@@ -99,7 +99,7 @@ const Navbar = () => {
             href="#contact"
             className="group inline-flex items-center gap-2 text-sm font-semibold bg-gradient-green text-primary-foreground px-5 py-2.5 rounded-full transition-all hover:shadow-green"
           >
-            Get started
+            Book a call
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
           </a>
         </div>

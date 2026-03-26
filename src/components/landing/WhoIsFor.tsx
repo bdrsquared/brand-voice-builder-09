@@ -20,7 +20,7 @@ const WhoIsFor = () => {
       <div className="absolute top-[-80px] left-[-120px] w-[350px] h-[350px] blob-blue pointer-events-none" />
       <div className="absolute bottom-[-60px] right-[-100px] w-[300px] h-[400px] blob-oblong-green pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

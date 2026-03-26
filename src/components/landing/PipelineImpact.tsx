@@ -30,9 +30,9 @@ const PipelineImpact = () => {
       <div className="absolute top-[-60px] right-[-180px] w-[450px] h-[350px] blob-oblong-green pointer-events-none" />
       <div className="absolute bottom-[-120px] left-[-100px] w-[350px] h-[350px] blob-blue-strong pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

@@ -1,10 +1,15 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import LogoWall from "./LogoWall";
+import ovalBg from "@/assets/oval.png";
 
 const Hero = () => {
   return (
     <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-6 overflow-hidden">
+      {/* Large oval background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none opacity-40">
+        <img src={ovalBg} alt="" className="w-full h-full object-contain" />
+      </div>
       {/* Blurred shapes */}
       <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] blob-green-strong pointer-events-none" />
       <div className="absolute top-[50px] right-[-200px] w-[400px] h-[600px] blob-oblong-blue pointer-events-none" />

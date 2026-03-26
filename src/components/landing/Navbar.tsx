@@ -157,7 +157,7 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30">
+              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 pb-5 shadow-xl shadow-black/30">
                 <div className="grid grid-cols-3 gap-5">
                   {caseStudies.map((study) => (
                     <a key={study.brand} href="#case-studies" className="group cursor-pointer block">
@@ -184,6 +184,19 @@ const Navbar = () => {
                       </span>
                     </a>
                   ))}
+                </div>
+                <div className="h-px bg-white/10 mt-5 mb-4" />
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-muted-foreground font-body">
+                    We partner with global brands to create podcast-led content that builds authority and drives results.
+                  </p>
+                  <a
+                    href="#case-studies"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:brightness-125 transition-all whitespace-nowrap ml-6"
+                  >
+                    See more case studies
+                    <ArrowRight className="w-3 h-3" />
+                  </a>
                 </div>
               </div>
             </motion.div>

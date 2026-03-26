@@ -1,6 +1,46 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const Calendly = () => {
+  useEffect(() => {
+    // Load Cal.com embed script
+    (function (C: any, A: string, L: string) {
+      let p = function (a: any, ar: any) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    const Cal = (window as any).Cal;
+    Cal("init", "30min", { origin: "https://app.cal.com" });
+    Cal.ns["30min"]("inline", {
+      elementOrSelector: "#my-cal-inline-30min",
+      config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+      calLink: "earworm-accounts-fqzg4l/30min",
+    });
+    Cal.ns["30min"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+  }, []);
+
   return (
     <section id="book" className="relative py-24 sm:py-32 px-6">
       <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] blob-green pointer-events-none" />
@@ -24,12 +64,9 @@ const Calendly = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="rounded-2xl overflow-hidden border border-white/10"
         >
-          <iframe
-            src="https://calendly.com/team-earworm/30-minute-consultation-clone"
-            width="100%"
-            height="700"
-            frameBorder="0"
-            title="Book a strategy call"
+          <div
+            id="my-cal-inline-30min"
+            style={{ width: "100%", height: "700px", overflow: "scroll" }}
             className="bg-white rounded-2xl"
           />
         </motion.div>

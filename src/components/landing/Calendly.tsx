@@ -35,10 +35,10 @@ const Calendly = () => {
     Cal("init", "30min", { origin: "https://app.cal.com" });
     Cal.ns["30min"]("inline", {
       elementOrSelector: "#my-cal-inline-30min",
-      config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+      config: { layout: "month_view", useSlotsViewOnSmallScreen: "true", theme: "dark" },
       calLink: "earworm-accounts-fqzg4l/30min",
     });
-    Cal.ns["30min"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    Cal.ns["30min"]("ui", { hideEventTypeDetails: false, layout: "month_view", theme: "dark", cssVarsPerTheme: { dark: { "cal-bg": "transparent" } } });
   }, []);
 
   return (
@@ -67,7 +67,7 @@ const Calendly = () => {
           <div
             id="my-cal-inline-30min"
             style={{ width: "100%", height: "700px", overflow: "scroll" }}
-            className="bg-white rounded-2xl"
+            className="rounded-2xl"
           />
         </motion.div>
       </div>

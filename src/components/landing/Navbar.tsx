@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3 } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
 import launchImg from "@/assets/service-launch.png";
 import runScaleImg from "@/assets/service-run-scale.png";
@@ -9,12 +9,12 @@ const megaMenuItems = [
   {
     title: "Launch",
     description: "We incubate, design, and launch podcasts that help businesses lead conversations",
-    image: launchImg,
+    image: runScaleImg,
   },
   {
     title: "Run & scale",
     description: "We manage your podcast end-to-end, turning each episode into a consistent, measurable growth channel.",
-    image: runScaleImg,
+    image: launchImg,
   },
   {
     title: "Our service",
@@ -90,10 +90,18 @@ const Navbar = () => {
                         <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       </div>
                     ) : (
-                      <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-4 flex flex-col justify-center gap-4 p-5">
-                        {["Strategy & Planning", "Production & Creative", "Distribution & Insight"].map((label) => (
-                          <div key={label} className="text-sm font-medium text-white/80 border-b border-white/10 pb-3 last:border-0 last:pb-0">
-                            {label}
+                      <div className="aspect-square rounded-xl mb-4 flex flex-col justify-center gap-0">
+                        {[
+                          { label: "Strategy & Planning", desc: "Podcast strategy · Episode planning · Research · Guest sourcing", icon: MonitorPlay },
+                          { label: "Production & Creative", desc: "Video & audio production · Graphic design · Motion graphics", icon: Film },
+                          { label: "Distribution & Insight", desc: "Publishing & distribution · Analytics & reporting · Audience insights", icon: BarChart3 },
+                        ].map((service, i) => (
+                          <div key={service.label} className={`py-4 ${i < 2 ? "border-b border-white/10" : ""}`}>
+                            <div className="flex items-center gap-2 mb-1">
+                              <service.icon className="w-4 h-4 text-white/60" />
+                              <span className="text-sm font-semibold text-foreground">{service.label}</span>
+                            </div>
+                            <p className="text-xs text-muted-foreground leading-relaxed pl-6">{service.desc}</p>
                           </div>
                         ))}
                       </div>

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import LogoWall from "./LogoWall";
 import ovalBg from "@/assets/oval.png";
+import ellipseHero from "@/assets/ellipse-hero.png";
 
 
 const Hero = () => {
@@ -10,6 +11,10 @@ const Hero = () => {
       {/* Large oval background */}
       <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] lg:w-[220%] h-[140%] pointer-events-none opacity-70">
         <img src={ovalBg} alt="" className="w-full h-full object-contain" />
+      </div>
+      {/* Large elliptical glow - bottom half visible */}
+      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[120%] max-w-[1600px] pointer-events-none opacity-20 z-[1]" style={{ filter: 'blur(30px)' }}>
+        <img src={ellipseHero} alt="" className="w-full h-auto" />
       </div>
       {/* Blurred shapes */}
       <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] blob-green-strong pointer-events-none" />

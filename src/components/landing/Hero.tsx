@@ -6,7 +6,7 @@ import ovalBg from "@/assets/oval.png";
 
 const Hero = () => {
   return (
-    <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-6 overflow-hidden">
+    <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-6">
       {/* Large oval background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] lg:w-[220%] h-[140%] pointer-events-none opacity-70">
         <img src={ovalBg} alt="" className="w-full h-full object-contain" />

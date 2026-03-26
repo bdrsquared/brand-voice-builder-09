@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const Calendly = () => {
   return (
-    <section id="book" className="relative py-24 sm:py-32 px-6 overflow-hidden">
+    <section id="book" className="relative py-24 sm:py-32 px-6">
       <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] blob-green pointer-events-none" />
       <div className="absolute bottom-[10%] left-[5%] w-[350px] h-[300px] blob-oblong-blue pointer-events-none" />
 

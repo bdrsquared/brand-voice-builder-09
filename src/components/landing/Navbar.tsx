@@ -157,7 +157,7 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30">
+              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 pb-5 shadow-xl shadow-black/30">
                 <div className="grid grid-cols-3 gap-5">
                   {caseStudies.map((study) => (
                     <a key={study.brand} href="#case-studies" className="group cursor-pointer block">

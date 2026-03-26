@@ -44,7 +44,7 @@ const WhoIsFor = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-xl font-bold mb-6 text-primary">This is for you if…</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-primary">This is for you if…</h3>
             <ul className="space-y-4">
               {forItems.map((item, i) => (
                 <li key={i} className="flex gap-3 items-start">
@@ -64,7 +64,7 @@ const WhoIsFor = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="text-xl font-bold mb-6 text-muted-foreground">This isn't for you if…</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-muted-foreground">This isn't for you if…</h3>
             <ul className="space-y-4">
               {notForItems.map((item, i) => (
                 <li key={i} className="flex gap-3 items-start">

@@ -12,7 +12,6 @@ import Testimonials from "@/components/landing/Testimonials";
 import WhoIsFor from "@/components/landing/WhoIsFor";
 import CaseStudies from "@/components/landing/CaseStudies";
 
-import CTA from "@/components/landing/CTA";
 import Calendly from "@/components/landing/Calendly";
 import Footer from "@/components/landing/Footer";
 
@@ -32,8 +31,6 @@ const Index = () => {
       <Testimonials />
       <CaseStudies />
       <WhoIsFor />
-      
-      <CTA />
       <Calendly />
       <Footer />
     </div>

@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 const ProblemStatement = () => {
   return (
     <section className="relative py-24 sm:py-32 px-6 overflow-hidden">
-      {/* Subtle blue orb */}
-      <div className="absolute bottom-[-200px] right-[-150px] w-[500px] h-[500px] orb-blue-subtle pointer-events-none" />
+      {/* Blurred shapes */}
+      <div className="absolute bottom-[-100px] right-[-100px] w-[450px] h-[300px] blob-oblong-green pointer-events-none" />
+      <div className="absolute top-[-80px] left-[-150px] w-[350px] h-[350px] blob-blue pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div

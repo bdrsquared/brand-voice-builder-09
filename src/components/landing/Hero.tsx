@@ -5,9 +5,10 @@ import LogoWall from "./LogoWall";
 const Hero = () => {
   return (
     <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-6 overflow-hidden">
-      {/* Gradient orbs */}
-      <div className="absolute top-[-200px] left-[-200px] w-[700px] h-[700px] orb-green pointer-events-none" />
-      <div className="absolute top-[-100px] right-[-300px] w-[600px] h-[600px] orb-blue pointer-events-none" />
+      {/* Blurred shapes */}
+      <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] blob-green-strong pointer-events-none" />
+      <div className="absolute top-[50px] right-[-200px] w-[400px] h-[600px] blob-oblong-blue pointer-events-none" />
+      <div className="absolute bottom-[-100px] left-[40%] w-[300px] h-[300px] blob-blue pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div

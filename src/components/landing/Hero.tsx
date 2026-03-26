@@ -12,7 +12,7 @@ const Hero = () => {
         <img src={ovalBg} alt="" className="w-full h-full object-contain" />
       </div>
       {/* Blurred shapes */}
-      <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] blob-green-strong pointer-events-none" />
+      
       <div className="absolute top-[50px] right-[-200px] w-[400px] h-[600px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-100px] left-[40%] w-[300px] h-[300px] blob-blue pointer-events-none" />
       {/* Bottom fade gradient */}

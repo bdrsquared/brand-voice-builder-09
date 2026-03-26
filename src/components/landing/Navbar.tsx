@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import logo from "@/assets/earworm-logo.png";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -23,9 +24,7 @@ const Navbar = () => {
       transition={{ duration: 0.4 }}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-        <span className="font-heading text-xl font-bold tracking-tight text-foreground">
-          pod<span className="text-gradient-green">cast</span>
-        </span>
+        <img src={logo} alt="Earworm" className="h-6" />
         <div className="flex items-center gap-6">
           <a
             href="#how-it-works"

@@ -95,20 +95,48 @@
     background-clip: text;
   }
 
-  /* Gradient orbs for depth */
-  .orb-green {
-    background: radial-gradient(circle, hsl(145, 96%, 55%, 0.15) 0%, transparent 70%);
+  /* Blurred shapes for depth */
+  .blob-green {
+    background: #1CFA76;
+    opacity: 0.08;
+    filter: blur(120px);
+    border-radius: 50%;
   }
 
-  .orb-blue {
-    background: radial-gradient(circle, hsl(243, 79%, 63%, 0.12) 0%, transparent 70%);
+  .blob-green-strong {
+    background: #1CFA76;
+    opacity: 0.12;
+    filter: blur(100px);
+    border-radius: 50%;
   }
 
-  .orb-green-subtle {
-    background: radial-gradient(ellipse, hsl(145, 96%, 55%, 0.06) 0%, transparent 60%);
+  .blob-blue {
+    background: #6359EA;
+    opacity: 0.08;
+    filter: blur(120px);
+    border-radius: 50%;
   }
 
-  .orb-blue-subtle {
-    background: radial-gradient(ellipse, hsl(243, 79%, 63%, 0.06) 0%, transparent 60%);
+  .blob-blue-strong {
+    background: #6359EA;
+    opacity: 0.12;
+    filter: blur(100px);
+    border-radius: 50%;
+  }
+
+  .blob-oblong-green {
+    background: #1CFA76;
+    opacity: 0.07;
+    filter: blur(100px);
+    border-radius: 40% 60% 50% 50%;
+  }
+
+  .blob-oblong-blue {
+    background: #6359EA;
+    opacity: 0.07;
+    filter: blur(100px);
+    border-radius: 60% 40% 50% 50%;
+  }
+}
   }
 }

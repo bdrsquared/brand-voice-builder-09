@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
+import LogoWall from "./LogoWall";
 
 const Hero = () => {
   return (
@@ -78,6 +79,8 @@ const Hero = () => {
           <span className="font-semibold text-foreground">Infobip</span> and
           more
         </motion.p>
+
+        <LogoWall />
       </div>
     </section>
   );

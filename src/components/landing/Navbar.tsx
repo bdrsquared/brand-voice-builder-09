@@ -38,25 +38,27 @@ const Navbar = () => {
         onMouseLeave={() => setMegaOpen(false)}
       >
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-8">
             <img src={logo} alt="Earworm" className="h-5" />
-            <div
-              className="relative hidden sm:block"
-              onMouseEnter={() => setMegaOpen(true)}
-            >
-              <button className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                Our service
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen ? "rotate-180" : ""}`} />
-              </button>
+            <div className="hidden sm:flex items-center gap-4">
+              <div
+                className="relative"
+                onMouseEnter={() => setMegaOpen(true)}
+              >
+                <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                  Our service
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen ? "rotate-180" : ""}`} />
+                </button>
+              </div>
+              <a
+                href="#how-it-works"
+                className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+              >
+                How it works
+              </a>
             </div>
           </div>
-          <div className="flex items-center gap-6">
-            <a
-              href="#how-it-works"
-              className="hidden sm:inline text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              How it works
-            </a>
+          <div className="flex items-center">
             <a
               href="#contact"
               className="group inline-flex items-center gap-2 text-sm font-semibold bg-gradient-green text-primary-foreground px-5 py-2.5 rounded-full transition-all hover:shadow-green"

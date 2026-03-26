@@ -43,7 +43,7 @@ const PipelineImpact = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             Content that drives{" "}
-            <span className="text-gradient-green">real pipeline</span>
+            <span className="text-gradient-green">real results</span>
           </h2>
         </motion.div>
 

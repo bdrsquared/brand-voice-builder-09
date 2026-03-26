@@ -14,17 +14,13 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
-      }`}
+      className="fixed top-3 left-0 right-0 z-50 px-4 sm:px-6"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-        <img src={logo} alt="Earworm" className="h-6" />
+      <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
+        <img src={logo} alt="Earworm" className="h-5" />
         <div className="flex items-center gap-6">
           <a
             href="#how-it-works"

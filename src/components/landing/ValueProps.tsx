@@ -30,41 +30,41 @@ const props = [
 
 const ValueProps = () => {
   return (
-    <section className="py-24 sm:py-32 px-6 bg-gradient-subtle">
+    <section className="py-24 sm:py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="font-mono text-sm tracking-widest uppercase text-primary mb-6 block">
-            Why podcasting
+          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
+            ● Why podcasting
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             A content channel that{" "}
-            <span className="text-gradient-gold">actually works</span>
+            <span className="text-gradient-green">actually works</span>
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-5">
           {props.map((prop, i) => (
             <motion.div
               key={prop.title}
-              className="group relative p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300"
+              className="group relative p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-lg transition-all duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors">
-                <prop.icon className="w-6 h-6 text-primary" />
+              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                <prop.icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold mb-3">
                 {prop.title}
               </h3>
-              <p className="text-secondary-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed font-body">
                 {prop.description}
               </p>
             </motion.div>

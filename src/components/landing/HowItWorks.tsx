@@ -23,42 +23,42 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-24 sm:py-32 px-6">
+    <section id="how-it-works" className="py-24 sm:py-32 px-6 bg-surface-dark">
       <div className="max-w-5xl mx-auto">
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="font-mono text-sm tracking-widest uppercase text-primary mb-6 block">
-            How it works
+          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
+            ● How it works
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             Simple process.{" "}
-            <span className="text-muted-foreground">Serious output.</span>
+            <span className="text-surface-dark-muted">Serious output.</span>
           </h2>
         </motion.div>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              className="flex gap-8 sm:gap-12 items-start p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/20 transition-colors"
-              initial={{ opacity: 0, x: -30 }}
+              className="flex gap-8 sm:gap-10 items-start p-8 sm:p-10 rounded-2xl border border-surface-dark-border bg-surface-dark-card hover:border-primary/20 transition-colors"
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
             >
-              <span className="font-mono text-4xl sm:text-5xl font-bold text-gradient-gold shrink-0">
+              <span className="text-4xl sm:text-5xl font-bold text-gradient-green shrink-0 font-heading">
                 {step.number}
               </span>
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold mb-3">
                   {step.title}
                 </h3>
-                <p className="text-secondary-foreground leading-relaxed text-lg">
+                <p className="text-surface-dark-muted leading-relaxed text-lg font-body">
                   {step.description}
                 </p>
               </div>

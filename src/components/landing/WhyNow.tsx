@@ -37,8 +37,8 @@ const WhyNow = () => {
             ● Why now
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
-            The window is open.{" "}
-            <span className="text-muted-foreground">Most competitors haven't caught on yet.</span>
+            First mover advantage.{" "}
+            <span className="text-muted-foreground">The brands that start now will own the conversation.</span>
           </h2>
           <p className="text-lg text-muted-foreground font-body mb-12 max-w-2xl leading-relaxed">
             Video podcasting isn't a future trend — it's happening now. The businesses investing today are building an unfair advantage that compounds over time.

@@ -16,11 +16,12 @@ const megaMenuItems = [
     description: "We manage your podcast end-to-end, turning each episode into a consistent, measurable growth channel.",
     image: launchImg,
   },
-  {
-    title: "Our service",
-    description: "Strategy & Planning · Production & Creative · Distribution & Insight",
-    image: null,
-  },
+];
+
+const servicesList = [
+  { label: "Strategy & Planning", desc: "Podcast strategy · Episode planning · Research · Guest sourcing", icon: MonitorPlay },
+  { label: "Production & Creative", desc: "Video & audio production · Graphic design · Motion graphics", icon: Film },
+  { label: "Distribution & Insight", desc: "Publishing & distribution · Analytics & reporting · Audience insights", icon: BarChart3 },
 ];
 
 const Navbar = () => {
@@ -85,27 +86,9 @@ const Navbar = () => {
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 grid grid-cols-3 gap-6">
                 {megaMenuItems.map((item) => (
                   <div key={item.title} className="group cursor-pointer">
-                    {item.image ? (
-                      <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-4 overflow-hidden">
-                        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                      </div>
-                    ) : (
-                      <div className="aspect-square rounded-xl mb-4 flex flex-col justify-center gap-0">
-                        {[
-                          { label: "Strategy & Planning", desc: "Podcast strategy · Episode planning · Research · Guest sourcing", icon: MonitorPlay },
-                          { label: "Production & Creative", desc: "Video & audio production · Graphic design · Motion graphics", icon: Film },
-                          { label: "Distribution & Insight", desc: "Publishing & distribution · Analytics & reporting · Audience insights", icon: BarChart3 },
-                        ].map((service, i) => (
-                          <div key={service.label} className={`py-4 ${i < 2 ? "border-b border-white/10" : ""}`}>
-                            <div className="flex items-center gap-2 mb-1">
-                              <service.icon className="w-4 h-4 text-white/60" />
-                              <span className="text-sm font-semibold text-foreground">{service.label}</span>
-                            </div>
-                            <p className="text-xs text-muted-foreground leading-relaxed pl-6">{service.desc}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden">
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                    </div>
                     <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
                       {item.title}
                     </h4>
@@ -114,6 +97,17 @@ const Navbar = () => {
                     </p>
                   </div>
                 ))}
+                <div className="flex flex-col justify-center">
+                  {servicesList.map((service, i) => (
+                    <div key={service.label} className={`py-5 ${i < servicesList.length - 1 ? "border-b border-white/10" : ""}`}>
+                      <div className="flex items-center gap-2.5 mb-1.5">
+                        <service.icon className="w-5 h-5 text-white/60" />
+                        <span className="text-base font-semibold text-foreground">{service.label}</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{service.desc}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           )}

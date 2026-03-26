@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 
 const Showreel = () => {
   return (
-    <section className="relative py-20 sm:py-28 px-6">
+    <section className="relative py-24 sm:py-32 px-6">
       <div className="absolute top-[-50px] right-[-150px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-80px] left-[-100px] w-[350px] h-[350px] blob-green pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

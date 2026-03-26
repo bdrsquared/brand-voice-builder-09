@@ -28,9 +28,9 @@ const HowItWorks = () => {
       <div className="absolute top-[-50px] right-[-100px] w-[500px] h-[350px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-80px] left-[-80px] w-[300px] h-[400px] blob-green pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

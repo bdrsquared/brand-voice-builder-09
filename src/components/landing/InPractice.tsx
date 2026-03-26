@@ -15,7 +15,7 @@ const InPractice = () => {
       <div className="absolute top-[-80px] left-[-100px] w-[400px] h-[350px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-100px] right-[-80px] w-[300px] h-[300px] blob-green pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

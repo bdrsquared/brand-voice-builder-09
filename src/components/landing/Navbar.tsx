@@ -1,23 +1,18 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3 } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
 
 const megaMenuItems = [
   {
-    title: "Strategy & Planning",
-    description: "Podcast strategy · Episode planning · Research · Guest sourcing",
-    icon: MonitorPlay,
+    title: "Video Podcasting",
+    description: "End-to-end production for B2B video podcasts.",
+    image: null,
   },
   {
-    title: "Production & Creative",
-    description: "Video & audio production · Graphic design · Motion graphics",
-    icon: Film,
-  },
-  {
-    title: "Distribution & Insight",
-    description: "Publishing & distribution · Analytics & reporting · Audience insights",
-    icon: BarChart3,
+    title: "Content Repurposing",
+    description: "Turn one episode into dozens of assets.",
+    image: null,
   },
 ];
 
@@ -80,16 +75,14 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-3 gap-6">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-2 gap-8">
                 {megaMenuItems.map((item) => (
                   <div key={item.title} className="group cursor-pointer">
-                    <div className="flex items-center gap-3 mb-2">
-                      <item.icon className="w-5 h-5 text-white/70" />
-                      <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {item.title}
-                      </h4>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed font-body pl-8">
+                    <div className="aspect-video rounded-xl bg-white/5 border border-white/10 mb-4 overflow-hidden" />
+                    <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                      {item.title}
+                    </h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed font-body">
                       {item.description}
                     </p>
                   </div>

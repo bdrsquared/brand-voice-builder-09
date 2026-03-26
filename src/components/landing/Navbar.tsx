@@ -33,14 +33,16 @@ const Navbar = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="max-w-5xl mx-auto relative">
+      <div
+        className="max-w-5xl mx-auto relative"
+        onMouseLeave={() => setMegaOpen(false)}
+      >
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
           <div className="flex items-center gap-6">
             <img src={logo} alt="Earworm" className="h-5" />
             <div
               className="relative hidden sm:block"
               onMouseEnter={() => setMegaOpen(true)}
-              onMouseLeave={() => setMegaOpen(false)}
             >
               <button className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Our service
@@ -69,13 +71,11 @@ const Navbar = () => {
         <AnimatePresence>
           {megaOpen && (
             <motion.div
-              className="absolute top-[calc(100%+8px)] left-0 right-0"
+              className="absolute top-full left-0 right-0 pt-2"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              onMouseEnter={() => setMegaOpen(true)}
-              onMouseLeave={() => setMegaOpen(false)}
             >
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-2 gap-8">
                 {megaMenuItems.map((item) => (

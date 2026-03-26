@@ -26,7 +26,7 @@ const outcomes = [
 
 const PipelineImpact = () => {
   return (
-    <section className="relative py-24 sm:py-32 px-6">
+    <section className="relative py-16 sm:py-20 px-6">
       <div className="absolute top-[-60px] right-[-180px] w-[450px] h-[350px] blob-oblong-green pointer-events-none" />
       <div className="absolute bottom-[-120px] left-[-100px] w-[350px] h-[350px] blob-blue-strong pointer-events-none" />
 

@@ -23,7 +23,7 @@ const stats = [
 
 const Stats = () => {
   return (
-    <section className="relative py-24 sm:py-32 px-6">
+    <section className="relative py-16 sm:py-20 px-6">
       <div className="absolute top-[-50px] right-[-100px] w-[300px] h-[300px] blob-green pointer-events-none" />
       <div className="absolute bottom-[-80px] left-[-120px] w-[350px] h-[300px] blob-oblong-blue pointer-events-none" />
 

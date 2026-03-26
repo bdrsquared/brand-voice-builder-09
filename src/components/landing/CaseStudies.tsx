@@ -98,7 +98,7 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
 
 const CaseStudies = () => {
   return (
-    <section className="relative py-24 sm:py-32 px-6">
+    <section className="relative py-16 sm:py-20 px-6">
       <div className="absolute top-[-100px] left-[-150px] w-[400px] h-[400px] blob-blue pointer-events-none" />
       <div className="absolute bottom-[-80px] right-[-120px] w-[350px] h-[450px] blob-oblong-green pointer-events-none" />
 

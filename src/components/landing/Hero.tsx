@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import LogoWall from "./LogoWall";
 import ovalBg from "@/assets/oval.png";
-import micShapes from "@/assets/mic-shapes.png";
+
 
 const Hero = () => {
   return (
@@ -17,15 +17,7 @@ const Hero = () => {
       <div className="absolute bottom-[-100px] left-[40%] w-[300px] h-[300px] blob-blue pointer-events-none" />
       {/* Bottom fade gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
-      {/* Mic image - right side */}
-      <motion.div
-        className="absolute right-[-40px] sm:right-[-20px] top-1/2 -translate-y-1/2 w-[280px] sm:w-[340px] lg:w-[420px] pointer-events-none z-[2] opacity-80"
-        initial={{ opacity: 0, x: 60 }}
-        animate={{ opacity: 0.8, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-      >
-        <img src={micShapes} alt="" className="w-full h-auto" />
-      </motion.div>
+
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div

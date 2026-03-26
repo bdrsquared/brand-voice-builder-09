@@ -35,8 +35,8 @@ const Navbar = () => {
     >
       <div className="max-w-5xl mx-auto relative">
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
-          <img src={logo} alt="Earworm" className="h-5" />
           <div className="flex items-center gap-6">
+            <img src={logo} alt="Earworm" className="h-5" />
             <div
               className="relative hidden sm:block"
               onMouseEnter={() => setMegaOpen(true)}
@@ -47,6 +47,8 @@ const Navbar = () => {
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen ? "rotate-180" : ""}`} />
               </button>
             </div>
+          </div>
+          <div className="flex items-center gap-6">
             <a
               href="#how-it-works"
               className="hidden sm:inline text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -67,7 +69,7 @@ const Navbar = () => {
         <AnimatePresence>
           {megaOpen && (
             <motion.div
-              className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-full max-w-lg"
+              className="absolute top-[calc(100%+8px)] left-0 right-0"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
@@ -75,14 +77,14 @@ const Navbar = () => {
               onMouseEnter={() => setMegaOpen(true)}
               onMouseLeave={() => setMegaOpen(false)}
             >
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5 shadow-xl shadow-black/30 grid grid-cols-2 gap-5">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-2 gap-8">
                 {megaMenuItems.map((item) => (
                   <div key={item.title} className="group cursor-pointer">
-                    <div className="aspect-video rounded-lg bg-white/5 border border-white/10 mb-3 overflow-hidden" />
-                    <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                    <div className="aspect-video rounded-xl bg-white/5 border border-white/10 mb-4 overflow-hidden" />
+                    <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed font-body">
+                    <p className="text-sm text-muted-foreground leading-relaxed font-body">
                       {item.description}
                     </p>
                   </div>

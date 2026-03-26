@@ -10,6 +10,7 @@ import HowItWorks from "@/components/landing/HowItWorks";
 import PipelineImpact from "@/components/landing/PipelineImpact";
 import Testimonials from "@/components/landing/Testimonials";
 import WhoIsFor from "@/components/landing/WhoIsFor";
+import CaseStudies from "@/components/landing/CaseStudies";
 
 import CTA from "@/components/landing/CTA";
 import Calendly from "@/components/landing/Calendly";
@@ -29,6 +30,7 @@ const Index = () => {
       <HowItWorks />
       <PipelineImpact />
       <Testimonials />
+      <CaseStudies />
       <WhoIsFor />
       
       <CTA />

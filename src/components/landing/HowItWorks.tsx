@@ -62,7 +62,7 @@ const HowItWorks = () => {
                 <h3 className="text-xl sm:text-2xl font-bold mb-3">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-lg font-body">
+                <p className="text-muted-foreground leading-relaxed font-body">
                   {step.description}
                 </p>
               </div>

@@ -45,13 +45,13 @@ const TestimonialCard = ({ t }: { t: typeof testimonials[0] }) => (
         {t.initials}
       </span>
     </div>
-    <p className="text-foreground/80 leading-relaxed font-body mb-8 text-[15px]">
+    <p className="text-foreground/80 leading-relaxed font-body mb-8 text-sm">
       "{t.quote}"
     </p>
     <div className="mt-auto">
       <Stars />
       <div className="mt-4">
-        <p className="font-heading font-bold text-lg">{t.name}</p>
+        <p className="font-heading font-bold text-base">{t.name}</p>
         <p className="text-primary text-sm font-medium">{t.company}</p>
         <p className="text-muted-foreground text-sm">{t.role}</p>
       </div>

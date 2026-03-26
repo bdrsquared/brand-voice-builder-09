@@ -60,8 +60,12 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Background gradient placeholder */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} bg-card`} />
+      {/* Background image or gradient */}
+      {study.image ? (
+        <img src={study.image} alt={study.title} className="absolute inset-0 w-full h-full object-cover" />
+      ) : (
+        <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} bg-card`} />
+      )}
 
       {/* Animated shimmer on hover */}
       <div

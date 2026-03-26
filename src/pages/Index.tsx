@@ -32,6 +32,7 @@ const Index = () => {
       <WhoIsFor />
       
       <CTA />
+      <Calendly />
       <Footer />
     </div>
   );

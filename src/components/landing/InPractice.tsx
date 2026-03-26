@@ -11,7 +11,7 @@ const items = [
 
 const InPractice = () => {
   return (
-    <section className="relative py-24 sm:py-32 px-6 overflow-hidden">
+    <section className="relative py-24 sm:py-32 px-6">
       <div className="absolute top-[-80px] left-[-100px] w-[400px] h-[350px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-100px] right-[-80px] w-[300px] h-[300px] blob-green pointer-events-none" />
 

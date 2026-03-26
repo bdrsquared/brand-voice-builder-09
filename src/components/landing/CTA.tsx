@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 const CTA = () => {
   return (
-    <section id="contact" className="relative py-24 sm:py-32 px-6 overflow-hidden">
+    <section id="contact" className="relative py-24 sm:py-32 px-6">
       {/* Blurred shapes */}
       <div className="absolute top-[30%] left-[20%] w-[500px] h-[400px] blob-green-strong pointer-events-none" />
       <div className="absolute bottom-[-50px] right-[-100px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />

@@ -30,7 +30,7 @@ const Index = () => {
       <PipelineImpact />
       <Testimonials />
       <CaseStudies />
-      <WhoIsFor />
+      
       <Calendly />
       <Footer />
     </div>

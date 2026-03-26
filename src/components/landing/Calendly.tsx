@@ -6,7 +6,7 @@ const Calendly = () => {
       <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] blob-green pointer-events-none" />
       <div className="absolute bottom-[10%] left-[5%] w-[350px] h-[300px] blob-oblong-blue pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.h2
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12"
           initial={{ opacity: 0, y: 20 }}

@@ -42,7 +42,7 @@ const Navbar = () => {
       transition={{ duration: 0.4 }}
     >
       <div
-        className="max-w-5xl mx-auto relative"
+        className="max-w-6xl mx-auto relative"
         onMouseLeave={() => setMegaOpen(false)}
       >
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">

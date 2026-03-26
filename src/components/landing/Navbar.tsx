@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3 } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
 
 const megaMenuItems = [
   {
-    title: "Video Podcasting",
-    description: "End-to-end production for B2B video podcasts.",
-    image: null,
+    title: "Strategy & Planning",
+    description: "Podcast strategy · Episode planning · Research · Guest sourcing",
+    icon: MonitorPlay,
   },
   {
-    title: "Content Repurposing",
-    description: "Turn one episode into dozens of assets.",
-    image: null,
+    title: "Production & Creative",
+    description: "Video & audio production · Graphic design · Motion graphics",
+    icon: Film,
+  },
+  {
+    title: "Distribution & Insight",
+    description: "Publishing & distribution · Analytics & reporting · Audience insights",
+    icon: BarChart3,
   },
 ];
 

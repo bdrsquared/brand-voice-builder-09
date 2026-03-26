@@ -35,19 +35,28 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          Your podcast is a{" "}
-          <span className="text-gradient-gold">pipeline machine</span>
+          Turn video podcasting into a{" "}
+          <span className="text-gradient-gold">content engine</span> that drives pipeline
         </motion.h1>
 
         <motion.p
-          className="text-lg sm:text-xl text-secondary-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg sm:text-xl text-secondary-foreground max-w-2xl mx-auto mb-8 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
         >
-          Turn conversations with your ideal customers into a strategic content
-          engine that builds authority, generates demand, and drives real
-          commercial outcomes.
+          We help businesses create high-quality video podcasts that build
+          authority, reach the right audience, and turn one conversation into
+          consistent long and short form content.
+        </motion.p>
+
+        <motion.p
+          className="text-sm text-muted-foreground mb-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+        >
+          Trusted by teams at Experian, Cisco, IG Group, Infobip and more
         </motion.p>
 
         <motion.div

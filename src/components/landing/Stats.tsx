@@ -50,7 +50,7 @@ const GlowCard = ({ stat, i }: { stat: typeof stats[0]; i: number }) => {
         className="absolute inset-0 pointer-events-none transition-opacity duration-300"
         style={{
           opacity: hovering ? 1 : 0,
-          background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, hsl(var(--primary) / 0.15), transparent 60%)`,
+          background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, rgba(34, 28, 67, 0.6), transparent 60%)`,
         }}
       />
       {/* Border glow overlay */}

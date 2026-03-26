@@ -90,10 +90,10 @@ const Navbar = () => {
                       <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden">
                         <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       </div>
-                      <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                      <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
                         {item.title}
                       </h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed font-body">
+                      <p className="text-xs text-muted-foreground leading-relaxed font-body">
                         {item.description}
                       </p>
                     </div>

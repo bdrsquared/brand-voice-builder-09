@@ -1,24 +1,27 @@
 import { motion } from "framer-motion";
-import { Handshake, Flame, MessageSquare, Timer } from "lucide-react";
+import spotHandshake from "@/assets/spot-handshake.png";
+import spotWarmth from "@/assets/spot-warmth.png";
+import spotOutreach from "@/assets/spot-outreach.png";
+import spotSpeed from "@/assets/spot-speed.png";
 
 const outcomes = [
   {
-    icon: Handshake,
+    image: spotHandshake,
     title: "Build real relationships with prospects",
     description: "Invite your ideal customers as guests. By the time the episode wraps, you've built a genuine connection — not a cold lead.",
   },
   {
-    icon: Flame,
+    image: spotWarmth,
     title: "Warm leads before sales conversations",
     description: "Prospects who've watched your content arrive educated, aligned, and ready to talk. No more starting from zero.",
   },
   {
-    icon: MessageSquare,
+    image: spotOutreach,
     title: "Give sales teams a reason to reach out",
     description: "\"Hey, I'd love to have you on our podcast\" is the most effective outreach message in B2B. It opens doors that cold emails can't.",
   },
   {
-    icon: Timer,
+    image: spotSpeed,
     title: "Shorten sales cycles, increase trust",
     description: "When prospects already know your voice, your thinking, and your values — the sale happens faster and with less friction.",
   },

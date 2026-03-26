@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
 import { useState, useRef } from "react";
+import caseCarrier from "@/assets/case-carrier.png";
+import casePrettyCovered from "@/assets/case-pretty-covered.png";
+import caseWenodo from "@/assets/case-wenodo.png";
 
 const caseStudies = [
   {
@@ -8,18 +11,21 @@ const caseStudies = [
     logo: "FIERCE FNTV",
     description: "A video podcast helping Carrier leaders navigate the future of logistics and supply chain innovation.",
     gradient: "from-rose-500/30 to-orange-400/20",
+    image: caseCarrier,
   },
   {
     title: "Pretty Covered",
     logo: "Polly",
     description: "A beauty and insurance brand podcast connecting with Gen Z audiences through authentic conversations.",
     gradient: "from-sky-400/30 to-blue-300/20",
+    image: casePrettyCovered,
   },
   {
     title: "Dig In",
     logo: "wenodo",
     description: "A deep-dive podcast exploring the world of food tech and sustainable agriculture ventures.",
     gradient: "from-amber-700/30 to-yellow-600/20",
+    image: caseWenodo,
   },
   {
     title: "No Stress",
@@ -54,8 +60,12 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Background gradient placeholder */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} bg-card`} />
+      {/* Background image or gradient */}
+      {study.image ? (
+        <img src={study.image} alt={study.title} className="absolute inset-0 w-full h-full object-cover" />
+      ) : (
+        <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} bg-card`} />
+      )}
 
       {/* Animated shimmer on hover */}
       <div

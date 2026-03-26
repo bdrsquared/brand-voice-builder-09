@@ -57,13 +57,6 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        "surface-dark": {
-          DEFAULT: "hsl(var(--surface-dark))",
-          foreground: "hsl(var(--surface-dark-foreground))",
-          muted: "hsl(var(--surface-dark-muted))",
-          border: "hsl(var(--surface-dark-border))",
-          card: "hsl(var(--surface-dark-card))",
-        },
       },
       fontFamily: {
         heading: ['Nohemi', 'system-ui', 'sans-serif'],

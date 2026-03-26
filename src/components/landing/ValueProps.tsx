@@ -7,31 +7,43 @@ const props = [
     title: "Build category authority",
     description:
       "Position your brand as the voice of your industry. Every episode is a stage where you lead the conversation, not follow it.",
+    color: "green" as const,
   },
   {
     icon: Target,
     title: "Reach your exact ICP",
     description:
       "Your guests are your prospects. Invite the right people, build real relationships, and create content that speaks directly to the buyers you want.",
+    color: "blue" as const,
   },
   {
     icon: Layers,
     title: "One session, endless content",
     description:
       "A single recording becomes long-form video, short clips, audiograms, blog posts, social content, and newsletter material. Record once, distribute everywhere.",
+    color: "blue" as const,
   },
   {
     icon: TrendingUp,
     title: "Drive actual pipeline",
     description:
       "This isn't vanity metrics. Podcasting creates warm relationships with prospects, builds trust at scale, and gives your sales team a reason to follow up.",
+    color: "green" as const,
   },
 ];
 
+const iconStyles = {
+  green: "bg-primary/10 text-primary",
+  blue: "bg-accent/10 text-accent",
+};
+
 const ValueProps = () => {
   return (
-    <section className="py-24 sm:py-32 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative py-24 sm:py-32 px-6 overflow-hidden">
+      {/* Green orb */}
+      <div className="absolute top-[100px] left-[-250px] w-[500px] h-[500px] orb-green-subtle pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -52,14 +64,14 @@ const ValueProps = () => {
           {props.map((prop, i) => (
             <motion.div
               key={prop.title}
-              className="group relative p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-lg transition-all duration-300"
+              className="group relative p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                <prop.icon className="w-5 h-5 text-primary" />
+              <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-6 transition-colors ${iconStyles[prop.color]}`}>
+                <prop.icon className="w-5 h-5" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold mb-3">
                 {prop.title}

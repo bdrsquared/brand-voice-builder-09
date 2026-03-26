@@ -3,8 +3,12 @@ import { ArrowRight } from "lucide-react";
 
 const CTA = () => {
   return (
-    <section id="contact" className="py-24 sm:py-32 px-6">
-      <div className="max-w-4xl mx-auto text-center">
+    <section id="contact" className="relative py-24 sm:py-32 px-6 overflow-hidden">
+      {/* Orbs behind CTA */}
+      <div className="absolute top-[50%] left-[30%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] orb-green pointer-events-none opacity-40" />
+      <div className="absolute top-[40%] right-[-100px] w-[400px] h-[400px] orb-blue pointer-events-none opacity-30" />
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

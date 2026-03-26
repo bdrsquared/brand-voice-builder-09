@@ -23,8 +23,12 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-24 sm:py-32 px-6 bg-surface-dark">
-      <div className="max-w-5xl mx-auto">
+    <section id="how-it-works" className="relative py-24 sm:py-32 px-6 overflow-hidden">
+      {/* Gradient orbs */}
+      <div className="absolute top-[-100px] right-[-200px] w-[500px] h-[500px] orb-blue-subtle pointer-events-none" />
+      <div className="absolute bottom-[-150px] left-[-100px] w-[400px] h-[400px] orb-green-subtle pointer-events-none" />
+
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -37,7 +41,7 @@ const HowItWorks = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             Simple process.{" "}
-            <span className="text-surface-dark-muted">Serious output.</span>
+            <span className="text-muted-foreground">Serious output.</span>
           </h2>
         </motion.div>
 
@@ -45,7 +49,7 @@ const HowItWorks = () => {
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              className="flex gap-8 sm:gap-10 items-start p-8 sm:p-10 rounded-2xl border border-surface-dark-border bg-surface-dark-card hover:border-primary/20 transition-colors"
+              className="flex gap-8 sm:gap-10 items-start p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/20 transition-colors"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -58,7 +62,7 @@ const HowItWorks = () => {
                 <h3 className="text-xl sm:text-2xl font-bold mb-3">
                   {step.title}
                 </h3>
-                <p className="text-surface-dark-muted leading-relaxed text-lg font-body">
+                <p className="text-muted-foreground leading-relaxed text-lg font-body">
                   {step.description}
                 </p>
               </div>

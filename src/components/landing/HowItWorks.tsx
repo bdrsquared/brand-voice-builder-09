@@ -23,7 +23,7 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="relative py-24 sm:py-32 px-6">
+    <section id="how-it-works" className="relative py-16 sm:py-20 px-6">
       {/* Blurred shapes */}
       <div className="absolute top-[-50px] right-[-100px] w-[500px] h-[350px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-80px] left-[-80px] w-[300px] h-[400px] blob-green pointer-events-none" />

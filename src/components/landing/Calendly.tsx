@@ -41,7 +41,7 @@ const Calendly = () => {
   }, []);
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 px-6">
+    <section id="contact" className="relative py-20 sm:py-24 px-6">
       <div className="absolute top-[30%] left-[20%] w-[500px] h-[400px] blob-green-strong pointer-events-none" />
       <div className="absolute bottom-[-50px] right-[-100px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />
 

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const Showreel = () => {
   return (
-    <section className="relative py-24 sm:py-32 px-6">
+    <section className="relative py-16 sm:py-20 px-6">
       <div className="absolute top-[-50px] right-[-150px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-80px] left-[-100px] w-[350px] h-[350px] blob-green pointer-events-none" />
 

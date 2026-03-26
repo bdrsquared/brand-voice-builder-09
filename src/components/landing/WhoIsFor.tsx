@@ -16,7 +16,7 @@ const notForItems = [
 
 const WhoIsFor = () => {
   return (
-    <section className="relative py-24 sm:py-32 px-6">
+    <section className="relative py-16 sm:py-20 px-6">
       <div className="absolute top-[-80px] left-[-120px] w-[350px] h-[350px] blob-blue pointer-events-none" />
       <div className="absolute bottom-[-60px] right-[-100px] w-[300px] h-[400px] blob-oblong-green pointer-events-none" />
 

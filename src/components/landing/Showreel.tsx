@@ -15,10 +15,10 @@ const Showreel = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-flex items-center gap-2 text-accent font-medium text-sm mb-6 block">
-            ● Check out our showreel
+            ● Working with businesses worldwide
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            See the <span className="text-gradient-green">quality</span> for yourself
+            Check out our <span className="text-gradient-green">showreel</span>
           </h2>
         </motion.div>
 
@@ -31,7 +31,7 @@ const Showreel = () => {
           style={{ padding: "56.25% 0 0 0", position: "relative" }}
         >
           <iframe
-            src="https://player.vimeo.com/video/1103156714?badge=0&autopause=0&player_id=0&app_id=58479"
+            src="https://player.vimeo.com/video/1103156714?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0"
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
             allowFullScreen

@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3 } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
+import launchImg from "@/assets/service-launch.png";
+import runScaleImg from "@/assets/service-run-scale.png";
 
 const megaMenuItems = [
   {
-    title: "Strategy & Planning",
-    description: "Podcast strategy · Episode planning · Research · Guest sourcing",
-    icon: MonitorPlay,
+    title: "Launch",
+    description: "We incubate, design, and launch podcasts that help businesses lead conversations",
+    image: launchImg,
   },
   {
-    title: "Production & Creative",
-    description: "Video & audio production · Graphic design · Motion graphics",
-    icon: Film,
+    title: "Run & scale",
+    description: "We manage your podcast end-to-end, turning each episode into a consistent, measurable growth channel.",
+    image: runScaleImg,
   },
   {
-    title: "Distribution & Insight",
-    description: "Publishing & distribution · Analytics & reporting · Audience insights",
-    icon: BarChart3,
+    title: "Our service",
+    description: "Strategy & Planning · Production & Creative · Distribution & Insight",
+    image: null,
   },
 ];
 

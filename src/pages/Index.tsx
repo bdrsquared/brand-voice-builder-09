@@ -10,7 +10,7 @@ import HowItWorks from "@/components/landing/HowItWorks";
 import PipelineImpact from "@/components/landing/PipelineImpact";
 import Testimonials from "@/components/landing/Testimonials";
 import WhoIsFor from "@/components/landing/WhoIsFor";
-import Scarcity from "@/components/landing/Scarcity";
+
 import CTA from "@/components/landing/CTA";
 import Footer from "@/components/landing/Footer";
 
@@ -29,7 +29,7 @@ const Index = () => {
       <PipelineImpact />
       <Testimonials />
       <WhoIsFor />
-      <Scarcity />
+      
       <CTA />
       <Footer />
     </div>

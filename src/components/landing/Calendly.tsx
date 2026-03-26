@@ -67,7 +67,7 @@ const Calendly = () => {
           <div
             id="my-cal-inline-30min"
             style={{ width: "100%", height: "700px", overflow: "scroll" }}
-            className="bg-white rounded-2xl"
+            className="rounded-2xl"
           />
         </motion.div>
       </div>

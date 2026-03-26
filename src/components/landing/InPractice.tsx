@@ -35,6 +35,9 @@ const InPractice = () => {
 
           {/* Right column - Content */}
           <div>
+            <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
+              ● What this looks like in practice
+            </span>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

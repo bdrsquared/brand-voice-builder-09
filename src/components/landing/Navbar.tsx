@@ -121,10 +121,10 @@ const Navbar = () => {
                       <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden">
                         <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       </div>
-                      <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                      <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
                         {item.title}
                       </h4>
-                      <p className="text-xs text-muted-foreground leading-relaxed font-body">
+                      <p className="text-sm text-muted-foreground leading-relaxed font-body">
                         {item.description}
                       </p>
                     </div>
@@ -136,9 +136,9 @@ const Navbar = () => {
                     <div key={service.label} className={`flex-1 flex flex-col justify-center ${i < servicesList.length - 1 ? "border-b border-white/10" : ""} ${i > 0 ? "pt-4" : ""} ${i < servicesList.length - 1 ? "pb-4" : ""}`}>
                       <div className="flex items-center gap-2.5 mb-1.5">
                         <service.icon className="w-5 h-5 text-white/50 shrink-0" />
-                        <span className="text-sm font-semibold text-foreground">{service.label}</span>
+                        <span className="text-base font-semibold text-foreground">{service.label}</span>
                       </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed pl-[30px]">{service.desc}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{service.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -169,16 +169,16 @@ const Navbar = () => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                       </div>
-                      <p className="text-[11px] font-semibold text-primary uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
                         {study.brand}
                       </p>
-                      <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                      <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
                         {study.title}
                       </h4>
-                      <p className="text-xs text-muted-foreground leading-relaxed mb-2 font-body">
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-2 font-body">
                         {study.description}
                       </p>
-                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                         View case study
                         <ArrowRight className="w-3 h-3" />
                       </span>

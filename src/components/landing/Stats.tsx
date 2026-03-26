@@ -58,7 +58,7 @@ const GlowCard = ({ stat, i }: { stat: typeof stats[0]; i: number }) => {
         className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-300"
         style={{
           opacity: hovering ? 1 : 0,
-          background: `radial-gradient(300px circle at ${pos.x}px ${pos.y}px, hsl(var(--primary) / 0.3), transparent 60%)`,
+          background: `radial-gradient(300px circle at ${pos.x}px ${pos.y}px, rgba(34, 28, 67, 0.8), transparent 60%)`,
           mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           maskComposite: "exclude",
           WebkitMaskComposite: "xor",

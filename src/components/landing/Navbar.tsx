@@ -83,28 +83,31 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 grid grid-cols-3 gap-6">
-                {megaMenuItems.map((item) => (
-                  <div key={item.title} className="group cursor-pointer">
-                    <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden">
-                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                    </div>
-                    <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed font-body">
-                      {item.description}
-                    </p>
-                  </div>
-                ))}
-                <div className="flex flex-col justify-center">
-                  {servicesList.map((service, i) => (
-                    <div key={service.label} className={`py-5 ${i < servicesList.length - 1 ? "border-b border-white/10" : ""}`}>
-                      <div className="flex items-center gap-2.5 mb-1.5">
-                        <service.icon className="w-5 h-5 text-white/60" />
-                        <span className="text-base font-semibold text-foreground">{service.label}</span>
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 flex gap-6">
+                <div className="grid grid-cols-2 gap-6 flex-1">
+                  {megaMenuItems.map((item) => (
+                    <div key={item.title} className="group cursor-pointer">
+                      <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden">
+                        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{service.desc}</p>
+                      <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed font-body">
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <div className="w-px bg-white/10 self-stretch" />
+                <div className="flex flex-col justify-center w-72 pl-2">
+                  {servicesList.map((service, i) => (
+                    <div key={service.label} className={`py-4 ${i < servicesList.length - 1 ? "border-b border-white/10" : ""}`}>
+                      <div className="flex items-center gap-2.5 mb-1">
+                        <service.icon className="w-5 h-5 text-white/50 shrink-0" />
+                        <span className="text-sm font-semibold text-foreground">{service.label}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground leading-relaxed pl-[30px]">{service.desc}</p>
                     </div>
                   ))}
                 </div>

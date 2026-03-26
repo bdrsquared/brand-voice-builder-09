@@ -79,6 +79,8 @@ const Hero = () => {
           <span className="font-semibold text-foreground">Infobip</span> and
           more
         </motion.p>
+
+        <LogoWall />
       </div>
     </section>
   );

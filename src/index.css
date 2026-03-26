@@ -3,66 +3,48 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap');
-
-@font-face {
-  font-family: 'Nohemi';
-  src: url('https://fonts.cdnfonts.com/css/nohemi');
-  font-weight: 100 900;
-  font-display: swap;
-}
-
 @import url('https://fonts.cdnfonts.com/css/nohemi');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 7%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 97%;
-    --card-foreground: 0 0% 7%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 152 72% 46%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 145 96% 55%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 40%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 60%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 50%;
 
-    --accent: 152 72% 46%;
+    --accent: 243 79% 63%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 91%;
-    --input: 0 0% 91%;
-    --ring: 152 72% 46%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 145 96% 55%;
 
     --radius: 0.75rem;
 
-    /* Dark surface for alternating sections */
-    --surface-dark: 0 0% 7%;
-    --surface-dark-foreground: 0 0% 92%;
-    --surface-dark-muted: 0 0% 55%;
-    --surface-dark-border: 0 0% 16%;
-    --surface-dark-card: 0 0% 12%;
-
-    --gradient-green: linear-gradient(135deg, hsl(152, 72%, 46%), hsl(162, 80%, 40%));
-    --shadow-green: 0 0 40px -8px hsl(152, 72%, 46%, 0.25);
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 7%;
-    --sidebar-primary: 152 72% 46%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 7%;
-    --sidebar-border: 0 0% 91%;
-    --sidebar-ring: 152 72% 46%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 145 96% 55%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 14%;
+    --sidebar-ring: 145 96% 55%;
   }
 }
 
@@ -92,34 +74,41 @@
   }
 
   .text-gradient-green {
-    background: var(--gradient-green);
+    background: linear-gradient(135deg, hsl(145, 96%, 55%), hsl(160, 90%, 45%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .bg-gradient-green {
-    background: var(--gradient-green);
+    background: linear-gradient(135deg, hsl(145, 96%, 55%), hsl(160, 90%, 45%));
   }
 
   .shadow-green {
-    box-shadow: var(--shadow-green);
+    box-shadow: 0 0 40px -8px hsl(145, 96%, 55%, 0.3);
   }
 
-  .bg-surface-dark {
-    background-color: hsl(var(--surface-dark));
-    color: hsl(var(--surface-dark-foreground));
+  .text-gradient-blue {
+    background: linear-gradient(135deg, hsl(243, 79%, 63%), hsl(260, 80%, 68%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .text-surface-dark-muted {
-    color: hsl(var(--surface-dark-muted));
+  /* Gradient orbs for depth */
+  .orb-green {
+    background: radial-gradient(circle, hsl(145, 96%, 55%, 0.15) 0%, transparent 70%);
   }
 
-  .border-surface-dark {
-    border-color: hsl(var(--surface-dark-border));
+  .orb-blue {
+    background: radial-gradient(circle, hsl(243, 79%, 63%, 0.12) 0%, transparent 70%);
   }
 
-  .bg-surface-dark-card {
-    background-color: hsl(var(--surface-dark-card));
+  .orb-green-subtle {
+    background: radial-gradient(ellipse, hsl(145, 96%, 55%, 0.06) 0%, transparent 60%);
+  }
+
+  .orb-blue-subtle {
+    background: radial-gradient(ellipse, hsl(243, 79%, 63%, 0.06) 0%, transparent 60%);
   }
 }

@@ -4,8 +4,9 @@ import { ArrowRight, Play } from "lucide-react";
 const Hero = () => {
   return (
     <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-6 overflow-hidden">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-transparent pointer-events-none" />
+      {/* Gradient orbs */}
+      <div className="absolute top-[-200px] left-[-200px] w-[700px] h-[700px] orb-green pointer-events-none" />
+      <div className="absolute top-[-100px] right-[-300px] w-[600px] h-[600px] orb-blue pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
@@ -14,7 +15,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-flex items-center gap-2 bg-primary/10 text-primary font-medium text-sm px-4 py-1.5 rounded-full mb-8">
+          <span className="inline-flex items-center gap-2 bg-primary/10 text-primary font-medium text-sm px-4 py-1.5 rounded-full mb-8 border border-primary/20">
             <Play className="w-3 h-3 fill-current" />
             Video Podcasting for B2B
           </span>

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3 } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
-import launchImg from "@/assets/service-launch.png";
-import runScaleImg from "@/assets/service-run-scale.png";
+import launchImg from "@/assets/service-launch.webp";
+import runScaleImg from "@/assets/service-run-scale.webp";
 
 const megaMenuItems = [
   {

@@ -12,6 +12,7 @@ import Testimonials from "@/components/landing/Testimonials";
 import WhoIsFor from "@/components/landing/WhoIsFor";
 
 import CTA from "@/components/landing/CTA";
+import Calendly from "@/components/landing/Calendly";
 import Footer from "@/components/landing/Footer";
 
 const Index = () => {

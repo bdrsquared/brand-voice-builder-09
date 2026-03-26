@@ -57,14 +57,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        gold: {
-          DEFAULT: "hsl(42, 92%, 60%)",
-          dark: "hsl(32, 95%, 50%)",
+        "surface-dark": {
+          DEFAULT: "hsl(var(--surface-dark))",
+          foreground: "hsl(var(--surface-dark-foreground))",
+          muted: "hsl(var(--surface-dark-muted))",
+          border: "hsl(var(--surface-dark-border))",
+          card: "hsl(var(--surface-dark-card))",
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        heading: ['Nohemi', 'system-ui', 'sans-serif'],
+        body: ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

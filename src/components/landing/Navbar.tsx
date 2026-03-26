@@ -77,7 +77,7 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-2 gap-8">
+              <div className="bg-background/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-2 gap-8">
                 {megaMenuItems.map((item) => (
                   <div key={item.title} className="group cursor-pointer">
                     <div className="aspect-video rounded-xl bg-white/5 border border-white/10 mb-4 overflow-hidden" />

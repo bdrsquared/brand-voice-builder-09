@@ -2,16 +2,23 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
+import launchImg from "@/assets/service-launch.png";
+import runScaleImg from "@/assets/service-run-scale.png";
 
 const megaMenuItems = [
   {
-    title: "Video Podcasting",
-    description: "End-to-end production for B2B video podcasts.",
-    image: null,
+    title: "Launch",
+    description: "We incubate, design, and launch podcasts that help businesses lead conversations",
+    image: launchImg,
   },
   {
-    title: "Content Repurposing",
-    description: "Turn one episode into dozens of assets.",
+    title: "Run & scale",
+    description: "We manage your podcast end-to-end, turning each episode into a consistent, measurable growth channel.",
+    image: runScaleImg,
+  },
+  {
+    title: "Our service",
+    description: "Strategy & Planning · Production & Creative · Distribution & Insight",
     image: null,
   },
 ];
@@ -75,11 +82,23 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-2 gap-8">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 grid grid-cols-3 gap-6">
                 {megaMenuItems.map((item) => (
                   <div key={item.title} className="group cursor-pointer">
-                    <div className="aspect-video rounded-xl bg-white/5 border border-white/10 mb-4 overflow-hidden" />
-                    <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                    {item.image ? (
+                      <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-4 overflow-hidden">
+                        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-4 flex flex-col justify-center gap-4 p-5">
+                        {["Strategy & Planning", "Production & Creative", "Distribution & Insight"].map((label) => (
+                          <div key={label} className="text-sm font-medium text-white/80 border-b border-white/10 pb-3 last:border-0 last:pb-0">
+                            {label}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
                       {item.title}
                     </h4>
                     <p className="text-sm text-muted-foreground leading-relaxed font-body">

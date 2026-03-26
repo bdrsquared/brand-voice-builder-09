@@ -1,7 +1,4 @@
 import { motion } from "framer-motion";
-import howStrategy from "@/assets/how-strategy.jpg";
-import howRecord from "@/assets/how-record.jpg";
-import howDistribute from "@/assets/how-distribute.jpg";
 
 const steps = [
   {
@@ -9,21 +6,18 @@ const steps = [
     title: "Strategy & guest mapping",
     description:
       "We help you define the conversations that matter — topics that position you as a leader and guests that are your ideal customers or connectors.",
-    image: howStrategy,
   },
   {
     number: "02",
     title: "Record & produce",
     description:
       "Show up and have a great conversation. We handle everything else — production, editing, and post-production to broadcast quality.",
-    image: howRecord,
   },
   {
     number: "03",
     title: "Distribute & repurpose",
     description:
       "One recording becomes dozens of content assets. Long-form video, short clips, written content, social posts — all on-brand and ready to publish.",
-    image: howDistribute,
   },
 ];
 
@@ -55,34 +49,22 @@ const HowItWorks = () => {
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/20 transition-colors overflow-hidden"
+              className="flex gap-8 sm:gap-10 items-start p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/20 transition-colors"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.12 }}
             >
-              <div className="flex gap-8 sm:gap-10 items-start flex-1 min-w-0">
-                <span className="text-4xl sm:text-5xl font-bold text-gradient-green shrink-0 font-heading">
-                  {step.number}
-                </span>
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed font-body">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-              <div className="w-full sm:w-48 md:w-56 shrink-0 rounded-xl overflow-hidden">
-                <img
-                  src={step.image}
-                  alt={step.title}
-                  className="w-full h-32 sm:h-36 object-cover rounded-xl"
-                  loading="lazy"
-                  width={800}
-                  height={512}
-                />
+              <span className="text-4xl sm:text-5xl font-bold text-gradient-green shrink-0 font-heading">
+                {step.number}
+              </span>
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed font-body">
+                  {step.description}
+                </p>
               </div>
             </motion.div>
           ))}

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import problemVisual from "@/assets/problem-visual.jpg";
 
 const ProblemStatement = () => {
   return (
@@ -23,10 +22,7 @@ const ProblemStatement = () => {
             <span className="text-muted-foreground">relationships.</span>{" "}
             It builds noise.
           </h2>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-6 text-muted-foreground text-lg leading-relaxed font-body">
+          <div className="grid sm:grid-cols-2 gap-10 text-muted-foreground text-lg leading-relaxed font-body">
             <p>
               Blog posts get skimmed. Social posts get scrolled past. Your ICP
               is drowning in AI-generated content that all sounds the same.
@@ -39,24 +35,7 @@ const ProblemStatement = () => {
               content that actually compounds.
             </p>
           </div>
-
-          <motion.div
-            className="rounded-2xl overflow-hidden border border-border"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <img
-              src={problemVisual}
-              alt="Content noise vs podcast signal"
-              className="w-full h-auto object-cover"
-              loading="lazy"
-              width={1200}
-              height={512}
-            />
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

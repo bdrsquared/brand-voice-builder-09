@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import LogoWall from "./LogoWall";
 import ovalBg from "@/assets/oval.png";
+import micShapes from "@/assets/mic-shapes.png";
 
 const Hero = () => {
   return (

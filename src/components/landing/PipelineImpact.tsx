@@ -1,24 +1,27 @@
 import { motion } from "framer-motion";
-import { Handshake, Flame, MessageSquare, Timer } from "lucide-react";
+import spotHandshake from "@/assets/spot-handshake.png";
+import spotWarmth from "@/assets/spot-warmth.png";
+import spotOutreach from "@/assets/spot-outreach.png";
+import spotSpeed from "@/assets/spot-speed.png";
 
 const outcomes = [
   {
-    icon: Handshake,
+    image: spotHandshake,
     title: "Build real relationships with prospects",
     description: "Invite your ideal customers as guests. By the time the episode wraps, you've built a genuine connection — not a cold lead.",
   },
   {
-    icon: Flame,
+    image: spotWarmth,
     title: "Warm leads before sales conversations",
     description: "Prospects who've watched your content arrive educated, aligned, and ready to talk. No more starting from zero.",
   },
   {
-    icon: MessageSquare,
+    image: spotOutreach,
     title: "Give sales teams a reason to reach out",
     description: "\"Hey, I'd love to have you on our podcast\" is the most effective outreach message in B2B. It opens doors that cold emails can't.",
   },
   {
-    icon: Timer,
+    image: spotSpeed,
     title: "Shorten sales cycles, increase trust",
     description: "When prospects already know your voice, your thinking, and your values — the sale happens faster and with less friction.",
   },
@@ -57,8 +60,8 @@ const PipelineImpact = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                <o.icon className="w-5 h-5 text-primary" />
+              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                <img src={o.image} alt={o.title} width={48} height={48} loading="lazy" className="w-12 h-12 object-contain" />
               </div>
               <h3 className="text-xl font-bold mb-2">{o.title}</h3>
               <p className="text-muted-foreground leading-relaxed font-body">{o.description}</p>

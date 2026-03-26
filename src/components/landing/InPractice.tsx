@@ -17,18 +17,7 @@ const InPractice = () => {
       <div className="absolute bottom-[-100px] right-[-80px] w-[300px] h-[300px] blob-green pointer-events-none" />
 
       <div className="relative z-10 max-w-[1200px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
-            ● What this looks like in practice
-          </span>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* Left column - Image */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -40,12 +29,15 @@ const InPractice = () => {
             <img
               src={repeatableImg}
               alt="Repeatable content system"
-              className="w-full max-w-md lg:max-w-full object-contain"
+              className="w-full object-contain"
             />
           </motion.div>
 
           {/* Right column - Content */}
           <div>
+            <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
+              ● What this looks like in practice
+            </span>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -4,9 +4,9 @@ import { ArrowRight } from "lucide-react";
 const CTA = () => {
   return (
     <section id="contact" className="relative py-24 sm:py-32 px-6 overflow-hidden">
-      {/* Orbs behind CTA */}
-      <div className="absolute top-[50%] left-[30%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] orb-green pointer-events-none opacity-40" />
-      <div className="absolute top-[40%] right-[-100px] w-[400px] h-[400px] orb-blue pointer-events-none opacity-30" />
+      {/* Blurred shapes */}
+      <div className="absolute top-[30%] left-[20%] w-[500px] h-[400px] blob-green-strong pointer-events-none" />
+      <div className="absolute bottom-[-50px] right-[-100px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <motion.div

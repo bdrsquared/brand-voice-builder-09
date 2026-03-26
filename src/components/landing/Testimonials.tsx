@@ -42,8 +42,8 @@ const Testimonials = () => {
 
   return (
     <section className="relative py-24 sm:py-32 px-6 overflow-hidden">
-      <div className="absolute bottom-[-200px] left-[-150px] w-[500px] h-[500px] orb-green-subtle pointer-events-none" />
-      <div className="absolute top-[-100px] right-[-200px] w-[400px] h-[400px] orb-blue-subtle pointer-events-none" />
+      <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[500px] blob-oblong-green pointer-events-none" />
+      <div className="absolute top-[-50px] right-[-150px] w-[350px] h-[350px] blob-blue-strong pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div

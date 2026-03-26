@@ -24,9 +24,9 @@ const steps = [
 const HowItWorks = () => {
   return (
     <section id="how-it-works" className="relative py-24 sm:py-32 px-6 overflow-hidden">
-      {/* Gradient orbs */}
-      <div className="absolute top-[-100px] right-[-200px] w-[500px] h-[500px] orb-blue-subtle pointer-events-none" />
-      <div className="absolute bottom-[-150px] left-[-100px] w-[400px] h-[400px] orb-green-subtle pointer-events-none" />
+      {/* Blurred shapes */}
+      <div className="absolute top-[-50px] right-[-100px] w-[500px] h-[350px] blob-oblong-blue pointer-events-none" />
+      <div className="absolute bottom-[-80px] left-[-80px] w-[300px] h-[400px] blob-green pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div

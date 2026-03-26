@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 const Showreel = () => {
   return (
     <section className="relative py-20 sm:py-28 px-6 overflow-hidden">
-      <div className="absolute top-[-100px] right-[-200px] w-[500px] h-[500px] orb-blue-subtle pointer-events-none" />
+      <div className="absolute top-[-50px] right-[-150px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />
+      <div className="absolute bottom-[-80px] left-[-100px] w-[350px] h-[350px] blob-green pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div

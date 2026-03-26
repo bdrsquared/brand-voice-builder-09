@@ -5,6 +5,7 @@ import ProblemStatement from "@/components/landing/ProblemStatement";
 import ValueProps from "@/components/landing/ValueProps";
 import HowItWorks from "@/components/landing/HowItWorks";
 import CTA from "@/components/landing/CTA";
+import Testimonials from "@/components/landing/Testimonials";
 import Footer from "@/components/landing/Footer";
 
 const Index = () => {
@@ -15,6 +16,7 @@ const Index = () => {
       <Showreel />
       <ValueProps />
       <HowItWorks />
+      <Testimonials />
       <CTA />
       <Footer />
     </div>

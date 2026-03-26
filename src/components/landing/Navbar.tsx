@@ -80,14 +80,16 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-2 gap-8">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-xl shadow-black/30 grid grid-cols-3 gap-6">
                 {megaMenuItems.map((item) => (
                   <div key={item.title} className="group cursor-pointer">
-                    <div className="aspect-video rounded-xl bg-white/5 border border-white/10 mb-4 overflow-hidden" />
-                    <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
-                      {item.title}
-                    </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed font-body">
+                    <div className="flex items-center gap-3 mb-2">
+                      <item.icon className="w-5 h-5 text-white/70" />
+                      <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {item.title}
+                      </h4>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed font-body pl-8">
                       {item.description}
                     </p>
                   </div>

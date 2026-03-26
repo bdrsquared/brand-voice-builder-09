@@ -28,7 +28,7 @@ const Hero = () => {
         >
           <span className="inline-flex items-center gap-2 bg-primary/10 text-primary font-medium text-sm px-4 py-1.5 rounded-full mb-8 border border-primary/20">
             <Play className="w-3 h-3 fill-current" />
-            Video Podcasting for B2B
+            For forward-thinking B2B brands
           </span>
         </motion.div>
 

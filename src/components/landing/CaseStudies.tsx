@@ -4,6 +4,9 @@ import { useState, useRef } from "react";
 import caseCarrier from "@/assets/case-carrier.png";
 import casePrettyCovered from "@/assets/case-pretty-covered.png";
 import caseWenodo from "@/assets/case-wenodo.png";
+import casePulsetto from "@/assets/case-pulsetto.png";
+import caseCfoPlaybook from "@/assets/case-cfo-playbook.png";
+import caseUkUsTax from "@/assets/case-uk-us-tax.png";
 
 const caseStudies = [
   {
@@ -32,18 +35,21 @@ const caseStudies = [
     logo: "PULSETTO",
     description: "A wellness-focused podcast helping busy professionals manage stress through science-backed techniques.",
     gradient: "from-emerald-500/30 to-green-400/20",
+    image: casePulsetto,
   },
   {
     title: "The CFO Playbook",
     logo: "soldo",
     description: "A finance podcast giving CFOs and finance leaders actionable strategies for modern business growth.",
     gradient: "from-slate-400/30 to-gray-300/20",
+    image: caseCfoPlaybook,
   },
   {
     title: "UK/US Tax Talk",
     logo: "COLLYER BRISTOW",
     description: "A cross-border tax podcast simplifying complex UK and US tax regulations for international businesses.",
     gradient: "from-indigo-500/30 to-purple-400/20",
+    image: caseUkUsTax,
   },
 ];
 

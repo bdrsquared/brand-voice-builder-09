@@ -1,17 +1,6 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 const Calendly = () => {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   return (
     <section id="book" className="relative py-24 sm:py-32 px-6 overflow-hidden">
       <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] blob-green pointer-events-none" />
@@ -35,10 +24,13 @@ const Calendly = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="rounded-2xl overflow-hidden border border-white/10"
         >
-          <div
-            className="calendly-inline-widget"
-            data-url="https://calendly.com/team-earworm/30-minute-consultation-clone"
-            style={{ minWidth: "320px", height: "700px" }}
+          <iframe
+            src="https://calendly.com/team-earworm/30-minute-consultation-clone"
+            width="100%"
+            height="700"
+            frameBorder="0"
+            title="Book a strategy call"
+            className="bg-white rounded-2xl"
           />
         </motion.div>
       </div>

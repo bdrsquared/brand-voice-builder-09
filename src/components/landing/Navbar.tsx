@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3 } from "lucide-react";
+import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3, X } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
 import launchImg from "@/assets/service-launch.webp";
 import runScaleImg from "@/assets/service-run-scale.webp";
@@ -45,165 +45,258 @@ const caseStudies = [
   },
 ];
 
+const mobileNavLinks = [
+  { label: "Our service", href: "#services" },
+  { label: "Case studies", href: "#case-studies" },
+  { label: "How it works", href: "#how-it-works" },
+];
+
 type MegaMenu = "services" | "cases" | null;
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
   return (
-    <motion.nav
-      className="fixed top-3 left-0 right-0 z-50 px-4 sm:px-6"
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      <div
-        className="max-w-6xl mx-auto relative"
-        onMouseLeave={() => setMegaOpen(null)}
+    <>
+      <motion.nav
+        className="fixed top-3 left-0 right-0 z-50 px-4 sm:px-6"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
       >
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
-          <img src={logo} alt="Earworm" className="h-5" />
-          <div className="hidden sm:flex items-center gap-4">
-            <div
-              className="relative"
-              onMouseEnter={() => setMegaOpen("services")}
-            >
-              <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
-                Our service
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "services" ? "rotate-180" : ""}`} />
-              </button>
+        <div
+          className="max-w-6xl mx-auto relative"
+          onMouseLeave={() => setMegaOpen(null)}
+        >
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
+            <img src={logo} alt="Earworm" className="h-5" />
+            <div className="hidden sm:flex items-center gap-4">
+              <div
+                className="relative"
+                onMouseEnter={() => setMegaOpen("services")}
+              >
+                <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                  Our service
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "services" ? "rotate-180" : ""}`} />
+                </button>
+              </div>
+              <div
+                className="relative"
+                onMouseEnter={() => setMegaOpen("cases")}
+              >
+                <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                  Case studies
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "cases" ? "rotate-180" : ""}`} />
+                </button>
+              </div>
+              <a
+                href="#how-it-works"
+                className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+              >
+                How it works
+              </a>
             </div>
-            <div
-              className="relative"
-              onMouseEnter={() => setMegaOpen("cases")}
-            >
-              <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
-                Case studies
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "cases" ? "rotate-180" : ""}`} />
-              </button>
-            </div>
+
+            {/* Desktop CTA */}
             <a
-              href="#how-it-works"
-              className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+              href="#contact"
+              className="hidden sm:inline-flex group items-center gap-2 text-sm font-semibold bg-gradient-green text-primary-foreground px-5 py-2.5 rounded-full transition-all hover:shadow-green"
             >
-              How it works
+              Book a call
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
             </a>
+
+            {/* Mobile burger */}
+            <button
+              className="sm:hidden relative w-10 h-10 flex items-center justify-center"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              <span className="sr-only">Menu</span>
+              <div className="relative w-5 h-4 flex flex-col justify-between">
+                <span
+                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 origin-center ${
+                    mobileOpen ? "translate-y-[7px] rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 ${
+                    mobileOpen ? "opacity-0 scale-x-0" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 origin-center ${
+                    mobileOpen ? "-translate-y-[7px] -rotate-45" : ""
+                  }`}
+                />
+              </div>
+            </button>
           </div>
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2 text-sm font-semibold bg-gradient-green text-primary-foreground px-5 py-2.5 rounded-full transition-all hover:shadow-green"
-          >
-            Book a call
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-          </a>
-        </div>
 
-        {/* Services mega menu */}
-        <AnimatePresence>
-          {megaOpen === "services" && (
-            <motion.div
-              className="absolute top-full left-0 right-0 pt-2"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 flex gap-6">
-                <div className="grid grid-cols-2 gap-6 flex-1">
-                  {megaMenuItems.map((item) => (
-                    <div key={item.title} className="group cursor-pointer">
-                      <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden">
-                        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+          {/* Services mega menu */}
+          <AnimatePresence>
+            {megaOpen === "services" && (
+              <motion.div
+                className="absolute top-full left-0 right-0 pt-2"
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 flex gap-6">
+                  <div className="grid grid-cols-2 gap-6 flex-1">
+                    {megaMenuItems.map((item) => (
+                      <div key={item.title} className="group cursor-pointer">
+                        <div className="aspect-square rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden">
+                          <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                        </div>
+                        <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                          {item.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed font-body">
+                          {item.description}
+                        </p>
                       </div>
-                      <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed font-body">
-                        {item.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <div className="w-px bg-white/10 self-stretch" />
-                <div className="flex flex-col justify-between w-72 py-2 pl-2">
-                  {servicesList.map((service, i) => (
-                    <div key={service.label} className={`flex-1 flex flex-col justify-center ${i < servicesList.length - 1 ? "border-b border-white/10" : ""} ${i > 0 ? "pt-4" : ""} ${i < servicesList.length - 1 ? "pb-4" : ""}`}>
-                      <div className="flex items-center gap-2.5 mb-1.5">
-                        <service.icon className="w-5 h-5 text-white/50 shrink-0" />
-                        <span className="text-base font-semibold text-foreground">{service.label}</span>
+                    ))}
+                  </div>
+                  <div className="w-px bg-white/10 self-stretch" />
+                  <div className="flex flex-col justify-between w-72 py-2 pl-2">
+                    {servicesList.map((service, i) => (
+                      <div key={service.label} className={`flex-1 flex flex-col justify-center ${i < servicesList.length - 1 ? "border-b border-white/10" : ""} ${i > 0 ? "pt-4" : ""} ${i < servicesList.length - 1 ? "pb-4" : ""}`}>
+                        <div className="flex items-center gap-2.5 mb-1.5">
+                          <service.icon className="w-5 h-5 text-white/50 shrink-0" />
+                          <span className="text-base font-semibold text-foreground">{service.label}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{service.desc}</p>
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{service.desc}</p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-        {/* Case studies mega menu */}
-        <AnimatePresence>
-          {megaOpen === "cases" && (
-            <motion.div
-              className="absolute top-full left-0 right-0 pt-2"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 pb-5 shadow-xl shadow-black/30">
-                <div className="grid grid-cols-3 gap-5">
-                  {caseStudies.map((study) => (
-                    <a key={study.brand} href="#case-studies" className="group cursor-pointer block">
-                      <div className="aspect-[16/10] rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden relative">
-                        <img
-                          src={study.image}
-                          alt={study.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      </div>
-                      <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
-                        {study.brand}
-                      </p>
-                      <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                        {study.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-2 font-body">
-                        {study.description}
-                      </p>
-                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                        View case study
-                        <ArrowRight className="w-3 h-3" />
-                      </span>
+          {/* Case studies mega menu */}
+          <AnimatePresence>
+            {megaOpen === "cases" && (
+              <motion.div
+                className="absolute top-full left-0 right-0 pt-2"
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 pb-5 shadow-xl shadow-black/30">
+                  <div className="grid grid-cols-3 gap-5">
+                    {caseStudies.map((study) => (
+                      <a key={study.brand} href="#case-studies" className="group cursor-pointer block">
+                        <div className="aspect-[16/10] rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden relative">
+                          <img
+                            src={study.image}
+                            alt={study.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        </div>
+                        <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
+                          {study.brand}
+                        </p>
+                        <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                          {study.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed mb-2 font-body">
+                          {study.description}
+                        </p>
+                        <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                          View case study
+                          <ArrowRight className="w-3 h-3" />
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                  <div className="h-px bg-white/10 mt-5 mb-4" />
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground font-body">
+                      We partner with global brands to create podcast-led content that builds authority and drives results.
+                    </p>
+                    <a
+                      href="#case-studies"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all whitespace-nowrap ml-6"
+                    >
+                      See more case studies
+                      <ArrowRight className="w-3 h-3" />
                     </a>
-                  ))}
+                  </div>
                 </div>
-                <div className="h-px bg-white/10 mt-5 mb-4" />
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground font-body">
-                    We partner with global brands to create podcast-led content that builds authority and drives results.
-                  </p>
-                  <a
-                    href="#case-studies"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all whitespace-nowrap ml-6"
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.nav>
+
+      {/* Mobile full-screen overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            className="fixed inset-0 z-[60] sm:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
+
+            {/* Content */}
+            <div className="relative z-10 flex flex-col h-full px-6 pt-24 pb-12">
+              <nav className="flex flex-col gap-2">
+                {mobileNavLinks.map((link, i) => (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    className="text-3xl font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.1 + i * 0.06 }}
+                    onClick={() => setMobileOpen(false)}
                   >
-                    See more case studies
-                    <ArrowRight className="w-3 h-3" />
-                  </a>
-                </div>
+                    {link.label}
+                  </motion.a>
+                ))}
+              </nav>
+
+              <div className="mt-auto">
+                <motion.a
+                  href="#contact"
+                  className="glow-on-hover group inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-full text-base w-full"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.35 }}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Book a strategy call
+                  <ArrowRight className="w-4 h-4" />
+                </motion.a>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

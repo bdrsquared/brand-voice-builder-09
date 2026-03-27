@@ -8,10 +8,10 @@ const stages = ["Lead", "In Progress", "Closed"];
 const deals = [
   { name: "Acme Ltd", value: "£25k", avatar: "AL", col: 0, image: acmeLogo },
   { name: "John Smith", value: "£18k", avatar: "JS", col: 1 },
-  { name: "Nova Corp", value: "£42k", avatar: "NC", col: 2 },
+  { name: "Nova Corp", value: "£42k", avatar: "NC", col: 2, image: novaCorpLogo },
 ];
 
-const movingDeal = { name: "Bright Co", value: "£31k", avatar: "BC" };
+const movingDeal = { name: "Bright Co", value: "£31k", avatar: "BC", image: brightCoLogo };
 
 // Phases: 0=show in col0, 1=fade out col0, 2=show in col1, 3=fade out col1, 4=show in col2 (win!), 5=fade out col2 & reset
 const PHASE_COUNT = 6;

@@ -43,7 +43,7 @@ const iconStyles = {
 
 const ValueProps = () => {
   return (
-    <section className="relative py-16 sm:py-20 px-6">
+    <section className="relative py-16 sm:py-20 px-4 sm:px-6 overflow-hidden">
       {/* Blurred shapes */}
       <div className="absolute top-[50px] left-[-200px] w-[400px] h-[500px] blob-oblong-green pointer-events-none" />
       <div className="absolute bottom-[-100px] right-[-150px] w-[350px] h-[350px] blob-blue-strong pointer-events-none" />

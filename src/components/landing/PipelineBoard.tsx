@@ -10,6 +10,10 @@ const deals = [
 
 const movingDeal = { name: "Bright Co", value: "£31k", avatar: "BC" };
 
+// Phases: 0=show in col0, 1=fade out col0, 2=show in col1, 3=fade out col1, 4=show in col2 (win!), 5=fade out col2 & reset
+const PHASE_COUNT = 6;
+const PHASE_TIMING = [2500, 600, 2500, 600, 3000, 600]; // ms per phase
+
 const PipelineBoard = () => {
   const [reduced, setReduced] = useState(false);
   const [phase, setPhase] = useState(0);
@@ -20,15 +24,26 @@ const PipelineBoard = () => {
 
   useEffect(() => {
     if (reduced) return;
-    const interval = setInterval(() => {
-      setPhase((p) => (p + 1) % 4);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [reduced]);
+    const timeout = setTimeout(() => {
+      setPhase((p) => (p + 1) % PHASE_COUNT);
+    }, PHASE_TIMING[phase]);
+    return () => clearTimeout(timeout);
+  }, [reduced, phase]);
 
-  // phase 0: col 0, phase 1: col 1, phase 2: col 2, phase 3: fade out & reset
-  const movingCol = phase >= 3 ? 0 : phase;
-  const movingOpacity = phase === 3 ? 0 : 1;
+  // Map phase to column and visibility
+  const getMovingState = () => {
+    switch (phase) {
+      case 0: return { col: 0, opacity: 1, won: false };
+      case 1: return { col: 0, opacity: 0, won: false };
+      case 2: return { col: 1, opacity: 1, won: false };
+      case 3: return { col: 1, opacity: 0, won: false };
+      case 4: return { col: 2, opacity: 1, won: true };
+      case 5: return { col: 2, opacity: 0, won: false };
+      default: return { col: 0, opacity: 0, won: false };
+    }
+  };
+
+  const { col: movingCol, opacity: movingOpacity, won } = getMovingState();
 
   return (
     <div
@@ -38,29 +53,31 @@ const PipelineBoard = () => {
       <div className="flex h-full">
         {stages.map((stage, si) => (
           <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-border/30">
-            {/* Column header */}
             <div className="px-3 py-2.5 border-b border-border/30">
               <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider font-body">
                 {stage}
               </p>
             </div>
 
-            {/* Cards */}
             <div className="flex-1 p-2 flex flex-col gap-2 relative">
-              {/* Static deals */}
               {deals
                 .filter((d) => d.col === si)
                 .map((deal) => (
                   <DealCard key={deal.name} {...deal} />
                 ))}
 
-              {/* Moving deal */}
               {movingCol === si && (
                 <div
-                  className="transition-all duration-700 ease-in-out"
+                  className="transition-opacity duration-500 ease-in-out relative"
                   style={{ opacity: movingOpacity }}
                 >
                   <DealCard {...movingDeal} highlight />
+                  {/* Win star */}
+                  {won && (
+                    <div className="absolute -top-2 -right-1 animate-[star-pop_0.5s_ease-out_forwards] text-sm">
+                      ⭐
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -68,7 +85,6 @@ const PipelineBoard = () => {
         ))}
       </div>
 
-      {/* Subtle top/bottom fade */}
       <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-card/80 to-transparent pointer-events-none" />
     </div>
   );

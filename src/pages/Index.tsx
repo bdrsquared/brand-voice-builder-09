@@ -1,3 +1,4 @@
+import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
 import Showreel from "@/components/landing/Showreel";
@@ -14,6 +15,12 @@ import CaseStudies from "@/components/landing/CaseStudies";
 
 import Calendly from "@/components/landing/Calendly";
 import Footer from "@/components/landing/Footer";
+
+const Index = () => {
+  return (
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      <TestimonialTicker />
+      <Navbar />
 
 const Index = () => {
   return (

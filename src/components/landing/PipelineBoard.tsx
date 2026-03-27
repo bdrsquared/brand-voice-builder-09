@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import acmeLogo from "@/assets/acme-logo.png";
 
 const stages = ["Lead", "In Progress", "Closed"];
 

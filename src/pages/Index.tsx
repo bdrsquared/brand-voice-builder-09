@@ -21,11 +21,11 @@ const Index = () => {
       <TestimonialTicker />
       <Navbar />
       <Hero />
+      <ValueProps />
       <Showreel />
       <WhyNow />
       <Stats />
       <ProblemStatement />
-      <ValueProps />
       <InPractice />
       <HowItWorks />
       

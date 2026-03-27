@@ -205,6 +205,9 @@
   @media (max-width: 639px) {
     .glow-on-hover::before {
       opacity: 1;
+      animation: none;
+      background: conic-gradient(#574ECC, #9139A4, #1CFA76, #574ECC);
+      background-size: 100%;
     }
   }
 

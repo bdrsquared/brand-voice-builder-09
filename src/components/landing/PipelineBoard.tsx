@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 const stages = ["Lead", "In Progress", "Closed"];
 
 const deals = [
-  { name: "Acme Ltd", value: "£25k", avatar: "AL", col: 0 },
-  { name: "John Smith", value: "£18k", avatar: "JS", col: 1 },
-  { name: "Nova Corp", value: "£42k", avatar: "NC", col: 2 },
+  { name: "Acme Ltd", shortName: "Acme", value: "£25k", avatar: "AL", col: 0 },
+  { name: "John Smith", shortName: "John S", value: "£18k", avatar: "JS", col: 1 },
+  { name: "Nova Corp", shortName: "Nova", value: "£42k", avatar: "NC", col: 2 },
 ];
 
-const movingDeal = { name: "Bright Co", value: "£31k", avatar: "BC" };
+const movingDeal = { name: "Bright Co", shortName: "Bright", value: "£31k", avatar: "BC" };
 
 // Phases: 0=show in col0, 1=fade out col0, 2=show in col1, 3=fade out col1, 4=show in col2 (win!), 5=fade out col2 & reset
 const PHASE_COUNT = 6;
@@ -91,11 +91,13 @@ const PipelineBoard = () => {
 
 const DealCard = ({
   name,
+  shortName,
   value,
   avatar,
   highlight,
 }: {
   name: string;
+  shortName?: string;
   value: string;
   avatar: string;
   highlight?: boolean;
@@ -110,8 +112,11 @@ const DealCard = ({
     <div className="hidden sm:flex w-6 h-6 rounded-full bg-primary/15 text-primary items-center justify-center text-[8px] font-medium shrink-0 font-body">
       {avatar}
     </div>
-    <div className="min-w-0">
-      <p className="text-[7px] sm:text-[10px] text-foreground font-medium leading-tight truncate font-body">{name}</p>
+    <div className="min-w-0 overflow-hidden">
+      <p className="text-[7px] sm:text-[10px] text-foreground font-medium leading-tight truncate font-body">
+        <span className="sm:hidden">{shortName || name}</span>
+        <span className="hidden sm:inline">{name}</span>
+      </p>
       <p className="text-[6px] sm:text-[9px] text-muted-foreground font-body">{value}</p>
     </div>
   </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Heart, MessageCircle, Share2, UserPlus } from "lucide-react";
 import ryanFosterAvatar from "@/assets/ryan-foster-avatar.png";
 import oliviaParkAvatar from "@/assets/olivia-park-avatar.png";
 import lucasGrantAvatar from "@/assets/lucas-grant-avatar.jpeg";

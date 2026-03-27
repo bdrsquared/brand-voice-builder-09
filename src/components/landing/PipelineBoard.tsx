@@ -4,7 +4,7 @@ import acmeLogo from "@/assets/acme-logo.png";
 const stages = ["Lead", "In Progress", "Closed"];
 
 const deals = [
-  { name: "Acme Ltd", value: "£25k", avatar: "AL", col: 0 },
+  { name: "Acme Ltd", value: "£25k", avatar: "AL", col: 0, image: acmeLogo },
   { name: "John Smith", value: "£18k", avatar: "JS", col: 1 },
   { name: "Nova Corp", value: "£42k", avatar: "NC", col: 2 },
 ];

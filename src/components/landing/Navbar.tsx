@@ -4,6 +4,9 @@ import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3, X } from "lucide
 import logo from "@/assets/earworm-logo.png";
 import launchImg from "@/assets/service-launch.webp";
 import runScaleImg from "@/assets/service-run-scale.webp";
+import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
+import caseNoStress from "@/assets/case-no-stress.jpeg";
+import caseCfoPlaybook from "@/assets/case-cfo-playbook.jpeg";
 
 const megaMenuItems = [
   {

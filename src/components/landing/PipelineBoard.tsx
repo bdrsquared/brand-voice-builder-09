@@ -49,11 +49,11 @@ const PipelineBoard = () => {
     <div
       className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5 h-[180px] sm:h-[280px]"
     >
-      <div className="flex h-full">
+      <div className="flex h-full w-full">
         {stages.map((stage, si) => (
-          <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-border/30 min-w-0">
-            <div className="px-1.5 sm:px-3 py-1.5 sm:py-2.5 border-b border-border/30">
-              <p className="text-[8px] sm:text-[10px] font-medium text-muted-foreground uppercase tracking-wider font-body truncate">
+          <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-border/30 min-w-0 overflow-hidden">
+            <div className="px-1 sm:px-3 py-1 sm:py-2.5 border-b border-border/30">
+              <p className="text-[7px] sm:text-[10px] font-medium text-muted-foreground uppercase tracking-wider font-body truncate">
                 {stage}
               </p>
             </div>

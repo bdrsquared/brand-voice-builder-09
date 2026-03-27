@@ -10,8 +10,8 @@ import emmaCarterAvatar from "@/assets/emma-carter-avatar.jpeg";
 const notifications = [
   { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary", image: jonDoeAvatar },
   { name: "Sarah Miles", action: "commented on your post", avatar: "SM", bg: "bg-accent/20 text-accent", image: null },
-  { name: "Alex Chen", action: "shared your clip", avatar: "AC", bg: "bg-primary/20 text-primary", image: null },
-  { name: "Emma Carter", action: "followed your page", avatar: "EC", bg: "bg-accent/20 text-accent", image: null },
+  { name: "Alex Chen", action: "shared your clip", avatar: "AC", bg: "bg-primary/20 text-primary", image: alexChenAvatar },
+  { name: "Emma Carter", action: "followed your page", avatar: "EC", bg: "bg-accent/20 text-accent", image: emmaCarterAvatar },
   { name: "Ryan Foster", action: "liked your video", avatar: "RF", bg: "bg-primary/20 text-primary", image: ryanFosterAvatar },
   { name: "Mia Johnson", action: "commented on your post", avatar: "MJ", bg: "bg-accent/20 text-accent", image: miaJohnsonAvatar },
   { name: "Lucas Grant", action: "shared your clip", avatar: "LG", bg: "bg-primary/20 text-primary", image: lucasGrantAvatar },

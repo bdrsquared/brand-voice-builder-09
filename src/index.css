@@ -58,7 +58,13 @@
     font-family: 'Geist', system-ui, -apple-system, sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3 {
+    font-family: 'Nohemi', system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  h4, h5, h6 {
     font-family: 'Nohemi', system-ui, sans-serif;
     letter-spacing: -0.02em;
   }

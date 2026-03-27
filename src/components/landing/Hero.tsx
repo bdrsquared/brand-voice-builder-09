@@ -39,7 +39,7 @@ const Hero = () => {
         >
           Turn video podcasting into a{" "}
           <span className="text-gradient-green">content engine</span> that
-          drives pipeline
+          drives growth
         </motion.h1>
 
         <motion.p

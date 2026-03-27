@@ -56,29 +56,13 @@ const ContentEngine = () => {
 
   return (
     <div
-      className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5"
+      className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-accent/5"
       style={{ height: "280px" }}
     >
-      {/* Fade masks */}
       <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-card/90 to-transparent z-20 pointer-events-none" />
       <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-card/90 to-transparent z-20 pointer-events-none" />
 
       <div className="flex h-full gap-2 p-3">
-        {/* Center source node */}
-        <div className="flex flex-col items-center justify-center shrink-0 w-[72px] z-10">
-          <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shadow-[0_0_20px_-4px_hsl(145,96%,55%,0.15)]">
-            <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-              <span className="text-primary text-xs">▶</span>
-            </div>
-          </div>
-          <p className="text-[8px] text-muted-foreground mt-1.5 font-body text-center">1 Session</p>
-          {/* Connecting lines */}
-          <div className="flex gap-6 mt-2">
-            <div className="w-px h-4 bg-primary/20" />
-            <div className="w-px h-4 bg-primary/20" />
-          </div>
-        </div>
-
         {/* Left column — scrolls up */}
         <div className="flex-1 overflow-hidden relative">
           <div ref={leftRef} className="flex flex-col gap-2">
@@ -104,15 +88,15 @@ const ContentEngine = () => {
 const ContentCard = ({ label, icon, accent }: { label: string; icon: string; accent: boolean; type: string }) => (
   <div
     className={`flex items-center gap-2 p-2 rounded-lg border ${
-      accent ? "border-primary/20 bg-primary/5" : "border-border/50 bg-secondary/50"
+      accent ? "border-accent/20 bg-accent/5" : "border-border/50 bg-secondary/50"
     }`}
   >
     <span className="text-xs shrink-0">{icon}</span>
     <div className="min-w-0 flex-1">
       <p className="text-[10px] text-foreground font-medium truncate font-body">{label}</p>
       <div className="flex gap-1 mt-1">
-        <div className={`h-[3px] rounded-full ${accent ? "bg-primary/20" : "bg-muted-foreground/15"} w-3/4`} />
-        <div className={`h-[3px] rounded-full ${accent ? "bg-primary/10" : "bg-muted-foreground/10"} w-1/4`} />
+        <div className={`h-[3px] rounded-full ${accent ? "bg-accent/20" : "bg-muted-foreground/15"} w-3/4`} />
+        <div className={`h-[3px] rounded-full ${accent ? "bg-accent/10" : "bg-muted-foreground/10"} w-1/4`} />
       </div>
     </div>
   </div>

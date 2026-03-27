@@ -8,7 +8,7 @@ const AuthorityPulse = () => {
   }, []);
 
   return (
-    <div className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5 flex items-end justify-center gap-2 sm:gap-3 px-4 sm:px-8 pb-3 sm:pb-8 pt-4 sm:pt-16 h-[180px] sm:h-[280px]">
+    <div className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5 flex items-end justify-center gap-2 sm:gap-3 px-4 sm:px-8 pb-4 sm:pb-8 pt-8 sm:pt-16 h-[180px] sm:h-[280px]">
       {/* Background glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full bg-primary/10 blur-[60px] pointer-events-none" />
 

@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 const stages = ["Lead", "In Progress", "Closed"];
 
 const deals = [
-  { name: "Acme Ltd", shortName: "Acme", value: "£25k", avatar: "AL", col: 0 },
-  { name: "John Smith", shortName: "John S", value: "£18k", avatar: "JS", col: 1 },
-  { name: "Nova Corp", shortName: "Nova", value: "£42k", avatar: "NC", col: 2 },
+  { name: "Acme Ltd", value: "£25k", avatar: "AL", col: 0 },
+  { name: "John Smith", value: "£18k", avatar: "JS", col: 1 },
+  { name: "Nova Corp", value: "£42k", avatar: "NC", col: 2 },
 ];
 
-const movingDeal = { name: "Bright Co", shortName: "Bright", value: "£31k", avatar: "BC" };
+const movingDeal = { name: "Bright Co", value: "£31k", avatar: "BC" };
 
 // Phases: 0=show in col0, 1=fade out col0, 2=show in col1, 3=fade out col1, 4=show in col2 (win!), 5=fade out col2 & reset
 const PHASE_COUNT = 6;
@@ -49,16 +49,16 @@ const PipelineBoard = () => {
     <div
       className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5 h-[180px] sm:h-[280px]"
     >
-      <div className="flex h-full w-full">
+      <div className="flex h-full">
         {stages.map((stage, si) => (
-          <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-border/30 min-w-0 overflow-hidden">
-            <div className="px-1 sm:px-3 py-1 sm:py-2.5 border-b border-border/30">
-              <p className="text-[7px] sm:text-[10px] font-medium text-muted-foreground uppercase tracking-wider font-body truncate">
+          <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-border/30">
+            <div className="px-3 py-2.5 border-b border-border/30">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider font-body">
                 {stage}
               </p>
             </div>
 
-            <div className="flex-1 p-1 sm:p-2 flex flex-col gap-1 sm:gap-2 relative">
+            <div className="flex-1 p-2 flex flex-col gap-2 relative">
               {deals
                 .filter((d) => d.col === si)
                 .map((deal) => (
@@ -91,33 +91,28 @@ const PipelineBoard = () => {
 
 const DealCard = ({
   name,
-  shortName,
   value,
   avatar,
   highlight,
 }: {
   name: string;
-  shortName?: string;
   value: string;
   avatar: string;
   highlight?: boolean;
 }) => (
   <div
-    className={`flex items-center gap-1 sm:gap-2 p-1 sm:p-2 rounded-md sm:rounded-lg border ${
+    className={`flex items-center gap-2 p-2 rounded-lg border ${
       highlight
         ? "border-primary/30 bg-primary/5 shadow-[0_0_12px_-4px_hsl(145,96%,55%,0.2)]"
         : "border-border/50 bg-secondary/50"
     }`}
   >
-    <div className="hidden sm:flex w-6 h-6 rounded-full bg-primary/15 text-primary items-center justify-center text-[8px] font-medium shrink-0 font-body">
+    <div className="w-6 h-6 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[8px] font-medium shrink-0 font-body">
       {avatar}
     </div>
-    <div className="min-w-0 overflow-hidden">
-      <p className="text-[7px] sm:text-[10px] text-foreground font-medium leading-tight truncate font-body">
-        <span className="sm:hidden">{shortName || name}</span>
-        <span className="hidden sm:inline">{name}</span>
-      </p>
-      <p className="text-[6px] sm:text-[9px] text-muted-foreground font-body">{value}</p>
+    <div className="min-w-0">
+      <p className="text-[10px] text-foreground font-medium leading-tight truncate font-body">{name}</p>
+      <p className="text-[9px] text-muted-foreground font-body">{value}</p>
     </div>
   </div>
 );

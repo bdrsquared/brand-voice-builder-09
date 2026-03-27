@@ -22,6 +22,7 @@ const testimonials = [
 
 const TestimonialTicker = () => {
   const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,10 +31,21 @@ const TestimonialTicker = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const handler = () => setVisible(window.scrollY < 50);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
   const t = testimonials[index];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[80] bg-primary text-black">
+    <motion.div
+      className="fixed top-0 left-0 right-0 z-[80] text-black"
+      style={{ backgroundColor: "#4DF290", fontFamily: "'Geist', sans-serif" }}
+      animate={{ y: visible ? 0 : -40 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
       <div className="max-w-7xl mx-auto px-4 py-1.5 text-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.p
@@ -44,12 +56,12 @@ const TestimonialTicker = () => {
             transition={{ duration: 0.4 }}
             className="text-[11px] sm:text-xs font-medium leading-tight whitespace-nowrap sm:whitespace-normal overflow-x-auto sm:overflow-visible scrollbar-hide"
           >
-            "{t.quote}" —{" "}
+            &ldquo;{t.quote}&rdquo; —{" "}
             <span className="opacity-70">{t.author}</span>
           </motion.p>
         </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -8,7 +8,7 @@ import ProblemStatement from "@/components/landing/ProblemStatement";
 import ValueProps from "@/components/landing/ValueProps";
 import InPractice from "@/components/landing/InPractice";
 import HowItWorks from "@/components/landing/HowItWorks";
-import PipelineImpact from "@/components/landing/PipelineImpact";
+
 import Testimonials from "@/components/landing/Testimonials";
 import WhoIsFor from "@/components/landing/WhoIsFor";
 import CaseStudies from "@/components/landing/CaseStudies";
@@ -28,7 +28,7 @@ const Index = () => {
       <ValueProps />
       <InPractice />
       <HowItWorks />
-      <PipelineImpact />
+      
       <Testimonials />
       <CaseStudies />
       <Calendly />

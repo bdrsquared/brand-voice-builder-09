@@ -111,14 +111,24 @@ const Navbar = () => {
               </a>
             </div>
 
-            {/* Desktop CTA */}
-            <a
-              href="#contact"
-              className="hidden sm:inline-flex group items-center gap-2 text-sm font-semibold bg-gradient-green text-primary-foreground px-5 py-2.5 rounded-full transition-all hover:shadow-green"
-            >
-              Book a call
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            {/* Desktop right side */}
+            <div className="hidden sm:flex items-center gap-4">
+              <a
+                href="https://app.earworm.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+              >
+                Client portal
+              </a>
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-2 text-sm font-semibold bg-gradient-green text-primary-foreground px-5 py-2.5 rounded-full transition-all hover:shadow-green"
+              >
+                Book a call
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
 
             {/* Mobile burger */}
             <button

@@ -177,6 +177,12 @@
     opacity: 1;
   }
 
+  @media (max-width: 639px) {
+    .glow-on-hover::before {
+      opacity: 1;
+    }
+  }
+
   .glow-on-hover::after {
     z-index: -1;
     content: '';

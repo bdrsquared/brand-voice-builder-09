@@ -32,19 +32,19 @@ const caseStudies = [
     brand: "Mastercard",
     title: "Fortune Favours the Bold",
     description: "How Mastercard used podcasting to position themselves as thought leaders in fintech.",
-    image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop",
+    image: casePrettyCovered,
   },
   {
     brand: "Deloitte",
     title: "The Green Room",
     description: "A flagship podcast series driving Deloitte's sustainability narrative globally.",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop",
+    image: caseNoStress,
   },
   {
     brand: "Red Bull",
     title: "Beyond the Ordinary",
     description: "Storytelling at scale — turning athletes' journeys into binge-worthy audio content.",
-    image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&h=400&fit=crop",
+    image: caseCfoPlaybook,
   },
 ];
 

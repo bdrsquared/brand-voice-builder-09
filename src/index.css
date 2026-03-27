@@ -176,6 +176,9 @@
     border: none;
     outline: none;
     text-decoration: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    isolation: isolate;
   }
 
   .glow-on-hover::before {

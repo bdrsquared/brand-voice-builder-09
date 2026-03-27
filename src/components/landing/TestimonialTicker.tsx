@@ -34,15 +34,15 @@ const TestimonialTicker = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[80] bg-primary text-black">
-      <div className="max-w-7xl mx-auto px-4 py-2.5 text-center overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 py-1.5 text-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.p
             key={index}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
+            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.4 }}
-            className="text-xs sm:text-sm font-medium leading-snug"
+            className="text-[11px] sm:text-xs font-medium leading-tight whitespace-nowrap sm:whitespace-normal overflow-x-auto sm:overflow-visible scrollbar-hide"
           >
             "{t.quote}" —{" "}
             <span className="opacity-70">{t.author}</span>

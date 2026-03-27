@@ -48,17 +48,27 @@ const TestimonialTicker = () => {
     >
       <div className="max-w-7xl mx-auto px-4 py-1.5 text-center overflow-hidden">
         <AnimatePresence mode="wait">
-          <motion.p
+          <motion.div
             key={index}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.4 }}
-            className="text-[11px] md:text-xs font-medium leading-tight whitespace-nowrap md:whitespace-normal md:overflow-visible scrollbar-hide md:animate-none animate-marquee inline-block md:inline"
+            className="text-[11px] md:text-xs font-medium leading-tight"
           >
-            &ldquo;{t.quote}&rdquo; —{" "}
-            <span className="opacity-70">{t.author}</span>
-          </motion.p>
+            {/* Desktop: static centered text */}
+            <p className="hidden md:block">
+              &ldquo;{t.quote}&rdquo; —{" "}
+              <span className="opacity-70">{t.author}</span>
+            </p>
+            {/* Mobile: marquee scrolling text */}
+            <div className="md:hidden whitespace-nowrap">
+              <span className="inline-block animate-marquee">
+                &ldquo;{t.quote}&rdquo; — <span className="opacity-70">{t.author}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+            </div>
+          </motion.div>
         </AnimatePresence>
       </div>
     </motion.div>

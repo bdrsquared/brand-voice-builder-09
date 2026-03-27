@@ -51,14 +51,14 @@ const PipelineBoard = () => {
     >
       <div className="flex h-full">
         {stages.map((stage, si) => (
-          <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-border/30">
-            <div className="px-3 py-2.5 border-b border-border/30">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider font-body">
+          <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-border/30 min-w-0">
+            <div className="px-1.5 sm:px-3 py-1.5 sm:py-2.5 border-b border-border/30">
+              <p className="text-[8px] sm:text-[10px] font-medium text-muted-foreground uppercase tracking-wider font-body truncate">
                 {stage}
               </p>
             </div>
 
-            <div className="flex-1 p-2 flex flex-col gap-2 relative">
+            <div className="flex-1 p-1 sm:p-2 flex flex-col gap-1 sm:gap-2 relative">
               {deals
                 .filter((d) => d.col === si)
                 .map((deal) => (
@@ -101,18 +101,18 @@ const DealCard = ({
   highlight?: boolean;
 }) => (
   <div
-    className={`flex items-center gap-2 p-2 rounded-lg border ${
+    className={`flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-lg border ${
       highlight
         ? "border-primary/30 bg-primary/5 shadow-[0_0_12px_-4px_hsl(145,96%,55%,0.2)]"
         : "border-border/50 bg-secondary/50"
     }`}
   >
-    <div className="w-6 h-6 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[8px] font-medium shrink-0 font-body">
+    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[7px] sm:text-[8px] font-medium shrink-0 font-body">
       {avatar}
     </div>
     <div className="min-w-0">
-      <p className="text-[10px] text-foreground font-medium leading-tight truncate font-body">{name}</p>
-      <p className="text-[9px] text-muted-foreground font-body">{value}</p>
+      <p className="text-[8px] sm:text-[10px] text-foreground font-medium leading-tight truncate font-body">{name}</p>
+      <p className="text-[7px] sm:text-[9px] text-muted-foreground font-body">{value}</p>
     </div>
   </div>
 );

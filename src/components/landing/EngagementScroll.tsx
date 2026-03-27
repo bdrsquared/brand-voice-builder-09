@@ -67,10 +67,16 @@ const EngagementScroll = () => {
                   {item.avatar}
                 </div>
               )}
-              <p className="text-xs text-foreground/80 font-body leading-tight">
+              <p className="text-xs text-foreground/80 font-body leading-tight flex-1">
                 <span className="font-medium text-foreground">{item.name}</span>{" "}
                 {item.action}
               </p>
+              <div className="shrink-0 text-foreground/40">
+                {item.action.includes("liked") && <Heart size={14} />}
+                {item.action.includes("commented") && <MessageCircle size={14} />}
+                {item.action.includes("shared") && <Share2 size={14} />}
+                {item.action.includes("followed") && <UserPlus size={14} />}
+              </div>
             </div>
           ))}
         </div>

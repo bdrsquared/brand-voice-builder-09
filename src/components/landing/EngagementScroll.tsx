@@ -31,7 +31,7 @@ const EngagementScroll = () => {
 
     let animationId: number;
     let offset = 0;
-    const speed = 0.3;
+    const speed = 0.345;
 
     const animate = () => {
       offset += speed;

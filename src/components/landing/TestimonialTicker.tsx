@@ -27,7 +27,7 @@ const TestimonialTicker = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 

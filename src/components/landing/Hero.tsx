@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { CalendarDays, ArrowRight } from "lucide-react";
 import LogoWall from "./LogoWall";
 import ovalBg from "@/assets/oval.png";
 

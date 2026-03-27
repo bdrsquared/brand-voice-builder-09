@@ -54,7 +54,7 @@ const TestimonialTicker = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.4 }}
-            className="text-[11px] md:text-xs font-medium leading-tight whitespace-nowrap md:whitespace-normal overflow-x-auto md:overflow-visible scrollbar-hide"
+            className="text-[11px] md:text-xs font-medium leading-tight whitespace-nowrap md:whitespace-normal md:overflow-visible scrollbar-hide md:animate-none animate-marquee inline-block md:inline"
           >
             &ldquo;{t.quote}&rdquo; —{" "}
             <span className="opacity-70">{t.author}</span>

@@ -72,14 +72,15 @@ const ValueProps = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              {prop.title === "Reach your exact ICP" && (
+              {prop.title === "Reach your exact ICP" ? (
                 <div className="mb-6">
                   <EngagementScroll />
                 </div>
+              ) : (
+                <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-6 transition-colors ${iconStyles[prop.color]}`}>
+                  <prop.icon className="w-5 h-5" />
+                </div>
               )}
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-6 transition-colors ${iconStyles[prop.color]}`}>
-                <prop.icon className="w-5 h-5" />
-              </div>
               <h3 className="text-xl sm:text-2xl font-bold mb-3">
                 {prop.title}
               </h3>

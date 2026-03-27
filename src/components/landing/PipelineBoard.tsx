@@ -95,11 +95,13 @@ const DealCard = ({
   value,
   avatar,
   highlight,
+  image,
 }: {
   name: string;
   value: string;
   avatar: string;
   highlight?: boolean;
+  image?: string;
 }) => (
   <div
     className={`flex items-center gap-2 p-2 rounded-lg border ${
@@ -108,9 +110,13 @@ const DealCard = ({
         : "border-border/50 bg-secondary/50"
     }`}
   >
-    <div className="w-6 h-6 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[8px] font-medium shrink-0 font-body">
-      {avatar}
-    </div>
+    {image ? (
+      <img src={image} alt={name} className="w-6 h-6 rounded-full object-cover shrink-0" />
+    ) : (
+      <div className="w-6 h-6 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[8px] font-medium shrink-0 font-body">
+        {avatar}
+      </div>
+    )}
     <div className="min-w-0">
       <p className="text-[10px] text-foreground font-medium leading-tight truncate font-body">{name}</p>
       <p className="text-[9px] text-muted-foreground font-body">{value}</p>

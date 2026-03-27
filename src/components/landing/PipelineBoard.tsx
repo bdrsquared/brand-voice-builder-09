@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import acmeLogo from "@/assets/acme-logo.png";
 
 const stages = ["Lead", "In Progress", "Closed"];
 
 const deals = [
-  { name: "Acme Ltd", value: "£25k", avatar: "AL", col: 0 },
+  { name: "Acme Ltd", value: "£25k", avatar: "AL", col: 0, image: acmeLogo },
   { name: "John Smith", value: "£18k", avatar: "JS", col: 1 },
   { name: "Nova Corp", value: "£42k", avatar: "NC", col: 2 },
 ];
@@ -94,11 +95,13 @@ const DealCard = ({
   value,
   avatar,
   highlight,
+  image,
 }: {
   name: string;
   value: string;
   avatar: string;
   highlight?: boolean;
+  image?: string;
 }) => (
   <div
     className={`flex items-center gap-2 p-2 rounded-lg border ${
@@ -107,9 +110,13 @@ const DealCard = ({
         : "border-border/50 bg-secondary/50"
     }`}
   >
-    <div className="w-6 h-6 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[8px] font-medium shrink-0 font-body">
-      {avatar}
-    </div>
+    {image ? (
+      <img src={image} alt={name} className="w-6 h-6 rounded-full object-cover shrink-0" />
+    ) : (
+      <div className="w-6 h-6 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[8px] font-medium shrink-0 font-body">
+        {avatar}
+      </div>
+    )}
     <div className="min-w-0">
       <p className="text-[10px] text-foreground font-medium leading-tight truncate font-body">{name}</p>
       <p className="text-[9px] text-muted-foreground font-body">{value}</p>

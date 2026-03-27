@@ -26,9 +26,8 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-flex items-center gap-2 bg-primary/10 text-primary font-medium text-sm px-4 py-1.5 rounded-full mb-8 border border-primary/20">
-            <Play className="w-3 h-3 fill-current" />
-            For forward-thinking B2B brands
+          <span className="inline-flex items-center gap-2 bg-card/80 text-foreground font-medium text-sm px-6 py-2.5 rounded-full mb-8 border border-border/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_2px_8px_rgba(0,0,0,0.3)] backdrop-blur-sm tracking-wide">
+            Growth Partner
           </span>
         </motion.div>
 

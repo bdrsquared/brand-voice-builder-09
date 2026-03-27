@@ -4,6 +4,8 @@ import oliviaParkAvatar from "@/assets/olivia-park-avatar.png";
 import lucasGrantAvatar from "@/assets/lucas-grant-avatar.jpeg";
 import jonDoeAvatar from "@/assets/jon-doe-avatar.jpeg";
 import miaJohnsonAvatar from "@/assets/mia-johnson-avatar.jpeg";
+import alexChenAvatar from "@/assets/alex-chen-avatar.jpeg";
+import emmaCarterAvatar from "@/assets/emma-carter-avatar.jpeg";
 
 const notifications = [
   { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary", image: jonDoeAvatar },

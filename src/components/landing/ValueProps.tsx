@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Crown, Target, Layers, TrendingUp } from "lucide-react";
 import EngagementScroll from "./EngagementScroll";
+import AuthorityPulse from "./AuthorityPulse";
 
 const props = [
   {
@@ -72,7 +73,11 @@ const ValueProps = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              {prop.title === "Reach your exact ICP" ? (
+              {prop.title === "Build category authority" ? (
+                <div className="mb-6">
+                  <AuthorityPulse />
+                </div>
+              ) : prop.title === "Reach your exact ICP" ? (
                 <div className="mb-6">
                   <EngagementScroll />
                 </div>

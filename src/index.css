@@ -143,4 +143,55 @@
     filter: blur(100px);
     border-radius: 60% 40% 50% 50%;
   }
+
+  /* Glow-on-hover button */
+  .glow-on-hover {
+    position: relative;
+    z-index: 0;
+    color: hsl(var(--primary-foreground));
+    background: linear-gradient(135deg, hsl(145, 96%, 55%), hsl(160, 90%, 45%));
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-decoration: none;
+  }
+
+  .glow-on-hover::before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(8px);
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 9999px;
+  }
+
+  .glow-on-hover:hover::before {
+    opacity: 1;
+  }
+
+  .glow-on-hover::after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, hsl(145, 96%, 55%), hsl(160, 90%, 45%));
+    left: 0;
+    top: 0;
+    border-radius: 9999px;
+  }
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }

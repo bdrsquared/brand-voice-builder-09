@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import LogoWall from "./LogoWall";
 import ovalBg from "@/assets/oval.png";
 
@@ -61,10 +61,10 @@ const Hero = () => {
         >
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 bg-gradient-green text-primary-foreground font-semibold px-8 py-4 rounded-full text-base transition-all hover:shadow-green"
+            className="glow-on-hover group inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-base"
           >
             Book a strategy call
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <Calendar className="w-4 h-4 transition-transform group-hover:scale-110" />
           </a>
           <a
             href="#how-it-works"

@@ -158,7 +158,7 @@
 
   .glow-on-hover::before {
     content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background: linear-gradient(45deg, #FA1CF6, #9139A4, #1CFA76, #9139A4, #FA1CF6);
     position: absolute;
     top: -3px;
     left: -3px;

@@ -61,10 +61,10 @@ const Hero = () => {
         >
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 bg-gradient-green text-primary-foreground font-semibold px-8 py-4 rounded-full text-base transition-all hover:shadow-green"
+            className="group inline-flex items-center gap-2.5 bg-gradient-to-r from-[hsl(145,96%,50%)] to-[hsl(155,90%,45%)] text-primary-foreground font-semibold px-8 py-4 rounded-full text-base transition-all duration-300 shadow-[0_0_20px_rgba(28,250,118,0.15),0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_0_35px_rgba(28,250,118,0.3),0_6px_20px_rgba(0,0,0,0.3)] hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.97] active:shadow-[0_0_15px_rgba(28,250,118,0.1),0_2px_8px_rgba(0,0,0,0.3)] active:brightness-100 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/[0.12] before:to-transparent before:rounded-full before:pointer-events-none"
           >
-            Book a strategy call
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <span className="transition-transform duration-250 group-hover:translate-x-0.5">Book a strategy call</span>
+            <CalendarDays className="w-[18px] h-[18px] transition-all duration-250 group-hover:translate-x-0.5 group-hover:scale-110" />
           </a>
           <a
             href="#how-it-works"

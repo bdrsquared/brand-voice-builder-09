@@ -183,28 +183,19 @@
 
   .glow-on-hover::before {
     content: '';
+    background: linear-gradient(45deg, #574ECC, #9139A4, #1CFA76, #9139A4, #574ECC);
     position: absolute;
-    inset: -2px;
-    padding: 2px;
-    border-radius: inherit;
-    background: conic-gradient(
-      from 0deg,
-      hsl(244 55% 55%),
-      hsl(289 48% 43%),
-      hsl(144 96% 55%),
-      hsl(289 48% 43%),
-      hsl(244 55% 55%)
-    );
-    z-index: -2;
+    top: -3px;
+    left: -3px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(8px);
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    animation: glowing 20s linear infinite;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    animation: glow-rotate 3s linear infinite;
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    box-shadow:
-      0 0 14px hsl(144 96% 55% / 0.35),
-      0 0 20px hsl(289 48% 43% / 0.28);
+    border-radius: 9999px;
   }
 
   .glow-on-hover:hover::before {
@@ -230,9 +221,10 @@
   }
 }
 
-@keyframes glow-rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }
 
 @keyframes marquee {

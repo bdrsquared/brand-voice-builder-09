@@ -82,6 +82,10 @@ const ValueProps = () => {
                 <div className="mb-6">
                   <EngagementScroll />
                 </div>
+              ) : prop.title === "Drive actual pipeline" ? (
+                <div className="mb-6">
+                  <PipelineBoard />
+                </div>
               ) : (
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-6 transition-colors ${iconStyles[prop.color]}`}>
                   <prop.icon className="w-5 h-5" />

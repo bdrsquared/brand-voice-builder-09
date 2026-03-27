@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import ryanFosterAvatar from "@/assets/ryan-foster-avatar.png";
 import oliviaParkAvatar from "@/assets/olivia-park-avatar.png";
+import lucasGrantAvatar from "@/assets/lucas-grant-avatar.jpeg";
 
 const notifications = [
   { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary", image: null },
@@ -9,7 +10,7 @@ const notifications = [
   { name: "Emma Carter", action: "followed your page", avatar: "EC", bg: "bg-accent/20 text-accent", image: null },
   { name: "Ryan Foster", action: "liked your video", avatar: "RF", bg: "bg-primary/20 text-primary", image: ryanFosterAvatar },
   { name: "Mia Johnson", action: "commented on your post", avatar: "MJ", bg: "bg-accent/20 text-accent", image: null },
-  { name: "Lucas Grant", action: "shared your clip", avatar: "LG", bg: "bg-primary/20 text-primary", image: null },
+  { name: "Lucas Grant", action: "shared your clip", avatar: "LG", bg: "bg-primary/20 text-primary", image: lucasGrantAvatar },
   { name: "Olivia Park", action: "followed your page", avatar: "OP", bg: "bg-accent/20 text-accent", image: oliviaParkAvatar },
 ];
 

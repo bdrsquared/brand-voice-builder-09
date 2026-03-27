@@ -1,14 +1,15 @@
 import { useEffect, useRef } from "react";
+import ryanFosterAvatar from "@/assets/ryan-foster-avatar.png";
 
 const notifications = [
-  { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary" },
-  { name: "Sarah Miles", action: "commented on your post", avatar: "SM", bg: "bg-accent/20 text-accent" },
-  { name: "Alex Chen", action: "shared your clip", avatar: "AC", bg: "bg-primary/20 text-primary" },
-  { name: "Emma Carter", action: "followed your page", avatar: "EC", bg: "bg-accent/20 text-accent" },
-  { name: "Ryan Foster", action: "liked your video", avatar: "RF", bg: "bg-primary/20 text-primary" },
-  { name: "Mia Johnson", action: "commented on your post", avatar: "MJ", bg: "bg-accent/20 text-accent" },
-  { name: "Lucas Grant", action: "shared your clip", avatar: "LG", bg: "bg-primary/20 text-primary" },
-  { name: "Olivia Park", action: "followed your page", avatar: "OP", bg: "bg-accent/20 text-accent" },
+  { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary", image: null },
+  { name: "Sarah Miles", action: "commented on your post", avatar: "SM", bg: "bg-accent/20 text-accent", image: null },
+  { name: "Alex Chen", action: "shared your clip", avatar: "AC", bg: "bg-primary/20 text-primary", image: null },
+  { name: "Emma Carter", action: "followed your page", avatar: "EC", bg: "bg-accent/20 text-accent", image: null },
+  { name: "Ryan Foster", action: "liked your video", avatar: "RF", bg: "bg-primary/20 text-primary", image: ryanFosterAvatar },
+  { name: "Mia Johnson", action: "commented on your post", avatar: "MJ", bg: "bg-accent/20 text-accent", image: null },
+  { name: "Lucas Grant", action: "shared your clip", avatar: "LG", bg: "bg-primary/20 text-primary", image: null },
+  { name: "Olivia Park", action: "followed your page", avatar: "OP", bg: "bg-accent/20 text-accent", image: null },
 ];
 
 const EngagementScroll = () => {
@@ -52,9 +53,13 @@ const EngagementScroll = () => {
               key={i}
               className="flex items-center gap-3 p-2.5 rounded-xl bg-secondary/50 border border-border/50"
             >
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium shrink-0 ${item.bg}`}>
-                {item.avatar}
-              </div>
+              {item.image ? (
+                <img src={item.image} alt={item.name} className="w-8 h-8 rounded-full object-cover shrink-0" />
+              ) : (
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium shrink-0 ${item.bg}`}>
+                  {item.avatar}
+                </div>
+              )}
               <p className="text-xs text-foreground/80 font-body leading-tight">
                 <span className="font-medium text-foreground">{item.name}</span>{" "}
                 {item.action}

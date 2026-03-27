@@ -43,7 +43,7 @@ const iconStyles = {
 
 const ValueProps = () => {
   return (
-    <section className="relative py-16 sm:py-20 px-6">
+    <section className="relative py-16 sm:py-20 px-4 sm:px-6 overflow-hidden">
       {/* Blurred shapes */}
       <div className="absolute top-[50px] left-[-200px] w-[400px] h-[500px] blob-oblong-green pointer-events-none" />
       <div className="absolute bottom-[-100px] right-[-150px] w-[350px] h-[350px] blob-blue-strong pointer-events-none" />
@@ -69,7 +69,7 @@ const ValueProps = () => {
           {props.map((prop, i) => (
             <motion.div
               key={prop.title}
-              className="group relative p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300"
+              className="group relative p-5 sm:p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300 overflow-hidden min-w-0"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}

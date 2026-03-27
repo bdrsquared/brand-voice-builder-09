@@ -40,7 +40,7 @@ const EngagementScroll = () => {
   const doubled = [...notifications, ...notifications];
 
   return (
-    <div className="relative w-full aspect-square max-w-[280px] mx-auto rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5">
+    <div className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5" style={{ height: '280px' }}>
       {/* Top/bottom fade masks */}
       <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-card/90 to-transparent z-10 pointer-events-none" />
       <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-card/90 to-transparent z-10 pointer-events-none" />

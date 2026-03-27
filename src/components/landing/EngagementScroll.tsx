@@ -2,14 +2,16 @@ import { useEffect, useRef } from "react";
 import ryanFosterAvatar from "@/assets/ryan-foster-avatar.png";
 import oliviaParkAvatar from "@/assets/olivia-park-avatar.png";
 import lucasGrantAvatar from "@/assets/lucas-grant-avatar.jpeg";
+import jonDoeAvatar from "@/assets/jon-doe-avatar.jpeg";
+import miaJohnsonAvatar from "@/assets/mia-johnson-avatar.jpeg";
 
 const notifications = [
-  { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary", image: null },
+  { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary", image: jonDoeAvatar },
   { name: "Sarah Miles", action: "commented on your post", avatar: "SM", bg: "bg-accent/20 text-accent", image: null },
   { name: "Alex Chen", action: "shared your clip", avatar: "AC", bg: "bg-primary/20 text-primary", image: null },
   { name: "Emma Carter", action: "followed your page", avatar: "EC", bg: "bg-accent/20 text-accent", image: null },
   { name: "Ryan Foster", action: "liked your video", avatar: "RF", bg: "bg-primary/20 text-primary", image: ryanFosterAvatar },
-  { name: "Mia Johnson", action: "commented on your post", avatar: "MJ", bg: "bg-accent/20 text-accent", image: null },
+  { name: "Mia Johnson", action: "commented on your post", avatar: "MJ", bg: "bg-accent/20 text-accent", image: miaJohnsonAvatar },
   { name: "Lucas Grant", action: "shared your clip", avatar: "LG", bg: "bg-primary/20 text-primary", image: lucasGrantAvatar },
   { name: "Olivia Park", action: "followed your page", avatar: "OP", bg: "bg-accent/20 text-accent", image: oliviaParkAvatar },
 ];

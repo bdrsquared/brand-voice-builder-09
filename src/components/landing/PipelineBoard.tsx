@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import acmeLogo from "@/assets/acme-logo.png";
+import novaCorpLogo from "@/assets/nova-corp-logo.png";
+import brightCoLogo from "@/assets/bright-co-logo.png";
 
 const stages = ["Lead", "In Progress", "Closed"];
 

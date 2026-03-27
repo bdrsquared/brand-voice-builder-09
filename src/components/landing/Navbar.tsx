@@ -73,7 +73,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-[38px] left-0 right-0 px-4 sm:px-6 ${mobileOpen ? "z-[70]" : "z-50"}`}
+        className={`fixed ${scrolled ? "top-3" : "top-[38px]"} left-0 right-0 px-4 sm:px-6 transition-[top] duration-300 ease-in-out ${mobileOpen ? "z-[70]" : "z-50"}`}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}

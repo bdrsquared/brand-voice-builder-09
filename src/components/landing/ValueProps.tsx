@@ -3,6 +3,7 @@ import { Crown, Target, Layers, TrendingUp } from "lucide-react";
 import EngagementScroll from "./EngagementScroll";
 import AuthorityPulse from "./AuthorityPulse";
 import PipelineBoard from "./PipelineBoard";
+import ContentEngine from "./ContentEngine";
 
 const props = [
   {
@@ -85,6 +86,10 @@ const ValueProps = () => {
               ) : prop.title === "Drive actual pipeline" ? (
                 <div className="mb-6">
                   <PipelineBoard />
+                </div>
+              ) : prop.title === "One session, endless content" ? (
+                <div className="mb-6">
+                  <ContentEngine />
                 </div>
               ) : (
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-6 transition-colors ${iconStyles[prop.color]}`}>

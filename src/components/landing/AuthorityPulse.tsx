@@ -8,14 +8,14 @@ const AuthorityPulse = () => {
   }, []);
 
   return (
-    <div className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5 flex items-end justify-center gap-3 px-8 pb-8 pt-16" style={{ height: "280px" }}>
+    <div className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5 flex items-end justify-center gap-2 sm:gap-3 px-4 sm:px-8 pb-4 sm:pb-8 pt-8 sm:pt-16 h-[180px] sm:h-[280px]">
       {/* Background glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full bg-primary/10 blur-[60px] pointer-events-none" />
 
       {/* Left podium */}
       <div className="relative flex flex-col items-center gap-2 z-10">
         <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
-        <div className="w-20 rounded-t-lg bg-gradient-to-b from-secondary to-card border border-border/60" style={{ height: "80px" }}>
+        <div className="w-14 sm:w-20 rounded-t-lg bg-gradient-to-b from-secondary to-card border border-border/60 h-[50px] sm:h-[80px]">
           <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/[0.04] to-transparent" />
         </div>
         <span className="text-[9px] text-muted-foreground font-body tracking-wide uppercase">2nd</span>
@@ -51,7 +51,7 @@ const AuthorityPulse = () => {
           )}
         </div>
 
-        <div className="w-24 rounded-t-lg bg-gradient-to-b from-primary/20 to-secondary border border-primary/20" style={{ height: "120px" }}>
+        <div className="w-16 sm:w-24 rounded-t-lg bg-gradient-to-b from-primary/20 to-secondary border border-primary/20 h-[70px] sm:h-[120px]">
           <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/[0.06] to-transparent" />
         </div>
         <span className="text-[9px] text-primary font-body tracking-wide uppercase font-medium">1st</span>
@@ -60,7 +60,7 @@ const AuthorityPulse = () => {
       {/* Right podium */}
       <div className="relative flex flex-col items-center gap-2 z-10">
         <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
-        <div className="w-20 rounded-t-lg bg-gradient-to-b from-secondary to-card border border-border/60" style={{ height: "60px" }}>
+        <div className="w-14 sm:w-20 rounded-t-lg bg-gradient-to-b from-secondary to-card border border-border/60 h-[35px] sm:h-[60px]">
           <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/[0.04] to-transparent" />
         </div>
         <span className="text-[9px] text-muted-foreground font-body tracking-wide uppercase">3rd</span>

@@ -58,8 +58,7 @@ const ContentEngine = () => {
 
   return (
     <div
-      className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-accent/5 flex flex-col justify-center gap-2.5 py-4"
-      style={{ height: "280px" }}
+      className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-accent/5 flex flex-col justify-center gap-1.5 sm:gap-2.5 py-3 sm:py-4 h-[180px] sm:h-[280px]"
     >
       <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-card/90 to-transparent z-20 pointer-events-none" />
       <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-card/90 to-transparent z-20 pointer-events-none" />

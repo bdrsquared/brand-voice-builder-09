@@ -56,12 +56,13 @@ const ValueProps = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
+          <span className="inline-flex items-center gap-2 text-muted-foreground font-medium text-sm mb-6 block">
             ● Why podcasting
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            A content channel that{" "}
-            <span className="text-gradient-green">actually works</span>
+            Plug the power of a{" "}
+            <span className="text-gradient-green">video podcast</span>{" "}
+            in to your business
           </h2>
         </motion.div>
 

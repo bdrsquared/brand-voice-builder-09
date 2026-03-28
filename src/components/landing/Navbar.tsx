@@ -292,7 +292,7 @@ const Navbar = () => {
                 ))}
               </nav>
 
-              <div className="mt-auto flex flex-col gap-4">
+              <div className="mt-auto flex flex-col gap-6">
                 {/* Featured case study card */}
                 <motion.a
                   href="#case-studies"
@@ -337,8 +337,8 @@ const Navbar = () => {
                   transition={{ duration: 0.3, delay: 0.35 }}
                   onClick={() => setMobileOpen(false)}
                 >
-                  <Calendar className="w-4 h-4" />
                   Book a strategy call
+                  <Calendar className="w-4 h-4" />
                 </motion.a>
               </div>
             </div>

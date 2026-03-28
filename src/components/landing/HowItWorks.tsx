@@ -31,7 +31,7 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="relative py-20 sm:py-28 px-6">
+    <section id="how-it-works" className="relative py-20 sm:py-28 px-6 overflow-hidden">
       <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
         {/* Left column */}
         <div className="flex flex-col">
@@ -61,7 +61,7 @@ const HowItWorks = () => {
               loading="lazy"
               width={640}
               height={800}
-              className="w-full max-w-sm lg:max-w-md mx-auto lg:mx-0"
+              className="w-[130%] max-w-none -ml-[15%] lg:-ml-[30%] lg:w-[140%]"
             />
           </motion.div>
         </div>

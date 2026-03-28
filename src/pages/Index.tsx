@@ -24,9 +24,9 @@ const Index = () => {
       <ValueProps />
       <Showreel />
       <WhyNow />
+      <InPractice />
       <Stats />
       <ProblemStatement />
-      <InPractice />
       <HowItWorks />
       
       <Testimonials />

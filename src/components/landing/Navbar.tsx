@@ -29,11 +29,11 @@ const servicesList = [
 
 const caseStudies = [
   {
-    brand: "Mastercard",
-    title: "Fortune Favours the Bold",
-    description: "How Mastercard used podcasting to position themselves as thought leaders in fintech.",
+    brand: "Polly",
+    title: "Pretty Covered",
+    description: "How Polly used podcasting to connect with Gen Z audiences through authentic conversations.",
     image: casePrettyCovered,
-    stats: { impressions: "1.2M", pipeline: "£2.4M" },
+    stats: { impressions: "1.2M", pipeline: "500+" },
   },
   {
     brand: "Deloitte",
@@ -340,13 +340,13 @@ const Navbar = () => {
                         onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                       >
                         <div className="aspect-[16/9] overflow-hidden">
-                          <img src={casePrettyCovered} alt="Fortune Favours the Bold" className="w-full h-full object-cover" />
+                          <img src={casePrettyCovered} alt="Pretty Covered" className="w-full h-full object-cover" />
                         </div>
                         <div className="p-4">
                           <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">Featured case study</p>
-                          <h4 className="text-base font-heading text-foreground mb-1.5">Fortune Favours the Bold</h4>
+                          <h4 className="text-base font-heading text-foreground mb-1.5">Pretty Covered</h4>
                           <p className="text-xs text-muted-foreground leading-relaxed mb-3 font-body">
-                            How Mastercard used podcasting to position themselves as thought leaders in fintech.
+                            How Polly used podcasting to connect with Gen Z audiences through authentic conversations.
                           </p>
                           <div className="flex items-center gap-4">
                             <div className="flex flex-col">
@@ -355,8 +355,8 @@ const Navbar = () => {
                             </div>
                             <div className="w-px h-6 bg-white/10" />
                             <div className="flex flex-col">
-                              <span className="text-sm font-semibold text-foreground">£2.4M</span>
-                              <span className="text-[10px] text-muted-foreground">Pipeline generated</span>
+                              <span className="text-sm font-semibold text-foreground">500+</span>
+                              <span className="text-[10px] text-muted-foreground">Leads generated</span>
                             </div>
                           </div>
                         </div>

@@ -61,7 +61,7 @@ const TestimonialCard = ({ t }: { t: typeof testimonials[0] }) => (
 
 const Testimonials = () => {
   return (
-    <section className="relative pt-8 sm:pt-12 pb-20 sm:pb-28">
+    <section className="relative -mt-[150px] pt-8 sm:pt-12 pb-20 sm:pb-28">
       <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[500px] blob-oblong-green pointer-events-none" />
       <div className="absolute top-[-50px] right-[-150px] w-[350px] h-[350px] blob-blue-strong pointer-events-none" />
 

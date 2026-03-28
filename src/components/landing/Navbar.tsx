@@ -391,7 +391,10 @@ const Navbar = () => {
                           <div className="p-4">
                             <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">{study.brand}</p>
                             <h4 className="text-base font-heading text-foreground mb-1">{study.title}</h4>
-                            <p className="text-xs text-muted-foreground leading-relaxed font-body">{study.description}</p>
+                            <p className="text-xs text-muted-foreground leading-relaxed font-body mb-2">{study.description}</p>
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                              See case study <ArrowRight className="w-3 h-3" />
+                            </span>
                           </div>
                         </a>
                       ))}

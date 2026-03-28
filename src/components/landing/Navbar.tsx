@@ -469,7 +469,7 @@ const Navbar = () => {
                               <div className="w-px h-5 bg-white/10" />
                               <div className="flex flex-col">
                                 <span className="text-xs font-semibold text-foreground">{study.stats.pipeline}</span>
-                                <span className="text-[9px] text-muted-foreground">Leads generated</span>
+                                <span className="text-[9px] text-muted-foreground">Pipeline generated</span>
                               </div>
                             </div>
                             <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary">

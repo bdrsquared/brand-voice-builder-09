@@ -1,72 +1,96 @@
 import { motion } from "framer-motion";
+import { Wand2, ListChecks, Share2, ClipboardList } from "lucide-react";
+import process3d from "@/assets/process-3d.png";
 
 const steps = [
   {
-    number: "01",
-    title: "Strategy & guest mapping",
+    icon: Wand2,
+    title: "Create",
     description:
-      "We help you define the conversations that matter — topics that position you as a leader and guests that are your ideal customers or connectors.",
+      "We shape the foundations of the show - sourcing the right host, defining themes, naming the podcast, setting creative direction, and agreeing clear timelines. We incubate the idea properly, so you're ready to launch with confidence, not guesswork.",
   },
   {
-    number: "02",
-    title: "Record & produce",
+    icon: ListChecks,
+    title: "Produce",
     description:
-      "Show up and have a great conversation. We handle everything else — production, editing, and post-production to broadcast quality.",
+      "Every episode is carefully planned and managed end-to-end. We handle scheduling, research, guest sourcing, recording, and production - so your podcast runs smoothly on autopilot.",
   },
   {
-    number: "03",
-    title: "Distribute & repurpose",
+    icon: Share2,
+    title: "Publish",
     description:
-      "One recording becomes dozens of content assets. Long-form video, short clips, written content, social posts — all on-brand and ready to publish.",
+      "One episode becomes content everywhere. Each recording is distributed as video, audio, clips, teasers, reels, blog content, and newsletters - designed to show up consistently across every channel that matters.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Report",
+    description:
+      "Decision-grade reporting that goes beyond downloads. See who's listening, how content is performing, audience trends, and engagement signals - giving your team the insight needed to refine strategy and support growth.",
   },
 ];
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="relative py-16 sm:py-20 px-6">
-      {/* Blurred shapes */}
-      <div className="absolute top-[-50px] right-[-100px] w-[500px] h-[350px] blob-oblong-blue pointer-events-none" />
-      <div className="absolute bottom-[-80px] left-[-80px] w-[300px] h-[400px] blob-green pointer-events-none" />
+    <section id="how-it-works" className="relative py-20 sm:py-28 px-6">
+      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        {/* Left column */}
+        <div className="flex flex-col">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+              Our process
+            </h2>
+            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-md font-body">
+              Our process is designed to take the complexity out of podcasting. We handle everything from idea to insight, so your show runs consistently and delivers real value for the business.
+            </p>
+          </motion.div>
+          <motion.div
+            className="mt-8 lg:mt-auto"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <img
+              src={process3d}
+              alt="Abstract 3D shapes"
+              loading="lazy"
+              width={640}
+              height={800}
+              className="w-full max-w-sm lg:max-w-md mx-auto lg:mx-0"
+            />
+          </motion.div>
+        </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        <motion.div
-          className="text-center mb-14"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
-            ● How it works
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            Simple process.
-          </h2>
-        </motion.div>
-
-        <div className="space-y-5">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              className="flex gap-8 sm:gap-10 items-start p-8 sm:p-10 rounded-2xl border border-border bg-card hover:border-primary/20 transition-colors"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-            >
-              <span className="text-4xl sm:text-5xl font-bold text-gradient-green shrink-0 font-heading">
-                {step.number}
-              </span>
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed font-body">
+        {/* Right column - cards */}
+        <div className="space-y-4">
+          {steps.map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <motion.div
+                key={step.title}
+                className="rounded-2xl border border-border/60 bg-card/40 backdrop-blur-sm p-6 sm:p-8 hover:border-primary/20 transition-colors"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-foreground" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold">{step.title}</h3>
+                </div>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-body">
                   {step.description}
                 </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

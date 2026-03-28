@@ -77,8 +77,8 @@ const Testimonials = () => {
             ● What our clients say
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            Trusted by <span className="text-gradient-green">ambitious</span>{" "}
-            teams
+            Trusted by <br />
+            <span className="text-gradient-green">ambitious</span>{" "}
           </h2>
         </motion.div>
 

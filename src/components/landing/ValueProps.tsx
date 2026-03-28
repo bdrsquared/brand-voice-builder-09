@@ -43,20 +43,19 @@ const iconStyles = {
 
 const ValueProps = () => {
   return (
-    <section className="relative py-16 sm:py-20 px-4 sm:px-6 overflow-hidden">
-      {/* Blurred shapes */}
+    <section className="relative py-20 sm:py-28 px-6 overflow-hidden">
       <div className="absolute top-[50px] left-[-200px] w-[400px] h-[500px] blob-oblong-green pointer-events-none" />
       <div className="absolute bottom-[-100px] right-[-150px] w-[350px] h-[350px] blob-blue-strong pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 text-muted-foreground font-medium text-sm mb-6 block">
+          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
             ● Why podcasting
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
@@ -70,37 +69,37 @@ const ValueProps = () => {
           {props.map((prop, i) => (
             <motion.div
               key={prop.title}
-              className="group relative p-5 sm:p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300 overflow-hidden min-w-0"
+              className="group relative p-6 sm:p-8 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300 overflow-hidden min-w-0"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               {prop.title === "Build category authority" ? (
-                <div className="mb-6">
+                <div className="mb-5">
                   <AuthorityPulse />
                 </div>
               ) : prop.title === "Reach your exact ICP" ? (
-                <div className="mb-6">
+                <div className="mb-5">
                   <EngagementScroll />
                 </div>
               ) : prop.title === "Drive actual pipeline" ? (
-                <div className="mb-6">
+                <div className="mb-5">
                   <PipelineBoard />
                 </div>
               ) : prop.title === "One session, endless content" ? (
-                <div className="mb-6">
+                <div className="mb-5">
                   <ContentEngine />
                 </div>
               ) : (
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-6 transition-colors ${iconStyles[prop.color]}`}>
+                <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-colors ${iconStyles[prop.color]}`}>
                   <prop.icon className="w-5 h-5" />
                 </div>
               )}
-              <h3 className="text-xl sm:text-2xl font-bold mb-3">
+              <h3 className="text-lg sm:text-xl font-bold mb-2">
                 {prop.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed font-body">
+              <p className="text-sm text-muted-foreground leading-relaxed font-body">
                 {prop.description}
               </p>
             </motion.div>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import caseCarrier from "@/assets/case-carrier.png";
 import casePrettyCovered from "@/assets/case-pretty-covered.png";
 import caseWenodo from "@/assets/case-wenodo.png";
@@ -66,41 +66,36 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Background image or gradient */}
       {study.image ? (
         <img src={study.image} alt={study.title} className="absolute inset-0 w-full h-full object-cover" />
       ) : (
         <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} bg-card`} />
       )}
 
-      {/* Animated shimmer on hover */}
       <div
         className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 ${
           hovered ? "opacity-100" : "opacity-70"
         }`}
       />
 
-      {/* Play button */}
       <div className="absolute top-4 right-4 z-10">
         <div className={`w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-300 ${hovered ? "bg-primary/80 border-primary/40 scale-110" : ""}`}>
           <Play className={`w-4 h-4 transition-colors duration-300 ${hovered ? "text-primary-foreground fill-primary-foreground" : "text-white fill-white"}`} />
         </div>
       </div>
 
-      {/* Logo */}
       <div className="absolute top-5 left-5 z-10">
         <span className="text-white/70 text-xs font-bold tracking-wider uppercase font-heading">
           {study.logo}
         </span>
       </div>
 
-      {/* Content overlay */}
       <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 font-heading">
+        <h3 className="text-lg sm:text-xl font-bold text-white mb-2 font-heading">
           {study.title}
         </h3>
         <div className="flex items-end justify-between gap-3">
-          <p className="text-white/60 text-sm leading-relaxed font-body line-clamp-3">
+          <p className="text-white/60 text-xs leading-relaxed font-body line-clamp-3">
             {study.description}
           </p>
           <div className={`w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 transition-all duration-300 ${hovered ? "bg-primary/80 border-primary/40" : ""}`}>
@@ -114,12 +109,11 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
 
 const CaseStudies = () => {
   return (
-    <section className="relative py-16 sm:py-20 px-6">
+    <section className="relative py-20 sm:py-28 px-6">
       <div className="absolute top-[-100px] left-[-150px] w-[400px] h-[400px] blob-blue pointer-events-none" />
       <div className="absolute bottom-[-80px] right-[-120px] w-[350px] h-[450px] blob-oblong-green pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Header */}
         <motion.div
           className="flex items-start sm:items-center justify-between mb-4"
           initial={{ opacity: 0, y: 20 }}
@@ -140,7 +134,7 @@ const CaseStudies = () => {
         </motion.div>
 
         <motion.p
-          className="text-muted-foreground font-body mb-12 text-lg"
+          className="text-muted-foreground font-body mb-12 text-base"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -149,7 +143,6 @@ const CaseStudies = () => {
           We've launched hundreds of shows and measured the impact
         </motion.p>
 
-        {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {caseStudies.map((study, i) => (
             <CaseStudyCard key={study.title} study={study} index={i} />

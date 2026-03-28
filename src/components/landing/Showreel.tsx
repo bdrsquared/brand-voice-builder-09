@@ -7,19 +7,19 @@ const Showreel = () => {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <section className="relative py-16 sm:py-20 px-6">
+    <section className="relative py-20 sm:py-28 px-6">
       <div className="absolute top-[-50px] right-[-150px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-80px] left-[-100px] w-[350px] h-[350px] blob-green pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 text-accent font-medium text-sm mb-6 block">
+          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
             ● Working with businesses worldwide
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
@@ -54,7 +54,6 @@ const Showreel = () => {
                 alt="Showreel thumbnail"
                 className="w-full h-full object-cover"
               />
-              {/* Glassmorphic play button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-white/20">
                   <Play className="w-8 h-8 sm:w-10 sm:h-10 text-white fill-white ml-1" />

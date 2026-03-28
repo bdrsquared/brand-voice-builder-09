@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3, X, Calendar } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
 import launchImg from "@/assets/service-launch.webp";
 import runScaleImg from "@/assets/service-run-scale.webp";
@@ -60,6 +60,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | null>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -275,72 +276,129 @@ const Navbar = () => {
             <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col h-full px-6 pt-24 pb-12">
-              <nav className="flex flex-col gap-2">
-                {mobileNavLinks.map((link, i) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+            <div className="relative z-10 flex flex-col h-full px-6 pt-24 pb-12 overflow-hidden">
+              <AnimatePresence mode="wait">
+                {mobileSubMenu === null ? (
+                  <motion.div
+                    key="main-menu"
+                    className="flex flex-col h-full"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 + i * 0.06 }}
-                    onClick={() => setMobileOpen(false)}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.25 }}
                   >
-                    {link.label}
-                  </motion.a>
-                ))}
-              </nav>
+                    <nav className="flex flex-col gap-2">
+                      {mobileNavLinks.map((link, i) => {
+                        if (link.label === "Case studies") {
+                          return (
+                            <button
+                              key={link.label}
+                              className="flex items-center justify-between text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left"
+                              onClick={() => setMobileSubMenu("cases")}
+                            >
+                              {link.label}
+                              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                            </button>
+                          );
+                        }
+                        return (
+                          <motion.a
+                            key={link.label}
+                            href={link.href}
+                            className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                            onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                          >
+                            {link.label}
+                          </motion.a>
+                        );
+                      })}
+                    </nav>
 
-              <div className="mt-auto flex flex-col gap-6">
-                {/* Featured case study card */}
-                <motion.a
-                  href="#case-studies"
-                  className="block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: 0.3 }}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  <div className="aspect-[16/9] overflow-hidden">
-                    <img
-                      src={casePrettyCovered}
-                      alt="Fortune Favours the Bold"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">Featured case study</p>
-                    <h4 className="text-base font-heading text-foreground mb-1.5">Fortune Favours the Bold</h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed mb-3 font-body">
-                      How Mastercard used podcasting to position themselves as thought leaders in fintech.
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <div className="flex flex-col">
-                        <span className="text-sm font-semibold text-foreground">124k</span>
-                        <span className="text-[10px] text-muted-foreground">Listeners</span>
-                      </div>
-                      <div className="w-px h-6 bg-white/10" />
-                      <div className="flex flex-col">
-                        <span className="text-sm font-semibold text-foreground">£2.4M</span>
-                        <span className="text-[10px] text-muted-foreground">Pipeline generated</span>
-                      </div>
+                    <div className="mt-auto flex flex-col gap-6">
+                      {/* Featured case study card */}
+                      <motion.a
+                        href="#case-studies"
+                        className="block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.35, delay: 0.3 }}
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                      >
+                        <div className="aspect-[16/9] overflow-hidden">
+                          <img src={casePrettyCovered} alt="Fortune Favours the Bold" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="p-4">
+                          <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">Featured case study</p>
+                          <h4 className="text-base font-heading text-foreground mb-1.5">Fortune Favours the Bold</h4>
+                          <p className="text-xs text-muted-foreground leading-relaxed mb-3 font-body">
+                            How Mastercard used podcasting to position themselves as thought leaders in fintech.
+                          </p>
+                          <div className="flex items-center gap-4">
+                            <div className="flex flex-col">
+                              <span className="text-sm font-semibold text-foreground">124k</span>
+                              <span className="text-[10px] text-muted-foreground">Listeners</span>
+                            </div>
+                            <div className="w-px h-6 bg-white/10" />
+                            <div className="flex flex-col">
+                              <span className="text-sm font-semibold text-foreground">£2.4M</span>
+                              <span className="text-[10px] text-muted-foreground">Pipeline generated</span>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.a>
+
+                      <motion.a
+                        href="#contact"
+                        className="glow-on-hover group inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-full text-base w-full"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.35 }}
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                      >
+                        Book a strategy call
+                        <Calendar className="w-4 h-4" />
+                      </motion.a>
                     </div>
-                  </div>
-                </motion.a>
-
-                <motion.a
-                  href="#contact"
-                  className="glow-on-hover group inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-full text-base w-full"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.35 }}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Book a strategy call
-                  <Calendar className="w-4 h-4" />
-                </motion.a>
-              </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="cases-submenu"
+                    className="flex flex-col h-full"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <button
+                      className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors mb-4"
+                      onClick={() => setMobileSubMenu(null)}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      Back
+                    </button>
+                    <h3 className="text-lg font-heading text-foreground mb-4">Case studies</h3>
+                    <div className="flex flex-col gap-4 overflow-y-auto flex-1 pb-4">
+                      {caseStudies.map((study) => (
+                        <a
+                          key={study.brand}
+                          href="#case-studies"
+                          className="block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
+                          onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                        >
+                          <div className="aspect-[16/9] overflow-hidden">
+                            <img src={study.image} alt={study.title} className="w-full h-full object-cover" />
+                          </div>
+                          <div className="p-4">
+                            <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">{study.brand}</p>
+                            <h4 className="text-base font-heading text-foreground mb-1">{study.title}</h4>
+                            <p className="text-xs text-muted-foreground leading-relaxed font-body">{study.description}</p>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         )}

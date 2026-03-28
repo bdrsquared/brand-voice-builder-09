@@ -137,7 +137,7 @@ const Navbar = () => {
             {/* Mobile burger */}
             <button
               className="sm:hidden relative w-10 h-10 flex items-center justify-center"
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={() => { setMobileOpen(!mobileOpen); if (mobileOpen) setMobileSubMenu(null); }}
               aria-label="Toggle menu"
             >
               <span className="sr-only">Menu</span>

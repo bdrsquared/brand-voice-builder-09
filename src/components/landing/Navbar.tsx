@@ -382,17 +382,17 @@ const Navbar = () => {
                         <a
                           key={study.brand}
                           href="#case-studies"
-                          className="block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
+                          className="flex gap-3 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden p-3"
                           onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                         >
-                          <div className="aspect-[16/9] overflow-hidden">
+                          <div className="w-24 h-20 rounded-lg overflow-hidden shrink-0">
                             <img src={study.image} alt={study.title} className="w-full h-full object-cover" />
                           </div>
-                          <div className="p-3">
+                          <div className="flex flex-col justify-center min-w-0">
                             <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-0.5">{study.brand}</p>
                             <h4 className="text-sm font-heading text-foreground mb-0.5">{study.title}</h4>
-                            <p className="text-xs text-muted-foreground leading-relaxed font-body mb-1.5">{study.description}</p>
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                            <p className="text-[11px] text-muted-foreground leading-snug font-body line-clamp-2">{study.description}</p>
+                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary mt-1">
                               See case study <ArrowRight className="w-3 h-3" />
                             </span>
                           </div>

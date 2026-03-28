@@ -63,7 +63,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | null>(null);
+  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | null>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -304,6 +304,18 @@ const Navbar = () => {
                             </button>
                           );
                         }
+                        if (link.label === "Our service") {
+                          return (
+                            <button
+                              key={link.label}
+                              className="flex items-center justify-between text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left"
+                              onClick={() => setMobileSubMenu("services")}
+                            >
+                              {link.label}
+                              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                            </button>
+                          );
+                        }
                         return (
                           <motion.a
                             key={link.label}
@@ -361,6 +373,58 @@ const Navbar = () => {
                         Book a strategy call
                         <Calendar className="w-4 h-4" />
                       </motion.a>
+                    </div>
+                  </motion.div>
+                ) : mobileSubMenu === "services" ? (
+                  <motion.div
+                    key="services-submenu"
+                    className="flex flex-col h-full"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <div className="flex items-center justify-between mb-5 mt-3">
+                      <h3 className="text-lg font-heading text-foreground">Our service</h3>
+                      <button
+                        className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                        onClick={() => setMobileSubMenu(null)}
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" />
+                        Back
+                      </button>
+                    </div>
+                    <div className="flex flex-col gap-4 overflow-y-auto flex-1 pb-4">
+                      {/* Service packages */}
+                      {megaMenuItems.map((item) => (
+                        <a
+                          key={item.title}
+                          href="#services"
+                          className="block rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden shrink-0"
+                          onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                        >
+                          <div className="aspect-video overflow-hidden">
+                            <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                          </div>
+                          <div className="p-3">
+                            <h4 className="text-sm font-heading text-foreground mb-0.5">{item.title}</h4>
+                            <p className="text-[11px] text-muted-foreground leading-snug font-body">{item.description}</p>
+                          </div>
+                        </a>
+                      ))}
+
+                      {/* Services list */}
+                      <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-3">
+                        {servicesList.map((service, i) => (
+                          <div key={service.label} className={`flex flex-col py-3 ${i < servicesList.length - 1 ? "border-b border-white/10" : ""}`}>
+                            <div className="flex items-center gap-2 mb-1">
+                              <service.icon className="w-4 h-4 text-white/50 shrink-0" />
+                              <span className="text-sm font-semibold text-foreground">{service.label}</span>
+                            </div>
+                            <p className="text-[11px] text-muted-foreground leading-snug pl-6">{service.desc}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 ) : (

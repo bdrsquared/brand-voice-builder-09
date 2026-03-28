@@ -40,8 +40,7 @@ const HowItWorks = () => {
             ● How it works
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            Simple process.{" "}
-            <span className="text-muted-foreground">Serious output.</span>
+            Simple process.
           </h2>
         </motion.div>
 

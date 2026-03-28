@@ -372,14 +372,16 @@ const Navbar = () => {
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <button
-                      className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors mb-4"
-                      onClick={() => setMobileSubMenu(null)}
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      Back
-                    </button>
-                    <h3 className="text-lg font-heading text-foreground mb-4">Case studies</h3>
+                    <div className="flex items-center justify-between mb-5">
+                      <h3 className="text-lg font-heading text-foreground">Case studies</h3>
+                      <button
+                        className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                        onClick={() => setMobileSubMenu(null)}
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" />
+                        Back
+                      </button>
+                    </div>
                     <div className="flex flex-col gap-4 overflow-y-auto flex-1 pb-4">
                       {caseStudies.map((study) => (
                         <a

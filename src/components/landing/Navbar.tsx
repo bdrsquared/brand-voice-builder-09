@@ -385,16 +385,16 @@ const Navbar = () => {
                         <a
                           key={study.brand}
                           href="#case-studies"
-                          className="block rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
+                          className="block rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden shrink-0"
                           onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                         >
-                          <div className="h-28 overflow-hidden">
+                          <div className="aspect-video overflow-hidden">
                             <img src={study.image} alt={study.title} className="w-full h-full object-cover" />
                           </div>
                           <div className="p-3">
                             <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-0.5">{study.brand}</p>
                             <h4 className="text-sm font-heading text-foreground mb-0.5">{study.title}</h4>
-                            <p className="text-[11px] text-muted-foreground leading-snug font-body line-clamp-2 mb-2">{study.description}</p>
+                            <p className="text-[11px] text-muted-foreground leading-snug font-body mb-2">{study.description}</p>
                             <div className="flex items-center gap-3 mb-2">
                               <div className="flex flex-col">
                                 <span className="text-xs font-semibold text-foreground">{study.stats.impressions}</span>

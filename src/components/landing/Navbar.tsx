@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3, X } from "lucide-react";
+import { ArrowRight, ChevronDown, MonitorPlay, Film, BarChart3, X, Calendar } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
 import launchImg from "@/assets/service-launch.webp";
 import runScaleImg from "@/assets/service-run-scale.webp";
@@ -292,43 +292,43 @@ const Navbar = () => {
                 ))}
               </nav>
 
-              {/* Featured case study card */}
-              <motion.a
-                href="#case-studies"
-                className="mt-6 block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.3 }}
-                onClick={() => setMobileOpen(false)}
-              >
-                <div className="aspect-[16/9] overflow-hidden">
-                  <img
-                    src={casePrettyCovered}
-                    alt="Fortune Favours the Bold"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">Featured case study</p>
-                  <h4 className="text-base font-heading text-foreground mb-1.5">Fortune Favours the Bold</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-3 font-body">
-                    How Mastercard used podcasting to position themselves as thought leaders in fintech.
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <div className="flex flex-col">
-                      <span className="text-sm font-semibold text-foreground">124k</span>
-                      <span className="text-[10px] text-muted-foreground">Listeners</span>
-                    </div>
-                    <div className="w-px h-6 bg-white/10" />
-                    <div className="flex flex-col">
-                      <span className="text-sm font-semibold text-foreground">£2.4M</span>
-                      <span className="text-[10px] text-muted-foreground">Pipeline generated</span>
+              <div className="mt-auto flex flex-col gap-4">
+                {/* Featured case study card */}
+                <motion.a
+                  href="#case-studies"
+                  className="block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.3 }}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <div className="aspect-[16/9] overflow-hidden">
+                    <img
+                      src={casePrettyCovered}
+                      alt="Fortune Favours the Bold"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">Featured case study</p>
+                    <h4 className="text-base font-heading text-foreground mb-1.5">Fortune Favours the Bold</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-3 font-body">
+                      How Mastercard used podcasting to position themselves as thought leaders in fintech.
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-semibold text-foreground">124k</span>
+                        <span className="text-[10px] text-muted-foreground">Listeners</span>
+                      </div>
+                      <div className="w-px h-6 bg-white/10" />
+                      <div className="flex flex-col">
+                        <span className="text-sm font-semibold text-foreground">£2.4M</span>
+                        <span className="text-[10px] text-muted-foreground">Pipeline generated</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.a>
+                </motion.a>
 
-              <div className="mt-auto pt-4">
                 <motion.a
                   href="#contact"
                   className="glow-on-hover group inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-full text-base w-full"
@@ -337,8 +337,8 @@ const Navbar = () => {
                   transition={{ duration: 0.3, delay: 0.35 }}
                   onClick={() => setMobileOpen(false)}
                 >
+                  <Calendar className="w-4 h-4" />
                   Book a strategy call
-                  <ArrowRight className="w-4 h-4" />
                 </motion.a>
               </div>
             </div>

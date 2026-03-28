@@ -33,18 +33,21 @@ const caseStudies = [
     title: "Fortune Favours the Bold",
     description: "How Mastercard used podcasting to position themselves as thought leaders in fintech.",
     image: casePrettyCovered,
+    stats: { impressions: "1.2M", pipeline: "£2.4M" },
   },
   {
     brand: "Deloitte",
     title: "The Green Room",
     description: "A flagship podcast series driving Deloitte's sustainability narrative globally.",
     image: caseNoStress,
+    stats: { impressions: "860k", pipeline: "£1.8M" },
   },
   {
     brand: "Red Bull",
     title: "Beyond the Ordinary",
     description: "Storytelling at scale — turning athletes' journeys into binge-worthy audio content.",
     image: caseCfoPlaybook,
+    stats: { impressions: "2.1M", pipeline: "£3.6M" },
   },
 ];
 
@@ -382,17 +385,28 @@ const Navbar = () => {
                         <a
                           key={study.brand}
                           href="#case-studies"
-                          className="flex gap-3 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden p-3"
+                          className="block rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
                           onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                         >
-                          <div className="w-24 h-20 rounded-lg overflow-hidden shrink-0">
+                          <div className="h-28 overflow-hidden">
                             <img src={study.image} alt={study.title} className="w-full h-full object-cover" />
                           </div>
-                          <div className="flex flex-col justify-center min-w-0">
+                          <div className="p-3">
                             <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-0.5">{study.brand}</p>
                             <h4 className="text-sm font-heading text-foreground mb-0.5">{study.title}</h4>
-                            <p className="text-[11px] text-muted-foreground leading-snug font-body line-clamp-2">{study.description}</p>
-                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary mt-1">
+                            <p className="text-[11px] text-muted-foreground leading-snug font-body line-clamp-2 mb-2">{study.description}</p>
+                            <div className="flex items-center gap-3 mb-2">
+                              <div className="flex flex-col">
+                                <span className="text-xs font-semibold text-foreground">{study.stats.impressions}</span>
+                                <span className="text-[9px] text-muted-foreground">Impressions</span>
+                              </div>
+                              <div className="w-px h-5 bg-white/10" />
+                              <div className="flex flex-col">
+                                <span className="text-xs font-semibold text-foreground">{study.stats.pipeline}</span>
+                                <span className="text-[9px] text-muted-foreground">Pipeline generated</span>
+                              </div>
+                            </div>
+                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary">
                               See case study <ArrowRight className="w-3 h-3" />
                             </span>
                           </div>

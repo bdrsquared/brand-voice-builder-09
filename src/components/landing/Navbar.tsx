@@ -372,7 +372,7 @@ const Navbar = () => {
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <div className="flex items-center justify-between mb-5">
+                    <div className="flex items-center justify-between mb-5 mt-3">
                       <h3 className="text-lg font-heading text-foreground">Case studies</h3>
                       <button
                         className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"

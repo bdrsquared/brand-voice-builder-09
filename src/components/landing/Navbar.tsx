@@ -281,7 +281,7 @@ const Navbar = () => {
                   <motion.a
                     key={link.label}
                     href={link.href}
-                    className="text-3xl font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                    className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.1 + i * 0.06 }}

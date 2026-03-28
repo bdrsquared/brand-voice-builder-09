@@ -3,21 +3,16 @@ import { ArrowRight, Calendar } from "lucide-react";
 import LogoWall from "./LogoWall";
 import ovalBg from "@/assets/oval.png";
 
-
 const Hero = () => {
   return (
-    <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-20 px-6">
+    <section className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 px-6">
       {/* Large oval background */}
       <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] lg:w-[220%] h-[140%] pointer-events-none opacity-70">
         <img src={ovalBg} alt="" className="w-full h-full object-contain" />
       </div>
-      {/* Blurred shapes */}
-      
       <div className="absolute top-[50px] right-[-200px] w-[400px] h-[600px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-100px] left-[40%] w-[300px] h-[300px] blob-blue pointer-events-none" />
-      {/* Bottom fade gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
-
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
@@ -26,13 +21,13 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium text-sm px-7 py-3 rounded-full mb-8 border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs transition-all duration-300 hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_30px_rgba(28,250,118,0.1),0_4px_16px_rgba(0,0,0,0.5)] hover:border-white/[0.12] cursor-default">
+          <span className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium text-sm px-7 py-3 rounded-full mb-6 border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs transition-all duration-300 hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_30px_rgba(28,250,118,0.1),0_4px_16px_rgba(0,0,0,0.5)] hover:border-white/[0.12] cursor-default">
             Content Partner
           </span>
         </motion.div>
 
         <motion.h1
-          className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-8"
+          className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -43,7 +38,7 @@ const Hero = () => {
         </motion.h1>
 
         <motion.p
-          className="text-center text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed font-body"
+          className="text-center text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed font-body"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -54,7 +49,7 @@ const Hero = () => {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -68,7 +63,7 @@ const Hero = () => {
           </a>
           <a
             href="#how-it-works"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-medium px-6 py-4 transition-colors"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-medium px-6 py-4 transition-colors text-sm"
           >
             See how it works
             <ArrowRight className="w-4 h-4" />
@@ -76,7 +71,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.p
-          className="text-center text-sm text-muted-foreground font-body"
+          className="text-center text-xs text-muted-foreground font-body"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}

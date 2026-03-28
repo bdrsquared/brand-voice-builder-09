@@ -41,7 +41,7 @@ const Calendly = () => {
   }, []);
 
   return (
-    <section id="contact" className="relative py-20 sm:py-24 px-6">
+    <section id="contact" className="relative py-20 sm:py-28 px-6">
       <div className="absolute top-[30%] left-[20%] w-[500px] h-[400px] blob-green-strong pointer-events-none" />
       <div className="absolute bottom-[-50px] right-[-100px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />
 
@@ -53,16 +53,16 @@ const Calendly = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
             Ready to build video content that supports{" "}
             <span className="text-gradient-green">real growth?</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed font-body">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto mb-3 leading-relaxed font-body">
             If you're thinking about using video podcasting to build authority, reach the right audience, and create consistent high-quality content, this is the best place to start.
           </p>
 
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed font-body">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed font-body">
             No pitch deck. No pressure. Just a focused conversation on your goals and whether this is the right approach for your business.
           </p>
 

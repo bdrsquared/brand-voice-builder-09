@@ -11,12 +11,12 @@ const items = [
 
 const InPractice = () => {
   return (
-    <section className="relative py-12 sm:py-16 px-6">
+    <section className="relative py-20 sm:py-28 px-6">
       <div className="absolute top-[-80px] left-[-100px] w-[400px] h-[350px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-100px] right-[-80px] w-[300px] h-[300px] blob-green pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto">
-        <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
+        <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
           ● What this looks like in practice
         </span>
         <motion.div
@@ -28,7 +28,7 @@ const InPractice = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-2">
             A repeatable system.
           </h2>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6 text-muted-foreground">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 text-muted-foreground">
             Not ad hoc content.
           </h2>
           <p className="text-base text-muted-foreground font-body mb-10 max-w-xl leading-relaxed">

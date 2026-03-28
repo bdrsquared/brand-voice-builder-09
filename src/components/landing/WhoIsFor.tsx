@@ -16,7 +16,7 @@ const notForItems = [
 
 const WhoIsFor = () => {
   return (
-    <section className="relative py-16 sm:py-20 px-6">
+    <section className="relative py-20 sm:py-28 px-6">
       <div className="absolute top-[-80px] left-[-120px] w-[350px] h-[350px] blob-blue pointer-events-none" />
       <div className="absolute bottom-[-60px] right-[-100px] w-[300px] h-[400px] blob-oblong-green pointer-events-none" />
 
@@ -27,7 +27,7 @@ const WhoIsFor = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 text-accent font-medium text-sm mb-6 block">
+          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
             ● Who this is for
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-12">
@@ -36,42 +36,42 @@ const WhoIsFor = () => {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-5">
           <motion.div
-            className="p-8 rounded-2xl border border-primary/20 bg-card"
+            className="p-6 sm:p-8 rounded-2xl border border-primary/20 bg-card"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-primary">This is for you if…</h3>
+            <h3 className="text-lg sm:text-xl font-bold mb-5 text-primary">This is for you if…</h3>
             <ul className="space-y-4">
               {forItems.map((item, i) => (
                 <li key={i} className="flex gap-3 items-start">
                   <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <Check className="w-3.5 h-3.5 text-primary" />
                   </div>
-                  <span className="text-foreground/80 font-body leading-relaxed">{item}</span>
+                  <span className="text-sm text-foreground/80 font-body leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
           </motion.div>
 
           <motion.div
-            className="p-8 rounded-2xl border border-border bg-card"
+            className="p-6 sm:p-8 rounded-2xl border border-border bg-card"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-muted-foreground">This isn't for you if…</h3>
+            <h3 className="text-lg sm:text-xl font-bold mb-5 text-muted-foreground">This isn't for you if…</h3>
             <ul className="space-y-4">
               {notForItems.map((item, i) => (
                 <li key={i} className="flex gap-3 items-start">
                   <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center shrink-0 mt-0.5">
                     <X className="w-3.5 h-3.5 text-muted-foreground" />
                   </div>
-                  <span className="text-muted-foreground font-body leading-relaxed">{item}</span>
+                  <span className="text-sm text-muted-foreground font-body leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>

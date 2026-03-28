@@ -49,7 +49,7 @@ const HowItWorks = () => {
             </p>
           </motion.div>
           <motion.div
-            className="mt-8 lg:mt-auto"
+            className="mt-0 lg:-mt-[100px] relative z-0"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -61,7 +61,7 @@ const HowItWorks = () => {
               loading="lazy"
               width={640}
               height={800}
-              className="w-[130%] max-w-none -ml-[15%] lg:-ml-[30%] lg:w-[140%]"
+              className="w-[150%] max-w-none -ml-[20%] lg:-ml-[35%] lg:w-[160%]"
             />
           </motion.div>
         </div>

@@ -65,7 +65,7 @@ const Hero = () => {
             href="/#how-it-works"
             className="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary font-medium px-6 py-4 transition-colors text-sm"
           >
-            See how it works
+            See how we work
             <ArrowRight className="w-4 h-4" />
           </a>
         </motion.div>

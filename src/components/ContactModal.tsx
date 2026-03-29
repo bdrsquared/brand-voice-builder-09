@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, Check, ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { countryCodes, UK_DEFAULT_INDEX } from "@/lib/country-codes";
+import BudgetSelect from "@/components/BudgetSelect";
 
 interface ContactModalProps {
   open: boolean;
@@ -13,6 +14,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [budget, setBudget] = useState("");
   const [message, setMessage] = useState("");
   const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]);
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);
@@ -61,7 +63,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
     setLoading(true);
     try {
       const { data, error: fnError } = await supabase.functions.invoke("send-demo-request", {
-        body: { name: name.trim(), email: email.trim(), phone: fullPhone, message: message.trim(), type: "contact" },
+        body: { name: name.trim(), email: email.trim(), phone: fullPhone, message: message.trim(), budget, type: "contact" },
       });
 
       if (fnError) throw fnError;
@@ -82,6 +84,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
       setName("");
       setEmail("");
       setPhoneNumber("");
+      setBudget("");
       setMessage("");
       setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
       setSubmitted(false);
@@ -256,6 +259,8 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
                             />
                           </div>
                         </div>
+
+                        <BudgetSelect value={budget} onChange={setBudget} />
 
                         <div>
                           <label className="block text-xs font-semibold text-white/50 mb-1.5 uppercase tracking-wider">Message *</label>

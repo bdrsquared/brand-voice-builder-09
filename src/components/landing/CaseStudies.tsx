@@ -12,12 +12,13 @@ import logoWenodo from "@/assets/logos/wenodo.png";
 import logoPulsetto from "@/assets/logos/pulsetto.png";
 import logoSoldo from "@/assets/logos/soldo.png";
 import logoCollyerBristow from "@/assets/logos/collyer-bristow.png";
+import logoFntv from "@/assets/logos/fntv.png";
 
 const caseStudies = [
   {
     title: "Carrier 2.0",
     logo: "FIERCE FNTV",
-    logoImage: null as string | null,
+    logoImage: logoFntv,
     description: "A video podcast helping Carrier leaders navigate the future of logistics and supply chain innovation.",
     gradient: "from-rose-500/30 to-orange-400/20",
     image: caseCarrier,
@@ -97,7 +98,7 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
 
       <div className="absolute top-5 left-5 z-10">
         {study.logoImage ? (
-          <img src={study.logoImage} alt={study.logo} className="h-5 w-auto brightness-0 invert opacity-70" />
+          <img src={study.logoImage} alt={study.logo} className="h-8 w-auto brightness-0 invert opacity-80" />
         ) : (
           <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
             {study.logo}

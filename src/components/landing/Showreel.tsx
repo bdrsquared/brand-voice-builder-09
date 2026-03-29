@@ -32,66 +32,34 @@ const Showreel = () => {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <div className="relative" style={{ paddingTop: 'clamp(120%, 120%, 120%)' }}>
-            <div className="sm:hidden absolute inset-0">
-              {playing ? (
-                <iframe
-                  src="https://player.vimeo.com/video/1103156714?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&autoplay=1"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                  allowFullScreen
-                  className="absolute top-0 left-0 w-full h-full"
-                  title="Showreel"
+          {/* Mobile: portrait | Desktop: 16:9 */}
+          <div className="relative aspect-[3/4] sm:aspect-video">
+            {playing ? (
+              <iframe
+                src="https://player.vimeo.com/video/1103156714?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&autoplay=1"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full"
+                title="Showreel"
+              />
+            ) : (
+              <button
+                onClick={() => setPlaying(true)}
+                className="absolute top-0 left-0 w-full h-full group cursor-pointer"
+              >
+                <img
+                  src={showreelThumb}
+                  alt="Showreel thumbnail"
+                  className="w-full h-full object-cover object-[70%_center] sm:object-center"
                 />
-              ) : (
-                <button
-                  onClick={() => setPlaying(true)}
-                  className="absolute top-0 left-0 w-full h-full group cursor-pointer"
-                >
-                  <img
-                    src={showreelThumb}
-                    alt="Showreel thumbnail"
-                    className="w-full h-full object-cover object-[70%_center]"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-full bg-black/30 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-black/40">
-                      <Play className="w-8 h-8 text-white fill-white ml-1" />
-                    </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-black/30 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-black/40">
+                    <Play className="w-8 h-8 sm:w-10 sm:h-10 text-white fill-white ml-1" />
                   </div>
-                </button>
-              )}
-            </div>
-          </div>
-          {/* Desktop: standard 16:9 */}
-          <div className="hidden sm:block relative" style={{ paddingTop: '56.25%' }}>
-            <div className="absolute inset-0">
-              {playing ? (
-                <iframe
-                  src="https://player.vimeo.com/video/1103156714?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&autoplay=1"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                  allowFullScreen
-                  className="absolute top-0 left-0 w-full h-full"
-                  title="Showreel"
-                />
-              ) : (
-                <button
-                  onClick={() => setPlaying(true)}
-                  className="absolute top-0 left-0 w-full h-full group cursor-pointer"
-                >
-                  <img
-                    src={showreelThumb}
-                    alt="Showreel thumbnail"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-24 h-24 rounded-full bg-black/30 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-black/40">
-                      <Play className="w-10 h-10 text-white fill-white ml-1" />
-                    </div>
-                  </div>
-                </button>
-              )}
-            </div>
+                </div>
+              </button>
+            )}
           </div>
         </motion.div>
       </div>

@@ -30,7 +30,7 @@ const WhyNow = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 text-emerald-600 font-medium text-sm mb-4 block">
+          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-muted-foreground">
             ● Why now
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 text-gray-900">

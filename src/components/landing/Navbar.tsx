@@ -69,6 +69,7 @@ const mobileNavLinks = [
 type MegaMenu = "services" | "cases" | "podplanner" | null;
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);

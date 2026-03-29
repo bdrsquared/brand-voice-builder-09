@@ -292,79 +292,55 @@ const Navbar = () => {
                       </p>
 
                       {/* Animated mini dashboard */}
-                      <div className="aspect-square max-w-[280px] rounded-xl bg-white/[0.03] border border-white/10 p-4 overflow-hidden relative">
+                      <div className="flex-1 rounded-xl bg-white/[0.03] border border-white/10 p-4 overflow-hidden relative aspect-square">
                         {/* Mini kanban header */}
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-2 h-2 rounded-full bg-primary/80" />
                           <span className="text-[10px] font-semibold text-white/50 uppercase tracking-wider">Content Pipeline</span>
                         </div>
                         {/* Kanban columns */}
-                        <div className="grid grid-cols-3 gap-2 h-[calc(100%-28px)]">
-                          {/* Planning column */}
-                          <div className="flex flex-col gap-1.5">
-                            <span className="text-[8px] font-semibold text-white/30 uppercase mb-1">Planning</span>
-                            <motion.div
-                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.3, duration: 0.4 }}
-                            >
-                              <div className="h-1 w-3/4 rounded-full bg-primary/40 mb-1" />
-                              <div className="h-1 w-1/2 rounded-full bg-white/10" />
-                            </motion.div>
-                            <motion.div
-                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.45, duration: 0.4 }}
-                            >
-                              <div className="h-1 w-2/3 rounded-full bg-accent/40 mb-1" />
-                              <div className="h-1 w-1/3 rounded-full bg-white/10" />
-                            </motion.div>
-                          </div>
-                          {/* In Production column */}
-                          <div className="flex flex-col gap-1.5">
-                            <span className="text-[8px] font-semibold text-white/30 uppercase mb-1">Production</span>
-                            <motion.div
-                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.5, duration: 0.4 }}
-                            >
-                              <div className="h-1 w-full rounded-full bg-primary/50 mb-1" />
-                              <div className="h-1 w-2/3 rounded-full bg-white/10" />
-                              <div className="flex items-center gap-0.5 mt-1.5">
-                                <div className="w-2.5 h-2.5 rounded-full bg-primary/30" />
-                                <div className="w-2.5 h-2.5 rounded-full bg-accent/30 -ml-1" />
-                              </div>
-                            </motion.div>
-                            <motion.div
-                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.6, duration: 0.4 }}
-                            >
-                              <div className="h-1 w-1/2 rounded-full bg-accent/40 mb-1" />
-                              <div className="h-1 w-3/4 rounded-full bg-white/10" />
-                            </motion.div>
-                          </div>
-                          {/* Published column */}
-                          <div className="flex flex-col gap-1.5">
-                            <span className="text-[8px] font-semibold text-white/30 uppercase mb-1">Published</span>
-                            <motion.div
-                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.7, duration: 0.4 }}
-                            >
-                              <div className="h-1 w-full rounded-full bg-primary/60 mb-1" />
-                              <div className="h-1 w-1/2 rounded-full bg-white/10" />
-                              <div className="flex items-center gap-1 mt-1.5">
-                                <div className="h-1 w-4 rounded-full bg-primary/30" />
-                                <span className="text-[7px] text-primary/60 font-semibold">12k</span>
-                              </div>
-                            </motion.div>
-                          </div>
+                        <div className="grid grid-cols-3 gap-2 flex-1 h-[calc(100%-28px)]">
+                          {[
+                            { label: "Planning", delay: 0.3, cards: [
+                              { color: "bg-primary/40", accent: "bg-white/10", w1: "w-3/4", w2: "w-1/2" },
+                              { color: "bg-accent/40", accent: "bg-white/10", w1: "w-2/3", w2: "w-1/3" },
+                            ]},
+                            { label: "Production", delay: 0.5, cards: [
+                              { color: "bg-primary/50", accent: "bg-white/10", w1: "w-full", w2: "w-2/3", avatars: true },
+                              { color: "bg-accent/40", accent: "bg-white/10", w1: "w-1/2", w2: "w-3/4" },
+                            ]},
+                            { label: "Published", delay: 0.7, cards: [
+                              { color: "bg-primary/60", accent: "bg-white/10", w1: "w-full", w2: "w-1/2", stat: "12k" },
+                            ]},
+                          ].map((col) => (
+                            <div key={col.label} className="flex flex-col gap-1.5">
+                              <span className="text-[8px] font-semibold text-white/30 uppercase mb-1">{col.label}</span>
+                              {col.cards.map((card, ci) => (
+                                <motion.div
+                                  key={ci}
+                                  className="rounded-md bg-white/[0.06] border border-white/10 p-1.5 aspect-square flex flex-col justify-center"
+                                  initial={{ opacity: 0, y: 8 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: col.delay + ci * 0.15, duration: 0.4 }}
+                                >
+                                  <div className={`h-1 ${card.w1} rounded-full ${card.color} mb-1`} />
+                                  <div className={`h-1 ${card.w2} rounded-full ${card.accent}`} />
+                                  {card.avatars && (
+                                    <div className="flex items-center gap-0.5 mt-1.5">
+                                      <div className="w-2.5 h-2.5 rounded-full bg-primary/30" />
+                                      <div className="w-2.5 h-2.5 rounded-full bg-accent/30 -ml-1" />
+                                    </div>
+                                  )}
+                                  {card.stat && (
+                                    <div className="flex items-center gap-1 mt-1.5">
+                                      <div className="h-1 w-4 rounded-full bg-primary/30" />
+                                      <span className="text-[7px] text-primary/60 font-semibold">{card.stat}</span>
+                                    </div>
+                                  )}
+                                </motion.div>
+                              ))}
+                            </div>
+                          ))}
                         </div>
                         {/* Subtle shimmer overlay */}
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-accent/[0.02] pointer-events-none rounded-xl" />
@@ -393,10 +369,10 @@ const Navbar = () => {
                         </div>
                         {/* Table rows */}
                         {[
-                          { date: "May 11, 2026", title: "Episode 1: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
-                          { date: "May 25, 2026", title: "Episode 2: Bright – TBC", status: "In Progress", statusColor: "bg-accent/20 text-accent" },
-                          { date: "Jun 8, 2026", title: "Episode 3: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
-                          { date: "Jun 22, 2026", title: "Episode 4: Bright – TBC", status: "Recorded", statusColor: "bg-white/10 text-white/60" },
+                          { date: "May 11, 2027", title: "Episode 1: Bright – TBC", status: "Released", statusColor: "bg-white/10 text-white/60" },
+                          { date: "May 25, 2027", title: "Episode 2: Bright – TBC", status: "In Progress", statusColor: "bg-accent/20 text-accent" },
+                          { date: "Jun 8, 2027", title: "Episode 3: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
+                          { date: "Jun 22, 2027", title: "Episode 4: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
                         ].map((row, i, arr) => (
                           <motion.div
                             key={i}

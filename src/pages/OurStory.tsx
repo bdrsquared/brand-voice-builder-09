@@ -128,19 +128,6 @@ const OurStory = () => {
         </div>
       </section>
 
-      {/* ── 3. Visual Break ── */}
-      <section className="relative">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="rounded-2xl overflow-hidden aspect-[21/9] relative">
-            <img
-              src={launchImg}
-              alt="Recording setup"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent" />
-          </div>
-        </div>
-      </section>
 
       {/* ── 4. The Team ── */}
       <section className="relative py-20 sm:py-28 px-6">

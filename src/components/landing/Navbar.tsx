@@ -921,7 +921,8 @@ const Navbar = () => {
       <AnimatePresence>
         {scrollingDown && !mobileOpen && (
           <motion.div
-            className="fixed bottom-0 left-0 right-0 z-50 sm:hidden pb-[env(safe-area-inset-bottom)] supports-[-webkit-touch-callout:none]:pb-[env(safe-area-inset-bottom)]"
+            className="fixed left-0 right-0 z-50 sm:hidden pb-[env(safe-area-inset-bottom)]"
+            style={{ bottom: bottomOffset }}
             initial={{ y: 80 }}
             animate={{ y: 0 }}
             exit={{ y: 80 }}

@@ -145,6 +145,9 @@ const OurStory = () => {
             <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
               Our brilliant team
             </motion.h2>
+            <motion.p variants={fadeUp} custom={2} className="text-base sm:text-lg text-text-secondary font-body mt-3 max-w-xl mx-auto">
+              A small leadership team, supported by producers, editors, and specialists across every project.
+            </motion.p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

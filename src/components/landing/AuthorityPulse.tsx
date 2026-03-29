@@ -14,11 +14,11 @@ const AuthorityPulse = () => {
 
       {/* Left podium */}
       <div className="relative flex flex-col items-center gap-2 z-10">
-        <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
+        <div className="w-2 h-2 rounded-full bg-text-tertiary/40" />
         <div className="w-20 rounded-t-lg bg-gradient-to-b from-secondary to-card border border-border/60 h-[80px]">
           <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/[0.04] to-transparent" />
         </div>
-        <span className="text-[9px] text-muted-foreground font-body tracking-wide uppercase">2nd</span>
+        <span className="text-[9px] text-text-tertiary font-body tracking-wide uppercase">2nd</span>
       </div>
 
       {/* Centre podium (tallest) */}
@@ -59,11 +59,11 @@ const AuthorityPulse = () => {
 
       {/* Right podium */}
       <div className="relative flex flex-col items-center gap-2 z-10">
-        <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
+        <div className="w-2 h-2 rounded-full bg-text-tertiary/40" />
         <div className="w-20 rounded-t-lg bg-gradient-to-b from-secondary to-card border border-border/60 h-[60px]">
           <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/[0.04] to-transparent" />
         </div>
-        <span className="text-[9px] text-muted-foreground font-body tracking-wide uppercase">3rd</span>
+        <span className="text-[9px] text-text-tertiary font-body tracking-wide uppercase">3rd</span>
       </div>
     </div>
   );

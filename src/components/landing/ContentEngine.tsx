@@ -86,7 +86,7 @@ const ContentCard = ({ label, icon, accent }: { label: string; icon: string; acc
     }`}
   >
     <span className="text-xs shrink-0">{icon}</span>
-    <p className="text-[10px] text-foreground font-medium whitespace-nowrap font-body">{label}</p>
+    <p className="text-[10px] text-text-primary font-medium whitespace-nowrap font-body">{label}</p>
   </div>
 );
 

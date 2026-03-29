@@ -38,9 +38,9 @@ const caseStudies = [
     stats: { impressions: "1.2M", pipeline: "500+" },
   },
   {
-    brand: "Deloitte",
-    title: "The Green Room",
-    description: "A flagship podcast series driving Deloitte's sustainability narrative globally.",
+    brand: "Pulsetto",
+    title: "No Stress",
+    description: "How Pulsetto used podcasting to drive awareness and leads through authentic wellness conversations.",
     image: caseNoStress,
     stats: { impressions: "860k", pipeline: "£1.8M" },
   },

@@ -54,8 +54,8 @@ const caseStudies = [
     slug: null as string | null,
   },
   {
-    brand: "Red Bull",
-    title: "Beyond the Ordinary",
+    brand: "Soldo",
+    title: "The CFO Playbook",
     description: "Storytelling at scale — turning athletes' journeys into binge-worthy audio content.",
     image: caseCfoPlaybook,
     stats: { impressions: "2.1M", pipeline: "£3.6M" },

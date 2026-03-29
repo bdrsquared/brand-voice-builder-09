@@ -292,56 +292,59 @@ const Navbar = () => {
                         Plan content, track episode status, and see performance in real time.
                       </p>
 
-                      {/* Animated mini dashboard — square, pinned to bottom */}
-                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.03] border border-white/10 p-4 overflow-hidden relative">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-2 h-2 rounded-full bg-primary/80" />
-                          <span className="text-[10px] font-semibold text-white/50 uppercase tracking-wider">Content Pipeline</span>
+                      {/* Production Status UI — square, pinned to bottom */}
+                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.04] border border-white/10 p-3 overflow-hidden relative flex flex-col">
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-2.5">
+                          <div className="flex items-center gap-1.5">
+                            <ArrowRight className="w-3 h-3 text-white/40 rotate-180" />
+                            <span className="text-[10px] font-heading font-semibold text-white/90">Production Status</span>
+                          </div>
+                          <div className="w-4 h-4 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center">
+                            <span className="text-[8px] text-primary font-bold">+</span>
+                          </div>
                         </div>
-                        <div className="grid grid-cols-3 gap-2 h-[calc(100%-28px)]">
+
+                        {/* Task list */}
+                        <div className="flex-1 flex flex-col gap-1.5">
                           {[
-                            { label: "Planning", delay: 0.3, cards: [
-                              { color: "bg-primary/40", accent: "bg-white/10", w1: "w-3/4", w2: "w-1/2" },
-                              { color: "bg-accent/40", accent: "bg-white/10", w1: "w-2/3", w2: "w-1/3" },
-                            ]},
-                            { label: "Production", delay: 0.5, cards: [
-                              { color: "bg-primary/50", accent: "bg-white/10", w1: "w-full", w2: "w-2/3", avatars: true },
-                              { color: "bg-accent/40", accent: "bg-white/10", w1: "w-1/2", w2: "w-3/4" },
-                            ]},
-                            { label: "Published", delay: 0.7, cards: [
-                              { color: "bg-primary/60", accent: "bg-white/10", w1: "w-full", w2: "w-1/2", stat: "12k" },
-                            ]},
-                          ].map((col) => (
-                            <div key={col.label} className="flex flex-col gap-1.5">
-                              <span className="text-[8px] font-semibold text-white/30 uppercase mb-1">{col.label}</span>
-                              {col.cards.map((card, ci) => (
-                                <motion.div
-                                  key={ci}
-                                  className="rounded-md bg-white/[0.06] border border-white/10 p-1.5 aspect-square flex flex-col justify-center"
-                                  initial={{ opacity: 0, y: 8 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  transition={{ delay: col.delay + ci * 0.15, duration: 0.4 }}
-                                >
-                                  <div className={`h-1 ${card.w1} rounded-full ${card.color} mb-1`} />
-                                  <div className={`h-1 ${card.w2} rounded-full ${card.accent}`} />
-                                  {card.avatars && (
-                                    <div className="flex items-center gap-0.5 mt-1.5">
-                                      <div className="w-2.5 h-2.5 rounded-full bg-primary/30" />
-                                      <div className="w-2.5 h-2.5 rounded-full bg-accent/30 -ml-1" />
-                                    </div>
-                                  )}
-                                  {card.stat && (
-                                    <div className="flex items-center gap-1 mt-1.5">
-                                      <div className="h-1 w-4 rounded-full bg-primary/30" />
-                                      <span className="text-[7px] text-primary/60 font-semibold">{card.stat}</span>
-                                    </div>
-                                  )}
-                                </motion.div>
-                              ))}
-                            </div>
+                            { task: "Finalize Research & Outline", done: false, highlight: true },
+                            { task: "Record Interview with Jane Doe", done: false },
+                            { task: "Mix & Master Final Episode", done: false },
+                            { task: "Write Show Notes & Transcript", done: true },
+                            { task: "Create Promotional Audiogram", done: false },
+                          ].map((item, i) => (
+                            <motion.div
+                              key={i}
+                              className={`flex items-center gap-2 rounded-lg px-2 py-1.5 ${item.highlight ? "bg-white/[0.08] border border-white/10" : "bg-white/[0.04]"} transition-colors hover:bg-white/[0.08]`}
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
+                            >
+                              <div className={`w-3 h-3 rounded-full border-[1.5px] shrink-0 flex items-center justify-center ${item.done ? "border-primary bg-primary/20" : "border-white/25"}`}>
+                                {item.done && <div className="w-1.5 h-1.5 rounded-full bg-primary" />}
+                              </div>
+                              <span className="text-[8px] text-white/70 font-body truncate">{item.task}</span>
+                              <div className="ml-auto flex items-center gap-0.5 shrink-0">
+                                <div className="w-1 h-1 rounded-full bg-white/15" />
+                                <div className="w-1 h-1 rounded-full bg-white/15" />
+                              </div>
+                            </motion.div>
                           ))}
                         </div>
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-accent/[0.02] pointer-events-none rounded-xl" />
+
+                        {/* Footer */}
+                        <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-white/[0.06]">
+                          <div className="flex items-center gap-1.5">
+                            <svg className="w-3 h-3" viewBox="0 0 16 16">
+                              <circle cx="8" cy="8" r="6" fill="none" stroke="hsl(var(--primary) / 0.3)" strokeWidth="2" />
+                              <circle cx="8" cy="8" r="6" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeDasharray="37.7" strokeDashoffset="30" strokeLinecap="round" transform="rotate(-90 8 8)" />
+                            </svg>
+                            <span className="text-[7px] font-semibold text-white/40 uppercase tracking-wider">Completed 1/5</span>
+                          </div>
+                        </div>
+
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.03] via-transparent to-primary/[0.03] pointer-events-none rounded-xl" />
                       </div>
                     </div>
 

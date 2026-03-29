@@ -54,6 +54,7 @@ const Showreel = () => {
                 <img
                   src={showreelThumb}
                   alt="Showreel thumbnail"
+                  loading="lazy"
                   className="w-full h-full object-cover object-[70%_center] sm:object-center"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">

@@ -90,7 +90,7 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
         onMouseLeave={() => setHovered(false)}
       >
         {study.image ? (
-          <img src={study.image} alt={study.title} className="absolute inset-0 w-full h-full object-cover" />
+          <img src={study.image} alt={study.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
         ) : (
           <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} bg-card`} />
         )}
@@ -109,7 +109,7 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
 
         <div className="absolute top-5 left-5 z-10">
           {study.logoImage ? (
-            <img src={study.logoImage} alt={study.logo} className="h-8 w-auto brightness-0 invert opacity-80" />
+            <img src={study.logoImage} alt={study.logo} loading="lazy" className="h-8 w-auto brightness-0 invert opacity-80" />
           ) : (
             <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
               {study.logo}

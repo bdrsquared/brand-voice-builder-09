@@ -55,43 +55,40 @@ const OurStory = () => {
       <Navbar />
 
       {/* ── 1. Hero ── */}
-      <section className="relative px-4 sm:px-6 pt-4 sm:pt-6">
-        <div className="relative max-w-6xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden h-[50vh] sm:h-[60vh] -mb-[50px] sm:mb-0 flex items-end justify-center ring-1 ring-white/[0.12] shadow-[0_0_40px_-10px_rgba(255,255,255,0.06)]">
-          <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border-[3px] border-white/[0.06] pointer-events-none z-20" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 20%, transparent 80%, rgba(255,255,255,0.06) 100%)" }} />
-          <img
-            src={officeHero}
-            alt="Earworm studio"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            className="relative z-10 text-center px-6 max-w-4xl pb-8 sm:pb-10"
+      <section className="relative h-[50vh] sm:h-[60vh] -mb-[50px] sm:mb-0 flex items-end justify-center overflow-hidden">
+        <img
+          src={officeHero}
+          alt="Earworm studio"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          className="relative z-10 text-center px-6 max-w-4xl"
+        >
+          <motion.h1
+            variants={fadeUp}
+            custom={0}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-text-primary mb-4"
           >
-            <motion.h1
-              variants={fadeUp}
-              custom={0}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-text-primary mb-4"
-            >
-              Our story
-            </motion.h1>
-            <motion.p
-              variants={fadeUp}
-              custom={1}
-              className="text-lg sm:text-xl text-text-secondary font-body max-w-2xl mx-auto mb-3"
-            >
-              A team built around a genuine passion for video podcast content
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              custom={2}
-              className="text-base text-text-tertiary font-body max-w-xl mx-auto"
-            >
-              We help brands create high-quality video podcasts that build authority and support real growth
-            </motion.p>
-          </motion.div>
-        </div>
+            Our story
+          </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            custom={1}
+            className="text-lg sm:text-xl text-text-secondary font-body max-w-2xl mx-auto mb-3"
+          >
+            A team built around a genuine passion for video podcast content
+          </motion.p>
+          <motion.p
+            variants={fadeUp}
+            custom={2}
+            className="text-base text-text-tertiary font-body max-w-xl mx-auto"
+          >
+            We help brands create high-quality video podcasts that build authority and support real growth
+          </motion.p>
+        </motion.div>
       </section>
 
       {/* ── 2. Our Story Split ── */}

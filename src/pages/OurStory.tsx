@@ -7,6 +7,7 @@ import Calendly from "@/components/landing/Calendly";
 import Footer from "@/components/landing/Footer";
 
 import officeHero from "@/assets/office-hero.jpeg";
+import officeDesk from "@/assets/office-desk.jpeg";
 import officeImg from "@/assets/office.jpeg";
 import launchImg from "@/assets/launch-microphone.jpeg";
 import alexAvatar from "@/assets/alex-chen-avatar.jpeg";
@@ -118,7 +119,7 @@ const OurStory = () => {
             style={{ y: imageY }}
           >
             <img
-              src={officeImg}
+              src={officeDesk}
               alt="Behind the scenes at Earworm studio"
               className="w-full h-full object-cover"
             />

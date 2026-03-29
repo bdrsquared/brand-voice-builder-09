@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
+import casePrettyCoveredHero from "@/assets/case-pretty-covered-hero.jpeg";
 
 const CaseStudyHero = lazy(() => import("@/components/case-study/CaseStudyHero"));
 const CaseStudyImpact = lazy(() => import("@/components/case-study/CaseStudyImpact"));
@@ -18,6 +19,7 @@ export interface CaseStudyData {
   clientName: string;
   tagline: string;
   heroImage: string;
+  heroObjectPosition?: string;
   stats: { label: string; value: string }[];
   impacts: { title: string; description: string }[];
   episodes: {
@@ -45,7 +47,8 @@ const caseStudies: Record<string, CaseStudyData> = {
     showName: "Pretty Covered",
     clientName: "Polly",
     tagline: "How Polly used podcasting to connect with Gen Z audiences through authentic beauty and insurance conversations.",
-    heroImage: "/src/assets/case-pretty-covered.webp",
+    heroImage: casePrettyCoveredHero,
+    heroObjectPosition: "25% center",
     stats: [
       { label: "Total impressions", value: "1.2M+" },
       { label: "Qualified leads", value: "500+" },

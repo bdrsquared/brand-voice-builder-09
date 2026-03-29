@@ -141,13 +141,13 @@ const Navbar = () => {
               >
                 How it works
               </a>
-              <a
-                href="/our-story"
+              <button
+                onClick={() => navigate("/our-story")}
                 className={`text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
                 onMouseEnter={() => setMegaOpen(null)}
               >
                 Our story
-              </a>
+              </button>
             </div>
 
             {/* Desktop right side */}

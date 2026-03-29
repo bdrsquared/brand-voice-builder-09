@@ -116,7 +116,7 @@ const Navbar = () => {
     if (!vv) return;
     const update = () => {
       // Position from top: visualViewport bottom minus button height (~50px)
-      setBottomBarTop(vv.offsetTop + vv.height - 50);
+      setBottomBarTop(vv.offsetTop + vv.height - 60);
     };
     vv.addEventListener("resize", update);
     vv.addEventListener("scroll", update);

@@ -36,14 +36,14 @@ const CookieConsent = () => {
           </p>
           <Link
             to="/cookies"
-            className="inline-block text-[11px] text-primary hover:underline mb-4"
+            className="inline-block text-[11px] text-muted-foreground hover:text-foreground transition-colors mb-4"
           >
             Read our cookie policy →
           </Link>
           <div className="flex items-center gap-2">
             <button
               onClick={() => handleChoice(true)}
-              className="flex-1 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+              className="flex-1 rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-foreground transition-colors hover:bg-white/20"
             >
               I accept
             </button>

@@ -346,8 +346,8 @@ const Navbar = () => {
                         Plan content, track episode status, and see performance in real time.
                       </p>
 
-                      {/* Production Status UI — square, pinned to bottom */}
-                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col">
+                      {/* Production Status UI — square, pinned to bottom (decorative only) */}
+                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col pointer-events-none select-none">
                         {/* Header */}
                         <div className="flex items-center justify-between mb-2.5">
                           <div className="flex items-center gap-1.5">
@@ -368,9 +368,9 @@ const Navbar = () => {
                             { task: "Write Show Notes & Transcript", done: true },
                             { task: "Create Promotional Audiogram", done: false },
                           ].map((item, i) => (
-                            <motion.div
+                              <motion.div
                               key={i}
-                              className={`flex items-center gap-2 rounded-lg px-2 py-1.5 ${item.highlight ? "bg-white/[0.12] border border-white/15" : "bg-white/[0.07]"} transition-colors hover:bg-white/[0.12]`}
+                              className={`flex items-center gap-2 rounded-lg px-2 py-1.5 ${item.highlight ? "bg-white/[0.12] border border-white/15" : "bg-white/[0.07]"}`}
                               initial={{ opacity: 0, y: 4 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
@@ -414,8 +414,8 @@ const Navbar = () => {
                         View upcoming episodes and read the plan behind each one.
                       </p>
 
-                      {/* Mini schedule table — square, pinned to bottom */}
-                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 overflow-hidden flex flex-col">
+                      {/* Mini schedule table — square, pinned to bottom (decorative only) */}
+                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 overflow-hidden flex flex-col pointer-events-none select-none">
                         {/* Table header */}
                         <div className="grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 py-2 border-b border-white/[0.08] text-[8px] font-semibold text-white/30 uppercase tracking-wider">
                           <span></span>
@@ -436,7 +436,7 @@ const Navbar = () => {
                           ].map((row, i, arr) => (
                             <motion.div
                               key={i}
-                              className={`flex-1 group grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 hover:bg-white/[0.08] transition-colors cursor-pointer ${i < arr.length - 1 ? "border-b border-white/[0.08]" : ""}`}
+                              className={`flex-1 grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 ${i < arr.length - 1 ? "border-b border-white/[0.08]" : ""}`}
                               initial={{ opacity: 0, y: 4 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
@@ -445,7 +445,7 @@ const Navbar = () => {
                               <span className="text-[8px] text-white/50 font-body">{row.date}</span>
                               <span className="text-[8px] text-white/80 font-body truncate">{row.title}</span>
                               <span className={`text-[7px] font-semibold px-1.5 py-0.5 rounded-full ${row.statusColor} text-center`}>{row.status}</span>
-                              <ArrowRight className="w-2.5 h-2.5 text-white/20 group-hover:text-white/50 transition-colors" />
+                              <ArrowRight className="w-2.5 h-2.5 text-white/20" />
                             </motion.div>
                           ))}
                         </div>

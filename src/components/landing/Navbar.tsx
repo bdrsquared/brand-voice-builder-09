@@ -803,29 +803,6 @@ const Navbar = () => {
                       ))}
                     </div>
 
-                    {/* Content schedule preview */}
-                    <div className="rounded-xl bg-white/[0.06] border border-white/10 overflow-hidden mb-6">
-                      <div className="px-3 py-2 border-b border-white/[0.08]">
-                        <span className="text-[10px] font-semibold text-white/50 uppercase tracking-wider">Content Schedule</span>
-                      </div>
-                      {[
-                        { date: "May 11, 2027", title: "Ep 1: Bright – TBC", status: "Released", statusColor: "bg-white/10 text-white/60" },
-                        { date: "May 25, 2027", title: "Ep 2: Bright – TBC", status: "In Progress", statusColor: "bg-accent/20 text-accent" },
-                        { date: "Jun 8, 2027", title: "Ep 3: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
-                      ].map((row, i, arr) => (
-                        <div
-                          key={i}
-                          className={`flex items-center gap-3 px-3 py-2.5 ${i < arr.length - 1 ? "border-b border-white/[0.06]" : ""}`}
-                        >
-                          <img src={brightLogo} alt="Bright" className="w-5 h-5 rounded object-cover shrink-0" />
-                          <div className="flex-1 min-w-0">
-                            <span className="text-[11px] text-white/80 font-body block truncate">{row.title}</span>
-                            <span className="text-[9px] text-white/40 font-body">{row.date}</span>
-                          </div>
-                          <span className={`text-[8px] font-semibold px-2 py-0.5 rounded-full ${row.statusColor} whitespace-nowrap`}>{row.status}</span>
-                        </div>
-                      ))}
-                    </div>
 
                     {/* CTAs */}
                     <div className="flex flex-col gap-3 mt-auto pb-4">

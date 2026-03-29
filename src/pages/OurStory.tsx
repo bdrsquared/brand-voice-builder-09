@@ -57,7 +57,7 @@ const OurStory = () => {
         <img
           src={officeHero}
           alt="Earworm studio"
-          className="absolute inset-0 w-full h-full object-cover object-bottom"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
         <motion.div
@@ -99,8 +99,8 @@ const OurStory = () => {
             viewport={{ once: true, margin: "-80px" }}
             className="space-y-6"
           >
-            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium px-5 py-2 rounded-full border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs mb-4">
-              How we got here
+            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center gap-2 text-primary font-medium text-sm">
+              ● How we got here
             </motion.span>
             <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
               Born from a belief that brands deserve{" "}
@@ -152,8 +152,8 @@ const OurStory = () => {
             viewport={{ once: true, margin: "-80px" }}
             className="text-center mb-14"
           >
-            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium px-5 py-2 rounded-full border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs mb-3">
-              The people
+            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-3">
+              ● The people
             </motion.span>
             <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
               Meet the team
@@ -227,8 +227,8 @@ const OurStory = () => {
             viewport={{ once: true, margin: "-80px" }}
             className="text-center mb-14"
           >
-            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium px-5 py-2 rounded-full border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs mb-3">
-              What we believe
+            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-3">
+              ● What we believe
             </motion.span>
             <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
               Our approach
@@ -267,8 +267,8 @@ const OurStory = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
           >
-            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium px-5 py-2 rounded-full border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs mb-4">
-              Our mission
+            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4">
+              ● Our mission
             </motion.span>
             <motion.h2
               variants={fadeUp}

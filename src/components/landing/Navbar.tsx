@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
 import logo from "@/assets/earworm-logo.webp";
 import logoDark from "@/assets/earworm-logo-dark.svg";
@@ -40,6 +40,7 @@ const caseStudies = [
     image: casePrettyCovered,
     stats: { impressions: "1.2M", pipeline: "500+" },
     locationType: "On Location" as const,
+    slug: "pretty-covered",
   },
   {
     brand: "Pulsetto",
@@ -48,6 +49,7 @@ const caseStudies = [
     image: caseNoStress,
     stats: { impressions: "860k", pipeline: "£1.8M" },
     locationType: "On Location" as const,
+    slug: null as string | null,
   },
   {
     brand: "Red Bull",
@@ -56,6 +58,7 @@ const caseStudies = [
     image: caseCfoPlaybook,
     stats: { impressions: "2.1M", pipeline: "£3.6M" },
     locationType: "Virtual" as const,
+    slug: null as string | null,
   },
 ];
 
@@ -253,7 +256,7 @@ const Navbar = () => {
                 <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 pb-5 shadow-xl shadow-black/30 transition-colors duration-300`}>
                   <div className="grid grid-cols-3 gap-5">
                     {caseStudies.map((study) => (
-                      <a key={study.brand} href="#case-studies" className="group cursor-pointer block">
+                      <a key={study.brand} href={study.slug ? `/case-study/${study.slug}` : "#case-studies"} className="group cursor-pointer block" onClick={() => setMegaOpen(null)}>
                         <div className="aspect-[16/10] rounded-xl bg-white/5 border border-white/10 mb-3 overflow-hidden relative">
                           <img
                             src={study.image}
@@ -693,7 +696,7 @@ const Navbar = () => {
                       {caseStudies.map((study) => (
                         <a
                           key={study.brand}
-                          href="#case-studies"
+                          href={study.slug ? `/case-study/${study.slug}` : "#case-studies"}
                           className="block rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden shrink-0"
                           onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                         >

@@ -146,8 +146,19 @@
     background-clip: text;
   }
 
+  .text-gradient-green-dark {
+    background: linear-gradient(135deg, hsl(155, 80%, 28%), hsl(243, 60%, 45%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .bg-gradient-green {
     background: linear-gradient(135deg, hsl(145, 96%, 55%), hsl(160, 90%, 45%));
+  }
+
+  .bg-gradient-green-dark {
+    background: linear-gradient(135deg, hsl(155, 80%, 28%), hsl(243, 60%, 45%));
   }
 
   .shadow-green {

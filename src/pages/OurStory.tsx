@@ -53,7 +53,7 @@ const OurStory = () => {
       <Navbar />
 
       {/* ── 1. Hero ── */}
-      <section className="relative h-[38vh] sm:h-[60vh] mt-[156px] sm:mt-0 -mb-[50px] sm:mb-0 flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[60vh] -mb-[50px] sm:mb-0 flex items-end justify-center overflow-hidden">
         <img
           src={officeHero}
           alt="Earworm studio"

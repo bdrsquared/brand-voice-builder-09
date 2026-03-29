@@ -14,6 +14,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [budget, setBudget] = useState("");
   const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]); // UK default
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);
   const [codeSearch, setCodeSearch] = useState("");

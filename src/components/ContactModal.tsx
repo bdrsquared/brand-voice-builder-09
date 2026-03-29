@@ -269,7 +269,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
                               <button
                                 type="button"
                                 onClick={() => { setCodeDropdownOpen(!codeDropdownOpen); setCodeSearch(""); }}
-                                className="flex items-center gap-1.5 rounded-xl border border-white/[0.1] bg-white/[0.05] px-3 py-3 text-sm text-foreground hover:bg-white/[0.07] transition-all whitespace-nowrap min-w-[100px]"
+                                className="flex items-center gap-1.5 rounded-xl border border-white/[0.1] bg-white/[0.05] px-3 py-3 text-sm text-foreground hover:bg-white/[0.07] transition-all whitespace-nowrap shrink-0"
                               >
                                 <span>{selectedCode.flag}</span>
                                 <span className="text-white/70 text-xs">{selectedCode.code}</span>
@@ -331,7 +331,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
                               value={phoneNumber}
                               onChange={(e) => setPhoneNumber(e.target.value)}
                               placeholder="7XXX XXX XXX"
-                              className="flex-1 rounded-xl border border-white/[0.1] bg-white/[0.05] px-4 py-3 text-sm text-foreground placeholder:text-white/25 focus:outline-none focus:border-white/[0.2] focus:bg-white/[0.07] transition-all font-body"
+                              className="flex-1 min-w-0 rounded-xl border border-white/[0.1] bg-white/[0.05] px-4 py-3 text-sm text-foreground placeholder:text-white/25 focus:outline-none focus:border-white/[0.2] focus:bg-white/[0.07] transition-all font-body"
                             />
                           </div>
                         </div>

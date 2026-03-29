@@ -186,12 +186,6 @@ const OurStory = () => {
                       >
                         <Linkedin className="w-3.5 h-3.5" />
                       </a>
-                      <a
-                        href={`mailto:${member.email}`}
-                        className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-tertiary/60 hover:text-primary hover:border-white/[0.12] transition-all"
-                      >
-                        <Mail className="w-3.5 h-3.5" />
-                      </a>
                     </div>
                   </div>
 

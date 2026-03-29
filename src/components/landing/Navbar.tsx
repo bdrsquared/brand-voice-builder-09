@@ -244,7 +244,7 @@ const Navbar = () => {
                           <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
                             {study.title}
                           </h4>
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide border border-primary/30 bg-primary/10 text-primary whitespace-nowrap">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide border border-white/20 bg-white/[0.08] backdrop-blur-sm text-white/80 whitespace-nowrap">
                             {study.locationType}
                           </span>
                         </div>
@@ -672,7 +672,7 @@ const Navbar = () => {
                             <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-0.5">{study.brand}</p>
                             <div className="flex items-center gap-1.5 mb-0.5">
                               <h4 className="text-sm font-heading text-foreground">{study.title}</h4>
-                              <span className="inline-flex items-center px-1.5 py-px rounded-full text-[8px] font-semibold tracking-wide border border-primary/30 bg-primary/10 text-primary whitespace-nowrap">
+                              <span className="inline-flex items-center px-1.5 py-px rounded-full text-[8px] font-semibold tracking-wide border border-white/20 bg-white/[0.08] backdrop-blur-sm text-white/80 whitespace-nowrap">
                                 {study.locationType}
                               </span>
                             </div>

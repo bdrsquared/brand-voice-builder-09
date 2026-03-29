@@ -68,7 +68,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | null>(null);
+  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);

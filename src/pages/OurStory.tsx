@@ -147,8 +147,7 @@ const OurStory = () => {
             </motion.h2>
           </motion.div>
 
-          {/* Horizontal scroll container */}
-          <div className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {team.map((member, i) => (
               <motion.div
                 key={member.name}
@@ -157,45 +156,45 @@ const OurStory = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 custom={i}
                 variants={fadeUp}
-                className="group relative flex-shrink-0 w-[320px] sm:w-[360px] snap-center rounded-2xl overflow-hidden backdrop-blur-2xl bg-white/[0.07] border border-white/[0.12] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] p-6 sm:p-8 transition-all duration-300 hover:bg-white/[0.10] hover:border-primary/30 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_hsl(145,96%,55%,0.12),inset_0_1px_0_0_rgba(255,255,255,0.08)]"
+                className="group relative rounded-2xl overflow-hidden backdrop-blur-2xl bg-white/[0.04] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] p-5 sm:p-6 transition-all duration-300 hover:bg-white/[0.07] hover:border-white/[0.15] hover:-translate-y-0.5 hover:shadow-[0_0_30px_-10px_hsl(145,96%,55%,0.08),inset_0_1px_0_0_rgba(255,255,255,0.06)]"
               >
                 {/* Avatar & header */}
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-white/10 group-hover:ring-primary/40 transition-all flex-shrink-0">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/[0.08] group-hover:ring-white/[0.15] transition-all flex-shrink-0">
                     <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h3 className="text-lg text-text-primary leading-tight">{member.name}</h3>
-                    <p className="text-sm text-primary font-body">{member.role}</p>
+                    <h3 className="text-sm font-medium text-text-primary leading-tight">{member.name}</h3>
+                    <p className="text-xs text-primary/80 font-body">{member.role}</p>
                   </div>
                 </div>
 
                 {/* About */}
-                <p className="text-sm text-text-secondary font-body leading-relaxed mb-4">
+                <p className="text-xs text-text-secondary/80 font-body leading-relaxed mb-3">
                   {member.about}
                 </p>
 
                 {/* Fun fact */}
-                <div className="rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3 mb-5">
-                  <p className="text-xs uppercase tracking-wider text-text-tertiary font-body mb-1">Fun fact</p>
-                  <p className="text-sm text-text-secondary font-body">{member.funFact}</p>
+                <div className="rounded-lg bg-white/[0.03] border border-white/[0.05] px-3 py-2.5 mb-4">
+                  <p className="text-[10px] uppercase tracking-wider text-text-tertiary/60 font-body mb-0.5">Fun fact</p>
+                  <p className="text-xs text-text-secondary/70 font-body">{member.funFact}</p>
                 </div>
 
                 {/* Links */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-text-tertiary hover:text-primary hover:border-primary/30 transition-all"
+                    className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-tertiary/60 hover:text-primary hover:border-white/[0.12] transition-all"
                   >
-                    <Linkedin className="w-4 h-4" />
+                    <Linkedin className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href={`mailto:${member.email}`}
-                    className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-text-tertiary hover:text-primary hover:border-primary/30 transition-all"
+                    className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-tertiary/60 hover:text-primary hover:border-white/[0.12] transition-all"
                   >
-                    <Mail className="w-4 h-4" />
+                    <Mail className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </motion.div>

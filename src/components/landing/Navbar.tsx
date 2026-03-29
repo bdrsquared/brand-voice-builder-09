@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
+import podplannerIcon from "@/assets/podplanner-icon.png";
 import launchImg from "@/assets/service-launch.webp";
 import runScaleImg from "@/assets/service-run-scale.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
@@ -125,8 +126,9 @@ const Navbar = () => {
                 href="https://app.earworm.co/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white transition-colors"
               >
+                <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
                 PodPlanner
               </a>
               <a

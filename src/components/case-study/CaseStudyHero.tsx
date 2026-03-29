@@ -12,7 +12,6 @@ const CaseStudyHero = ({ data }: { data: CaseStudyData }) => {
           className="w-full h-full object-cover sm:object-center"
           style={{ objectPosition: data.heroObjectPosition || "center" }}
         />
-        />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
       </div>

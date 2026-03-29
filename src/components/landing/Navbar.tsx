@@ -81,6 +81,7 @@ const Navbar = () => {
   const [isBottomLight, setIsBottomLight] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
+  const [bottomOffset, setBottomOffset] = useState(0);
   const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
 

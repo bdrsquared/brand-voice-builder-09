@@ -70,7 +70,7 @@ const mobileNavLinks = [
   { label: "More", href: "#" },
 ];
 
-type MegaMenu = "services" | "cases" | "podplanner" | null;
+type MegaMenu = "services" | "cases" | "podplanner" | "more" | null;
 
 const Navbar = () => {
   const navigate = useNavigate();

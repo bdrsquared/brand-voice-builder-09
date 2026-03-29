@@ -1,4 +1,12 @@
-export const countryCodes = [
+export const budgetOptions = [
+  { label: "£10k–£20k", description: "Smaller projects or early-stage exploration" },
+  { label: "£20k–£40k", description: "Running a podcast as a serious channel" },
+  { label: "£40k–£75k", description: "Multi-episode, multi-channel programmes" },
+  { label: "£75k+", description: "Enterprise or multi-show partnerships" },
+  { label: "Unsure", description: "" },
+];
+
+
   { code: "+1", country: "US", flag: "🇺🇸", name: "United States" },
   { code: "+1", country: "CA", flag: "🇨🇦", name: "Canada" },
   { code: "+44", country: "GB", flag: "🇬🇧", name: "United Kingdom" },

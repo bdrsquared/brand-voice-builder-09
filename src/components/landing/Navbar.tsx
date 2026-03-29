@@ -566,14 +566,21 @@ const Navbar = () => {
                           );
                         }
                         return (
-                          <motion.a
+                          <motion.button
                             key={link.label}
-                            href={link.href}
-                            className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
-                            onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                            className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left"
+                            onClick={() => {
+                              if (link.href.startsWith("/")) {
+                                navigate(link.href);
+                              } else {
+                                window.location.href = link.href;
+                              }
+                              setMobileOpen(false);
+                              setMobileSubMenu(null);
+                            }}
                           >
                             {link.label}
-                          </motion.a>
+                          </motion.button>
                         );
                       })}
                     </nav>

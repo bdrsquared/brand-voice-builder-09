@@ -114,7 +114,7 @@ const Navbar = () => {
           onMouseLeave={() => setMegaOpen(null)}
         >
           <div className={`${navLight ? "bg-white/70 border-black/10 shadow-black/5" : "bg-white/5 border-white/10 shadow-black/20"} backdrop-blur-xl border rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg transition-colors duration-300`}>
-            <img src={navLight ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300" />
+            <img src={navLight ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300 cursor-pointer" onClick={() => navigate("/")} />
             <div className="hidden sm:flex items-center gap-8">
               <div
                 className="relative"

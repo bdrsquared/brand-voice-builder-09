@@ -373,6 +373,8 @@ const Navbar = () => {
                             { date: "May 25, 2027", title: "Ep 2: Bright – TBC", status: "In Progress", statusColor: "bg-accent/20 text-accent" },
                             { date: "Jun 8, 2027", title: "Ep 3: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
                             { date: "Jun 22, 2027", title: "Ep 4: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
+                            { date: "Jul 6, 2027", title: "Ep 5: Bright – TBC", status: "Create Plan", statusColor: "bg-white/5 text-white/40 border border-white/10" },
+                            { date: "Jul 20, 2027", title: "Ep 6: Bright – TBC", status: "Create Plan", statusColor: "bg-white/5 text-white/40 border border-white/10" },
                           ].map((row, i, arr) => (
                             <motion.div
                               key={i}

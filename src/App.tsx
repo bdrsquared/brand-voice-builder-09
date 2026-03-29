@@ -15,6 +15,8 @@ const CaseStudy = lazy(() => import("./pages/CaseStudy.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const CookiesPolicy = lazy(() => import("./pages/CookiesPolicy.tsx"));
 const BookACall = lazy(() => import("./pages/BookACall.tsx"));
+const Admin = lazy(() => import("./pages/Admin.tsx"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
 
 const queryClient = new QueryClient();
 

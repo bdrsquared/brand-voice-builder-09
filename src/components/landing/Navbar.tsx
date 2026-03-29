@@ -458,33 +458,35 @@ const Navbar = () => {
                     {/* Right column — features */}
                     <div className="flex flex-col justify-center w-72 py-2 pl-2 gap-0">
                       {[
-                        {
-                          icon: Layers,
-                          title: "Plan with clarity",
-                          desc: "Map out episodes, guests, and content in one place.",
-                        },
-                        {
-                          icon: Activity,
-                          title: "Track progress",
-                          desc: "See exactly where each episode is in production.",
-                        },
-                        {
-                          icon: Eye,
-                          title: "Measure performance",
-                          desc: "Understand what's working across your content.",
-                        },
-                      ].map((feature, i, arr) => (
-                        <div
-                          key={feature.title}
-                          className={`flex-1 flex flex-col justify-center ${i < arr.length - 1 ? "border-b border-white/10" : ""} ${i > 0 ? "pt-4" : ""} ${i < arr.length - 1 ? "pb-4" : ""}`}
-                        >
-                          <div className="flex items-center gap-2.5 mb-1.5">
-                            <feature.icon className="w-5 h-5 text-white/50 shrink-0" />
-                            <span className="text-base font-semibold text-foreground">{feature.title}</span>
+                        { icon: Layers, title: "Plan with clarity", desc: "Map out episodes, guests, and content in one place." },
+                        { icon: Activity, title: "Track progress", desc: "See exactly where each episode is in production." },
+                        { icon: Eye, title: "Measure performance", desc: "Understand what's working across your content." },
+                      ].map((feature, i, arr) => {
+                        const gradients = [
+                          "radial-gradient(ellipse at 10% 80%, hsla(145,80%,55%,0.06) 0%, transparent 55%), radial-gradient(ellipse at 90% 20%, hsla(243,70%,60%,0.04) 0%, transparent 50%)",
+                          "radial-gradient(ellipse at 80% 90%, hsla(243,70%,60%,0.06) 0%, transparent 55%), radial-gradient(ellipse at 20% 10%, hsla(35,90%,55%,0.04) 0%, transparent 50%)",
+                          "radial-gradient(ellipse at 15% 20%, hsla(35,90%,55%,0.05) 0%, transparent 50%), radial-gradient(ellipse at 85% 80%, hsla(145,80%,55%,0.05) 0%, transparent 55%)",
+                        ];
+                        return (
+                          <div
+                            key={feature.title}
+                            className={`group/svc relative flex-1 flex flex-col justify-center rounded-xl px-3 py-3 my-1.5 -mx-3 overflow-hidden transition-all duration-500 hover:bg-white/[0.04] ${i < arr.length - 1 ? "border-b border-white/10" : ""}`}
+                            style={{ backgroundImage: gradients[i] }}
+                          >
+                            <div className="absolute inset-0 opacity-0 group-hover/svc:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-xl">
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover/svc:translate-x-full transition-transform duration-1000 ease-in-out" />
+                            </div>
+                            <div className="absolute inset-0 rounded-xl border border-white/0 group-hover/svc:border-white/[0.08] transition-colors duration-500 pointer-events-none" />
+                            <div className="relative z-10">
+                              <div className="flex items-center gap-2.5 mb-1.5">
+                                <feature.icon className="w-5 h-5 text-white/50 shrink-0 group-hover/svc:text-primary/70 transition-colors duration-300" />
+                                <span className="text-base font-semibold text-foreground">{feature.title}</span>
+                              </div>
+                              <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{feature.desc}</p>
+                            </div>
                           </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{feature.desc}</p>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
 

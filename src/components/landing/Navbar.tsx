@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
+import podplannerIcon from "@/assets/podplanner-icon.png";
 import launchImg from "@/assets/service-launch.webp";
 import runScaleImg from "@/assets/service-run-scale.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";

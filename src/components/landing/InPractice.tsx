@@ -37,14 +37,14 @@ const InPractice = () => {
           {items.map((item, i) => (
             <motion.div
               key={i}
-              className="flex items-center gap-4 p-4 rounded-xl border border-black/[0.08] bg-white/50 hover:border-primary/40 transition-colors"
+              className="flex items-center gap-4 p-4 rounded-xl border border-black/[0.08] bg-white/50 hover:border-[hsl(155,80%,28%)]/40 transition-colors"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <item.icon className="w-4 h-4 text-primary" />
+              <div className="w-9 h-9 rounded-lg bg-gradient-green-dark flex items-center justify-center shrink-0">
+                <item.icon className="w-4 h-4 text-white" />
               </div>
               <p className="text-sm text-light-text-primary font-body font-medium">{item.text}</p>
             </motion.div>

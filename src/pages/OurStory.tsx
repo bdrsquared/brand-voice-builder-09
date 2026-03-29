@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Target, Gem, RefreshCw, TrendingUp } from "lucide-react";
+import { ArrowRight, Target, Gem, RefreshCw, TrendingUp, Linkedin, Mail } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Calendly from "@/components/landing/Calendly";
@@ -20,12 +20,12 @@ import ryanAvatar from "@/assets/ryan-foster-avatar.png";
 /* ───── data ───── */
 
 const team = [
-  { name: "Ben Farley", role: "Founder & Strategy", avatar: alexAvatar, desc: "The one who started it all" },
-  { name: "Emma Carter", role: "Head of Production", avatar: emmaAvatar, desc: "Brings every episode to life" },
-  { name: "Lucas Grant", role: "Creative Director", avatar: lucasAvatar, desc: "Makes everything look incredible" },
-  { name: "Mia Johnson", role: "Content Strategist", avatar: miaAvatar, desc: "Turns ideas into growth plans" },
-  { name: "Olivia Park", role: "Editor & Post-Production", avatar: oliviaAvatar, desc: "Pixel-perfect finishing touches" },
-  { name: "Ryan Foster", role: "Growth & Distribution", avatar: ryanAvatar, desc: "Gets content in front of the right people" },
+  { name: "Ben Farley", role: "Founder & Strategy", avatar: alexAvatar, about: "Ben built Earworm from the ground up with a mission to help brands tell stories worth listening to. He leads strategy and client relationships.", funFact: "Once recorded an entire episode in a moving campervan.", linkedin: "https://linkedin.com/in/benfarley", email: "ben@earworm.co" },
+  { name: "Emma Carter", role: "Head of Production", avatar: emmaAvatar, about: "Emma oversees every production from pre to post — making sure each episode sounds, looks, and feels premium.", funFact: "Has a collection of over 200 vinyl records.", linkedin: "https://linkedin.com/in/emmacarter", email: "emma@earworm.co" },
+  { name: "Lucas Grant", role: "Creative Director", avatar: lucasAvatar, about: "Lucas shapes the visual identity of every show — from thumbnails and set design to motion graphics.", funFact: "Learned to edit video before he could drive.", linkedin: "https://linkedin.com/in/lucasgrant", email: "lucas@earworm.co" },
+  { name: "Mia Johnson", role: "Content Strategist", avatar: miaAvatar, about: "Mia turns business goals into content plans — mapping topics, guests, and formats that actually drive results.", funFact: "Keeps a spreadsheet ranking every coffee shop she's visited.", linkedin: "https://linkedin.com/in/miajohnson", email: "mia@earworm.co" },
+  { name: "Olivia Park", role: "Editor & Post-Production", avatar: oliviaAvatar, about: "Olivia handles the edit suite — cutting, colour grading, and polishing every frame to perfection.", funFact: "Can identify any film from a single frame.", linkedin: "https://linkedin.com/in/oliviapark", email: "olivia@earworm.co" },
+  { name: "Ryan Foster", role: "Growth & Distribution", avatar: ryanAvatar, about: "Ryan makes sure content reaches the right audience — managing distribution, repurposing, and performance tracking.", funFact: "Has run a marathon on every continent except Antarctica.", linkedin: "https://linkedin.com/in/ryanfoster", email: "ryan@earworm.co" },
 ];
 
 const principles = [
@@ -160,7 +160,8 @@ const OurStory = () => {
             </motion.h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          {/* Horizontal scroll container */}
+          <div className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
             {team.map((member, i) => (
               <motion.div
                 key={member.name}
@@ -169,14 +170,47 @@ const OurStory = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 custom={i}
                 variants={fadeUp}
-                className="group relative rounded-2xl overflow-hidden bg-card border border-border p-6 sm:p-8 transition-all duration-300 hover:border-primary/30 hover:-translate-y-1 hover:shadow-[0_0_30px_-10px_hsl(145,96%,55%,0.15)]"
+                className="group relative flex-shrink-0 w-[320px] sm:w-[360px] snap-center rounded-2xl overflow-hidden backdrop-blur-xl bg-white/[0.04] border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-primary/30 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_hsl(145,96%,55%,0.12)]"
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden mb-4 ring-2 ring-border group-hover:ring-primary/40 transition-all">
-                  <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                {/* Avatar & header */}
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-white/10 group-hover:ring-primary/40 transition-all flex-shrink-0">
+                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg text-text-primary leading-tight">{member.name}</h3>
+                    <p className="text-sm text-primary font-body">{member.role}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg sm:text-xl text-text-primary mb-1">{member.name}</h3>
-                <p className="text-sm text-primary font-body mb-2">{member.role}</p>
-                <p className="text-sm text-text-tertiary font-body">{member.desc}</p>
+
+                {/* About */}
+                <p className="text-sm text-text-secondary font-body leading-relaxed mb-4">
+                  {member.about}
+                </p>
+
+                {/* Fun fact */}
+                <div className="rounded-xl bg-white/[0.04] border border-white/[0.06] px-4 py-3 mb-5">
+                  <p className="text-xs uppercase tracking-wider text-text-tertiary font-body mb-1">Fun fact</p>
+                  <p className="text-sm text-text-secondary font-body">{member.funFact}</p>
+                </div>
+
+                {/* Links */}
+                <div className="flex items-center gap-3">
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-text-tertiary hover:text-primary hover:border-primary/30 transition-all"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-text-tertiary hover:text-primary hover:border-primary/30 transition-all"
+                  >
+                    <Mail className="w-4 h-4" />
+                  </a>
+                </div>
               </motion.div>
             ))}
           </div>

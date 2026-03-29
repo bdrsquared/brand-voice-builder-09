@@ -57,9 +57,6 @@ const TestimonialTicker = () => {
           opacity: 0.4,
         }}
       />
-      animate={{ y: visible ? 0 : -40 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-    >
       <div className="max-w-7xl mx-auto px-4 py-1.5 text-center overflow-hidden relative" style={{ minHeight: '1.5rem' }}>
         <AnimatePresence mode="popLayout">
           <motion.div

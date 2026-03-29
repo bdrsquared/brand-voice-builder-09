@@ -91,7 +91,7 @@ const Navbar = () => {
         >
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
             <img src={logo} alt="Earworm" className="h-5" />
-            <div className="hidden sm:flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-8">
               <div
                 className="relative"
                 onMouseEnter={() => setMegaOpen("services")}

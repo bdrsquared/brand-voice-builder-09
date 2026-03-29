@@ -21,9 +21,11 @@ const Index = () => {
       <TestimonialTicker />
       <Navbar />
       <Hero />
-      <ValueProps />
       
       <Suspense fallback={null}>
+        <CaseStudies />
+        <ValueProps />
+
         {/* Rounded divider: dark to light */}
         <div id="light-section-start" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
           <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
@@ -46,7 +48,6 @@ const Index = () => {
         <HowItWorks />
         
         <Testimonials />
-        <CaseStudies />
         <Calendly />
         <Footer />
       </Suspense>

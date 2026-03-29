@@ -708,7 +708,45 @@ const Navbar = () => {
                       ))}
                     </div>
                   </motion.div>
+                ) : mobileSubMenu === "more" ? (
+                  <motion.div
+                    key="more-submenu"
+                    className="flex flex-col h-full"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <div className="flex items-center justify-between mb-5 mt-3">
+                      <h3 className="text-lg font-heading text-foreground">More</h3>
+                      <button
+                        className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                        onClick={() => setMobileSubMenu(null)}
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" />
+                        Back
+                      </button>
+                    </div>
+                    <nav className="flex flex-col gap-2">
+                      <a
+                        href="#how-it-works"
+                        className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                      >
+                        How it works
+                      </a>
+                      <a
+                        href="#"
+                        className="flex items-center gap-2 text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                      >
+                        <img src={podplannerIcon} alt="" className="w-4 h-4" />
+                        PodPlanner
+                      </a>
+                    </nav>
+                  </motion.div>
                 )}
+
               </AnimatePresence>
             </div>
           </motion.div>

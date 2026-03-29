@@ -35,7 +35,7 @@ const LogoWall = () => {
             key={i}
             src={logo.src}
             alt={logo.alt}
-            className="h-10 sm:h-12 w-auto opacity-50 shrink-0"
+            className="h-12 sm:h-12 w-auto opacity-50 shrink-0"
             loading="lazy"
           />
         ))}

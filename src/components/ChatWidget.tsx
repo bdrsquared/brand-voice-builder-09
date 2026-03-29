@@ -162,7 +162,8 @@ const ChatWidget = () => {
                   >
                     <h3 className={`text-lg font-heading mb-0.5 ${light ? "text-gray-900" : "text-foreground"}`}>Chat with us</h3>
                     <p className={`text-xs font-body mb-5 ${light ? "text-gray-500" : "text-muted-foreground"}`}>
-                      Drop us a line and we'll get back to you.
+                      We review every enquiry carefully – we'll come back to you if it's a good fit.
+                    </p>
                     </p>
 
                     <div className="space-y-3">

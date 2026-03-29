@@ -384,7 +384,7 @@ const Navbar = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
                             >
-                              <div className="w-4 h-4 rounded bg-white/10 flex items-center justify-center text-[5px] font-bold text-white/50">B</div>
+                              <img src={brightLogo} alt="Bright" className="w-4 h-4 rounded object-cover" />
                               <span className="text-[8px] text-white/50 font-body">{row.date}</span>
                               <span className="text-[8px] text-white/80 font-body truncate">{row.title}</span>
                               <span className={`text-[7px] font-semibold px-1.5 py-0.5 rounded-full ${row.statusColor} text-center`}>{row.status}</span>

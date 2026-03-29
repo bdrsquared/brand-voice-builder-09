@@ -13,7 +13,7 @@ const InPractice = () => {
   return (
     <section className="relative py-20 sm:py-28 px-6">
       <div className="relative z-10 max-w-3xl mx-auto">
-        <span className="inline-flex items-center gap-2 text-emerald-600 font-medium text-sm mb-4 block">
+        <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-muted-foreground">
           ● What this looks like in practice
         </span>
         <motion.div

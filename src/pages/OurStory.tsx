@@ -99,9 +99,9 @@ const OurStory = () => {
             viewport={{ once: true, margin: "-80px" }}
             className="space-y-6"
           >
-            <motion.p variants={fadeUp} custom={0} className="text-sm uppercase tracking-widest text-text-tertiary font-body">
+            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium px-5 py-2 rounded-full border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs mb-4">
               How we got here
-            </motion.p>
+            </motion.span>
             <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
               Born from a belief that brands deserve{" "}
               <span className="text-gradient-green">better content</span>
@@ -152,9 +152,9 @@ const OurStory = () => {
             viewport={{ once: true, margin: "-80px" }}
             className="text-center mb-14"
           >
-            <motion.p variants={fadeUp} custom={0} className="text-sm uppercase tracking-widest text-text-tertiary font-body mb-3">
+            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium px-5 py-2 rounded-full border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs mb-3">
               The people
-            </motion.p>
+            </motion.span>
             <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
               Meet the team
             </motion.h2>
@@ -227,9 +227,9 @@ const OurStory = () => {
             viewport={{ once: true, margin: "-80px" }}
             className="text-center mb-14"
           >
-            <motion.p variants={fadeUp} custom={0} className="text-sm uppercase tracking-widest text-text-tertiary font-body mb-3">
+            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium px-5 py-2 rounded-full border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs mb-3">
               What we believe
-            </motion.p>
+            </motion.span>
             <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
               Our approach
             </motion.h2>
@@ -267,9 +267,9 @@ const OurStory = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
           >
-            <motion.p variants={fadeUp} custom={0} className="text-sm uppercase tracking-widest text-text-tertiary font-body mb-4">
+            <motion.span variants={fadeUp} custom={0} className="inline-flex items-center bg-gradient-to-r from-primary/[0.08] via-card/60 to-accent/[0.06] text-foreground font-medium px-5 py-2 rounded-full border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.2),0_0_20px_rgba(28,250,118,0.06),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs mb-4">
               Our mission
-            </motion.p>
+            </motion.span>
             <motion.h2
               variants={fadeUp}
               custom={1}

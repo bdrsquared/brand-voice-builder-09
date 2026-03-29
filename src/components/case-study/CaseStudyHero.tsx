@@ -40,15 +40,15 @@ const CaseStudyHero = ({ data }: { data: CaseStudyData }) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="inline-flex gap-0 rounded-2xl bg-white/[0.05] backdrop-blur-2xl border border-white/[0.1] overflow-hidden"
+          className="grid grid-cols-3 rounded-2xl bg-white/[0.05] backdrop-blur-2xl border border-white/[0.1] overflow-hidden"
         >
           {data.stats.map((stat, i) => (
             <div
               key={stat.label}
-              className={`px-8 sm:px-12 py-6 sm:py-8 ${i < data.stats.length - 1 ? "border-r border-white/[0.08]" : ""}`}
+              className={`px-4 sm:px-12 py-5 sm:py-8 ${i < data.stats.length - 1 ? "border-r border-white/[0.08]" : ""}`}
             >
-              <p className="text-3xl sm:text-4xl md:text-5xl text-text-primary mb-1 font-heading">{stat.value}</p>
-              <p className="text-xs sm:text-sm text-text-tertiary font-body uppercase tracking-wider">{stat.label}</p>
+              <p className="text-2xl sm:text-4xl md:text-5xl text-text-primary mb-1 font-heading">{stat.value}</p>
+              <p className="text-[10px] sm:text-sm text-text-tertiary font-body uppercase tracking-wider leading-tight">{stat.label}</p>
             </div>
           ))}
         </motion.div>

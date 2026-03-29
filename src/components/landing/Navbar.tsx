@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import DemoRequestModal from "@/components/DemoRequestModal";
+import ContactModal from "@/components/ContactModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, MessageCircle, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
 import logo from "@/assets/earworm-logo.webp";
 import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.webp";
@@ -80,6 +81,7 @@ const Navbar = () => {
   const [isLightSection, setIsLightSection] = useState(false);
   const [isBottomLight, setIsBottomLight] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
   const [bottomOffset, setBottomOffset] = useState(0);
   const lastScrollY = useRef(0);
@@ -929,18 +931,19 @@ const Navbar = () => {
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
           >
             <div className="px-4 py-2.5">
-              <Link
-                to="/book-a-call"
+              <button
+                onClick={() => setContactModalOpen(true)}
                 className={`flex items-center justify-center gap-2 w-full text-sm font-semibold py-2.5 rounded-full transition-all relative overflow-hidden backdrop-blur-xl border ${isBottomLight ? 'text-black bg-black/10 border-black/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] before:bg-gradient-to-r before:from-[#1CFA76] before:via-[#6359EA] before:to-[#FFB347]' : 'text-white bg-white/10 border-white/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] hover:shadow-[0_0_18px_rgba(28,250,118,0.25),0_0_8px_rgba(99,89,234,0.25)] before:bg-gradient-to-r before:from-[#1CFA76] before:via-[#6359EA] before:to-[#FFB347]'} before:absolute before:inset-0 before:rounded-full before:p-[1px] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude]`}
               >
-                <Calendar className="w-4 h-4 relative z-10" />
-                <span className="relative z-10">Book a call</span>
-              </Link>
+                <MessageCircle className="w-4 h-4 relative z-10" />
+                <span className="relative z-10">Send us a message</span>
+              </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
       <DemoRequestModal open={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
+      <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
     </>
   );
 };

@@ -17,7 +17,7 @@ serve(async (req) => {
     }
 
     const body = await req.json();
-    const { name, email, phone } = body;
+    const { name, email, phone, message, type } = body;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0 || name.length > 200) {
       return new Response(JSON.stringify({ error: 'Valid name is required' }), {
@@ -33,11 +33,22 @@ serve(async (req) => {
       });
     }
 
+    const isContact = type === 'contact';
+
+    if (isContact && (!message || typeof message !== 'string' || message.trim().length === 0)) {
+      return new Response(JSON.stringify({ error: 'Message is required' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const headerText = isContact ? "💬 New Website Message" : "🎙️ New PodPlanner Demo Request";
+
     const slackMessage = {
       blocks: [
         {
           type: "header",
-          text: { type: "plain_text", text: "🎙️ New PodPlanner Demo Request", emoji: true }
+          text: { type: "plain_text", text: headerText, emoji: true }
         },
         {
           type: "section",
@@ -51,6 +62,10 @@ serve(async (req) => {
           fields: [
             { type: "mrkdwn", text: `*Phone:*\n${phone.trim()}` },
           ]
+        }] : []),
+        ...(isContact && message ? [{
+          type: "section",
+          text: { type: "mrkdwn", text: `*Message:*\n${message.trim()}` }
         }] : []),
         {
           type: "context",

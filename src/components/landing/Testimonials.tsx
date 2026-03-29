@@ -101,7 +101,7 @@ const Testimonials = () => {
           <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-          <div className="flex gap-5 animate-scroll-left-slow w-max py-2">
+          <div className="flex gap-5 animate-scroll-left-slow w-max py-2 will-change-transform">
             {allTestimonials.map((t, i) => (
               <TestimonialCard key={`${t.name}-${i}`} t={t} />
             ))}

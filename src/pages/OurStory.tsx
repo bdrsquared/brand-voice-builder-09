@@ -147,7 +147,17 @@ const OurStory = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {team.map((member, i) => (
+            {team.map((member, i) => {
+              const gradients = [
+                "radial-gradient(ellipse at 10% 90%, hsla(145,80%,55%,0.08) 0%, transparent 50%), radial-gradient(ellipse at 90% 20%, hsla(250,80%,65%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, hsla(35,90%,60%,0.04) 0%, transparent 60%)",
+                "radial-gradient(ellipse at 85% 85%, hsla(35,90%,60%,0.08) 0%, transparent 50%), radial-gradient(ellipse at 15% 30%, hsla(145,80%,55%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 60% 10%, hsla(250,80%,65%,0.05) 0%, transparent 55%)",
+                "radial-gradient(ellipse at 20% 15%, hsla(250,80%,65%,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, hsla(35,90%,60%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 40% 90%, hsla(145,80%,55%,0.05) 0%, transparent 55%)",
+                "radial-gradient(ellipse at 70% 10%, hsla(145,80%,55%,0.07) 0%, transparent 45%), radial-gradient(ellipse at 10% 80%, hsla(250,80%,65%,0.07) 0%, transparent 50%), radial-gradient(ellipse at 90% 60%, hsla(35,90%,60%,0.05) 0%, transparent 55%)",
+                "radial-gradient(ellipse at 90% 90%, hsla(250,80%,65%,0.08) 0%, transparent 50%), radial-gradient(ellipse at 30% 10%, hsla(35,90%,60%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 10% 60%, hsla(145,80%,55%,0.05) 0%, transparent 55%)",
+                "radial-gradient(ellipse at 50% 5%, hsla(35,90%,60%,0.08) 0%, transparent 45%), radial-gradient(ellipse at 5% 50%, hsla(145,80%,55%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 85% 80%, hsla(250,80%,65%,0.05) 0%, transparent 55%)",
+                "radial-gradient(ellipse at 15% 70%, hsla(145,80%,55%,0.07) 0%, transparent 50%), radial-gradient(ellipse at 75% 15%, hsla(250,80%,65%,0.06) 0%, transparent 45%), radial-gradient(ellipse at 50% 90%, hsla(35,90%,60%,0.06) 0%, transparent 55%)",
+              ];
+              return (
               <motion.div
                 key={member.name}
                 initial="hidden"
@@ -156,6 +166,7 @@ const OurStory = () => {
                 custom={i}
                 variants={fadeUp}
                 className="group relative rounded-2xl overflow-hidden backdrop-blur-2xl bg-white/[0.04] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] p-5 sm:p-6 transition-all duration-300 hover:bg-white/[0.07] hover:border-white/[0.15] hover:-translate-y-0.5 flex gap-5"
+                style={{ backgroundImage: gradients[i % gradients.length] }}
               >
                 {/* Square avatar */}
                 <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden ring-1 ring-white/[0.08] group-hover:ring-white/[0.15] transition-all flex-shrink-0">

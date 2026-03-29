@@ -42,7 +42,7 @@ const EngagementScroll = () => {
     };
 
     animationId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animId);
+    return () => cancelAnimationFrame(animationId);
   }, []);
 
   const doubled = [...notifications, ...notifications];

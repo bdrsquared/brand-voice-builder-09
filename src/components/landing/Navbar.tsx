@@ -113,6 +113,7 @@ const Navbar = () => {
               <a
                 href="#how-it-works"
                 className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+                onMouseEnter={() => setMegaOpen(null)}
               >
                 How it works
               </a>

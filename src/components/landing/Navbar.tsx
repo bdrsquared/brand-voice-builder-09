@@ -4,10 +4,10 @@ import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, 
 import logo from "@/assets/earworm-logo.png";
 import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.png";
-import brightLogo from "@/assets/bright-logo.png";
-import launchImg from "@/assets/launch-microphone.jpeg";
-import runScaleImg from "@/assets/run-scale.png";
-import officeImg from "@/assets/office.jpeg";
+import brightLogo from "@/assets/bright-logo-compressed.webp";
+import launchImg from "@/assets/launch-microphone-compressed.webp";
+import runScaleImg from "@/assets/run-scale-compressed.webp";
+import officeImg from "@/assets/office-compressed.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
 import caseNoStress from "@/assets/case-no-stress.jpeg";
 import caseCfoPlaybook from "@/assets/case-cfo-playbook.jpeg";

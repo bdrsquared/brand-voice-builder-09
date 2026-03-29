@@ -15,12 +15,12 @@ const megaMenuItems = [
   {
     title: "Launch",
     description: "We incubate, design, and launch podcasts that help businesses lead conversations",
-    image: launchImg,
+    image: runScaleImg,
   },
   {
     title: "Run & scale",
     description: "We manage your podcast end-to-end, turning each episode into a consistent, measurable growth channel.",
-    image: runScaleImg,
+    image: launchImg,
   },
 ];
 

@@ -96,9 +96,13 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
       </div>
 
       <div className="absolute top-5 left-5 z-10">
-        <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
-          {study.logo}
-        </span>
+        {study.logoImage ? (
+          <img src={study.logoImage} alt={study.logo} className="h-5 w-auto brightness-0 invert opacity-70" />
+        ) : (
+          <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
+            {study.logo}
+          </span>
+        )}
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-5 z-10">

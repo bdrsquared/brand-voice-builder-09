@@ -77,6 +77,8 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
   const [isLightSection, setIsLightSection] = useState(false);
+  const [scrollingDown, setScrollingDown] = useState(false);
+  const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
 
   useEffect(() => {

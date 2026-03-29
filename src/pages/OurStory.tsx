@@ -44,7 +44,13 @@ const OurStory = () => {
   const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-background overflow-x-hidden relative">
+      {/* Background blobs */}
+      <div className="absolute top-[15%] left-[-5%] w-[500px] h-[300px] blob-oblong-green pointer-events-none" />
+      <div className="absolute top-[30%] right-[-8%] w-[400px] h-[250px] blob-oblong-blue pointer-events-none" />
+      <div className="absolute top-[55%] left-[10%] w-[450px] h-[280px] blob-oblong-amber pointer-events-none" />
+      <div className="absolute top-[75%] right-[5%] w-[350px] h-[220px] blob-oblong-green pointer-events-none" />
+      <div className="absolute top-[90%] left-[-3%] w-[400px] h-[260px] blob-oblong-blue pointer-events-none" />
       <TestimonialTicker />
       <Navbar />
 

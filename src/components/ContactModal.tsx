@@ -14,7 +14,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
-  const [selectedCode, setSelectedCode] = useState(countryCodes[2]);
+  const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]);
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);
   const [codeSearch, setCodeSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -83,7 +83,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
       setEmail("");
       setPhoneNumber("");
       setMessage("");
-      setSelectedCode(countryCodes[2]);
+      setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
       setSubmitted(false);
       setError("");
       setCodeSearch("");

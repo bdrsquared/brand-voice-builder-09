@@ -13,7 +13,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [selectedCode, setSelectedCode] = useState(countryCodes[2]); // UK default
+  const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]); // UK default
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);
   const [codeSearch, setCodeSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -80,7 +80,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
       setName("");
       setEmail("");
       setPhoneNumber("");
-      setSelectedCode(countryCodes[2]);
+      setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
       setSubmitted(false);
       setError("");
       setCodeSearch("");

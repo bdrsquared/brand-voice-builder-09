@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useRef, useState, useCallback } from "react";
 
 const stats = [
   {
@@ -7,86 +6,23 @@ const stats = [
     value: "74%",
     label: "B2B decision-makers listen to podcasts weekly.",
     source: "Source: Edison Research",
+    gradient: "radial-gradient(ellipse at 20% 80%, hsl(145 96% 55% / 0.12) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, hsl(243 79% 63% / 0.10) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, hsl(320 60% 50% / 0.06) 0%, transparent 60%)",
   },
   {
     title: "Build brand authority",
     value: "65%",
     label: "Podcast guests say it led to new business or speaking invites.",
     source: "Source: Podchaser Pro",
+    gradient: "radial-gradient(ellipse at 70% 90%, hsl(243 79% 63% / 0.14) 0%, transparent 50%), radial-gradient(ellipse at 10% 30%, hsl(145 96% 55% / 0.08) 0%, transparent 50%), radial-gradient(ellipse at 90% 10%, hsl(320 60% 50% / 0.08) 0%, transparent 55%)",
   },
   {
     title: "Turn episodes into content",
     value: "10-20x",
     label: "Video Podcasts generate 10-20x more reusable content than blog posts.",
     source: "Internal agency data / industry benchmarks",
+    gradient: "radial-gradient(ellipse at 80% 70%, hsl(320 60% 50% / 0.10) 0%, transparent 50%), radial-gradient(ellipse at 20% 20%, hsl(243 79% 63% / 0.12) 0%, transparent 50%), radial-gradient(ellipse at 50% 90%, hsl(145 96% 55% / 0.08) 0%, transparent 55%)",
   },
 ];
-
-const GlowCard = ({ stat, i }: { stat: typeof stats[0]; i: number }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [hovering, setHovering] = useState(false);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  }, []);
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
-      className="relative p-6 sm:p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm flex flex-col justify-between min-h-[320px] overflow-hidden group"
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: i * 0.1 }}
-    >
-      <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-300"
-        style={{
-          opacity: hovering ? 1 : 0,
-          background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, rgba(34, 28, 67, 0.6), transparent 60%)`,
-        }}
-      />
-      <div
-        className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-300"
-        style={{
-          opacity: hovering ? 1 : 0,
-          background: `radial-gradient(300px circle at ${pos.x}px ${pos.y}px, rgba(34, 28, 67, 0.8), transparent 60%)`,
-          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          maskComposite: "exclude",
-          WebkitMaskComposite: "xor",
-          padding: "1px",
-          borderRadius: "1rem",
-        }}
-      />
-
-      <h3 className="relative z-10 text-lg sm:text-xl leading-snug text-text-primary">
-        {stat.title}
-      </h3>
-
-      <div className="relative z-10">
-        <span className="block text-5xl sm:text-6xl font-heading text-gradient-green mb-3">
-          {stat.value}
-        </span>
-        <p className="text-text-secondary font-body leading-relaxed text-sm">
-          {stat.label}
-        </p>
-      </div>
-
-      <div className="relative z-10">
-        <div className="w-8 h-px bg-white/20 mb-3" />
-        <p className="text-xs text-text-tertiary font-body">
-          {stat.source}
-        </p>
-      </div>
-    </motion.div>
-  );
-};
 
 const Stats = () => {
   return (
@@ -118,7 +54,35 @@ const Stats = () => {
 
         <div className="grid md:grid-cols-3 gap-5">
           {stats.map((stat, i) => (
-            <GlowCard key={i} stat={stat} i={i} />
+            <motion.div
+              key={i}
+              className="relative p-6 sm:p-8 rounded-2xl border border-white/10 bg-white/[0.03] flex flex-col justify-between min-h-[320px] overflow-hidden"
+              style={{ background: `${stat.gradient}, hsl(0 0% 5%)` }}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <h3 className="relative z-10 text-lg sm:text-xl leading-snug text-text-primary">
+                {stat.title}
+              </h3>
+
+              <div className="relative z-10">
+                <span className="block text-5xl sm:text-6xl font-heading text-gradient-green mb-3">
+                  {stat.value}
+                </span>
+                <p className="text-text-secondary font-body leading-relaxed text-sm">
+                  {stat.label}
+                </p>
+              </div>
+
+              <div className="relative z-10">
+                <div className="w-8 h-px bg-white/20 mb-3" />
+                <p className="text-xs text-text-tertiary font-body">
+                  {stat.source}
+                </p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

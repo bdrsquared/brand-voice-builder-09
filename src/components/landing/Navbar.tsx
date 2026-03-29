@@ -566,12 +566,12 @@ const Navbar = () => {
                 >
                   <div className="flex flex-col gap-1">
                     <a
-                      href="#how-it-works"
-                      onClick={() => setMegaOpen(null)}
+                      href="/#how-it-works"
+                      onClick={() => { setMegaOpen(null); navigate("/#how-it-works"); }}
                       className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all"
                     >
                       <Layers className="w-4 h-4 text-white/50" />
-                      How it works
+                      How we work
                     </a>
                     <button
                       onClick={() => { navigate("/our-story"); setMegaOpen(null); }}
@@ -844,11 +844,11 @@ const Navbar = () => {
                     </div>
                     <nav className="flex flex-col gap-2">
                       <a
-                        href="#how-it-works"
+                        href="/#how-it-works"
                         className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
-                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); navigate("/#how-it-works"); }}
                       >
-                        How it works
+                        How we work
                       </a>
                       <button
                         className="flex items-center justify-between text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left w-full"

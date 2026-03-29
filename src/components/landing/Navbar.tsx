@@ -5,8 +5,8 @@ import logo from "@/assets/earworm-logo.png";
 import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.png";
 import brightLogo from "@/assets/bright-logo.png";
-import launchImg from "@/assets/Launch_Podcast.jpeg";
-import runScaleImg from "@/assets/launch-microphone.jpeg";
+import launchImg from "@/assets/launch-microphone.jpeg";
+import runScaleImg from "@/assets/run-scale.png";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
 import caseNoStress from "@/assets/case-no-stress.jpeg";
 import caseCfoPlaybook from "@/assets/case-cfo-playbook.jpeg";
@@ -15,12 +15,12 @@ const megaMenuItems = [
   {
     title: "Launch",
     description: "We incubate, design, and launch podcasts that help businesses lead conversations",
-    image: runScaleImg,
+    image: launchImg,
   },
   {
     title: "Run & scale",
     description: "We manage your podcast end-to-end, turning each episode into a consistent, measurable growth channel.",
-    image: launchImg,
+    image: runScaleImg,
   },
 ];
 

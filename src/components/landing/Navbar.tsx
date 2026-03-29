@@ -356,10 +356,10 @@ const Navbar = () => {
                         View upcoming episodes and read the plan behind each one.
                       </p>
 
-                      {/* Mini schedule table */}
-                      <div className="rounded-xl bg-white/[0.03] border border-white/10 overflow-hidden">
+                      {/* Mini schedule table — square, pinned to bottom */}
+                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.03] border border-white/10 overflow-hidden flex flex-col">
                         {/* Table header */}
-                        <div className="grid grid-cols-[28px_72px_1fr_68px_20px] gap-2 items-center px-3 py-2 border-b border-white/8 text-[8px] font-semibold text-white/30 uppercase tracking-wider">
+                        <div className="grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 py-2 border-b border-white/[0.08] text-[8px] font-semibold text-white/30 uppercase tracking-wider">
                           <span></span>
                           <span>Date</span>
                           <span>Title</span>
@@ -367,28 +367,29 @@ const Navbar = () => {
                           <span></span>
                         </div>
                         {/* Table rows */}
-                        {[
-                          { date: "May 11, 2027", title: "Episode 1: Bright – TBC", status: "Released", statusColor: "bg-white/10 text-white/60" },
-                          { date: "May 25, 2027", title: "Episode 2: Bright – TBC", status: "In Progress", statusColor: "bg-accent/20 text-accent" },
-                          { date: "Jun 8, 2027", title: "Episode 3: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
-                          { date: "Jun 22, 2027", title: "Episode 4: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
-                        ].map((row, i, arr) => (
-                          <motion.div
-                            key={i}
-                            className={`group grid grid-cols-[28px_72px_1fr_68px_20px] gap-2 items-center px-3 py-2 hover:bg-white/[0.04] transition-colors cursor-pointer ${i < arr.length - 1 ? "border-b border-white/[0.06]" : ""}`}
-                            initial={{ opacity: 0, y: 4 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
-                          >
-                            <div className="w-5 h-5 rounded bg-white/10 flex items-center justify-center text-[6px] font-bold text-white/50">B</div>
-                            <span className="text-[9px] text-white/50 font-body">{row.date}</span>
-                            <span className="text-[10px] text-white/80 font-body truncate">{row.title}</span>
-                            <span className={`text-[8px] font-semibold px-1.5 py-0.5 rounded-full ${row.statusColor} text-center`}>{row.status}</span>
-                            <ArrowRight className="w-2.5 h-2.5 text-white/20 group-hover:text-white/50 transition-colors" />
-                          </motion.div>
-                        ))}
+                        <div className="flex-1 flex flex-col">
+                          {[
+                            { date: "May 11, 2027", title: "Ep 1: Bright – TBC", status: "Released", statusColor: "bg-white/10 text-white/60" },
+                            { date: "May 25, 2027", title: "Ep 2: Bright – TBC", status: "In Progress", statusColor: "bg-accent/20 text-accent" },
+                            { date: "Jun 8, 2027", title: "Ep 3: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
+                            { date: "Jun 22, 2027", title: "Ep 4: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
+                          ].map((row, i, arr) => (
+                            <motion.div
+                              key={i}
+                              className={`flex-1 group grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 hover:bg-white/[0.04] transition-colors cursor-pointer ${i < arr.length - 1 ? "border-b border-white/[0.06]" : ""}`}
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
+                            >
+                              <div className="w-4 h-4 rounded bg-white/10 flex items-center justify-center text-[5px] font-bold text-white/50">B</div>
+                              <span className="text-[8px] text-white/50 font-body">{row.date}</span>
+                              <span className="text-[8px] text-white/80 font-body truncate">{row.title}</span>
+                              <span className={`text-[7px] font-semibold px-1.5 py-0.5 rounded-full ${row.statusColor} text-center`}>{row.status}</span>
+                              <ArrowRight className="w-2.5 h-2.5 text-white/20 group-hover:text-white/50 transition-colors" />
+                            </motion.div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
 
                     {/* Divider */}
                     <div className="w-px bg-white/10 self-stretch" />

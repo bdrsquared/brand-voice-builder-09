@@ -29,7 +29,7 @@ const ProblemStatement = () => {
             </p>
             <p>
               Meanwhile, the companies winning their categories are doing
-              something different — they're having real conversations with the
+              something different - they're having real conversations with the
               right people, on camera, and turning those conversations into
               content that actually compounds.
             </p>

@@ -3,20 +3,20 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const testimonials = [
   {
-    quote: "Working with Earworm helped us generate over 1M+ views and impressions across channels, directly contributing to new sales opportunities.",
+    quote: "High-quality content that drove 1M+ views and real leads.",
     author: "Marketing Manager, No Stress (Pulsetto)",
   },
   {
-    quote: "Earworm turned our podcast into a consistent pipeline driver, helping us start meaningful conversations with the right prospects.",
-    author: "Head of Marketing, B2B SaaS Company",
+    quote: "Great team, standout content, consistent leads.",
+    author: "Head of Marketing, B2B SaaS",
   },
   {
-    quote: "The quality and consistency of content has significantly increased our brand visibility and positioned us as a leader in our space.",
-    author: "Director of Marketing, Fintech Company",
+    quote: "Exceptional creative that boosted brand and pipeline.",
+    author: "Director of Marketing, Fintech",
   },
   {
-    quote: "What started as a content initiative quickly became a core part of our growth strategy, supporting both brand and demand generation.",
-    author: "VP Marketing, Enterprise Tech Company",
+    quote: "High-quality production with real lead impact.",
+    author: "VP Marketing, Enterprise Tech",
   },
 ];
 

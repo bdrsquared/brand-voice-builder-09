@@ -1,0 +1,89 @@
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
+};
+
+serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  try {
+    const SLACK_WEBHOOK_URL = Deno.env.get('SLACK_WEBHOOK_URL');
+    if (!SLACK_WEBHOOK_URL) {
+      throw new Error('SLACK_WEBHOOK_URL is not configured');
+    }
+
+    const body = await req.json();
+    const { name, email, phone } = body;
+
+    if (!name || typeof name !== 'string' || name.trim().length === 0 || name.length > 200) {
+      return new Response(JSON.stringify({ error: 'Valid name is required' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (!email || typeof email !== 'string' || !email.includes('@') || email.length > 320) {
+      return new Response(JSON.stringify({ error: 'Valid email is required' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const slackMessage = {
+      blocks: [
+        {
+          type: "header",
+          text: { type: "plain_text", text: "🎙️ New Demo Request", emoji: true }
+        },
+        {
+          type: "section",
+          fields: [
+            { type: "mrkdwn", text: `*Name:*\n${name.trim()}` },
+            { type: "mrkdwn", text: `*Email:*\n${email.trim()}` },
+          ]
+        },
+        ...(phone && phone.trim() ? [{
+          type: "section",
+          fields: [
+            { type: "mrkdwn", text: `*Phone:*\n${phone.trim()}` },
+          ]
+        }] : []),
+        {
+          type: "context",
+          elements: [
+            { type: "mrkdwn", text: `Submitted via earworm.co at ${new Date().toISOString()}` }
+          ]
+        }
+      ]
+    };
+
+    const slackResponse = await fetch(SLACK_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(slackMessage),
+    });
+
+    if (!slackResponse.ok) {
+      const errorText = await slackResponse.text();
+      throw new Error(`Slack API call failed [${slackResponse.status}]: ${errorText}`);
+    }
+
+    await slackResponse.text();
+
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  } catch (error: unknown) {
+    console.error('Error sending demo request:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return new Response(JSON.stringify({ success: false, error: errorMessage }), {
+      status: 500,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+});

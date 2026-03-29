@@ -164,7 +164,6 @@ const ChatWidget = () => {
                     <p className={`text-xs font-body mb-5 ${light ? "text-gray-500" : "text-muted-foreground"}`}>
                       We review every enquiry carefully – we'll come back to you if it's a good fit.
                     </p>
-                    </p>
 
                     <div className="space-y-3">
                       <div>

@@ -78,6 +78,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
   const [isLightSection, setIsLightSection] = useState(false);
+  const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
   const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
@@ -917,6 +918,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <DemoRequestModal open={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
     </>
   );
 };

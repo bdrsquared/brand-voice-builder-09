@@ -68,7 +68,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | null>(null);
+  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -735,15 +735,119 @@ const Navbar = () => {
                       >
                         How it works
                       </a>
+                      <button
+                        className="flex items-center justify-between text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left w-full"
+                        onClick={() => setMobileSubMenu("podplanner")}
+                      >
+                        <span className="flex items-center gap-2">
+                          <img src={podplannerIcon} alt="" className="w-4 h-4" />
+                          PodPlanner
+                        </span>
+                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                      </button>
+                    </nav>
+                  </motion.div>
+                ) : mobileSubMenu === "podplanner" ? (
+                  <motion.div
+                    key="podplanner-submenu"
+                    className="flex flex-col h-full overflow-y-auto"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <div className="flex items-center justify-between mb-4 mt-3">
+                      <div className="flex items-center gap-2">
+                        <img src={podplannerIcon} alt="" className="w-5 h-5" />
+                        <h3 className="text-lg font-heading text-foreground">PodPlanner</h3>
+                      </div>
+                      <button
+                        className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                        onClick={() => setMobileSubMenu("more")}
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" />
+                        Back
+                      </button>
+                    </div>
+
+                    <p className="text-sm text-muted-foreground leading-relaxed font-body mb-5">
+                      A project management system for your video podcast. Plan content, track episode status, and see performance in real time.
+                    </p>
+
+                    {/* Features */}
+                    <div className="flex flex-col gap-4 mb-6">
+                      {[
+                        {
+                          icon: Layers,
+                          title: "Plan with clarity",
+                          desc: "Map out episodes, guests, and content in one place.",
+                        },
+                        {
+                          icon: Activity,
+                          title: "Track progress",
+                          desc: "See exactly where each episode is in production.",
+                        },
+                        {
+                          icon: Eye,
+                          title: "Measure performance",
+                          desc: "Understand what's working across your content.",
+                        },
+                      ].map((feature) => (
+                        <div key={feature.title} className="flex items-start gap-3">
+                          <feature.icon className="w-5 h-5 text-primary/70 shrink-0 mt-0.5" />
+                          <div>
+                            <span className="text-sm font-semibold text-foreground block mb-0.5">{feature.title}</span>
+                            <p className="text-xs text-muted-foreground leading-relaxed">{feature.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Content schedule preview */}
+                    <div className="rounded-xl bg-white/[0.06] border border-white/10 overflow-hidden mb-6">
+                      <div className="px-3 py-2 border-b border-white/[0.08]">
+                        <span className="text-[10px] font-semibold text-white/50 uppercase tracking-wider">Content Schedule</span>
+                      </div>
+                      {[
+                        { date: "May 11, 2027", title: "Ep 1: Bright – TBC", status: "Released", statusColor: "bg-white/10 text-white/60" },
+                        { date: "May 25, 2027", title: "Ep 2: Bright – TBC", status: "In Progress", statusColor: "bg-accent/20 text-accent" },
+                        { date: "Jun 8, 2027", title: "Ep 3: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
+                      ].map((row, i, arr) => (
+                        <div
+                          key={i}
+                          className={`flex items-center gap-3 px-3 py-2.5 ${i < arr.length - 1 ? "border-b border-white/[0.06]" : ""}`}
+                        >
+                          <img src={brightLogo} alt="Bright" className="w-5 h-5 rounded object-cover shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <span className="text-[11px] text-white/80 font-body block truncate">{row.title}</span>
+                            <span className="text-[9px] text-white/40 font-body">{row.date}</span>
+                          </div>
+                          <span className={`text-[8px] font-semibold px-2 py-0.5 rounded-full ${row.statusColor} whitespace-nowrap`}>{row.status}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="flex flex-col gap-3 mt-auto pb-4">
                       <a
-                        href="#"
-                        className="flex items-center gap-2 text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                        href="https://app.earworm.co/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 text-sm font-semibold text-foreground py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
                         onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                       >
-                        <img src={podplannerIcon} alt="" className="w-4 h-4" />
-                        PodPlanner
+                        <LogIn className="w-4 h-4" />
+                        Log in
                       </a>
-                    </nav>
+                      <a
+                        href="#contact"
+                        className="flex items-center justify-center gap-2 text-sm font-semibold text-primary-foreground py-3 rounded-xl bg-primary hover:brightness-110 transition-all"
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                      >
+                        Request a demo
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </motion.div>
                 ) : null}
 

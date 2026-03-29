@@ -32,16 +32,18 @@ const allTestimonials = [...testimonials, ...testimonials];
 
 const Stars = () => (
   <div className="flex gap-1">
+    <svg className="w-0 h-0 absolute" aria-hidden="true">
+      <defs>
+        <linearGradient id="star-grad-shared" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="hsl(145, 96%, 55%)" />
+          <stop offset="50%" stopColor="hsl(35, 100%, 60%)" />
+          <stop offset="100%" stopColor="hsl(217, 91%, 60%)" />
+        </linearGradient>
+      </defs>
+    </svg>
     {[...Array(5)].map((_, i) => (
-      <svg key={i} className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id={`star-grad-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(145, 96%, 55%)" />
-            <stop offset="50%" stopColor="hsl(35, 100%, 60%)" />
-            <stop offset="100%" stopColor="hsl(217, 91%, 60%)" />
-          </linearGradient>
-        </defs>
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill={`url(#star-grad-${i})`} />
+      <svg key={i} className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="url(#star-grad-shared)" />
       </svg>
     ))}
   </div>
@@ -101,7 +103,7 @@ const Testimonials = () => {
           <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-          <div className="flex gap-5 animate-scroll-left-slow w-max py-2">
+          <div className="flex gap-5 animate-scroll-left-slow w-max py-2 will-change-transform">
             {allTestimonials.map((t, i) => (
               <TestimonialCard key={`${t.name}-${i}`} t={t} />
             ))}

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import caseCarrier from "@/assets/case-carrier.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.webp";
@@ -73,7 +72,6 @@ const caseStudies = [
 ];
 
 const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: number }) => {
-  const [hovered, setHovered] = useState(false);
 
   const Wrapper = study.slug ? Link : "div";
   const wrapperProps = study.slug ? { to: `/case-study/${study.slug}` } : {};
@@ -82,34 +80,28 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
     <Wrapper {...wrapperProps as any}>
       <motion.div
         className="group relative aspect-[4/5] rounded-2xl overflow-hidden border border-border cursor-pointer"
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5, delay: index * 0.08 }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        transition={{ duration: 0.4, delay: index * 0.06 }}
       >
         {study.image ? (
-          <img src={study.image} alt={study.title} className="absolute inset-0 w-full h-full object-cover" />
+          <img src={study.image} alt={study.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
         ) : (
           <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} bg-card`} />
         )}
 
-        <div
-          className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 ${
-            hovered ? "opacity-100" : "opacity-70"
-          }`}
-        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
 
         <div className="absolute top-4 right-4 z-10">
-          <div className={`w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-300 ${hovered ? "bg-primary/80 border-primary/40 scale-110" : ""}`}>
-            <Play className={`w-4 h-4 transition-colors duration-300 ${hovered ? "text-primary-foreground fill-primary-foreground" : "text-white fill-white"}`} />
+          <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 group-hover:bg-primary/80 group-hover:border-primary/40 group-hover:scale-110">
+            <Play className="w-4 h-4 text-white fill-white transition-colors duration-200 group-hover:text-primary-foreground group-hover:fill-primary-foreground" />
           </div>
         </div>
 
         <div className="absolute top-5 left-5 z-10">
           {study.logoImage ? (
-            <img src={study.logoImage} alt={study.logo} className="h-8 w-auto brightness-0 invert opacity-80" />
+            <img src={study.logoImage} alt={study.logo} loading="lazy" className="h-8 w-auto brightness-0 invert opacity-80" />
           ) : (
             <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
               {study.logo}
@@ -125,8 +117,8 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
             <p className="text-white/60 text-xs leading-relaxed font-body line-clamp-3">
               {study.description}
             </p>
-            <div className={`w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 transition-all duration-300 ${hovered ? "bg-primary/80 border-primary/40" : ""}`}>
-              <ArrowUpRight className={`w-4 h-4 transition-colors duration-300 ${hovered ? "text-primary-foreground" : "text-white/70"}`} />
+            <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 transition-all duration-200 group-hover:bg-primary/80 group-hover:border-primary/40">
+              <ArrowUpRight className="w-4 h-4 text-white/70 transition-colors duration-200 group-hover:text-primary-foreground" />
             </div>
           </div>
         </div>

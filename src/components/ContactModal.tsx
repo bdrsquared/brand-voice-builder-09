@@ -2,86 +2,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, Check, ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-
-const countryCodes = [
-  { code: "+1", country: "US", flag: "🇺🇸", name: "United States" },
-  { code: "+1", country: "CA", flag: "🇨🇦", name: "Canada" },
-  { code: "+44", country: "GB", flag: "🇬🇧", name: "United Kingdom" },
-  { code: "+353", country: "IE", flag: "🇮🇪", name: "Ireland" },
-  { code: "+61", country: "AU", flag: "🇦🇺", name: "Australia" },
-  { code: "+64", country: "NZ", flag: "🇳🇿", name: "New Zealand" },
-  { code: "+91", country: "IN", flag: "🇮🇳", name: "India" },
-  { code: "+49", country: "DE", flag: "🇩🇪", name: "Germany" },
-  { code: "+33", country: "FR", flag: "🇫🇷", name: "France" },
-  { code: "+34", country: "ES", flag: "🇪🇸", name: "Spain" },
-  { code: "+39", country: "IT", flag: "🇮🇹", name: "Italy" },
-  { code: "+31", country: "NL", flag: "🇳🇱", name: "Netherlands" },
-  { code: "+32", country: "BE", flag: "🇧🇪", name: "Belgium" },
-  { code: "+41", country: "CH", flag: "🇨🇭", name: "Switzerland" },
-  { code: "+43", country: "AT", flag: "🇦🇹", name: "Austria" },
-  { code: "+46", country: "SE", flag: "🇸🇪", name: "Sweden" },
-  { code: "+47", country: "NO", flag: "🇳🇴", name: "Norway" },
-  { code: "+45", country: "DK", flag: "🇩🇰", name: "Denmark" },
-  { code: "+358", country: "FI", flag: "🇫🇮", name: "Finland" },
-  { code: "+48", country: "PL", flag: "🇵🇱", name: "Poland" },
-  { code: "+351", country: "PT", flag: "🇵🇹", name: "Portugal" },
-  { code: "+30", country: "GR", flag: "🇬🇷", name: "Greece" },
-  { code: "+420", country: "CZ", flag: "🇨🇿", name: "Czech Republic" },
-  { code: "+36", country: "HU", flag: "🇭🇺", name: "Hungary" },
-  { code: "+40", country: "RO", flag: "🇷🇴", name: "Romania" },
-  { code: "+359", country: "BG", flag: "🇧🇬", name: "Bulgaria" },
-  { code: "+385", country: "HR", flag: "🇭🇷", name: "Croatia" },
-  { code: "+421", country: "SK", flag: "🇸🇰", name: "Slovakia" },
-  { code: "+386", country: "SI", flag: "🇸🇮", name: "Slovenia" },
-  { code: "+372", country: "EE", flag: "🇪🇪", name: "Estonia" },
-  { code: "+371", country: "LV", flag: "🇱🇻", name: "Latvia" },
-  { code: "+370", country: "LT", flag: "🇱🇹", name: "Lithuania" },
-  { code: "+352", country: "LU", flag: "🇱🇺", name: "Luxembourg" },
-  { code: "+356", country: "MT", flag: "🇲🇹", name: "Malta" },
-  { code: "+357", country: "CY", flag: "🇨🇾", name: "Cyprus" },
-  { code: "+354", country: "IS", flag: "🇮🇸", name: "Iceland" },
-  { code: "+7", country: "RU", flag: "🇷🇺", name: "Russia" },
-  { code: "+380", country: "UA", flag: "🇺🇦", name: "Ukraine" },
-  { code: "+90", country: "TR", flag: "🇹🇷", name: "Turkey" },
-  { code: "+972", country: "IL", flag: "🇮🇱", name: "Israel" },
-  { code: "+971", country: "AE", flag: "🇦🇪", name: "United Arab Emirates" },
-  { code: "+966", country: "SA", flag: "🇸🇦", name: "Saudi Arabia" },
-  { code: "+974", country: "QA", flag: "🇶🇦", name: "Qatar" },
-  { code: "+973", country: "BH", flag: "🇧🇭", name: "Bahrain" },
-  { code: "+968", country: "OM", flag: "🇴🇲", name: "Oman" },
-  { code: "+965", country: "KW", flag: "🇰🇼", name: "Kuwait" },
-  { code: "+962", country: "JO", flag: "🇯🇴", name: "Jordan" },
-  { code: "+961", country: "LB", flag: "🇱🇧", name: "Lebanon" },
-  { code: "+86", country: "CN", flag: "🇨🇳", name: "China" },
-  { code: "+81", country: "JP", flag: "🇯🇵", name: "Japan" },
-  { code: "+82", country: "KR", flag: "🇰🇷", name: "South Korea" },
-  { code: "+65", country: "SG", flag: "🇸🇬", name: "Singapore" },
-  { code: "+852", country: "HK", flag: "🇭🇰", name: "Hong Kong" },
-  { code: "+60", country: "MY", flag: "🇲🇾", name: "Malaysia" },
-  { code: "+66", country: "TH", flag: "🇹🇭", name: "Thailand" },
-  { code: "+63", country: "PH", flag: "🇵🇭", name: "Philippines" },
-  { code: "+62", country: "ID", flag: "🇮🇩", name: "Indonesia" },
-  { code: "+84", country: "VN", flag: "🇻🇳", name: "Vietnam" },
-  { code: "+880", country: "BD", flag: "🇧🇩", name: "Bangladesh" },
-  { code: "+92", country: "PK", flag: "🇵🇰", name: "Pakistan" },
-  { code: "+94", country: "LK", flag: "🇱🇰", name: "Sri Lanka" },
-  { code: "+977", country: "NP", flag: "🇳🇵", name: "Nepal" },
-  { code: "+55", country: "BR", flag: "🇧🇷", name: "Brazil" },
-  { code: "+52", country: "MX", flag: "🇲🇽", name: "Mexico" },
-  { code: "+54", country: "AR", flag: "🇦🇷", name: "Argentina" },
-  { code: "+56", country: "CL", flag: "🇨🇱", name: "Chile" },
-  { code: "+57", country: "CO", flag: "🇨🇴", name: "Colombia" },
-  { code: "+51", country: "PE", flag: "🇵🇪", name: "Peru" },
-  { code: "+58", country: "VE", flag: "🇻🇪", name: "Venezuela" },
-  { code: "+593", country: "EC", flag: "🇪🇨", name: "Ecuador" },
-  { code: "+27", country: "ZA", flag: "🇿🇦", name: "South Africa" },
-  { code: "+234", country: "NG", flag: "🇳🇬", name: "Nigeria" },
-  { code: "+254", country: "KE", flag: "🇰🇪", name: "Kenya" },
-  { code: "+233", country: "GH", flag: "🇬🇭", name: "Ghana" },
-  { code: "+20", country: "EG", flag: "🇪🇬", name: "Egypt" },
-  { code: "+212", country: "MA", flag: "🇲🇦", name: "Morocco" },
-  { code: "+216", country: "TN", flag: "🇹🇳", name: "Tunisia" },
-];
+import { countryCodes, UK_DEFAULT_INDEX } from "@/lib/country-codes";
 
 interface ContactModalProps {
   open: boolean;
@@ -93,7 +14,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
-  const [selectedCode, setSelectedCode] = useState(countryCodes[2]);
+  const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]);
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);
   const [codeSearch, setCodeSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -162,7 +83,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
       setEmail("");
       setPhoneNumber("");
       setMessage("");
-      setSelectedCode(countryCodes[2]);
+      setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
       setSubmitted(false);
       setError("");
       setCodeSearch("");

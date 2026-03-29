@@ -1,8 +1,33 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Calendly = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [calLoaded, setCalLoaded] = useState(false);
+
   useEffect(() => {
+    if (calLoaded) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setCalLoaded(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px" }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [calLoaded]);
+
+  useEffect(() => {
+    if (!calLoaded) return;
+
     (function (C: any, A: string, L: string) {
       let p = function (a: any, ar: any) { a.q.push(ar); };
       let d = C.document;
@@ -38,10 +63,10 @@ const Calendly = () => {
       calLink: "earworm-accounts-fqzg4l/30min",
     });
     Cal.ns["30min"]("ui", { hideEventTypeDetails: false, layout: "month_view", theme: "dark", cssVarsPerTheme: { dark: { "cal-bg": "transparent" } } });
-  }, []);
+  }, [calLoaded]);
 
   return (
-    <section id="contact" className="relative py-20 sm:py-28 px-6">
+    <section ref={sectionRef} id="contact" className="relative py-20 sm:py-28 px-6">
       <div className="absolute top-[30%] left-[20%] w-[500px] h-[400px] blob-green-strong pointer-events-none" />
       <div className="absolute bottom-[-50px] right-[-100px] w-[400px] h-[300px] blob-oblong-blue pointer-events-none" />
 

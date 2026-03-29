@@ -16,8 +16,16 @@ const Showreel = () => {
         <div
           className="relative rounded-3xl border border-white/20 backdrop-blur-md overflow-hidden p-8 sm:p-12"
           style={{
-            background: "linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,179,71,0.15) 25%, rgba(255,255,255,0.9) 40%, rgba(99,89,234,0.12) 60%, rgba(255,255,255,0.88) 75%, rgba(28,250,118,0.12) 100%)",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.5)",
+            background: `
+              radial-gradient(ellipse 80% 60% at 15% 20%, rgba(28,250,118,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse 50% 70% at 85% 15%, rgba(99,89,234,0.07) 0%, transparent 55%),
+              radial-gradient(ellipse 60% 50% at 60% 80%, rgba(255,179,71,0.06) 0%, transparent 50%),
+              radial-gradient(ellipse 40% 40% at 30% 70%, rgba(99,89,234,0.05) 0%, transparent 45%),
+              radial-gradient(ellipse 70% 50% at 90% 60%, rgba(28,250,118,0.06) 0%, transparent 50%),
+              radial-gradient(ellipse 45% 45% at 50% 30%, rgba(255,179,71,0.05) 0%, transparent 45%),
+              linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.88) 100%)
+            `,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6)",
           }}
         >
           <motion.div

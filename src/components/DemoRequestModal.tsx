@@ -199,9 +199,9 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
 
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/[0.08] border border-white/[0.1] flex items-center justify-center text-white/50 hover:text-white hover:bg-white/[0.12] transition-all"
+                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/[0.08] border border-white/[0.1] flex items-center justify-center text-white/50 hover:text-white hover:bg-white/[0.12] transition-all cursor-pointer"
               >
-                <X className="w-4 h-4" />
+                <X className="w-4 h-4 pointer-events-none" />
               </button>
 
               <div className="relative z-10 p-8 overflow-visible">

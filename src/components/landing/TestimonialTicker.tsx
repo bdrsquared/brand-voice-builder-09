@@ -53,7 +53,7 @@ const TestimonialTicker = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(90deg, #1CFA76 0%, #6359EA 50%, #1CFA76 100%)",
+          background: "linear-gradient(90deg, #1CFA76 0%, #FFB347 25%, #6359EA 50%, #FFB347 75%, #1CFA76 100%)",
           opacity: 0.4,
         }}
       />

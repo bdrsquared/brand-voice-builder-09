@@ -48,8 +48,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
-        <CookieConsent />
-        <ChatWidget />
+        <ConditionalWidgets />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

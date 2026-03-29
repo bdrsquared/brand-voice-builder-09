@@ -111,7 +111,7 @@ const Admin = () => {
             { label: "This Week", value: weekCount },
             { label: "All Time", value: totalInquiries },
           ].map((stat) => (
-            <div key={stat.label} className="bg-card rounded-xl border border-border p-5">
+            <div key={stat.label} className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-5">
               <p className="text-sm text-muted-foreground">{stat.label}</p>
               <p className="text-3xl font-semibold mt-1">{stat.value}</p>
             </div>

@@ -17,7 +17,7 @@ const Showreel = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-gradient-blue" style={{ filter: 'drop-shadow(0 0 8px hsl(243 79% 63% / 0.3))' }}>
+          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-light-text-tertiary">
             ● Working with businesses worldwide
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-light-text-primary">

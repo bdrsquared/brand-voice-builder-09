@@ -30,7 +30,7 @@ const WhyNow = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-gradient-blue" style={{ filter: 'drop-shadow(0 0 8px hsl(243 79% 63% / 0.3))' }}>
+          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-light-text-tertiary">
             ● Why now
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-4 text-light-text-primary">

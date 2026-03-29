@@ -291,15 +291,13 @@ const Navbar = () => {
                         Plan content, track episode status, and see performance in real time.
                       </p>
 
-                      {/* Animated mini dashboard */}
-                      <div className="flex-1 rounded-xl bg-white/[0.03] border border-white/10 p-4 overflow-hidden relative aspect-square">
-                        {/* Mini kanban header */}
+                      {/* Animated mini dashboard — square, pinned to bottom */}
+                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.03] border border-white/10 p-4 overflow-hidden relative">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-2 h-2 rounded-full bg-primary/80" />
                           <span className="text-[10px] font-semibold text-white/50 uppercase tracking-wider">Content Pipeline</span>
                         </div>
-                        {/* Kanban columns */}
-                        <div className="grid grid-cols-3 gap-2 flex-1 h-[calc(100%-28px)]">
+                        <div className="grid grid-cols-3 gap-2 h-[calc(100%-28px)]">
                           {[
                             { label: "Planning", delay: 0.3, cards: [
                               { color: "bg-primary/40", accent: "bg-white/10", w1: "w-3/4", w2: "w-1/2" },
@@ -342,7 +340,6 @@ const Navbar = () => {
                             </div>
                           ))}
                         </div>
-                        {/* Subtle shimmer overlay */}
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-accent/[0.02] pointer-events-none rounded-xl" />
                       </div>
                     </div>

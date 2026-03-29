@@ -166,20 +166,14 @@ const Navbar = () => {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "cases" ? "rotate-180" : ""}`} />
                 </button>
               </div>
-              <a
-                href="#how-it-works"
-                className={`text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
-                onMouseEnter={() => setMegaOpen(null)}
+              <div
+                className="relative"
+                onMouseEnter={() => setMegaOpen("more")}
               >
-                How it works
-              </a>
-              <button
-                onClick={() => navigate("/our-story")}
-                className={`text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
-                onMouseEnter={() => setMegaOpen(null)}
-              >
-                Our story
-              </button>
+                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
+                  More +
+                </button>
+              </div>
             </div>
 
             {/* Desktop right side */}

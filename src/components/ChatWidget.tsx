@@ -94,7 +94,14 @@ const ChatWidget = () => {
     }, 300);
   };
 
-  const inputClass = "w-full rounded-xl border border-white/[0.1] bg-white/[0.05] px-3 py-2.5 text-sm text-foreground placeholder:text-white/25 focus:outline-none focus:border-white/[0.2] focus:bg-white/[0.07] transition-all font-body";
+  const light = isLight;
+  const inputClass = light
+    ? "w-full rounded-xl border border-black/[0.12] bg-black/[0.05] px-3 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-black/[0.25] focus:bg-black/[0.07] transition-all font-body"
+    : "w-full rounded-xl border border-white/[0.1] bg-white/[0.05] px-3 py-2.5 text-sm text-foreground placeholder:text-white/25 focus:outline-none focus:border-white/[0.2] focus:bg-white/[0.07] transition-all font-body";
+
+  const labelClass = light
+    ? "block text-[10px] font-semibold text-gray-500 mb-1 uppercase tracking-wider"
+    : "block text-[10px] font-semibold text-white/50 mb-1 uppercase tracking-wider";
 
   return (
     <div className="fixed bottom-6 right-6 z-[150] hidden md:block">
@@ -105,15 +112,25 @@ const ChatWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 350 }}
-            className="absolute bottom-16 right-0 w-[340px] rounded-2xl border border-white/[0.12] bg-white/[0.06] backdrop-blur-2xl shadow-2xl overflow-visible"
+            className={`absolute bottom-16 right-0 w-[340px] rounded-2xl backdrop-blur-2xl shadow-2xl overflow-visible transition-colors duration-300 ${
+              light
+                ? "border border-black/[0.12] bg-white/70"
+                : "border border-white/[0.12] bg-white/[0.06]"
+            }`}
           >
             <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{
-              background: "radial-gradient(ellipse at 20% 0%, hsla(145,80%,55%,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 100%, hsla(243,70%,60%,0.04) 0%, transparent 50%)"
+              background: light
+                ? "radial-gradient(ellipse at 20% 0%, hsla(145,80%,55%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 100%, hsla(243,70%,60%,0.06) 0%, transparent 50%)"
+                : "radial-gradient(ellipse at 20% 0%, hsla(145,80%,55%,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 100%, hsla(243,70%,60%,0.04) 0%, transparent 50%)"
             }} />
 
             <button
               onClick={handleClose}
-              className="absolute top-3 right-3 z-20 w-7 h-7 rounded-full bg-white/[0.08] border border-white/[0.1] flex items-center justify-center text-white/50 hover:text-white hover:bg-white/[0.12] transition-all cursor-pointer"
+              className={`absolute top-3 right-3 z-20 w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                light
+                  ? "bg-black/[0.06] border border-black/[0.1] text-gray-500 hover:text-gray-800 hover:bg-black/[0.1]"
+                  : "bg-white/[0.08] border border-white/[0.1] text-white/50 hover:text-white hover:bg-white/[0.12]"
+              }`}
             >
               <X className="w-3.5 h-3.5 pointer-events-none" />
             </button>
@@ -130,8 +147,8 @@ const ChatWidget = () => {
                     <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center mx-auto mb-4">
                       <Check className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="text-lg font-heading text-foreground mb-1">Message sent</h3>
-                    <p className="text-xs text-muted-foreground font-body">
+                    <h3 className={`text-lg font-heading mb-1 ${light ? "text-gray-900" : "text-foreground"}`}>Message sent</h3>
+                    <p className={`text-xs font-body ${light ? "text-gray-500" : "text-muted-foreground"}`}>
                       Thanks {name.split(" ")[0]}, we'll get back to you shortly.
                     </p>
                   </motion.div>
@@ -143,34 +160,38 @@ const ChatWidget = () => {
                     exit={{ opacity: 0 }}
                     onSubmit={handleSubmit}
                   >
-                    <h3 className="text-lg font-heading text-foreground mb-0.5">Chat with us</h3>
-                    <p className="text-xs text-muted-foreground font-body mb-5">
+                    <h3 className={`text-lg font-heading mb-0.5 ${light ? "text-gray-900" : "text-foreground"}`}>Chat with us</h3>
+                    <p className={`text-xs font-body mb-5 ${light ? "text-gray-500" : "text-muted-foreground"}`}>
                       Drop us a line and we'll get back to you.
                     </p>
 
                     <div className="space-y-3">
                       <div>
-                        <label className="block text-[10px] font-semibold text-white/50 mb-1 uppercase tracking-wider">Name *</label>
+                        <label className={labelClass}>Name *</label>
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" className={inputClass} maxLength={200} />
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-semibold text-white/50 mb-1 uppercase tracking-wider">Email *</label>
+                        <label className={labelClass}>Email *</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" className={inputClass} maxLength={320} />
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-semibold text-white/50 mb-1 uppercase tracking-wider">Phone <span className="text-white/30">(optional)</span></label>
+                        <label className={labelClass}>Phone <span className={light ? "text-gray-400" : "text-white/30"}>(optional)</span></label>
                         <div className="flex gap-2">
                           <div className="relative" ref={dropdownRef}>
                             <button
                               type="button"
                               onClick={() => { setCodeDropdownOpen(!codeDropdownOpen); setCodeSearch(""); }}
-                              className="flex items-center gap-1 rounded-xl border border-white/[0.1] bg-white/[0.05] px-2.5 py-2.5 text-sm text-foreground hover:bg-white/[0.07] transition-all whitespace-nowrap shrink-0"
+                              className={`flex items-center gap-1 rounded-xl px-2.5 py-2.5 text-sm transition-all whitespace-nowrap shrink-0 ${
+                                light
+                                  ? "border border-black/[0.12] bg-black/[0.05] text-gray-900 hover:bg-black/[0.07]"
+                                  : "border border-white/[0.1] bg-white/[0.05] text-foreground hover:bg-white/[0.07]"
+                              }`}
                             >
                               <span className="text-sm">{selectedCode.flag}</span>
-                              <span className="text-white/70 text-xs">{selectedCode.code}</span>
-                              <ChevronDown className="w-3 h-3 text-white/40" />
+                              <span className={`text-xs ${light ? "text-gray-600" : "text-white/70"}`}>{selectedCode.code}</span>
+                              <ChevronDown className={`w-3 h-3 ${light ? "text-gray-400" : "text-white/40"}`} />
                             </button>
 
                             <AnimatePresence>
@@ -180,18 +201,26 @@ const ChatWidget = () => {
                                   animate={{ opacity: 1, y: 0 }}
                                   exit={{ opacity: 0, y: -4 }}
                                   transition={{ duration: 0.15 }}
-                                  className="absolute bottom-full left-0 mb-1.5 w-60 max-h-52 rounded-xl border border-white/[0.12] bg-[hsl(var(--card))]/95 backdrop-blur-2xl shadow-2xl overflow-hidden z-50"
+                                  className={`absolute bottom-full left-0 mb-1.5 w-60 max-h-52 rounded-xl backdrop-blur-2xl shadow-2xl overflow-hidden z-50 ${
+                                    light
+                                      ? "border border-black/[0.1] bg-white/95"
+                                      : "border border-white/[0.12] bg-[hsl(var(--card))]/95"
+                                  }`}
                                 >
-                                  <div className="p-2 border-b border-white/[0.08]">
+                                  <div className={`p-2 border-b ${light ? "border-black/[0.08]" : "border-white/[0.08]"}`}>
                                     <div className="relative">
-                                      <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                                      <Search className={`absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 ${light ? "text-gray-400" : "text-white/30"}`} />
                                       <input
                                         ref={searchInputRef}
                                         type="text"
                                         value={codeSearch}
                                         onChange={(e) => setCodeSearch(e.target.value)}
                                         placeholder="Search country..."
-                                        className="w-full rounded-lg border border-white/[0.08] bg-white/[0.05] pl-8 pr-3 py-1.5 text-xs text-foreground placeholder:text-white/25 focus:outline-none focus:border-white/[0.15] transition-all font-body"
+                                        className={`w-full rounded-lg pl-8 pr-3 py-1.5 text-xs focus:outline-none transition-all font-body ${
+                                          light
+                                            ? "border border-black/[0.08] bg-black/[0.03] text-gray-900 placeholder:text-gray-400 focus:border-black/[0.15]"
+                                            : "border border-white/[0.08] bg-white/[0.05] text-foreground placeholder:text-white/25 focus:border-white/[0.15]"
+                                        }`}
                                       />
                                     </div>
                                   </div>
@@ -201,14 +230,18 @@ const ChatWidget = () => {
                                         key={`${c.country}-${i}`}
                                         type="button"
                                         onClick={() => { setSelectedCode(c); setCodeDropdownOpen(false); setCodeSearch(""); }}
-                                        className={`w-full flex items-center gap-2 px-3 py-1.5 text-left text-xs hover:bg-white/[0.06] transition-colors ${selectedCode.country === c.country && selectedCode.code === c.code ? "bg-white/[0.04]" : ""}`}
+                                        className={`w-full flex items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors ${
+                                          light
+                                            ? `hover:bg-black/[0.04] ${selectedCode.country === c.country && selectedCode.code === c.code ? "bg-black/[0.03]" : ""}`
+                                            : `hover:bg-white/[0.06] ${selectedCode.country === c.country && selectedCode.code === c.code ? "bg-white/[0.04]" : ""}`
+                                        }`}
                                       >
                                         <span className="text-sm">{c.flag}</span>
-                                        <span className="text-foreground font-medium flex-1 truncate">{c.name}</span>
-                                        <span className="text-white/40">{c.code}</span>
+                                        <span className={`font-medium flex-1 truncate ${light ? "text-gray-900" : "text-foreground"}`}>{c.name}</span>
+                                        <span className={light ? "text-gray-400" : "text-white/40"}>{c.code}</span>
                                       </button>
                                     ))}
-                                    {filteredCodes.length === 0 && <p className="text-xs text-white/30 text-center py-3">No results</p>}
+                                    {filteredCodes.length === 0 && <p className={`text-xs text-center py-3 ${light ? "text-gray-400" : "text-white/30"}`}>No results</p>}
                                   </div>
                                 </motion.div>
                               )}
@@ -218,10 +251,10 @@ const ChatWidget = () => {
                         </div>
                       </div>
 
-                      <BudgetSelect value={budget} onChange={setBudget} compact />
+                      <BudgetSelect value={budget} onChange={setBudget} compact light={light} />
 
                       <div>
-                        <label className="block text-[10px] font-semibold text-white/50 mb-1 uppercase tracking-wider">Message *</label>
+                        <label className={labelClass}>Message *</label>
                         <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="How can we help?" rows={3} className={`${inputClass} resize-none`} maxLength={2000} />
                       </div>
                     </div>
@@ -248,7 +281,7 @@ const ChatWidget = () => {
       <motion.button
         onClick={() => open ? handleClose() : setOpen(true)}
         className={`group relative flex items-center gap-2 rounded-full backdrop-blur-xl px-5 py-3 text-sm font-semibold shadow-lg transition-all cursor-pointer ${
-          isLight && !open
+          light
             ? "border border-black/[0.15] bg-black/[0.08] text-gray-900 hover:bg-black/[0.12]"
             : "border border-white/[0.15] bg-white/[0.08] text-foreground hover:bg-white/[0.12]"
         }`}

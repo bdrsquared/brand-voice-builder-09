@@ -15,12 +15,12 @@ const CTA = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-8 text-text-primary">
             Ready to turn conversations into{" "}
             <span className="text-gradient-green">pipeline?</span>
           </h2>
 
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-body">
+          <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed font-body">
             Let's talk about what a strategic podcast could look like for your
             business. No pitch deck. Just a real conversation about your goals
             and whether this is the right move.
@@ -34,7 +34,7 @@ const CTA = () => {
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </a>
 
-          <p className="mt-6 text-sm text-muted-foreground font-body">
+          <p className="mt-6 text-sm text-text-tertiary font-body">
             Free 30-minute call · No commitment · Honest advice
           </p>
         </motion.div>

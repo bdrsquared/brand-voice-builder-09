@@ -30,14 +30,14 @@ const WhyNow = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-muted-foreground">
+          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-light-text-tertiary">
             ● Why now
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 text-gray-900">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-4 text-light-text-primary">
             First mover advantage.{" "}
-            <span className="text-gray-400">The brands that start now will own the conversation.</span>
+            <span className="text-light-text-tertiary">The brands that start now will own the conversation.</span>
           </h2>
-          <p className="text-base text-gray-500 font-body mb-12 max-w-2xl leading-relaxed">
+          <p className="text-base text-light-text-secondary font-body mb-12 max-w-2xl leading-relaxed">
             Video podcasting isn't a future trend — it's happening now. The businesses investing today are building an unfair advantage that compounds over time.
           </p>
         </motion.div>
@@ -46,16 +46,16 @@ const WhyNow = () => {
           {reasons.map((r, i) => (
             <motion.div
               key={i}
-              className="flex gap-4 items-start p-6 sm:p-8 rounded-2xl border border-gray-200 bg-gray-50/80"
+              className="flex gap-4 items-start p-6 sm:p-8 rounded-2xl border border-black/[0.08] bg-white/50"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
-                <r.icon className="w-5 h-5 text-indigo-500" />
+              <div className="w-10 h-10 rounded-lg bg-[hsl(243,79%,63%)]/10 flex items-center justify-center shrink-0">
+                <r.icon className="w-5 h-5 text-accent" />
               </div>
-              <p className="text-sm text-gray-700 font-body leading-relaxed">{r.text}</p>
+              <p className="text-sm text-light-text-secondary font-body leading-relaxed">{r.text}</p>
             </motion.div>
           ))}
         </div>

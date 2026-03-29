@@ -19,6 +19,14 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        // Text hierarchy — dark mode
+        "text-primary": "hsl(var(--text-primary))",
+        "text-secondary": "hsl(var(--text-secondary))",
+        "text-tertiary": "hsl(var(--text-tertiary))",
+        // Text hierarchy — light mode
+        "light-text-primary": "hsl(var(--light-text-primary))",
+        "light-text-secondary": "hsl(var(--light-text-secondary))",
+        "light-text-tertiary": "hsl(var(--light-text-tertiary))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

@@ -17,16 +17,16 @@ const Showreel = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-muted-foreground">
+          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-light-text-tertiary">
             ● Working with businesses worldwide
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
-            Check out our <span className="text-gradient-green sm:inline"><span className="sm:hidden text-gray-500">showreel</span><span className="hidden sm:inline">showreel</span></span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-light-text-primary">
+            Check out our <span className="text-gradient-green sm:inline"><span className="sm:hidden text-light-text-tertiary">showreel</span><span className="hidden sm:inline">showreel</span></span>
           </h2>
         </motion.div>
 
         <motion.div
-          className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-lg"
+          className="relative rounded-2xl overflow-hidden border border-black/10 shadow-lg"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}

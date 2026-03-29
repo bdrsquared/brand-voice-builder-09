@@ -41,19 +41,19 @@ const Stars = () => (
 const TestimonialCard = ({ t }: { t: typeof testimonials[0] }) => (
   <div className="group flex-shrink-0 w-[340px] sm:w-[380px] p-6 sm:p-8 rounded-2xl border border-border bg-card hover:border-primary/30 hover:bg-card/80 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_40px_-12px_hsl(145,96%,55%,0.15)]">
     <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-      <span className="text-primary font-heading font-bold text-base">
+      <span className="text-primary font-heading text-base">
         {t.initials}
       </span>
     </div>
-    <p className="text-foreground/80 leading-relaxed font-body mb-6 text-sm">
+    <p className="text-text-secondary leading-relaxed font-body mb-6 text-sm">
       "{t.quote}"
     </p>
     <div className="mt-auto">
       <Stars />
       <div className="mt-3">
-        <p className="font-heading font-bold text-sm">{t.name}</p>
+        <p className="font-heading text-sm text-text-primary">{t.name}</p>
         <p className="text-primary text-xs font-medium">{t.company}</p>
-        <p className="text-muted-foreground text-xs">{t.role}</p>
+        <p className="text-text-tertiary text-xs">{t.role}</p>
       </div>
     </div>
   </div>
@@ -76,7 +76,7 @@ const Testimonials = () => {
           <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
             ● What our clients say
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Trusted by <br />
             <span className="text-gradient-green">ambitious</span>{" "}
           </h2>

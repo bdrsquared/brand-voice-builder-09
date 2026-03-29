@@ -41,10 +41,10 @@ const HowItWorks = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl mb-4 text-text-primary">
               Our process
             </h2>
-            <p className="text-base text-muted-foreground leading-relaxed max-w-md font-body">
+            <p className="text-base text-text-secondary leading-relaxed max-w-md font-body">
               Our process is designed to take the complexity out of podcasting. We handle everything from idea to insight, so your show runs consistently and delivers real value for the business.
             </p>
           </motion.div>
@@ -81,11 +81,11 @@ const HowItWorks = () => {
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-foreground" />
+                    <Icon className="w-5 h-5 text-text-primary" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold">{step.title}</h3>
+                  <h3 className="text-lg sm:text-xl text-text-primary">{step.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed font-body">
+                <p className="text-sm text-text-secondary leading-relaxed font-body">
                   {step.description}
                 </p>
               </motion.div>

@@ -848,7 +848,7 @@ const Navbar = () => {
                         className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
                         onClick={() => { setMobileOpen(false); setMobileSubMenu(null); navigate("/#how-it-works"); }}
                       >
-                        How it works
+                        How we work
                       </a>
                       <button
                         className="flex items-center justify-between text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left w-full"

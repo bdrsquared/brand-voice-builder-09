@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -40,6 +41,25 @@ serve(async (req) => {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
+    }
+
+    // Save to database using service role
+    try {
+      const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+      const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+      const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+      await supabase.from('inquiries').insert({
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone?.trim() || null,
+        message: message?.trim() || null,
+        budget: budget || null,
+        type: type || 'demo',
+      });
+    } catch (dbError) {
+      console.error('Failed to save inquiry to database:', dbError);
+      // Don't block the Slack notification if DB fails
     }
 
     const headerText = isContact ? "💬 New Website Message" : "🎙️ New PodPlanner Demo Request";

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, ArrowRight, Check, ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { countryCodes, UK_DEFAULT_INDEX } from "@/lib/country-codes";
+import BudgetSelect from "@/components/BudgetSelect";
 
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);

@@ -119,7 +119,7 @@ const OurStory = () => {
             style={{ y: imageY }}
           >
             <img
-              src={officeImg}
+              src={officeDesk}
               alt="Behind the scenes at Earworm studio"
               className="w-full h-full object-cover"
             />

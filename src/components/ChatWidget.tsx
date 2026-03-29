@@ -45,6 +45,23 @@ const ChatWidget = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Detect if chat widget is over light section
+  useEffect(() => {
+    const handler = () => {
+      const lightStart = document.getElementById("light-section-start");
+      const lightEnd = document.getElementById("light-section-end");
+      if (lightStart && lightEnd) {
+        const windowH = window.innerHeight;
+        const startTop = lightStart.getBoundingClientRect().top;
+        const endBottom = lightEnd.getBoundingClientRect().bottom;
+        setIsLight(startTop <= windowH && endBottom >= windowH - 80);
+      }
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    handler();
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
   const fullPhone = phoneNumber.trim() ? `${selectedCode.code} ${phoneNumber.trim()}` : "";
 
   const handleSubmit = async (e: React.FormEvent) => {

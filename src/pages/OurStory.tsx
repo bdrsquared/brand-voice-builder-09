@@ -56,7 +56,8 @@ const OurStory = () => {
 
       {/* ── 1. Hero ── */}
       <section className="relative px-4 sm:px-6 pt-4 sm:pt-6">
-        <div className="relative max-w-6xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden h-[50vh] sm:h-[60vh] -mb-[50px] sm:mb-0 flex items-end justify-center">
+        <div className="relative max-w-6xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden h-[50vh] sm:h-[60vh] -mb-[50px] sm:mb-0 flex items-end justify-center ring-1 ring-white/[0.12] shadow-[0_0_40px_-10px_rgba(255,255,255,0.06)]">
+          <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border-[3px] border-white/[0.06] pointer-events-none z-20" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 20%, transparent 80%, rgba(255,255,255,0.06) 100%)" }} />
           <img
             src={officeHero}
             alt="Earworm studio"

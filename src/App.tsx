@@ -9,6 +9,7 @@ import PageTransition from "./components/PageTransition";
 
 const Index = lazy(() => import("./pages/Index.tsx"));
 const OurStory = lazy(() => import("./pages/OurStory.tsx"));
+const CaseStudy = lazy(() => import("./pages/CaseStudy.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const AnimatedRoutes = () => {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageTransition><Index /></PageTransition>} />
           <Route path="/our-story" element={<PageTransition><OurStory /></PageTransition>} />
+          <Route path="/case-study/:slug" element={<PageTransition><CaseStudy /></PageTransition>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>

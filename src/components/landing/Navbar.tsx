@@ -108,8 +108,8 @@ const Navbar = () => {
           className="max-w-6xl mx-auto relative"
           onMouseLeave={() => setMegaOpen(null)}
         >
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
-            <img src={logo} alt="Earworm" className="h-5" />
+          <div className={`${isLightSection ? "bg-white/70 border-black/10 shadow-black/5" : "bg-white/5 border-white/10 shadow-black/20"} backdrop-blur-xl border rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg transition-colors duration-300`}>
+            <img src={isLightSection ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300" />
             <div className="hidden sm:flex items-center gap-8">
               <div
                 className="relative"

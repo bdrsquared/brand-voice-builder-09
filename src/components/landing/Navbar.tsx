@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
 import podplannerIcon from "@/assets/podplanner-icon.png";
 import launchImg from "@/assets/service-launch.webp";
@@ -58,7 +58,7 @@ const mobileNavLinks = [
   { label: "How it works", href: "#how-it-works" },
 ];
 
-type MegaMenu = "services" | "cases" | null;
+type MegaMenu = "services" | "cases" | "podplanner" | null;
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -122,15 +122,16 @@ const Navbar = () => {
 
             {/* Desktop right side */}
             <div className="hidden sm:flex items-center gap-4">
-              <a
-                href="https://app.earworm.co/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white transition-colors"
+              <div
+                className="relative"
+                onMouseEnter={() => setMegaOpen("podplanner")}
               >
-                <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
-                PodPlanner
-              </a>
+                <button className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                  <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
+                  PodPlanner
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "podplanner" ? "rotate-180" : ""}`} />
+                </button>
+              </div>
               <a
                 href="#contact"
                 className="group inline-flex items-center gap-2 text-sm font-semibold bg-gradient-green text-primary-foreground px-5 py-2.5 rounded-full transition-all hover:shadow-green"

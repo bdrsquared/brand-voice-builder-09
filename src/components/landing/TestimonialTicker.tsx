@@ -65,8 +65,10 @@ const TestimonialTicker = () => {
               <span className="opacity-70">{t.author}</span>
             </p>
             {/* Mobile: marquee scrolling text */}
-            <div className="md:hidden whitespace-nowrap">
+            <div className="md:hidden whitespace-nowrap overflow-hidden">
               <span className="inline-block animate-marquee">
+                &ldquo;{t.quote}&rdquo; — <span className="opacity-70">{t.author}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &ldquo;{t.quote}&rdquo; — <span className="opacity-70">{t.author}</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </span>

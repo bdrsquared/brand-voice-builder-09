@@ -61,7 +61,7 @@ const HowItWorks = () => {
               loading="lazy"
               width={640}
               height={800}
-              className="w-[210%] max-w-none -ml-[40%] sm:w-[150%] sm:-ml-[20%] lg:-ml-[35%] lg:w-[160%]"
+              className="w-[210%] max-w-none -ml-[30%] -mt-[15%] sm:mt-0 sm:w-[150%] sm:-ml-[20%] lg:-ml-[35%] lg:w-[160%]"
             />
           </motion.div>
         </div>

@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "./components/PageTransition";
 import CookieConsent from "./components/CookieConsent";
+import ChatWidget from "./components/ChatWidget";
 
 const Index = lazy(() => import("./pages/Index.tsx"));
 const OurStory = lazy(() => import("./pages/OurStory.tsx"));
@@ -44,6 +45,7 @@ const App = () => (
       <BrowserRouter>
         <AnimatedRoutes />
         <CookieConsent />
+        <ChatWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

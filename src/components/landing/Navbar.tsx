@@ -266,6 +266,178 @@ const Navbar = () => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* PodPlanner mega menu */}
+          <AnimatePresence>
+            {megaOpen === "podplanner" && (
+              <motion.div
+                className="absolute top-full left-0 right-0 pt-2"
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30">
+                  {/* Two-column layout */}
+                  <div className="flex gap-6">
+                    {/* Left column — description + animated UI */}
+                    <div className="flex-1 flex flex-col">
+                      <div className="flex items-center gap-2 mb-2">
+                        <img src={podplannerIcon} alt="" className="w-5 h-5" />
+                        <h4 className="text-lg font-heading font-semibold text-foreground">PodPlanner</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed font-body mb-4 max-w-sm">
+                        A project management system for your video podcast.<br />
+                        Plan content, track episode status, and see performance in real time.
+                      </p>
+
+                      {/* Animated mini dashboard */}
+                      <div className="aspect-square max-w-[280px] rounded-xl bg-white/[0.03] border border-white/10 p-4 overflow-hidden relative">
+                        {/* Mini kanban header */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-2 h-2 rounded-full bg-primary/80" />
+                          <span className="text-[10px] font-semibold text-white/50 uppercase tracking-wider">Content Pipeline</span>
+                        </div>
+                        {/* Kanban columns */}
+                        <div className="grid grid-cols-3 gap-2 h-[calc(100%-28px)]">
+                          {/* Planning column */}
+                          <div className="flex flex-col gap-1.5">
+                            <span className="text-[8px] font-semibold text-white/30 uppercase mb-1">Planning</span>
+                            <motion.div
+                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.3, duration: 0.4 }}
+                            >
+                              <div className="h-1 w-3/4 rounded-full bg-primary/40 mb-1" />
+                              <div className="h-1 w-1/2 rounded-full bg-white/10" />
+                            </motion.div>
+                            <motion.div
+                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.45, duration: 0.4 }}
+                            >
+                              <div className="h-1 w-2/3 rounded-full bg-accent/40 mb-1" />
+                              <div className="h-1 w-1/3 rounded-full bg-white/10" />
+                            </motion.div>
+                          </div>
+                          {/* In Production column */}
+                          <div className="flex flex-col gap-1.5">
+                            <span className="text-[8px] font-semibold text-white/30 uppercase mb-1">Production</span>
+                            <motion.div
+                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.5, duration: 0.4 }}
+                            >
+                              <div className="h-1 w-full rounded-full bg-primary/50 mb-1" />
+                              <div className="h-1 w-2/3 rounded-full bg-white/10" />
+                              <div className="flex items-center gap-0.5 mt-1.5">
+                                <div className="w-2.5 h-2.5 rounded-full bg-primary/30" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-accent/30 -ml-1" />
+                              </div>
+                            </motion.div>
+                            <motion.div
+                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.6, duration: 0.4 }}
+                            >
+                              <div className="h-1 w-1/2 rounded-full bg-accent/40 mb-1" />
+                              <div className="h-1 w-3/4 rounded-full bg-white/10" />
+                            </motion.div>
+                          </div>
+                          {/* Published column */}
+                          <div className="flex flex-col gap-1.5">
+                            <span className="text-[8px] font-semibold text-white/30 uppercase mb-1">Published</span>
+                            <motion.div
+                              className="rounded-md bg-white/[0.06] border border-white/10 p-1.5"
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.7, duration: 0.4 }}
+                            >
+                              <div className="h-1 w-full rounded-full bg-primary/60 mb-1" />
+                              <div className="h-1 w-1/2 rounded-full bg-white/10" />
+                              <div className="flex items-center gap-1 mt-1.5">
+                                <div className="h-1 w-4 rounded-full bg-primary/30" />
+                                <span className="text-[7px] text-primary/60 font-semibold">12k</span>
+                              </div>
+                            </motion.div>
+                          </div>
+                        </div>
+                        {/* Subtle shimmer overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-accent/[0.02] pointer-events-none rounded-xl" />
+                      </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-px bg-white/10 self-stretch" />
+
+                    {/* Right column — features */}
+                    <div className="flex flex-col justify-center w-72 py-2 pl-2 gap-0">
+                      {[
+                        {
+                          icon: Layers,
+                          title: "Plan with clarity",
+                          desc: "Map out episodes, guests, and content in one place.",
+                        },
+                        {
+                          icon: Activity,
+                          title: "Track progress",
+                          desc: "See exactly where each episode is in production.",
+                        },
+                        {
+                          icon: Eye,
+                          title: "Measure performance",
+                          desc: "Understand what's working across your content.",
+                        },
+                      ].map((feature, i, arr) => (
+                        <div
+                          key={feature.title}
+                          className={`flex-1 flex flex-col justify-center ${i < arr.length - 1 ? "border-b border-white/10" : ""} ${i > 0 ? "pt-4" : ""} ${i < arr.length - 1 ? "pb-4" : ""}`}
+                        >
+                          <div className="flex items-center gap-2.5 mb-1.5">
+                            <feature.icon className="w-5 h-5 text-white/50 shrink-0" />
+                            <span className="text-base font-semibold text-foreground">{feature.title}</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{feature.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Bottom divider */}
+                  <div className="h-px bg-white/10 mt-5 mb-4" />
+
+                  {/* Bottom CTAs */}
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground font-body">
+                      Manage your podcast workflow from planning to publishing.
+                    </p>
+                    <div className="flex items-center gap-4 ml-6">
+                      <a
+                        href="https://app.earworm.co/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-colors whitespace-nowrap"
+                      >
+                        <LogIn className="w-3.5 h-3.5" />
+                        Log in
+                      </a>
+                      <a
+                        href="#contact"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all whitespace-nowrap"
+                      >
+                        Request a demo
+                        <ArrowRight className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.nav>
 

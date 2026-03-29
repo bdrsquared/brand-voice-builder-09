@@ -257,6 +257,8 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
                             />
                           </div>
                         </div>
+
+                        <BudgetSelect value={budget} onChange={setBudget} />
                       </div>
 
                       {error && (

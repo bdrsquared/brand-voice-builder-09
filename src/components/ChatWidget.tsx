@@ -10,6 +10,7 @@ const ChatWidget = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [budget, setBudget] = useState("");
   const [message, setMessage] = useState("");
   const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]);
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);

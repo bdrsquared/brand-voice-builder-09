@@ -83,7 +83,7 @@ const Navbar = () => {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
-  const [bottomOffset, setBottomOffset] = useState(0);
+  const [bottomBarTop, setBottomBarTop] = useState<number | null>(null);
   const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
 
@@ -110,14 +110,13 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Track visual viewport offset for Chrome mobile (browser bar hide/show)
+  // Track visual viewport for Chrome mobile (browser bar hide/show)
   useEffect(() => {
     const vv = window.visualViewport;
     if (!vv) return;
     const update = () => {
-      // offsetTop accounts for the difference when browser chrome hides
-      const offset = window.innerHeight - (vv.height + vv.offsetTop);
-      setBottomOffset(Math.max(0, offset));
+      // Position from top: visualViewport bottom minus button height (~50px)
+      setBottomBarTop(vv.offsetTop + vv.height - 50);
     };
     vv.addEventListener("resize", update);
     vv.addEventListener("scroll", update);
@@ -923,8 +922,8 @@ const Navbar = () => {
       <AnimatePresence>
         {scrollingDown && !mobileOpen && (
           <motion.div
-            className="fixed left-0 right-0 z-50 sm:hidden pb-[env(safe-area-inset-bottom)]"
-            style={{ bottom: bottomOffset }}
+            className="fixed left-0 right-0 z-50 sm:hidden"
+            style={bottomBarTop !== null ? { top: bottomBarTop } : { bottom: 0 }}
             initial={{ y: 80 }}
             animate={{ y: 0 }}
             exit={{ y: 80 }}

@@ -194,14 +194,14 @@ const Navbar = () => {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "podplanner" ? "rotate-180" : ""}`} />
                 </button>
               </div>
-              <a
-                href="#contact"
-                className="group relative inline-flex items-center gap-2 text-sm font-semibold text-white px-5 py-2.5 rounded-full transition-all bg-white/[0.08] backdrop-blur-xl border border-white/[0.15] hover:bg-white/[0.12] overflow-hidden"
+              <button
+                onClick={() => setContactModalOpen(true)}
+                className="group relative inline-flex items-center gap-2 text-sm font-semibold text-white px-5 py-2.5 rounded-full transition-all bg-white/[0.08] backdrop-blur-xl border border-white/[0.15] hover:bg-white/[0.12] overflow-hidden cursor-pointer"
               >
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
-                <span className="relative z-10">Book a call</span>
+                <span className="relative z-10">Let's talk</span>
                 <ArrowRight className="w-3.5 h-3.5 relative z-10 transition-transform group-hover:translate-x-0.5" />
-              </a>
+              </button>
             </div>
 
             {/* Mobile burger */}

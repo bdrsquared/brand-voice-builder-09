@@ -36,6 +36,7 @@ const caseStudies = [
     description: "How Polly used podcasting to connect with Gen Z audiences through authentic conversations.",
     image: casePrettyCovered,
     stats: { impressions: "1.2M", pipeline: "500+" },
+    locationType: "On Location" as const,
   },
   {
     brand: "Pulsetto",
@@ -43,6 +44,7 @@ const caseStudies = [
     description: "How Pulsetto used podcasting to drive awareness and leads through authentic wellness conversations.",
     image: caseNoStress,
     stats: { impressions: "860k", pipeline: "£1.8M" },
+    locationType: "On Location" as const,
   },
   {
     brand: "Red Bull",
@@ -50,6 +52,7 @@ const caseStudies = [
     description: "Storytelling at scale — turning athletes' journeys into binge-worthy audio content.",
     image: caseCfoPlaybook,
     stats: { impressions: "2.1M", pipeline: "£3.6M" },
+    locationType: "Virtual" as const,
   },
 ];
 
@@ -237,9 +240,14 @@ const Navbar = () => {
                         <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
                           {study.brand}
                         </p>
-                        <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                          {study.title}
-                        </h4>
+                        <div className="flex items-center gap-2 mb-1">
+                          <h4 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {study.title}
+                          </h4>
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide border border-primary/30 bg-primary/10 text-primary whitespace-nowrap">
+                            {study.locationType}
+                          </span>
+                        </div>
                         <p className="text-sm text-muted-foreground leading-relaxed mb-2 font-body">
                           {study.description}
                         </p>
@@ -662,7 +670,12 @@ const Navbar = () => {
                           </div>
                           <div className="p-3">
                             <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-0.5">{study.brand}</p>
-                            <h4 className="text-sm font-heading text-foreground mb-0.5">{study.title}</h4>
+                            <div className="flex items-center gap-1.5 mb-0.5">
+                              <h4 className="text-sm font-heading text-foreground">{study.title}</h4>
+                              <span className="inline-flex items-center px-1.5 py-px rounded-full text-[8px] font-semibold tracking-wide border border-primary/30 bg-primary/10 text-primary whitespace-nowrap">
+                                {study.locationType}
+                              </span>
+                            </div>
                             <p className="text-[11px] text-muted-foreground leading-snug font-body mb-2">{study.description}</p>
                             <div className="flex items-center gap-3 mb-2">
                               <div className="flex flex-col">

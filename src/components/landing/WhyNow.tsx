@@ -52,8 +52,8 @@ const WhyNow = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              <div className="w-10 h-10 rounded-lg bg-gradient-green-dark flex items-center justify-center shrink-0">
-                <r.icon className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-lg bg-black/[0.06] backdrop-blur-sm border border-black/[0.08] flex items-center justify-center shrink-0">
+                <r.icon className="w-5 h-5 text-light-text-secondary" />
               </div>
               <p className="text-sm text-light-text-secondary font-body leading-relaxed">{r.text}</p>
             </motion.div>

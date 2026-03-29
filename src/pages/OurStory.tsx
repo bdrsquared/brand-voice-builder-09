@@ -13,7 +13,7 @@ import alexAvatar from "@/assets/alex-chen-avatar.jpeg";
 import emmaAvatar from "@/assets/emma-carter-avatar.jpeg";
 import lucasAvatar from "@/assets/lucas-grant-avatar.jpeg";
 import miaAvatar from "@/assets/mia-johnson-avatar.jpeg";
-import oliviaAvatar from "@/assets/olivia-park.png";
+import oliviaAvatar from "@/assets/olivia-park-avatar.png";
 import ryanAvatar from "@/assets/ryan-foster-avatar.png";
 
 /* ───── data ───── */

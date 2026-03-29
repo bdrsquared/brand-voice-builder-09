@@ -61,6 +61,7 @@ const caseStudies = [
 const mobileNavLinks = [
   { label: "Our service", href: "#services" },
   { label: "Case studies", href: "#case-studies" },
+  { label: "Our story", href: "/our-story" },
   { label: "More", href: "#" },
 ];
 
@@ -137,6 +138,13 @@ const Navbar = () => {
                 onMouseEnter={() => setMegaOpen(null)}
               >
                 How it works
+              </a>
+              <a
+                href="/our-story"
+                className={`text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
+                onMouseEnter={() => setMegaOpen(null)}
+              >
+                Our story
               </a>
             </div>
 

@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap');
 @font-face {
   font-family: 'Nohemi';
   src: url('/fonts/Nohemi-Regular.woff2') format('woff2');

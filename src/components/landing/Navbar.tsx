@@ -569,35 +569,24 @@ const Navbar = () => {
                     </nav>
 
                     <div className="mt-auto flex flex-col gap-6">
-                      {/* Featured case study card */}
+                      {/* Office card */}
                       <motion.a
-                        href="#case-studies"
+                        href="#about"
                         className="block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35, delay: 0.3 }}
+                        transition={{ duration: 0.35, delay: 0.25 }}
                         onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                       >
-                        <div className="aspect-[16/9] overflow-hidden">
-                          <img src={casePrettyCovered} alt="Pretty Covered" className="w-full h-full object-cover" />
+                        <div className="aspect-video overflow-hidden">
+                          <img src={officeImg} alt="Earworm studio" className="w-full h-full object-cover" />
                         </div>
                         <div className="p-4">
-                          <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">Featured case study</p>
-                          <h4 className="text-base font-heading text-foreground mb-1.5">Pretty Covered</h4>
-                          <p className="text-xs text-muted-foreground leading-relaxed mb-3 font-body">
-                            How Polly used podcasting to connect with Gen Z audiences through authentic conversations.
-                          </p>
-                          <div className="flex items-center gap-4">
-                            <div className="flex flex-col">
-                              <span className="text-sm font-semibold text-foreground">124k</span>
-                              <span className="text-[10px] text-muted-foreground">Listeners</span>
-                            </div>
-                            <div className="w-px h-6 bg-white/10" />
-                            <div className="flex flex-col">
-                              <span className="text-sm font-semibold text-foreground">500+</span>
-                              <span className="text-[10px] text-muted-foreground">Leads generated</span>
-                            </div>
-                          </div>
+                          <h4 className="text-base font-heading text-foreground mb-1.5">It starts in our studio</h4>
+                          <p className="text-xs text-muted-foreground leading-relaxed font-body mb-2">Real conversations. High-quality production. No shortcuts.</p>
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                            → Read our story
+                          </span>
                         </div>
                       </motion.a>
 
@@ -763,23 +752,18 @@ const Navbar = () => {
                       </button>
                     </nav>
 
-                    {/* Office card */}
-                    <a
-                      href="#about"
-                      className="block rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden mt-5"
+                    {/* Book a strategy call CTA */}
+                    <motion.a
+                      href="#contact"
+                      className="glow-on-hover group inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-full text-base w-full mt-auto"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.3 }}
                       onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                     >
-                      <div className="aspect-video overflow-hidden">
-                        <img src={officeImg} alt="Earworm studio" className="w-full h-full object-cover" />
-                      </div>
-                      <div className="p-3">
-                        <h4 className="text-sm font-heading text-foreground mb-1">It starts in our studio</h4>
-                        <p className="text-[11px] text-muted-foreground leading-snug font-body mb-2">Real conversations. High-quality production. No shortcuts.</p>
-                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary">
-                          → Read our story
-                        </span>
-                      </div>
-                    </a>
+                      Book a strategy call
+                      <Calendar className="w-4 h-4" />
+                    </motion.a>
                   </motion.div>
                 ) : mobileSubMenu === "podplanner" ? (
                   <motion.div

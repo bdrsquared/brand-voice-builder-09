@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
@@ -30,9 +31,15 @@ const CookieConsent = () => {
           <p className="text-sm font-semibold text-foreground mb-1">
             Let's talk cookies 🍪
           </p>
-          <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+          <p className="text-xs text-muted-foreground leading-relaxed mb-3">
             Not the edible kind — just the ones that help us run the site properly and see what's working.
           </p>
+          <Link
+            to="/cookies"
+            className="inline-block text-[11px] text-primary hover:underline mb-4"
+          >
+            Read our cookie policy →
+          </Link>
           <div className="flex items-center gap-2">
             <button
               onClick={() => handleChoice(true)}

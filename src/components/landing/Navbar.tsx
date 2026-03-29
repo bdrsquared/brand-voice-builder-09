@@ -7,6 +7,7 @@ import podplannerIcon from "@/assets/podplanner-icon.png";
 import brightLogo from "@/assets/bright-logo.png";
 import launchImg from "@/assets/launch-microphone.jpeg";
 import runScaleImg from "@/assets/run-scale.png";
+import officeImg from "@/assets/office.jpeg";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
 import caseNoStress from "@/assets/case-no-stress.jpeg";
 import caseCfoPlaybook from "@/assets/case-cfo-playbook.jpeg";
@@ -761,6 +762,24 @@ const Navbar = () => {
                         <ChevronRight className="w-4 h-4 text-muted-foreground" />
                       </button>
                     </nav>
+
+                    {/* Office card */}
+                    <a
+                      href="#about"
+                      className="block rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden mt-5"
+                      onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                    >
+                      <div className="aspect-video overflow-hidden">
+                        <img src={officeImg} alt="Earworm studio" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-3">
+                        <h4 className="text-sm font-heading text-foreground mb-1">It starts in our studio</h4>
+                        <p className="text-[11px] text-muted-foreground leading-snug font-body mb-2">Real conversations. High-quality production. No shortcuts.</p>
+                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary">
+                          → Read our story
+                        </span>
+                      </div>
+                    </a>
                   </motion.div>
                 ) : mobileSubMenu === "podplanner" ? (
                   <motion.div

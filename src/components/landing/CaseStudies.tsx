@@ -7,11 +7,17 @@ import caseWenodo from "@/assets/case-wenodo.png";
 import casePulsetto from "@/assets/case-pulsetto.png";
 import caseCfoPlaybook from "@/assets/case-cfo-playbook.png";
 import caseUkUsTax from "@/assets/case-uk-us-tax.png";
+import logoPolly from "@/assets/logos/polly.png";
+import logoWenodo from "@/assets/logos/wenodo.png";
+import logoPulsetto from "@/assets/logos/pulsetto.png";
+import logoSoldo from "@/assets/logos/soldo.png";
+import logoCollyerBristow from "@/assets/logos/collyer-bristow.png";
 
 const caseStudies = [
   {
     title: "Carrier 2.0",
     logo: "FIERCE FNTV",
+    logoImage: null as string | null,
     description: "A video podcast helping Carrier leaders navigate the future of logistics and supply chain innovation.",
     gradient: "from-rose-500/30 to-orange-400/20",
     image: caseCarrier,
@@ -19,6 +25,7 @@ const caseStudies = [
   {
     title: "Pretty Covered",
     logo: "Polly",
+    logoImage: logoPolly,
     description: "A beauty and insurance brand podcast connecting with Gen Z audiences through authentic conversations.",
     gradient: "from-sky-400/30 to-blue-300/20",
     image: casePrettyCovered,
@@ -26,6 +33,7 @@ const caseStudies = [
   {
     title: "Dig In",
     logo: "wenodo",
+    logoImage: logoWenodo,
     description: "A deep-dive podcast exploring the world of food tech and sustainable agriculture ventures.",
     gradient: "from-amber-700/30 to-yellow-600/20",
     image: caseWenodo,
@@ -33,6 +41,7 @@ const caseStudies = [
   {
     title: "No Stress",
     logo: "PULSETTO",
+    logoImage: logoPulsetto,
     description: "A wellness-focused podcast helping busy professionals manage stress through science-backed techniques.",
     gradient: "from-emerald-500/30 to-green-400/20",
     image: casePulsetto,
@@ -40,6 +49,7 @@ const caseStudies = [
   {
     title: "The CFO Playbook",
     logo: "soldo",
+    logoImage: logoSoldo,
     description: "A finance podcast giving CFOs and finance leaders actionable strategies for modern business growth.",
     gradient: "from-slate-400/30 to-gray-300/20",
     image: caseCfoPlaybook,
@@ -47,6 +57,7 @@ const caseStudies = [
   {
     title: "UK/US Tax Talk",
     logo: "COLLYER BRISTOW",
+    logoImage: logoCollyerBristow,
     description: "A cross-border tax podcast simplifying complex UK and US tax regulations for international businesses.",
     gradient: "from-indigo-500/30 to-purple-400/20",
     image: caseUkUsTax,
@@ -85,9 +96,13 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
       </div>
 
       <div className="absolute top-5 left-5 z-10">
-        <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
-          {study.logo}
-        </span>
+        {study.logoImage ? (
+          <img src={study.logoImage} alt={study.logo} className="h-5 w-auto brightness-0 invert opacity-70" />
+        ) : (
+          <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
+            {study.logo}
+          </span>
+        )}
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-5 z-10">

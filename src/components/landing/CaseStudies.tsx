@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Link } from "react-router-dom";
 import caseCarrier from "@/assets/case-carrier.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.webp";

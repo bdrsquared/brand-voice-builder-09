@@ -115,7 +115,7 @@ const Navbar = () => {
                 className="relative"
                 onMouseEnter={() => setMegaOpen("services")}
               >
-                <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   Our service
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "services" ? "rotate-180" : ""}`} />
                 </button>
@@ -124,14 +124,14 @@ const Navbar = () => {
                 className="relative"
                 onMouseEnter={() => setMegaOpen("cases")}
               >
-                <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   Case studies
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "cases" ? "rotate-180" : ""}`} />
                 </button>
               </div>
               <a
                 href="#how-it-works"
-                className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+                className={`text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
                 onMouseEnter={() => setMegaOpen(null)}
               >
                 How it works
@@ -144,7 +144,7 @@ const Navbar = () => {
                 className="relative"
                 onMouseEnter={() => setMegaOpen("podplanner")}
               >
-                <button className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                <button className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
                   PodPlanner
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "podplanner" ? "rotate-180" : ""}`} />
@@ -168,17 +168,17 @@ const Navbar = () => {
               <span className="sr-only">Menu</span>
               <div className="relative w-5 h-4 flex flex-col justify-between">
                 <span
-                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 origin-center ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 origin-center ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "translate-y-[7px] rotate-45" : ""
                   }`}
                 />
                 <span
-                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "opacity-0 scale-x-0" : ""
                   }`}
                 />
                 <span
-                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 origin-center ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 origin-center ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "-translate-y-[7px] -rotate-45" : ""
                   }`}
                 />

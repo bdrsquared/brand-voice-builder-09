@@ -922,8 +922,8 @@ const Navbar = () => {
       <AnimatePresence>
         {scrollingDown && !mobileOpen && (
           <motion.div
-            className="fixed left-0 right-0 z-50 sm:hidden pb-[env(safe-area-inset-bottom)]"
-            style={{ bottom: bottomOffset }}
+            className="fixed left-0 right-0 z-50 sm:hidden"
+            style={bottomBarTop !== null ? { top: bottomBarTop } : { bottom: 0 }}
             initial={{ y: 80 }}
             animate={{ y: 0 }}
             exit={{ y: 80 }}

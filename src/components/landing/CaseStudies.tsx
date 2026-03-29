@@ -85,13 +85,13 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
       </div>
 
       <div className="absolute top-5 left-5 z-10">
-        <span className="text-white/70 text-xs font-bold tracking-wider uppercase font-heading">
+        <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
           {study.logo}
         </span>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-        <h3 className="text-lg sm:text-xl font-bold text-white mb-2 font-heading">
+        <h3 className="text-lg sm:text-xl text-white mb-2 font-heading">
           {study.title}
         </h3>
         <div className="flex items-end justify-between gap-3">
@@ -121,12 +121,12 @@ const CaseStudies = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Case studies
           </h2>
           <a
             href="#"
-            className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-foreground/80 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2.5 hover:bg-white/10 transition-colors"
+            className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-text-secondary bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2.5 hover:bg-white/10 hover:text-text-primary transition-colors"
           >
             View All Work
             <ArrowUpRight className="w-4 h-4" />
@@ -134,7 +134,7 @@ const CaseStudies = () => {
         </motion.div>
 
         <motion.p
-          className="text-muted-foreground font-body mb-12 text-base"
+          className="text-text-secondary font-body mb-12 text-base"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

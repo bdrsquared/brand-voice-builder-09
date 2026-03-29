@@ -65,22 +65,22 @@ const GlowCard = ({ stat, i }: { stat: typeof stats[0]; i: number }) => {
         }}
       />
 
-      <h3 className="relative z-10 text-lg sm:text-xl font-bold leading-snug">
+      <h3 className="relative z-10 text-lg sm:text-xl leading-snug text-text-primary">
         {stat.title}
       </h3>
 
       <div className="relative z-10">
-        <span className="block text-5xl sm:text-6xl font-bold font-heading text-gradient-green mb-3">
+        <span className="block text-5xl sm:text-6xl font-heading text-gradient-green mb-3">
           {stat.value}
         </span>
-        <p className="text-muted-foreground font-body leading-relaxed text-sm">
+        <p className="text-text-secondary font-body leading-relaxed text-sm">
           {stat.label}
         </p>
       </div>
 
       <div className="relative z-10">
         <div className="w-8 h-px bg-white/20 mb-3" />
-        <p className="text-xs text-muted-foreground/50 font-body">
+        <p className="text-xs text-text-tertiary font-body">
           {stat.source}
         </p>
       </div>
@@ -97,7 +97,7 @@ const Stats = () => {
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-12">
           <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight max-w-2xl"
+            className="text-3xl sm:text-4xl md:text-5xl leading-tight max-w-2xl text-text-primary"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -106,7 +106,7 @@ const Stats = () => {
             Why brands are investing in monthly podcast content
           </motion.h2>
           <motion.p
-            className="text-sm text-muted-foreground font-body leading-relaxed max-w-sm lg:text-right"
+            className="text-sm text-text-secondary font-body leading-relaxed max-w-sm lg:text-right"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}

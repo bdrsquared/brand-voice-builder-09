@@ -41,7 +41,7 @@ const PipelineImpact = () => {
           <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-6 block">
             ● Commercial impact
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Content that drives{" "}
             <span className="text-gradient-green">real results</span>
           </h2>
@@ -60,8 +60,8 @@ const PipelineImpact = () => {
               <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
                 <o.icon className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-3">{o.title}</h3>
-              <p className="text-muted-foreground leading-relaxed font-body">{o.description}</p>
+              <h3 className="text-xl sm:text-2xl mb-3 text-text-primary">{o.title}</h3>
+              <p className="text-text-secondary leading-relaxed font-body">{o.description}</p>
             </motion.div>
           ))}
         </div>

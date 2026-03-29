@@ -58,7 +58,7 @@ const ValueProps = () => {
           <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
             ● Why podcasting
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Plug the power of a{" "}
             <span className="text-gradient-green">video podcast</span>{" "}
             in to your business
@@ -96,10 +96,10 @@ const ValueProps = () => {
                   <prop.icon className="w-5 h-5" />
                 </div>
               )}
-              <h3 className="text-lg sm:text-xl font-bold mb-2">
+              <h3 className="text-lg sm:text-xl mb-2 text-text-primary">
                 {prop.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed font-body">
+              <p className="text-sm text-text-secondary leading-relaxed font-body">
                 {prop.description}
               </p>
             </motion.div>

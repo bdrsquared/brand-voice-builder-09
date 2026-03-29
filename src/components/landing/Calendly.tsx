@@ -53,24 +53,24 @@ const Calendly = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-4 text-text-primary">
             Ready to build video content that supports{" "}
             <span className="text-gradient-green">real growth?</span>
           </h2>
 
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto mb-3 leading-relaxed font-body">
+          <p className="text-base text-text-secondary max-w-2xl mx-auto mb-3 leading-relaxed font-body">
             If you're thinking about using video podcasting to build authority, reach the right audience, and create consistent high-quality content, this is the best place to start.
           </p>
 
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed font-body">
+          <p className="text-base text-text-secondary max-w-2xl mx-auto mb-6 leading-relaxed font-body">
             No pitch deck. No pressure. Just a focused conversation on your goals and whether this is the right approach for your business.
           </p>
 
-          <p className="text-sm text-foreground/80 font-semibold mb-2 font-body">
+          <p className="text-sm text-text-primary font-semibold mb-2 font-body">
             Book a time below — it takes 30 seconds.
           </p>
 
-          <p className="text-xs text-muted-foreground font-body">
+          <p className="text-xs text-text-tertiary font-body">
             Free 30-minute call · No commitment · Straightforward advice
           </p>
         </motion.div>

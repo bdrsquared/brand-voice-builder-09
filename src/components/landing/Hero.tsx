@@ -27,7 +27,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.h1
-          className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6"
+          className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 text-text-primary"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -38,7 +38,7 @@ const Hero = () => {
         </motion.h1>
 
         <motion.p
-          className="text-center text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed font-body"
+          className="text-center text-base sm:text-lg text-text-secondary max-w-2xl mx-auto mb-8 leading-relaxed font-body"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -63,7 +63,7 @@ const Hero = () => {
           </a>
           <a
             href="#how-it-works"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-medium px-6 py-4 transition-colors text-sm"
+            className="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary font-medium px-6 py-4 transition-colors text-sm"
           >
             See how it works
             <ArrowRight className="w-4 h-4" />
@@ -71,16 +71,16 @@ const Hero = () => {
         </motion.div>
 
         <motion.p
-          className="text-center text-xs text-muted-foreground font-body"
+          className="text-center text-xs text-text-tertiary font-body"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           Trusted by teams at{" "}
-          <span className="font-semibold text-foreground">Experian</span>,{" "}
-          <span className="font-semibold text-foreground">Cisco</span>,{" "}
-          <span className="font-semibold text-foreground">IG Group</span>,{" "}
-          <span className="font-semibold text-foreground">Infobip</span> and
+          <span className="font-semibold text-text-primary">Experian</span>,{" "}
+          <span className="font-semibold text-text-primary">Cisco</span>,{" "}
+          <span className="font-semibold text-text-primary">IG Group</span>,{" "}
+          <span className="font-semibold text-text-primary">Infobip</span> and
           more
         </motion.p>
 

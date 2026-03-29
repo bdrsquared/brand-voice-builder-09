@@ -30,9 +30,9 @@ const WhoIsFor = () => {
           <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
             ● Who this is for
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-12 text-text-primary">
             We're selective about who we work with.{" "}
-            <span className="text-muted-foreground">Here's why.</span>
+            <span className="text-text-secondary">Here's why.</span>
           </h2>
         </motion.div>
 
@@ -44,14 +44,14 @@ const WhoIsFor = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-lg sm:text-xl font-bold mb-5 text-primary">This is for you if…</h3>
+            <h3 className="text-lg sm:text-xl mb-5 text-primary">This is for you if…</h3>
             <ul className="space-y-4">
               {forItems.map((item, i) => (
                 <li key={i} className="flex gap-3 items-start">
                   <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <Check className="w-3.5 h-3.5 text-primary" />
                   </div>
-                  <span className="text-sm text-foreground/80 font-body leading-relaxed">{item}</span>
+                  <span className="text-sm text-text-secondary font-body leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
@@ -64,14 +64,14 @@ const WhoIsFor = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="text-lg sm:text-xl font-bold mb-5 text-muted-foreground">This isn't for you if…</h3>
+            <h3 className="text-lg sm:text-xl mb-5 text-text-tertiary">This isn't for you if…</h3>
             <ul className="space-y-4">
               {notForItems.map((item, i) => (
                 <li key={i} className="flex gap-3 items-start">
                   <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center shrink-0 mt-0.5">
-                    <X className="w-3.5 h-3.5 text-muted-foreground" />
+                    <X className="w-3.5 h-3.5 text-text-tertiary" />
                   </div>
-                  <span className="text-sm text-muted-foreground font-body leading-relaxed">{item}</span>
+                  <span className="text-sm text-text-tertiary font-body leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>

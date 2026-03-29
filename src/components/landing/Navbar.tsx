@@ -62,7 +62,6 @@ const caseStudies = [
 const mobileNavLinks = [
   { label: "Our service", href: "#services" },
   { label: "Case studies", href: "#case-studies" },
-  { label: "Our story", href: "/our-story" },
   { label: "More", href: "#" },
 ];
 
@@ -587,13 +586,12 @@ const Navbar = () => {
 
                     <div className="mt-auto flex flex-col gap-6">
                       {/* Office card */}
-                      <motion.a
-                        href="#about"
-                        className="block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
+                      <motion.div
+                        className="block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden cursor-pointer"
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.35, delay: 0.25 }}
-                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                        onClick={() => { navigate("/our-story"); setMobileOpen(false); setMobileSubMenu(null); }}
                       >
                         <div className="aspect-video overflow-hidden">
                           <img src={officeImg} alt="Earworm studio" className="w-full h-full object-cover" />
@@ -605,7 +603,7 @@ const Navbar = () => {
                             → Read our story
                           </span>
                         </div>
-                      </motion.a>
+                      </motion.div>
 
                       <motion.a
                         href="#contact"

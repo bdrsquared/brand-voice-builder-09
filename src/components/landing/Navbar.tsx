@@ -650,7 +650,7 @@ const Navbar = () => {
                       </div>
                     </div>
                   </motion.div>
-                ) : (
+                ) : mobileSubMenu === "cases" ? (
                   <motion.div
                     key="cases-submenu"
                     className="flex flex-col h-full"
@@ -745,7 +745,7 @@ const Navbar = () => {
                       </a>
                     </nav>
                   </motion.div>
-                )}
+                ) : null}
 
               </AnimatePresence>
             </div>

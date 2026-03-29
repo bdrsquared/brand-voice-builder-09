@@ -59,7 +59,7 @@ const caseStudies = [
 const mobileNavLinks = [
   { label: "Our service", href: "#services" },
   { label: "Case studies", href: "#case-studies" },
-  { label: "How it works", href: "#how-it-works" },
+  { label: "More", href: "#" },
 ];
 
 type MegaMenu = "services" | "cases" | "podplanner" | null;
@@ -68,7 +68,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | null>(null);
+  const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | null>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -521,6 +521,18 @@ const Navbar = () => {
                               key={link.label}
                               className="flex items-center justify-between text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left"
                               onClick={() => setMobileSubMenu("services")}
+                            >
+                              {link.label}
+                              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                            </button>
+                          );
+                        }
+                        if (link.label === "More") {
+                          return (
+                            <button
+                              key={link.label}
+                              className="flex items-center justify-between text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left"
+                              onClick={() => setMobileSubMenu("more")}
                             >
                               {link.label}
                               <ChevronRight className="w-4 h-4 text-muted-foreground" />

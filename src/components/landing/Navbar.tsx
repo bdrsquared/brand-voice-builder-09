@@ -78,6 +78,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
   const [isLightSection, setIsLightSection] = useState(false);
+  const [isBottomLight, setIsBottomLight] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
   const lastScrollY = useRef(0);
@@ -93,10 +94,13 @@ const Navbar = () => {
       const lightStart = document.getElementById("light-section-start");
       const lightEnd = document.getElementById("light-section-end");
       if (lightStart && lightEnd) {
-        const navBottom = 70; // approximate navbar bottom position
+        const navBottom = 70;
         const startTop = lightStart.getBoundingClientRect().top;
         const endBottom = lightEnd.getBoundingClientRect().bottom;
         setIsLightSection(startTop <= navBottom && endBottom >= navBottom);
+        // Check bottom bar position against light section
+        const windowH = window.innerHeight;
+        setIsBottomLight(startTop <= windowH && endBottom >= windowH - 60);
       }
     };
     window.addEventListener("scroll", handler);
@@ -907,7 +911,7 @@ const Navbar = () => {
             <div className="px-4 py-2.5">
               <Link
                 to="/book-a-call"
-                className="flex items-center justify-center gap-2 w-full text-white text-sm font-semibold py-2.5 rounded-full transition-all bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] hover:shadow-[0_0_18px_rgba(28,250,118,0.25),0_0_8px_rgba(99,89,234,0.25)] relative overflow-hidden before:absolute before:inset-0 before:rounded-full before:p-[1px] before:bg-gradient-to-r before:from-[#1CFA76] before:via-[#6359EA] before:to-[#FFB347] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude]"
+                className={`flex items-center justify-center gap-2 w-full text-sm font-semibold py-2.5 rounded-full transition-all relative overflow-hidden backdrop-blur-xl border ${isBottomLight ? 'text-black bg-black/10 border-black/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] before:bg-gradient-to-r before:from-[#1CFA76] before:via-[#6359EA] before:to-[#FFB347]' : 'text-white bg-white/10 border-white/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] hover:shadow-[0_0_18px_rgba(28,250,118,0.25),0_0_8px_rgba(99,89,234,0.25)] before:bg-gradient-to-r before:from-[#1CFA76] before:via-[#6359EA] before:to-[#FFB347]'} before:absolute before:inset-0 before:rounded-full before:p-[1px] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude]`}
               >
                 <Calendar className="w-4 h-4 relative z-10" />
                 <span className="relative z-10">Book a call</span>

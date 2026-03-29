@@ -32,7 +32,7 @@ const Index = () => {
       <div id="light-sections" style={{ backgroundColor: '#E4E5E9' }}>
         <Showreel />
         <WhyNow />
-        <InPractice />
+        <HowItWorks />
       </div>
 
       {/* Rounded divider: light to dark */}
@@ -40,9 +40,9 @@ const Index = () => {
         <div className="bg-background rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" />
       </div>
 
+      <InPractice />
       <Stats />
       <ProblemStatement />
-      <HowItWorks />
       
       <Testimonials />
       <CaseStudies />

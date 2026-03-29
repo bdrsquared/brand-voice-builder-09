@@ -371,8 +371,8 @@ const Navbar = () => {
                         <h4 className="text-lg font-heading font-semibold text-foreground">PodPlanner</h4>
                       </div>
                       <p className="text-sm text-muted-foreground leading-relaxed font-body mb-4 max-w-sm">
-                        A project management system for your video podcast.<br />
-                        Plan content, track episode status, and see performance in real time.
+                        We've built a tool for planning and running a video podcast strategy.<br /><br />
+                        One dashboard to organise, track, and collaborate.
                       </p>
 
                       {/* Production Status UI — square, pinned to bottom (decorative only) */}

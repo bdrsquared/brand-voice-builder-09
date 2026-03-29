@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Wand2, ListChecks, Share2, ClipboardList } from "lucide-react";
-import process3d from "@/assets/process-3d.png";
+import process3d from "@/assets/process-3d.webp";
 
 const steps = [
   {

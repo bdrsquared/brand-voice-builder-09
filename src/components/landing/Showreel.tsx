@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Play } from "lucide-react";
-import showreelThumb from "@/assets/showreel-thumb.png";
+import showreelThumb from "@/assets/showreel-thumb.webp";
 
 const Showreel = () => {
   const [playing, setPlaying] = useState(false);

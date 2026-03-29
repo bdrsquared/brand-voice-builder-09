@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 import { Heart, MessageCircle, Share2, UserPlus } from "lucide-react";
-import ryanFosterAvatar from "@/assets/ryan-foster-avatar.png";
-import oliviaParkAvatar from "@/assets/olivia-park-avatar.png";
-import lucasGrantAvatar from "@/assets/lucas-grant-avatar.jpeg";
-import jonDoeAvatar from "@/assets/jon-doe-avatar.jpeg";
-import miaJohnsonAvatar from "@/assets/mia-johnson-avatar.jpeg";
-import alexChenAvatar from "@/assets/alex-chen-avatar.jpeg";
-import emmaCarterAvatar from "@/assets/emma-carter-avatar.jpeg";
+import ryanFosterAvatar from "@/assets/ryan-foster-avatar.webp";
+import oliviaParkAvatar from "@/assets/olivia-park-avatar.webp";
+import lucasGrantAvatar from "@/assets/lucas-grant-avatar.webp";
+import jonDoeAvatar from "@/assets/jon-doe-avatar.webp";
+import miaJohnsonAvatar from "@/assets/mia-johnson-avatar.webp";
+import alexChenAvatar from "@/assets/alex-chen-avatar.webp";
+import emmaCarterAvatar from "@/assets/emma-carter-avatar.webp";
 
 const notifications = [
   { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary", image: jonDoeAvatar },

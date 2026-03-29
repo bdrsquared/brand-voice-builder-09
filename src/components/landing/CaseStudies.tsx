@@ -1,18 +1,18 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
 import { useState } from "react";
-import caseCarrier from "@/assets/case-carrier.png";
-import casePrettyCovered from "@/assets/case-pretty-covered.png";
-import caseWenodo from "@/assets/case-wenodo.png";
-import casePulsetto from "@/assets/case-pulsetto.png";
-import caseCfoPlaybook from "@/assets/case-cfo-playbook.png";
-import caseUkUsTax from "@/assets/case-uk-us-tax.png";
-import logoPolly from "@/assets/logos/polly.png";
-import logoWenodo from "@/assets/logos/wenodo.png";
-import logoPulsetto from "@/assets/logos/pulsetto.png";
-import logoSoldo from "@/assets/logos/soldo.png";
-import logoCollyerBristow from "@/assets/logos/collyer-bristow.png";
-import logoFntv from "@/assets/logos/fntv.png";
+import caseCarrier from "@/assets/case-carrier.webp";
+import casePrettyCovered from "@/assets/case-pretty-covered.webp";
+import caseWenodo from "@/assets/case-wenodo.webp";
+import casePulsetto from "@/assets/case-pulsetto.webp";
+import caseCfoPlaybook from "@/assets/case-cfo-playbook.webp";
+import caseUkUsTax from "@/assets/case-uk-us-tax.webp";
+import logoPolly from "@/assets/logos/polly.webp";
+import logoWenodo from "@/assets/logos/wenodo.webp";
+import logoPulsetto from "@/assets/logos/pulsetto.webp";
+import logoSoldo from "@/assets/logos/soldo.webp";
+import logoCollyerBristow from "@/assets/logos/collyer-bristow.webp";
+import logoFntv from "@/assets/logos/fntv.webp";
 
 const caseStudies = [
   {

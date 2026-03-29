@@ -6,16 +6,16 @@ import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Calendly from "@/components/landing/Calendly";
 import Footer from "@/components/landing/Footer";
 
-import officeHero from "@/assets/office-hero.jpeg";
-import officeDesk from "@/assets/office-desk.jpeg";
-import officeImg from "@/assets/office.jpeg";
+import officeHero from "@/assets/office-hero.webp";
+import officeDesk from "@/assets/office-desk.webp";
+import officeImg from "@/assets/office.webp";
 import launchImg from "@/assets/launch-microphone.jpeg";
-import alexAvatar from "@/assets/alex-chen-avatar.jpeg";
-import emmaAvatar from "@/assets/emma-carter-avatar.jpeg";
-import lucasAvatar from "@/assets/lucas-grant-avatar.jpeg";
-import miaAvatar from "@/assets/mia-johnson-avatar.jpeg";
-import oliviaAvatar from "@/assets/olivia-park-avatar.png";
-import ryanAvatar from "@/assets/ryan-foster-avatar.png";
+import alexAvatar from "@/assets/alex-chen-avatar.webp";
+import emmaAvatar from "@/assets/emma-carter-avatar.webp";
+import lucasAvatar from "@/assets/lucas-grant-avatar.webp";
+import miaAvatar from "@/assets/mia-johnson-avatar.webp";
+import oliviaAvatar from "@/assets/olivia-park-avatar.webp";
+import ryanAvatar from "@/assets/ryan-foster-avatar.webp";
 
 /* ───── data ───── */
 

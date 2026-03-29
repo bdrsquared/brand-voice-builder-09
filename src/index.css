@@ -215,6 +215,13 @@
     border-radius: 60% 40% 50% 50%;
   }
 
+  .blob-oblong-amber {
+    background: #F5A623;
+    opacity: 0.07;
+    filter: blur(100px);
+    border-radius: 50% 40% 60% 50%;
+  }
+
   /* Glow-on-hover button */
   .glow-on-hover {
     position: relative;

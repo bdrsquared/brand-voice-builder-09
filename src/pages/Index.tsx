@@ -24,12 +24,12 @@ const Index = () => {
       <ValueProps />
       
       {/* Rounded divider: dark to light */}
-      <div className="relative z-10 bg-white">
+      <div className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
         <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
       </div>
 
       {/* Light mode sections */}
-      <div className="bg-white">
+      <div style={{ backgroundColor: '#E4E5E9' }}>
         <Showreel />
         <WhyNow />
         <InPractice />
@@ -37,7 +37,7 @@ const Index = () => {
 
       {/* Rounded divider: light to dark */}
       <div className="relative z-10 bg-background">
-        <div className="bg-white rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+        <div className="rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: '#E4E5E9' }} />
       </div>
 
       <Stats />

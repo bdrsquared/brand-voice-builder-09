@@ -293,7 +293,7 @@ const Navbar = () => {
                       </p>
 
                       {/* Production Status UI — square, pinned to bottom */}
-                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.04] border border-white/10 p-3 overflow-hidden relative flex flex-col">
+                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col">
                         {/* Header */}
                         <div className="flex items-center justify-between mb-2.5">
                           <div className="flex items-center gap-1.5">
@@ -316,7 +316,7 @@ const Navbar = () => {
                           ].map((item, i) => (
                             <motion.div
                               key={i}
-                              className={`flex items-center gap-2 rounded-lg px-2 py-1.5 ${item.highlight ? "bg-white/[0.08] border border-white/10" : "bg-white/[0.04]"} transition-colors hover:bg-white/[0.08]`}
+                              className={`flex items-center gap-2 rounded-lg px-2 py-1.5 ${item.highlight ? "bg-white/[0.12] border border-white/15" : "bg-white/[0.07]"} transition-colors hover:bg-white/[0.12]`}
                               initial={{ opacity: 0, y: 4 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
@@ -344,7 +344,7 @@ const Navbar = () => {
                           </div>
                         </div>
 
-                        <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.03] via-transparent to-primary/[0.03] pointer-events-none rounded-xl" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-transparent to-primary/[0.06] pointer-events-none rounded-xl" />
                       </div>
                     </div>
 
@@ -361,7 +361,7 @@ const Navbar = () => {
                       </p>
 
                       {/* Mini schedule table — square, pinned to bottom */}
-                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.03] border border-white/10 overflow-hidden flex flex-col">
+                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 overflow-hidden flex flex-col">
                         {/* Table header */}
                         <div className="grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 py-2 border-b border-white/[0.08] text-[8px] font-semibold text-white/30 uppercase tracking-wider">
                           <span></span>
@@ -382,7 +382,7 @@ const Navbar = () => {
                           ].map((row, i, arr) => (
                             <motion.div
                               key={i}
-                              className={`flex-1 group grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 hover:bg-white/[0.04] transition-colors cursor-pointer ${i < arr.length - 1 ? "border-b border-white/[0.06]" : ""}`}
+                              className={`flex-1 group grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 hover:bg-white/[0.08] transition-colors cursor-pointer ${i < arr.length - 1 ? "border-b border-white/[0.08]" : ""}`}
                               initial={{ opacity: 0, y: 4 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}

@@ -56,7 +56,7 @@ const PipelineBoard = () => {
         {stages.map((stage, si) => (
           <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-border/30">
             <div className="px-3 py-2.5 border-b border-border/30">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider font-body">
+              <p className="text-[10px] font-medium text-text-tertiary uppercase tracking-wider font-body">
                 {stage}
               </p>
             </div>
@@ -120,8 +120,8 @@ const DealCard = ({
       </div>
     )}
     <div className="min-w-0">
-      <p className="text-[10px] text-foreground font-medium leading-tight truncate font-body">{name}</p>
-      <p className="text-[9px] text-muted-foreground font-body">{value}</p>
+      <p className="text-[10px] text-text-primary font-medium leading-tight truncate font-body">{name}</p>
+      <p className="text-[9px] text-text-tertiary font-body">{value}</p>
     </div>
   </div>
 );

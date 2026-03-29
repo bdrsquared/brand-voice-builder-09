@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import DemoRequestModal from "@/components/DemoRequestModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
@@ -77,6 +78,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
   const [isLightSection, setIsLightSection] = useState(false);
+  const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
   const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
@@ -512,13 +514,13 @@ const Navbar = () => {
                         <LogIn className="w-3.5 h-3.5" />
                         Log in
                       </a>
-                      <a
-                        href="#contact"
+                      <button
+                        onClick={() => setDemoModalOpen(true)}
                         className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all whitespace-nowrap"
                       >
                         Request a demo
                         <ArrowRight className="w-3 h-3" />
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -876,14 +878,13 @@ const Navbar = () => {
                         <LogIn className="w-4 h-4" />
                         Log in
                       </a>
-                      <a
-                        href="#contact"
-                        className="flex items-center justify-center gap-2 text-sm font-semibold text-primary-foreground py-3 rounded-xl bg-primary hover:brightness-110 transition-all"
-                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                      <button
+                        className="flex items-center justify-center gap-2 text-sm font-semibold text-primary-foreground py-3 rounded-xl bg-primary hover:brightness-110 transition-all w-full"
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); setDemoModalOpen(true); }}
                       >
                         Request a demo
                         <ArrowRight className="w-3.5 h-3.5" />
-                      </a>
+                      </button>
                     </div>
                   </motion.div>
                 ) : null}
@@ -917,6 +918,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <DemoRequestModal open={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
     </>
   );
 };

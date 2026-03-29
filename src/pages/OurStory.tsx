@@ -170,7 +170,7 @@ const OurStory = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 custom={i}
                 variants={fadeUp}
-                className="group relative flex-shrink-0 w-[320px] sm:w-[360px] snap-center rounded-2xl overflow-hidden backdrop-blur-xl bg-white/[0.04] border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-primary/30 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_hsl(145,96%,55%,0.12)]"
+                className="group relative flex-shrink-0 w-[320px] sm:w-[360px] snap-center rounded-2xl overflow-hidden backdrop-blur-2xl bg-white/[0.07] border border-white/[0.12] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] p-6 sm:p-8 transition-all duration-300 hover:bg-white/[0.10] hover:border-primary/30 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_hsl(145,96%,55%,0.12),inset_0_1px_0_0_rgba(255,255,255,0.08)]"
               >
                 {/* Avatar & header */}
                 <div className="flex items-center gap-4 mb-5">

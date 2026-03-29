@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
 import caseCarrier from "@/assets/case-carrier.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.webp";
 import caseWenodo from "@/assets/case-wenodo.webp";
@@ -73,7 +72,6 @@ const caseStudies = [
 ];
 
 const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: number }) => {
-  const [hovered, setHovered] = useState(false);
 
   const Wrapper = study.slug ? Link : "div";
   const wrapperProps = study.slug ? { to: `/case-study/${study.slug}` } : {};

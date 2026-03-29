@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
 import logoDark from "@/assets/earworm-logo-dark.svg";
@@ -68,6 +69,7 @@ const mobileNavLinks = [
 type MegaMenu = "services" | "cases" | "podplanner" | null;
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -112,7 +114,7 @@ const Navbar = () => {
           onMouseLeave={() => setMegaOpen(null)}
         >
           <div className={`${navLight ? "bg-white/70 border-black/10 shadow-black/5" : "bg-white/5 border-white/10 shadow-black/20"} backdrop-blur-xl border rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg transition-colors duration-300`}>
-            <img src={navLight ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300" />
+            <img src={navLight ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300 cursor-pointer" onClick={() => navigate("/")} />
             <div className="hidden sm:flex items-center gap-8">
               <div
                 className="relative"
@@ -139,13 +141,13 @@ const Navbar = () => {
               >
                 How it works
               </a>
-              <a
-                href="/our-story"
+              <button
+                onClick={() => navigate("/our-story")}
                 className={`text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
                 onMouseEnter={() => setMegaOpen(null)}
               >
                 Our story
-              </a>
+              </button>
             </div>
 
             {/* Desktop right side */}
@@ -564,14 +566,21 @@ const Navbar = () => {
                           );
                         }
                         return (
-                          <motion.a
+                          <motion.button
                             key={link.label}
-                            href={link.href}
-                            className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
-                            onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                            className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left"
+                            onClick={() => {
+                              if (link.href.startsWith("/")) {
+                                navigate(link.href);
+                              } else {
+                                window.location.href = link.href;
+                              }
+                              setMobileOpen(false);
+                              setMobileSubMenu(null);
+                            }}
                           >
                             {link.label}
-                          </motion.a>
+                          </motion.button>
                         );
                       })}
                     </nav>

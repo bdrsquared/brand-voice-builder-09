@@ -43,7 +43,7 @@ const TestimonialTicker = () => {
     <motion.div
       className="fixed top-0 left-0 right-0 z-[80] text-black"
       style={{
-        background: "linear-gradient(90deg, rgba(28,250,118,0.35) 0%, #ffffff 30%, rgba(99,89,234,0.3) 55%, #ffffff 75%, rgba(28,250,118,0.3) 100%)",
+        background: "linear-gradient(90deg, #1CFA76 0%, #6359EA 50%, #1CFA76 100%)",
         fontFamily: "'Geist', sans-serif",
       }}
       animate={{ y: visible ? 0 : -40 }}

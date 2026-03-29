@@ -237,7 +237,7 @@ const Navbar = () => {
                       return (
                         <div
                           key={service.label}
-                          className={`group/svc relative flex-1 flex flex-col justify-center rounded-xl px-3 py-3 -mx-3 overflow-hidden transition-all duration-500 hover:bg-white/[0.04] ${i < servicesList.length - 1 ? "border-b border-white/10" : ""}`}
+                          className={`group/svc relative flex-1 flex flex-col justify-center rounded-xl px-3 py-3 my-1.5 -mx-3 overflow-hidden transition-all duration-500 hover:bg-white/[0.04] ${i < servicesList.length - 1 ? "border-b border-white/10" : ""}`}
                           style={{ backgroundImage: gradients[i] }}
                         >
                           {/* Shimmer glow on hover */}

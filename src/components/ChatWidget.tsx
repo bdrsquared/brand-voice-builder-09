@@ -55,7 +55,7 @@ const ChatWidget = () => {
     setLoading(true);
     try {
       const { data, error: fnError } = await supabase.functions.invoke("send-demo-request", {
-        body: { name: name.trim(), email: email.trim(), phone: fullPhone, message: message.trim(), type: "contact" },
+        body: { name: name.trim(), email: email.trim(), phone: fullPhone, message: message.trim(), budget, type: "contact" },
       });
       if (fnError) throw fnError;
       if (data && !data.success) throw new Error(data.error || "Something went wrong");
@@ -70,7 +70,7 @@ const ChatWidget = () => {
   const handleClose = () => {
     setOpen(false);
     setTimeout(() => {
-      setName(""); setEmail(""); setPhoneNumber(""); setMessage("");
+      setName(""); setEmail(""); setPhoneNumber(""); setBudget(""); setMessage("");
       setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
       setSubmitted(false); setError(""); setCodeSearch(""); setCodeDropdownOpen(false);
     }, 300);
@@ -199,6 +199,8 @@ const ChatWidget = () => {
                           <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="7XXX XXX XXX" className={`flex-1 min-w-0 ${inputClass.replace("w-full ", "")}`} />
                         </div>
                       </div>
+
+                      <BudgetSelect value={budget} onChange={setBudget} compact />
 
                       <div>
                         <label className="block text-[10px] font-semibold text-white/50 mb-1 uppercase tracking-wider">Message *</label>

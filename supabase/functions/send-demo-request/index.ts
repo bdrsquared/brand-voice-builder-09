@@ -17,7 +17,7 @@ serve(async (req) => {
     }
 
     const body = await req.json();
-    const { name, email, phone, message, type } = body;
+    const { name, email, phone, message, budget, type } = body;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0 || name.length > 200) {
       return new Response(JSON.stringify({ error: 'Valid name is required' }), {
@@ -66,6 +66,12 @@ serve(async (req) => {
         ...(isContact && message ? [{
           type: "section",
           text: { type: "mrkdwn", text: `*Message:*\n${message.trim()}` }
+        }] : []),
+        ...(budget ? [{
+          type: "section",
+          fields: [
+            { type: "mrkdwn", text: `*Budget:*\n${budget}` },
+          ]
         }] : []),
         {
           type: "context",

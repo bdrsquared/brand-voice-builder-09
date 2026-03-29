@@ -63,7 +63,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
     setLoading(true);
     try {
       const { data, error: fnError } = await supabase.functions.invoke("send-demo-request", {
-        body: { name: name.trim(), email: email.trim(), phone: fullPhone, message: message.trim(), type: "contact" },
+        body: { name: name.trim(), email: email.trim(), phone: fullPhone, message: message.trim(), budget, type: "contact" },
       });
 
       if (fnError) throw fnError;
@@ -84,6 +84,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
       setName("");
       setEmail("");
       setPhoneNumber("");
+      setBudget("");
       setMessage("");
       setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
       setSubmitted(false);
@@ -258,6 +259,8 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
                             />
                           </div>
                         </div>
+
+                        <BudgetSelect value={budget} onChange={setBudget} />
 
                         <div>
                           <label className="block text-xs font-semibold text-white/50 mb-1.5 uppercase tracking-wider">Message *</label>

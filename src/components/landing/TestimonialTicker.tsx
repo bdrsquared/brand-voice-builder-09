@@ -64,13 +64,11 @@ const TestimonialTicker = () => {
               &ldquo;{t.quote}&rdquo; —{" "}
               <span className="opacity-70">{t.author}</span>
             </p>
-            {/* Mobile: marquee scrolling text */}
-            <div className="md:hidden whitespace-nowrap">
-              <span className="inline-block animate-marquee">
-                &ldquo;{t.quote}&rdquo; — <span className="opacity-70">{t.author}</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </span>
-            </div>
+            {/* Mobile: vertical ticker, always visible */}
+            <p className="md:hidden text-center">
+              &ldquo;{t.quote}&rdquo; —{" "}
+              <span className="opacity-70">{t.author}</span>
+            </p>
           </motion.div>
         </AnimatePresence>
       </div>

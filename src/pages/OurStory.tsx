@@ -143,11 +143,11 @@ const OurStory = () => {
               ● The people
             </motion.span>
             <motion.h2 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
-              Meet the team
+              Our brilliant team
             </motion.h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {team.map((member, i) => (
               <motion.div
                 key={member.name}
@@ -156,46 +156,47 @@ const OurStory = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 custom={i}
                 variants={fadeUp}
-                className="group relative rounded-2xl overflow-hidden backdrop-blur-2xl bg-white/[0.04] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] p-5 sm:p-6 transition-all duration-300 hover:bg-white/[0.07] hover:border-white/[0.15] hover:-translate-y-0.5 hover:shadow-[0_0_30px_-10px_hsl(145,96%,55%,0.08),inset_0_1px_0_0_rgba(255,255,255,0.06)]"
+                className="group relative rounded-2xl overflow-hidden backdrop-blur-2xl bg-white/[0.04] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] p-5 sm:p-6 transition-all duration-300 hover:bg-white/[0.07] hover:border-white/[0.15] hover:-translate-y-0.5 flex gap-5"
               >
-                {/* Avatar & header */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/[0.08] group-hover:ring-white/[0.15] transition-all flex-shrink-0">
-                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-text-primary leading-tight">{member.name}</h3>
-                    <p className="text-xs text-primary/80 font-body">{member.role}</p>
-                  </div>
+                {/* Square avatar */}
+                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden ring-1 ring-white/[0.08] group-hover:ring-white/[0.15] transition-all flex-shrink-0">
+                  <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
                 </div>
 
-                {/* About */}
-                <p className="text-xs text-text-secondary/80 font-body leading-relaxed mb-3">
-                  {member.about}
-                </p>
+                {/* Content */}
+                <div className="flex flex-col flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-2 mb-0.5">
+                    <div>
+                      <h3 className="text-sm font-medium text-text-primary leading-tight">{member.name}</h3>
+                      <p className="text-xs text-primary/80 font-body">{member.role}</p>
+                    </div>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <a
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-tertiary/60 hover:text-primary hover:border-white/[0.12] transition-all"
+                      >
+                        <Linkedin className="w-3.5 h-3.5" />
+                      </a>
+                      <a
+                        href={`mailto:${member.email}`}
+                        className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-tertiary/60 hover:text-primary hover:border-white/[0.12] transition-all"
+                      >
+                        <Mail className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  </div>
 
-                {/* Fun fact */}
-                <div className="rounded-lg bg-white/[0.03] border border-white/[0.05] px-3 py-2.5 mb-4">
-                  <p className="text-[10px] uppercase tracking-wider text-text-tertiary/60 font-body mb-0.5">Fun fact</p>
-                  <p className="text-xs text-text-secondary/70 font-body">{member.funFact}</p>
-                </div>
+                  <p className="text-xs text-text-secondary/80 font-body leading-relaxed mb-2 mt-1">
+                    {member.about}
+                  </p>
 
-                {/* Links */}
-                <div className="flex items-center gap-2">
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-tertiary/60 hover:text-primary hover:border-white/[0.12] transition-all"
-                  >
-                    <Linkedin className="w-3.5 h-3.5" />
-                  </a>
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-tertiary/60 hover:text-primary hover:border-white/[0.12] transition-all"
-                  >
-                    <Mail className="w-3.5 h-3.5" />
-                  </a>
+                  {/* Fun fact */}
+                  <div className="rounded-lg bg-white/[0.03] border border-white/[0.05] px-3 py-2 mt-auto">
+                    <p className="text-[10px] uppercase tracking-wider text-text-tertiary/60 font-body mb-0.5">Fun fact</p>
+                    <p className="text-xs text-text-secondary/70 font-body">{member.funFact}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}

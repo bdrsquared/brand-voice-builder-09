@@ -10,23 +10,18 @@ import officeHero from "@/assets/office-hero.webp";
 import officeDesk from "@/assets/office-desk.webp";
 import officeImg from "@/assets/office.webp";
 import launchImg from "@/assets/launch-microphone.jpeg";
-import alexAvatar from "@/assets/alex-chen-avatar.webp";
-import emmaAvatar from "@/assets/emma-carter-avatar.webp";
-import lucasAvatar from "@/assets/lucas-grant-avatar.webp";
-import miaAvatar from "@/assets/mia-johnson-avatar.webp";
-import oliviaAvatar from "@/assets/olivia-park-avatar.webp";
-import ryanAvatar from "@/assets/ryan-foster-avatar.webp";
+import benAvatar from "@/assets/ben-farley.png";
 
 /* ───── data ───── */
 
 const team = [
-  { name: "Ben Farley", role: "Founder & Strategy", avatar: alexAvatar, about: "Ben built Earworm from the ground up with a mission to help brands tell stories worth listening to. He leads strategy and client relationships.", funFact: "Once recorded an entire episode in a moving campervan.", linkedin: "https://linkedin.com/in/benfarley", email: "ben@earworm.co" },
-  { name: "Stephen Fordham", role: "Chairman", avatar: emmaAvatar, about: "Stephen brings decades of senior leadership experience, guiding Earworm's strategic direction and long-term vision.", funFact: "Has never missed a board meeting in 20 years.", linkedin: "https://linkedin.com/in/stephenfordham", email: "stephen@earworm.co" },
-  { name: "Steve Chang", role: "Finance Director", avatar: lucasAvatar, about: "Steve keeps the numbers sharp — overseeing financial planning, forecasting, and making sure growth is sustainable.", funFact: "Can solve a Rubik's cube in under two minutes.", linkedin: "https://linkedin.com/in/stevechang", email: "steve@earworm.co" },
-  { name: "Susie McFarland", role: "Commercial Director", avatar: miaAvatar, about: "Susie drives commercial growth — building partnerships and ensuring every client engagement delivers real value.", funFact: "Once closed a deal on a ski lift.", linkedin: "https://linkedin.com/in/susiemcfarland", email: "susie@earworm.co" },
-  { name: "Lucy Meecham-Jones", role: "Sales Manager", avatar: oliviaAvatar, about: "Lucy leads the sales team — connecting brands with the right Earworm services and building lasting relationships.", funFact: "Has a black belt in karate.", linkedin: "https://linkedin.com/in/lucymeechamjones", email: "lucy@earworm.co" },
-  { name: "Adele Burrows", role: "Client Services", avatar: ryanAvatar, about: "Adele is the glue between clients and production — making sure every project runs smoothly from kickoff to delivery.", funFact: "Can name every dog breed on sight.", linkedin: "https://linkedin.com/in/adeleburrows", email: "adele@earworm.co" },
-  { name: "Jon Farley", role: "Creative Director", avatar: lucasAvatar, about: "Jon shapes the creative vision behind every Earworm show — from concept and branding to set design and motion.", funFact: "Learned to edit video before he could drive.", linkedin: "https://linkedin.com/in/jonfarley", email: "jon@earworm.co" },
+  { name: "Ben Farley", role: "Founder & Strategy", avatar: benAvatar, about: "Ben built Earworm from the ground up with a mission to help brands tell stories worth listening to. He leads strategy and client relationships.", funFact: "Once recorded an entire episode in a moving campervan.", linkedin: "https://linkedin.com/in/benfarley", email: "ben@earworm.co" },
+  { name: "Stephen Fordham", role: "Chairman", avatar: null, about: "Stephen brings decades of senior leadership experience, guiding Earworm's strategic direction and long-term vision.", funFact: "Has never missed a board meeting in 20 years.", linkedin: "https://linkedin.com/in/stephenfordham", email: "stephen@earworm.co" },
+  { name: "Steve Chang", role: "Finance Director", avatar: null, about: "Steve keeps the numbers sharp — overseeing financial planning, forecasting, and making sure growth is sustainable.", funFact: "Can solve a Rubik's cube in under two minutes.", linkedin: "https://linkedin.com/in/stevechang", email: "steve@earworm.co" },
+  { name: "Susie McFarland", role: "Commercial Director", avatar: null, about: "Susie drives commercial growth — building partnerships and ensuring every client engagement delivers real value.", funFact: "Once closed a deal on a ski lift.", linkedin: "https://linkedin.com/in/susiemcfarland", email: "susie@earworm.co" },
+  { name: "Lucy Meecham-Jones", role: "Sales Manager", avatar: null, about: "Lucy leads the sales team — connecting brands with the right Earworm services and building lasting relationships.", funFact: "Has a black belt in karate.", linkedin: "https://linkedin.com/in/lucymeechamjones", email: "lucy@earworm.co" },
+  { name: "Adele Burrows", role: "Client Services", avatar: null, about: "Adele is the glue between clients and production — making sure every project runs smoothly from kickoff to delivery.", funFact: "Can name every dog breed on sight.", linkedin: "https://linkedin.com/in/adeleburrows", email: "adele@earworm.co" },
+  { name: "Jon Farley", role: "Creative Director", avatar: null, about: "Jon shapes the creative vision behind every Earworm show — from concept and branding to set design and motion.", funFact: "Learned to edit video before he could drive.", linkedin: "https://linkedin.com/in/jonfarley", email: "jon@earworm.co" },
 ];
 
 const principles = [

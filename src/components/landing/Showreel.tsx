@@ -23,6 +23,9 @@ const Showreel = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-light-text-primary">
             Check out our <span className="text-light-text-tertiary">showreel</span>
           </h2>
+          <p className="mt-3 text-base text-light-text-secondary max-w-xl">
+            World-class creative, built for brands that take content seriously.
+          </p>
         </motion.div>
 
         <motion.div

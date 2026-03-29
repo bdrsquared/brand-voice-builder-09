@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "./components/PageTransition";
+import CookieConsent from "./components/CookieConsent";
 
 const Index = lazy(() => import("./pages/Index.tsx"));
 const OurStory = lazy(() => import("./pages/OurStory.tsx"));
@@ -39,6 +40,7 @@ const App = () => (
       <BrowserRouter>
         <AnimatedRoutes />
       </BrowserRouter>
+      <CookieConsent />
     </TooltipProvider>
   </QueryClientProvider>
 );

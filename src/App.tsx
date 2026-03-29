@@ -9,6 +9,17 @@ import PageTransition from "./components/PageTransition";
 import CookieConsent from "./components/CookieConsent";
 import ChatWidget from "./components/ChatWidget";
 
+const ConditionalWidgets = () => {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith("/admin");
+  if (isAdmin) return null;
+  return (
+    <>
+      <CookieConsent />
+      <ChatWidget />
+    </>
+  );
+};
 const Index = lazy(() => import("./pages/Index.tsx"));
 const OurStory = lazy(() => import("./pages/OurStory.tsx"));
 const CaseStudy = lazy(() => import("./pages/CaseStudy.tsx"));
@@ -48,8 +59,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
-        <CookieConsent />
-        <ChatWidget />
+        <ConditionalWidgets />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

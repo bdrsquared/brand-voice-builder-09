@@ -14,7 +14,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [budget, setBudget] = useState("");
+  
   const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]); // UK default
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);
   const [codeSearch, setCodeSearch] = useState("");
@@ -61,7 +61,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
     setLoading(true);
     try {
       const { data, error: fnError } = await supabase.functions.invoke("send-demo-request", {
-        body: { name: name.trim(), email: email.trim(), phone: fullPhone, budget },
+        body: { name: name.trim(), email: email.trim(), phone: fullPhone },
       });
 
       if (fnError) throw fnError;
@@ -82,7 +82,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
       setName("");
       setEmail("");
       setPhoneNumber("");
-      setBudget("");
+      
       setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
       setSubmitted(false);
       setError("");
@@ -257,8 +257,6 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
                             />
                           </div>
                         </div>
-
-                        <BudgetSelect value={budget} onChange={setBudget} />
                       </div>
 
                       {error && (

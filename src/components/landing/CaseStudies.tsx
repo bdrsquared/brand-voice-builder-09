@@ -12,6 +12,7 @@ import logoWenodo from "@/assets/logos/wenodo.png";
 import logoPulsetto from "@/assets/logos/pulsetto.png";
 import logoSoldo from "@/assets/logos/soldo.png";
 import logoCollyerBristow from "@/assets/logos/collyer-bristow.png";
+import logoFntv from "@/assets/logos/fntv.png";
 
 const caseStudies = [
   {

@@ -186,7 +186,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="relative w-full max-w-md rounded-2xl border border-white/[0.12] bg-white/[0.06] backdrop-blur-2xl shadow-2xl overflow-hidden"
+              className="relative w-full max-w-md rounded-2xl border border-white/[0.12] bg-white/[0.06] backdrop-blur-2xl shadow-2xl overflow-visible"
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
@@ -204,7 +204,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
                 <X className="w-4 h-4" />
               </button>
 
-              <div className="relative z-10 p-8">
+              <div className="relative z-10 p-8 overflow-visible">
                 <AnimatePresence mode="wait">
                   {submitted ? (
                     <motion.div

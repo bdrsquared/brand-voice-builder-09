@@ -37,7 +37,7 @@ serve(async (req) => {
       blocks: [
         {
           type: "header",
-          text: { type: "plain_text", text: "🎙️ New Demo Request", emoji: true }
+          text: { type: "plain_text", text: "🎙️ New PodPlanner Demo Request", emoji: true }
         },
         {
           type: "section",

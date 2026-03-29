@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import DemoRequestModal from "@/components/DemoRequestModal";
+import ContactModal from "@/components/ContactModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, MessageCircle, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
 import logo from "@/assets/earworm-logo.webp";
 import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.webp";

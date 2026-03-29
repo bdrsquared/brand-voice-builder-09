@@ -61,7 +61,7 @@ const Stats = () => {
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
             >
               <h3 className="relative z-10 text-lg sm:text-xl leading-snug text-text-primary">
                 {stat.title}

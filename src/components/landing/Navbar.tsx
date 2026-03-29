@@ -81,6 +81,7 @@ const Navbar = () => {
   const [isBottomLight, setIsBottomLight] = useState(false);
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
+  const [bottomOffset, setBottomOffset] = useState(0);
   const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
 
@@ -105,6 +106,24 @@ const Navbar = () => {
     };
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  // Track visual viewport offset for Chrome mobile (browser bar hide/show)
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const update = () => {
+      // offsetTop accounts for the difference when browser chrome hides
+      const offset = window.innerHeight - (vv.height + vv.offsetTop);
+      setBottomOffset(Math.max(0, offset));
+    };
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    update();
+    return () => {
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+    };
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -902,7 +921,8 @@ const Navbar = () => {
       <AnimatePresence>
         {scrollingDown && !mobileOpen && (
           <motion.div
-            className="fixed bottom-0 left-0 right-0 z-50 sm:hidden pb-[env(safe-area-inset-bottom)] supports-[-webkit-touch-callout:none]:pb-[env(safe-area-inset-bottom)]"
+            className="fixed left-0 right-0 z-50 sm:hidden pb-[env(safe-area-inset-bottom)]"
+            style={{ bottom: bottomOffset }}
             initial={{ y: 80 }}
             animate={{ y: 0 }}
             exit={{ y: 80 }}

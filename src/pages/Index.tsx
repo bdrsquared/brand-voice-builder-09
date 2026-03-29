@@ -1,19 +1,19 @@
+import { lazy, Suspense } from "react";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
-import Showreel from "@/components/landing/Showreel";
-import WhyNow from "@/components/landing/WhyNow";
-import Stats from "@/components/landing/Stats";
-import ProblemStatement from "@/components/landing/ProblemStatement";
 import ValueProps from "@/components/landing/ValueProps";
-import InPractice from "@/components/landing/InPractice";
-import HowItWorks from "@/components/landing/HowItWorks";
 
-import Testimonials from "@/components/landing/Testimonials";
-import WhoIsFor from "@/components/landing/WhoIsFor";
-import CaseStudies from "@/components/landing/CaseStudies";
-import Calendly from "@/components/landing/Calendly";
-import Footer from "@/components/landing/Footer";
+const Showreel = lazy(() => import("@/components/landing/Showreel"));
+const WhyNow = lazy(() => import("@/components/landing/WhyNow"));
+const Stats = lazy(() => import("@/components/landing/Stats"));
+const ProblemStatement = lazy(() => import("@/components/landing/ProblemStatement"));
+const InPractice = lazy(() => import("@/components/landing/InPractice"));
+const HowItWorks = lazy(() => import("@/components/landing/HowItWorks"));
+const Testimonials = lazy(() => import("@/components/landing/Testimonials"));
+const CaseStudies = lazy(() => import("@/components/landing/CaseStudies"));
+const Calendly = lazy(() => import("@/components/landing/Calendly"));
+const Footer = lazy(() => import("@/components/landing/Footer"));
 
 const Index = () => {
   return (
@@ -23,31 +23,33 @@ const Index = () => {
       <Hero />
       <ValueProps />
       
-      {/* Rounded divider: dark to light */}
-      <div id="light-section-start" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
-        <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
-      </div>
+      <Suspense fallback={null}>
+        {/* Rounded divider: dark to light */}
+        <div id="light-section-start" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+          <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+        </div>
 
-      {/* Light mode sections */}
-      <div id="light-sections" style={{ backgroundColor: '#E4E5E9' }}>
-        <Showreel />
-        <WhyNow />
-        <InPractice />
-      </div>
+        {/* Light mode sections */}
+        <div id="light-sections" style={{ backgroundColor: '#E4E5E9' }}>
+          <Showreel />
+          <WhyNow />
+          <InPractice />
+        </div>
 
-      {/* Rounded divider: light to dark */}
-      <div id="light-section-end" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
-        <div className="bg-background rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" />
-      </div>
+        {/* Rounded divider: light to dark */}
+        <div id="light-section-end" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+          <div className="bg-background rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" />
+        </div>
 
-      <Stats />
-      <ProblemStatement />
-      <HowItWorks />
-      
-      <Testimonials />
-      <CaseStudies />
-      <Calendly />
-      <Footer />
+        <Stats />
+        <ProblemStatement />
+        <HowItWorks />
+        
+        <Testimonials />
+        <CaseStudies />
+        <Calendly />
+        <Footer />
+      </Suspense>
     </div>
   );
 };

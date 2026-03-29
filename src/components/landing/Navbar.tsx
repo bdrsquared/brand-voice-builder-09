@@ -110,7 +110,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed ${scrolled ? "top-3" : "top-[38px]"} left-0 right-0 px-4 sm:px-6 transition-[top] duration-300 ease-in-out ${mobileOpen ? "z-[70]" : "z-50"}`}
+        className={`fixed ${scrolled ? "top-3" : "top-[38px]"} left-0 right-0 px-4 sm:px-6 transition-[top,transform] duration-300 ease-in-out ${mobileOpen ? "z-[70]" : "z-50"} ${scrollingDown && !mobileOpen ? "max-sm:-translate-y-[120%]" : "translate-y-0"}`}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
@@ -908,8 +908,9 @@ const Navbar = () => {
                 href="https://calendly.com/ben-earworm/discovery"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full text-center bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-semibold py-2.5 rounded-full transition-colors"
+                className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-semibold py-2.5 rounded-full transition-colors"
               >
+                <Calendar className="w-4 h-4" />
                 Book a call
               </a>
             </div>

@@ -53,11 +53,11 @@ const OurStory = () => {
       <Navbar />
 
       {/* ── 1. Hero ── */}
-      <section className="relative h-[70vh] sm:h-[80vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[60vh] flex items-center justify-center overflow-hidden">
         <img
           src={officeHero}
           alt="Earworm studio"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-bottom"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
         <motion.div

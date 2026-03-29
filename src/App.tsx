@@ -45,6 +45,7 @@ const App = () => (
       <BrowserRouter>
         <AnimatedRoutes />
         <CookieConsent />
+        <ChatWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
@@ -77,12 +77,16 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
   const [isLightSection, setIsLightSection] = useState(false);
+  const [scrollingDown, setScrollingDown] = useState(false);
+  const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
 
   useEffect(() => {
     const handler = () => {
-      setScrolled(window.scrollY > 50);
-      
+      const currentY = window.scrollY;
+      setScrolled(currentY > 50);
+      setScrollingDown(currentY > 100 && currentY > lastScrollY.current);
+      lastScrollY.current = currentY;
       // Check if navbar is over the light section
       const lightStart = document.getElementById("light-section-start");
       const lightEnd = document.getElementById("light-section-end");
@@ -885,6 +889,29 @@ const Navbar = () => {
                 ) : null}
 
               </AnimatePresence>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {/* Mobile bottom CTA bar */}
+      <AnimatePresence>
+        {scrollingDown && !mobileOpen && (
+          <motion.div
+            className="fixed bottom-0 left-0 right-0 z-50 sm:hidden"
+            initial={{ y: 80 }}
+            animate={{ y: 0 }}
+            exit={{ y: 80 }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          >
+            <div className="bg-background/80 backdrop-blur-xl border-t border-white/10 px-4 py-2.5">
+              <a
+                href="https://calendly.com/ben-earworm/discovery"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-semibold py-2.5 rounded-full transition-colors"
+              >
+                Book a call
+              </a>
             </div>
           </motion.div>
         )}

@@ -583,7 +583,7 @@ const Navbar = () => {
                         </div>
                         <div className="p-4">
                           <h4 className="text-base font-heading text-foreground mb-1.5">It starts in our studio</h4>
-                          <p className="text-xs text-muted-foreground leading-relaxed font-body mb-2">Real conversations. High-quality production. No shortcuts.</p>
+                          <p className="text-xs text-muted-foreground leading-relaxed font-body mb-2">A team that lives and breathes content and marketing. We bring that energy into every project we run.</p>
                           <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
                             → Read our story
                           </span>

@@ -36,8 +36,8 @@ const Index = () => {
       </div>
 
       {/* Rounded divider: light to dark */}
-      <div className="relative z-10 bg-background">
-        <div className="rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: '#E4E5E9' }} />
+      <div className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+        <div className="bg-background rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" />
       </div>
 
       <Stats />

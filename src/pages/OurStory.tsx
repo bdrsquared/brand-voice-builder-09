@@ -159,7 +159,15 @@ const OurStory = () => {
               >
                 {/* Square avatar */}
                 <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden ring-1 ring-white/[0.08] group-hover:ring-white/[0.15] transition-all flex-shrink-0">
-                  <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                  {member.avatar ? (
+                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-white/[0.06] flex items-center justify-center">
+                      <span className="text-2xl sm:text-3xl font-heading text-white/30">
+                        {member.name.split(" ").map(n => n[0]).join("")}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}

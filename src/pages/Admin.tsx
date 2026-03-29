@@ -119,7 +119,7 @@ const Admin = () => {
         </div>
 
         {/* Chart */}
-        <div className="bg-card rounded-xl border border-border p-6">
+        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-medium text-muted-foreground">Inquiries Over Time</h2>
             <div className="flex gap-1">
@@ -159,7 +159,7 @@ const Admin = () => {
         </div>
 
         {/* Table */}
-        <div className="bg-card rounded-xl border border-border overflow-hidden">
+        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow className="border-border">

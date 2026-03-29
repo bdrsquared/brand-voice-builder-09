@@ -22,9 +22,24 @@ const Index = () => {
       <Navbar />
       <Hero />
       <ValueProps />
-      <Showreel />
-      <WhyNow />
-      <InPractice />
+      
+      {/* Rounded divider: dark to light */}
+      <div className="relative z-10 bg-white">
+        <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+      </div>
+
+      {/* Light mode sections */}
+      <div className="bg-white">
+        <Showreel />
+        <WhyNow />
+        <InPractice />
+      </div>
+
+      {/* Rounded divider: light to dark */}
+      <div className="relative z-10 bg-background">
+        <div className="bg-white rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+      </div>
+
       <Stats />
       <ProblemStatement />
       <HowItWorks />

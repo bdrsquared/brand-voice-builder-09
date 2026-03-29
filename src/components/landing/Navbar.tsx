@@ -126,8 +126,9 @@ const Navbar = () => {
                 href="https://app.earworm.co/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white transition-colors"
               >
+                <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
                 PodPlanner
               </a>
               <a

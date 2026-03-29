@@ -67,13 +67,18 @@ const HowItWorks = () => {
         </div>
 
         {/* Right column - cards */}
-        <div className="space-y-4">
+        <div className="relative space-y-4 sm:space-y-4">
           {steps.map((step, i) => {
             const Icon = step.icon;
             return (
               <motion.div
                 key={step.title}
-                className="rounded-2xl border border-border/60 bg-card/40 backdrop-blur-sm p-6 sm:p-8 hover:border-primary/20 transition-colors"
+                className="rounded-2xl border border-border/60 bg-card/90 backdrop-blur-sm p-6 sm:p-8 hover:border-primary/20 transition-colors sm:relative sm:z-auto"
+                style={{
+                  position: 'sticky',
+                  top: `${100 + i * 20}px`,
+                  zIndex: i + 1,
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}

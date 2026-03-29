@@ -352,8 +352,10 @@ const Navbar = () => {
 
                     {/* Middle column — content schedule */}
                     <div className="flex-1 flex flex-col">
-                      <h4 className="text-sm font-heading font-semibold text-foreground mb-1">See your content schedule</h4>
-                      <p className="text-xs text-muted-foreground leading-relaxed font-body mb-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h4 className="text-lg font-heading font-semibold text-foreground">See your content schedule</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed font-body mb-4 max-w-sm">
                         View upcoming episodes and read the plan behind each one.
                       </p>
 

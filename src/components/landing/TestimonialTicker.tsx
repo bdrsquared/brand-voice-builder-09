@@ -66,18 +66,21 @@ const TestimonialTicker = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.4 }}
-            className="text-[11px] md:text-xs font-medium leading-tight"
+            className="text-[11px] md:text-xs font-medium leading-tight flex items-center justify-center gap-1"
           >
             {/* Desktop: static centered text */}
-            <p className="hidden md:block">
+            <p className="hidden md:flex items-center gap-1.5">
+              <span className="inline-flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-current" />)}</span>
               &ldquo;{t.quote}&rdquo; —{" "}
               <span className="opacity-70">{t.author}</span>
             </p>
             {/* Mobile: marquee scrolling text */}
             <div className="md:hidden whitespace-nowrap overflow-hidden">
               <span className="inline-block animate-marquee">
+                <span className="inline-flex gap-0.5 align-middle mr-1">{[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-current" />)}</span>
                 &ldquo;{t.quote}&rdquo; — <span className="opacity-70">{t.author}</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span className="inline-flex gap-0.5 align-middle mr-1">{[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-current" />)}</span>
                 &ldquo;{t.quote}&rdquo; — <span className="opacity-70">{t.author}</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </span>

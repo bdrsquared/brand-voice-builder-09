@@ -390,6 +390,7 @@ const Navbar = () => {
                           ))}
                         </div>
                       </div>
+                    </div>
 
                     {/* Divider */}
                     <div className="w-px bg-white/10 self-stretch" />

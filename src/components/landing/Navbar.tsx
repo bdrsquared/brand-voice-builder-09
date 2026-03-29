@@ -70,9 +70,22 @@ const Navbar = () => {
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
+  const [isLightSection, setIsLightSection] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 50);
+    const handler = () => {
+      setScrolled(window.scrollY > 50);
+      
+      // Check if navbar is over the light section
+      const lightStart = document.getElementById("light-section-start");
+      const lightEnd = document.getElementById("light-section-end");
+      if (lightStart && lightEnd) {
+        const navBottom = 70; // approximate navbar bottom position
+        const startTop = lightStart.getBoundingClientRect().top;
+        const endBottom = lightEnd.getBoundingClientRect().bottom;
+        setIsLightSection(startTop <= navBottom && endBottom >= navBottom);
+      }
+    };
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);

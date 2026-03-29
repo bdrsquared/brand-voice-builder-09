@@ -43,9 +43,20 @@ const TestimonialTicker = () => {
     <motion.div
       className="fixed top-0 left-0 right-0 z-[80] text-black"
       style={{
-        background: "linear-gradient(90deg, #1CFA76 0%, #6359EA 50%, #1CFA76 100%)",
+        background: "white",
         fontFamily: "'Geist', sans-serif",
       }}
+      animate={{ y: visible ? 0 : -40 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
+      {/* Gradient overlay at 40% opacity */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(90deg, #1CFA76 0%, #6359EA 50%, #1CFA76 100%)",
+          opacity: 0.4,
+        }}
+      />
       animate={{ y: visible ? 0 : -40 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >

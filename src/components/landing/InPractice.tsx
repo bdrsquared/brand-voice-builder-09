@@ -13,7 +13,7 @@ const InPractice = () => {
   return (
     <section className="relative py-20 sm:py-28 px-6">
       <div className="relative z-10 max-w-3xl mx-auto">
-        <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-light-text-tertiary">
+        <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-gradient-blue" style={{ filter: 'drop-shadow(0 0 8px hsl(243 79% 63% / 0.3))' }}>
           ● What this looks like in practice
         </span>
         <motion.div

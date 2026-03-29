@@ -49,7 +49,7 @@ const HowItWorks = () => {
             </p>
           </motion.div>
           <motion.div
-            className="-mt-32 -mb-52 lg:-mt-[100px] lg:mb-0 relative z-0 flex items-center justify-center lg:block"
+            className="-mt-40 -mb-64 lg:-mt-[100px] lg:mb-0 relative z-0 flex items-center justify-center lg:block"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}

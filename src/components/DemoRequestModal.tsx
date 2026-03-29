@@ -204,7 +204,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
                 <X className="w-4 h-4" />
               </button>
 
-              <div className="relative z-10 p-8">
+              <div className="relative z-10 p-8 overflow-visible">
                 <AnimatePresence mode="wait">
                   {submitted ? (
                     <motion.div

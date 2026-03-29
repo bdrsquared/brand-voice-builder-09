@@ -904,15 +904,15 @@ const Navbar = () => {
             exit={{ y: 80 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
           >
-            <div className="bg-background/80 backdrop-blur-xl border-t border-white/10 px-4 py-2.5">
+            <div className="px-4 py-2.5">
               <a
                 href="https://calendly.com/ben-earworm/discovery"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-semibold py-2.5 rounded-full transition-colors"
+                className="flex items-center justify-center gap-2 w-full text-white text-sm font-semibold py-2.5 rounded-full transition-all bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] hover:shadow-[0_0_18px_rgba(28,250,118,0.25),0_0_8px_rgba(99,89,234,0.25)] relative overflow-hidden before:absolute before:inset-0 before:rounded-full before:p-[1px] before:bg-gradient-to-r before:from-[#1CFA76] before:via-[#6359EA] before:to-[#FFB347] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude]"
               >
-                <Calendar className="w-4 h-4" />
-                Book a call
+                <Calendar className="w-4 h-4 relative z-10" />
+                <span className="relative z-10">Book a call</span>
               </a>
             </div>
           </motion.div>

@@ -69,7 +69,7 @@ const ValueProps = () => {
           {props.map((prop, i) => (
             <motion.div
               key={prop.title}
-              className="group relative p-6 sm:p-8 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300 overflow-hidden min-w-0"
+              className="group relative p-6 sm:p-8 rounded-2xl border border-border bg-gradient-to-b from-card to-card/60 hover:border-primary/30 transition-all duration-300 overflow-hidden min-w-0"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}

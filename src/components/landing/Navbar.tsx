@@ -127,7 +127,7 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
               >
-                Client portal
+                PodPlanner
               </a>
               <a
                 href="#contact"

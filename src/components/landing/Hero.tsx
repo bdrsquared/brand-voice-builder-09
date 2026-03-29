@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
 import LogoWall from "./LogoWall";
-import ovalBg from "@/assets/oval.png";
+import ovalBg from "@/assets/oval.webp";
 
 const Hero = () => {
   return (

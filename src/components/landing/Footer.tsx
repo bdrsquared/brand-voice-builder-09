@@ -1,4 +1,4 @@
-import logo from "@/assets/earworm-logo.png";
+import logo from "@/assets/earworm-logo.webp";
 
 const Footer = () => {
   return (

@@ -1,12 +1,12 @@
-import logoBnvt from "@/assets/logos/bnvt.png";
-import logoCollyerBristow from "@/assets/logos/collyer-bristow.png";
-import logoWenodo from "@/assets/logos/wenodo.png";
-import logoPulsetto from "@/assets/logos/pulsetto.png";
-import logoSoldo from "@/assets/logos/soldo.png";
-import logoPolly from "@/assets/logos/polly.png";
-import logoKpmg from "@/assets/logos/kpmg.png";
-import logoIgGroup from "@/assets/logos/ig-group.png";
-import logoCisco from "@/assets/logos/cisco.png";
+import logoBnvt from "@/assets/logos/bnvt.webp";
+import logoCollyerBristow from "@/assets/logos/collyer-bristow.webp";
+import logoWenodo from "@/assets/logos/wenodo.webp";
+import logoPulsetto from "@/assets/logos/pulsetto.webp";
+import logoSoldo from "@/assets/logos/soldo.webp";
+import logoPolly from "@/assets/logos/polly.webp";
+import logoKpmg from "@/assets/logos/kpmg.webp";
+import logoIgGroup from "@/assets/logos/ig-group.webp";
+import logoCisco from "@/assets/logos/cisco.webp";
 
 const logos = [
   { src: logoBnvt, alt: "BNVT" },

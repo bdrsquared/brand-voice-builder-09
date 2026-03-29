@@ -71,6 +71,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
   const [isLightSection, setIsLightSection] = useState(false);
+  const navLight = isLightSection && !mobileOpen;
 
   useEffect(() => {
     const handler = () => {
@@ -108,14 +109,14 @@ const Navbar = () => {
           className="max-w-6xl mx-auto relative"
           onMouseLeave={() => setMegaOpen(null)}
         >
-          <div className={`${isLightSection ? "bg-white/70 border-black/10 shadow-black/5" : "bg-white/5 border-white/10 shadow-black/20"} backdrop-blur-xl border rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg transition-colors duration-300`}>
-            <img src={isLightSection ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300" />
+          <div className={`${navLight ? "bg-white/70 border-black/10 shadow-black/5" : "bg-white/5 border-white/10 shadow-black/20"} backdrop-blur-xl border rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg transition-colors duration-300`}>
+            <img src={navLight ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300" />
             <div className="hidden sm:flex items-center gap-8">
               <div
                 className="relative"
                 onMouseEnter={() => setMegaOpen("services")}
               >
-                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
+                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   Our service
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "services" ? "rotate-180" : ""}`} />
                 </button>
@@ -124,14 +125,14 @@ const Navbar = () => {
                 className="relative"
                 onMouseEnter={() => setMegaOpen("cases")}
               >
-                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
+                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   Case studies
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "cases" ? "rotate-180" : ""}`} />
                 </button>
               </div>
               <a
                 href="#how-it-works"
-                className={`text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
+                className={`text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
                 onMouseEnter={() => setMegaOpen(null)}
               >
                 How it works
@@ -144,7 +145,7 @@ const Navbar = () => {
                 className="relative"
                 onMouseEnter={() => setMegaOpen("podplanner")}
               >
-                <button className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
+                <button className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
                   PodPlanner
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "podplanner" ? "rotate-180" : ""}`} />
@@ -168,17 +169,17 @@ const Navbar = () => {
               <span className="sr-only">Menu</span>
               <div className="relative w-5 h-4 flex flex-col justify-between">
                 <span
-                  className={`block h-[2px] w-full rounded-full transition-all duration-300 origin-center ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 origin-center ${navLight ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "translate-y-[7px] rotate-45" : ""
                   }`}
                 />
                 <span
-                  className={`block h-[2px] w-full rounded-full transition-all duration-300 ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 ${navLight ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "opacity-0 scale-x-0" : ""
                   }`}
                 />
                 <span
-                  className={`block h-[2px] w-full rounded-full transition-all duration-300 origin-center ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 origin-center ${navLight ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "-translate-y-[7px] -rotate-45" : ""
                   }`}
                 />
@@ -196,7 +197,7 @@ const Navbar = () => {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className={`${isLightSection ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 flex gap-6 transition-colors duration-300`}>
+                <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 flex gap-6 transition-colors duration-300`}>
                   <div className="grid grid-cols-2 gap-6 flex-1">
                     {megaMenuItems.map((item) => (
                       <div key={item.title} className="group cursor-pointer">
@@ -239,7 +240,7 @@ const Navbar = () => {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className={`${isLightSection ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 pb-5 shadow-xl shadow-black/30 transition-colors duration-300`}>
+                <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 pb-5 shadow-xl shadow-black/30 transition-colors duration-300`}>
                   <div className="grid grid-cols-3 gap-5">
                     {caseStudies.map((study) => (
                       <a key={study.brand} href="#case-studies" className="group cursor-pointer block">
@@ -300,7 +301,7 @@ const Navbar = () => {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className={`${isLightSection ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 transition-colors duration-300`}>
+                <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 transition-colors duration-300`}>
                   {/* Two-column layout */}
                   <div className="flex gap-6">
                     {/* Left column — description + animated UI */}

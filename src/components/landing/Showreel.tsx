@@ -21,7 +21,7 @@ const Showreel = () => {
             ● Working with businesses worldwide
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-light-text-primary">
-            Check out our <span className="text-gradient-green-dark sm:inline"><span className="sm:hidden text-light-text-tertiary">showreel</span><span className="hidden sm:inline">showreel</span></span>
+            Check out our <span className="text-light-text-tertiary">showreel</span>
           </h2>
         </motion.div>
 

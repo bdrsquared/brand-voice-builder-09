@@ -458,23 +458,10 @@ const Navbar = () => {
                     {/* Right column — features */}
                     <div className="flex flex-col justify-center w-72 py-2 pl-2 gap-0">
                       {[
-                        {
-                          icon: Layers,
-                          title: "Plan with clarity",
-                          desc: "Map out episodes, guests, and content in one place.",
-                        },
-                        {
-                          icon: Activity,
-                          title: "Track progress",
-                          desc: "See exactly where each episode is in production.",
-                        },
-                        {
-                          icon: Eye,
-                          title: "Measure performance",
-                          desc: "Understand what's working across your content.",
-                        },
-                      ].map((feature, i, arr) => (
-                      {(() => {
+                        { icon: Layers, title: "Plan with clarity", desc: "Map out episodes, guests, and content in one place." },
+                        { icon: Activity, title: "Track progress", desc: "See exactly where each episode is in production." },
+                        { icon: Eye, title: "Measure performance", desc: "Understand what's working across your content." },
+                      ].map((feature, i, arr) => {
                         const gradients = [
                           "radial-gradient(ellipse at 10% 80%, hsla(145,80%,55%,0.06) 0%, transparent 55%), radial-gradient(ellipse at 90% 20%, hsla(243,70%,60%,0.04) 0%, transparent 50%)",
                           "radial-gradient(ellipse at 80% 90%, hsla(243,70%,60%,0.06) 0%, transparent 55%), radial-gradient(ellipse at 20% 10%, hsla(35,90%,55%,0.04) 0%, transparent 50%)",
@@ -499,7 +486,7 @@ const Navbar = () => {
                             </div>
                           </div>
                         );
-                      })()}
+                      })}
                     </div>
                   </div>
 

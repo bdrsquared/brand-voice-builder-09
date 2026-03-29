@@ -110,14 +110,13 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Track visual viewport offset for Chrome mobile (browser bar hide/show)
+  // Track visual viewport for Chrome mobile (browser bar hide/show)
   useEffect(() => {
     const vv = window.visualViewport;
     if (!vv) return;
     const update = () => {
-      // offsetTop accounts for the difference when browser chrome hides
-      const offset = window.innerHeight - (vv.height + vv.offsetTop);
-      setBottomOffset(Math.max(0, offset));
+      // Position from top: visualViewport bottom minus button height (~50px)
+      setBottomBarTop(vv.offsetTop + vv.height - 50);
     };
     vv.addEventListener("resize", update);
     vv.addEventListener("scroll", update);

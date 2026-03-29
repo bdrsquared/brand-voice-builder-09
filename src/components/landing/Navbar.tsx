@@ -5,7 +5,7 @@ import logo from "@/assets/earworm-logo.png";
 import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.png";
 import brightLogo from "@/assets/bright-logo.png";
-import launchImg from "@/assets/service-launch.webp";
+import launchImg from "@/assets/Launch_Podcast.jpeg";
 import runScaleImg from "@/assets/service-run-scale.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
 import caseNoStress from "@/assets/case-no-stress.jpeg";

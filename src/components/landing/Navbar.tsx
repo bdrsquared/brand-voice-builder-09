@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, Calendar, Layers, Activity, Eye, LogIn } from "lucide-react";
 import logo from "@/assets/earworm-logo.png";
+import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.png";
 import brightLogo from "@/assets/bright-logo.png";
 import launchImg from "@/assets/service-launch.webp";
@@ -69,9 +70,22 @@ const Navbar = () => {
   const [megaOpen, setMegaOpen] = useState<MegaMenu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSubMenu, setMobileSubMenu] = useState<"cases" | "services" | "more" | "podplanner" | null>(null);
+  const [isLightSection, setIsLightSection] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 50);
+    const handler = () => {
+      setScrolled(window.scrollY > 50);
+      
+      // Check if navbar is over the light section
+      const lightStart = document.getElementById("light-section-start");
+      const lightEnd = document.getElementById("light-section-end");
+      if (lightStart && lightEnd) {
+        const navBottom = 70; // approximate navbar bottom position
+        const startTop = lightStart.getBoundingClientRect().top;
+        const endBottom = lightEnd.getBoundingClientRect().bottom;
+        setIsLightSection(startTop <= navBottom && endBottom >= navBottom);
+      }
+    };
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
@@ -94,14 +108,14 @@ const Navbar = () => {
           className="max-w-6xl mx-auto relative"
           onMouseLeave={() => setMegaOpen(null)}
         >
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg shadow-black/20">
-            <img src={logo} alt="Earworm" className="h-5" />
+          <div className={`${isLightSection ? "bg-white/70 border-black/10 shadow-black/5" : "bg-white/5 border-white/10 shadow-black/20"} backdrop-blur-xl border rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg transition-colors duration-300`}>
+            <img src={isLightSection ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300" />
             <div className="hidden sm:flex items-center gap-8">
               <div
                 className="relative"
                 onMouseEnter={() => setMegaOpen("services")}
               >
-                <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   Our service
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "services" ? "rotate-180" : ""}`} />
                 </button>
@@ -110,14 +124,14 @@ const Navbar = () => {
                 className="relative"
                 onMouseEnter={() => setMegaOpen("cases")}
               >
-                <button className="inline-flex items-center gap-1 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                <button className={`inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   Case studies
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "cases" ? "rotate-180" : ""}`} />
                 </button>
               </div>
               <a
                 href="#how-it-works"
-                className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
+                className={`text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}
                 onMouseEnter={() => setMegaOpen(null)}
               >
                 How it works
@@ -130,7 +144,7 @@ const Navbar = () => {
                 className="relative"
                 onMouseEnter={() => setMegaOpen("podplanner")}
               >
-                <button className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                <button className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-300 ${isLightSection ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
                   <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
                   PodPlanner
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "podplanner" ? "rotate-180" : ""}`} />
@@ -154,17 +168,17 @@ const Navbar = () => {
               <span className="sr-only">Menu</span>
               <div className="relative w-5 h-4 flex flex-col justify-between">
                 <span
-                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 origin-center ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 origin-center ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "translate-y-[7px] rotate-45" : ""
                   }`}
                 />
                 <span
-                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "opacity-0 scale-x-0" : ""
                   }`}
                 />
                 <span
-                  className={`block h-[2px] w-full bg-foreground rounded-full transition-all duration-300 origin-center ${
+                  className={`block h-[2px] w-full rounded-full transition-all duration-300 origin-center ${isLightSection ? "bg-gray-900" : "bg-foreground"} ${
                     mobileOpen ? "-translate-y-[7px] -rotate-45" : ""
                   }`}
                 />

@@ -24,19 +24,19 @@ const Index = () => {
       <ValueProps />
       
       {/* Rounded divider: dark to light */}
-      <div className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+      <div id="light-section-start" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
         <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
       </div>
 
       {/* Light mode sections */}
-      <div style={{ backgroundColor: '#E4E5E9' }}>
+      <div id="light-sections" style={{ backgroundColor: '#E4E5E9' }}>
         <Showreel />
         <WhyNow />
         <InPractice />
       </div>
 
       {/* Rounded divider: light to dark */}
-      <div className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+      <div id="light-section-end" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
         <div className="bg-background rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" />
       </div>
 

@@ -18,6 +18,7 @@ const ChatWidget = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [isLight, setIsLight] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -42,6 +43,23 @@ const ChatWidget = () => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Detect if chat widget is over light section
+  useEffect(() => {
+    const handler = () => {
+      const lightStart = document.getElementById("light-section-start");
+      const lightEnd = document.getElementById("light-section-end");
+      if (lightStart && lightEnd) {
+        const windowH = window.innerHeight;
+        const startTop = lightStart.getBoundingClientRect().top;
+        const endBottom = lightEnd.getBoundingClientRect().bottom;
+        setIsLight(startTop <= windowH && endBottom >= windowH - 80);
+      }
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    handler();
+    return () => window.removeEventListener("scroll", handler);
   }, []);
 
   const fullPhone = phoneNumber.trim() ? `${selectedCode.code} ${phoneNumber.trim()}` : "";
@@ -229,7 +247,11 @@ const ChatWidget = () => {
       {/* Trigger button */}
       <motion.button
         onClick={() => open ? handleClose() : setOpen(true)}
-        className="group relative flex items-center gap-2 rounded-full border border-white/[0.15] bg-white/[0.08] backdrop-blur-xl px-5 py-3 text-sm font-semibold text-foreground shadow-lg hover:bg-white/[0.12] transition-all cursor-pointer"
+        className={`group relative flex items-center gap-2 rounded-full backdrop-blur-xl px-5 py-3 text-sm font-semibold shadow-lg transition-all cursor-pointer ${
+          isLight && !open
+            ? "border border-black/[0.15] bg-black/[0.08] text-gray-900 hover:bg-black/[0.12]"
+            : "border border-white/[0.15] bg-white/[0.08] text-foreground hover:bg-white/[0.12]"
+        }`}
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
       >

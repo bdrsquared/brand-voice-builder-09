@@ -42,7 +42,10 @@ const TestimonialTicker = () => {
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 z-[80] text-black"
-      style={{ backgroundColor: "#4DF290", fontFamily: "'Geist', sans-serif" }}
+      style={{
+        background: "linear-gradient(105deg, #f0e6ff 0%, #ffffff 18%, #d4f5e0 32%, #f5eeff 48%, #e0fff0 60%, #ffffff 75%, #ece0ff 88%, #d9ffe8 100%)",
+        fontFamily: "'Geist', sans-serif",
+      }}
       animate={{ y: visible ? 0 : -40 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >

@@ -222,18 +222,32 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
 
       if (imgResponse.ok) {
         const imgData = await imgResponse.json();
-        const content = imgData.choices?.[0]?.message?.content;
+        console.log("AI image response keys:", JSON.stringify(Object.keys(imgData)));
+        const message = imgData.choices?.[0]?.message;
+        console.log("Message keys:", message ? JSON.stringify(Object.keys(message)) : "no message");
+        const content = message?.content || "";
+        console.log("Content type:", typeof content, "length:", content?.length, "starts with:", typeof content === "string" ? content.substring(0, 100) : "N/A");
         
-        // Check for inline_data (base64 image) in parts
-        const parts = imgData.choices?.[0]?.message?.parts || [];
+        // Check for base64 image in content (data URI format)
         let base64Data: string | null = null;
         let mimeType = "image/png";
         
+        // Try parts first (Gemini native format)
+        const parts = message?.parts || [];
         for (const part of parts) {
           if (part.inline_data) {
             base64Data = part.inline_data.data;
             mimeType = part.inline_data.mime_type || "image/png";
             break;
+          }
+        }
+        
+        // Try content as data URI
+        if (!base64Data && typeof content === "string") {
+          const dataUriMatch = content.match(/data:(image\/[^;]+);base64,([A-Za-z0-9+/=]+)/);
+          if (dataUriMatch) {
+            mimeType = dataUriMatch[1];
+            base64Data = dataUriMatch[2];
           }
         }
 

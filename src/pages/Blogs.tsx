@@ -70,7 +70,7 @@ const Blogs = () => {
     (currentPage - 1) * POSTS_PER_PAGE,
     currentPage * POSTS_PER_PAGE
   );
-  const recentPosts = posts.slice(0, 5);
+  
 
   useEffect(() => {
     setCurrentPage(1);

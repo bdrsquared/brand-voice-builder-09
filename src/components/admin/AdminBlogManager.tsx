@@ -93,6 +93,7 @@ const AdminBlogManager = () => {
     const { data } = await supabase
       .from("blog_ideas")
       .select("*")
+      .neq("status", "declined")
       .order("created_at", { ascending: false });
     if (data) setIdeas(data as BlogIdea[]);
   };

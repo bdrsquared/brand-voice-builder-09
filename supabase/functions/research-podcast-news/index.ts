@@ -25,6 +25,23 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+    // Fetch existing idea titles to avoid duplicates (including declined ones)
+    const { data: existingIdeas } = await supabase
+      .from("blog_ideas")
+      .select("title");
+    const existingTitles = (existingIdeas || []).map((i: { title: string }) => i.title);
+
+    // Also fetch existing blog post titles
+    const { data: existingPosts } = await supabase
+      .from("blog_posts")
+      .select("title");
+    const existingPostTitles = (existingPosts || []).map((p: { title: string }) => p.title);
+
+    const allExistingTitles = [...existingTitles, ...existingPostTitles];
+    const exclusionList = allExistingTitles.length > 0
+      ? `\n\nDo NOT suggest ideas similar to these existing titles:\n${allExistingTitles.map(t => `- ${t}`).join("\n")}`
+      : "";
+
     // Search for latest podcast industry news
     const searchResponse = await fetch("https://api.perplexity.ai/chat/completions", {
       method: "POST",
@@ -43,7 +60,7 @@ serve(async (req) => {
           {
             role: "user",
             content:
-              "What are the top 5 most interesting podcast industry news stories or trends from the past week? Include stories about branded podcasts, B2B podcasting, video podcasting, podcast marketing strategies, and podcast production innovations.",
+              `What are the top 5 most interesting podcast industry news stories or trends from the past week? Include stories about branded podcasts, B2B podcasting, video podcasting, podcast marketing strategies, and podcast production innovations.${exclusionList}`,
           },
         ],
         search_recency_filter: "week",

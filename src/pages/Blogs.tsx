@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Footer from "@/components/landing/Footer";
-import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Search, TrendingUp } from "lucide-react";
+import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { format, parseISO } from "date-fns";
 
 type BlogPost = {
@@ -70,7 +70,7 @@ const Blogs = () => {
     (currentPage - 1) * POSTS_PER_PAGE,
     currentPage * POSTS_PER_PAGE
   );
-  const recentPosts = posts.slice(0, 5);
+  
 
   useEffect(() => {
     setCurrentPage(1);
@@ -99,9 +99,6 @@ const Blogs = () => {
           {/* Header row */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold tracking-widest uppercase border border-white/[0.1] bg-white/[0.04] backdrop-blur-md text-muted-foreground mb-4">
-                News & Articles
-              </span>
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading mb-3 leading-[0.95]">
                 <span className="bg-gradient-to-r from-foreground via-foreground/90 to-muted-foreground bg-clip-text text-transparent">
                   Insights that
@@ -184,34 +181,6 @@ const Blogs = () => {
             </Link>
           )}
 
-          {/* Category filters */}
-          {categories.length > 0 && (
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
-              <button
-                onClick={() => setActiveCategory(null)}
-                className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-medium transition-all backdrop-blur-md ${
-                  !activeCategory
-                    ? "bg-foreground text-background"
-                    : "bg-white/[0.04] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
-                }`}
-              >
-                All
-              </button>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-                  className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-medium transition-all backdrop-blur-md ${
-                    activeCategory === cat
-                      ? "bg-foreground text-background"
-                      : "bg-white/[0.04] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 
@@ -231,17 +200,15 @@ const Blogs = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10">
-              {/* Articles grid */}
-              <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+                <div className="grid grid-cols-1 gap-5">
                   {paginatedPosts.map((post) => (
                     <Link
                       key={post.id}
                       to={`/blog/${post.slug}`}
-                      className="group flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-white/[0.14] transition-all duration-300 hover:bg-white/[0.04]"
+                      className="group flex flex-col sm:flex-row rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-white/[0.14] transition-all duration-300 hover:bg-white/[0.04]"
                     >
-                      <div className="aspect-[16/9] overflow-hidden">
+                      <div className="sm:w-72 lg:w-80 shrink-0 aspect-[16/9] sm:aspect-auto sm:h-full overflow-hidden">
                         {post.cover_image ? (
                           <img
                             src={post.cover_image}
@@ -249,12 +216,12 @@ const Blogs = () => {
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="w-full h-full bg-white/[0.02] flex items-center justify-center">
+                          <div className="w-full h-full min-h-[180px] bg-white/[0.02] flex items-center justify-center">
                             <span className="text-3xl font-heading text-white/[0.04]">E</span>
                           </div>
                         )}
                       </div>
-                      <div className="p-4 sm:p-5 flex flex-col flex-1">
+                      <div className="p-4 sm:p-5 flex flex-col flex-1 justify-center">
                         <div className="flex items-center gap-2 mb-2">
                           {post.category && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.04] backdrop-blur-md border border-white/[0.08] text-muted-foreground">
@@ -269,7 +236,7 @@ const Blogs = () => {
                           {post.title}
                         </h3>
                         {post.excerpt && (
-                          <p className="text-xs sm:text-sm text-muted-foreground/70 font-body line-clamp-2 mt-auto">
+                          <p className="text-xs sm:text-sm text-muted-foreground/70 font-body line-clamp-2">
                             {post.excerpt}
                           </p>
                         )}
@@ -313,64 +280,6 @@ const Blogs = () => {
                   </div>
                 )}
               </div>
-
-              {/* Sidebar */}
-              <aside className="hidden lg:block space-y-8">
-                {/* Recent posts */}
-                <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-md p-5">
-                  <h3 className="text-sm font-heading font-semibold uppercase tracking-wider text-muted-foreground/60 mb-4 flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4 text-foreground/40" />
-                    Recent
-                  </h3>
-                  <div className="space-y-4">
-                    {recentPosts.map((post, i) => (
-                      <Link
-                        key={post.id}
-                        to={`/blog/${post.slug}`}
-                        className="group flex gap-3 items-start"
-                      >
-                        <span className="text-2xl font-heading font-bold text-white/[0.06] leading-none mt-0.5 shrink-0">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <div className="min-w-0">
-                          <h4 className="text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors line-clamp-2 leading-snug">
-                            {post.title}
-                          </h4>
-                          <span className="text-[11px] text-muted-foreground/40 mt-1 block">
-                            {format(parseISO(post.created_at), "MMM d")}
-                          </span>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Categories */}
-                <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-md p-5">
-                  <h3 className="text-sm font-heading font-semibold uppercase tracking-wider text-muted-foreground/60 mb-4">
-                    Topics
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {categories.map((cat) => {
-                      const count = posts.filter((p) => p.category === cat).length;
-                      return (
-                        <button
-                          key={cat}
-                          onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all backdrop-blur-md ${
-                            activeCategory === cat
-                              ? "bg-foreground text-background"
-                              : "bg-white/[0.04] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
-                          }`}
-                        >
-                          {cat} <span className="opacity-40 ml-1">{count}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </aside>
-            </div>
           )}
         </div>
       </section>

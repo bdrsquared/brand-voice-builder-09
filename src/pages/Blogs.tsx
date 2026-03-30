@@ -18,7 +18,7 @@ type BlogPost = {
   created_at: string;
 };
 
-const POSTS_PER_PAGE = 8;
+const POSTS_PER_PAGE = 9;
 
 const Blogs = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);

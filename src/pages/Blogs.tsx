@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Footer from "@/components/landing/Footer";
-import { ArrowRight, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Search, TrendingUp } from "lucide-react";
 import { format, parseISO } from "date-fns";
 
 type BlogPost = {
@@ -18,12 +18,14 @@ type BlogPost = {
   created_at: string;
 };
 
-const POSTS_PER_PAGE = 10;
+const POSTS_PER_PAGE = 8;
 
 const Blogs = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,147 +41,320 @@ const Blogs = () => {
     fetchPosts();
   }, []);
 
-  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
-  const paginatedPosts = posts.slice(
+  const categories = useMemo(() => {
+    const cats = posts.map((p) => p.category).filter(Boolean) as string[];
+    return [...new Set(cats)];
+  }, [posts]);
+
+  const filteredPosts = useMemo(() => {
+    let result = posts;
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (p) =>
+          p.title.toLowerCase().includes(q) ||
+          p.excerpt?.toLowerCase().includes(q) ||
+          p.category?.toLowerCase().includes(q)
+      );
+    }
+    if (activeCategory) {
+      result = result.filter((p) => p.category === activeCategory);
+    }
+    return result;
+  }, [posts, searchQuery, activeCategory]);
+
+  const featuredPost = posts[0];
+  const mainPosts = filteredPosts.filter((p) => p.id !== featuredPost?.id);
+  const totalPages = Math.ceil(mainPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = mainPosts.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
     currentPage * POSTS_PER_PAGE
   );
+  const recentPosts = posts.slice(0, 5);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, activeCategory]);
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <TestimonialTicker />
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-32 pb-16 sm:pt-40 sm:pb-20 px-6 relative">
+      {/* Hero with featured post */}
+      <section className="pt-28 sm:pt-36 pb-8 sm:pb-12 px-6 relative">
         <div className="absolute inset-0 pointer-events-none">
           <div className="blob-green absolute w-[500px] h-[500px] -top-40 -left-40" />
           <div className="blob-blue absolute w-[400px] h-[400px] -top-20 right-0" />
         </div>
-        <div className="max-w-6xl mx-auto relative z-10 text-center">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10 bg-white/[0.06] backdrop-blur-sm text-muted-foreground mb-6">
-            Insights & Ideas
-          </span>
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-heading mb-6">
-            The Earworm <span className="text-gradient-green">Blog</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto font-body">
-            Strategies, stories, and insights on building authority through video podcasting.
-          </p>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+            <div>
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-heading mb-2">
+                News & <span className="text-gradient-green">Insights</span>
+              </h1>
+              <p className="text-sm sm:text-base text-muted-foreground font-body max-w-lg">
+                What's happening in podcasting, content and the stuff nobody's talking about yet.
+              </p>
+            </div>
+            {/* Search */}
+            <div className="relative w-full sm:w-72">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/40 focus:ring-1 focus:ring-primary/20 transition-all font-body"
+              />
+            </div>
+          </div>
+
+          {/* Featured post */}
+          {!searchQuery && !activeCategory && featuredPost && !loading && (
+            <Link
+              to={`/blog/${featuredPost.slug}`}
+              className="group block relative rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 mb-10"
+            >
+              <div className="grid md:grid-cols-2">
+                <div className="aspect-[16/10] md:aspect-auto md:h-full">
+                  {featuredPost.cover_image ? (
+                    <img
+                      src={featuredPost.cover_image}
+                      alt={featuredPost.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full h-full min-h-[240px] bg-secondary flex items-center justify-center">
+                      <span className="text-5xl font-heading text-muted-foreground/20">E</span>
+                    </div>
+                  )}
+                </div>
+                <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-card">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-primary/10 text-primary border border-primary/20">
+                      Featured
+                    </span>
+                    {featuredPost.category && (
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.06] border border-white/[0.08] text-foreground/70">
+                        {featuredPost.category}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading font-medium mb-3 text-foreground group-hover:text-primary transition-colors leading-tight">
+                    {featuredPost.title}
+                  </h2>
+                  {featuredPost.excerpt && (
+                    <p className="text-sm sm:text-base text-muted-foreground font-body line-clamp-3 mb-4">
+                      {featuredPost.excerpt}
+                    </p>
+                  )}
+                  <div className="flex items-center justify-between mt-auto">
+                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {format(parseISO(featuredPost.created_at), "MMM d, yyyy")}
+                    </span>
+                    <span className="flex items-center gap-1.5 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                      Read <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
+
+          {/* Category filters */}
+          {categories.length > 0 && (
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
+              <button
+                onClick={() => setActiveCategory(null)}
+                className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  !activeCategory
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-white/[0.06] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:bg-white/[0.1]"
+                }`}
+              >
+                All
+              </button>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                  className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
+                    activeCategory === cat
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-white/[0.06] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:bg-white/[0.1]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Blog Grid */}
+      {/* Main content */}
       <section className="px-6 pb-20 sm:pb-28">
         <div className="max-w-6xl mx-auto">
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="rounded-2xl border border-border bg-card animate-pulse h-[380px]" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="rounded-2xl border border-border bg-card animate-pulse h-[320px]" />
               ))}
             </div>
-          ) : posts.length === 0 ? (
+          ) : filteredPosts.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-muted-foreground text-lg">No blog posts yet. Check back soon!</p>
+              <p className="text-muted-foreground text-lg font-body">
+                {searchQuery ? `No results for "${searchQuery}"` : "No blog posts yet. Check back soon!"}
+              </p>
             </div>
           ) : (
-            <>
-              <div className="flex flex-col gap-4">
-                {paginatedPosts.map((post) => (
-                  <Link
-                    key={post.id}
-                    to={`/blog/${post.slug}`}
-                    className="group relative flex rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
-                  >
-                    {/* Shimmer sweep on hover */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-2xl z-10">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-                    </div>
-                    <div className="w-28 sm:w-40 shrink-0">
-                      {post.cover_image ? (
-                        <img
-                          src={post.cover_image}
-                          alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-secondary flex items-center justify-center">
-                          <span className="text-2xl font-heading text-muted-foreground/30">E</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-1 p-4 sm:p-5 flex flex-col justify-center min-w-0">
-                      <div className="hidden sm:flex items-center gap-3 mb-2">
-                        {post.category && (
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] text-foreground/80">
-                            {post.category}
-                          </span>
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10">
+              {/* Articles grid */}
+              <div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {paginatedPosts.map((post) => (
+                    <Link
+                      key={post.id}
+                      to={`/blog/${post.slug}`}
+                      className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
+                    >
+                      <div className="aspect-[16/9] overflow-hidden">
+                        {post.cover_image ? (
+                          <img
+                            src={post.cover_image}
+                            alt={post.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-secondary flex items-center justify-center">
+                            <span className="text-3xl font-heading text-muted-foreground/20">E</span>
+                          </div>
                         )}
-                        <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Calendar className="w-3 h-3" />
-                          {format(parseISO(post.created_at), "MMM d, yyyy")}
-                        </span>
                       </div>
-                      <h3 className="text-sm sm:text-lg font-heading font-medium mb-1 text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="text-xs sm:text-sm text-muted-foreground font-body line-clamp-2 sm:line-clamp-1">
-                          {post.excerpt}
-                        </p>
-                      )}
-                      <span className="sm:hidden flex items-center gap-1 text-[11px] text-muted-foreground mt-1.5">
-                        <Calendar className="w-3 h-3" />
-                        {format(parseISO(post.created_at), "MMM d, yyyy")}
-                      </span>
+                      <div className="p-4 sm:p-5 flex flex-col flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          {post.category && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.06] border border-white/[0.08] text-foreground/70">
+                              {post.category}
+                            </span>
+                          )}
+                          <span className="text-[11px] text-muted-foreground/60">
+                            {format(parseISO(post.created_at), "MMM d, yyyy")}
+                          </span>
+                        </div>
+                        <h3 className="text-base sm:text-lg font-heading font-medium mb-2 text-foreground group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                          {post.title}
+                        </h3>
+                        {post.excerpt && (
+                          <p className="text-xs sm:text-sm text-muted-foreground font-body line-clamp-2 mt-auto">
+                            {post.excerpt}
+                          </p>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center mt-10">
+                    <div className="inline-flex items-center gap-1 px-3 py-2 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/[0.08]">
+                      <button
+                        onClick={() => goToPage(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/[0.08] transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                        <button
+                          key={page}
+                          onClick={() => goToPage(page)}
+                          className={`w-8 h-8 rounded-full text-sm font-medium transition-colors ${
+                            page === currentPage
+                              ? "bg-primary text-primary-foreground"
+                              : "text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      ))}
+                      <button
+                        onClick={() => goToPage(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/[0.08] transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
                     </div>
-                    <div className="hidden sm:flex items-center pr-5 shrink-0">
-                      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors group-hover:translate-x-0.5 transition-transform" />
-                    </div>
-                  </Link>
-                ))}
+                  </div>
+                )}
               </div>
 
-              {totalPages > 1 && (
-                <div className="flex justify-center mt-10">
-                  <div className="inline-flex items-center gap-1 px-3 py-2 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/[0.08]">
-                    <button
-                      onClick={() => goToPage(currentPage - 1)}
-                      disabled={currentPage === 1}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/[0.08] transition-colors disabled:opacity-30 disabled:pointer-events-none"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      <span className="hidden sm:inline">Prev</span>
-                    </button>
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                      <button
-                        key={page}
-                        onClick={() => goToPage(page)}
-                        className={`w-8 h-8 rounded-full text-sm font-medium transition-colors ${
-                          page === currentPage
-                            ? "bg-primary text-primary-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
-                        }`}
+              {/* Sidebar */}
+              <aside className="hidden lg:block space-y-8">
+                {/* Recent posts */}
+                <div className="rounded-2xl border border-border bg-card p-5">
+                  <h3 className="text-sm font-heading font-semibold uppercase tracking-wider text-muted-foreground mb-4 flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-primary" />
+                    Recent
+                  </h3>
+                  <div className="space-y-4">
+                    {recentPosts.map((post, i) => (
+                      <Link
+                        key={post.id}
+                        to={`/blog/${post.slug}`}
+                        className="group flex gap-3 items-start"
                       >
-                        {page}
-                      </button>
+                        <span className="text-2xl font-heading font-bold text-white/[0.08] leading-none mt-0.5 shrink-0">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <div className="min-w-0">
+                          <h4 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+                            {post.title}
+                          </h4>
+                          <span className="text-[11px] text-muted-foreground/50 mt-1 block">
+                            {format(parseISO(post.created_at), "MMM d")}
+                          </span>
+                        </div>
+                      </Link>
                     ))}
-                    <button
-                      onClick={() => goToPage(currentPage + 1)}
-                      disabled={currentPage === totalPages}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/[0.08] transition-colors disabled:opacity-30 disabled:pointer-events-none"
-                    >
-                      <span className="hidden sm:inline">Next</span>
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
                   </div>
                 </div>
-              )}
-            </>
+
+                {/* Categories */}
+                <div className="rounded-2xl border border-border bg-card p-5">
+                  <h3 className="text-sm font-heading font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+                    Topics
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {categories.map((cat) => {
+                      const count = posts.filter((p) => p.category === cat).length;
+                      return (
+                        <button
+                          key={cat}
+                          onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                            activeCategory === cat
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-white/[0.04] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
+                          }`}
+                        >
+                          {cat} <span className="opacity-50 ml-1">{count}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </aside>
+            </div>
           )}
         </div>
       </section>

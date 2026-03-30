@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink, Check, X, RefreshCw, Loader2, Sparkles } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink, Check, X, RefreshCw, Loader2, Sparkles, ImageIcon } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { toast } from "sonner";
 
@@ -80,6 +80,7 @@ const AdminBlogManager = () => {
   const [saving, setSaving] = useState(false);
   const [researching, setResearching] = useState(false);
   const [generatingId, setGeneratingId] = useState<string | null>(null);
+  const [findingImage, setFindingImage] = useState(false);
 
   const fetchPosts = async () => {
     const { data } = await supabase
@@ -283,6 +284,36 @@ const AdminBlogManager = () => {
     }
   };
 
+  // Find an image for the current blog post being edited
+  const handleFindImage = async () => {
+    if (!form.title) {
+      toast.error("Add a title first so we can find a relevant image");
+      return;
+    }
+    setFindingImage(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("find-blog-image", {
+        body: {
+          title: form.title,
+          excerpt: form.excerpt || "",
+          slug: form.slug || form.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+        },
+      });
+      if (error || data?.error) {
+        toast.error(data?.error || error?.message || "Failed to find image");
+      } else if (data?.cover_image) {
+        setForm((f) => ({ ...f, cover_image: data.cover_image }));
+        toast.success("Found and stored a cover image!");
+      } else {
+        toast.error("No suitable image found");
+      }
+    } catch (e) {
+      toast.error("Failed to search for image");
+    } finally {
+      setFindingImage(false);
+    }
+  };
+
   const statusColor = (status: string) => {
     switch (status) {
       case "new": return "bg-blue-500/20 text-blue-400";
@@ -348,7 +379,20 @@ const AdminBlogManager = () => {
             </div>
           </div>
           <div>
-            <Label>Cover Image URL</Label>
+            <div className="flex items-center justify-between mb-1">
+              <Label>Cover Image URL</Label>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleFindImage}
+                disabled={findingImage}
+                className="text-xs text-muted-foreground hover:text-primary gap-1.5 h-7"
+              >
+                {findingImage ? <Loader2 className="w-3 h-3 animate-spin" /> : <ImageIcon className="w-3 h-3" />}
+                {findingImage ? "Searching..." : "Find an image"}
+              </Button>
+            </div>
             <Input
               value={form.cover_image}
               onChange={(e) => setForm((f) => ({ ...f, cover_image: e.target.value }))}

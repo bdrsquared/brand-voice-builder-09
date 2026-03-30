@@ -93,17 +93,13 @@ const Blogs = () => {
           {/* Header row */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading mb-3 leading-[0.95]">
-                <span className="bg-gradient-to-r from-foreground via-foreground/90 to-muted-foreground bg-clip-text text-transparent">
-                  Insights that
-                </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading mb-3 leading-[0.95] text-foreground">
+                The stuff happening.
                 <br />
-                <span className="bg-gradient-to-r from-[#6359EA] via-[#1CFA76] to-[#FFB347] bg-clip-text text-transparent">
-                  actually matter
-                </span>
+                What we think about it.
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground font-body max-w-md">
-                What's happening in podcasting, content and the stuff nobody's talking about yet.
+                Industry news without the corporate spin.
               </p>
             </div>
             {/* Search */}

@@ -180,98 +180,155 @@ const Admin = () => {
           </div>
         </div>
 
-        {/* Table */}
+        {/* Inquiries List */}
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-border">
-                <TableHead className="text-muted-foreground">Type</TableHead>
-                <TableHead className="text-muted-foreground">Name</TableHead>
-                <TableHead className="text-muted-foreground">Email</TableHead>
-                <TableHead className="text-muted-foreground hidden md:table-cell">Phone</TableHead>
-                <TableHead className="text-muted-foreground hidden md:table-cell">Budget</TableHead>
-                <TableHead className="text-muted-foreground">Date</TableHead>
-                <TableHead />
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {inquiries.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={7} className="text-center py-12 text-muted-foreground">
-                    No inquiries yet
-                  </TableCell>
+          {/* Desktop table */}
+          <div className="hidden md:block">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-border">
+                  <TableHead className="text-muted-foreground">Type</TableHead>
+                  <TableHead className="text-muted-foreground">Name</TableHead>
+                  <TableHead className="text-muted-foreground">Email</TableHead>
+                  <TableHead className="text-muted-foreground">Phone</TableHead>
+                  <TableHead className="text-muted-foreground">Budget</TableHead>
+                  <TableHead className="text-muted-foreground">Date</TableHead>
+                  <TableHead />
                 </TableRow>
-              ) : (
-                inquiries.map((inq) => (
-                  <>
-                    <TableRow
-                      key={inq.id}
-                      className="border-border cursor-pointer hover:bg-muted/30 transition-colors"
-                      onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
-                    >
-                      <TableCell>
-                        <Badge variant="outline" className="text-xs border-border">
-                          {inq.type === "contact" ? (
-                            <><MessageSquare className="w-3 h-3 mr-1" /> Message</>
+              </TableHeader>
+              <TableBody>
+                {inquiries.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={7} className="text-center py-12 text-muted-foreground">
+                      No inquiries yet
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  inquiries.map((inq) => (
+                    <>
+                      <TableRow
+                        key={inq.id}
+                        className="border-border cursor-pointer hover:bg-muted/30 transition-colors"
+                        onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
+                      >
+                        <TableCell>
+                          <Badge variant="outline" className="text-xs border-border">
+                            {inq.type === "contact" ? (
+                              <><MessageSquare className="w-3 h-3 mr-1" /> Message</>
+                            ) : (
+                              <><Mic className="w-3 h-3 mr-1" /> Demo</>
+                            )}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="font-medium">{inq.name}</TableCell>
+                        <TableCell className="text-muted-foreground">{inq.email}</TableCell>
+                        <TableCell className="text-muted-foreground">{inq.phone || " - "}</TableCell>
+                        <TableCell className="text-muted-foreground">{inq.budget || " - "}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">
+                          {format(parseISO(inq.created_at), "MMM d, HH:mm")}
+                        </TableCell>
+                        <TableCell>
+                          {expandedId === inq.id ? (
+                            <ChevronUp className="w-4 h-4 text-muted-foreground" />
                           ) : (
-                            <><Mic className="w-3 h-3 mr-1" /> Demo</>
+                            <ChevronDown className="w-4 h-4 text-muted-foreground" />
                           )}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="font-medium">{inq.name}</TableCell>
-                      <TableCell className="text-muted-foreground">{inq.email}</TableCell>
-                      <TableCell className="text-muted-foreground hidden md:table-cell">
-                        {inq.phone || " - "}
-                      </TableCell>
-                      <TableCell className="text-muted-foreground hidden md:table-cell">
-                        {inq.budget || " - "}
-                      </TableCell>
-                      <TableCell className="text-muted-foreground text-sm">
-                        {format(parseISO(inq.created_at), "MMM d, HH:mm")}
-                      </TableCell>
-                      <TableCell>
-                        {expandedId === inq.id ? (
-                          <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                        ) : (
-                          <ChevronDown className="w-4 h-4 text-muted-foreground" />
-                        )}
-                      </TableCell>
-                    </TableRow>
-                    {expandedId === inq.id && (
-                      <TableRow key={`${inq.id}-detail`} className="border-border">
-                        <TableCell colSpan={7} className="bg-muted/10 px-6 py-4">
-                          <div className="space-y-3 text-sm">
-                            <div className="flex items-start gap-2">
-                              <Mail className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
-                              <span>{inq.email}</span>
-                            </div>
-                            {inq.phone && (
-                              <div className="flex items-start gap-2">
-                                <Phone className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
-                                <span>{inq.phone}</span>
-                              </div>
-                            )}
-                            {inq.budget && (
-                              <div className="flex items-start gap-2">
-                                <Calendar className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
-                                <span>Budget: {inq.budget}</span>
-                              </div>
-                            )}
-                            {inq.message && (
-                              <div className="mt-2 p-3 rounded-lg bg-background border border-border">
-                                <p className="text-xs text-muted-foreground mb-1">Message</p>
-                                <p className="text-foreground whitespace-pre-wrap">{inq.message}</p>
-                              </div>
-                            )}
-                          </div>
                         </TableCell>
                       </TableRow>
+                      {expandedId === inq.id && (
+                        <TableRow key={`${inq.id}-detail`} className="border-border">
+                          <TableCell colSpan={7} className="bg-muted/10 px-6 py-4">
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-start gap-2">
+                                <Mail className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+                                <span>{inq.email}</span>
+                              </div>
+                              {inq.phone && (
+                                <div className="flex items-start gap-2">
+                                  <Phone className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+                                  <span>{inq.phone}</span>
+                                </div>
+                              )}
+                              {inq.budget && (
+                                <div className="flex items-start gap-2">
+                                  <Calendar className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+                                  <span>Budget: {inq.budget}</span>
+                                </div>
+                              )}
+                              {inq.message && (
+                                <div className="mt-2 p-3 rounded-lg bg-background border border-border">
+                                  <p className="text-xs text-muted-foreground mb-1">Message</p>
+                                  <p className="text-foreground whitespace-pre-wrap">{inq.message}</p>
+                                </div>
+                              )}
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+
+          {/* Mobile card list */}
+          <div className="md:hidden divide-y divide-white/10">
+            {inquiries.length === 0 ? (
+              <p className="text-center py-12 text-muted-foreground text-sm">No inquiries yet</p>
+            ) : (
+              inquiries.map((inq) => (
+                <div
+                  key={inq.id}
+                  className="p-4 cursor-pointer active:bg-muted/20 transition-colors"
+                  onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-medium text-sm truncate">{inq.name}</span>
+                        <Badge variant="outline" className="text-[10px] border-border shrink-0">
+                          {inq.type === "contact" ? "Message" : "Demo"}
+                        </Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground truncate">{inq.email}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {format(parseISO(inq.created_at), "MMM d, HH:mm")}
+                      </p>
+                    </div>
+                    {expandedId === inq.id ? (
+                      <ChevronUp className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
                     )}
-                  </>
-                ))
-              )}
-            </TableBody>
-          </Table>
+                  </div>
+
+                  {expandedId === inq.id && (
+                    <div className="mt-3 pt-3 border-t border-white/10 space-y-2 text-sm">
+                      {inq.phone && (
+                        <div className="flex items-center gap-2">
+                          <Phone className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                          <span className="text-xs">{inq.phone}</span>
+                        </div>
+                      )}
+                      {inq.budget && (
+                        <div className="flex items-center gap-2">
+                          <Calendar className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                          <span className="text-xs">Budget: {inq.budget}</span>
+                        </div>
+                      )}
+                      {inq.message && (
+                        <div className="mt-2 p-2.5 rounded-lg bg-background border border-border">
+                          <p className="text-[10px] text-muted-foreground mb-1">Message</p>
+                          <p className="text-xs text-foreground whitespace-pre-wrap">{inq.message}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
         </div>
           </>
         )}

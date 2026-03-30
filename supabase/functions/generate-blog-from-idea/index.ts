@@ -21,10 +21,6 @@ serve(async (req) => {
       );
     }
 
-    const PERPLEXITY_API_KEY = Deno.env.get("PERPLEXITY_API_KEY");
-    if (!PERPLEXITY_API_KEY) {
-      console.warn("PERPLEXITY_API_KEY not configured - will skip image search");
-    }
 
     const { idea_id } = await req.json();
     if (!idea_id) {

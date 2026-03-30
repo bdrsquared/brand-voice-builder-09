@@ -80,7 +80,6 @@ const AdminBlogManager = () => {
   const [saving, setSaving] = useState(false);
   const [researching, setResearching] = useState(false);
   const [generatingId, setGeneratingId] = useState<string | null>(null);
-  const [findingImage, setFindingImage] = useState(false);
 
   const fetchPosts = async () => {
     const { data } = await supabase

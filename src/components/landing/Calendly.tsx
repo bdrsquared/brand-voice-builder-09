@@ -92,7 +92,7 @@ const Calendly = () => {
           </p>
 
           <p className="text-sm text-text-primary font-semibold mb-2 font-body">
-            Book a time below — it takes 30 seconds.
+            Book a time below  -  it takes 30 seconds.
           </p>
 
           <p className="text-xs text-text-tertiary font-body">

@@ -80,7 +80,7 @@ const CaseStudyCTA = () => {
             Let's talk about what a strategic video podcast could look like for your business. No pitch deck. Just a real conversation about your goals.
           </p>
           <p className="text-sm text-text-primary font-semibold mb-2 font-body">
-            Book a time below — it takes 30 seconds.
+            Book a time below  -  it takes 30 seconds.
           </p>
           <p className="text-xs text-text-tertiary font-body">
             Free 30-minute call · No commitment · Straightforward advice

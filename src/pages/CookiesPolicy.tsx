@@ -54,13 +54,13 @@ const CookiesPolicy = () => {
                 <div className="rounded-xl border border-white/10 bg-card/50 p-4">
                   <h3 className="text-sm font-semibold text-foreground mb-1">Essential cookies</h3>
                   <p className="text-xs text-muted-foreground">
-                    These are necessary for the site to function — things like remembering your cookie preference. They can't be switched off.
+                    These are necessary for the site to function  -  things like remembering your cookie preference. They can't be switched off.
                   </p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-card/50 p-4">
                   <h3 className="text-sm font-semibold text-foreground mb-1">Analytics cookies</h3>
                   <p className="text-xs text-muted-foreground">
-                    We use analytics to understand how visitors use our site — which pages are popular, where people drop off, and how we can improve. This data is aggregated and anonymous.
+                    We use analytics to understand how visitors use our site  -  which pages are popular, where people drop off, and how we can improve. This data is aggregated and anonymous.
                   </p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-card/50 p-4">
@@ -75,14 +75,14 @@ const CookiesPolicy = () => {
             <section>
               <h2 className="text-xl font-semibold text-foreground mb-3">Third-party cookies</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Some of our pages embed third-party content (like Calendly for booking calls). These services may set their own cookies. We don't control those cookies — check their respective privacy policies for details.
+                Some of our pages embed third-party content (like Calendly for booking calls). These services may set their own cookies. We don't control those cookies  -  check their respective privacy policies for details.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground mb-3">Managing your cookies</h2>
               <p className="text-muted-foreground leading-relaxed">
-                You can control and delete cookies through your browser settings. Most browsers let you block or remove cookies — but doing so may affect how our site works for you. You can also clear cookies at any time to reset your preferences.
+                You can control and delete cookies through your browser settings. Most browsers let you block or remove cookies  -  but doing so may affect how our site works for you. You can also clear cookies at any time to reset your preferences.
               </p>
             </section>
 

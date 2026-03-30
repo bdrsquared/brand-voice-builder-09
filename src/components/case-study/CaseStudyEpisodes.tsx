@@ -58,7 +58,7 @@ const CaseStudyEpisodes = ({ data }: { data: CaseStudyData }) => {
                 </span>
               )}
 
-              {/* Play icon — always visible */}
+              {/* Play icon  -  always visible */}
               <div className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center shrink-0 group-hover:border-primary/30 group-hover:bg-primary/10 transition-all duration-300">
                 <Play className="w-4 h-4 text-text-tertiary group-hover:text-primary transition-colors duration-300 fill-current" />
               </div>

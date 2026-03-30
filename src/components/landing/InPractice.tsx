@@ -113,7 +113,7 @@ const InPractice = () => {
                 Multi-platform distribution
               </h3>
               <p className="text-sm text-light-text-secondary font-body leading-relaxed">
-                LinkedIn, YouTube, Spotify, Apple — everywhere your audience lives.
+                LinkedIn, YouTube, Spotify, Apple  -  everywhere your audience lives.
               </p>
             </div>
           </motion.div>

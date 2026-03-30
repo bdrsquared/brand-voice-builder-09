@@ -286,6 +286,54 @@ const AdminBlogManager = () => {
     }
   };
 
+  const toggleSelect = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === newIdeas.length) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(newIdeas.map((i) => i.id)));
+    }
+  };
+
+  const handleBulkApprove = async () => {
+    if (selectedIds.size === 0) return;
+    setBulkProcessing(true);
+    const ids = Array.from(selectedIds);
+    let success = 0;
+    for (const id of ids) {
+      try {
+        const { data, error } = await supabase.functions.invoke("generate-blog-from-idea", {
+          body: { idea_id: id },
+        });
+        if (!error && !data?.error) success++;
+      } catch {}
+    }
+    toast.success(`${success} blog post(s) generated and published!`);
+    setSelectedIds(new Set());
+    setBulkProcessing(false);
+    fetchIdeas();
+    fetchPosts();
+  };
+
+  const handleBulkDecline = async () => {
+    if (selectedIds.size === 0) return;
+    const ids = Array.from(selectedIds);
+    for (const id of ids) {
+      await supabase.from("blog_ideas").update({ status: "declined" }).eq("id", id);
+    }
+    toast.success(`${ids.length} idea(s) declined`);
+    setSelectedIds(new Set());
+    fetchIdeas();
+  };
+
   const statusColor = (status: string) => {
     switch (status) {
       case "new": return "bg-blue-500/20 text-blue-400";

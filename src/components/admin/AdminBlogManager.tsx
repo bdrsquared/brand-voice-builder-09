@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Plus, Pencil, Trash2, ArrowLeft, Eye } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { toast } from "sonner";
 
@@ -23,6 +23,16 @@ type BlogPost = {
   updated_at: string;
 };
 
+type BlogIdea = {
+  id: string;
+  title: string;
+  description: string | null;
+  source: string | null;
+  source_url: string | null;
+  status: string;
+  created_at: string;
+};
+
 type FormData = {
   title: string;
   slug: string;
@@ -32,6 +42,13 @@ type FormData = {
   category: string;
   author: string;
   published: boolean;
+};
+
+type IdeaFormData = {
+  title: string;
+  description: string;
+  source: string;
+  source_url: string;
 };
 
 const emptyForm: FormData = {
@@ -45,10 +62,21 @@ const emptyForm: FormData = {
   published: false,
 };
 
+const emptyIdeaForm: IdeaFormData = {
+  title: "",
+  description: "",
+  source: "",
+  source_url: "",
+};
+
 const AdminBlogManager = () => {
+  const [activeTab, setActiveTab] = useState<"active" | "ideas">("active");
   const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [editing, setEditing] = useState<string | null>(null); // 'new' or post id
+  const [ideas, setIdeas] = useState<BlogIdea[]>([]);
+  const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState<FormData>(emptyForm);
+  const [editingIdea, setEditingIdea] = useState<string | null>(null);
+  const [ideaForm, setIdeaForm] = useState<IdeaFormData>(emptyIdeaForm);
   const [saving, setSaving] = useState(false);
 
   const fetchPosts = async () => {
@@ -59,8 +87,17 @@ const AdminBlogManager = () => {
     if (data) setPosts(data as BlogPost[]);
   };
 
+  const fetchIdeas = async () => {
+    const { data } = await supabase
+      .from("blog_ideas")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (data) setIdeas(data as BlogIdea[]);
+  };
+
   useEffect(() => {
     fetchPosts();
+    fetchIdeas();
   }, []);
 
   const generateSlug = (title: string) =>
@@ -135,6 +172,64 @@ const AdminBlogManager = () => {
     }
   };
 
+  const handleSaveIdea = async () => {
+    if (!ideaForm.title) {
+      toast.error("Title is required");
+      return;
+    }
+    setSaving(true);
+
+    if (editingIdea === "new") {
+      const { error } = await supabase.from("blog_ideas").insert({
+        title: ideaForm.title,
+        description: ideaForm.description || null,
+        source: ideaForm.source || null,
+        source_url: ideaForm.source_url || null,
+      });
+      if (error) toast.error(error.message);
+      else toast.success("Idea saved");
+    } else {
+      const { error } = await supabase
+        .from("blog_ideas")
+        .update({
+          title: ideaForm.title,
+          description: ideaForm.description || null,
+          source: ideaForm.source || null,
+          source_url: ideaForm.source_url || null,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", editingIdea!);
+      if (error) toast.error(error.message);
+      else toast.success("Idea updated");
+    }
+
+    setSaving(false);
+    setEditingIdea(null);
+    setIdeaForm(emptyIdeaForm);
+    fetchIdeas();
+  };
+
+  const handleDeleteIdea = async (id: string) => {
+    if (!confirm("Delete this idea?")) return;
+    const { error } = await supabase.from("blog_ideas").delete().eq("id", id);
+    if (error) toast.error(error.message);
+    else {
+      toast.success("Idea deleted");
+      fetchIdeas();
+    }
+  };
+
+  const handleEditIdea = (idea: BlogIdea) => {
+    setEditingIdea(idea.id);
+    setIdeaForm({
+      title: idea.title,
+      description: idea.description || "",
+      source: idea.source || "",
+      source_url: idea.source_url || "",
+    });
+  };
+
+  // Blog post editor view
   if (editing) {
     return (
       <div className="space-y-6">
@@ -235,62 +330,222 @@ const AdminBlogManager = () => {
     );
   }
 
+  // Idea editor view
+  if (editingIdea) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="sm" onClick={() => { setEditingIdea(null); setIdeaForm(emptyIdeaForm); }}>
+            <ArrowLeft className="w-4 h-4 mr-1" /> Back
+          </Button>
+          <h2 className="text-lg font-semibold">{editingIdea === "new" ? "New Idea" : "Edit Idea"}</h2>
+        </div>
+
+        <div className="grid gap-4">
+          <div>
+            <Label>Title</Label>
+            <Input
+              value={ideaForm.title}
+              onChange={(e) => setIdeaForm((f) => ({ ...f, title: e.target.value }))}
+              placeholder="Blog idea title..."
+              className="bg-white/5 border-white/10"
+            />
+          </div>
+          <div>
+            <Label>Description</Label>
+            <Textarea
+              value={ideaForm.description}
+              onChange={(e) => setIdeaForm((f) => ({ ...f, description: e.target.value }))}
+              rows={4}
+              placeholder="What should this blog cover?"
+              className="bg-white/5 border-white/10"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label>Source</Label>
+              <Input
+                value={ideaForm.source}
+                onChange={(e) => setIdeaForm((f) => ({ ...f, source: e.target.value }))}
+                placeholder="e.g. Competitor blog, Industry news"
+                className="bg-white/5 border-white/10"
+              />
+            </div>
+            <div>
+              <Label>Source URL</Label>
+              <Input
+                value={ideaForm.source_url}
+                onChange={(e) => setIdeaForm((f) => ({ ...f, source_url: e.target.value }))}
+                placeholder="https://..."
+                className="bg-white/5 border-white/10"
+              />
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <Button onClick={handleSaveIdea} disabled={saving} className="bg-primary text-primary-foreground">
+              {saving ? "Saving..." : "Save Idea"}
+            </Button>
+            <Button variant="ghost" onClick={() => { setEditingIdea(null); setIdeaForm(emptyIdeaForm); }}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Blog Posts</h2>
-        <Button
-          size="sm"
-          onClick={() => { setEditing("new"); setForm(emptyForm); }}
-          className="bg-primary text-primary-foreground"
+      {/* Tabs */}
+      <div className="flex items-center gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.08] w-fit">
+        <button
+          onClick={() => setActiveTab("active")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+            activeTab === "active"
+              ? "bg-white/[0.1] text-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground hover:bg-white/[0.04]"
+          }`}
         >
-          <Plus className="w-4 h-4 mr-1" /> New Post
-        </Button>
+          <FileText className="w-4 h-4" />
+          Active
+          <span className="ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/[0.08]">
+            {posts.length}
+          </span>
+        </button>
+        <button
+          onClick={() => setActiveTab("ideas")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+            activeTab === "ideas"
+              ? "bg-white/[0.1] text-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground hover:bg-white/[0.04]"
+          }`}
+        >
+          <Lightbulb className="w-4 h-4" />
+          Ideas
+          <span className="ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/[0.08]">
+            {ideas.length}
+          </span>
+        </button>
       </div>
 
-      {posts.length === 0 ? (
-        <p className="text-muted-foreground py-8 text-center">No blog posts yet.</p>
-      ) : (
-        <div className="space-y-3">
-          {posts.map((post) => (
-            <div
-              key={post.id}
-              className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 flex items-center justify-between gap-4"
+      {activeTab === "active" ? (
+        <>
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Blog Posts</h2>
+            <Button
+              size="sm"
+              onClick={() => { setEditing("new"); setForm(emptyForm); }}
+              className="bg-primary text-primary-foreground"
             >
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-medium truncate">{post.title}</h3>
-                  <span
-                    className={`shrink-0 inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                      post.published
-                        ? "bg-primary/20 text-primary"
-                        : "bg-muted text-muted-foreground"
-                    }`}
-                  >
-                    {post.published ? "Published" : "Draft"}
-                  </span>
+              <Plus className="w-4 h-4 mr-1" /> New Post
+            </Button>
+          </div>
+
+          {posts.length === 0 ? (
+            <p className="text-muted-foreground py-8 text-center">No blog posts yet.</p>
+          ) : (
+            <div className="space-y-3">
+              {posts.map((post) => (
+                <div
+                  key={post.id}
+                  className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 flex items-center justify-between gap-4"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-medium truncate">{post.title}</h3>
+                      <span
+                        className={`shrink-0 inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                          post.published
+                            ? "bg-primary/20 text-primary"
+                            : "bg-muted text-muted-foreground"
+                        }`}
+                      >
+                        {post.published ? "Published" : "Draft"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {post.category && `${post.category} · `}
+                      {format(parseISO(post.created_at), "MMM d, yyyy")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {post.published && (
+                      <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer">
+                        <Button variant="ghost" size="sm"><Eye className="w-4 h-4" /></Button>
+                      </a>
+                    )}
+                    <Button variant="ghost" size="sm" onClick={() => handleEdit(post)}>
+                      <Pencil className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => handleDelete(post.id)}>
+                      <Trash2 className="w-4 h-4 text-destructive" />
+                    </Button>
+                  </div>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  {post.category && `${post.category} · `}
-                  {format(parseISO(post.created_at), "MMM d, yyyy")}
-                </p>
-              </div>
-              <div className="flex items-center gap-1">
-                {post.published && (
-                  <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="sm"><Eye className="w-4 h-4" /></Button>
-                  </a>
-                )}
-                <Button variant="ghost" size="sm" onClick={() => handleEdit(post)}>
-                  <Pencil className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" onClick={() => handleDelete(post.id)}>
-                  <Trash2 className="w-4 h-4 text-destructive" />
-                </Button>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </>
+      ) : (
+        <>
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Content Ideas</h2>
+            <Button
+              size="sm"
+              onClick={() => { setEditingIdea("new"); setIdeaForm(emptyIdeaForm); }}
+              className="bg-primary text-primary-foreground"
+            >
+              <Plus className="w-4 h-4 mr-1" /> New Idea
+            </Button>
+          </div>
+
+          {ideas.length === 0 ? (
+            <div className="text-center py-12 space-y-3">
+              <Lightbulb className="w-10 h-10 text-muted-foreground/30 mx-auto" />
+              <p className="text-muted-foreground">No content ideas yet.</p>
+              <p className="text-xs text-muted-foreground/60">Add ideas manually or we'll generate them from web sources.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {ideas.map((idea) => (
+                <div
+                  key={idea.id}
+                  className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 flex items-center justify-between gap-4"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-medium truncate">{idea.title}</h3>
+                      {idea.source && (
+                        <span className="shrink-0 inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/[0.06] border border-white/[0.08] text-muted-foreground">
+                          {idea.source}
+                        </span>
+                      )}
+                    </div>
+                    {idea.description && (
+                      <p className="text-xs text-muted-foreground line-clamp-1 mb-1">{idea.description}</p>
+                    )}
+                    <p className="text-[11px] text-muted-foreground/60">
+                      {format(parseISO(idea.created_at), "MMM d, yyyy")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {idea.source_url && (
+                      <a href={idea.source_url} target="_blank" rel="noopener noreferrer">
+                        <Button variant="ghost" size="sm"><ExternalLink className="w-4 h-4" /></Button>
+                      </a>
+                    )}
+                    <Button variant="ghost" size="sm" onClick={() => handleEditIdea(idea)}>
+                      <Pencil className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => handleDeleteIdea(idea.id)}>
+                      <Trash2 className="w-4 h-4 text-destructive" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );

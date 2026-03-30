@@ -21,6 +21,11 @@ serve(async (req) => {
       );
     }
 
+    const PERPLEXITY_API_KEY = Deno.env.get("PERPLEXITY_API_KEY");
+    if (!PERPLEXITY_API_KEY) {
+      console.warn("PERPLEXITY_API_KEY not configured - will skip image search");
+    }
+
     const { idea_id } = await req.json();
     if (!idea_id) {
       return new Response(
@@ -193,6 +198,51 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
+    // Step 3: Find a relevant image via Perplexity
+    let coverImageUrl: string | null = null;
+    if (PERPLEXITY_API_KEY) {
+      try {
+        console.log("Searching for blog cover image...");
+        const imgResponse = await fetch("https://api.perplexity.ai/chat/completions", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${PERPLEXITY_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "sonar",
+            messages: [
+              {
+                role: "system",
+                content: "You are an image researcher. Find a high-quality, royalty-free or Creative Commons image URL that would work as a blog cover image. Return ONLY a single direct image URL (ending in .jpg, .jpeg, .png, or .webp) from a reputable source like Unsplash, Pexels, or Pixabay. No text, no explanation, just the URL.",
+              },
+              {
+                role: "user",
+                content: `Find a professional, high-quality photo that would work as a blog header image for an article titled: "${blog.title}". The image should be relevant to podcasting, media production, business, or the specific topic. Return only the direct image URL.`,
+              },
+            ],
+          }),
+        });
+
+        if (imgResponse.ok) {
+          const imgData = await imgResponse.json();
+          const imgContent = imgData.choices?.[0]?.message?.content?.trim() || "";
+          // Extract URL from response
+          const urlMatch = imgContent.match(/https?:\/\/[^\s"'<>]+\.(jpg|jpeg|png|webp)[^\s"'<>]*/i);
+          if (urlMatch) {
+            // Verify the image is accessible
+            const checkResp = await fetch(urlMatch[0], { method: "HEAD" });
+            if (checkResp.ok) {
+              coverImageUrl = urlMatch[0];
+              console.log("Found cover image:", coverImageUrl);
+            }
+          }
+        }
+      } catch (imgErr) {
+        console.warn("Image search failed, proceeding without cover:", imgErr);
+      }
+    }
+
     // Insert as draft blog post
     const { data: newPost, error: postError } = await supabase
       .from("blog_posts")
@@ -201,6 +251,7 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
         slug,
         excerpt: blog.excerpt,
         content: blog.content,
+        cover_image: coverImageUrl,
         category: blog.category,
         author: "Earworm",
         published: false,

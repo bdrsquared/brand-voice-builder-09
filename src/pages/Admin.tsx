@@ -98,44 +98,44 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="border-b border-border px-6 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-semibold font-display">Dashboard</h1>
-        <div className="flex items-center gap-2">
-          <div className="flex bg-white/5 rounded-lg p-0.5 mr-4">
+      <header className="border-b border-border px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+        <h1 className="text-lg sm:text-xl font-semibold font-display">Dashboard</h1>
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+          <div className="flex bg-white/5 rounded-lg p-0.5">
             <button
               onClick={() => setActiveTab("inquiries")}
-              className={`px-3 py-1.5 text-sm rounded-md transition-colors ${activeTab === "inquiries" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "inquiries" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
             >
-              <BarChart3 className="w-3.5 h-3.5 inline mr-1.5" />Inquiries
+              <BarChart3 className="w-3.5 h-3.5 inline mr-1" />Inquiries
             </button>
             <button
               onClick={() => setActiveTab("blog")}
-              className={`px-3 py-1.5 text-sm rounded-md transition-colors ${activeTab === "blog" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "blog" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
             >
-              <FileText className="w-3.5 h-3.5 inline mr-1.5" />Blog
+              <FileText className="w-3.5 h-3.5 inline mr-1" />Blog
             </button>
           </div>
-          <Button variant="ghost" size="sm" onClick={handleSignOut}>
-            <LogOut className="w-4 h-4 mr-2" /> Sign Out
+          <Button variant="ghost" size="sm" onClick={handleSignOut} className="text-xs sm:text-sm">
+            <LogOut className="w-4 h-4 sm:mr-2" /> <span className="hidden sm:inline">Sign Out</span>
           </Button>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
         {activeTab === "blog" ? (
           <AdminBlogManager />
         ) : (
           <>
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4">
           {[
             { label: "Today", value: todayCount },
             { label: "This Week", value: weekCount },
             { label: "All Time", value: totalInquiries },
           ].map((stat) => (
-            <div key={stat.label} className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-5">
-              <p className="text-sm text-muted-foreground">{stat.label}</p>
-              <p className="text-3xl font-semibold mt-1">{stat.value}</p>
+            <div key={stat.label} className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-3 sm:p-5">
+              <p className="text-xs sm:text-sm text-muted-foreground">{stat.label}</p>
+              <p className="text-xl sm:text-3xl font-semibold mt-1">{stat.value}</p>
             </div>
           ))}
         </div>

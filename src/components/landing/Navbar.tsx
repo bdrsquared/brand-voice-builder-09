@@ -9,7 +9,6 @@ import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.webp";
 import brightLogo from "@/assets/bright-logo-compressed.webp";
 import launchImg from "@/assets/launch-microphone-compressed.webp";
-import podplannerLaunchImg from "@/assets/podplanner-launch.png";
 import runScaleImg from "@/assets/run-scale-compressed.webp";
 import officeImg from "@/assets/office-compressed.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
@@ -20,7 +19,7 @@ const megaMenuItems = [
   {
     title: "Launch",
     description: "We incubate, design, and launch podcasts that help businesses lead conversations",
-    image: podplannerLaunchImg,
+    image: runScaleImg,
   },
   {
     title: "Run & scale",

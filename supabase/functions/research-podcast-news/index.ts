@@ -132,6 +132,21 @@ serve(async (req) => {
       );
     }
 
+    // Notify Slack with interactive buttons
+    try {
+      const notifyUrl = `${supabaseUrl}/functions/v1/slack-notify-ideas`;
+      await fetch(notifyUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${supabaseServiceKey}`,
+        },
+        body: JSON.stringify({ ideas: inserted }),
+      });
+    } catch (slackErr) {
+      console.warn("Slack notification failed (non-blocking):", slackErr);
+    }
+
     return new Response(
       JSON.stringify({ success: true, ideas: inserted, count: inserted?.length || 0 }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }

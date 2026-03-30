@@ -120,20 +120,24 @@ const BlogPost = () => {
               <ArrowLeft className="w-3.5 h-3.5" /> Back to blog
             </Link>
 
-            <button
-              onClick={() => {
-                if (navigator.share) {
-                  navigator.share({ title: post.title, url: window.location.href });
-                } else {
-                  navigator.clipboard.writeText(window.location.href);
-                  alert("Link copied!");
-                }
-              }}
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Share this article"
-            >
-              <Share2 className="w-3.5 h-3.5" /> Share
-            </button>
+            {(() => {
+              const [copied, setCopied] = useState(false);
+              const handleCopy = useCallback(() => {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                });
+              }, []);
+              return (
+                <button
+                  onClick={handleCopy}
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Copy link to clipboard"
+                >
+                  <Share2 className="w-3.5 h-3.5" /> {copied ? "Copied!" : "Share"}
+                </button>
+              );
+            })()}
           </div>
 
           {/* Meta */}

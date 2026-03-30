@@ -75,19 +75,6 @@ const Showreel = () => {
         </motion.div>
       </div>
 
-      {/* Tricolour parallax gradient bleed */}
-      <motion.div
-        className="relative z-0 w-full h-[300px] sm:h-[400px] -mt-16 pointer-events-none"
-        style={{ y: gradientY }}
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse 80% 70% at 20% 50%, rgba(28, 250, 118, 0.35), transparent 70%), radial-gradient(ellipse 80% 70% at 50% 60%, rgba(99, 89, 234, 0.3), transparent 70%), radial-gradient(ellipse 80% 70% at 80% 50%, rgba(255, 179, 71, 0.3), transparent 70%)",
-            filter: "blur(60px)",
-          }}
-        />
-      </motion.div>
     </section>
   );
 };

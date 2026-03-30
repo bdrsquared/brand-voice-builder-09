@@ -290,7 +290,7 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
           }
         }
 
-        if (base64Data) {
+        if (base64Data && !coverImageUrl) {
           // Convert base64 to blob
           const binaryStr = atob(base64Data);
           const bytes = new Uint8Array(binaryStr.length);

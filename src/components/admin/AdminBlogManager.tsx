@@ -314,7 +314,7 @@ const AdminBlogManager = () => {
     }
   };
 
-
+  const statusColor = (status: string) => {
     switch (status) {
       case "new": return "bg-blue-500/20 text-blue-400";
       case "generating": return "bg-amber-500/20 text-amber-400";

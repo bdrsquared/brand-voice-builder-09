@@ -99,9 +99,6 @@ const Blogs = () => {
           {/* Header row */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold tracking-widest uppercase border border-white/[0.1] bg-white/[0.04] backdrop-blur-md text-muted-foreground mb-4">
-                News & Articles
-              </span>
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading mb-3 leading-[0.95]">
                 <span className="bg-gradient-to-r from-foreground via-foreground/90 to-muted-foreground bg-clip-text text-transparent">
                   Insights that

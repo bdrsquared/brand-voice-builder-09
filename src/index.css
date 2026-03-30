@@ -267,6 +267,40 @@
     }
   }
 
+  /* Always-on glow variant for chat button */
+  .glow-always {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+  }
+
+  .glow-always::before {
+    content: '';
+    background: linear-gradient(45deg, #574ECC, #9139A4, #1CFA76, #9139A4, #574ECC);
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(8px);
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    animation: glowing 20s linear infinite;
+    opacity: 1;
+    border-radius: 9999px;
+  }
+
+  .glow-always::after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 9999px;
+  }
+
   .glow-on-hover::after {
     z-index: -1;
     content: '';

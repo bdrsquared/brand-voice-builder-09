@@ -443,6 +443,7 @@ Respond with ONLY valid JSON, no other text:
         excerpt: blog.excerpt,
         content: blog.content,
         cover_image: coverImageUrl,
+        image_style: chosenStyle,
         category: blog.category,
         author: "Earworm",
         published: true,

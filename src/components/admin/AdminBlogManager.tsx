@@ -81,6 +81,8 @@ const AdminBlogManager = () => {
   const [saving, setSaving] = useState(false);
   const [researching, setResearching] = useState(false);
   const [generatingId, setGeneratingId] = useState<string | null>(null);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkProcessing, setBulkProcessing] = useState(false);
 
   const fetchPosts = async () => {
     const { data } = await supabase

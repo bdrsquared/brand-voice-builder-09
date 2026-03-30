@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink, Check, X, RefreshCw, Loader2, Sparkles } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink, Check, X, RefreshCw, Loader2, Sparkles, ImageIcon } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { toast } from "sonner";
 

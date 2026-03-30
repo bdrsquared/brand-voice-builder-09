@@ -32,7 +32,15 @@ const Index = () => {
         </div>
 
         {/* Light mode sections */}
-        <div id="light-sections" style={{ backgroundColor: '#E4E5E9' }}>
+        <div id="light-sections" className="relative" style={{ backgroundColor: '#E4E5E9' }}>
+          {/* Tricolour gradient bleeding across all light sections */}
+          <div
+            className="absolute inset-0 pointer-events-none z-0"
+            style={{
+              background: "radial-gradient(ellipse 70% 40% at 15% 40%, rgba(28, 250, 118, 0.25), transparent 70%), radial-gradient(ellipse 70% 40% at 55% 55%, rgba(99, 89, 234, 0.2), transparent 70%), radial-gradient(ellipse 70% 40% at 85% 35%, rgba(255, 179, 71, 0.2), transparent 70%)",
+              filter: "blur(60px)",
+            }}
+          />
           <Showreel />
           <WhyNow />
           <InPractice />

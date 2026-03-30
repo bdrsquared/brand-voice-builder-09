@@ -570,23 +570,36 @@ const AdminBlogManager = () => {
                   key={post.id}
                   className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 flex items-center justify-between gap-4"
                 >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-medium truncate">{post.title}</h3>
-                      <span
-                        className={`shrink-0 inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                          post.published
-                            ? "bg-primary/20 text-primary"
-                            : "bg-muted text-muted-foreground"
-                        }`}
-                      >
-                        {post.published ? "Published" : "Draft"}
-                      </span>
+                  <div className="flex items-center gap-4 flex-1 min-w-0">
+                    {post.cover_image ? (
+                      <img
+                        src={post.cover_image}
+                        alt={post.title}
+                        className="w-14 h-14 rounded-lg object-cover shrink-0 border border-white/10"
+                      />
+                    ) : (
+                      <div className="w-14 h-14 rounded-lg bg-white/[0.04] border border-white/10 shrink-0 flex items-center justify-center">
+                        <FileText className="w-5 h-5 text-muted-foreground/30" />
+                      </div>
+                    )}
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-medium truncate">{post.title}</h3>
+                        <span
+                          className={`shrink-0 inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                            post.published
+                              ? "bg-primary/20 text-primary"
+                              : "bg-muted text-muted-foreground"
+                          }`}
+                        >
+                          {post.published ? "Published" : "Draft"}
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        {post.category && `${post.category} · `}
+                        {format(parseISO(post.created_at), "MMM d, yyyy")}
+                      </p>
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      {post.category && `${post.category} · `}
-                      {format(parseISO(post.created_at), "MMM d, yyyy")}
-                    </p>
                   </div>
                   <div className="flex items-center gap-1">
                     {post.published && (

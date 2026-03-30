@@ -273,6 +273,8 @@ const Admin = () => {
             </TableBody>
           </Table>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

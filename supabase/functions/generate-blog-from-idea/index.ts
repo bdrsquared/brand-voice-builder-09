@@ -230,48 +230,66 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
           console.log("Perplexity image response:", imgContent);
           const urlMatch = imgContent.match(/https?:\/\/[^\s"'<>\)]+/i);
           
+          let imageBlob: Blob | null = null;
+          let imgContentType = "image/jpeg";
+
+          // Try Perplexity URL first
           if (urlMatch) {
             let sourceUrl = urlMatch[0];
-            // Ensure Unsplash URLs have download params
             if (sourceUrl.includes("unsplash.com") && !sourceUrl.includes("?")) {
               sourceUrl += "?w=1200&q=80";
             }
-            console.log("Downloading image from:", sourceUrl);
-            
-            // Download the image
-            const downloadResp = await fetch(sourceUrl);
-            if (downloadResp.ok) {
-              const contentType = downloadResp.headers.get("content-type") || "";
-              if (contentType.startsWith("image/")) {
-                const imageBlob = await downloadResp.blob();
-                const ext = contentType.includes("png") ? "png" : "jpg";
-                const fileName = `${slug}.${ext}`;
-                
-                // Upload to our storage bucket
-                const { error: uploadError } = await supabase.storage
-                  .from("blog-images")
-                  .upload(fileName, imageBlob, {
-                    contentType: contentType,
-                    upsert: true,
-                  });
-                
-                if (!uploadError) {
-                  const { data: publicUrlData } = supabase.storage
-                    .from("blog-images")
-                    .getPublicUrl(fileName);
-                  coverImageUrl = publicUrlData.publicUrl;
-                  console.log("Image stored at:", coverImageUrl);
-                } else {
-                  console.warn("Storage upload error:", uploadError.message);
+            console.log("Trying Perplexity URL:", sourceUrl);
+            try {
+              const downloadResp = await fetch(sourceUrl, { redirect: "follow" });
+              if (downloadResp.ok) {
+                const ct = downloadResp.headers.get("content-type") || "";
+                if (ct.startsWith("image/")) {
+                  imageBlob = await downloadResp.blob();
+                  imgContentType = ct;
                 }
-              } else {
-                console.warn("Downloaded content is not an image:", contentType);
               }
+            } catch (e) {
+              console.warn("Perplexity URL failed:", e);
+            }
+          }
+
+          // Fallback: Unsplash source redirect
+          if (!imageBlob) {
+            const keywords = blog.title.split(/\s+/).slice(0, 3).join(",").toLowerCase();
+            const fallbackUrl = `https://source.unsplash.com/1200x800/?${encodeURIComponent(keywords)}`;
+            console.log("Fallback to Unsplash source:", fallbackUrl);
+            try {
+              const fallbackResp = await fetch(fallbackUrl, { redirect: "follow" });
+              if (fallbackResp.ok) {
+                const ct = fallbackResp.headers.get("content-type") || "";
+                if (ct.startsWith("image/")) {
+                  imageBlob = await fallbackResp.blob();
+                  imgContentType = ct;
+                }
+              }
+            } catch (e) {
+              console.warn("Unsplash fallback failed:", e);
+            }
+          }
+
+          if (imageBlob) {
+            const ext = imgContentType.includes("png") ? "png" : "jpg";
+            const fileName = `${slug}.${ext}`;
+            const { error: uploadError } = await supabase.storage
+              .from("blog-images")
+              .upload(fileName, imageBlob, { contentType: imgContentType, upsert: true });
+            if (!uploadError) {
+              const { data: publicUrlData } = supabase.storage
+                .from("blog-images")
+                .getPublicUrl(fileName);
+              coverImageUrl = publicUrlData.publicUrl;
+              console.log("Image stored at:", coverImageUrl);
             } else {
-              console.warn("Image download failed:", downloadResp.status);
+              console.warn("Storage upload error:", uploadError.message);
             }
           } else {
-            console.warn("No URL found in image response");
+            console.warn("Could not download any image");
           }
         } else {
           console.warn("Image search HTTP error:", imgResponse.status);

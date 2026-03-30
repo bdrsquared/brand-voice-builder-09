@@ -35,6 +35,8 @@ serve(async (req) => {
 
     // Ask Perplexity for a relevant Unsplash image
     const searchContext = excerpt ? `${title}. ${excerpt}` : title;
+
+    // Ask Perplexity to suggest search keywords for finding a relevant image
     const imgResponse = await fetch("https://api.perplexity.ai/chat/completions", {
       method: "POST",
       headers: {
@@ -46,11 +48,11 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: "You are a helpful assistant. When asked for an image, respond with ONLY a raw URL on a single line. No markdown, no brackets, no extra text. The URL must be a direct link to an image file that can be downloaded.",
+            content: "You find free stock photos. When given a blog topic, search for a relevant photo on Unsplash or Pexels and return ONLY the direct image file URL. The URL must end in a common image extension or contain /download. No markdown, no text, just one URL.",
           },
           {
             role: "user",
-            content: `Give me one high-quality Unsplash image URL relevant to: ${searchContext}. Use the format https://images.unsplash.com/photo-XXXX?w=1200&q=80 (include the query params). Only the URL, nothing else.`,
+            content: `Find a free, high-quality photo relevant to this blog: "${searchContext}". Return only the direct image URL.`,
           },
         ],
       }),
@@ -69,43 +71,68 @@ serve(async (req) => {
     console.log("Perplexity image response:", imgContent);
 
     const urlMatch = imgContent.match(/https?:\/\/[^\s"'<>\)]+/i);
-    if (!urlMatch) {
-      return new Response(
-        JSON.stringify({ error: "No image URL found in search results" }),
-        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+
+    let imageBlob: Blob | null = null;
+    let finalContentType = "image/jpeg";
+
+    // Try the Perplexity-suggested URL first
+    if (urlMatch) {
+      let sourceUrl = urlMatch[0];
+      if (sourceUrl.includes("unsplash.com") && !sourceUrl.includes("?")) {
+        sourceUrl += "?w=1200&q=80";
+      }
+      console.log("Trying Perplexity URL:", sourceUrl);
+
+      try {
+        const downloadResp = await fetch(sourceUrl, { redirect: "follow" });
+        if (downloadResp.ok) {
+          const ct = downloadResp.headers.get("content-type") || "";
+          if (ct.startsWith("image/")) {
+            imageBlob = await downloadResp.blob();
+            finalContentType = ct;
+            console.log("Successfully downloaded from Perplexity URL");
+          }
+        }
+      } catch (e) {
+        console.warn("Perplexity URL download failed:", e);
+      }
     }
 
-    let sourceUrl = urlMatch[0];
-    if (sourceUrl.includes("unsplash.com") && !sourceUrl.includes("?")) {
-      sourceUrl += "?w=1200&q=80";
+    // Fallback: use Unsplash source redirect (always works)
+    if (!imageBlob) {
+      const keywords = title.split(/\s+/).slice(0, 3).join(",").toLowerCase();
+      const fallbackUrl = `https://source.unsplash.com/1200x800/?${encodeURIComponent(keywords)}`;
+      console.log("Fallback to Unsplash source:", fallbackUrl);
+
+      try {
+        const fallbackResp = await fetch(fallbackUrl, { redirect: "follow" });
+        if (fallbackResp.ok) {
+          const ct = fallbackResp.headers.get("content-type") || "";
+          if (ct.startsWith("image/")) {
+            imageBlob = await fallbackResp.blob();
+            finalContentType = ct;
+            console.log("Successfully downloaded from Unsplash source fallback");
+          }
+        }
+      } catch (e) {
+        console.warn("Unsplash fallback failed:", e);
+      }
     }
 
-    // Download the image
-    const downloadResp = await fetch(sourceUrl);
-    if (!downloadResp.ok) {
+    if (!imageBlob) {
       return new Response(
-        JSON.stringify({ error: "Failed to download image" }),
+        JSON.stringify({ error: "Could not download any image" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    const contentType = downloadResp.headers.get("content-type") || "";
-    if (!contentType.startsWith("image/")) {
-      return new Response(
-        JSON.stringify({ error: "URL did not return an image" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    const imageBlob = await downloadResp.blob();
-    const ext = contentType.includes("png") ? "png" : "jpg";
+    const ext = finalContentType.includes("png") ? "png" : "jpg";
     const fileName = `${slug || "blog-image"}-${Date.now()}.${ext}`;
 
     // Upload to storage
     const { error: uploadError } = await supabase.storage
       .from("blog-images")
-      .upload(fileName, imageBlob, { contentType, upsert: true });
+      .upload(fileName, imageBlob, { contentType: finalContentType, upsert: true });
 
     if (uploadError) {
       console.error("Upload error:", uploadError);

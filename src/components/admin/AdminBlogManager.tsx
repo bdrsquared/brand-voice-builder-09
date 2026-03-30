@@ -272,9 +272,9 @@ const AdminBlogManager = () => {
     setGeneratingId(null);
   };
 
-  // Decline idea - delete it
+  // Decline idea - mark as declined (keeps record to avoid duplicates)
   const handleDecline = async (ideaId: string) => {
-    const { error } = await supabase.from("blog_ideas").delete().eq("id", ideaId);
+    const { error } = await supabase.from("blog_ideas").update({ status: "declined" }).eq("id", ideaId);
     if (error) toast.error(error.message);
     else {
       toast.success("Idea dismissed");

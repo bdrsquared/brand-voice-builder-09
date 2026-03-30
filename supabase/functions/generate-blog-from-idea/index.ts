@@ -253,10 +253,30 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
     let coverImageUrl: string | null = null;
     let chosenStyle: string | null = null;
     try {
-      console.log("Step 3a: Picking image style with AI...");
+      // Step 3a: Randomly pick a style — no AI, pure randomness
+      const styleKeys = Object.keys(STYLE_PROMPTS);
       
-      // Pick style using AI
-      const styleResponse = await fetch(
+      // Check what styles were recently used to avoid repetition
+      const { data: recentPosts } = await supabase
+        .from("blog_posts")
+        .select("image_style")
+        .not("image_style", "is", null)
+        .order("created_at", { ascending: false })
+        .limit(5);
+      
+      const recentStyles = (recentPosts || []).map(p => p.image_style).filter(Boolean);
+      
+      // Filter out styles used in the last 5 posts; if all used, allow all
+      let availableStyles = styleKeys.filter(s => !recentStyles.includes(s));
+      if (availableStyles.length === 0) availableStyles = styleKeys;
+      
+      chosenStyle = availableStyles[Math.floor(Math.random() * availableStyles.length)];
+      console.log(`Style randomly chosen: ${chosenStyle} (avoided recent: ${recentStyles.join(", ")})`);
+
+      const styleConfig = STYLE_PROMPTS[chosenStyle!];
+      
+      // Use AI only to describe what subject should be in the image
+      const subjectResponse = await fetch(
         "https://ai.gateway.lovable.dev/v1/chat/completions",
         {
           method: "POST",
@@ -269,52 +289,24 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
             messages: [
               {
                 role: "user",
-                content: `You are choosing a visual style for a blog post image. Pick the single most appropriate style based on the content's tone and topic.
+                content: `Based on this blog title and excerpt, describe in 1-2 sentences what the subject of the image should be. Be specific and visual. No style direction, just the subject.
 
-BLOG TITLE: ${blog.title}
-BLOG EXCERPT: ${blog.excerpt}
+TITLE: ${blog.title}
+EXCERPT: ${blog.excerpt}
 
-AVAILABLE STYLES:
-- vibrant_studio: opinion pieces, hot takes, controversial topics, strong POV or emotional reaction
-- glossy_3d: tech topics, product explainers, AI content, abstract or conceptual subjects
-- iphone_photo: personal finance, lifestyle, work and productivity, everyday real life
-- meme_face: listicles, relatable content, humour, irony, things meant to be shared
-- editorial_flat: research roundups, considered explainers, cultural or social topics
-- grainy_disposable: nostalgia, culture, music, fashion, human or social stories
-
-Rules:
-- Pick based on emotional match, not literal subject matter
-- A tech post about burnout = iphone_photo, not glossy_3d
-- An opinion piece about AI = vibrant_studio or meme_face
-
-Respond with ONLY valid JSON, no other text:
-{
-  "style": "<style_key>",
-  "reason": "<one sentence why>",
-  "subjectDescription": "<what should be in the image, 1-2 sentences, specific to this blog topic>"
-}`,
+Respond with ONLY the subject description, nothing else.`,
               },
             ],
           }),
         }
       );
 
-      if (!styleResponse.ok) {
-        console.warn("Style picker failed:", styleResponse.status);
-        throw new Error("Style picker failed");
+      let subjectDescription = blog.title;
+      if (subjectResponse.ok) {
+        const subjectData = await subjectResponse.json();
+        subjectDescription = subjectData.choices?.[0]?.message?.content?.trim() || blog.title;
       }
 
-      const styleData = await styleResponse.json();
-      const styleRaw = styleData.choices?.[0]?.message?.content || "";
-      const styleJsonMatch = styleRaw.match(/\{[\s\S]*\}/);
-      if (!styleJsonMatch) throw new Error("No JSON in style response");
-      
-      const stylePick = JSON.parse(styleJsonMatch[0]);
-      chosenStyle = stylePick.style;
-      const subjectDescription = stylePick.subjectDescription;
-      console.log(`Style chosen: ${chosenStyle} — ${stylePick.reason}`);
-
-      const styleConfig = STYLE_PROMPTS[chosenStyle!] || STYLE_PROMPTS.editorial_flat;
       const fullPrompt = `${styleConfig.prompt}\n\nThe subject of this image: ${subjectDescription}\n\n${styleConfig.negative}`;
 
       console.log("Step 3b: Generating image with chosen style...");

@@ -156,9 +156,9 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
                       exit={{ opacity: 0 }}
                       onSubmit={handleSubmit}
                     >
-                      <h3 className="text-xl font-heading text-foreground mb-1">Send us a message</h3>
+                      <h3 className="text-xl font-heading text-foreground mb-1">Chat with us</h3>
                       <p className="text-sm text-muted-foreground font-body mb-6">
-                        Drop us a line and we'll get back to you.
+                        We review every enquiry carefully – we'll come back to you if it's a good fit.
                       </p>
 
                       <div className="space-y-4">

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink, Check, X, RefreshCw, Loader2, Sparkles } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { toast } from "sonner";
 
@@ -78,6 +78,8 @@ const AdminBlogManager = () => {
   const [editingIdea, setEditingIdea] = useState<string | null>(null);
   const [ideaForm, setIdeaForm] = useState<IdeaFormData>(emptyIdeaForm);
   const [saving, setSaving] = useState(false);
+  const [researching, setResearching] = useState(false);
+  const [generatingId, setGeneratingId] = useState<string | null>(null);
 
   const fetchPosts = async () => {
     const { data } = await supabase
@@ -227,6 +229,67 @@ const AdminBlogManager = () => {
       source: idea.source || "",
       source_url: idea.source_url || "",
     });
+  };
+
+  // Research new ideas via Perplexity
+  const handleResearch = async () => {
+    setResearching(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("research-podcast-news");
+      if (error) {
+        toast.error("Research failed: " + error.message);
+      } else if (data?.error) {
+        toast.error(data.error);
+      } else {
+        toast.success(`Found ${data.count} new content ideas!`);
+        fetchIdeas();
+      }
+    } catch (e) {
+      toast.error("Failed to research ideas");
+    }
+    setResearching(false);
+  };
+
+  // Approve idea - generate blog
+  const handleApprove = async (ideaId: string) => {
+    setGeneratingId(ideaId);
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-blog-from-idea", {
+        body: { idea_id: ideaId },
+      });
+      if (error) {
+        toast.error("Generation failed: " + error.message);
+      } else if (data?.error) {
+        toast.error(data.error);
+      } else {
+        toast.success("Blog post generated and saved as draft!");
+        fetchIdeas();
+        fetchPosts();
+      }
+    } catch (e) {
+      toast.error("Failed to generate blog");
+    }
+    setGeneratingId(null);
+  };
+
+  // Decline idea - delete it
+  const handleDecline = async (ideaId: string) => {
+    const { error } = await supabase.from("blog_ideas").delete().eq("id", ideaId);
+    if (error) toast.error(error.message);
+    else {
+      toast.success("Idea dismissed");
+      fetchIdeas();
+    }
+  };
+
+  const statusColor = (status: string) => {
+    switch (status) {
+      case "new": return "bg-blue-500/20 text-blue-400";
+      case "generating": return "bg-amber-500/20 text-amber-400";
+      case "approved": return "bg-primary/20 text-primary";
+      case "error": return "bg-destructive/20 text-destructive";
+      default: return "bg-muted text-muted-foreground";
+    }
   };
 
   // Blog post editor view
@@ -394,6 +457,9 @@ const AdminBlogManager = () => {
     );
   }
 
+  const newIdeas = ideas.filter((i) => i.status === "new");
+  const processedIdeas = ideas.filter((i) => i.status !== "new");
+
   return (
     <div className="space-y-4">
       {/* Tabs */}
@@ -422,9 +488,11 @@ const AdminBlogManager = () => {
         >
           <Lightbulb className="w-4 h-4" />
           Ideas
-          <span className="ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-white/[0.08]">
-            {ideas.length}
-          </span>
+          {newIdeas.length > 0 && (
+            <span className="ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-primary/20 text-primary">
+              {newIdeas.length}
+            </span>
+          )}
         </button>
       </div>
 
@@ -490,59 +558,148 @@ const AdminBlogManager = () => {
         <>
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">Content Ideas</h2>
-            <Button
-              size="sm"
-              onClick={() => { setEditingIdea("new"); setIdeaForm(emptyIdeaForm); }}
-              className="bg-primary text-primary-foreground"
-            >
-              <Plus className="w-4 h-4 mr-1" /> New Idea
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleResearch}
+                disabled={researching}
+                className="border-white/10 hover:bg-white/5"
+              >
+                {researching ? (
+                  <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                ) : (
+                  <Sparkles className="w-4 h-4 mr-1" />
+                )}
+                {researching ? "Researching..." : "Research Ideas"}
+              </Button>
+              <Button
+                size="sm"
+                onClick={() => { setEditingIdea("new"); setIdeaForm(emptyIdeaForm); }}
+                className="bg-primary text-primary-foreground"
+              >
+                <Plus className="w-4 h-4 mr-1" /> Add Idea
+              </Button>
+            </div>
           </div>
 
           {ideas.length === 0 ? (
             <div className="text-center py-12 space-y-3">
               <Lightbulb className="w-10 h-10 text-muted-foreground/30 mx-auto" />
               <p className="text-muted-foreground">No content ideas yet.</p>
-              <p className="text-xs text-muted-foreground/60">Add ideas manually or we'll generate them from web sources.</p>
+              <p className="text-xs text-muted-foreground/60">
+                Click "Research Ideas" to find the latest podcast news, or add your own.
+              </p>
             </div>
           ) : (
-            <div className="space-y-3">
-              {ideas.map((idea) => (
-                <div
-                  key={idea.id}
-                  className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 flex items-center justify-between gap-4"
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-medium truncate">{idea.title}</h3>
-                      {idea.source && (
-                        <span className="shrink-0 inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/[0.06] border border-white/[0.08] text-muted-foreground">
-                          {idea.source}
-                        </span>
-                      )}
+            <div className="space-y-6">
+              {/* New ideas needing review */}
+              {newIdeas.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                    Needs Review ({newIdeas.length})
+                  </h3>
+                  {newIdeas.map((idea) => (
+                    <div
+                      key={idea.id}
+                      className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 space-y-3"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-medium">{idea.title}</h3>
+                            {idea.source && (
+                              <span className="shrink-0 inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/[0.06] border border-white/[0.08] text-muted-foreground">
+                                {idea.source}
+                              </span>
+                            )}
+                          </div>
+                          {idea.description && (
+                            <p className="text-sm text-muted-foreground leading-relaxed mb-2">
+                              {idea.description}
+                            </p>
+                          )}
+                          <div className="flex items-center gap-3 text-[11px] text-muted-foreground/60">
+                            <span>{format(parseISO(idea.created_at), "MMM d, yyyy")}</span>
+                            {idea.source_url && (
+                              <a
+                                href={idea.source_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1 text-primary hover:underline"
+                              >
+                                <ExternalLink className="w-3 h-3" /> Source
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 pt-2 border-t border-white/[0.06]">
+                        <Button
+                          size="sm"
+                          onClick={() => handleApprove(idea.id)}
+                          disabled={generatingId === idea.id}
+                          className="bg-primary text-primary-foreground"
+                        >
+                          {generatingId === idea.id ? (
+                            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                          ) : (
+                            <Check className="w-4 h-4 mr-1" />
+                          )}
+                          {generatingId === idea.id ? "Generating blog..." : "Approve & Generate"}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => handleDecline(idea.id)}
+                          disabled={generatingId === idea.id}
+                          className="text-muted-foreground hover:text-destructive"
+                        >
+                          <X className="w-4 h-4 mr-1" /> Decline
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => handleEditIdea(idea)}
+                          className="ml-auto"
+                        >
+                          <Pencil className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </div>
-                    {idea.description && (
-                      <p className="text-xs text-muted-foreground line-clamp-1 mb-1">{idea.description}</p>
-                    )}
-                    <p className="text-[11px] text-muted-foreground/60">
-                      {format(parseISO(idea.created_at), "MMM d, yyyy")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {idea.source_url && (
-                      <a href={idea.source_url} target="_blank" rel="noopener noreferrer">
-                        <Button variant="ghost" size="sm"><ExternalLink className="w-4 h-4" /></Button>
-                      </a>
-                    )}
-                    <Button variant="ghost" size="sm" onClick={() => handleEditIdea(idea)}>
-                      <Pencil className="w-4 h-4" />
-                    </Button>
-                    <Button variant="ghost" size="sm" onClick={() => handleDeleteIdea(idea.id)}>
-                      <Trash2 className="w-4 h-4 text-destructive" />
-                    </Button>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              )}
+
+              {/* Processed ideas */}
+              {processedIdeas.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                    Processed ({processedIdeas.length})
+                  </h3>
+                  {processedIdeas.map((idea) => (
+                    <div
+                      key={idea.id}
+                      className="rounded-xl border border-white/10 bg-white/[0.02] backdrop-blur-xl p-4 flex items-center justify-between gap-4 opacity-60"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-medium truncate">{idea.title}</h3>
+                          <span className={`shrink-0 inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold ${statusColor(idea.status)}`}>
+                            {idea.status}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-muted-foreground/60">
+                          {format(parseISO(idea.created_at), "MMM d, yyyy")}
+                        </p>
+                      </div>
+                      <Button variant="ghost" size="sm" onClick={() => handleDeleteIdea(idea.id)}>
+                        <Trash2 className="w-4 h-4 text-destructive" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </>

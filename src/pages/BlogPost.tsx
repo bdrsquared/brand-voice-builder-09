@@ -19,6 +19,44 @@ type Post = {
   created_at: string;
 };
 
+const useMetaTags = (post: Post | null) => {
+  useEffect(() => {
+    if (!post) return;
+
+    const siteUrl = window.location.origin;
+    const ogImage = post.cover_image || `${siteUrl}/og-image.png`;
+    const description = post.excerpt || `Read "${post.title}" on the Earworm blog.`;
+
+    document.title = `${post.title} | Earworm`;
+
+    const setMeta = (property: string, content: string, isName = false) => {
+      const attr = isName ? "name" : "property";
+      let el = document.querySelector(`meta[${attr}="${property}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, property);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setMeta("description", description, true);
+    setMeta("og:title", post.title);
+    setMeta("og:description", description);
+    setMeta("og:image", ogImage);
+    setMeta("og:url", `${siteUrl}/blog/${post.slug}`);
+    setMeta("og:type", "article");
+    setMeta("twitter:card", "summary_large_image", true);
+    setMeta("twitter:title", post.title, true);
+    setMeta("twitter:description", description, true);
+    setMeta("twitter:image", ogImage, true);
+
+    return () => {
+      document.title = "Earworm";
+    };
+  }, [post]);
+};
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<Post | null>(null);
@@ -39,6 +77,8 @@ const BlogPost = () => {
     };
     fetchPost();
   }, [slug]);
+
+  useMetaTags(post);
 
   if (loading) {
     return (

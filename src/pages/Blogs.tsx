@@ -94,12 +94,10 @@ const Blogs = () => {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading mb-3 leading-[0.95] text-foreground">
-                The stuff happening.
-                <br />
-                What we think about it.
+                The stuff that's happening.
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground font-body max-w-md">
-                Industry news without the corporate spin.
+                Our thoughts on the podcast industry - musings, news and articles, without the corporate spin.
               </p>
             </div>
             {/* Search */}

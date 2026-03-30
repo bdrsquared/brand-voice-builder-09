@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink, Check, X, RefreshCw, Loader2, Sparkles } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, Eye, Lightbulb, FileText, ExternalLink, Check, X, RefreshCw, Loader2, Sparkles, CheckSquare, Square } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import { format, parseISO } from "date-fns";
 import { toast } from "sonner";
 
@@ -80,6 +81,8 @@ const AdminBlogManager = () => {
   const [saving, setSaving] = useState(false);
   const [researching, setResearching] = useState(false);
   const [generatingId, setGeneratingId] = useState<string | null>(null);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkProcessing, setBulkProcessing] = useState(false);
 
   const fetchPosts = async () => {
     const { data } = await supabase
@@ -281,6 +284,54 @@ const AdminBlogManager = () => {
       toast.success("Idea dismissed");
       fetchIdeas();
     }
+  };
+
+  const toggleSelect = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === newIdeas.length) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(newIdeas.map((i) => i.id)));
+    }
+  };
+
+  const handleBulkApprove = async () => {
+    if (selectedIds.size === 0) return;
+    setBulkProcessing(true);
+    const ids = Array.from(selectedIds);
+    let success = 0;
+    for (const id of ids) {
+      try {
+        const { data, error } = await supabase.functions.invoke("generate-blog-from-idea", {
+          body: { idea_id: id },
+        });
+        if (!error && !data?.error) success++;
+      } catch {}
+    }
+    toast.success(`${success} blog post(s) generated and published!`);
+    setSelectedIds(new Set());
+    setBulkProcessing(false);
+    fetchIdeas();
+    fetchPosts();
+  };
+
+  const handleBulkDecline = async () => {
+    if (selectedIds.size === 0) return;
+    const ids = Array.from(selectedIds);
+    for (const id of ids) {
+      await supabase.from("blog_ideas").update({ status: "declined" }).eq("id", id);
+    }
+    toast.success(`${ids.length} idea(s) declined`);
+    setSelectedIds(new Set());
+    fetchIdeas();
   };
 
   const statusColor = (status: string) => {
@@ -597,15 +648,64 @@ const AdminBlogManager = () => {
               {/* New ideas needing review */}
               {newIdeas.length > 0 && (
                 <div className="space-y-3">
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                    Needs Review ({newIdeas.length})
-                  </h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                      Needs Review ({newIdeas.length})
+                    </h3>
+                    <button
+                      onClick={toggleSelectAll}
+                      className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {selectedIds.size === newIdeas.length ? "Deselect all" : "Select all"}
+                    </button>
+                  </div>
+
+                  {/* Bulk action bar */}
+                  {selectedIds.size > 0 && (
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.06] border border-white/[0.1]">
+                      <span className="text-sm font-medium">{selectedIds.size} selected</span>
+                      <div className="flex items-center gap-2 ml-auto">
+                        <Button
+                          size="sm"
+                          onClick={handleBulkApprove}
+                          disabled={bulkProcessing}
+                          className="bg-primary text-primary-foreground"
+                        >
+                          {bulkProcessing ? (
+                            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                          ) : (
+                            <Check className="w-4 h-4 mr-1" />
+                          )}
+                          {bulkProcessing ? "Processing..." : "Approve Selected"}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={handleBulkDecline}
+                          disabled={bulkProcessing}
+                          className="text-muted-foreground hover:text-destructive"
+                        >
+                          <X className="w-4 h-4 mr-1" /> Decline Selected
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
                   {newIdeas.map((idea) => (
                     <div
                       key={idea.id}
-                      className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 space-y-3"
+                      className={`rounded-xl border backdrop-blur-xl p-4 space-y-3 transition-colors ${
+                        selectedIds.has(idea.id)
+                          ? "border-primary/30 bg-primary/[0.04]"
+                          : "border-white/10 bg-white/5"
+                      }`}
                     >
-                      <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-start gap-3">
+                        <Checkbox
+                          checked={selectedIds.has(idea.id)}
+                          onCheckedChange={() => toggleSelect(idea.id)}
+                          className="mt-1 border-white/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                        />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="font-medium">{idea.title}</h3>
@@ -639,7 +739,7 @@ const AdminBlogManager = () => {
                         <Button
                           size="sm"
                           onClick={() => handleApprove(idea.id)}
-                          disabled={generatingId === idea.id}
+                          disabled={generatingId === idea.id || bulkProcessing}
                           className="bg-primary text-primary-foreground"
                         >
                           {generatingId === idea.id ? (
@@ -653,7 +753,7 @@ const AdminBlogManager = () => {
                           size="sm"
                           variant="ghost"
                           onClick={() => handleDecline(idea.id)}
-                          disabled={generatingId === idea.id}
+                          disabled={generatingId === idea.id || bulkProcessing}
                           className="text-muted-foreground hover:text-destructive"
                         >
                           <X className="w-4 h-4 mr-1" /> Decline

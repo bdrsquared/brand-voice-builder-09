@@ -198,7 +198,7 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
-    // Step 3: Find a relevant image via Perplexity
+    // Step 3: Find a relevant image via Perplexity, download it, and store in our bucket
     let coverImageUrl: string | null = null;
     if (PERPLEXITY_API_KEY) {
       try {
@@ -214,11 +214,11 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
             messages: [
               {
                 role: "system",
-                content: "You are a helpful assistant. When asked for an image, respond with ONLY a raw URL on a single line. No markdown, no brackets, no extra text.",
+                content: "You are a helpful assistant. When asked for an image, respond with ONLY a raw URL on a single line. No markdown, no brackets, no extra text. The URL must be a direct link to an image file that can be downloaded.",
               },
               {
                 role: "user",
-                content: `Give me one Unsplash image URL for: ${blog.title}. Use the format https://images.unsplash.com/photo-XXXX. Only the URL, nothing else.`,
+                content: `Give me one high-quality Unsplash image URL relevant to: ${blog.title}. Use the format https://images.unsplash.com/photo-XXXX?w=1200&q=80 (include the query params). Only the URL, nothing else.`,
               },
             ],
           }),
@@ -228,11 +228,48 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
           const imgData = await imgResponse.json();
           const imgContent = imgData.choices?.[0]?.message?.content?.trim() || "";
           console.log("Perplexity image response:", imgContent);
-          // Extract any URL from response
           const urlMatch = imgContent.match(/https?:\/\/[^\s"'<>\)]+/i);
+          
           if (urlMatch) {
-            coverImageUrl = urlMatch[0];
-            console.log("Found cover image:", coverImageUrl);
+            let sourceUrl = urlMatch[0];
+            // Ensure Unsplash URLs have download params
+            if (sourceUrl.includes("unsplash.com") && !sourceUrl.includes("?")) {
+              sourceUrl += "?w=1200&q=80";
+            }
+            console.log("Downloading image from:", sourceUrl);
+            
+            // Download the image
+            const downloadResp = await fetch(sourceUrl);
+            if (downloadResp.ok) {
+              const contentType = downloadResp.headers.get("content-type") || "";
+              if (contentType.startsWith("image/")) {
+                const imageBlob = await downloadResp.blob();
+                const ext = contentType.includes("png") ? "png" : "jpg";
+                const fileName = `${slug}.${ext}`;
+                
+                // Upload to our storage bucket
+                const { error: uploadError } = await supabase.storage
+                  .from("blog-images")
+                  .upload(fileName, imageBlob, {
+                    contentType: contentType,
+                    upsert: true,
+                  });
+                
+                if (!uploadError) {
+                  const { data: publicUrlData } = supabase.storage
+                    .from("blog-images")
+                    .getPublicUrl(fileName);
+                  coverImageUrl = publicUrlData.publicUrl;
+                  console.log("Image stored at:", coverImageUrl);
+                } else {
+                  console.warn("Storage upload error:", uploadError.message);
+                }
+              } else {
+                console.warn("Downloaded content is not an image:", contentType);
+              }
+            } else {
+              console.warn("Image download failed:", downloadResp.status);
+            }
           } else {
             console.warn("No URL found in image response");
           }

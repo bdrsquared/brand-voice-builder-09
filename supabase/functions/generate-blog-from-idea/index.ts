@@ -341,7 +341,7 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
         cover_image: coverImageUrl,
         category: blog.category,
         author: "Earworm",
-        published: false,
+        published: true,
       })
       .select()
       .single();

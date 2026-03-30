@@ -195,14 +195,14 @@ const Blogs = () => {
             </div>
           ) : (
             <div>
-                <div className="grid grid-cols-1 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {paginatedPosts.map((post) => (
                     <Link
                       key={post.id}
                       to={`/blog/${post.slug}`}
-                      className="group flex flex-col sm:flex-row rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-white/[0.14] transition-all duration-300 hover:bg-white/[0.04]"
+                      className="group flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-white/[0.14] transition-all duration-300 hover:bg-white/[0.04]"
                     >
-                      <div className="sm:w-72 lg:w-80 shrink-0 aspect-[16/9] sm:aspect-auto sm:h-full overflow-hidden">
+                      <div className="aspect-[16/10] overflow-hidden">
                         {post.cover_image ? (
                           <img
                             src={post.cover_image}
@@ -210,12 +210,12 @@ const Blogs = () => {
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="w-full h-full min-h-[180px] bg-white/[0.02] flex items-center justify-center">
+                          <div className="w-full h-full bg-white/[0.02] flex items-center justify-center">
                             <span className="text-3xl font-heading text-white/[0.04]">E</span>
                           </div>
                         )}
                       </div>
-                      <div className="p-4 sm:p-5 flex flex-col flex-1 justify-center">
+                      <div className="p-4 sm:p-5 flex flex-col flex-1">
                         <div className="flex items-center gap-2 mb-2">
                           {post.category && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.04] backdrop-blur-md border border-white/[0.08] text-muted-foreground">
@@ -226,11 +226,11 @@ const Blogs = () => {
                             {format(parseISO(post.created_at), "MMM d, yyyy")}
                           </span>
                         </div>
-                        <h3 className="text-base sm:text-lg font-heading font-medium mb-2 text-foreground group-hover:text-foreground/80 transition-colors leading-snug line-clamp-2">
+                        <h3 className="text-base font-heading font-medium mb-2 text-foreground group-hover:text-foreground/80 transition-colors leading-snug line-clamp-2">
                           {post.title}
                         </h3>
                         {post.excerpt && (
-                          <p className="text-xs sm:text-sm text-muted-foreground/70 font-body line-clamp-2">
+                          <p className="text-xs text-muted-foreground/70 font-body line-clamp-2 mt-auto">
                             {post.excerpt}
                           </p>
                         )}

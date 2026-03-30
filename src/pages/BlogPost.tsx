@@ -151,12 +151,12 @@ const BlogPost = () => {
           {/* Content */}
           <div
             className="prose prose-invert prose-lg max-w-none font-body
-              prose-headings:font-heading prose-headings:text-foreground prose-headings:tracking-tight
-              prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4
-              prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3
-              prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-2
-              prose-p:text-muted-foreground prose-p:leading-[1.65] prose-p:text-base
-              prose-li:text-muted-foreground prose-li:leading-[1.65] prose-li:text-base
+              prose-headings:font-heading prose-headings:text-foreground prose-headings:tracking-tight prose-headings:font-bold
+              prose-h2:!text-2xl sm:prose-h2:!text-3xl prose-h2:!mt-12 prose-h2:!mb-5 prose-h2:!leading-tight
+              prose-h3:!text-xl sm:prose-h3:!text-2xl prose-h3:!mt-10 prose-h3:!mb-4 prose-h3:!leading-tight
+              prose-h4:!text-lg prose-h4:!mt-8 prose-h4:!mb-3 prose-h4:font-semibold
+              prose-p:text-muted-foreground prose-p:leading-[1.75] prose-p:!text-base prose-p:!mb-5
+              prose-li:text-muted-foreground prose-li:leading-[1.75] prose-li:!text-base
               prose-a:text-primary prose-a:no-underline hover:prose-a:underline
               prose-strong:text-foreground
               prose-blockquote:border-primary/30 prose-blockquote:text-muted-foreground

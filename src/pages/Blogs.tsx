@@ -178,6 +178,7 @@ const Blogs = () => {
                 </div>
               </div>
             )}
+          )}
         </div>
       </section>
 

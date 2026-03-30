@@ -18,9 +18,12 @@ type BlogPost = {
   created_at: string;
 };
 
+const POSTS_PER_PAGE = 10;
+
 const Blogs = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchPosts = async () => {

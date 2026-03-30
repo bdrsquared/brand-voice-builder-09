@@ -42,7 +42,27 @@ serve(async (req) => {
       ? `\n\nDo NOT suggest ideas similar to these existing titles:\n${allExistingTitles.map(t => `- ${t}`).join("\n")}`
       : "";
 
-    // Search for latest podcast industry news
+    // Randomise the angle to get different results each time
+    const angles = [
+      "branded podcast launches, partnerships, and sponsor deals",
+      "podcast technology, AI tools, hosting platforms, and distribution changes",
+      "video podcasting trends, YouTube podcast growth, and visual formats",
+      "B2B podcasting strategies, thought leadership, and corporate content",
+      "podcast audience growth, marketing tactics, and discoverability",
+      "podcast monetisation models, ad revenue shifts, and creator economy",
+      "podcast production innovations, remote recording, and workflow tools",
+      "podcast industry mergers, acquisitions, and business moves",
+      "independent podcaster success stories and breakout shows",
+      "podcast content formats, storytelling trends, and narrative innovation",
+      "podcast analytics, measurement, and ROI tracking developments",
+      "live podcasting, events, and community-driven audio",
+    ];
+    // Pick 3 random angles to combine
+    const shuffled = angles.sort(() => Math.random() - 0.5);
+    const chosenAngles = shuffled.slice(0, 3).join("; ");
+    const randomSeed = Math.random().toString(36).slice(2, 8);
+    const today = new Date().toISOString().split("T")[0];
+
     const searchResponse = await fetch("https://api.perplexity.ai/chat/completions", {
       method: "POST",
       headers: {
@@ -55,12 +75,12 @@ serve(async (req) => {
           {
             role: "system",
             content:
-              "You are a podcast industry analyst. Return exactly 5 recent podcast industry news stories or trends. For each, provide a title and a 2-3 sentence summary. Focus on B2B podcasting, branded podcasts, video podcasting, podcast marketing, and podcast production trends. Return as JSON array with objects containing 'title', 'summary', and 'source_url' fields. Only return the JSON array, no other text.",
+              "You are a podcast industry analyst who finds fresh, surprising stories. Return exactly 5 recent podcast industry news stories or trends. For each, provide a title and a 2-3 sentence summary. Return as JSON array with objects containing 'title', 'summary', and 'source_url' fields. Only return the JSON array, no other text.",
           },
           {
             role: "user",
             content:
-              `What are the top 5 most interesting podcast industry news stories or trends from the past week? Include stories about branded podcasts, B2B podcasting, video podcasting, podcast marketing strategies, and podcast production innovations.${exclusionList}`,
+              `Date: ${today} | Session: ${randomSeed}\n\nFind 5 fresh and surprising podcast industry stories from the past week. Focus specifically on: ${chosenAngles}.\n\nDig beyond the obvious headlines — find niche, unexpected, or under-reported stories that a podcast agency would find valuable.${exclusionList}`,
           },
         ],
         search_recency_filter: "week",

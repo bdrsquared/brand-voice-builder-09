@@ -15,7 +15,21 @@ const Showreel = () => {
   const gradientY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
 
   return (
-    <section ref={sectionRef} className="relative py-20 sm:py-28 px-6 pb-0">
+    <section ref={sectionRef} className="relative py-20 sm:py-28 px-6 pb-0 pt-0">
+
+      {/* Top tricolour parallax gradient bleed */}
+      <motion.div
+        className="relative z-0 w-full h-[250px] sm:h-[300px] -mb-20 pointer-events-none"
+        style={{ y: gradientY }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse 80% 70% at 80% 50%, rgba(28, 250, 118, 0.3), transparent 70%), radial-gradient(ellipse 80% 70% at 50% 40%, rgba(99, 89, 234, 0.25), transparent 70%), radial-gradient(ellipse 80% 70% at 20% 50%, rgba(255, 179, 71, 0.25), transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
+      </motion.div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div

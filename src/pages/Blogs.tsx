@@ -100,7 +100,7 @@ const Blogs = () => {
                   <div className="flex-1 p-4 sm:p-5 flex flex-col justify-center min-w-0">
                     <div className="flex items-center gap-3 mb-2">
                       {post.category && (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-primary/10 text-primary border border-primary/20">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] text-foreground/80">
                           {post.category}
                         </span>
                       )}

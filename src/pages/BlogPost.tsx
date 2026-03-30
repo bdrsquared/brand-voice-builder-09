@@ -82,15 +82,15 @@ const BlogPost = () => {
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
             {post.category && (
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-primary/10 text-primary border border-primary/20">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] text-foreground/80">
                 {post.category}
               </span>
             )}
-            <span className="flex items-center gap-1 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1 text-sm text-muted-foreground font-body">
               <Calendar className="w-3.5 h-3.5" />
               {format(parseISO(post.created_at), "MMMM d, yyyy")}
             </span>
-            <span className="flex items-center gap-1 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1 text-sm text-muted-foreground font-body">
               <User className="w-3.5 h-3.5" />
               {post.author}
             </span>
@@ -108,14 +108,19 @@ const BlogPost = () => {
             </div>
           )}
 
-          {/* Content - rendered as HTML or plain text */}
+          {/* Content */}
           <div
             className="prose prose-invert prose-lg max-w-none font-body
-              prose-headings:font-heading prose-headings:text-foreground
-              prose-p:text-muted-foreground prose-p:leading-relaxed
+              prose-headings:font-heading prose-headings:text-foreground prose-headings:tracking-tight
+              prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4
+              prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3
+              prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-2
+              prose-p:text-muted-foreground prose-p:leading-[1.65] prose-p:text-base
+              prose-li:text-muted-foreground prose-li:leading-[1.65] prose-li:text-base
               prose-a:text-primary prose-a:no-underline hover:prose-a:underline
               prose-strong:text-foreground
-              prose-blockquote:border-primary/30 prose-blockquote:text-muted-foreground"
+              prose-blockquote:border-primary/30 prose-blockquote:text-muted-foreground
+              prose-img:rounded-xl prose-img:border prose-img:border-border"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>

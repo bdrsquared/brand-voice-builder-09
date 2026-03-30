@@ -253,25 +253,34 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
     let coverImageUrl: string | null = null;
     let chosenStyle: string | null = null;
     try {
-      // Step 3a: Randomly pick a style — no AI, pure randomness
+      // Step 3a: Randomly pick a style — crypto-random, strict dedup
       const styleKeys = Object.keys(STYLE_PROMPTS);
       
-      // Check what styles were recently used to avoid repetition
+      // Look back further to avoid clustering
       const { data: recentPosts } = await supabase
         .from("blog_posts")
         .select("image_style")
         .not("image_style", "is", null)
         .order("created_at", { ascending: false })
-        .limit(5);
+        .limit(10);
       
       const recentStyles = (recentPosts || []).map(p => p.image_style).filter(Boolean);
       
-      // Filter out styles used in the last 5 posts; if all used, allow all
-      let availableStyles = styleKeys.filter(s => !recentStyles.includes(s));
+      // Count how often each style appears in recent posts
+      const styleCounts: Record<string, number> = {};
+      for (const s of styleKeys) styleCounts[s] = 0;
+      for (const s of recentStyles) if (styleCounts[s] !== undefined) styleCounts[s]++;
+      
+      // Find the minimum count and only allow styles at that count (least used)
+      const minCount = Math.min(...Object.values(styleCounts));
+      let availableStyles = styleKeys.filter(s => styleCounts[s] === minCount);
       if (availableStyles.length === 0) availableStyles = styleKeys;
       
-      chosenStyle = availableStyles[Math.floor(Math.random() * availableStyles.length)];
-      console.log(`Style randomly chosen: ${chosenStyle} (avoided recent: ${recentStyles.join(", ")})`);
+      // Crypto-random selection
+      const randomBytes = new Uint32Array(1);
+      crypto.getRandomValues(randomBytes);
+      chosenStyle = availableStyles[randomBytes[0] % availableStyles.length];
+      console.log(`Style chosen: ${chosenStyle} (counts: ${JSON.stringify(styleCounts)}, pool: ${availableStyles.join(", ")})`);
 
       const styleConfig = STYLE_PROMPTS[chosenStyle!];
       

@@ -93,8 +93,12 @@ const Blogs = () => {
                   <Link
                     key={post.id}
                     to={`/blog/${post.slug}`}
-                    className="group flex rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
+                    className="group relative flex rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
                   >
+                    {/* Shimmer sweep on hover */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-2xl z-10">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+                    </div>
                     <div className="w-28 sm:w-40 shrink-0">
                       {post.cover_image ? (
                         <img

@@ -233,7 +233,7 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
         if (images.length > 0) {
           const img = images[0];
           const imgUrl = img.image_url?.url || img.url || img.image_url;
-          console.log("Image URL type:", typeof imgUrl, "starts:", typeof imgUrl === "string" ? imgUrl.substring(0, 80) : "N/A");
+          
           
           if (typeof imgUrl === "string" && imgUrl.startsWith("data:")) {
             const dataUriMatch = imgUrl.match(/data:(image\/[^;]+);base64,(.+)/);

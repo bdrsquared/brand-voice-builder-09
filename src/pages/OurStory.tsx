@@ -17,18 +17,18 @@ import benAvatar from "@/assets/ben-farley.png";
 const team = [
   { name: "Ben Farley", role: "Founder & CEO", avatar: benAvatar, about: "Ben built Earworm from the ground up with a mission to help brands tell stories worth listening to. He leads strategy and client relationships.", funFact: "Once recorded an entire episode in a moving campervan.", linkedin: "https://linkedin.com/in/benfarley", email: "ben@earworm.co" },
   { name: "Stephen Fordham", role: "Chairman", avatar: null, about: "Stephen brings decades of senior leadership experience, guiding Earworm's strategic direction and long-term vision.", funFact: "Has never missed a board meeting in 20 years.", linkedin: "https://linkedin.com/in/stephenfordham", email: "stephen@earworm.co" },
-  { name: "Steve Chang", role: "Finance Director", avatar: null, about: "Steve keeps the numbers sharp — overseeing financial planning, forecasting, and making sure growth is sustainable.", funFact: "Can solve a Rubik's cube in under two minutes.", linkedin: "https://linkedin.com/in/stevechang", email: "steve@earworm.co" },
-  { name: "Susie McFarland", role: "Commercial Director", avatar: null, about: "Susie drives commercial growth — building partnerships and ensuring every client engagement delivers real value.", funFact: "Once closed a deal on a ski lift.", linkedin: "https://linkedin.com/in/susiemcfarland", email: "susie@earworm.co" },
-  { name: "Lucy Meecham-Jones", role: "Sales Manager", avatar: null, about: "Lucy leads the sales team — connecting brands with the right Earworm services and building lasting relationships.", funFact: "Has a black belt in karate.", linkedin: "https://linkedin.com/in/lucymeechamjones", email: "lucy@earworm.co" },
-  { name: "Adele Burrows", role: "Client Services", avatar: null, about: "Adele is the glue between clients and production — making sure every project runs smoothly from kickoff to delivery.", funFact: "Can name every dog breed on sight.", linkedin: "https://linkedin.com/in/adeleburrows", email: "adele@earworm.co" },
-  { name: "Jon Farley", role: "Creative Director", avatar: null, about: "Jon shapes the creative vision behind every Earworm show — from concept and branding to set design and motion.", funFact: "Learned to edit video before he could drive.", linkedin: "https://linkedin.com/in/jonfarley", email: "jon@earworm.co" },
+  { name: "Steve Chang", role: "Finance Director", avatar: null, about: "Steve keeps the numbers sharp  -  overseeing financial planning, forecasting, and making sure growth is sustainable.", funFact: "Can solve a Rubik's cube in under two minutes.", linkedin: "https://linkedin.com/in/stevechang", email: "steve@earworm.co" },
+  { name: "Susie McFarland", role: "Commercial Director", avatar: null, about: "Susie drives commercial growth  -  building partnerships and ensuring every client engagement delivers real value.", funFact: "Once closed a deal on a ski lift.", linkedin: "https://linkedin.com/in/susiemcfarland", email: "susie@earworm.co" },
+  { name: "Lucy Meecham-Jones", role: "Sales Manager", avatar: null, about: "Lucy leads the sales team  -  connecting brands with the right Earworm services and building lasting relationships.", funFact: "Has a black belt in karate.", linkedin: "https://linkedin.com/in/lucymeechamjones", email: "lucy@earworm.co" },
+  { name: "Adele Burrows", role: "Client Services", avatar: null, about: "Adele is the glue between clients and production  -  making sure every project runs smoothly from kickoff to delivery.", funFact: "Can name every dog breed on sight.", linkedin: "https://linkedin.com/in/adeleburrows", email: "adele@earworm.co" },
+  { name: "Jon Farley", role: "Creative Director", avatar: null, about: "Jon shapes the creative vision behind every Earworm show  -  from concept and branding to set design and motion.", funFact: "Learned to edit video before he could drive.", linkedin: "https://linkedin.com/in/jonfarley", email: "jon@earworm.co" },
 ];
 
 const principles = [
-  { icon: Target, title: "Strategy first", desc: "Every podcast starts with a clear plan tied to business goals — not vanity metrics." },
+  { icon: Target, title: "Strategy first", desc: "Every podcast starts with a clear plan tied to business goals  -  not vanity metrics." },
   { icon: Gem, title: "Quality matters", desc: "We treat every frame, edit, and word as a reflection of your brand." },
   { icon: RefreshCw, title: "Built for consistency", desc: "Systems and workflows designed to keep content flowing week after week." },
-  { icon: TrendingUp, title: "Focus on outcomes", desc: "Content that compounds — building pipeline, authority, and audience over time." },
+  { icon: TrendingUp, title: "Focus on outcomes", desc: "Content that compounds  -  building pipeline, authority, and audience over time." },
 ];
 
 const fadeUp = {
@@ -109,7 +109,7 @@ const OurStory = () => {
               <span className="text-gradient-green">better content</span>
             </motion.h2>
             <motion.p variants={fadeUp} custom={2} className="text-text-secondary font-body leading-relaxed">
-              Earworm was founded by Ben Farley with a simple conviction: B2B companies shouldn't have to choose between quality and consistency. Too many brands settle for forgettable content — we set out to change that.
+              Earworm was founded by Ben Farley with a simple conviction: B2B companies shouldn't have to choose between quality and consistency. Too many brands settle for forgettable content  -  we set out to change that.
             </motion.p>
             <motion.p variants={fadeUp} custom={3} className="text-text-secondary font-body leading-relaxed">
               What started as a passion for audio storytelling quickly evolved into a full-service video podcast agency. Today we help ambitious businesses launch, run, and scale shows that genuinely move the needle.
@@ -288,7 +288,7 @@ const OurStory = () => {
               custom={2}
               className="text-lg sm:text-xl text-text-secondary font-body max-w-2xl mx-auto leading-relaxed"
             >
-              — and turn podcasting into a scalable, high-quality{" "}
+               -  and turn podcasting into a scalable, high-quality{" "}
               <span className="text-gradient-green">growth channel</span>.
             </motion.p>
           </motion.div>

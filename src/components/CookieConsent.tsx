@@ -32,7 +32,7 @@ const CookieConsent = () => {
             Let's talk cookies 🍪
           </p>
           <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-            Not the edible kind — just the ones that help us run the site properly and see what's working.
+            Not the edible kind  -  just the ones that help us run the site properly and see what's working.
           </p>
           <Link
             to="/cookies"

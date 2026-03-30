@@ -16,7 +16,7 @@ const reasons = [
   },
   {
     icon: Clock,
-    text: "Most teams are inconsistent — publishing in bursts then going quiet. That's a gap you can own.",
+    text: "Most teams are inconsistent  -  publishing in bursts then going quiet. That's a gap you can own.",
   },
 ];
 
@@ -38,7 +38,7 @@ const WhyNow = () => {
             <span className="text-light-text-tertiary">The brands that start now will own the conversation.</span>
           </h2>
           <p className="text-base text-light-text-secondary font-body mb-12 max-w-2xl leading-relaxed">
-            Video podcasting isn't a future trend — it's happening now. The businesses investing today are building an unfair advantage that compounds over time.
+            Video podcasting isn't a future trend  -  it's happening now. The businesses investing today are building an unfair advantage that compounds over time.
           </p>
         </motion.div>
 

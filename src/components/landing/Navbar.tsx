@@ -56,7 +56,7 @@ const caseStudies = [
   {
     brand: "Soldo",
     title: "The CFO Playbook",
-    description: "Storytelling at scale — turning athletes' journeys into binge-worthy audio content.",
+    description: "Storytelling at scale  -  turning athletes' journeys into binge-worthy audio content.",
     image: caseCfoPlaybook,
     stats: { impressions: "2.1M", pipeline: "£3.6M" },
     locationType: "Virtual" as const,
@@ -364,7 +364,7 @@ const Navbar = () => {
                 <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 transition-colors duration-300`}>
                   {/* Two-column layout */}
                   <div className="flex gap-6">
-                    {/* Left column — description + animated UI */}
+                    {/* Left column  -  description + animated UI */}
                     <div className="flex-1 flex flex-col">
                       <div className="flex items-center gap-2 mb-2">
                         <img src={podplannerIcon} alt="" className="w-5 h-5" />
@@ -375,7 +375,7 @@ const Navbar = () => {
                         One dashboard to organise, track, and collaborate.
                       </p>
 
-                      {/* Production Status UI — square, pinned to bottom (decorative only) */}
+                      {/* Production Status UI  -  square, pinned to bottom (decorative only) */}
                       <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col pointer-events-none select-none">
                         {/* Header */}
                         <div className="flex items-center justify-between mb-2.5">
@@ -434,7 +434,7 @@ const Navbar = () => {
                     {/* Divider */}
                     <div className="w-px bg-white/10 self-stretch" />
 
-                    {/* Middle column — content schedule */}
+                    {/* Middle column  -  content schedule */}
                     <div className="flex-1 flex flex-col">
                       <div className="flex items-center gap-2 mb-2">
                         <h4 className="text-lg font-heading font-semibold text-foreground">See your content schedule</h4>
@@ -443,7 +443,7 @@ const Navbar = () => {
                         View upcoming episodes and read the plan behind each one.
                       </p>
 
-                      {/* Mini schedule table — square, pinned to bottom (decorative only) */}
+                      {/* Mini schedule table  -  square, pinned to bottom (decorative only) */}
                       <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 overflow-hidden flex flex-col pointer-events-none select-none">
                         {/* Table header */}
                         <div className="grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 py-2 border-b border-white/[0.08] text-[8px] font-semibold text-white/30 uppercase tracking-wider">
@@ -484,7 +484,7 @@ const Navbar = () => {
                     {/* Divider */}
                     <div className="w-px bg-white/10 self-stretch" />
 
-                    {/* Right column — features */}
+                    {/* Right column  -  features */}
                     <div className="flex flex-col justify-center w-72 py-2 pl-2 gap-0">
                       {[
                         { icon: Layers, title: "Plan with clarity", desc: "Map out episodes, guests, and content in one place." },

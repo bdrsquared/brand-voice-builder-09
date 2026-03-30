@@ -221,10 +221,10 @@ const Admin = () => {
                       <TableCell className="font-medium">{inq.name}</TableCell>
                       <TableCell className="text-muted-foreground">{inq.email}</TableCell>
                       <TableCell className="text-muted-foreground hidden md:table-cell">
-                        {inq.phone || "—"}
+                        {inq.phone || " - "}
                       </TableCell>
                       <TableCell className="text-muted-foreground hidden md:table-cell">
-                        {inq.budget || "—"}
+                        {inq.budget || " - "}
                       </TableCell>
                       <TableCell className="text-muted-foreground text-sm">
                         {format(parseISO(inq.created_at), "MMM d, HH:mm")}

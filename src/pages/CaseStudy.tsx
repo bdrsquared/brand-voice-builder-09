@@ -40,7 +40,7 @@ export interface CaseStudyData {
   };
 }
 
-// Demo data — swap per client
+// Demo data  -  swap per client
 const caseStudies: Record<string, CaseStudyData> = {
   "pretty-covered": {
     slug: "pretty-covered",
@@ -55,9 +55,9 @@ const caseStudies: Record<string, CaseStudyData> = {
       { label: "Episodes produced", value: "24" },
     ],
     impacts: [
-      { title: "Built authority in insurtech", description: "Positioned Polly as the go-to voice for Gen Z insurance — a space no competitor was owning." },
+      { title: "Built authority in insurtech", description: "Positioned Polly as the go-to voice for Gen Z insurance  -  a space no competitor was owning." },
       { title: "Generated qualified pipeline", description: "Over 500 qualified leads attributed directly to podcast-driven content and guest referrals." },
-      { title: "Created a content flywheel", description: "Each episode produced 12+ assets — clips, quotes, articles — fuelling 3 months of social content." },
+      { title: "Created a content flywheel", description: "Each episode produced 12+ assets  -  clips, quotes, articles  -  fuelling 3 months of social content." },
       { title: "Opened strategic doors", description: "Guests included C-suite leaders from target accounts, turning interviews into warm introductions." },
     ],
     episodes: [
@@ -78,8 +78,8 @@ const caseStudies: Record<string, CaseStudyData> = {
       "/src/assets/office-hero.webp",
     ],
     summary: {
-      challenge: "Polly needed to build brand awareness with Gen Z — a demographic that ignores traditional advertising. They had no content engine and no presence in the conversation.",
-      solution: "We created Pretty Covered — a video podcast that let Polly lead authentic conversations about beauty, risk, and modern life. Each episode was designed to produce a cascade of short-form content for social.",
+      challenge: "Polly needed to build brand awareness with Gen Z  -  a demographic that ignores traditional advertising. They had no content engine and no presence in the conversation.",
+      solution: "We created Pretty Covered  -  a video podcast that let Polly lead authentic conversations about beauty, risk, and modern life. Each episode was designed to produce a cascade of short-form content for social.",
       result: "1.2M+ impressions, 500+ qualified leads, and a brand that Gen Z audiences now actively seek out. The podcast became Polly's most effective top-of-funnel channel.",
     },
   },

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Video, Scissors, Share2, Library, Calendar, Mic, BarChart3, Sparkles } from "lucide-react";
 import microphoneImg from "@/assets/earworm-microphone.png";
+import booksImg from "@/assets/earworm-books.png";
 
 const InPractice = () => {
   return (
@@ -117,20 +118,20 @@ const InPractice = () => {
             </div>
           </motion.div>
 
-          {/* Card 4 - Accent */}
+          {/* Card 4 - Accent with books background */}
           <motion.div
-            className="relative overflow-hidden rounded-2xl p-6 sm:p-8 min-h-[220px] flex flex-col justify-between"
-            style={{ background: "linear-gradient(135deg, hsl(250, 60%, 30%) 0%, hsl(280, 50%, 25%) 100%)" }}
+            className="relative overflow-hidden rounded-2xl min-h-[220px] flex flex-col justify-end"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.24 }}
           >
-            <div className="absolute top-[-20px] right-[-20px] w-[120px] h-[120px] rounded-full bg-accent/20 blur-[50px] pointer-events-none" />
-            <div className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-              <Library className="w-5 h-5 text-white/80" />
-            </div>
-            <div>
+            <img src={booksImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-white/10" />
+            <div className="relative z-10 p-6 sm:p-8">
+              <div className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center mb-4">
+                <Library className="w-5 h-5 text-white/80" />
+              </div>
               <h3 className="text-lg sm:text-xl text-white font-heading font-medium mb-2">
                 Growing content library
               </h3>

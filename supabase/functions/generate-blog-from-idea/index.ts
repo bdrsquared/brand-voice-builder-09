@@ -214,11 +214,11 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
             messages: [
               {
                 role: "system",
-                content: "You are an image researcher. Find a high-quality, royalty-free or Creative Commons image URL that would work as a blog cover image. Return ONLY a single direct image URL (ending in .jpg, .jpeg, .png, or .webp) from a reputable source like Unsplash, Pexels, or Pixabay. No text, no explanation, just the URL.",
+                content: "You are a helpful assistant. When asked for an image, respond with ONLY a raw URL on a single line. No markdown, no brackets, no extra text.",
               },
               {
                 role: "user",
-                content: `Find a professional, high-quality photo that would work as a blog header image for an article titled: "${blog.title}". The image should be relevant to podcasting, media production, business, or the specific topic. Return only the direct image URL.`,
+                content: `Give me one Unsplash image URL for: ${blog.title}. Use the format https://images.unsplash.com/photo-XXXX. Only the URL, nothing else.`,
               },
             ],
           }),

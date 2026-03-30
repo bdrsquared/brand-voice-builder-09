@@ -126,16 +126,13 @@ serve(async (req) => {
       );
     }
 
-    const contentType = finalContentType;
-
-    const imageBlob = await downloadResp.blob();
-    const ext = contentType.includes("png") ? "png" : "jpg";
+    const ext = finalContentType.includes("png") ? "png" : "jpg";
     const fileName = `${slug || "blog-image"}-${Date.now()}.${ext}`;
 
     // Upload to storage
     const { error: uploadError } = await supabase.storage
       .from("blog-images")
-      .upload(fileName, imageBlob, { contentType, upsert: true });
+      .upload(fileName, imageBlob, { contentType: finalContentType, upsert: true });
 
     if (uploadError) {
       console.error("Upload error:", uploadError);
@@ -144,12 +141,6 @@ serve(async (req) => {
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-
-    const { data: publicUrlData } = supabase.storage
-      .from("blog-images")
-      .getPublicUrl(fileName);
-
-    console.log("Image stored at:", publicUrlData.publicUrl);
 
     return new Response(
       JSON.stringify({ cover_image: publicUrlData.publicUrl }),

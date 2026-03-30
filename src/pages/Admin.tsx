@@ -99,10 +99,26 @@ const Admin = () => {
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
       <header className="border-b border-border px-6 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-semibold font-display">Inquiry Dashboard</h1>
-        <Button variant="ghost" size="sm" onClick={handleSignOut}>
-          <LogOut className="w-4 h-4 mr-2" /> Sign Out
-        </Button>
+        <h1 className="text-xl font-semibold font-display">Dashboard</h1>
+        <div className="flex items-center gap-2">
+          <div className="flex bg-white/5 rounded-lg p-0.5 mr-4">
+            <button
+              onClick={() => setActiveTab("inquiries")}
+              className={`px-3 py-1.5 text-sm rounded-md transition-colors ${activeTab === "inquiries" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <BarChart3 className="w-3.5 h-3.5 inline mr-1.5" />Inquiries
+            </button>
+            <button
+              onClick={() => setActiveTab("blog")}
+              className={`px-3 py-1.5 text-sm rounded-md transition-colors ${activeTab === "blog" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <FileText className="w-3.5 h-3.5 inline mr-1.5" />Blog
+            </button>
+          </div>
+          <Button variant="ghost" size="sm" onClick={handleSignOut}>
+            <LogOut className="w-4 h-4 mr-2" /> Sign Out
+          </Button>
+        </div>
       </header>
 
       <div className="max-w-6xl mx-auto px-6 py-8 space-y-8">

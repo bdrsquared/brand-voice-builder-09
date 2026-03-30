@@ -21,10 +21,6 @@ serve(async (req) => {
       );
     }
 
-    const PERPLEXITY_API_KEY = Deno.env.get("PERPLEXITY_API_KEY");
-    if (!PERPLEXITY_API_KEY) {
-      console.warn("PERPLEXITY_API_KEY not configured - will skip image search");
-    }
 
     const { idea_id } = await req.json();
     if (!idea_id) {
@@ -198,105 +194,140 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
-    // Step 3: Find a relevant image via Perplexity, download it, and store in our bucket
+    // Step 3: Generate a cover image using Lovable AI
     let coverImageUrl: string | null = null;
-    if (PERPLEXITY_API_KEY) {
-      try {
-        console.log("Searching for blog cover image...");
-        const imgResponse = await fetch("https://api.perplexity.ai/chat/completions", {
+    try {
+      console.log("Generating blog cover image with AI...");
+      const imagePrompt = `Professional, warm, cinematic blog header photo for an article titled "${blog.title}". Modern, sleek, business-oriented. Dark moody tones with warm accent lighting. No text overlay. Photorealistic style.`;
+      
+      const imgResponse = await fetch(
+        "https://ai.gateway.lovable.dev/v1/chat/completions",
+        {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${PERPLEXITY_API_KEY}`,
+            Authorization: `Bearer ${LOVABLE_API_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "sonar",
+            model: "google/gemini-3.1-flash-image-preview",
             messages: [
               {
-                role: "system",
-                content: "You are a helpful assistant. When asked for an image, respond with ONLY a raw URL on a single line. No markdown, no brackets, no extra text. The URL must be a direct link to an image file that can be downloaded.",
-              },
-              {
                 role: "user",
-                content: `Give me one high-quality Unsplash image URL relevant to: ${blog.title}. Use the format https://images.unsplash.com/photo-XXXX?w=1200&q=80 (include the query params). Only the URL, nothing else.`,
+                content: imagePrompt,
               },
             ],
           }),
-        });
+        }
+      );
 
-        if (imgResponse.ok) {
-          const imgData = await imgResponse.json();
-          const imgContent = imgData.choices?.[0]?.message?.content?.trim() || "";
-          console.log("Perplexity image response:", imgContent);
-          const urlMatch = imgContent.match(/https?:\/\/[^\s"'<>\)]+/i);
+      if (imgResponse.ok) {
+        const imgData = await imgResponse.json();
+        const message = imgData.choices?.[0]?.message;
+        
+        let base64Data: string | null = null;
+        let mimeType = "image/png";
+        
+        // Check for images array on the message (Lovable AI gateway format)
+        const images = message?.images || [];
+        
+        if (images.length > 0) {
+          const img = images[0];
+          const imgUrl = img.image_url?.url || img.url || img.image_url;
           
-          let imageBlob: Blob | null = null;
-          let imgContentType = "image/jpeg";
-
-          // Try Perplexity URL first
-          if (urlMatch) {
-            let sourceUrl = urlMatch[0];
-            if (sourceUrl.includes("unsplash.com") && !sourceUrl.includes("?")) {
-              sourceUrl += "?w=1200&q=80";
+          
+          if (typeof imgUrl === "string" && imgUrl.startsWith("data:")) {
+            const dataUriMatch = imgUrl.match(/data:(image\/[^;]+);base64,(.+)/);
+            if (dataUriMatch) {
+              mimeType = dataUriMatch[1];
+              base64Data = dataUriMatch[2];
             }
-            console.log("Trying Perplexity URL:", sourceUrl);
+          } else if (typeof imgUrl === "string" && imgUrl.startsWith("http")) {
+            // Direct URL - download it
+            console.log("Downloading image from URL...");
             try {
-              const downloadResp = await fetch(sourceUrl, { redirect: "follow" });
-              if (downloadResp.ok) {
-                const ct = downloadResp.headers.get("content-type") || "";
+              const dlResp = await fetch(imgUrl);
+              if (dlResp.ok) {
+                const ct = dlResp.headers.get("content-type") || "image/png";
                 if (ct.startsWith("image/")) {
-                  imageBlob = await downloadResp.blob();
-                  imgContentType = ct;
+                  const imgBlob = await dlResp.blob();
+                  const ext = ct.includes("png") ? "png" : "jpg";
+                  const fileName = `${slug}.${ext}`;
+                  const { error: uploadError } = await supabase.storage
+                    .from("blog-images")
+                    .upload(fileName, imgBlob, { contentType: ct, upsert: true });
+                  if (!uploadError) {
+                    const { data: publicUrlData } = supabase.storage
+                      .from("blog-images")
+                      .getPublicUrl(fileName);
+                    coverImageUrl = publicUrlData.publicUrl;
+                    console.log("AI image stored at:", coverImageUrl);
+                  }
                 }
               }
             } catch (e) {
-              console.warn("Perplexity URL failed:", e);
+              console.warn("Image URL download failed:", e);
+            }
+          } else if (img.data) {
+            base64Data = img.data;
+            mimeType = img.mime_type || img.content_type || "image/png";
+          }
+        }
+        
+        // Check parts (Gemini native format)
+        if (!base64Data && !coverImageUrl) {
+          const parts = message?.parts || [];
+          for (const part of parts) {
+            if (part.inline_data) {
+              base64Data = part.inline_data.data;
+              mimeType = part.inline_data.mime_type || "image/png";
+              break;
             }
           }
-
-          // Fallback: Unsplash source redirect
-          if (!imageBlob) {
-            const keywords = blog.title.split(/\s+/).slice(0, 3).join(",").toLowerCase();
-            const fallbackUrl = `https://source.unsplash.com/1200x800/?${encodeURIComponent(keywords)}`;
-            console.log("Fallback to Unsplash source:", fallbackUrl);
-            try {
-              const fallbackResp = await fetch(fallbackUrl, { redirect: "follow" });
-              if (fallbackResp.ok) {
-                const ct = fallbackResp.headers.get("content-type") || "";
-                if (ct.startsWith("image/")) {
-                  imageBlob = await fallbackResp.blob();
-                  imgContentType = ct;
-                }
-              }
-            } catch (e) {
-              console.warn("Unsplash fallback failed:", e);
-            }
+        }
+        
+        // Check content for data URI
+        if (!base64Data && !coverImageUrl && typeof message?.content === "string") {
+          const dataUriMatch = message.content.match(/data:(image\/[^;]+);base64,([A-Za-z0-9+/=]+)/);
+          if (dataUriMatch) {
+            mimeType = dataUriMatch[1];
+            base64Data = dataUriMatch[2];
           }
+        }
 
-          if (imageBlob) {
-            const ext = imgContentType.includes("png") ? "png" : "jpg";
-            const fileName = `${slug}.${ext}`;
-            const { error: uploadError } = await supabase.storage
+        if (base64Data && !coverImageUrl) {
+          // Convert base64 to blob
+          const binaryStr = atob(base64Data);
+          const bytes = new Uint8Array(binaryStr.length);
+          for (let i = 0; i < binaryStr.length; i++) {
+            bytes[i] = binaryStr.charCodeAt(i);
+          }
+          const imageBlob = new Blob([bytes], { type: mimeType });
+          
+          const ext = mimeType.includes("png") ? "png" : "jpg";
+          const fileName = `${slug}.${ext}`;
+          
+          const { error: uploadError } = await supabase.storage
+            .from("blog-images")
+            .upload(fileName, imageBlob, { contentType: mimeType, upsert: true });
+          
+          if (!uploadError) {
+            const { data: publicUrlData } = supabase.storage
               .from("blog-images")
-              .upload(fileName, imageBlob, { contentType: imgContentType, upsert: true });
-            if (!uploadError) {
-              const { data: publicUrlData } = supabase.storage
-                .from("blog-images")
-                .getPublicUrl(fileName);
-              coverImageUrl = publicUrlData.publicUrl;
-              console.log("Image stored at:", coverImageUrl);
-            } else {
-              console.warn("Storage upload error:", uploadError.message);
-            }
+              .getPublicUrl(fileName);
+            coverImageUrl = publicUrlData.publicUrl;
+            console.log("AI image stored at:", coverImageUrl);
           } else {
-            console.warn("Could not download any image");
+            console.warn("Storage upload error:", uploadError.message);
           }
         } else {
-          console.warn("Image search HTTP error:", imgResponse.status);
+          console.warn("No image data in AI response");
         }
-      } catch (imgErr) {
-        console.warn("Image search failed, proceeding without cover:", imgErr);
+      } else {
+        const errText = await imgResponse.text();
+        console.warn("AI image generation error:", imgResponse.status, errText);
       }
+    } catch (imgErr) {
+      console.warn("Image generation failed, proceeding without cover:", imgErr);
     }
 
     // Insert as draft blog post

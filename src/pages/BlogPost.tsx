@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Footer from "@/components/landing/Footer";
-import { ArrowLeft, Calendar, User } from "lucide-react";
+import { ArrowLeft, Calendar, User, Share2 } from "lucide-react";
 import { format, parseISO } from "date-fns";
 
 type Post = {

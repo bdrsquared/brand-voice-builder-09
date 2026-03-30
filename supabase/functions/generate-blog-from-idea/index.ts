@@ -222,29 +222,68 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
 
       if (imgResponse.ok) {
         const imgData = await imgResponse.json();
-        console.log("AI image response keys:", JSON.stringify(Object.keys(imgData)));
         const message = imgData.choices?.[0]?.message;
-        console.log("Message keys:", message ? JSON.stringify(Object.keys(message)) : "no message");
-        const content = message?.content || "";
-        console.log("Content type:", typeof content, "length:", content?.length, "starts with:", typeof content === "string" ? content.substring(0, 100) : "N/A");
         
-        // Check for base64 image in content (data URI format)
         let base64Data: string | null = null;
         let mimeType = "image/png";
         
-        // Try parts first (Gemini native format)
-        const parts = message?.parts || [];
-        for (const part of parts) {
-          if (part.inline_data) {
-            base64Data = part.inline_data.data;
-            mimeType = part.inline_data.mime_type || "image/png";
-            break;
+        // Check for images array on the message (Lovable AI gateway format)
+        const images = message?.images || [];
+        if (images.length > 0) {
+          const img = images[0];
+          if (img.url && img.url.startsWith("data:")) {
+            const dataUriMatch = img.url.match(/data:(image\/[^;]+);base64,(.+)/);
+            if (dataUriMatch) {
+              mimeType = dataUriMatch[1];
+              base64Data = dataUriMatch[2];
+            }
+          } else if (img.data) {
+            base64Data = img.data;
+            mimeType = img.mime_type || img.content_type || "image/png";
+          } else if (img.url) {
+            // Direct URL - download it
+            console.log("Downloading image from URL:", img.url.substring(0, 100));
+            try {
+              const dlResp = await fetch(img.url);
+              if (dlResp.ok) {
+                const ct = dlResp.headers.get("content-type") || "image/png";
+                if (ct.startsWith("image/")) {
+                  const imageBlob = await dlResp.blob();
+                  const ext = ct.includes("png") ? "png" : "jpg";
+                  const fileName = `${slug}.${ext}`;
+                  const { error: uploadError } = await supabase.storage
+                    .from("blog-images")
+                    .upload(fileName, imageBlob, { contentType: ct, upsert: true });
+                  if (!uploadError) {
+                    const { data: publicUrlData } = supabase.storage
+                      .from("blog-images")
+                      .getPublicUrl(fileName);
+                    coverImageUrl = publicUrlData.publicUrl;
+                    console.log("AI image stored at:", coverImageUrl);
+                  }
+                }
+              }
+            } catch (e) {
+              console.warn("Image URL download failed:", e);
+            }
           }
         }
         
-        // Try content as data URI
-        if (!base64Data && typeof content === "string") {
-          const dataUriMatch = content.match(/data:(image\/[^;]+);base64,([A-Za-z0-9+/=]+)/);
+        // Check parts (Gemini native format)
+        if (!base64Data && !coverImageUrl) {
+          const parts = message?.parts || [];
+          for (const part of parts) {
+            if (part.inline_data) {
+              base64Data = part.inline_data.data;
+              mimeType = part.inline_data.mime_type || "image/png";
+              break;
+            }
+          }
+        }
+        
+        // Check content for data URI
+        if (!base64Data && !coverImageUrl && typeof message?.content === "string") {
+          const dataUriMatch = message.content.match(/data:(image\/[^;]+);base64,([A-Za-z0-9+/=]+)/);
           if (dataUriMatch) {
             mimeType = dataUriMatch[1];
             base64Data = dataUriMatch[2];

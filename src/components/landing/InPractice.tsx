@@ -28,35 +28,45 @@ const InPractice = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Card 1 - Large span */}
           <motion.div
-            className="sm:col-span-2 relative overflow-hidden rounded-2xl p-6 sm:p-8 min-h-[280px] flex flex-col justify-end"
-            style={{ background: "linear-gradient(135deg, hsl(145, 96%, 25%) 0%, hsl(160, 90%, 20%) 50%, hsl(250, 60%, 25%) 100%)" }}
+            className="sm:col-span-2 relative overflow-hidden rounded-2xl min-h-[280px] flex flex-col justify-end"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5 }}
           >
-            <div className="absolute top-6 right-6 flex gap-2">
-              <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                <Mic className="w-5 h-5 text-white/80" />
+            {/* Background image */}
+            <img src={microphoneImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+            {/* CSS grid overlay */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+                backgroundSize: "60px 60px",
+              }}
+            />
+            {/* Dark gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+            <div className="relative z-10 p-6 sm:p-8">
+              <div className="absolute top-[-60px] right-6 flex gap-2">
+                <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+                  <Mic className="w-5 h-5 text-white/80" />
+                </div>
+                <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+                  <Video className="w-5 h-5 text-white/80" />
+                </div>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                <Video className="w-5 h-5 text-white/80" />
+              <h3 className="text-xl sm:text-2xl text-white font-heading font-medium mb-2">
+                Record once, distribute everywhere
+              </h3>
+              <p className="text-sm text-white/70 font-body max-w-md leading-relaxed">
+                Every month, you sit down for a conversation. We turn it into a full content engine that keeps your brand visible and top of mind.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/15 text-white/90">Fully managed</span>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/15 text-white/90">Monthly sessions</span>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/15 text-white/90">All platforms</span>
               </div>
-            </div>
-            {/* Decorative blob */}
-            <div className="absolute top-[-40px] right-[-40px] w-[200px] h-[200px] rounded-full bg-primary/20 blur-[80px] pointer-events-none" />
-            <div className="absolute bottom-[-30px] left-[20%] w-[150px] h-[150px] rounded-full bg-accent/15 blur-[60px] pointer-events-none" />
-            
-            <h3 className="text-xl sm:text-2xl text-white font-heading font-medium mb-2">
-              Record once, distribute everywhere
-            </h3>
-            <p className="text-sm text-white/70 font-body max-w-md leading-relaxed">
-              Every month, you sit down for a conversation. We turn it into a full content engine that keeps your brand visible and top of mind.
-            </p>
-            <div className="flex flex-wrap gap-2 mt-4">
-              <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/15 text-white/90">Fully managed</span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/15 text-white/90">Monthly sessions</span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/15 text-white/90">All platforms</span>
             </div>
           </motion.div>
 

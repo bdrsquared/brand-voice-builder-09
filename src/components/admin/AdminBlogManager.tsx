@@ -683,7 +683,7 @@ const AdminBlogManager = () => {
                           variant="ghost"
                           onClick={handleBulkDecline}
                           disabled={bulkProcessing}
-                          className="text-muted-foreground hover:text-destructive"
+                          className="border border-white/10 text-foreground hover:bg-destructive hover:text-destructive-foreground hover:border-destructive"
                         >
                           <X className="w-4 h-4 mr-1" /> Decline Selected
                         </Button>

@@ -13,6 +13,8 @@ const Showreel = () => {
   });
 
   const gradientY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.35], [0.88, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.25], [0.7, 1]);
 
   return (
     <section ref={sectionRef} className="relative py-20 sm:py-28 px-6 pb-0">

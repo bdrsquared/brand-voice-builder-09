@@ -214,11 +214,11 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
             messages: [
               {
                 role: "system",
-                content: "You are an image researcher. Find a high-quality, royalty-free or Creative Commons image URL that would work as a blog cover image. Return ONLY a single direct image URL (ending in .jpg, .jpeg, .png, or .webp) from a reputable source like Unsplash, Pexels, or Pixabay. No text, no explanation, just the URL.",
+                content: "You are a helpful assistant. When asked for an image, respond with ONLY a raw URL on a single line. No markdown, no brackets, no extra text.",
               },
               {
                 role: "user",
-                content: `Find a professional, high-quality photo that would work as a blog header image for an article titled: "${blog.title}". The image should be relevant to podcasting, media production, business, or the specific topic. Return only the direct image URL.`,
+                content: `Give me one Unsplash image URL for: ${blog.title}. Use the format https://images.unsplash.com/photo-XXXX. Only the URL, nothing else.`,
               },
             ],
           }),
@@ -227,16 +227,17 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
         if (imgResponse.ok) {
           const imgData = await imgResponse.json();
           const imgContent = imgData.choices?.[0]?.message?.content?.trim() || "";
-          // Extract URL from response
-          const urlMatch = imgContent.match(/https?:\/\/[^\s"'<>]+\.(jpg|jpeg|png|webp)[^\s"'<>]*/i);
+          console.log("Perplexity image response:", imgContent);
+          // Extract any URL from response
+          const urlMatch = imgContent.match(/https?:\/\/[^\s"'<>\)]+/i);
           if (urlMatch) {
-            // Verify the image is accessible
-            const checkResp = await fetch(urlMatch[0], { method: "HEAD" });
-            if (checkResp.ok) {
-              coverImageUrl = urlMatch[0];
-              console.log("Found cover image:", coverImageUrl);
-            }
+            coverImageUrl = urlMatch[0];
+            console.log("Found cover image:", coverImageUrl);
+          } else {
+            console.warn("No URL found in image response");
           }
+        } else {
+          console.warn("Image search HTTP error:", imgResponse.status);
         }
       } catch (imgErr) {
         console.warn("Image search failed, proceeding without cover:", imgErr);

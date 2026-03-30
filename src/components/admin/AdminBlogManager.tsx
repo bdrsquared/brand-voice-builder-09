@@ -379,7 +379,20 @@ const AdminBlogManager = () => {
             </div>
           </div>
           <div>
-            <Label>Cover Image URL</Label>
+            <div className="flex items-center justify-between mb-1">
+              <Label>Cover Image URL</Label>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleFindImage}
+                disabled={findingImage}
+                className="text-xs text-muted-foreground hover:text-primary gap-1.5 h-7"
+              >
+                {findingImage ? <Loader2 className="w-3 h-3 animate-spin" /> : <ImageIcon className="w-3 h-3" />}
+                {findingImage ? "Searching..." : "Find an image"}
+              </Button>
+            </div>
             <Input
               value={form.cover_image}
               onChange={(e) => setForm((f) => ({ ...f, cover_image: e.target.value }))}

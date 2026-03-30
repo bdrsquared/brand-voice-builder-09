@@ -88,7 +88,7 @@ const Blogs = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-4">
-              {posts.map((post) => (
+              {paginatedPosts.map((post) => (
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
@@ -139,7 +139,45 @@ const Blogs = () => {
                 </Link>
               ))}
             </div>
-          )}
+
+            {/* Glassmorphic Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center mt-10">
+                <div className="inline-flex items-center gap-1 px-3 py-2 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/[0.08]">
+                  <button
+                    onClick={() => goToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/[0.08] transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span className="hidden sm:inline">Prev</span>
+                  </button>
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => goToPage(page)}
+                      className={`w-8 h-8 rounded-full text-sm font-medium transition-colors ${
+                        page === currentPage
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+
+                  <button
+                    onClick={() => goToPage(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/[0.08] transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  >
+                    <span className="hidden sm:inline">Next</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
         </div>
       </section>
 

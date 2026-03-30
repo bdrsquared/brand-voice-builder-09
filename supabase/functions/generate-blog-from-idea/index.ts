@@ -222,12 +222,102 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
-    // Step 3: Generate a cover image using Lovable AI
+    // Step 3: Two-step image generation — pick style, then generate
+    const STYLE_PROMPTS: Record<string, { prompt: string; negative: string }> = {
+      vibrant_studio: {
+        prompt: `Solid vibrant backdrop, single bold colour — electric magenta, acid green, cobalt, or deep orange. One person centre frame, shot from the waist up or face only. Expression is exaggerated and readable at thumbnail size: surprised, horrified, unimpressed, delighted. The expression should feel like a reaction meme, not a portrait. Face takes up most of the frame. Skin is real — pores, natural imperfections, no retouching. Colours are supersaturated but the image itself is still photographic, not illustrated. No props, no text, nothing else in frame. The backdrop is flat — no gradient, no texture, just one loud colour. Slightly harsh front-on lighting so nothing is mysterious. Shot on a mirrorless camera with a 50mm lens, shallow depth of field, face sharp, backdrop soft.`,
+        negative: `no text overlays, no gradient backgrounds, no multiple people, no smiling-at-camera, no studio glamour retouching, no vignette`,
+      },
+      glossy_3d: {
+        prompt: `Hyper-glossy CGI render, intentionally over-produced. Objects should look like they are made of polished resin, chrome, or thick frosted glass. Impossible lighting — multiple coloured light sources, reflections that don't make physical sense, subsurface glow. The palette should feel curated: either monochromatic with one accent, or a specific two-colour combination like deep navy and acid yellow. Depth of field even though nothing would realistically have depth of field in a render. Everything too smooth, too shiny, too perfect — but in an interesting way, not a boring way. The object or subject sits alone in a void or on a reflective surface. Nothing natural or organic. Pure artifice. Rendered in Cinema 4D or Blender aesthetic, octane render style, 4k, no camera grain.`,
+        negative: `no photorealism, no natural settings, no flat design, no hand-drawn elements, no stock imagery feel`,
+      },
+      iphone_photo: {
+        prompt: `A genuinely bad phone photo. Not artfully bad — just how bad phone photos actually look. Slightly soft focus because someone moved. Overhead fluorescent or mixed indoor lighting, no white balance correction. Slightly blown-out highlights on one side. Off-centre to the point of looking like an accident. Something partially in frame that shouldn't be — an elbow, a thumb over the lens corner, the edge of a table. The subject is mundane: a desk, an object, a person looking at something else. JPEG compression visible at edges. Colours are slightly wrong — too warm or too green depending on the light source. This should look like a photo someone sent in a group chat, not to an editor. Shot on iPhone 11 or older, automatic mode, no editing, portrait mode off.`,
+        negative: `no golden hour, no professional framing, no sharp focus, no beautiful light, no intentional composition, no editing`,
+      },
+      meme_face: {
+        prompt: `Bold flat-colour background — one colour, maximally saturated, chosen for emotional energy (yellow for chaos, red for alarm, green for cursed energy, blue for sadness). A single face takes up 60-70% of the frame. Expression is one emotion taken to its logical extreme: absolute despair, unhinged glee, deep suspicion, profound confusion. The face should be the kind of face that works as a reaction image — readable, specific, funny without trying. Slightly low resolution aesthetic, like it's been screenshotted and re-uploaded. No text. No other elements. The face does all the work. If there is a body it is cut off at the shoulders. Flat graphic, strong outline, no background detail, expression over everything.`,
+        negative: `no text, no busy backgrounds, no multiple subjects, no calm expressions, no professional photography lighting, no stock photo energy`,
+      },
+      editorial_flat: {
+        prompt: `Editorial magazine aesthetic. Single muted background colour — warm off-white, dusty rose, sage, faded terracotta, or deep forest green. One or two objects arranged with deliberate negative space. The composition is considered but not obsessive — something might be very slightly to the left of centre. Colours are all from the same family, desaturated. Shadows are real and visible. Nothing is floating: objects sit on a surface with proper contact shadows. If there is text it is printed on something in the image, not overlaid digitally. Quiet. Shot on medium format, flat lay or 3/4 angle, natural overcast light.`,
+        negative: `no vibrant colours, no people, no branding, no digital text overlays, no studio lighting, no centred symmetrical compositions`,
+      },
+      grainy_disposable: {
+        prompt: `Disposable camera aesthetic, early 2000s. Heavy grain throughout — not digital noise, actual film grain. Colours are warm and slightly wrong: reds bleed, whites go cream, blacks go dark brown. Slight vignette at the corners from the cheap lens. Flash if it's a low-light situation — the harsh flat flash that makes everyone look caught, not lit. Overexposed or underexposed, not correctly exposed. The subject is people in a real situation: at a table, outside, caught mid-sentence, laughing at something off frame. Nothing is composed. Kodak Gold or Fuji 200 film emulation, 35mm, developed at a drugstore.`,
+        negative: `no clean digital look, no sharp focus, no studio, no posed subjects, no colour grading, no modern camera quality`,
+      },
+    };
+
     let coverImageUrl: string | null = null;
+    let chosenStyle: string | null = null;
     try {
-      console.log("Generating blog cover image with AI...");
-      const imagePrompt = `You are a creative director generating an image for a blog post titled "${blog.title}". Create a photo that feels like it was taken by a person, not generated by a machine. The aesthetic is raw, specific and a little imperfect - not polished, not corporate, not stock. It should feel found, not produced. Like someone took a photo of something real and slightly unglamorous. Phone camera, natural light, slightly wrong angle, real environment with clutter in it. Colour grading subtle or non-existent. No oversaturated sunsets. No perfectly colour-matched flat-lays. Slight underexposure is more interesting than well-lit. Muted, a bit washed out or occasionally very high contrast - not "beautiful." Use a random colour profile or style every time - more blues, or reds or yellows depending on the image. Composition off-centre, partial frame, something half cut off at the edge. A hand in frame, an elbow, the corner of a room. Real spaces have edges. People if included should look like people - not models, slightly awkward poses, real skin, candid over directed, mixed ethnicities, normal clothes with a crease in them. Natural light only or low warm artificial light - a desk lamp, overhead fluorescent, a screen glow. Avoid golden hour, soft studio lighting, perfect window light. Instead overcast, overhead, slightly flat, harsh midday or dim evening. Encourage grain, slight motion blur, lens flare if there's a light source. Real surfaces like worn wood, slightly dirty concrete, dog-eared paper, scratched laminate. Not marble, not linen, not clean white backgrounds. Show an environment that looks used - a workspace, a half-drunk coffee, a bag dropped on a floor. Real context not a styled vignette. Text if relevant should look handwritten, printed badly or on a real surface. Shot on phone camera, natural grain, slightly underexposed. No text overlays, no studio lighting, no models, no branded elements.`;
+      console.log("Step 3a: Picking image style with AI...");
       
+      // Pick style using AI
+      const styleResponse = await fetch(
+        "https://ai.gateway.lovable.dev/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${LOVABLE_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "google/gemini-2.5-flash",
+            messages: [
+              {
+                role: "user",
+                content: `You are choosing a visual style for a blog post image. Pick the single most appropriate style based on the content's tone and topic.
+
+BLOG TITLE: ${blog.title}
+BLOG EXCERPT: ${blog.excerpt}
+
+AVAILABLE STYLES:
+- vibrant_studio: opinion pieces, hot takes, controversial topics, strong POV or emotional reaction
+- glossy_3d: tech topics, product explainers, AI content, abstract or conceptual subjects
+- iphone_photo: personal finance, lifestyle, work and productivity, everyday real life
+- meme_face: listicles, relatable content, humour, irony, things meant to be shared
+- editorial_flat: research roundups, considered explainers, cultural or social topics
+- grainy_disposable: nostalgia, culture, music, fashion, human or social stories
+
+Rules:
+- Pick based on emotional match, not literal subject matter
+- A tech post about burnout = iphone_photo, not glossy_3d
+- An opinion piece about AI = vibrant_studio or meme_face
+
+Respond with ONLY valid JSON, no other text:
+{
+  "style": "<style_key>",
+  "reason": "<one sentence why>",
+  "subjectDescription": "<what should be in the image, 1-2 sentences, specific to this blog topic>"
+}`,
+              },
+            ],
+          }),
+        }
+      );
+
+      if (!styleResponse.ok) {
+        console.warn("Style picker failed:", styleResponse.status);
+        throw new Error("Style picker failed");
+      }
+
+      const styleData = await styleResponse.json();
+      const styleRaw = styleData.choices?.[0]?.message?.content || "";
+      const styleJsonMatch = styleRaw.match(/\{[\s\S]*\}/);
+      if (!styleJsonMatch) throw new Error("No JSON in style response");
+      
+      const stylePick = JSON.parse(styleJsonMatch[0]);
+      chosenStyle = stylePick.style;
+      const subjectDescription = stylePick.subjectDescription;
+      console.log(`Style chosen: ${chosenStyle} — ${stylePick.reason}`);
+
+      const styleConfig = STYLE_PROMPTS[chosenStyle!] || STYLE_PROMPTS.editorial_flat;
+      const fullPrompt = `${styleConfig.prompt}\n\nThe subject of this image: ${subjectDescription}\n\n${styleConfig.negative}`;
+
+      console.log("Step 3b: Generating image with chosen style...");
       const imgResponse = await fetch(
         "https://ai.gateway.lovable.dev/v1/chat/completions",
         {
@@ -238,12 +328,8 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
           },
           body: JSON.stringify({
             model: "google/gemini-3.1-flash-image-preview",
-            messages: [
-              {
-                role: "user",
-                content: imagePrompt,
-              },
-            ],
+            messages: [{ role: "user", content: fullPrompt }],
+            modalities: ["image", "text"],
           }),
         }
       );
@@ -255,13 +341,11 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
         let base64Data: string | null = null;
         let mimeType = "image/png";
         
-        // Check for images array on the message (Lovable AI gateway format)
+        // Check for images array (Lovable AI gateway format)
         const images = message?.images || [];
-        
         if (images.length > 0) {
           const img = images[0];
           const imgUrl = img.image_url?.url || img.url || img.image_url;
-          
           
           if (typeof imgUrl === "string" && imgUrl.startsWith("data:")) {
             const dataUriMatch = imgUrl.match(/data:(image\/[^;]+);base64,(.+)/);
@@ -270,8 +354,6 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
               base64Data = dataUriMatch[2];
             }
           } else if (typeof imgUrl === "string" && imgUrl.startsWith("http")) {
-            // Direct URL - download it
-            console.log("Downloading image from URL...");
             try {
               const dlResp = await fetch(imgUrl);
               if (dlResp.ok) {
@@ -288,7 +370,6 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
                       .from("blog-images")
                       .getPublicUrl(fileName);
                     coverImageUrl = publicUrlData.publicUrl;
-                    console.log("AI image stored at:", coverImageUrl);
                   }
                 }
               }
@@ -300,7 +381,7 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
             mimeType = img.mime_type || img.content_type || "image/png";
           }
         }
-        
+
         // Check parts (Gemini native format)
         if (!base64Data && !coverImageUrl) {
           const parts = message?.parts || [];
@@ -312,7 +393,7 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
             }
           }
         }
-        
+
         // Check content for data URI
         if (!base64Data && !coverImageUrl && typeof message?.content === "string") {
           const dataUriMatch = message.content.match(/data:(image\/[^;]+);base64,([A-Za-z0-9+/=]+)/);
@@ -323,14 +404,12 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
         }
 
         if (base64Data && !coverImageUrl) {
-          // Convert base64 to blob
           const binaryStr = atob(base64Data);
           const bytes = new Uint8Array(binaryStr.length);
           for (let i = 0; i < binaryStr.length; i++) {
             bytes[i] = binaryStr.charCodeAt(i);
           }
           const imageBlob = new Blob([bytes], { type: mimeType });
-          
           const ext = mimeType.includes("png") ? "png" : "jpg";
           const fileName = `${slug}.${ext}`;
           
@@ -347,12 +426,9 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
           } else {
             console.warn("Storage upload error:", uploadError.message);
           }
-        } else {
-          console.warn("No image data in AI response");
         }
       } else {
-        const errText = await imgResponse.text();
-        console.warn("AI image generation error:", imgResponse.status, errText);
+        console.warn("Image generation failed:", imgResponse.status, await imgResponse.text());
       }
     } catch (imgErr) {
       console.warn("Image generation failed, proceeding without cover:", imgErr);

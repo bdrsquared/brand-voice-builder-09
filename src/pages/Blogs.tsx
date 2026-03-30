@@ -74,28 +74,31 @@ const Blogs = () => {
               <p className="text-muted-foreground text-lg">No blog posts yet. Check back soon!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex flex-col gap-4">
               {posts.map((post) => (
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
-                  className="group rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
+                  className="group flex rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
                 >
-                  {post.cover_image ? (
-                    <div className="aspect-[16/10] overflow-hidden">
+                  {/* Thumbnail */}
+                  <div className="w-28 sm:w-40 shrink-0">
+                    {post.cover_image ? (
                       <img
                         src={post.cover_image}
                         alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                    </div>
-                  ) : (
-                    <div className="aspect-[16/10] bg-secondary flex items-center justify-center">
-                      <span className="text-3xl font-heading text-muted-foreground/30">E</span>
-                    </div>
-                  )}
-                  <div className="p-6 sm:p-8">
-                    <div className="flex items-center gap-3 mb-3">
+                    ) : (
+                      <div className="w-full h-full bg-secondary flex items-center justify-center">
+                        <span className="text-2xl font-heading text-muted-foreground/30">E</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 p-4 sm:p-5 flex flex-col justify-center min-w-0">
+                    <div className="flex items-center gap-3 mb-2">
                       {post.category && (
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-primary/10 text-primary border border-primary/20">
                           {post.category}
@@ -106,17 +109,19 @@ const Blogs = () => {
                         {format(parseISO(post.created_at), "MMM d, yyyy")}
                       </span>
                     </div>
-                    <h3 className="text-lg font-heading font-medium mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="text-base sm:text-lg font-heading font-medium mb-1 text-foreground group-hover:text-primary transition-colors line-clamp-1">
                       {post.title}
                     </h3>
                     {post.excerpt && (
-                      <p className="text-sm text-muted-foreground font-body line-clamp-3 mb-4">
+                      <p className="text-sm text-muted-foreground font-body line-clamp-1 hidden sm:block">
                         {post.excerpt}
                       </p>
                     )}
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                      Read more <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-                    </span>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="hidden sm:flex items-center pr-5 shrink-0">
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </Link>
               ))}

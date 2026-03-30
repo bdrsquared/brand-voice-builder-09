@@ -181,34 +181,6 @@ const Blogs = () => {
             </Link>
           )}
 
-          {/* Category filters */}
-          {categories.length > 0 && (
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
-              <button
-                onClick={() => setActiveCategory(null)}
-                className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-medium transition-all backdrop-blur-md ${
-                  !activeCategory
-                    ? "bg-foreground text-background"
-                    : "bg-white/[0.04] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
-                }`}
-              >
-                All
-              </button>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-                  className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-medium transition-all backdrop-blur-md ${
-                    activeCategory === cat
-                      ? "bg-foreground text-background"
-                      : "bg-white/[0.04] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 

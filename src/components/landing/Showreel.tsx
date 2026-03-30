@@ -13,6 +13,8 @@ const Showreel = () => {
   });
 
   const gradientY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.35], [0.88, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.25], [0.7, 1]);
 
   return (
     <section ref={sectionRef} className="relative py-20 sm:py-28 px-6 pb-0">
@@ -37,11 +39,8 @@ const Showreel = () => {
         </motion.div>
 
         <motion.div
-          className="relative rounded-2xl overflow-hidden border border-black/10 shadow-lg"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          className="relative rounded-2xl overflow-hidden border border-black/10 shadow-lg will-change-transform"
+          style={{ scale, opacity }}
         >
           {/* Mobile: portrait | Desktop: 16:9 */}
           <div className="relative aspect-[3/4] sm:aspect-video">

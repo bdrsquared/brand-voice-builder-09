@@ -392,6 +392,36 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
       .update({ status: "approved" })
       .eq("id", idea_id);
 
+    // Post link to Slack
+    try {
+      const SLACK_BOT_TOKEN = Deno.env.get("SLACK_BOT_TOKEN");
+      const SLACK_CHANNEL_ID = Deno.env.get("SLACK_CHANNEL_ID");
+      if (SLACK_BOT_TOKEN && SLACK_CHANNEL_ID) {
+        const blogUrl = `https://brand-voice-builder-09.lovable.app/blog/${slug}`;
+        await fetch("https://slack.com/api/chat.postMessage", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            channel: SLACK_CHANNEL_ID,
+            blocks: [
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `📝 *New blog published:* <${blogUrl}|${blog.title}>\n${blog.excerpt || ""}`,
+                },
+              },
+            ],
+          }),
+        });
+      }
+    } catch (slackErr) {
+      console.warn("Slack notification failed:", slackErr);
+    }
+
     return new Response(
       JSON.stringify({ success: true, post: newPost }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }

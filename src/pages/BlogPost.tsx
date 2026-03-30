@@ -150,17 +150,16 @@ const BlogPost = () => {
 
           {/* Content */}
           <div
-            className="prose prose-invert prose-lg max-w-none font-body
-              prose-headings:font-heading prose-headings:text-foreground prose-headings:tracking-tight prose-headings:font-bold
-              prose-h2:!text-2xl sm:prose-h2:!text-3xl prose-h2:!mt-14 prose-h2:!mb-6 prose-h2:!leading-tight
-              prose-h3:!text-xl sm:prose-h3:!text-2xl prose-h3:!mt-10 prose-h3:!mb-5 prose-h3:!leading-tight
-              prose-h4:!text-lg prose-h4:!mt-8 prose-h4:!mb-4 prose-h4:font-semibold
-              prose-p:text-muted-foreground prose-p:leading-[1.75] prose-p:!text-base prose-p:!mb-5
-              prose-li:text-muted-foreground prose-li:leading-[1.75] prose-li:!text-base
-              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-foreground
-              prose-blockquote:border-primary/30 prose-blockquote:text-muted-foreground
-              prose-img:rounded-xl prose-img:border prose-img:border-border"
+            className="max-w-none font-body text-foreground
+              [&_h2]:mt-14 [&_h2]:mb-6 [&_h2]:font-heading [&_h2]:text-2xl sm:[&_h2]:text-3xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:leading-tight
+              [&_h3]:mt-10 [&_h3]:mb-5 [&_h3]:font-heading [&_h3]:text-xl sm:[&_h3]:text-2xl [&_h3]:font-bold [&_h3]:tracking-tight [&_h3]:leading-tight
+              [&_h4]:mt-8 [&_h4]:mb-4 [&_h4]:font-heading [&_h4]:text-lg [&_h4]:font-semibold
+              [&_p]:mb-5 [&_p]:text-base [&_p]:leading-[1.75] [&_p]:text-muted-foreground
+              [&_ul]:my-6 [&_ol]:my-6 [&_li]:mb-2 [&_li]:text-base [&_li]:leading-[1.75] [&_li]:text-muted-foreground
+              [&_a]:text-primary [&_a]:no-underline [&_a:hover]:underline
+              [&_strong]:text-foreground
+              [&_blockquote]:my-6 [&_blockquote]:border-l-2 [&_blockquote]:border-primary/30 [&_blockquote]:pl-4 [&_blockquote]:text-muted-foreground
+              [&_img]:rounded-xl [&_img]:border [&_img]:border-border"
             dangerouslySetInnerHTML={{ __html: post.content.replace(/<br\s*\/?>/gi, '') }}
           />
         </div>

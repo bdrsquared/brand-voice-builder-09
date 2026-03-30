@@ -124,11 +124,11 @@ const Blogs = () => {
                           {format(parseISO(post.created_at), "MMM d, yyyy")}
                         </span>
                       </div>
-                      <h3 className="text-base sm:text-lg font-heading font-medium mb-1 text-foreground group-hover:text-primary transition-colors line-clamp-1">
+                      <h3 className="text-sm sm:text-lg font-heading font-medium mb-1 text-foreground group-hover:text-primary transition-colors line-clamp-2">
                         {post.title}
                       </h3>
                       {post.excerpt && (
-                        <p className="text-sm text-muted-foreground font-body line-clamp-1 hidden sm:block">
+                        <p className="text-xs sm:text-sm text-muted-foreground font-body line-clamp-2 sm:line-clamp-1">
                           {post.excerpt}
                         </p>
                       )}

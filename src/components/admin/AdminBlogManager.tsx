@@ -648,15 +648,64 @@ const AdminBlogManager = () => {
               {/* New ideas needing review */}
               {newIdeas.length > 0 && (
                 <div className="space-y-3">
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                    Needs Review ({newIdeas.length})
-                  </h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                      Needs Review ({newIdeas.length})
+                    </h3>
+                    <button
+                      onClick={toggleSelectAll}
+                      className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {selectedIds.size === newIdeas.length ? "Deselect all" : "Select all"}
+                    </button>
+                  </div>
+
+                  {/* Bulk action bar */}
+                  {selectedIds.size > 0 && (
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.06] border border-white/[0.1]">
+                      <span className="text-sm font-medium">{selectedIds.size} selected</span>
+                      <div className="flex items-center gap-2 ml-auto">
+                        <Button
+                          size="sm"
+                          onClick={handleBulkApprove}
+                          disabled={bulkProcessing}
+                          className="bg-primary text-primary-foreground"
+                        >
+                          {bulkProcessing ? (
+                            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                          ) : (
+                            <Check className="w-4 h-4 mr-1" />
+                          )}
+                          {bulkProcessing ? "Processing..." : "Approve Selected"}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={handleBulkDecline}
+                          disabled={bulkProcessing}
+                          className="text-muted-foreground hover:text-destructive"
+                        >
+                          <X className="w-4 h-4 mr-1" /> Decline Selected
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
                   {newIdeas.map((idea) => (
                     <div
                       key={idea.id}
-                      className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 space-y-3"
+                      className={`rounded-xl border backdrop-blur-xl p-4 space-y-3 transition-colors ${
+                        selectedIds.has(idea.id)
+                          ? "border-primary/30 bg-primary/[0.04]"
+                          : "border-white/10 bg-white/5"
+                      }`}
                     >
-                      <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-start gap-3">
+                        <Checkbox
+                          checked={selectedIds.has(idea.id)}
+                          onCheckedChange={() => toggleSelect(idea.id)}
+                          className="mt-1 border-white/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                        />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="font-medium">{idea.title}</h3>
@@ -690,7 +739,7 @@ const AdminBlogManager = () => {
                         <Button
                           size="sm"
                           onClick={() => handleApprove(idea.id)}
-                          disabled={generatingId === idea.id}
+                          disabled={generatingId === idea.id || bulkProcessing}
                           className="bg-primary text-primary-foreground"
                         >
                           {generatingId === idea.id ? (
@@ -704,7 +753,7 @@ const AdminBlogManager = () => {
                           size="sm"
                           variant="ghost"
                           onClick={() => handleDecline(idea.id)}
-                          disabled={generatingId === idea.id}
+                          disabled={generatingId === idea.id || bulkProcessing}
                           className="text-muted-foreground hover:text-destructive"
                         >
                           <X className="w-4 h-4 mr-1" /> Decline

@@ -1,0 +1,129 @@
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import Navbar from "@/components/landing/Navbar";
+import TestimonialTicker from "@/components/landing/TestimonialTicker";
+import Footer from "@/components/landing/Footer";
+import { ArrowLeft, Calendar, User } from "lucide-react";
+import { format, parseISO } from "date-fns";
+
+type Post = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string;
+  cover_image: string | null;
+  category: string | null;
+  author: string;
+  created_at: string;
+};
+
+const BlogPost = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const [post, setPost] = useState<Post | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (!slug) return;
+      const { data } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .eq("slug", slug)
+        .eq("published", true)
+        .maybeSingle();
+
+      if (data) setPost(data as Post);
+      setLoading(false);
+    };
+    fetchPost();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <TestimonialTicker />
+        <Navbar />
+        <div className="pt-40 flex items-center justify-center">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="min-h-screen bg-background">
+        <TestimonialTicker />
+        <Navbar />
+        <div className="pt-40 text-center px-6">
+          <h1 className="text-3xl font-heading mb-4">Post not found</h1>
+          <Link to="/blogs" className="text-primary hover:underline inline-flex items-center gap-1">
+            <ArrowLeft className="w-4 h-4" /> Back to blog
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      <TestimonialTicker />
+      <Navbar />
+
+      <article className="pt-32 sm:pt-40 pb-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          {/* Back link */}
+          <Link to="/blogs" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to blog
+          </Link>
+
+          {/* Meta */}
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            {post.category && (
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-primary/10 text-primary border border-primary/20">
+                {post.category}
+              </span>
+            )}
+            <span className="flex items-center gap-1 text-sm text-muted-foreground">
+              <Calendar className="w-3.5 h-3.5" />
+              {format(parseISO(post.created_at), "MMMM d, yyyy")}
+            </span>
+            <span className="flex items-center gap-1 text-sm text-muted-foreground">
+              <User className="w-3.5 h-3.5" />
+              {post.author}
+            </span>
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl font-heading mb-6">{post.title}</h1>
+
+          {post.excerpt && (
+            <p className="text-lg text-muted-foreground font-body mb-8 leading-relaxed">{post.excerpt}</p>
+          )}
+
+          {post.cover_image && (
+            <div className="rounded-2xl overflow-hidden border border-border mb-10">
+              <img src={post.cover_image} alt={post.title} className="w-full object-cover" />
+            </div>
+          )}
+
+          {/* Content - rendered as HTML or plain text */}
+          <div
+            className="prose prose-invert prose-lg max-w-none font-body
+              prose-headings:font-heading prose-headings:text-foreground
+              prose-p:text-muted-foreground prose-p:leading-relaxed
+              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-foreground
+              prose-blockquote:border-primary/30 prose-blockquote:text-muted-foreground"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </div>
+      </article>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default BlogPost;

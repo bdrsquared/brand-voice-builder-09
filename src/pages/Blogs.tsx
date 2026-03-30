@@ -18,7 +18,7 @@ type BlogPost = {
   created_at: string;
 };
 
-const POSTS_PER_PAGE = 8;
+const POSTS_PER_PAGE = 9;
 
 const Blogs = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -88,13 +88,6 @@ const Blogs = () => {
 
       {/* Hero */}
       <section className="pt-28 sm:pt-36 pb-8 sm:pb-12 px-6 relative">
-        {/* Gradient background blurs - brand colours */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute w-[700px] h-[700px] -top-72 -left-48 rounded-full bg-[#6359EA]/[0.14] blur-[140px]" />
-          <div className="absolute w-[600px] h-[600px] -top-20 right-[-120px] rounded-full bg-[#FFB347]/[0.12] blur-[130px]" />
-          <div className="absolute w-[500px] h-[500px] top-10 left-1/3 rounded-full bg-[#1CFA76]/[0.08] blur-[120px]" />
-          <div className="absolute w-[400px] h-[400px] top-40 right-1/4 rounded-full bg-[#6359EA]/[0.06] blur-[100px]" />
-        </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header row */}
@@ -202,14 +195,14 @@ const Blogs = () => {
             </div>
           ) : (
             <div>
-                <div className="grid grid-cols-1 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {paginatedPosts.map((post) => (
                     <Link
                       key={post.id}
                       to={`/blog/${post.slug}`}
-                      className="group flex flex-col sm:flex-row rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-white/[0.14] transition-all duration-300 hover:bg-white/[0.04]"
+                      className="group flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden hover:border-white/[0.14] transition-all duration-300 hover:bg-white/[0.04]"
                     >
-                      <div className="sm:w-72 lg:w-80 shrink-0 aspect-[16/9] sm:aspect-auto sm:h-full overflow-hidden">
+                      <div className="aspect-[16/10] overflow-hidden">
                         {post.cover_image ? (
                           <img
                             src={post.cover_image}
@@ -217,12 +210,12 @@ const Blogs = () => {
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="w-full h-full min-h-[180px] bg-white/[0.02] flex items-center justify-center">
+                          <div className="w-full h-full bg-white/[0.02] flex items-center justify-center">
                             <span className="text-3xl font-heading text-white/[0.04]">E</span>
                           </div>
                         )}
                       </div>
-                      <div className="p-4 sm:p-5 flex flex-col flex-1 justify-center">
+                      <div className="p-4 sm:p-5 flex flex-col flex-1">
                         <div className="flex items-center gap-2 mb-2">
                           {post.category && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.04] backdrop-blur-md border border-white/[0.08] text-muted-foreground">
@@ -233,11 +226,11 @@ const Blogs = () => {
                             {format(parseISO(post.created_at), "MMM d, yyyy")}
                           </span>
                         </div>
-                        <h3 className="text-base sm:text-lg font-heading font-medium mb-2 text-foreground group-hover:text-foreground/80 transition-colors leading-snug line-clamp-2">
+                        <h3 className="text-base font-heading font-medium mb-2 text-foreground group-hover:text-foreground/80 transition-colors leading-snug line-clamp-2">
                           {post.title}
                         </h3>
                         {post.excerpt && (
-                          <p className="text-xs sm:text-sm text-muted-foreground/70 font-body line-clamp-2">
+                          <p className="text-xs text-muted-foreground/70 font-body line-clamp-2 mt-auto">
                             {post.excerpt}
                           </p>
                         )}

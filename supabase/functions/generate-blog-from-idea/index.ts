@@ -229,6 +229,7 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
         
         // Check for images array on the message (Lovable AI gateway format)
         const images = message?.images || [];
+        console.log("Images array length:", images.length, images.length > 0 ? "First image keys: " + JSON.stringify(Object.keys(images[0])) : "");
         if (images.length > 0) {
           const img = images[0];
           if (img.url && img.url.startsWith("data:")) {

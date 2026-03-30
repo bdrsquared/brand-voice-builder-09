@@ -581,12 +581,11 @@ const Navbar = () => {
                       Our story
                     </button>
                     <button
-                      onClick={() => { setMegaOpen(null); }}
+                      onClick={() => { navigate("/blogs"); setMegaOpen(null); }}
                       className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all text-left"
                     >
                       <Eye className="w-4 h-4 text-white/50" />
                       Blog
-                      <span className="ml-auto text-[9px] uppercase tracking-wider text-white/30 font-semibold">Soon</span>
                     </button>
                   </div>
                 </div>

@@ -169,8 +169,8 @@ const InPractice = () => {
                 Full podcast episodes published and optimised across all major platforms.
               </p>
               <div className="flex flex-wrap gap-2 mt-3">
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 border border-primary/20 text-primary">Video</span>
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 border border-primary/20 text-primary">Audio</span>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-black/[0.06] border border-black/[0.08] text-light-text-secondary">Video</span>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-black/[0.06] border border-black/[0.08] text-light-text-secondary">Audio</span>
               </div>
             </div>
           </motion.div>

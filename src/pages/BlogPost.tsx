@@ -160,9 +160,8 @@ const BlogPost = () => {
               prose-a:text-primary prose-a:no-underline hover:prose-a:underline
               prose-strong:text-foreground
               prose-blockquote:border-primary/30 prose-blockquote:text-muted-foreground
-              prose-img:rounded-xl prose-img:border prose-img:border-border
-              [&>br]:hidden [&>h2+br]:hidden [&>h3+br]:hidden"
-            dangerouslySetInnerHTML={{ __html: post.content.replace(/<br\s*\/?>\s*(?=<h[2-4])/gi, '').replace(/(<\/h[2-4]>)\s*<br\s*\/?>/gi, '$1') }}
+              prose-img:rounded-xl prose-img:border prose-img:border-border"
+            dangerouslySetInnerHTML={{ __html: post.content.replace(/<br\s*\/?>/gi, '') }}
           />
         </div>
       </article>

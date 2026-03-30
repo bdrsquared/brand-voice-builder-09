@@ -283,36 +283,6 @@ const AdminBlogManager = () => {
     }
   };
 
-  // Find an image for the current blog post being edited
-  const handleFindImage = async () => {
-    if (!form.title) {
-      toast.error("Add a title first so we can find a relevant image");
-      return;
-    }
-    setFindingImage(true);
-    try {
-      const { data, error } = await supabase.functions.invoke("find-blog-image", {
-        body: {
-          title: form.title,
-          excerpt: form.excerpt || "",
-          slug: form.slug || form.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
-        },
-      });
-      if (error || data?.error) {
-        toast.error(data?.error || error?.message || "Failed to find image");
-      } else if (data?.cover_image) {
-        setForm((f) => ({ ...f, cover_image: data.cover_image }));
-        toast.success("Found and stored a cover image!");
-      } else {
-        toast.error("No suitable image found");
-      }
-    } catch (e) {
-      toast.error("Failed to search for image");
-    } finally {
-      setFindingImage(false);
-    }
-  };
-
   const statusColor = (status: string) => {
     switch (status) {
       case "new": return "bg-blue-500/20 text-blue-400";

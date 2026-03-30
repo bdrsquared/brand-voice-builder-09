@@ -113,13 +113,13 @@ const Blogs = () => {
                       )}
                     </div>
                     <div className="flex-1 p-4 sm:p-5 flex flex-col justify-center min-w-0">
-                      <div className="flex items-center gap-3 mb-2">
+                      <div className="hidden sm:flex items-center gap-3 mb-2">
                         {post.category && (
-                          <span className="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] text-foreground/80">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] text-foreground/80">
                             {post.category}
                           </span>
                         )}
-                        <span className="flex items-center gap-1 text-xs text-muted-foreground sm:ml-0 ml-auto">
+                        <span className="flex items-center gap-1 text-xs text-muted-foreground">
                           <Calendar className="w-3 h-3" />
                           {format(parseISO(post.created_at), "MMM d, yyyy")}
                         </span>
@@ -132,6 +132,10 @@ const Blogs = () => {
                           {post.excerpt}
                         </p>
                       )}
+                      <span className="sm:hidden flex items-center gap-1 text-[11px] text-muted-foreground mt-1.5">
+                        <Calendar className="w-3 h-3" />
+                        {format(parseISO(post.created_at), "MMM d, yyyy")}
+                      </span>
                     </div>
                     <div className="hidden sm:flex items-center pr-5 shrink-0">
                       <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors group-hover:translate-x-0.5 transition-transform" />

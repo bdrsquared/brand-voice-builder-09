@@ -280,11 +280,7 @@ const ChatWidget = () => {
       {/* Trigger button */}
       <motion.button
         onClick={() => open ? handleClose() : setOpen(true)}
-        className={`glow-always group relative flex items-center gap-2 rounded-full backdrop-blur-xl px-5 py-3 text-sm font-semibold shadow-lg transition-all cursor-pointer ${
-          light
-            ? "border border-black/[0.15] bg-black/[0.08] text-gray-900 hover:bg-black/[0.12]"
-            : "border border-white/[0.15] bg-white/[0.08] text-foreground hover:bg-white/[0.12]"
-        }`}
+        className="glow-always group relative flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-lg transition-all cursor-pointer text-primary-foreground"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
       >

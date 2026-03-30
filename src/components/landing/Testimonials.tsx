@@ -28,7 +28,7 @@ const testimonials = [
   },
 ];
 
-const allTestimonials = [...testimonials, ...testimonials];
+const allTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
 const Stars = () => (
   <div className="flex gap-1">

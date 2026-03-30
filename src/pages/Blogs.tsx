@@ -90,9 +90,10 @@ const Blogs = () => {
       <section className="pt-28 sm:pt-36 pb-8 sm:pb-12 px-6 relative">
         {/* Gradient background blurs - brand colours */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute w-[600px] h-[600px] -top-60 -left-40 rounded-full bg-[#6359EA]/[0.08] blur-[120px]" />
-          <div className="absolute w-[500px] h-[500px] -top-40 right-[-100px] rounded-full bg-[#FFB347]/[0.06] blur-[100px]" />
-          <div className="absolute w-[300px] h-[300px] top-20 left-1/2 -translate-x-1/2 rounded-full bg-[#1CFA76]/[0.04] blur-[80px]" />
+          <div className="absolute w-[700px] h-[700px] -top-72 -left-48 rounded-full bg-[#6359EA]/[0.14] blur-[140px]" />
+          <div className="absolute w-[600px] h-[600px] -top-20 right-[-120px] rounded-full bg-[#FFB347]/[0.12] blur-[130px]" />
+          <div className="absolute w-[500px] h-[500px] top-10 left-1/3 rounded-full bg-[#1CFA76]/[0.08] blur-[120px]" />
+          <div className="absolute w-[400px] h-[400px] top-40 right-1/4 rounded-full bg-[#6359EA]/[0.06] blur-[100px]" />
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">

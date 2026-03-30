@@ -7,13 +7,6 @@ import ContentEngine from "./ContentEngine";
 
 const props = [
   {
-    icon: Crown,
-    title: "Build category authority",
-    description:
-      "Position your brand as the voice of your industry. Every episode is a stage where you lead the conversation, not follow it.",
-    color: "green" as const,
-  },
-  {
     icon: Target,
     title: "Reach your exact ICP",
     description:
@@ -32,6 +25,13 @@ const props = [
     title: "Drive actual pipeline",
     description:
       "This isn't vanity metrics. Podcasting creates warm relationships with prospects, builds trust at scale, and gives your sales team a reason to follow up.",
+    color: "green" as const,
+  },
+  {
+    icon: Crown,
+    title: "Build category authority",
+    description:
+      "Position your brand as the voice of your industry. Every episode is a stage where you lead the conversation, not follow it.",
     color: "green" as const,
   },
 ];

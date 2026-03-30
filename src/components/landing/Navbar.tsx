@@ -20,7 +20,7 @@ const megaMenuItems = [
   {
     title: "Launch",
     description: "We incubate, design, and launch podcasts that help businesses lead conversations",
-    image: runScaleImg,
+    image: podplannerLaunchImg,
   },
   {
     title: "Run & scale",

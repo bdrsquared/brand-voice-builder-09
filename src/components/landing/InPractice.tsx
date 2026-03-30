@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Video, Scissors, Share2, Library, Calendar, Mic, BarChart3, Sparkles } from "lucide-react";
+import microphoneImg from "@/assets/earworm-microphone.png";
 
 const InPractice = () => {
   return (

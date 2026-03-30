@@ -232,29 +232,29 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
         console.log("Images array length:", images.length, images.length > 0 ? "First image keys: " + JSON.stringify(Object.keys(images[0])) : "");
         if (images.length > 0) {
           const img = images[0];
-          if (img.url && img.url.startsWith("data:")) {
-            const dataUriMatch = img.url.match(/data:(image\/[^;]+);base64,(.+)/);
+          const imgUrl = img.image_url?.url || img.url || img.image_url;
+          console.log("Image URL type:", typeof imgUrl, "starts:", typeof imgUrl === "string" ? imgUrl.substring(0, 80) : "N/A");
+          
+          if (typeof imgUrl === "string" && imgUrl.startsWith("data:")) {
+            const dataUriMatch = imgUrl.match(/data:(image\/[^;]+);base64,(.+)/);
             if (dataUriMatch) {
               mimeType = dataUriMatch[1];
               base64Data = dataUriMatch[2];
             }
-          } else if (img.data) {
-            base64Data = img.data;
-            mimeType = img.mime_type || img.content_type || "image/png";
-          } else if (img.url) {
+          } else if (typeof imgUrl === "string" && imgUrl.startsWith("http")) {
             // Direct URL - download it
-            console.log("Downloading image from URL:", img.url.substring(0, 100));
+            console.log("Downloading image from URL...");
             try {
-              const dlResp = await fetch(img.url);
+              const dlResp = await fetch(imgUrl);
               if (dlResp.ok) {
                 const ct = dlResp.headers.get("content-type") || "image/png";
                 if (ct.startsWith("image/")) {
-                  const imageBlob = await dlResp.blob();
+                  const imgBlob = await dlResp.blob();
                   const ext = ct.includes("png") ? "png" : "jpg";
                   const fileName = `${slug}.${ext}`;
                   const { error: uploadError } = await supabase.storage
                     .from("blog-images")
-                    .upload(fileName, imageBlob, { contentType: ct, upsert: true });
+                    .upload(fileName, imgBlob, { contentType: ct, upsert: true });
                   if (!uploadError) {
                     const { data: publicUrlData } = supabase.storage
                       .from("blog-images")
@@ -267,6 +267,9 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
             } catch (e) {
               console.warn("Image URL download failed:", e);
             }
+          } else if (img.data) {
+            base64Data = img.data;
+            mimeType = img.mime_type || img.content_type || "image/png";
           }
         }
         

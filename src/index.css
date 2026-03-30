@@ -276,18 +276,23 @@
 
   .glow-always::before {
     content: '';
-    background: linear-gradient(45deg, #574ECC, #9139A4, #1CFA76, #9139A4, #574ECC);
     position: absolute;
-    top: -3px;
-    left: -3px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(8px);
-    width: calc(100% + 6px);
-    height: calc(100% + 6px);
-    animation: glowing 20s linear infinite;
-    opacity: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 9999px;
+    padding: 2px;
+    background: linear-gradient(45deg, #574ECC, #9139A4, #1CFA76, #9139A4, #574ECC);
+    background-size: 400%;
+    animation: glowing 20s linear infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .glow-always::after {

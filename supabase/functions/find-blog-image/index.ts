@@ -142,6 +142,12 @@ serve(async (req) => {
       );
     }
 
+    const { data: publicUrlData } = supabase.storage
+      .from("blog-images")
+      .getPublicUrl(fileName);
+
+    console.log("Image stored at:", publicUrlData.publicUrl);
+
     return new Response(
       JSON.stringify({ cover_image: publicUrlData.publicUrl }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }

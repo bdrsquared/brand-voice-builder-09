@@ -255,6 +255,12 @@ const Admin = () => {
                                   <span>Budget: {inq.budget}</span>
                                 </div>
                               )}
+                              {inq.source_page && (
+                                <div className="flex items-start gap-2">
+                                  <FileText className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+                                  <span>Source: {inq.source_page}</span>
+                                </div>
+                              )}
                               {inq.message && (
                                 <div className="mt-2 p-3 rounded-lg bg-background border border-border">
                                   <p className="text-xs text-muted-foreground mb-1">Message</p>

@@ -1,12 +1,18 @@
 import { useMemo } from "react";
 
+const BRAND_COLORS = [
+  "28, 250, 118",   // #1CFA76
+  "99, 89, 234",    // #6359EA
+  "64, 171, 178",   // #40ABB2
+];
+
 const generateDots = (count: number) => {
   const shadows: string[] = [];
   for (let i = 0; i < count; i++) {
     const x = (-0.5 + Math.random() * 3).toFixed(2);
     const y = (-0.5 + Math.random() * 3).toFixed(2);
-    const hue = Math.floor(Math.random() * 360);
-    shadows.push(`${x}em ${y}em 7px hsla(${hue}, 100%, 50%, 0.9)`);
+    const color = BRAND_COLORS[Math.floor(Math.random() * BRAND_COLORS.length)];
+    shadows.push(`${x}em ${y}em 7px rgba(${color}, 0.9)`);
   }
   return shadows.join(", ");
 };

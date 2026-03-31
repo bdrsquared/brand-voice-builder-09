@@ -1,18 +1,22 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
+import { lazy, Suspense } from "react";
 import LogoWall from "./LogoWall";
-import ovalBg from "@/assets/oval.webp";
+
+const GradientCanvas = lazy(() => import("./GradientCanvas"));
 
 const Hero = () => {
   return (
     <section className="relative pt-28 pb-8 sm:pt-36 sm:pb-28 px-6">
-      {/* Large oval background */}
-      <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] lg:w-[220%] h-[140%] pointer-events-none opacity-70">
-        <img src={ovalBg} alt="" className="w-full h-full object-contain" />
+      {/* WebGL animated gradient background */}
+      <div className="absolute top-[20%] left-0 right-0 bottom-0 pointer-events-none overflow-hidden">
+        <Suspense fallback={null}>
+          <GradientCanvas />
+        </Suspense>
       </div>
-      <div className="absolute top-[50px] right-[-200px] w-[400px] h-[600px] blob-oblong-blue pointer-events-none" />
-      <div className="absolute bottom-[-100px] left-[40%] w-[300px] h-[300px] blob-blue pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
+      {/* Dark gradient overlay on top */}
+      <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-background via-background/85 to-transparent pointer-events-none z-[5]" />
+      <div className="absolute top-0 left-0 right-0 h-[40%] bg-gradient-to-b from-background via-background/60 to-transparent pointer-events-none z-[5]" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div

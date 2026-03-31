@@ -30,6 +30,7 @@ const Blogs = lazy(() => import("./pages/Blogs.tsx"));
 const BlogPostPage = lazy(() => import("./pages/BlogPost.tsx"));
 const Admin = lazy(() => import("./pages/Admin.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
+const Sandbox = lazy(() => import("./pages/Sandbox.tsx"));
 
 const queryClient = new QueryClient();
 

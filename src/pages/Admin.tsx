@@ -8,6 +8,7 @@ import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, Chevron
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
+import AdminPagesManager from "@/components/admin/AdminPagesManager";
 
 type Inquiry = {
   id: string;

@@ -12,7 +12,7 @@ const generateDots = (count: number) => {
     const x = (-0.5 + Math.random() * 3).toFixed(2);
     const y = (-0.5 + Math.random() * 3).toFixed(2);
     const color = BRAND_COLORS[Math.floor(Math.random() * BRAND_COLORS.length)];
-    shadows.push(`${x}em ${y}em 7px rgba(${color}, 0.9)`);
+    shadows.push(`${x}em ${y}em 12px rgba(${color}, 0.9)`);
   }
   return shadows.join(", ");
 };
@@ -22,7 +22,7 @@ const DotsBackground = () => {
     () =>
       Array.from({ length: 4 }, (_, i) => ({
         textShadow: generateDots(40),
-        animationDuration: `${44 - i}s`,
+        animationDuration: `${80 - i * 2}s`,
         animationDelay: `-${27 + i * 5 - (i > 1 ? 6 : 0)}s`,
       })),
     []
@@ -41,7 +41,7 @@ const DotsBackground = () => {
           left: 50%;
           width: 3em;
           height: 3em;
-          font-size: 52px;
+          font-size: 80px;
           color: transparent;
           mix-blend-mode: screen;
           animation-name: dots-move;

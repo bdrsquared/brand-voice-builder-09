@@ -97,7 +97,11 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         >
           <a
             href="#contact"
-            className="group relative inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-base text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.12] shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white/[0.14] hover:border-white/[0.2] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_20px_rgba(255,255,255,0.04)]"
+            className={`group relative inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-base transition-all duration-300 ${
+              variant === "classic"
+                ? "glow-on-hover text-primary-foreground"
+                : "text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.12] shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:bg-white/[0.14] hover:border-white/[0.2] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_20px_rgba(255,255,255,0.04)]"
+            }`}
           >
             Start a conversation
             <MessageCircle className="w-4 h-4 transition-transform group-hover:scale-110" />

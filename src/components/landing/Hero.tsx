@@ -29,7 +29,7 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           Turn video podcasting into a{" "}
-          <span className="italic bg-gradient-to-r from-[#1CFA76] via-[#6359EA] to-[#40ABB2] bg-clip-text text-transparent opacity-90">content engine</span> that
+          <span className="italic text-white">content engine</span> that
           drives growth
         </motion.h1>
 

@@ -282,7 +282,7 @@
     right: 0;
     bottom: 0;
     border-radius: 9999px;
-    padding: 2px;
+    padding: 1px;
     background: linear-gradient(45deg, #574ECC, #9139A4, #1CFA76, #9139A4, #574ECC);
     background-size: 400%;
     animation: glowing 20s linear infinite;

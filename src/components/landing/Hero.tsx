@@ -6,7 +6,11 @@ import DotsBackground from "./DotsBackground";
 
 const ROTATING_WORDS = ["growth", "revenue", "change", "impact", "retention"];
 
-const Hero = () => {
+interface HeroProps {
+  variant?: "classic" | "dots";
+}
+
+const Hero = ({ variant = "classic" }: HeroProps) => {
   const [displayText, setDisplayText] = useState("");
 
   const typeWriter = useCallback((text: string, i: number, onDone: () => void) => {

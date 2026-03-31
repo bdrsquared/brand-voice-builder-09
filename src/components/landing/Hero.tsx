@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import LogoWall from "./LogoWall";
 import DotsBackground from "./DotsBackground";

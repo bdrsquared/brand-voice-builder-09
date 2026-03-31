@@ -609,6 +609,7 @@ const Navbar = () => {
                               <span className="text-[11px] font-semibold text-primary group-hover/blog:brightness-125 transition-all mt-0.5 inline-flex items-center gap-1">
                                 Read more <ArrowRight className="w-2.5 h-2.5" />
                               </span>
+                            </div>
                           </a>
                         ))}
                         {recentBlogs.length === 0 && (

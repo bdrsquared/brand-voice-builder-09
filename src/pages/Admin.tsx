@@ -193,7 +193,6 @@ const Admin = () => {
                   <TableHead className="text-muted-foreground">Email</TableHead>
                   <TableHead className="text-muted-foreground">Phone</TableHead>
                   <TableHead className="text-muted-foreground">Budget</TableHead>
-                  <TableHead className="text-muted-foreground">Source</TableHead>
                   <TableHead className="text-muted-foreground">Date</TableHead>
                 </TableRow>
               </TableHeader>
@@ -225,7 +224,6 @@ const Admin = () => {
                         <TableCell className="text-muted-foreground">{inq.email}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.phone || " - "}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.budget || " - "}</TableCell>
-                        <TableCell className="text-muted-foreground text-xs">{inq.source_page || " - "}</TableCell>
                         <TableCell className="text-muted-foreground text-sm">
                           {format(parseISO(inq.created_at), "MMM d, HH:mm")}
                         </TableCell>
@@ -255,6 +253,12 @@ const Admin = () => {
                                 <div className="flex items-start gap-2">
                                   <Calendar className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
                                   <span>Budget: {inq.budget}</span>
+                                </div>
+                              )}
+                              {inq.source_page && (
+                                <div className="flex items-start gap-2">
+                                  <FileText className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+                                  <span>Source: {inq.source_page}</span>
                                 </div>
                               )}
                               {inq.message && (
@@ -317,6 +321,12 @@ const Admin = () => {
                         <div className="flex items-center gap-2">
                           <Calendar className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                           <span className="text-xs">Budget: {inq.budget}</span>
+                        </div>
+                      )}
+                      {inq.source_page && (
+                        <div className="flex items-center gap-2">
+                          <FileText className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                          <span className="text-xs">Source: {inq.source_page}</span>
                         </div>
                       )}
                       {inq.message && (

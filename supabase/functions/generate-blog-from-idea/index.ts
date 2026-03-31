@@ -222,6 +222,10 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
+    // Cooldown after blog text generation to avoid rate limits
+    console.log("Waiting 15s before image generation to avoid rate limits...");
+    await new Promise(r => setTimeout(r, 15000));
+
     // Step 3: Two-step image generation — pick style, then generate
     const STYLE_PROMPTS: Record<string, { prompt: string; negative: string }> = {
       vibrant_studio: {

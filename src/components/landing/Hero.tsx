@@ -12,7 +12,7 @@ const Hero = () => {
       </div>
       <div className="absolute top-[50px] right-[-200px] w-[400px] h-[600px] blob-oblong-blue pointer-events-none" />
       <div className="absolute bottom-[-100px] left-[40%] w-[300px] h-[300px] blob-blue pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
+      
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div

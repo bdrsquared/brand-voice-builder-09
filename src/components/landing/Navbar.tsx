@@ -85,7 +85,7 @@ const Navbar = () => {
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
   const [bottomBarTop, setBottomBarTop] = useState<number | null>(null);
-  const [recentBlogs, setRecentBlogs] = useState<Array<{ title: string; excerpt: string | null; created_at: string; slug: string }>>([]);
+  const [recentBlogs, setRecentBlogs] = useState<Array<{ title: string; excerpt: string | null; created_at: string; slug: string; cover_image: string | null }>>([]);
   const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
 

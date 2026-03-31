@@ -6,7 +6,11 @@ import DotsBackground from "./DotsBackground";
 
 const ROTATING_WORDS = ["growth", "revenue", "change", "impact", "retention"];
 
-const Hero = () => {
+interface HeroProps {
+  variant?: "classic" | "dots";
+}
+
+const Hero = ({ variant = "classic" }: HeroProps) => {
   const [displayText, setDisplayText] = useState("");
 
   const typeWriter = useCallback((text: string, i: number, onDone: () => void) => {
@@ -32,8 +36,20 @@ const Hero = () => {
 
   return (
     <section className="relative pt-28 pb-8 sm:pt-36 sm:pb-28 px-6">
-      {/* Animated dots background */}
-      <DotsBackground />
+      {/* Background */}
+      {variant === "dots" ? (
+        <DotsBackground />
+      ) : (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[80%] rounded-[50%]"
+            style={{
+              background: "radial-gradient(ellipse at center, rgba(99,89,234,0.35) 0%, rgba(64,171,178,0.2) 40%, rgba(28,250,118,0.08) 65%, transparent 85%)",
+              filter: "blur(60px)",
+            }}
+          />
+        </div>
+      )}
       <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
 
       <div className="relative z-10 max-w-5xl mx-auto">

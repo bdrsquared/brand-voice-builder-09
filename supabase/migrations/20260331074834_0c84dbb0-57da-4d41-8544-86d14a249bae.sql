@@ -1,0 +1,1 @@
+ALTER TABLE public.inquiries ADD COLUMN source_page text DEFAULT NULL;

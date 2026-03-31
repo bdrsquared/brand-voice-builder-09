@@ -18,6 +18,7 @@ type Inquiry = {
   budget: string | null;
   type: string;
   created_at: string;
+  source_page: string | null;
 };
 
 const Admin = () => {
@@ -192,14 +193,14 @@ const Admin = () => {
                   <TableHead className="text-muted-foreground">Email</TableHead>
                   <TableHead className="text-muted-foreground">Phone</TableHead>
                   <TableHead className="text-muted-foreground">Budget</TableHead>
+                  <TableHead className="text-muted-foreground">Source</TableHead>
                   <TableHead className="text-muted-foreground">Date</TableHead>
-                  <TableHead />
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {inquiries.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center py-12 text-muted-foreground">
+                    <TableCell colSpan={8} className="text-center py-12 text-muted-foreground">
                       No inquiries yet
                     </TableCell>
                   </TableRow>
@@ -224,6 +225,7 @@ const Admin = () => {
                         <TableCell className="text-muted-foreground">{inq.email}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.phone || " - "}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.budget || " - "}</TableCell>
+                        <TableCell className="text-muted-foreground text-xs">{inq.source_page || " - "}</TableCell>
                         <TableCell className="text-muted-foreground text-sm">
                           {format(parseISO(inq.created_at), "MMM d, HH:mm")}
                         </TableCell>
@@ -237,7 +239,7 @@ const Admin = () => {
                       </TableRow>
                       {expandedId === inq.id && (
                         <TableRow key={`${inq.id}-detail`} className="border-border">
-                          <TableCell colSpan={7} className="bg-muted/10 px-6 py-4">
+                          <TableCell colSpan={8} className="bg-muted/10 px-6 py-4">
                             <div className="space-y-3 text-sm">
                               <div className="flex items-start gap-2">
                                 <Mail className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />

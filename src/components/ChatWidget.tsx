@@ -73,7 +73,7 @@ const ChatWidget = () => {
     setLoading(true);
     try {
       const { data, error: fnError } = await supabase.functions.invoke("send-demo-request", {
-        body: { name: name.trim(), email: email.trim(), phone: fullPhone, message: message.trim(), budget, type: "contact" },
+        body: { name: name.trim(), email: email.trim(), phone: fullPhone, message: message.trim(), budget, type: "contact", source_page: window.location.pathname },
       });
       if (fnError) throw fnError;
       if (data && !data.success) throw new Error(data.error || "Something went wrong");

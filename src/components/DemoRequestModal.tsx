@@ -61,7 +61,7 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
     setLoading(true);
     try {
       const { data, error: fnError } = await supabase.functions.invoke("send-demo-request", {
-        body: { name: name.trim(), email: email.trim(), phone: fullPhone },
+        body: { name: name.trim(), email: email.trim(), phone: fullPhone, source_page: window.location.pathname },
       });
 
       if (fnError) throw fnError;

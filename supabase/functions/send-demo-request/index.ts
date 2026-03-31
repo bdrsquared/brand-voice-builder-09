@@ -18,7 +18,7 @@ serve(async (req) => {
     }
 
     const body = await req.json();
-    const { name, email, phone, message, budget, type } = body;
+    const { name, email, phone, message, budget, type, source_page } = body;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0 || name.length > 200) {
       return new Response(JSON.stringify({ error: 'Valid name is required' }), {
@@ -56,6 +56,7 @@ serve(async (req) => {
         message: message?.trim() || null,
         budget: budget || null,
         type: type || 'demo',
+        source_page: source_page || null,
       });
     } catch (dbError) {
       console.error('Failed to save inquiry to database:', dbError);

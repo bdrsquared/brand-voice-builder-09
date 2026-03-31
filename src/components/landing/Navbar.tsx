@@ -587,17 +587,26 @@ const Navbar = () => {
                             key={blog.slug}
                             href={`/blog/${blog.slug}`}
                             onClick={(e) => { e.preventDefault(); navigate(`/blog/${blog.slug}`); setMegaOpen(null); }}
-                            className="group/blog flex flex-col gap-0.5 px-3 py-2.5 rounded-lg hover:bg-white/[0.06] transition-all"
+                            className="group/blog flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/[0.06] transition-all"
                           >
-                            <div className="flex items-center justify-between gap-3">
-                              <span className="text-sm font-semibold text-white/90 group-hover/blog:text-white transition-colors line-clamp-1">{blog.title}</span>
-                              <span className="text-[11px] text-white/30 whitespace-nowrap shrink-0">
-                                {new Date(blog.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
-                              </span>
-                            </div>
-                            {blog.excerpt && (
-                              <p className="text-xs text-white/40 line-clamp-1 font-body">{blog.excerpt}</p>
+                            {blog.cover_image ? (
+                              <img src={blog.cover_image} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0 border border-white/10" />
+                            ) : (
+                              <div className="w-10 h-10 rounded-lg bg-white/[0.08] border border-white/10 shrink-0 flex items-center justify-center">
+                                <BookOpen className="w-4 h-4 text-white/30" />
+                              </div>
                             )}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between gap-3">
+                                <span className="text-sm font-semibold text-white/90 group-hover/blog:text-white transition-colors line-clamp-1">{blog.title}</span>
+                                <span className="text-[11px] text-white/30 whitespace-nowrap shrink-0">
+                                  {new Date(blog.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
+                                </span>
+                              </div>
+                              {blog.excerpt && (
+                                <p className="text-xs text-white/40 line-clamp-1 font-body">{blog.excerpt}</p>
+                              )}
+                            </div>
                           </a>
                         ))}
                         {recentBlogs.length === 0 && (

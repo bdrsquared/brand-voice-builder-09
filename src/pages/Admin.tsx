@@ -239,7 +239,7 @@ const Admin = () => {
                       </TableRow>
                       {expandedId === inq.id && (
                         <TableRow key={`${inq.id}-detail`} className="border-border">
-                          <TableCell colSpan={7} className="bg-muted/10 px-6 py-4">
+                          <TableCell colSpan={8} className="bg-muted/10 px-6 py-4">
                             <div className="space-y-3 text-sm">
                               <div className="flex items-start gap-2">
                                 <Mail className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />

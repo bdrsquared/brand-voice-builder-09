@@ -946,8 +946,8 @@ const Navbar = () => {
                       transition={{ duration: 0.3, delay: 0.3 }}
                       onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
                     >
-                      Book a strategy call
-                      <Calendar className="w-4 h-4" />
+                      Start a conversation
+                      <MessageCircle className="w-4 h-4" />
                     </motion.a>
                   </motion.div>
                 ) : mobileSubMenu === "podplanner" ? (

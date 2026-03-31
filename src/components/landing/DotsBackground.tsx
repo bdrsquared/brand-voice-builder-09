@@ -23,7 +23,7 @@ const DotsBackground = () => {
     () =>
       Array.from({ length: 4 }, (_, i) => ({
         textShadow: generateDots(40),
-        animationDuration: `${44 - i}s`,
+        animationDuration: `${80 - i * 2}s`,
         animationDelay: `-${27 + i * 5 - (i > 1 ? 6 : 0)}s`,
       })),
     []

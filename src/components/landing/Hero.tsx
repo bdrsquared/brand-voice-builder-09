@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import LogoWall from "./LogoWall";
 import DotsBackground from "./DotsBackground";
@@ -83,8 +83,8 @@ const Hero = () => {
             href="#contact"
             className="glow-on-hover glow-on-hover--glass group relative inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-base text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.15] shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white/[0.14] hover:border-white/[0.25] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
           >
-            Book a strategy call
-            <Calendar className="w-4 h-4 transition-transform group-hover:scale-110" />
+            Start a conversation
+            <MessageCircle className="w-4 h-4 transition-transform group-hover:scale-110" />
           </a>
           <a
             href="/#how-it-works"

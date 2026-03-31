@@ -200,7 +200,7 @@ const Admin = () => {
               <TableBody>
                 {inquiries.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center py-12 text-muted-foreground">
+                    <TableCell colSpan={8} className="text-center py-12 text-muted-foreground">
                       No inquiries yet
                     </TableCell>
                   </TableRow>

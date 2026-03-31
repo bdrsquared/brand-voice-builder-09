@@ -85,8 +85,19 @@ const Navbar = () => {
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
   const [bottomBarTop, setBottomBarTop] = useState<number | null>(null);
+  const [recentBlogs, setRecentBlogs] = useState<Array<{ title: string; excerpt: string | null; created_at: string; slug: string }>>([]);
   const lastScrollY = useRef(0);
   const navLight = isLightSection && !mobileOpen;
+
+  useEffect(() => {
+    supabase
+      .from("blog_posts")
+      .select("title, excerpt, created_at, slug")
+      .eq("published", true)
+      .order("created_at", { ascending: false })
+      .limit(5)
+      .then(({ data }) => { if (data) setRecentBlogs(data); });
+  }, []);
 
   useEffect(() => {
     const handler = () => {

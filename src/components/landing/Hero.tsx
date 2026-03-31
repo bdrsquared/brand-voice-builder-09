@@ -56,7 +56,8 @@ const Hero = () => {
         >
           Turn video podcasting into a{" "}
           <span className="italic text-white">content engine</span> that
-          drives{" "}
+          drives
+          <br />
           <span className="text-white">{displayText}<span className="animate-pulse">|</span></span>
         </motion.h1>
 

@@ -94,8 +94,8 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
 
         <div className="absolute top-4 right-4 z-10">
-          <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 group-hover:bg-primary/80 group-hover:border-primary/40 group-hover:scale-110">
-            <Play className="w-4 h-4 text-white fill-white transition-colors duration-200 group-hover:text-primary-foreground group-hover:fill-primary-foreground" />
+          <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 group-hover:bg-black/50 group-hover:backdrop-blur-xl group-hover:border-white/30 group-hover:scale-110">
+            <Play className="w-4 h-4 text-white fill-white transition-colors duration-200" />
           </div>
         </div>
 

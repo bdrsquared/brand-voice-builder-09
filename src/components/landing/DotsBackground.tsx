@@ -42,7 +42,7 @@ const DotsBackground = () => {
           left: 50%;
           width: 3em;
           height: 3em;
-          font-size: 52px;
+          font-size: 80px;
           color: transparent;
           mix-blend-mode: screen;
           animation-name: dots-move;

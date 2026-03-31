@@ -12,9 +12,9 @@ const Hero = () => {
   const typeWriter = useCallback((text: string, i: number, onDone: () => void) => {
     if (i < text.length) {
       setDisplayText(text.substring(0, i + 1));
-      setTimeout(() => typeWriter(text, i + 1, onDone), 100);
+      setTimeout(() => typeWriter(text, i + 1, onDone), 120);
     } else {
-      setTimeout(onDone, 700);
+      setTimeout(onDone, 840);
     }
   }, []);
 

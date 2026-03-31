@@ -1,0 +1,1 @@
+UPDATE blog_posts SET cover_image = 'https://opzkaxzcmqqqdbteuhas.supabase.co/storage/v1/object/public/blog-images/the-cybersecurity-merger-that-actually-matters-for-your-content-strategy.png', image_style = 'meme_face' WHERE slug = 'the-cybersecurity-merger-that-actually-matters-for-your-content-strategy';

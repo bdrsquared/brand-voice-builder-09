@@ -20,7 +20,7 @@ const Index = () => {
     <div className="min-h-screen bg-background overflow-x-hidden">
       <TestimonialTicker />
       <Navbar />
-      <Hero variant="dots" />
+      <Hero />
       
       <Suspense fallback={null}>
         <CaseStudies />

@@ -2,8 +2,11 @@ import { useMemo } from "react";
 
 const BRAND_COLORS = [
   "28, 250, 118",   // #1CFA76
+  "80, 255, 140",   // brighter green
   "99, 89, 234",    // #6359EA
+  "130, 120, 255",  // brighter purple
   "64, 171, 178",   // #40ABB2
+  "80, 210, 220",   // brighter teal
 ];
 
 const generateDots = (count: number) => {

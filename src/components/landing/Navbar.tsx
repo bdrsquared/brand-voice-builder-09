@@ -92,10 +92,10 @@ const Navbar = () => {
   useEffect(() => {
     supabase
       .from("blog_posts")
-      .select("title, excerpt, created_at, slug")
+      .select("title, excerpt, created_at, slug, cover_image")
       .eq("published", true)
       .order("created_at", { ascending: false })
-      .limit(5)
+      .limit(4)
       .then(({ data }) => { if (data) setRecentBlogs(data); });
   }, []);
 

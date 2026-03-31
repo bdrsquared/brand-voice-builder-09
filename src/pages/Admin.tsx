@@ -193,8 +193,8 @@ const Admin = () => {
                   <TableHead className="text-muted-foreground">Email</TableHead>
                   <TableHead className="text-muted-foreground">Phone</TableHead>
                   <TableHead className="text-muted-foreground">Budget</TableHead>
+                  <TableHead className="text-muted-foreground">Source</TableHead>
                   <TableHead className="text-muted-foreground">Date</TableHead>
-                  <TableHead />
                 </TableRow>
               </TableHeader>
               <TableBody>

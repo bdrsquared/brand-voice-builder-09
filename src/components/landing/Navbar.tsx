@@ -95,7 +95,7 @@ const Navbar = () => {
       .select("title, excerpt, created_at, slug, cover_image")
       .eq("published", true)
       .order("created_at", { ascending: false })
-      .limit(4)
+      .limit(3)
       .then(({ data }) => { if (data) setRecentBlogs(data); });
   }, []);
 
@@ -576,7 +576,7 @@ const Navbar = () => {
                 <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 transition-colors duration-300`}>
                   <div className="flex gap-6">
                     {/* Left column — Recent blogs */}
-                    <div className="flex-1 min-w-0">
+                    <div className="w-72 shrink-0">
                       <div className="flex items-center gap-2 mb-4">
                         <BookOpen className="w-4 h-4 text-white/50" />
                         <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider">Latest from the blog</h4>
@@ -606,6 +606,9 @@ const Navbar = () => {
                               {blog.excerpt && (
                                 <p className="text-xs text-white/40 line-clamp-1 font-body">{blog.excerpt}</p>
                               )}
+                              <span className="text-[11px] font-semibold text-primary group-hover/blog:brightness-125 transition-all mt-0.5 inline-flex items-center gap-1">
+                                Read more <ArrowRight className="w-2.5 h-2.5" />
+                              </span>
                             </div>
                           </a>
                         ))}

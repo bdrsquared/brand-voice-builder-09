@@ -18,7 +18,7 @@ serve(async (req) => {
     }
 
     const body = await req.json();
-    const { name, email, phone, message, budget, type } = body;
+    const { name, email, phone, message, budget, type, source_page } = body;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0 || name.length > 200) {
       return new Response(JSON.stringify({ error: 'Valid name is required' }), {

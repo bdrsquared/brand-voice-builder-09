@@ -30,6 +30,7 @@ const Blogs = lazy(() => import("./pages/Blogs.tsx"));
 const BlogPostPage = lazy(() => import("./pages/BlogPost.tsx"));
 const Admin = lazy(() => import("./pages/Admin.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
+const Sandbox = lazy(() => import("./pages/Sandbox.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const AnimatedRoutes = () => {
           <Route path="/blog/:slug" element={<PageTransition><BlogPostPage /></PageTransition>} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/sandbox" element={<PageTransition><Sandbox /></PageTransition>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>

@@ -117,8 +117,8 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
             <p className="text-white/60 text-xs leading-relaxed font-body line-clamp-3">
               {study.description}
             </p>
-            <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 transition-all duration-200 group-hover:bg-primary/80 group-hover:border-primary/40">
-              <ArrowUpRight className="w-4 h-4 text-white/70 transition-colors duration-200 group-hover:text-primary-foreground" />
+            <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 transition-all duration-200 group-hover:bg-black/50 group-hover:backdrop-blur-xl group-hover:border-white/30">
+              <ArrowUpRight className="w-4 h-4 text-white/70 transition-colors duration-200 group-hover:text-white" />
             </div>
           </div>
         </div>

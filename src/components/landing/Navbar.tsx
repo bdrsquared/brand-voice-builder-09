@@ -606,7 +606,9 @@ const Navbar = () => {
                               {blog.excerpt && (
                                 <p className="text-xs text-white/40 line-clamp-1 font-body">{blog.excerpt}</p>
                               )}
-                            </div>
+                              <span className="text-[11px] font-semibold text-primary group-hover/blog:brightness-125 transition-all mt-0.5 inline-flex items-center gap-1">
+                                Read more <ArrowRight className="w-2.5 h-2.5" />
+                              </span>
                           </a>
                         ))}
                         {recentBlogs.length === 0 && (

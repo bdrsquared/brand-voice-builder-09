@@ -57,20 +57,7 @@ const Hero = () => {
           Turn video podcasting into a{" "}
           <span className="italic text-white">content engine</span> that
           drives{" "}
-          <span className="relative inline-block min-w-[3ch]">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={ROTATING_WORDS[wordIndex]}
-                className="inline-block text-primary"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-              >
-                {ROTATING_WORDS[wordIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </span>
+          <span className="text-white">{displayText}<span className="animate-pulse">|</span></span>
         </motion.h1>
 
         <motion.p

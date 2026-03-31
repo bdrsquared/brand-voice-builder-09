@@ -565,7 +565,7 @@ const Navbar = () => {
 
           {/* More dropdown */}
           <AnimatePresence>
-            {megaOpen === "more" && (
+          {megaOpen === "more" && (
               <motion.div
                 className="absolute top-full left-0 right-0 pt-2"
                 initial={{ opacity: 0, y: -8 }}
@@ -573,32 +573,80 @@ const Navbar = () => {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-xl shadow-black/30 transition-colors duration-300 max-w-xs ml-auto mr-auto sm:ml-[unset] sm:mr-[unset] sm:max-w-[220px]`}
-                  style={{ marginLeft: "auto", marginRight: "auto", position: "relative", left: "0" }}
-                >
-                  <div className="flex flex-col gap-1">
-                    <a
-                      href="/#how-it-works"
-                      onClick={() => { setMegaOpen(null); navigate("/#how-it-works"); }}
-                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all"
-                    >
-                      <Layers className="w-4 h-4 text-white/50" />
-                      How we work
-                    </a>
-                    <button
-                      onClick={() => { navigate("/our-story"); setMegaOpen(null); }}
-                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all text-left"
-                    >
-                      <Activity className="w-4 h-4 text-white/50" />
-                      Our story
-                    </button>
-                    <button
-                      onClick={() => { navigate("/blogs"); setMegaOpen(null); }}
-                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all text-left"
-                    >
-                      <Eye className="w-4 h-4 text-white/50" />
-                      Blog
-                    </button>
+                <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 transition-colors duration-300`}>
+                  <div className="flex gap-6">
+                    {/* Left column — Recent blogs */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-4">
+                        <BookOpen className="w-4 h-4 text-white/50" />
+                        <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider">Latest from the blog</h4>
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        {recentBlogs.map((blog) => (
+                          <a
+                            key={blog.slug}
+                            href={`/blog/${blog.slug}`}
+                            onClick={(e) => { e.preventDefault(); navigate(`/blog/${blog.slug}`); setMegaOpen(null); }}
+                            className="group/blog flex flex-col gap-0.5 px-3 py-2.5 rounded-lg hover:bg-white/[0.06] transition-all"
+                          >
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-sm font-semibold text-white/90 group-hover/blog:text-white transition-colors line-clamp-1">{blog.title}</span>
+                              <span className="text-[11px] text-white/30 whitespace-nowrap shrink-0">
+                                {new Date(blog.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                              </span>
+                            </div>
+                            {blog.excerpt && (
+                              <p className="text-xs text-white/40 line-clamp-1 font-body">{blog.excerpt}</p>
+                            )}
+                          </a>
+                        ))}
+                        {recentBlogs.length === 0 && (
+                          <p className="text-xs text-white/30 px-3 py-2">No posts yet.</p>
+                        )}
+                      </div>
+                      <div className="mt-3 pt-3 border-t border-white/[0.08]">
+                        <a
+                          href="/blogs"
+                          onClick={(e) => { e.preventDefault(); navigate("/blogs"); setMegaOpen(null); }}
+                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all px-3"
+                        >
+                          View all posts
+                          <ArrowRight className="w-3 h-3" />
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-px bg-white/10 self-stretch" />
+
+                    {/* Right column — Navigation links */}
+                    <div className="w-56 shrink-0">
+                      <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4 px-3">Explore</h4>
+                      <div className="flex flex-col gap-1">
+                        <a
+                          href="/#how-it-works"
+                          onClick={() => { setMegaOpen(null); navigate("/#how-it-works"); }}
+                          className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all"
+                        >
+                          <Layers className="w-4 h-4 text-white/50" />
+                          How we work
+                        </a>
+                        <button
+                          onClick={() => { navigate("/our-story"); setMegaOpen(null); }}
+                          className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all text-left"
+                        >
+                          <Activity className="w-4 h-4 text-white/50" />
+                          Our story
+                        </button>
+                        <button
+                          onClick={() => { navigate("/blogs"); setMegaOpen(null); }}
+                          className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all text-left"
+                        >
+                          <Eye className="w-4 h-4 text-white/50" />
+                          Blog
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>

@@ -323,6 +323,12 @@ const Admin = () => {
                           <span className="text-xs">Budget: {inq.budget}</span>
                         </div>
                       )}
+                      {inq.source_page && (
+                        <div className="flex items-center gap-2">
+                          <FileText className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                          <span className="text-xs">Source: {inq.source_page}</span>
+                        </div>
+                      )}
                       {inq.message && (
                         <div className="mt-2 p-2.5 rounded-lg bg-background border border-border">
                           <p className="text-[10px] text-muted-foreground mb-1">Message</p>

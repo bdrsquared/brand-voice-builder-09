@@ -94,6 +94,12 @@ serve(async (req) => {
             { type: "mrkdwn", text: `*Budget:*\n${budget}` },
           ]
         }] : []),
+        ...(source_page ? [{
+          type: "section",
+          fields: [
+            { type: "mrkdwn", text: `*Source Page:*\n${source_page}` },
+          ]
+        }] : []),
         {
           type: "context",
           elements: [

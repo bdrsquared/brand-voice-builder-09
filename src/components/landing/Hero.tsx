@@ -1,9 +1,21 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
 import LogoWall from "./LogoWall";
 import DotsBackground from "./DotsBackground";
 
+const ROTATING_WORDS = ["growth", "revenue", "change", "impact", "retention"];
+
 const Hero = () => {
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative pt-28 pb-8 sm:pt-36 sm:pb-28 px-6">
       {/* Animated dots background */}
@@ -30,7 +42,21 @@ const Hero = () => {
         >
           Turn video podcasting into a{" "}
           <span className="italic text-white">content engine</span> that
-          drives growth
+          drives{" "}
+          <span className="relative inline-block min-w-[3ch]">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={ROTATING_WORDS[wordIndex]}
+                className="inline-block text-primary"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+              >
+                {ROTATING_WORDS[wordIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.h1>
 
         <motion.p

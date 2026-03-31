@@ -237,6 +237,12 @@
     isolation: isolate;
   }
 
+  .glow-on-hover.glow-on-hover--glass {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
   .glow-on-hover::before {
     content: '';
     background: linear-gradient(45deg, #574ECC, #9139A4, #1CFA76, #9139A4, #574ECC);

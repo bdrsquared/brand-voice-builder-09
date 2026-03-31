@@ -81,7 +81,7 @@ const Hero = () => {
         >
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-base text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.15] shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white/[0.14] hover:border-white/[0.25] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+            className="glow-on-hover glow-on-hover--glass group relative inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-base text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.15] shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white/[0.14] hover:border-white/[0.25] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
           >
             Book a strategy call
             <Calendar className="w-4 h-4 transition-transform group-hover:scale-110" />

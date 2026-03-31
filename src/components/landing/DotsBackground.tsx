@@ -7,7 +7,6 @@ const BRAND_COLORS = [
 ];
 
 const generateDots = (count: number) => {
-const generateDots = (count: number) => {
   const shadows: string[] = [];
   for (let i = 0; i < count; i++) {
     const x = (-0.5 + Math.random() * 3).toFixed(2);

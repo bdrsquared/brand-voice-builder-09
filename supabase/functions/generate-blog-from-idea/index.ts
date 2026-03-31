@@ -319,23 +319,35 @@ Respond with ONLY the subject description, nothing else.`,
       const fullPrompt = `${styleConfig.prompt}\n\nThe subject of this image: ${subjectDescription}\n\n${styleConfig.negative}`;
 
       console.log("Step 3b: Generating image with chosen style...");
-      const imgResponse = await fetch(
-        "https://ai.gateway.lovable.dev/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${LOVABLE_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "google/gemini-3.1-flash-image-preview",
-            messages: [{ role: "user", content: fullPrompt }],
-            modalities: ["image", "text"],
-          }),
-        }
-      );
+      
+      // Retry logic for rate limits
+      let imgResponse: Response | null = null;
+      const maxRetries = 3;
+      for (let attempt = 0; attempt < maxRetries; attempt++) {
+        imgResponse = await fetch(
+          "https://ai.gateway.lovable.dev/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${LOVABLE_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "google/gemini-3.1-flash-image-preview",
+              messages: [{ role: "user", content: fullPrompt }],
+              modalities: ["image", "text"],
+            }),
+          }
+        );
+        
+        if (imgResponse.status !== 429) break;
+        
+        const waitSecs = (attempt + 1) * 10; // 10s, 20s, 30s
+        console.log(`Image generation rate limited (attempt ${attempt + 1}/${maxRetries}), waiting ${waitSecs}s...`);
+        await new Promise(r => setTimeout(r, waitSecs * 1000));
+      }
 
-      if (imgResponse.ok) {
+      if (imgResponse && imgResponse.ok) {
         const imgData = await imgResponse.json();
         const message = imgData.choices?.[0]?.message;
         

@@ -71,7 +71,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           Turn video podcasting into a{" "}
-          <span className="italic text-white">content engine</span> that
+          <span className={`italic ${variant === "classic" ? "text-primary" : "text-white"}`}>content engine</span> that
           drives
           <br className="hidden sm:block" />
           <span className="sm:hidden"> </span>

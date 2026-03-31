@@ -27,7 +27,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(30);
-  const [activeTab, setActiveTab] = useState<"inquiries" | "blog">("inquiries");
+  const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages">("inquiries");
   const navigate = useNavigate();
 
   useEffect(() => {

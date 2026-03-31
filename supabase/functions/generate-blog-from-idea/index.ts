@@ -322,11 +322,15 @@ Respond with ONLY the subject description, nothing else.`,
 
       const fullPrompt = `${styleConfig.prompt}\n\nThe subject of this image: ${subjectDescription}\n\n${styleConfig.negative}`;
 
+      // Cooldown after subject description call
+      console.log("Waiting 10s before image generation call...");
+      await new Promise(r => setTimeout(r, 10000));
+
       console.log("Step 3b: Generating image with chosen style...");
       
-      // Retry logic for rate limits
+      // Retry logic for rate limits with exponential backoff
       let imgResponse: Response | null = null;
-      const maxRetries = 3;
+      const maxRetries = 5;
       for (let attempt = 0; attempt < maxRetries; attempt++) {
         imgResponse = await fetch(
           "https://ai.gateway.lovable.dev/v1/chat/completions",
@@ -346,7 +350,7 @@ Respond with ONLY the subject description, nothing else.`,
         
         if (imgResponse.status !== 429) break;
         
-        const waitSecs = (attempt + 1) * 10; // 10s, 20s, 30s
+        const waitSecs = Math.min(15 * Math.pow(2, attempt), 120); // 15s, 30s, 60s, 120s, 120s
         console.log(`Image generation rate limited (attempt ${attempt + 1}/${maxRetries}), waiting ${waitSecs}s...`);
         await new Promise(r => setTimeout(r, waitSecs * 1000));
       }

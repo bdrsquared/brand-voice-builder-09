@@ -7,13 +7,13 @@ const BRAND_COLORS = [
 ];
 
 const generateDots = (count: number) => {
-    const shadows: string[] = [];
+const generateDots = (count: number) => {
+  const shadows: string[] = [];
   for (let i = 0; i < count; i++) {
     const x = (-0.5 + Math.random() * 3).toFixed(2);
     const y = (-0.5 + Math.random() * 3).toFixed(2);
     const color = BRAND_COLORS[Math.floor(Math.random() * BRAND_COLORS.length)];
     shadows.push(`${x}em ${y}em 12px rgba(${color}, 0.9)`);
-  }
   }
   return shadows.join(", ");
 };

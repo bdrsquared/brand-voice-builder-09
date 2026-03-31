@@ -1,0 +1,1 @@
+UPDATE blog_posts SET cover_image = 'https://opzkaxzcmqqqdbteuhas.supabase.co/storage/v1/object/public/blog-images/the-7-7-billion-bet-on-audio-first-security.png', image_style = 'grainy_disposable' WHERE id = '791896bb-6810-4aab-9461-ac13eb41a8ab';

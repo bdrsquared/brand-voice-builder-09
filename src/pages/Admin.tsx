@@ -4,10 +4,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3 } from "lucide-react";
+import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
+import AdminPagesManager from "@/components/admin/AdminPagesManager";
 
 type Inquiry = {
   id: string;
@@ -26,7 +27,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(30);
-  const [activeTab, setActiveTab] = useState<"inquiries" | "blog">("inquiries");
+  const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages">("inquiries");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -115,6 +116,12 @@ const Admin = () => {
             >
               <FileText className="w-3.5 h-3.5 inline mr-1" />Blog
             </button>
+            <button
+              onClick={() => setActiveTab("pages")}
+              className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "pages" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <Globe className="w-3.5 h-3.5 inline mr-1" />Pages
+            </button>
           </div>
           <Button variant="ghost" size="sm" onClick={handleSignOut} className="text-xs sm:text-sm">
             <LogOut className="w-4 h-4 sm:mr-2" /> <span className="hidden sm:inline">Sign Out</span>
@@ -125,6 +132,8 @@ const Admin = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
         {activeTab === "blog" ? (
           <AdminBlogManager />
+        ) : activeTab === "pages" ? (
+          <AdminPagesManager />
         ) : (
           <>
         {/* Stats */}

@@ -18,6 +18,7 @@ type Inquiry = {
   budget: string | null;
   type: string;
   created_at: string;
+  source_page: string | null;
 };
 
 const Admin = () => {

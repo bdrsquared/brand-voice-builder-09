@@ -129,7 +129,7 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
 
 const CaseStudies = () => {
   return (
-    <section className="relative py-20 sm:py-28 px-6 overflow-visible">
+    <section className="relative pt-10 sm:pt-14 pb-20 sm:pb-28 px-6 overflow-visible">
       <div className="absolute top-[30%] right-[-200px] w-[600px] h-[500px] pointer-events-none" style={{ background: "radial-gradient(ellipse at center, hsla(145,96%,55%,0.10) 0%, hsla(243,79%,63%,0.08) 50%, transparent 80%)", filter: "blur(140px)" }} />
       <div className="absolute bottom-[-80px] right-[-120px] w-[350px] h-[450px] blob-oblong-green pointer-events-none" />
 

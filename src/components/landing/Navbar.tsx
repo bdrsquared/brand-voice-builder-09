@@ -15,6 +15,7 @@ import officeImg from "@/assets/office-compressed.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
 import caseNoStress from "@/assets/case-no-stress.jpeg";
 import caseCfoPlaybook from "@/assets/case-cfo-playbook.jpeg";
+import caseIgOrigami from "@/assets/case-ig-origami.jpg";
 
 const megaMenuItems = [
   {

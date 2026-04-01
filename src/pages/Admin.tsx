@@ -55,6 +55,7 @@ const Admin = () => {
       }
 
       fetchInquiries();
+      fetchPageViews();
     };
     checkAuth();
   }, [navigate]);

@@ -149,6 +149,20 @@ const Admin = () => {
     }
   };
 
+  const handleExpand = async (inq: Inquiry) => {
+    const isExpanding = expandedId !== inq.id;
+    setExpandedId(isExpanding ? inq.id : null);
+    if (isExpanding && !inq.read) {
+      await supabase
+        .from("inquiries")
+        .update({ read: true } as any)
+        .eq("id", inq.id);
+      setInquiries((prev) =>
+        prev.map((i) => (i.id === inq.id ? { ...i, read: true } : i))
+      );
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate("/admin/login");

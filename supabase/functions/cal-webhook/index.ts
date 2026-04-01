@@ -16,8 +16,8 @@ Deno.serve(async (req) => {
 
     const triggerEvent = payload.triggerEvent;
 
-    // Only process booking created events
-    if (triggerEvent !== "BOOKING_CREATED") {
+    // Handle both BOOKING_REQUESTED (needs approval) and BOOKING_CREATED (auto-approved)
+    if (triggerEvent !== "BOOKING_CREATED" && triggerEvent !== "BOOKING_REQUESTED") {
       return new Response(JSON.stringify({ message: "Event ignored", triggerEvent }), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -26,7 +26,6 @@ Deno.serve(async (req) => {
 
     const booking = payload.payload;
 
-    // Extract attendee info (first attendee is typically the booker)
     const attendee = booking?.attendees?.[0];
     if (!attendee) {
       console.error("No attendee found in booking payload");
@@ -38,9 +37,10 @@ Deno.serve(async (req) => {
 
     const name = attendee.name || "Unknown";
     const email = attendee.email || "";
-    const phone = attendee.phone || booking?.responses?.phone?.value || null;
+    const phone = attendee.phone || attendee.phoneNumber || booking?.responses?.attendeePhoneNumber?.value || booking?.responses?.phone?.value || null;
+    const bookingUid = booking?.uid || "";
+    const requiresConfirmation = booking?.requiresConfirmation || false;
 
-    // Build a descriptive message from booking details
     const eventTitle = booking?.title || booking?.eventTitle || "Cal.com Meeting";
     const startTime = booking?.startTime
       ? new Date(booking.startTime).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })
@@ -50,15 +50,21 @@ Deno.serve(async (req) => {
       : "";
 
     const notes = booking?.responses?.notes?.value || booking?.description || "";
+    const org = booking?.responses?.Org?.value || booking?.userFieldsResponses?.Org?.value || "";
+    const budget = booking?.responses?.budget?.value || booking?.userFieldsResponses?.budget?.value || "";
+    const budgetStr = Array.isArray(budget) ? budget.join(", ") : budget;
+
     const message = [
       `📅 Meeting booked: ${eventTitle}`,
       `Date: ${startTime}${endTime ? ` – ${endTime}` : ""}`,
+      org ? `Organisation: ${org}` : "",
+      budgetStr ? `Budget: ${budgetStr}` : "",
       notes ? `Notes: ${notes}` : "",
     ]
       .filter(Boolean)
       .join("\n");
 
-    // Insert into inquiries using service role (bypasses RLS)
+    // Insert into inquiries
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
@@ -68,60 +74,107 @@ Deno.serve(async (req) => {
       email,
       phone,
       message,
+      budget: budgetStr || null,
       type: "cal_booking",
       source_page: "/book-a-call",
     });
 
     if (error) {
       console.error("Failed to insert inquiry:", error);
-      return new Response(JSON.stringify({ error: error.message }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
     }
 
     // Send Slack notification
     const SLACK_WEBHOOK_URL = Deno.env.get("SLACK_WEBHOOK_URL");
     if (SLACK_WEBHOOK_URL) {
       try {
-        const slackMessage = {
-          blocks: [
-            {
-              type: "header",
-              text: { type: "plain_text", text: "📅 New Cal.com Booking", emoji: true },
+        const isRequested = triggerEvent === "BOOKING_REQUESTED";
+
+        const slackBlocks: any[] = [
+          {
+            type: "header",
+            text: {
+              type: "plain_text",
+              text: isRequested ? "📅 New Booking Request (Pending Approval)" : "📅 New Cal.com Booking",
+              emoji: true,
             },
-            {
-              type: "section",
-              fields: [
-                { type: "mrkdwn", text: `*Name:*\n${name}` },
-                { type: "mrkdwn", text: `*Email:*\n${email}` },
-              ],
-            },
-            ...(phone ? [{
-              type: "section",
-              fields: [{ type: "mrkdwn", text: `*Phone:*\n${phone}` }],
-            }] : []),
-            {
-              type: "section",
-              text: { type: "mrkdwn", text: `*Meeting:*\n${eventTitle}\n${startTime}${endTime ? ` – ${endTime}` : ""}` },
-            },
-            ...(notes ? [{
-              type: "section",
-              text: { type: "mrkdwn", text: `*Notes:*\n${notes}` },
-            }] : []),
-            {
-              type: "context",
-              elements: [
-                { type: "mrkdwn", text: `Booked via Cal.com at ${new Date().toISOString()}` },
-              ],
-            },
+          },
+          {
+            type: "section",
+            fields: [
+              { type: "mrkdwn", text: `*Name:*\n${name}` },
+              { type: "mrkdwn", text: `*Email:*\n${email}` },
+            ],
+          },
+        ];
+
+        if (phone) {
+          slackBlocks.push({
+            type: "section",
+            fields: [{ type: "mrkdwn", text: `*Phone:*\n${phone}` }],
+          });
+        }
+
+        if (org) {
+          slackBlocks.push({
+            type: "section",
+            fields: [{ type: "mrkdwn", text: `*Organisation:*\n${org}` }],
+          });
+        }
+
+        slackBlocks.push({
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `*Meeting:*\n${eventTitle}\n${startTime}${endTime ? ` – ${endTime}` : ""}`,
+          },
+        });
+
+        if (budgetStr) {
+          slackBlocks.push({
+            type: "section",
+            fields: [{ type: "mrkdwn", text: `*Budget:*\n${budgetStr}` }],
+          });
+        }
+
+        if (notes) {
+          slackBlocks.push({
+            type: "section",
+            text: { type: "mrkdwn", text: `*Notes:*\n${notes}` },
+          });
+        }
+
+        // Add approve/decline buttons for bookings requiring confirmation
+        if (isRequested && bookingUid) {
+          slackBlocks.push({
+            type: "actions",
+            elements: [
+              {
+                type: "button",
+                text: { type: "plain_text", text: "✅ Approve", emoji: true },
+                style: "primary",
+                action_id: `approve_booking:${bookingUid}`,
+              },
+              {
+                type: "button",
+                text: { type: "plain_text", text: "❌ Decline", emoji: true },
+                style: "danger",
+                action_id: `decline_booking:${bookingUid}`,
+              },
+            ],
+          });
+        }
+
+        slackBlocks.push({
+          type: "context",
+          elements: [
+            { type: "mrkdwn", text: `Booked via Cal.com at ${new Date().toISOString()}` },
           ],
-        };
+        });
 
         const slackRes = await fetch(SLACK_WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(slackMessage),
+          body: JSON.stringify({ blocks: slackBlocks }),
         });
 
         if (!slackRes.ok) {
@@ -132,7 +185,7 @@ Deno.serve(async (req) => {
       }
     }
 
-    console.log(`Booking inquiry created for ${email}`);
+    console.log(`Booking inquiry created for ${email} (event: ${triggerEvent})`);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

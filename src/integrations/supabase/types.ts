@@ -94,6 +94,7 @@ export type Database = {
       }
       inquiries: {
         Row: {
+          archived: boolean
           budget: string | null
           created_at: string
           email: string
@@ -105,6 +106,7 @@ export type Database = {
           type: string
         }
         Insert: {
+          archived?: boolean
           budget?: string | null
           created_at?: string
           email: string
@@ -116,6 +118,7 @@ export type Database = {
           type?: string
         }
         Update: {
+          archived?: boolean
           budget?: string | null
           created_at?: string
           email?: string

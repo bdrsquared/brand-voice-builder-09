@@ -27,9 +27,11 @@ const ITEMS_PER_PAGE = 20;
 
 const Admin = () => {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+  const [pageViews, setPageViews] = useState<Array<{ page_path: string; created_at: string }>>([]);
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(30);
+  const [pvTimeRange, setPvTimeRange] = useState(30);
   const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages">("inquiries");
   const [showArchived, setShowArchived] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);

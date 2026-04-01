@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight } from "lucide-react";
+import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
@@ -27,9 +27,11 @@ const ITEMS_PER_PAGE = 20;
 
 const Admin = () => {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+  const [pageViews, setPageViews] = useState<Array<{ page_path: string; created_at: string }>>([]);
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(30);
+  const [pvTimeRange, setPvTimeRange] = useState(30);
   const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages">("inquiries");
   const [showArchived, setShowArchived] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,6 +55,7 @@ const Admin = () => {
       }
 
       fetchInquiries();
+      fetchPageViews();
     };
     checkAuth();
   }, [navigate]);
@@ -67,6 +70,16 @@ const Admin = () => {
       setInquiries(data as Inquiry[]);
     }
     setLoading(false);
+  };
+
+  const fetchPageViews = async () => {
+    const since = subDays(new Date(), 90).toISOString();
+    const { data } = await supabase
+      .from("page_views")
+      .select("page_path, created_at")
+      .gte("created_at", since)
+      .order("created_at", { ascending: false }) as any;
+    if (data) setPageViews(data);
   };
 
   const handleArchive = async (id: string) => {
@@ -119,6 +132,29 @@ const Admin = () => {
       count,
     }));
   }, [inquiries, timeRange]);
+
+  const pvChartData = useMemo(() => {
+    const days: Record<string, number> = {};
+    for (let i = pvTimeRange - 1; i >= 0; i--) {
+      const day = format(subDays(new Date(), i), "yyyy-MM-dd");
+      days[day] = 0;
+    }
+    pageViews.forEach((pv) => {
+      const day = format(parseISO(pv.created_at), "yyyy-MM-dd");
+      if (days[day] !== undefined) days[day]++;
+    });
+    return Object.entries(days).map(([date, count]) => ({
+      date: format(parseISO(date), pvTimeRange <= 7 ? "EEE" : "MMM d"),
+      count,
+    }));
+  }, [pageViews, pvTimeRange]);
+
+  const pvToday = pageViews.filter(
+    (pv) => format(parseISO(pv.created_at), "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd")
+  ).length;
+  const pvWeek = pageViews.filter(
+    (pv) => parseISO(pv.created_at) >= startOfDay(subDays(new Date(), 7))
+  ).length;
 
   const activeInquiries = inquiries.filter((i) => !i.archived);
   const totalInquiries = activeInquiries.length;
@@ -294,7 +330,50 @@ const Admin = () => {
           </div>
         </div>
 
-        {/* Inquiries List */}
+        {/* Page Views Chart */}
+        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Eye className="w-4 h-4 text-muted-foreground" />
+              <h2 className="text-sm font-medium text-muted-foreground">Page Views</h2>
+              <span className="text-xs text-muted-foreground ml-2">Today: {pvToday} · This week: {pvWeek}</span>
+            </div>
+            <div className="flex gap-1">
+              {[7, 14, 30].map((d) => (
+                <button
+                  key={d}
+                  onClick={() => setPvTimeRange(d)}
+                  className={`px-3 py-1 text-xs rounded-md transition-colors ${
+                    pvTimeRange === d
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {d}d
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="h-48">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={pvChartData}>
+                <XAxis dataKey="date" tick={{ fill: "hsl(0 0% 50%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: "hsl(0 0% 50%)", fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
+                <Tooltip
+                  contentStyle={{
+                    background: "hsl(0 0% 7%)",
+                    border: "1px solid hsl(0 0% 15%)",
+                    borderRadius: 8,
+                    color: "hsl(0 0% 95%)",
+                    fontSize: 12,
+                  }}
+                />
+                <Bar dataKey="count" fill="hsl(145 80% 55%)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
           {/* Toggle active / archived */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">

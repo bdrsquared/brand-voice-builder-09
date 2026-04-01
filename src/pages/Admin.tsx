@@ -656,7 +656,7 @@ const Admin = () => {
                 <div
                   key={inq.id}
                   className={`p-4 cursor-pointer active:bg-muted/20 transition-colors ${!inq.read ? "bg-white/[0.02]" : ""}`}
-                  onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
+                  onClick={() => handleExpand(inq)}
                 >
                   <div className="flex items-start gap-3">
                     <input

@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe } from "lucide-react";
+import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
@@ -226,6 +226,8 @@ const Admin = () => {
                               <><MessageSquare className="w-3 h-3 mr-1" /> Message</>
                             ) : inq.type === "cal_booking" ? (
                               <><Calendar className="w-3 h-3 mr-1" /> Calendar</>
+                            ) : inq.type === "playpack" ? (
+                              <><Magnet className="w-3 h-3 mr-1" /> Magnet</>
                             ) : (
                               <><Mic className="w-3 h-3 mr-1" /> Demo</>
                             )}
@@ -305,7 +307,7 @@ const Admin = () => {
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium text-sm truncate">{inq.name}</span>
                         <Badge variant="outline" className="text-[10px] border-border shrink-0">
-                          {inq.type === "contact" ? "Message" : inq.type === "cal_booking" ? "Calendar" : "Demo"}
+                          {inq.type === "contact" ? "Message" : inq.type === "cal_booking" ? "Calendar" : inq.type === "playpack" ? "Magnet" : "Demo"}
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground truncate">{inq.email}</p>

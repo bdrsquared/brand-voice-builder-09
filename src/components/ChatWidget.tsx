@@ -160,9 +160,9 @@ const ChatWidget = () => {
                     exit={{ opacity: 0 }}
                     onSubmit={handleSubmit}
                   >
-                    <h3 className={`text-lg font-heading mb-0.5 ${light ? "text-gray-900" : "text-foreground"}`}>Chat with us</h3>
+                    <h3 className={`text-lg font-heading mb-0.5 ${light ? "text-gray-900" : "text-foreground"}`}>Start a conversation</h3>
                     <p className={`text-xs font-body mb-5 ${light ? "text-gray-500" : "text-muted-foreground"}`}>
-                      We review every enquiry carefully – we'll come back to you if it's a good fit.
+                      If we're the right partner for you, we'll be in touch.
                     </p>
 
                     <div className="space-y-3">

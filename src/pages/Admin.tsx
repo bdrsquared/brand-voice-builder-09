@@ -224,6 +224,8 @@ const Admin = () => {
                           <Badge variant="outline" className="text-xs border-border">
                             {inq.type === "contact" ? (
                               <><MessageSquare className="w-3 h-3 mr-1" /> Message</>
+                            ) : inq.type === "cal_booking" ? (
+                              <><Calendar className="w-3 h-3 mr-1" /> Calendar</>
                             ) : (
                               <><Mic className="w-3 h-3 mr-1" /> Demo</>
                             )}

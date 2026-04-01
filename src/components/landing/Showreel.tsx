@@ -71,9 +71,13 @@ const Showreel = () => {
               <ScrollRevealText text="Check out our" scrollProgress={scrollYProgress} startAt={0.03} endAt={0.15} />
             </span>
             <br className="hidden sm:block" />
-            <span className="bg-gradient-to-r from-[#6359EA] via-[#1CFA76] to-[#FFB347] bg-clip-text text-transparent">
-              <ScrollRevealText text="showreel" scrollProgress={scrollYProgress} startAt={0.1} endAt={0.2} />
-            </span>
+            <ScrollRevealText
+              text="showreel"
+              scrollProgress={scrollYProgress}
+              startAt={0.1}
+              endAt={0.2}
+              className="bg-gradient-to-r from-[#6359EA] via-[#1CFA76] to-[#FFB347] bg-clip-text [-webkit-text-fill-color:transparent]"
+            />
           </h2>
 
           <motion.div

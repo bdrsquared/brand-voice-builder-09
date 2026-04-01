@@ -226,6 +226,8 @@ const Admin = () => {
                               <><MessageSquare className="w-3 h-3 mr-1" /> Message</>
                             ) : inq.type === "cal_booking" ? (
                               <><Calendar className="w-3 h-3 mr-1" /> Calendar</>
+                            ) : inq.type === "playpack" ? (
+                              <><Magnet className="w-3 h-3 mr-1" /> Magnet</>
                             ) : (
                               <><Mic className="w-3 h-3 mr-1" /> Demo</>
                             )}

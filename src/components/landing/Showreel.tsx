@@ -3,58 +3,36 @@ import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import showreelThumb from "@/assets/showreel-thumb.webp";
 
-const ScrollRevealText = ({ text, scrollProgress, startAt, endAt, className = "", variant = "default" }: {
+const ScrollRevealText = ({ text, scrollProgress, startAt, endAt }: {
   text: string;
   scrollProgress: any;
   startAt: number;
   endAt: number;
-  className?: string;
-  variant?: "default" | "brandGradient";
 }) => {
   const [progress, setProgress] = useState(0);
   const mapped = useTransform(scrollProgress, [startAt, endAt], [0, 1]);
   useMotionValueEvent(mapped, "change", (v: number) => setProgress(v));
 
-  const revealedLetters = text.split("").map((char, i) => {
-    const charProgress = Math.min(1, Math.max(0, (progress * text.length - i) / 1.5));
-    const isSpace = char === " ";
-
-    return (
-      <span
-        key={i}
-        style={{
-          opacity: 0.12 + charProgress * 0.88,
-          display: "inline-block",
-          transform: isSpace ? undefined : `translateY(${(1 - charProgress) * 14}px)`,
-          ...(variant === "brandGradient" && !isSpace
-            ? {
-                backgroundImage:
-                  "linear-gradient(90deg, hsl(243 79% 63%) 0%, hsl(145 96% 55%) 50%, hsl(35 100% 64%) 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                color: "transparent",
-              }
-            : {}),
-        }}
-      >
-        {isSpace ? "\u00A0" : char}
-      </span>
-    );
-  });
-
-  if (variant === "brandGradient") {
-    return (
-      <span className={`relative inline-block whitespace-pre ${className}`}>
-        <span aria-hidden className="absolute inset-0 whitespace-pre text-light-text-tertiary/35 pointer-events-none">
-          {text}
-        </span>
-        <span className="relative">{revealedLetters}</span>
-      </span>
-    );
-  }
-
-  return <span className={className}>{revealedLetters}</span>;
+  return (
+    <>
+      {text.split("").map((char, i) => {
+        const charProgress = Math.min(1, Math.max(0, (progress * text.length - i) / 1.5));
+        const isSpace = char === " ";
+        return (
+          <span
+            key={i}
+            style={{
+              opacity: 0.12 + charProgress * 0.88,
+              display: "inline-block",
+              transform: isSpace ? undefined : `translateY(${(1 - charProgress) * 14}px)`,
+            }}
+          >
+            {isSpace ? "\u00A0" : char}
+          </span>
+        );
+      })}
+    </>
+  );
 };
 
 const Showreel = () => {
@@ -73,13 +51,19 @@ const Showreel = () => {
 
   const subOpacity = useTransform(scrollYProgress, [0.18, 0.25], [0, 1]);
   const subY = useTransform(scrollYProgress, [0.18, 0.25], [15, 0]);
-  const lineScaleX = useTransform(scrollYProgress, [0.15, 0.22], [0, 1]);
 
   return (
     <section ref={sectionRef} className="relative py-20 sm:py-28 px-6 pb-0">
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <div className="text-left sm:text-center mb-12 sm:mb-16">
+        <div className="relative text-left sm:text-center mb-12 sm:mb-16">
+          {/* Brand gradient blobs behind the title */}
+          <div className="absolute inset-0 pointer-events-none -z-10" aria-hidden>
+            <div className="absolute top-1/2 left-1/2 -translate-x-[70%] -translate-y-[60%] w-[300px] h-[300px] sm:w-[450px] sm:h-[400px] rounded-full bg-[#6359EA] opacity-[0.18] blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-[30%] -translate-y-[40%] w-[280px] h-[280px] sm:w-[400px] sm:h-[350px] rounded-full bg-[#1CFA76] opacity-[0.15] blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 translate-x-[10%] -translate-y-[50%] w-[250px] h-[250px] sm:w-[350px] sm:h-[300px] rounded-full bg-[#FFB347] opacity-[0.15] blur-[100px]" />
+          </div>
+
           <motion.span
             className="inline-flex items-center gap-2 font-medium text-sm mb-6 text-light-text-tertiary"
             style={{ opacity: useTransform(scrollYProgress, [0.02, 0.08], [0, 1]) }}
@@ -87,29 +71,11 @@ const Showreel = () => {
             ● Working with businesses worldwide
           </motion.span>
 
-          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-medium leading-[0.95] tracking-tight">
-            <span className="text-light-text-primary">
-              <ScrollRevealText text="Check out our" scrollProgress={scrollYProgress} startAt={0.03} endAt={0.15} />
-            </span>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-medium leading-[0.95] tracking-tight text-light-text-primary">
+            <ScrollRevealText text="Check out our" scrollProgress={scrollYProgress} startAt={0.03} endAt={0.15} />
             <br className="hidden sm:block" />
-            <ScrollRevealText
-              text="showreel"
-              scrollProgress={scrollYProgress}
-              startAt={0.1}
-              endAt={0.2}
-              variant="brandGradient"
-            />
+            <ScrollRevealText text="showreel" scrollProgress={scrollYProgress} startAt={0.1} endAt={0.2} />
           </h2>
-
-          <motion.div
-            className="mx-auto mt-6 sm:mt-8 h-[2px] rounded-full origin-left"
-            style={{
-              background: "linear-gradient(90deg, #6359EA, #1CFA76, #FFB347)",
-              maxWidth: "200px",
-              scaleX: lineScaleX,
-              opacity: lineScaleX,
-            }}
-          />
 
           <motion.p
             className="mt-5 sm:mt-6 text-base sm:text-lg text-light-text-secondary max-w-xl sm:mx-auto"

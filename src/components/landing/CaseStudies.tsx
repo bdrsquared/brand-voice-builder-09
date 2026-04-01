@@ -49,7 +49,7 @@ const caseStudies = [
     description: "A wellness-focused podcast helping busy professionals manage stress through science-backed techniques.",
     gradient: "from-emerald-500/30 to-green-400/20",
     image: casePulsetto,
-    slug: null as string | null,
+    slug: "no-stress",
   },
   {
     title: "The CFO Playbook",
@@ -58,7 +58,7 @@ const caseStudies = [
     description: "A finance podcast giving CFOs and finance leaders actionable strategies for modern business growth.",
     gradient: "from-slate-400/30 to-gray-300/20",
     image: caseCfoPlaybook,
-    slug: null as string | null,
+    slug: "the-cfo-playbook",
   },
   {
     title: "UK/US Tax Talk",

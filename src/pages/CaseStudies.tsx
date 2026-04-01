@@ -77,7 +77,7 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: index * 0.08 }}
       >
-        <div className="aspect-video overflow-hidden">
+        <div className="aspect-[4/3] overflow-hidden">
           {study.image && (
             <img
               src={study.image}
@@ -124,7 +124,7 @@ const CaseStudiesPage = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-32 sm:pt-40 pb-16 sm:pb-20 px-6 overflow-hidden">
+      <section className="relative pt-32 sm:pt-40 pb-16 sm:pb-20 px-6">
         <DotsBackground />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">

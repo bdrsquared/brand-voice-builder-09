@@ -8,6 +8,12 @@ import caseIgBtsControl from "@/assets/case-ig-bts-control.jpg";
 import caseIgLogoArt from "@/assets/case-ig-logo-art.png";
 import caseIgMarketChaos from "@/assets/case-ig-market-chaos.png";
 import caseIgOrigami from "@/assets/case-ig-origami.jpg";
+import caseNostressHero from "@/assets/case-nostress-hero.png";
+import caseNostressBtsWide from "@/assets/case-nostress-bts-wide.jpg";
+import caseNostressBtsGuest from "@/assets/case-nostress-bts-guest.jpg";
+import caseNostressBtsHost from "@/assets/case-nostress-bts-host.jpg";
+import caseNostressBranded from "@/assets/case-nostress-branded.png";
+import caseNostressSpeaker from "@/assets/case-nostress-speaker.png";
 
 const CaseStudyHero = lazy(() => import("@/components/case-study/CaseStudyHero"));
 const CaseStudyImpact = lazy(() => import("@/components/case-study/CaseStudyImpact"));

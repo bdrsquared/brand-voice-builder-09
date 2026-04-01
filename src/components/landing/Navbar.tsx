@@ -351,13 +351,13 @@ const Navbar = () => {
                     <p className="text-sm text-muted-foreground font-body">
                       We partner with global brands to create podcast-led content that builds authority and drives results.
                     </p>
-                    <a
-                      href="#case-studies"
+                    <Link
+                      to="/case-studies"
                       className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all whitespace-nowrap ml-6"
                     >
                       See more case studies
                       <ArrowRight className="w-3 h-3" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </motion.div>

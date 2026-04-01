@@ -80,6 +80,58 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Send Slack notification
+    const SLACK_WEBHOOK_URL = Deno.env.get("SLACK_WEBHOOK_URL");
+    if (SLACK_WEBHOOK_URL) {
+      try {
+        const slackMessage = {
+          blocks: [
+            {
+              type: "header",
+              text: { type: "plain_text", text: "📅 New Cal.com Booking", emoji: true },
+            },
+            {
+              type: "section",
+              fields: [
+                { type: "mrkdwn", text: `*Name:*\n${name}` },
+                { type: "mrkdwn", text: `*Email:*\n${email}` },
+              ],
+            },
+            ...(phone ? [{
+              type: "section",
+              fields: [{ type: "mrkdwn", text: `*Phone:*\n${phone}` }],
+            }] : []),
+            {
+              type: "section",
+              text: { type: "mrkdwn", text: `*Meeting:*\n${eventTitle}\n${startTime}${endTime ? ` – ${endTime}` : ""}` },
+            },
+            ...(notes ? [{
+              type: "section",
+              text: { type: "mrkdwn", text: `*Notes:*\n${notes}` },
+            }] : []),
+            {
+              type: "context",
+              elements: [
+                { type: "mrkdwn", text: `Booked via Cal.com at ${new Date().toISOString()}` },
+              ],
+            },
+          ],
+        };
+
+        const slackRes = await fetch(SLACK_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(slackMessage),
+        });
+
+        if (!slackRes.ok) {
+          console.error("Slack notification failed:", await slackRes.text());
+        }
+      } catch (slackErr) {
+        console.error("Failed to send Slack notification:", slackErr);
+      }
+    }
+
     console.log(`Booking inquiry created for ${email}`);
 
     return new Response(JSON.stringify({ success: true }), {

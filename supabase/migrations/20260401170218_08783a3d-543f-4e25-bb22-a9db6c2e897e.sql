@@ -1,0 +1,1 @@
+ALTER TABLE public.inquiries ADD COLUMN read boolean NOT NULL DEFAULT false;

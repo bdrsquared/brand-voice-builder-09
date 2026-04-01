@@ -102,6 +102,7 @@ export type Database = {
           message: string | null
           name: string
           phone: string | null
+          read: boolean
           source_page: string | null
           type: string
         }
@@ -114,6 +115,7 @@ export type Database = {
           message?: string | null
           name: string
           phone?: string | null
+          read?: boolean
           source_page?: string | null
           type?: string
         }
@@ -126,6 +128,7 @@ export type Database = {
           message?: string | null
           name?: string
           phone?: string | null
+          read?: boolean
           source_page?: string | null
           type?: string
         }

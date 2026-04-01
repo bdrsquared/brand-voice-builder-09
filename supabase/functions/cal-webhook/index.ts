@@ -90,7 +90,7 @@ Deno.serve(async (req) => {
     const SLACK_LEADS_CHANNEL_ID = "C050700QNLV";
     const SLACK_WEBHOOK_URL = Deno.env.get("SLACK_WEBHOOK_URL");
 
-    if (SLACK_BOT_TOKEN && SLACK_CHANNEL_ID || SLACK_WEBHOOK_URL) {
+    if (SLACK_BOT_TOKEN && SLACK_LEADS_CHANNEL_ID || SLACK_WEBHOOK_URL) {
       try {
         const slackBlocks: any[] = [
           {

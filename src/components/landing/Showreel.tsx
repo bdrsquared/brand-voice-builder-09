@@ -16,8 +16,10 @@ const ScrollRevealText = ({ text, scrollProgress, startAt, endAt }: {
   return (
     <>
       {text.split("").map((char, i) => {
-        const charProgress = Math.min(1, Math.max(0, (progress * text.length - i) / 1.5));
         const isSpace = char === " ";
+        const normalizedIndex = text.length > 1 ? i / (text.length - 1) : 0;
+        const charStart = normalizedIndex * 0.58;
+        const charProgress = Math.min(1, Math.max(0, (progress - charStart) / 0.42));
         return (
           <span
             key={i}

@@ -70,7 +70,16 @@ const Showreel = () => {
               <ScrollRevealText text="Check out our" scrollProgress={scrollYProgress} startAt={0.03} endAt={0.15} />
             </span>
             <br className="hidden sm:block" />
-            <ScrollRevealText text="showreel" gradient scrollProgress={scrollYProgress} startAt={0.1} endAt={0.2} />
+            <span
+              style={{
+                background: "linear-gradient(90deg, #6359EA 0%, #1CFA76 50%, #FFB347 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              <ScrollRevealText text="showreel" scrollProgress={scrollYProgress} startAt={0.1} endAt={0.2} />
+            </span>
           </h2>
 
           <motion.div

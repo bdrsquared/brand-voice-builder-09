@@ -460,7 +460,7 @@ const Admin = () => {
 
         {insightsSubTab === "leads" && (
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
-          {/* Toggle active / archived */}
+          {/* Toolbar: active/archived toggle + bulk actions */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
             <div className="flex items-center gap-2">
               <button
@@ -477,6 +477,51 @@ const Admin = () => {
                 Archived ({archivedCount})
               </button>
             </div>
+
+            {/* Bulk actions dropdown */}
+            {selectedIds.size > 0 && (
+              <div className="relative">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-xs gap-1.5 border-white/10"
+                  onClick={() => setActionsOpen(!actionsOpen)}
+                >
+                  <MoreHorizontal className="w-3.5 h-3.5" />
+                  Actions ({selectedIds.size})
+                  <ChevronDown className="w-3 h-3" />
+                </Button>
+                {actionsOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setActionsOpen(false)} />
+                    <div className="absolute right-0 top-full mt-1 z-50 w-44 rounded-lg border border-white/10 bg-card/95 backdrop-blur-xl shadow-xl overflow-hidden">
+                      <button
+                        onClick={handleBulkArchive}
+                        className="w-full flex items-center gap-2 px-3 py-2.5 text-xs text-foreground hover:bg-white/[0.06] transition-colors"
+                      >
+                        <Archive className="w-3.5 h-3.5 text-muted-foreground" />
+                        {showArchived ? "Unarchive" : "Archive"}
+                      </button>
+                      <button
+                        onClick={handleBulkMarkRead}
+                        className="w-full flex items-center gap-2 px-3 py-2.5 text-xs text-foreground hover:bg-white/[0.06] transition-colors"
+                      >
+                        <CheckCircle className="w-3.5 h-3.5 text-muted-foreground" />
+                        Mark as read
+                      </button>
+                      <div className="h-px bg-white/[0.08]" />
+                      <button
+                        onClick={handleBulkDelete}
+                        className="w-full flex items-center gap-2 px-3 py-2.5 text-xs text-red-400 hover:bg-red-500/10 transition-colors"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        Delete
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Desktop table */}
@@ -484,19 +529,27 @@ const Admin = () => {
             <Table>
               <TableHeader>
                 <TableRow className="border-border">
+                  <TableHead className="w-10">
+                    <input
+                      type="checkbox"
+                      checked={paginatedInquiries.length > 0 && selectedIds.size === paginatedInquiries.length}
+                      onChange={toggleSelectAll}
+                      className="w-3.5 h-3.5 rounded border-white/20 bg-white/5 accent-primary cursor-pointer"
+                    />
+                  </TableHead>
                   <TableHead className="text-muted-foreground">Type</TableHead>
                   <TableHead className="text-muted-foreground">Name</TableHead>
                   <TableHead className="text-muted-foreground">Email</TableHead>
                   <TableHead className="text-muted-foreground">Phone</TableHead>
                   <TableHead className="text-muted-foreground">Budget</TableHead>
                   <TableHead className="text-muted-foreground">Date</TableHead>
-                  <TableHead className="text-muted-foreground w-20"></TableHead>
+                  <TableHead className="text-muted-foreground w-10"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {paginatedInquiries.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center py-12 text-muted-foreground">
+                    <TableCell colSpan={8} className="text-center py-12 text-muted-foreground">
                       {showArchived ? "No archived inquiries" : "No inquiries yet"}
                     </TableCell>
                   </TableRow>
@@ -505,11 +558,22 @@ const Admin = () => {
                     <>
                       <TableRow
                         key={inq.id}
-                        className="border-border cursor-pointer hover:bg-muted/30 transition-colors"
+                        className={`border-border cursor-pointer hover:bg-muted/30 transition-colors ${!inq.read ? "bg-white/[0.02]" : ""}`}
                         onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
                       >
+                        <TableCell onClick={(e) => e.stopPropagation()}>
+                          <input
+                            type="checkbox"
+                            checked={selectedIds.has(inq.id)}
+                            onChange={() => toggleSelect(inq.id)}
+                            className="w-3.5 h-3.5 rounded border-white/20 bg-white/5 accent-primary cursor-pointer"
+                          />
+                        </TableCell>
                         <TableCell>{renderTypeBadge(inq)}</TableCell>
-                        <TableCell className="font-medium">{inq.name}</TableCell>
+                        <TableCell className="font-medium">
+                          {inq.name}
+                          {!inq.read && <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary ml-2" />}
+                        </TableCell>
                         <TableCell className="text-muted-foreground">{inq.email}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.phone || " - "}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.budget || " - "}</TableCell>
@@ -517,27 +581,16 @@ const Admin = () => {
                           {format(parseISO(inq.created_at), "MMM d, HH:mm")}
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-1">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-7 w-7 p-0 text-muted-foreground hover:text-foreground"
-                              title={inq.archived ? "Unarchive" : "Archive"}
-                              onClick={(e) => { e.stopPropagation(); handleArchive(inq.id); }}
-                            >
-                              <Archive className="w-3.5 h-3.5" />
-                            </Button>
-                            {expandedId === inq.id ? (
-                              <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                            ) : (
-                              <ChevronDown className="w-4 h-4 text-muted-foreground" />
-                            )}
-                          </div>
+                          {expandedId === inq.id ? (
+                            <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                          )}
                         </TableCell>
                       </TableRow>
                       {expandedId === inq.id && (
                         <TableRow key={`${inq.id}-detail`} className="border-border">
-                          <TableCell colSpan={7} className="bg-muted/10 px-6 py-4">
+                          <TableCell colSpan={8} className="bg-muted/10 px-6 py-4">
                             <div className="space-y-3 text-sm">
                               <div className="flex items-start gap-2">
                                 <Mail className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
@@ -588,13 +641,21 @@ const Admin = () => {
               paginatedInquiries.map((inq) => (
                 <div
                   key={inq.id}
-                  className="p-4 cursor-pointer active:bg-muted/20 transition-colors"
+                  className={`p-4 cursor-pointer active:bg-muted/20 transition-colors ${!inq.read ? "bg-white/[0.02]" : ""}`}
                   onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.has(inq.id)}
+                      onChange={() => toggleSelect(inq.id)}
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-3.5 h-3.5 rounded border-white/20 bg-white/5 accent-primary cursor-pointer mt-1 shrink-0"
+                    />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium text-sm truncate">{inq.name}</span>
+                        {!inq.read && <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary shrink-0" />}
                         <Badge variant="outline" className="text-[10px] border-border shrink-0">
                           {inq.type === "contact" ? "Message" : inq.type === "cal_booking" ? "Calendar" : inq.type === "playpack" ? "Magnet" : "Demo"}
                         </Badge>
@@ -604,26 +665,15 @@ const Admin = () => {
                         {format(parseISO(inq.created_at), "MMM d, HH:mm")}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1 shrink-0 mt-1">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 w-7 p-0 text-muted-foreground hover:text-foreground"
-                        title={inq.archived ? "Unarchive" : "Archive"}
-                        onClick={(e) => { e.stopPropagation(); handleArchive(inq.id); }}
-                      >
-                        <Archive className="w-3.5 h-3.5" />
-                      </Button>
-                      {expandedId === inq.id ? (
-                        <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4 text-muted-foreground" />
-                      )}
-                    </div>
+                    {expandedId === inq.id ? (
+                      <ChevronUp className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
+                    )}
                   </div>
 
                   {expandedId === inq.id && (
-                    <div className="mt-3 pt-3 border-t border-white/10 space-y-2 text-sm">
+                    <div className="mt-3 pt-3 border-t border-white/10 space-y-2 text-sm ml-6">
                       {inq.phone && (
                         <div className="flex items-center gap-2">
                           <Phone className="w-3.5 h-3.5 text-muted-foreground shrink-0" />

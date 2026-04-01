@@ -64,23 +64,25 @@ Deno.serve(async (req) => {
       .filter(Boolean)
       .join("\n");
 
-    // Insert into inquiries
+    // Only insert into inquiries for BOOKING_REQUESTED to avoid double-counting
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { error } = await supabase.from("inquiries").insert({
-      name,
-      email,
-      phone,
-      message,
-      budget: budgetStr || null,
-      type: "cal_booking",
-      source_page: "/book-a-call",
-    });
+    if (triggerEvent === "BOOKING_REQUESTED") {
+      const { error } = await supabase.from("inquiries").insert({
+        name,
+        email,
+        phone,
+        message,
+        budget: budgetStr || null,
+        type: "cal_booking",
+        source_page: "/book-a-call",
+      });
 
-    if (error) {
-      console.error("Failed to insert inquiry:", error);
+      if (error) {
+        console.error("Failed to insert inquiry:", error);
+      }
     }
 
     // Send Slack notification

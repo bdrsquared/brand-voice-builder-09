@@ -87,10 +87,10 @@ Deno.serve(async (req) => {
     // Use Bot API for interactive messages, webhook for simple ones
     const isRequested = triggerEvent === "BOOKING_REQUESTED";
     const SLACK_BOT_TOKEN = Deno.env.get("SLACK_BOT_TOKEN");
-    const SLACK_CHANNEL_ID = Deno.env.get("SLACK_CHANNEL_ID");
+    const SLACK_LEADS_CHANNEL_ID = "C050700QNLV";
     const SLACK_WEBHOOK_URL = Deno.env.get("SLACK_WEBHOOK_URL");
 
-    if (SLACK_BOT_TOKEN && SLACK_CHANNEL_ID || SLACK_WEBHOOK_URL) {
+    if (SLACK_BOT_TOKEN && SLACK_LEADS_CHANNEL_ID || SLACK_WEBHOOK_URL) {
       try {
         const slackBlocks: any[] = [
           {
@@ -175,7 +175,7 @@ Deno.serve(async (req) => {
         });
 
         // Use Bot API when we have interactive buttons, webhook otherwise
-        if (isRequested && bookingUid && SLACK_BOT_TOKEN && SLACK_CHANNEL_ID) {
+        if (isRequested && bookingUid && SLACK_BOT_TOKEN && SLACK_LEADS_CHANNEL_ID) {
           const slackRes = await fetch("https://slack.com/api/chat.postMessage", {
             method: "POST",
             headers: {
@@ -183,7 +183,7 @@ Deno.serve(async (req) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              channel: SLACK_CHANNEL_ID,
+              channel: SLACK_LEADS_CHANNEL_ID,
               blocks: slackBlocks,
               text: `📅 New booking request from ${name} (${email})`,
             }),

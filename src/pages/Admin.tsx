@@ -37,6 +37,8 @@ const Admin = () => {
   const [showArchived, setShowArchived] = useState(false);
   const [insightsSubTab, setInsightsSubTab] = useState<"leads" | "pageviews">("leads");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [actionsOpen, setActionsOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {

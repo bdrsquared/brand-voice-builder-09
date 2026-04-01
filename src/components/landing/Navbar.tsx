@@ -50,7 +50,7 @@ const caseStudies = [
     brand: "IG",
     title: "The Art of Investing",
     description: "How IG used podcasting to make complex financial topics accessible and engaging for a broad audience.",
-    image: caseIgOrigami,
+    image: caseIgFirefly,
     stats: { impressions: "103K", pipeline: "2K+" },
     locationType: "On Location" as const,
     slug: "the-art-of-investing",

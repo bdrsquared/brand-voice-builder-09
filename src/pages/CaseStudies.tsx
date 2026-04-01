@@ -77,7 +77,7 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: index * 0.08 }}
       >
-        <div className="aspect-video overflow-hidden">
+        <div className="aspect-[4/3] overflow-hidden">
           {study.image && (
             <img
               src={study.image}

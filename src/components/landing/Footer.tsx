@@ -18,7 +18,7 @@ const Footer = () => {
           <div>
             <img src={logo} alt="Earworm" className="h-5 mb-6 brightness-0 invert" />
             <p className="text-sm text-white/60 font-body leading-relaxed mb-8 max-w-xs">
-              A full-service podcast agency, delivering high-quality content, growth &amp; consultancy.
+              We turn video podcasts into consistent, high-quality content that builds authority and drives pipeline.
             </p>
 
             <div className="space-y-6 text-sm text-white/50 font-body">

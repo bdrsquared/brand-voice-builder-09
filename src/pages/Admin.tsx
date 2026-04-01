@@ -86,18 +86,66 @@ const Admin = () => {
     if (data) setPageViews(data);
   };
 
-  const handleArchive = async (id: string) => {
-    const inquiry = inquiries.find((i) => i.id === id);
-    if (!inquiry) return;
-    const newArchived = !inquiry.archived;
+  const handleBulkArchive = async () => {
+    if (selectedIds.size === 0) return;
+    const ids = Array.from(selectedIds);
+    const newArchived = !showArchived; // archive if viewing active, unarchive if viewing archived
     const { error } = await supabase
       .from("inquiries")
       .update({ archived: newArchived } as any)
-      .eq("id", id);
+      .in("id", ids);
     if (!error) {
       setInquiries((prev) =>
-        prev.map((i) => (i.id === id ? { ...i, archived: newArchived } : i))
+        prev.map((i) => (selectedIds.has(i.id) ? { ...i, archived: newArchived } : i))
       );
+      setSelectedIds(new Set());
+    }
+    setActionsOpen(false);
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedIds.size === 0) return;
+    const ids = Array.from(selectedIds);
+    const { error } = await supabase
+      .from("inquiries")
+      .delete()
+      .in("id", ids);
+    if (!error) {
+      setInquiries((prev) => prev.filter((i) => !selectedIds.has(i.id)));
+      setSelectedIds(new Set());
+    }
+    setActionsOpen(false);
+  };
+
+  const handleBulkMarkRead = async () => {
+    if (selectedIds.size === 0) return;
+    const ids = Array.from(selectedIds);
+    const { error } = await supabase
+      .from("inquiries")
+      .update({ read: true } as any)
+      .in("id", ids);
+    if (!error) {
+      setInquiries((prev) =>
+        prev.map((i) => (selectedIds.has(i.id) ? { ...i, read: true } : i))
+      );
+      setSelectedIds(new Set());
+    }
+    setActionsOpen(false);
+  };
+
+  const toggleSelect = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === paginatedInquiries.length) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(paginatedInquiries.map((i) => i.id)));
     }
   };
 

@@ -175,7 +175,7 @@ Deno.serve(async (req) => {
         });
 
         // Use Bot API when we have interactive buttons, webhook otherwise
-        if (isRequested && bookingUid && SLACK_BOT_TOKEN && SLACK_CHANNEL_ID) {
+        if (isRequested && bookingUid && SLACK_BOT_TOKEN && SLACK_LEADS_CHANNEL_ID) {
           const slackRes = await fetch("https://slack.com/api/chat.postMessage", {
             method: "POST",
             headers: {

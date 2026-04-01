@@ -1,38 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
 import LogoWall from "./LogoWall";
 import DotsBackground from "./DotsBackground";
-
-const ROTATING_WORDS = ["growth", "revenue", "change", "impact", "retention"];
 
 interface HeroProps {
   variant?: "classic" | "dots";
 }
 
 const Hero = ({ variant = "classic" }: HeroProps) => {
-  const [displayText, setDisplayText] = useState("");
-
-  const typeWriter = useCallback((text: string, i: number, onDone: () => void) => {
-    if (i < text.length) {
-      setDisplayText(text.substring(0, i + 1));
-      setTimeout(() => typeWriter(text, i + 1, onDone), 120);
-    } else {
-      setTimeout(onDone, 840);
-    }
-  }, []);
-
-  const startAnimation = useCallback((i: number) => {
-    if (i >= ROTATING_WORDS.length) {
-      setTimeout(() => startAnimation(0), 2000);
-      return;
-    }
-    typeWriter(ROTATING_WORDS[i], 0, () => startAnimation(i + 1));
-  }, [typeWriter]);
-
-  useEffect(() => {
-    startAnimation(0);
-  }, [startAnimation]);
 
   return (
     <section className="relative pt-28 pb-8 sm:pt-36 sm:pb-28 px-6">
@@ -63,7 +38,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           drives
           <br className="hidden sm:block" />
           <span className="sm:hidden"> </span>
-          <span className="text-white">{displayText}<span className="animate-pulse">|</span></span>
+          <span className="text-white">growth</span>
         </motion.h1>
 
         <motion.p

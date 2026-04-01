@@ -21,6 +21,7 @@ type Inquiry = {
   created_at: string;
   source_page: string | null;
   archived: boolean;
+  read: boolean;
 };
 
 const ITEMS_PER_PAGE = 20;

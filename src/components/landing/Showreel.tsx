@@ -55,25 +55,25 @@ const Showreel = () => {
   const subY = useTransform(scrollYProgress, [0.18, 0.25], [15, 0]);
 
   return (
-    <section ref={sectionRef} className="relative py-20 sm:py-28 px-6 pb-0">
+    <section ref={sectionRef} className="relative py-24 sm:py-28 px-4 sm:px-6 pb-0">
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <div className="relative text-left sm:text-center mb-12 sm:mb-16">
+        <div className="relative text-left sm:text-center mb-14 sm:mb-16">
           {/* Brand gradient blobs behind the title */}
           <div className="absolute inset-0 pointer-events-none -z-10" aria-hidden>
-            <div className="absolute top-1/2 left-1/2 -translate-x-[70%] -translate-y-[60%] w-[300px] h-[300px] sm:w-[450px] sm:h-[400px] rounded-full bg-[#6359EA] opacity-[0.18] blur-[100px]" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-[30%] -translate-y-[40%] w-[280px] h-[280px] sm:w-[400px] sm:h-[350px] rounded-full bg-[#1CFA76] opacity-[0.15] blur-[100px]" />
-            <div className="absolute top-1/2 left-1/2 translate-x-[10%] -translate-y-[50%] w-[250px] h-[250px] sm:w-[350px] sm:h-[300px] rounded-full bg-[#FFB347] opacity-[0.15] blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-[70%] -translate-y-[60%] w-[280px] h-[280px] sm:w-[450px] sm:h-[400px] rounded-full bg-[#6359EA] opacity-[0.22] sm:opacity-[0.18] blur-[80px] sm:blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-[30%] -translate-y-[40%] w-[260px] h-[260px] sm:w-[400px] sm:h-[350px] rounded-full bg-[#1CFA76] opacity-[0.18] sm:opacity-[0.15] blur-[80px] sm:blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 translate-x-[10%] -translate-y-[50%] w-[240px] h-[240px] sm:w-[350px] sm:h-[300px] rounded-full bg-[#FFB347] opacity-[0.18] sm:opacity-[0.15] blur-[80px] sm:blur-[100px]" />
           </div>
 
           <motion.span
-            className="inline-flex items-center gap-2 font-medium text-sm mb-6 text-light-text-tertiary"
+            className="inline-flex items-center gap-2 font-medium text-sm mb-5 sm:mb-6 text-light-text-tertiary"
             style={{ opacity: useTransform(scrollYProgress, [0.02, 0.08], [0, 1]) }}
           >
             ● Working with businesses worldwide
           </motion.span>
 
-          <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-medium leading-[0.95] tracking-tight text-light-text-primary">
+          <h2 className="text-[11vw] sm:text-5xl md:text-7xl lg:text-8xl font-heading font-medium leading-[0.95] tracking-tight text-light-text-primary">
             <ScrollRevealText text="Check out our" scrollProgress={scrollYProgress} startAt={0.03} endAt={0.19} />
             <br />
             <ScrollRevealText text="showreel" scrollProgress={scrollYProgress} startAt={0.1} endAt={0.26} />

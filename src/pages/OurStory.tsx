@@ -148,78 +148,11 @@ const OurStory = () => {
               Our brilliant team
             </motion.h2>
             <motion.p variants={fadeUp} custom={2} className="text-base sm:text-lg text-text-secondary font-body mt-3 max-w-xl mx-auto">
-              A small leadership team, supported by producers, editors, and specialists across every project.
+              Coming soon.
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {team.map((member, i) => {
-              const gradients = [
-                "radial-gradient(ellipse at 10% 90%, hsla(145,80%,55%,0.08) 0%, transparent 50%), radial-gradient(ellipse at 90% 20%, hsla(250,80%,65%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, hsla(35,90%,60%,0.04) 0%, transparent 60%)",
-                "radial-gradient(ellipse at 85% 85%, hsla(35,90%,60%,0.08) 0%, transparent 50%), radial-gradient(ellipse at 15% 30%, hsla(145,80%,55%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 60% 10%, hsla(250,80%,65%,0.05) 0%, transparent 55%)",
-                "radial-gradient(ellipse at 20% 15%, hsla(250,80%,65%,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, hsla(35,90%,60%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 40% 90%, hsla(145,80%,55%,0.05) 0%, transparent 55%)",
-                "radial-gradient(ellipse at 70% 10%, hsla(145,80%,55%,0.07) 0%, transparent 45%), radial-gradient(ellipse at 10% 80%, hsla(250,80%,65%,0.07) 0%, transparent 50%), radial-gradient(ellipse at 90% 60%, hsla(35,90%,60%,0.05) 0%, transparent 55%)",
-                "radial-gradient(ellipse at 90% 90%, hsla(250,80%,65%,0.08) 0%, transparent 50%), radial-gradient(ellipse at 30% 10%, hsla(35,90%,60%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 10% 60%, hsla(145,80%,55%,0.05) 0%, transparent 55%)",
-                "radial-gradient(ellipse at 50% 5%, hsla(35,90%,60%,0.08) 0%, transparent 45%), radial-gradient(ellipse at 5% 50%, hsla(145,80%,55%,0.06) 0%, transparent 50%), radial-gradient(ellipse at 85% 80%, hsla(250,80%,65%,0.05) 0%, transparent 55%)",
-                "radial-gradient(ellipse at 15% 70%, hsla(145,80%,55%,0.07) 0%, transparent 50%), radial-gradient(ellipse at 75% 15%, hsla(250,80%,65%,0.06) 0%, transparent 45%), radial-gradient(ellipse at 50% 90%, hsla(35,90%,60%,0.06) 0%, transparent 55%)",
-              ];
-              return (
-              <motion.div
-                key={member.name}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
-                custom={i}
-                variants={fadeUp}
-                className="group relative rounded-2xl overflow-hidden backdrop-blur-2xl bg-white/[0.04] border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] p-5 sm:p-6 transition-all duration-300 hover:bg-white/[0.07] hover:border-white/[0.15] hover:-translate-y-0.5 flex gap-5"
-                style={{ backgroundImage: gradients[i % gradients.length] }}
-              >
-                {/* Square avatar */}
-                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden ring-1 ring-white/[0.08] group-hover:ring-white/[0.15] transition-all flex-shrink-0">
-                  {member.avatar ? (
-                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full bg-white/[0.06] flex items-center justify-center">
-                      <span className="text-2xl sm:text-3xl font-heading text-white/30">
-                        {member.name.split(" ").map(n => n[0]).join("")}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-2 mb-0.5">
-                    <div>
-                      <h3 className="text-sm font-medium text-text-primary leading-tight">{member.name}</h3>
-                      <p className="text-xs text-primary/80 font-body">{member.role}</p>
-                    </div>
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <a
-                        href={member.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-tertiary/60 hover:text-primary hover:border-white/[0.12] transition-all"
-                      >
-                        <Linkedin className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-text-secondary/80 font-body leading-relaxed mb-2 mt-1">
-                    {member.about}
-                  </p>
-
-                  {/* Fun fact */}
-                  <div className="rounded-lg bg-white/[0.03] border border-white/[0.05] px-3 py-2 mt-auto">
-                    <p className="text-[10px] uppercase tracking-wider text-text-tertiary/60 font-body mb-0.5">Fun fact</p>
-                    <p className="text-xs text-text-secondary/70 font-body">{member.funFact}</p>
-                  </div>
-                </div>
-              </motion.div>
-              );
-            })}
-          </div>
+          {/* ── Team cards hidden — data preserved in `team` array above for easy restoration ── */}
         </div>
       </section>
 

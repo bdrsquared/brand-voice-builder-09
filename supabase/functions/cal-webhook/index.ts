@@ -87,7 +87,7 @@ Deno.serve(async (req) => {
     // Use Bot API for interactive messages, webhook for simple ones
     const isRequested = triggerEvent === "BOOKING_REQUESTED";
     const SLACK_BOT_TOKEN = Deno.env.get("SLACK_BOT_TOKEN");
-    const SLACK_CHANNEL_ID = Deno.env.get("SLACK_CHANNEL_ID");
+    const SLACK_LEADS_CHANNEL_ID = "C050700QNLV";
     const SLACK_WEBHOOK_URL = Deno.env.get("SLACK_WEBHOOK_URL");
 
     if (SLACK_BOT_TOKEN && SLACK_CHANNEL_ID || SLACK_WEBHOOK_URL) {

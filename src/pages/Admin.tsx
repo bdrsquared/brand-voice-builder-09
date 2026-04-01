@@ -573,7 +573,7 @@ const Admin = () => {
                       <TableRow
                         key={inq.id}
                         className={`border-border cursor-pointer hover:bg-muted/30 transition-colors ${!inq.read ? "bg-white/[0.02]" : ""}`}
-                        onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
+                        onClick={() => handleExpand(inq)}
                       >
                         <TableCell onClick={(e) => e.stopPropagation()}>
                           <input

@@ -277,6 +277,24 @@ const Admin = () => {
           <AdminPagesManager />
         ) : (
           <>
+        {/* Sub-tabs: Leads / Page Views */}
+        <div className="flex gap-1 bg-white/5 rounded-lg p-0.5 w-fit">
+          <button
+            onClick={() => setInsightsSubTab("leads")}
+            className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors flex items-center gap-1.5 ${insightsSubTab === "leads" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+          >
+            <BarChart3 className="w-3.5 h-3.5" />Leads
+          </button>
+          <button
+            onClick={() => setInsightsSubTab("pageviews")}
+            className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors flex items-center gap-1.5 ${insightsSubTab === "pageviews" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+          >
+            <Eye className="w-3.5 h-3.5" />Page Views
+          </button>
+        </div>
+
+        {insightsSubTab === "leads" ? (
+          <>
         {/* Stats */}
         <div className="grid grid-cols-3 gap-2 sm:gap-4">
           {[
@@ -330,15 +348,27 @@ const Admin = () => {
             </ResponsiveContainer>
           </div>
         </div>
+          </>
+        ) : (
+          <>
+        {/* Page Views Stats */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-4">
+          {[
+            { label: "Today", value: pvToday },
+            { label: "This Week", value: pvWeek },
+            { label: "Total (90d)", value: pageViews.length },
+          ].map((stat) => (
+            <div key={stat.label} className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-3 sm:p-5">
+              <p className="text-xs sm:text-sm text-muted-foreground">{stat.label}</p>
+              <p className="text-xl sm:text-3xl font-semibold mt-1">{stat.value}</p>
+            </div>
+          ))}
+        </div>
 
         {/* Page Views Chart */}
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-6">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <Eye className="w-4 h-4 text-muted-foreground" />
-              <h2 className="text-sm font-medium text-muted-foreground">Page Views</h2>
-              <span className="text-xs text-muted-foreground ml-2">Today: {pvToday} · This week: {pvWeek}</span>
-            </div>
+            <h2 className="text-sm font-medium text-muted-foreground">Page Views Over Time</h2>
             <div className="flex gap-1">
               {[7, 14, 30].map((d) => (
                 <button
@@ -374,6 +404,8 @@ const Admin = () => {
             </ResponsiveContainer>
           </div>
         </div>
+          </>
+        )}
 
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
           {/* Toggle active / archived */}

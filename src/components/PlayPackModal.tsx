@@ -123,7 +123,7 @@ const PlayPackModal = ({ open, onClose }: PlayPackModalProps) => {
                     >
                       <h3 className="text-xl font-heading text-foreground mb-1">Request the Play Pack</h3>
                       <p className="text-sm text-muted-foreground font-body mb-6">
-                        18+ spreadsheets, guides, and tools we use with our clients to plan, launch, and grow video podcasts.
+                        24+ spreadsheets, guides, and tools we use with our clients to plan, launch, and grow video podcasts.
                       </p>
 
                       <div className="space-y-4">

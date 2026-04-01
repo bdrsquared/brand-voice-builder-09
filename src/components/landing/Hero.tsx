@@ -38,7 +38,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           drives
           <br className="hidden sm:block" />
           <span className="sm:hidden"> </span>
-          <span className="text-white">{displayText}<span className="animate-pulse">|</span></span>
+          <span className="text-white">growth</span>
         </motion.h1>
 
         <motion.p

@@ -38,13 +38,13 @@ const servicesList = [
 
 const caseStudies = [
   {
-    brand: "Polly",
-    title: "Pretty Covered",
-    description: "How Polly used podcasting to connect with Gen Z audiences through authentic conversations.",
-    image: casePrettyCovered,
-    stats: { impressions: "1.2M", pipeline: "500+" },
+    brand: "Pulsetto",
+    title: "No Stress",
+    description: "How Pulsetto used podcasting to reframe their brand from a device company to a wellness authority.",
+    image: caseNoStress,
+    stats: { impressions: "370K+", pipeline: "67K+" },
     locationType: "On Location" as const,
-    slug: "pretty-covered",
+    slug: "no-stress",
   },
   {
     brand: "IG",

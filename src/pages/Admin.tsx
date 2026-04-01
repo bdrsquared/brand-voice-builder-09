@@ -330,7 +330,50 @@ const Admin = () => {
           </div>
         </div>
 
-        {/* Inquiries List */}
+        {/* Page Views Chart */}
+        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Eye className="w-4 h-4 text-muted-foreground" />
+              <h2 className="text-sm font-medium text-muted-foreground">Page Views</h2>
+              <span className="text-xs text-muted-foreground ml-2">Today: {pvToday} · This week: {pvWeek}</span>
+            </div>
+            <div className="flex gap-1">
+              {[7, 14, 30].map((d) => (
+                <button
+                  key={d}
+                  onClick={() => setPvTimeRange(d)}
+                  className={`px-3 py-1 text-xs rounded-md transition-colors ${
+                    pvTimeRange === d
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {d}d
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="h-48">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={pvChartData}>
+                <XAxis dataKey="date" tick={{ fill: "hsl(0 0% 50%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: "hsl(0 0% 50%)", fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
+                <Tooltip
+                  contentStyle={{
+                    background: "hsl(0 0% 7%)",
+                    border: "1px solid hsl(0 0% 15%)",
+                    borderRadius: 8,
+                    color: "hsl(0 0% 95%)",
+                    fontSize: 12,
+                  }}
+                />
+                <Bar dataKey="count" fill="hsl(145 80% 55%)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
           {/* Toggle active / archived */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">

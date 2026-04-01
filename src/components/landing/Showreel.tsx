@@ -71,9 +71,9 @@ const Showreel = () => {
             ● Working with businesses worldwide
           </motion.span>
 
-          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-medium leading-[0.95] tracking-tight text-light-text-primary">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-medium leading-[0.95] tracking-tight text-light-text-primary">
             <ScrollRevealText text="Check out our" scrollProgress={scrollYProgress} startAt={0.03} endAt={0.19} />
-            <br className="hidden sm:block" />
+            <br />
             <ScrollRevealText text="showreel" scrollProgress={scrollYProgress} startAt={0.1} endAt={0.26} />
           </h2>
 

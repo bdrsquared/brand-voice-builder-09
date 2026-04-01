@@ -305,7 +305,7 @@ const Admin = () => {
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium text-sm truncate">{inq.name}</span>
                         <Badge variant="outline" className="text-[10px] border-border shrink-0">
-                          {inq.type === "contact" ? "Message" : "Demo"}
+                          {inq.type === "contact" ? "Message" : inq.type === "cal_booking" ? "Calendar" : "Demo"}
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground truncate">{inq.email}</p>

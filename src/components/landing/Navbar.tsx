@@ -587,7 +587,7 @@ const Navbar = () => {
                         <h5 className="text-sm font-heading font-bold text-white mb-2">2026 Video Podcast Play Pack</h5>
                         <p className="text-xs text-white/50 font-body leading-relaxed mb-4">A curated set of 18+ spreadsheets, guides, and tools we use with our clients to plan, launch, and grow video podcasts that drive pipeline.</p>
                         <button
-                          onClick={() => { setMegaOpen(null); setContactModalOpen(true); }}
+                          onClick={() => { setMegaOpen(null); setPlayPackModalOpen(true); }}
                           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all"
                         >
                           Request access

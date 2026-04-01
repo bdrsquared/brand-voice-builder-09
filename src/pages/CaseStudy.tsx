@@ -8,6 +8,12 @@ import caseIgBtsControl from "@/assets/case-ig-bts-control.jpg";
 import caseIgLogoArt from "@/assets/case-ig-logo-art.png";
 import caseIgMarketChaos from "@/assets/case-ig-market-chaos.png";
 import caseIgOrigami from "@/assets/case-ig-origami.jpg";
+import caseNostressHero from "@/assets/case-nostress-hero.png";
+import caseNostressBtsWide from "@/assets/case-nostress-bts-wide.jpg";
+import caseNostressBtsGuest from "@/assets/case-nostress-bts-guest.jpg";
+import caseNostressBtsHost from "@/assets/case-nostress-bts-host.jpg";
+import caseNostressBranded from "@/assets/case-nostress-branded.png";
+import caseNostressSpeaker from "@/assets/case-nostress-speaker.png";
 
 const CaseStudyHero = lazy(() => import("@/components/case-study/CaseStudyHero"));
 const CaseStudyImpact = lazy(() => import("@/components/case-study/CaseStudyImpact"));
@@ -127,6 +133,47 @@ const caseStudies: Record<string, CaseStudyData> = {
       challenge: "IG needed to cut through market noise and make complex financial topics accessible, engaging, and relevant to a broad audience.",
       solution: "Earworm developed a video-first podcast strategy focused on timely macro themes, supported by full-service production, guest coaching, and a consistent social distribution engine.",
       result: "The show generated over 100K downloads, strong YouTube performance, and high engagement rates, successfully positioning IG as a leading voice in modern investing.",
+    },
+  },
+  "no-stress": {
+    slug: "no-stress",
+    showName: "No Stress",
+    clientName: "Pulsetto",
+    tagline: "How Pulsetto used podcasting to reframe their brand from a wellness gadget into a stress resilience platform built for high performers.",
+    heroImage: caseNostressHero,
+    heroObjectPosition: "center 40%",
+    stats: [
+      { label: "YouTube views across 3 episodes", value: "370K+" },
+      { label: "Audio consumption rate", value: "66%" },
+      { label: "Combined guest reach", value: "67K+" },
+    ],
+    impacts: [
+      { title: "Reframed the brand around stress fitness", description: "Helped Pulsetto turn its product story into a broader stress fitness platform, repositioning from a wellness gadget into a tool for training resilience." },
+      { title: "Built a show for high performers under pressure", description: "Created a show built for athletes, founders, busy professionals and people recovering from burnout — anyone training their stress response." },
+      { title: "Established a repeatable content engine", description: "Delivered a scalable format combining video episodes, audio distribution, social teasers, and branded thumbnail systems from every recording." },
+      { title: "Elevated Pulsetto's visual identity", description: "Gave Pulsetto a more premium and consistent visual identity through dynamic guest-led thumbnails, brand green motion backgrounds, and a text-led logo system." },
+    ],
+    episodes: [
+      { thumbnail: caseNostressSpeaker, title: "Building Stress Resilience Like a Muscle", guest: "Expert interview", duration: "52 min" },
+      { thumbnail: caseNostressBranded, title: "Tired But Wired? The Real Reason You Cannot Switch Off", guest: "Science-backed conversation", duration: "48 min" },
+      { thumbnail: caseNostressHero, title: "Stress Resilience: The Real Edge in Competitive Sport", guest: "Dr Josephine Perry", duration: "55 min" },
+    ],
+    approach: [
+      { title: "Editorial strategy", description: "The show was built around a clear editorial idea: stress is trainable. Earworm and Pulsetto framed the podcast around practical, science-backed conversations that help listeners become calmer and more resilient under pressure." },
+      { title: "Production format", description: "Episodes were structured as 45–60 minute in-person interviews, recorded at MediaWorkHouse in Cricklewood, with a host-led conversation format and clear guest briefings." },
+      { title: "Content approach", description: "The production approach blended expert guests, science-backed talking points, and actionable listener takeaways, making the show useful for both performance-focused and wellness-focused audiences." },
+      { title: "Visual identity", description: "The visual package was designed to feel premium and recognisable, using podcast-shot thumbnails, Pulsetto's brand green, 3D pulse backgrounds, and a simplified text-led logo treatment." },
+    ],
+    btsImages: [
+      caseNostressBtsWide,
+      caseNostressBtsGuest,
+      caseNostressBtsHost,
+      caseNostressBranded,
+    ],
+    summary: {
+      challenge: "Pulsetto needed a content platform that could move the brand beyond generic wellness messaging and position it around a more ownable, expert-led conversation on stress resilience, recovery, and nervous system regulation.",
+      solution: "We developed No Stress as a branded video-first and audio podcast, pairing expert guests with a consistent 'stress fitness' narrative, in-person studio production, strong episode briefing, and a premium visual identity optimised for YouTube and social distribution.",
+      result: "The three highlighted YouTube episodes total 370K+ views with a 66% consumption rate, showing strong early engagement. The content gives Pulsetto a reusable brand platform for ongoing expert-led storytelling.",
     },
   },
 };

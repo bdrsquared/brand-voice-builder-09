@@ -4,7 +4,13 @@ import logo from "@/assets/earworm-logo.webp";
 
 const Footer = () => {
   return (
-    <footer className="bg-[hsl(0,0%,8%)] text-white pt-16 pb-8 px-6">
+    <footer>
+      {/* Rounded section divider */}
+      <div className="relative z-10" style={{ backgroundColor: 'hsl(0,0%,8%)' }}>
+        <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+      </div>
+
+      <div className="bg-[hsl(0,0%,8%)] text-white pt-16 pb-8 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Main grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-14">
@@ -86,6 +92,7 @@ const Footer = () => {
             Admin
           </Link>
         </div>
+      </div>
       </div>
     </footer>
   );

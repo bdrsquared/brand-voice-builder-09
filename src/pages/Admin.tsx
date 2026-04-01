@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye, Trash2, CheckCircle, MoreHorizontal } from "lucide-react";
+import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye, Trash2, CheckCircle, MoreHorizontal, BellDot } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
@@ -146,6 +146,20 @@ const Admin = () => {
       setSelectedIds(new Set());
     } else {
       setSelectedIds(new Set(paginatedInquiries.map((i) => i.id)));
+    }
+  };
+
+  const handleExpand = async (inq: Inquiry) => {
+    const isExpanding = expandedId !== inq.id;
+    setExpandedId(isExpanding ? inq.id : null);
+    if (isExpanding && !inq.read) {
+      await supabase
+        .from("inquiries")
+        .update({ read: true } as any)
+        .eq("id", inq.id);
+      setInquiries((prev) =>
+        prev.map((i) => (i.id === inq.id ? { ...i, read: true } : i))
+      );
     }
   };
 
@@ -559,7 +573,7 @@ const Admin = () => {
                       <TableRow
                         key={inq.id}
                         className={`border-border cursor-pointer hover:bg-muted/30 transition-colors ${!inq.read ? "bg-white/[0.02]" : ""}`}
-                        onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
+                        onClick={() => handleExpand(inq)}
                       >
                         <TableCell onClick={(e) => e.stopPropagation()}>
                           <input
@@ -571,8 +585,10 @@ const Admin = () => {
                         </TableCell>
                         <TableCell>{renderTypeBadge(inq)}</TableCell>
                         <TableCell className="font-medium">
-                          {inq.name}
-                          {!inq.read && <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary ml-2" />}
+                          <span className="inline-flex items-center gap-1.5">
+                            {!inq.read && <BellDot className="w-3.5 h-3.5 text-primary shrink-0" />}
+                            {inq.name}
+                          </span>
                         </TableCell>
                         <TableCell className="text-muted-foreground">{inq.email}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.phone || " - "}</TableCell>
@@ -642,7 +658,7 @@ const Admin = () => {
                 <div
                   key={inq.id}
                   className={`p-4 cursor-pointer active:bg-muted/20 transition-colors ${!inq.read ? "bg-white/[0.02]" : ""}`}
-                  onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
+                  onClick={() => handleExpand(inq)}
                 >
                   <div className="flex items-start gap-3">
                     <input
@@ -655,7 +671,7 @@ const Admin = () => {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium text-sm truncate">{inq.name}</span>
-                        {!inq.read && <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary shrink-0" />}
+                        {!inq.read && <BellDot className="w-3.5 h-3.5 text-primary shrink-0" />}
                         <Badge variant="outline" className="text-[10px] border-border shrink-0">
                           {inq.type === "contact" ? "Message" : inq.type === "cal_booking" ? "Calendar" : inq.type === "playpack" ? "Magnet" : "Demo"}
                         </Badge>

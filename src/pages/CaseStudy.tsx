@@ -3,6 +3,11 @@ import { useParams, Navigate } from "react-router-dom";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import casePrettyCoveredHero from "@/assets/case-pretty-covered-hero.jpeg";
+import caseIgHero from "@/assets/case-ig-bts-studio.png";
+import caseIgBtsControl from "@/assets/case-ig-bts-control.jpg";
+import caseIgLogoArt from "@/assets/case-ig-logo-art.png";
+import caseIgMarketChaos from "@/assets/case-ig-market-chaos.png";
+import caseIgOrigami from "@/assets/case-ig-origami.jpg";
 
 const CaseStudyHero = lazy(() => import("@/components/case-study/CaseStudyHero"));
 const CaseStudyImpact = lazy(() => import("@/components/case-study/CaseStudyImpact"));

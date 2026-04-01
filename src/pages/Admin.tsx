@@ -72,6 +72,16 @@ const Admin = () => {
     setLoading(false);
   };
 
+  const fetchPageViews = async () => {
+    const since = subDays(new Date(), 90).toISOString();
+    const { data } = await supabase
+      .from("page_views")
+      .select("page_path, created_at")
+      .gte("created_at", since)
+      .order("created_at", { ascending: false }) as any;
+    if (data) setPageViews(data);
+  };
+
   const handleArchive = async (id: string) => {
     const inquiry = inquiries.find((i) => i.id === id);
     if (!inquiry) return;

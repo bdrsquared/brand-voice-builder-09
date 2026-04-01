@@ -68,7 +68,7 @@ Deno.serve(async (req) => {
       email,
       phone,
       message,
-      type: "calendar",
+      type: "cal_booking",
       source_page: "/book-a-call",
     });
 

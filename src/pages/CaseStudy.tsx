@@ -14,6 +14,12 @@ import caseNostressBtsGuest from "@/assets/case-nostress-bts-guest.jpg";
 import caseNostressBtsHost from "@/assets/case-nostress-bts-host.jpg";
 import caseNostressBranded from "@/assets/case-nostress-branded.png";
 import caseNostressSpeaker from "@/assets/case-nostress-speaker.png";
+import caseSoldoHero from "@/assets/case-soldo-hero.png";
+import caseSoldoHost from "@/assets/case-soldo-host.png";
+import caseSoldoEvent from "@/assets/case-soldo-event.jpg";
+import caseSoldoSkyline from "@/assets/case-soldo-skyline.png";
+import caseSoldoGuest from "@/assets/case-soldo-guest.png";
+import caseSoldoBags from "@/assets/case-soldo-bags.jpg";
 
 const CaseStudyHero = lazy(() => import("@/components/case-study/CaseStudyHero"));
 const CaseStudyImpact = lazy(() => import("@/components/case-study/CaseStudyImpact"));

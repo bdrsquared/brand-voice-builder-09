@@ -58,11 +58,11 @@ const caseStudies = [
   {
     brand: "Soldo",
     title: "The CFO Playbook",
-    description: "Storytelling at scale  -  turning athletes' journeys into binge-worthy audio content.",
+    description: "How Soldo used podcasting to position as a thought leader with CFOs and turn content into qualified pipeline.",
     image: caseCfoPlaybook,
-    stats: { impressions: "2.1M", pipeline: "£3.6M" },
+    stats: { impressions: "750K+", pipeline: "£2M" },
     locationType: "Virtual" as const,
-    slug: null as string | null,
+    slug: "the-cfo-playbook",
   },
 ];
 

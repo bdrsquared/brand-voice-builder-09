@@ -144,13 +144,13 @@ const CaseStudies = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Case studies
           </h2>
-          <a
-            href="#"
+          <Link
+            to="/case-studies"
             className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-text-secondary bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2.5 hover:bg-white/10 hover:text-text-primary transition-colors"
           >
             View All Work
             <ArrowUpRight className="w-4 h-4" />
-          </a>
+          </Link>
         </motion.div>
 
         <motion.p

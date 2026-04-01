@@ -63,7 +63,8 @@ serve(async (req) => {
       // Don't block the Slack notification if DB fails
     }
 
-    const headerText = isContact ? "💬 New Website Message" : "🎙️ New PodPlanner Demo Request";
+    const isPlayPack = type === 'playpack';
+    const headerText = isPlayPack ? "📦 Play Pack Request" : isContact ? "💬 New Website Message" : "🎙️ New PodPlanner Demo Request";
 
     const slackMessage = {
       blocks: [

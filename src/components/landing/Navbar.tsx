@@ -631,6 +631,26 @@ const Navbar = () => {
                     {/* Divider */}
                     <div className="w-px bg-white/10 self-stretch" />
 
+                    {/* Middle column — Play Pack */}
+                    <div className="w-64 shrink-0">
+                      <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4 px-3">Play Pack</h4>
+                      <div className="px-3">
+                        <img src={playbookCover} alt="2026 Video Podcast Play Pack" className="w-full h-auto rounded-lg border border-white/10 mb-4" />
+                        <h5 className="text-sm font-heading font-bold text-white mb-2">2026 Video Podcast Play Pack</h5>
+                        <p className="text-xs text-white/50 font-body leading-relaxed mb-4">A curated set of 18+ spreadsheets, guides, and tools we use with our clients to plan, launch, and grow video podcasts that drive pipeline.</p>
+                        <button
+                          onClick={() => { setMegaOpen(null); setContactModalOpen(true); }}
+                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all"
+                        >
+                          Request access
+                          <ArrowRight className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-px bg-white/10 self-stretch" />
+
                     {/* Right column — Navigation links */}
                     <div className="w-56 shrink-0">
                       <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4 px-3">Explore</h4>

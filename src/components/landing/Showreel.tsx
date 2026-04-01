@@ -3,35 +3,36 @@ import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import showreelThumb from "@/assets/showreel-thumb.webp";
 
-const ScrollRevealText = ({ text, scrollProgress, startAt, endAt }: {
+const ScrollRevealText = ({ text, scrollProgress, startAt, endAt, className = "" }: {
   text: string;
   scrollProgress: any;
   startAt: number;
   endAt: number;
+  className?: string;
 }) => {
   const [progress, setProgress] = useState(0);
   const mapped = useTransform(scrollProgress, [startAt, endAt], [0, 1]);
   useMotionValueEvent(mapped, "change", (v: number) => setProgress(v));
 
   return (
-    <>
+    <span className={className}>
       {text.split("").map((char, i) => {
         const charProgress = Math.min(1, Math.max(0, (progress * text.length - i) / 1.5));
         const isSpace = char === " ";
         return (
           <span
             key={i}
-            className={isSpace ? "" : "inline-block"}
             style={{
               opacity: 0.12 + charProgress * 0.88,
-              transform: `translateY(${(1 - charProgress) * 14}px)`,
+              display: "inline-block",
+              transform: isSpace ? undefined : `translateY(${(1 - charProgress) * 14}px)`,
             }}
           >
             {isSpace ? "\u00A0" : char}
           </span>
         );
       })}
-    </>
+    </span>
   );
 };
 

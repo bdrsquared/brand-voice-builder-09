@@ -585,8 +585,10 @@ const Admin = () => {
                         </TableCell>
                         <TableCell>{renderTypeBadge(inq)}</TableCell>
                         <TableCell className="font-medium">
-                          {inq.name}
-                          {!inq.read && <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary ml-2" />}
+                          <span className="inline-flex items-center gap-1.5">
+                            {!inq.read && <BellDot className="w-3.5 h-3.5 text-primary shrink-0" />}
+                            {inq.name}
+                          </span>
                         </TableCell>
                         <TableCell className="text-muted-foreground">{inq.email}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.phone || " - "}</TableCell>

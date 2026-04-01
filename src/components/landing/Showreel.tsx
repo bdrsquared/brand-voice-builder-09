@@ -91,8 +91,8 @@ const Showreel = () => {
         </div>
 
         <motion.div
-          className="relative rounded-2xl overflow-hidden border border-black/10 shadow-lg will-change-transform"
-          style={{ scale, opacity }}
+          className="relative overflow-hidden will-change-transform"
+          style={{ scale, opacity, y, borderRadius, boxShadow: "0 25px 60px -15px rgba(0,0,0,0.3)" }}
         >
           {/* Mobile: portrait | Desktop: 16:9 */}
           <div className="relative aspect-[3/4] sm:aspect-video">

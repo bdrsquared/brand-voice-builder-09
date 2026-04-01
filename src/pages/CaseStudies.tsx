@@ -124,7 +124,7 @@ const CaseStudiesPage = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-32 sm:pt-40 pb-16 sm:pb-20 px-6 overflow-hidden">
+      <section className="relative pt-32 sm:pt-40 pb-16 sm:pb-20 px-6">
         <DotsBackground />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">

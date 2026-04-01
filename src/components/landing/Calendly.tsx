@@ -60,9 +60,9 @@ const Calendly = () => {
     Cal.ns["30min"]("inline", {
       elementOrSelector: "#my-cal-inline-30min",
       config: { layout: "month_view", useSlotsViewOnSmallScreen: "true", theme: "dark" },
-      calLink: "earworm-accounts-fqzg4l/30min",
+      calLink: "earworm-team-c4bqf8/30min",
     });
-    Cal.ns["30min"]("ui", { hideEventTypeDetails: false, layout: "month_view", theme: "dark", cssVarsPerTheme: { dark: { "cal-bg": "transparent" } } });
+    Cal.ns["30min"]("ui", { theme: "dark", cssVarsPerTheme: { light: { "cal-brand": "#0E0E0E" }, dark: { "cal-brand": "#1CFA76" } }, hideEventTypeDetails: true, layout: "month_view" });
   }, [calLoaded]);
 
   return (

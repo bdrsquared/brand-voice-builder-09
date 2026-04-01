@@ -17,7 +17,6 @@ const caseStudies = [
   {
     title: "Pretty Covered",
     logo: "Polly",
-    logoImage: logoPolly,
     description: "How Polly used podcasting to make life insurance feel human and accessible, generating 485 leads in week one.",
     stats: "158K+ impressions · 485 leads",
     image: casePrettyCovered,
@@ -25,8 +24,7 @@ const caseStudies = [
   },
   {
     title: "The CFO Playbook",
-    logo: "soldo",
-    logoImage: logoSoldo,
+    logo: "Soldo",
     description: "How Soldo turned podcasting into a £2M qualified pipeline and positioned as a thought leader with CFOs.",
     stats: "750K+ downloads · 20X ROI",
     image: caseCfoPlaybook,
@@ -35,7 +33,6 @@ const caseStudies = [
   {
     title: "The Art of Investing",
     logo: "IG",
-    logoImage: null,
     description: "How IG cut through market noise with a weekly podcast that generated 103K+ downloads and 82% consumption.",
     stats: "103K+ downloads · 82% retention",
     image: caseUkUsTax,
@@ -43,8 +40,7 @@ const caseStudies = [
   },
   {
     title: "No Stress",
-    logo: "PULSETTO",
-    logoImage: logoPulsetto,
+    logo: "Pulsetto",
     description: "How Pulsetto reframed their brand from a wellness gadget to a stress resilience platform for high performers.",
     stats: "370K+ views · 66% consumption",
     image: casePulsetto,
@@ -52,8 +48,7 @@ const caseStudies = [
   },
   {
     title: "Carrier 2.0",
-    logo: "FIERCE FNTV",
-    logoImage: logoFntv,
+    logo: "Fierce FNTV",
     description: "A video podcast helping Carrier leaders navigate the future of logistics and supply chain innovation.",
     stats: "Coming soon",
     image: caseCarrier,
@@ -61,8 +56,7 @@ const caseStudies = [
   },
   {
     title: "Dig In",
-    logo: "wenodo",
-    logoImage: logoWenodo,
+    logo: "Wenodo",
     description: "A deep-dive podcast exploring the world of food tech and sustainable agriculture ventures.",
     stats: "Coming soon",
     image: caseWenodo,

@@ -84,19 +84,23 @@ const Calendly = () => {
           </h2>
 
           <p className="text-base text-text-secondary max-w-2xl mx-auto mb-3 leading-relaxed font-body">
-            If you're thinking about using video podcasting to build authority, reach the right audience, and create consistent high-quality content, this is the best place to start.
+            If you're thinking about using video podcasting to build authority, reach the right audience, and create consistent high-quality content, this is where we start.
           </p>
 
           <p className="text-base text-text-secondary max-w-2xl mx-auto mb-6 leading-relaxed font-body">
-            No pitch deck. No pressure. Just a focused conversation on your goals and whether this is the right approach for your business.
+            We work closely with a small number of teams to plan and execute podcast strategies that actually deliver.
+          </p>
+
+          <p className="text-base text-text-secondary max-w-2xl mx-auto mb-6 leading-relaxed font-body">
+            Use the calendar below to request a conversation — if it looks like a fit, we'll be in touch.
           </p>
 
           <p className="text-sm text-text-primary font-semibold mb-2 font-body">
-            Book a time below  -  it takes 30 seconds.
+            30-minute discovery call
           </p>
 
           <p className="text-xs text-text-tertiary font-body">
-            Free 30-minute call · No commitment · Straightforward advice
+            Focused, practical, and tailored to your goals
           </p>
         </motion.div>
 

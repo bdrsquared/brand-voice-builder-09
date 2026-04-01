@@ -671,7 +671,7 @@ const Admin = () => {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium text-sm truncate">{inq.name}</span>
-                        {!inq.read && <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary shrink-0" />}
+                        {!inq.read && <BellDot className="w-3.5 h-3.5 text-primary shrink-0" />}
                         <Badge variant="outline" className="text-[10px] border-border shrink-0">
                           {inq.type === "contact" ? "Message" : inq.type === "cal_booking" ? "Calendar" : inq.type === "playpack" ? "Magnet" : "Demo"}
                         </Badge>

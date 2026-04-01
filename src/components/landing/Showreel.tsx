@@ -3,37 +3,58 @@ import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import showreelThumb from "@/assets/showreel-thumb.webp";
 
-const ScrollRevealText = ({ text, scrollProgress, startAt, endAt, className = "" }: {
+const ScrollRevealText = ({ text, scrollProgress, startAt, endAt, className = "", variant = "default" }: {
   text: string;
   scrollProgress: any;
   startAt: number;
   endAt: number;
   className?: string;
+  variant?: "default" | "brandGradient";
 }) => {
   const [progress, setProgress] = useState(0);
   const mapped = useTransform(scrollProgress, [startAt, endAt], [0, 1]);
   useMotionValueEvent(mapped, "change", (v: number) => setProgress(v));
 
-  return (
-    <span className={className}>
-      {text.split("").map((char, i) => {
-        const charProgress = Math.min(1, Math.max(0, (progress * text.length - i) / 1.5));
-        const isSpace = char === " ";
-        return (
-          <span
-            key={i}
-            style={{
-              opacity: 0.12 + charProgress * 0.88,
-              display: "inline-block",
-              transform: isSpace ? undefined : `translateY(${(1 - charProgress) * 14}px)`,
-            }}
-          >
-            {isSpace ? "\u00A0" : char}
-          </span>
-        );
-      })}
-    </span>
-  );
+  const revealedLetters = text.split("").map((char, i) => {
+    const charProgress = Math.min(1, Math.max(0, (progress * text.length - i) / 1.5));
+    const isSpace = char === " ";
+
+    return (
+      <span
+        key={i}
+        style={{
+          opacity: 0.12 + charProgress * 0.88,
+          display: "inline-block",
+          transform: isSpace ? undefined : `translateY(${(1 - charProgress) * 14}px)`,
+          ...(variant === "brandGradient" && !isSpace
+            ? {
+                backgroundImage:
+                  "linear-gradient(90deg, hsl(243 79% 63%) 0%, hsl(145 96% 55%) 50%, hsl(35 100% 64%) 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                color: "transparent",
+              }
+            : {}),
+        }}
+      >
+        {isSpace ? "\u00A0" : char}
+      </span>
+    );
+  });
+
+  if (variant === "brandGradient") {
+    return (
+      <span className={`relative inline-block whitespace-pre ${className}`}>
+        <span aria-hidden className="absolute inset-0 whitespace-pre text-light-text-tertiary/35 pointer-events-none">
+          {text}
+        </span>
+        <span className="relative">{revealedLetters}</span>
+      </span>
+    );
+  }
+
+  return <span className={className}>{revealedLetters}</span>;
 };
 
 const Showreel = () => {
@@ -76,7 +97,7 @@ const Showreel = () => {
               scrollProgress={scrollYProgress}
               startAt={0.1}
               endAt={0.2}
-              className="bg-gradient-to-r from-[#6359EA] via-[#1CFA76] to-[#FFB347] bg-clip-text [-webkit-text-fill-color:transparent]"
+              variant="brandGradient"
             />
           </h2>
 

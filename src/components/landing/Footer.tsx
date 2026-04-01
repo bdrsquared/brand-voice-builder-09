@@ -28,8 +28,9 @@ const Footer = () => {
                 <div>
                   <p className="text-white/80 font-medium mb-1">Bristol</p>
                   <p>Earworm Agency Limited</p>
-                  <p>Generator Building,</p>
-                  <p>Bristol BS1 6BX</p>
+                  <p>Studio D &amp; B,</p>
+                  <p>25–27 Stokes Croft,</p>
+                  <p>Bristol, BS1 3PY</p>
                 </div>
                 <div>
                   <p className="text-white/80 font-medium mb-1">New York</p>

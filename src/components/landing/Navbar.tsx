@@ -15,6 +15,7 @@ import officeImg from "@/assets/office-compressed.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
 import caseNoStress from "@/assets/case-no-stress.jpeg";
 import caseCfoPlaybook from "@/assets/case-cfo-playbook.jpeg";
+import caseIgOrigami from "@/assets/case-ig-origami.jpg";
 
 const megaMenuItems = [
   {
@@ -46,13 +47,13 @@ const caseStudies = [
     slug: "pretty-covered",
   },
   {
-    brand: "Pulsetto",
-    title: "No Stress",
-    description: "How Pulsetto used podcasting to drive awareness and leads through authentic wellness conversations.",
-    image: caseNoStress,
-    stats: { impressions: "860k", pipeline: "£1.8M" },
+    brand: "IG",
+    title: "The Art of Investing",
+    description: "How IG used podcasting to make complex financial topics accessible and engaging for a broad audience.",
+    image: caseIgOrigami,
+    stats: { impressions: "103K", pipeline: "2K+" },
     locationType: "On Location" as const,
-    slug: null as string | null,
+    slug: "the-art-of-investing",
   },
   {
     brand: "Soldo",

@@ -84,11 +84,14 @@ Deno.serve(async (req) => {
     }
 
     // Send Slack notification
+    // Use Bot API for interactive messages, webhook for simple ones
+    const isRequested = triggerEvent === "BOOKING_REQUESTED";
+    const SLACK_BOT_TOKEN = Deno.env.get("SLACK_BOT_TOKEN");
+    const SLACK_CHANNEL_ID = Deno.env.get("SLACK_CHANNEL_ID");
     const SLACK_WEBHOOK_URL = Deno.env.get("SLACK_WEBHOOK_URL");
-    if (SLACK_WEBHOOK_URL) {
-      try {
-        const isRequested = triggerEvent === "BOOKING_REQUESTED";
 
+    if (SLACK_BOT_TOKEN && SLACK_CHANNEL_ID || SLACK_WEBHOOK_URL) {
+      try {
         const slackBlocks: any[] = [
           {
             type: "header",
@@ -171,14 +174,35 @@ Deno.serve(async (req) => {
           ],
         });
 
-        const slackRes = await fetch(SLACK_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ blocks: slackBlocks }),
-        });
+        // Use Bot API when we have interactive buttons, webhook otherwise
+        if (isRequested && bookingUid && SLACK_BOT_TOKEN && SLACK_CHANNEL_ID) {
+          const slackRes = await fetch("https://slack.com/api/chat.postMessage", {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${SLACK_BOT_TOKEN}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              channel: SLACK_CHANNEL_ID,
+              blocks: slackBlocks,
+              text: `📅 New booking request from ${name} (${email})`,
+            }),
+          });
 
-        if (!slackRes.ok) {
-          console.error("Slack notification failed:", await slackRes.text());
+          const slackData = await slackRes.json();
+          if (!slackData.ok) {
+            console.error("Slack Bot API failed:", slackData.error);
+          }
+        } else if (SLACK_WEBHOOK_URL) {
+          const slackRes = await fetch(SLACK_WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ blocks: slackBlocks }),
+          });
+
+          if (!slackRes.ok) {
+            console.error("Slack webhook failed:", await slackRes.text());
+          }
         }
       } catch (slackErr) {
         console.error("Failed to send Slack notification:", slackErr);

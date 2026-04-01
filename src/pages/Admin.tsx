@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet } from "lucide-react";
+import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
@@ -20,7 +20,10 @@ type Inquiry = {
   type: string;
   created_at: string;
   source_page: string | null;
+  archived: boolean;
 };
+
+const ITEMS_PER_PAGE = 20;
 
 const Admin = () => {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
@@ -28,6 +31,8 @@ const Admin = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(30);
   const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages">("inquiries");
+  const [showArchived, setShowArchived] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,10 +69,40 @@ const Admin = () => {
     setLoading(false);
   };
 
+  const handleArchive = async (id: string) => {
+    const inquiry = inquiries.find((i) => i.id === id);
+    if (!inquiry) return;
+    const newArchived = !inquiry.archived;
+    const { error } = await supabase
+      .from("inquiries")
+      .update({ archived: newArchived } as any)
+      .eq("id", id);
+    if (!error) {
+      setInquiries((prev) =>
+        prev.map((i) => (i.id === id ? { ...i, archived: newArchived } : i))
+      );
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate("/admin/login");
   };
+
+  const filteredInquiries = useMemo(
+    () => inquiries.filter((i) => (showArchived ? i.archived : !i.archived)),
+    [inquiries, showArchived]
+  );
+
+  const totalPages = Math.max(1, Math.ceil(filteredInquiries.length / ITEMS_PER_PAGE));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const paginatedInquiries = filteredInquiries.slice(
+    (safeCurrentPage - 1) * ITEMS_PER_PAGE,
+    safeCurrentPage * ITEMS_PER_PAGE
+  );
+
+  // Reset page when switching views
+  useEffect(() => { setCurrentPage(1); }, [showArchived]);
 
   const chartData = useMemo(() => {
     const days: Record<string, number> = {};
@@ -85,17 +120,86 @@ const Admin = () => {
     }));
   }, [inquiries, timeRange]);
 
-  const totalInquiries = inquiries.length;
-  const todayCount = inquiries.filter(
+  const activeInquiries = inquiries.filter((i) => !i.archived);
+  const totalInquiries = activeInquiries.length;
+  const todayCount = activeInquiries.filter(
     (i) => format(parseISO(i.created_at), "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd")
   ).length;
-  const weekCount = inquiries.filter(
+  const weekCount = activeInquiries.filter(
     (i) => parseISO(i.created_at) >= startOfDay(subDays(new Date(), 7))
   ).length;
+  const archivedCount = inquiries.filter((i) => i.archived).length;
 
   if (loading) {
     return <div className="min-h-screen bg-background flex items-center justify-center text-foreground">Loading...</div>;
   }
+
+  const renderTypeBadge = (inq: Inquiry) => (
+    <Badge variant="outline" className="text-xs border-border">
+      {inq.type === "contact" ? (
+        <><MessageSquare className="w-3 h-3 mr-1" /> Message</>
+      ) : inq.type === "cal_booking" ? (
+        <><Calendar className="w-3 h-3 mr-1" /> Calendar</>
+      ) : inq.type === "playpack" ? (
+        <><Magnet className="w-3 h-3 mr-1" /> Magnet</>
+      ) : (
+        <><Mic className="w-3 h-3 mr-1" /> Demo</>
+      )}
+    </Badge>
+  );
+
+  const renderPagination = () => {
+    if (totalPages <= 1) return null;
+    return (
+      <div className="flex items-center justify-between px-4 py-3 border-t border-white/10">
+        <p className="text-xs text-muted-foreground">
+          {(safeCurrentPage - 1) * ITEMS_PER_PAGE + 1}–{Math.min(safeCurrentPage * ITEMS_PER_PAGE, filteredInquiries.length)} of {filteredInquiries.length}
+        </p>
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            disabled={safeCurrentPage <= 1}
+            onClick={() => setCurrentPage((p) => p - 1)}
+            className="h-8 w-8 p-0"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </Button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter((p) => p === 1 || p === totalPages || Math.abs(p - safeCurrentPage) <= 1)
+            .reduce<(number | "...")[]>((acc, p, idx, arr) => {
+              if (idx > 0 && p - (arr[idx - 1] as number) > 1) acc.push("...");
+              acc.push(p);
+              return acc;
+            }, [])
+            .map((p, i) =>
+              p === "..." ? (
+                <span key={`dots-${i}`} className="text-xs text-muted-foreground px-1">…</span>
+              ) : (
+                <Button
+                  key={p}
+                  variant={p === safeCurrentPage ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setCurrentPage(p as number)}
+                  className="h-8 w-8 p-0 text-xs"
+                >
+                  {p}
+                </Button>
+              )
+            )}
+          <Button
+            variant="ghost"
+            size="sm"
+            disabled={safeCurrentPage >= totalPages}
+            onClick={() => setCurrentPage((p) => p + 1)}
+            className="h-8 w-8 p-0"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -192,6 +296,25 @@ const Admin = () => {
 
         {/* Inquiries List */}
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
+          {/* Toggle active / archived */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowArchived(false)}
+                className={`px-3 py-1.5 text-xs rounded-md transition-colors ${!showArchived ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                Active ({inquiries.filter((i) => !i.archived).length})
+              </button>
+              <button
+                onClick={() => setShowArchived(true)}
+                className={`px-3 py-1.5 text-xs rounded-md transition-colors flex items-center gap-1 ${showArchived ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                <Archive className="w-3 h-3" />
+                Archived ({archivedCount})
+              </button>
+            </div>
+          </div>
+
           {/* Desktop table */}
           <div className="hidden md:block">
             <Table>
@@ -203,36 +326,25 @@ const Admin = () => {
                   <TableHead className="text-muted-foreground">Phone</TableHead>
                   <TableHead className="text-muted-foreground">Budget</TableHead>
                   <TableHead className="text-muted-foreground">Date</TableHead>
+                  <TableHead className="text-muted-foreground w-20"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {inquiries.length === 0 ? (
+                {paginatedInquiries.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center py-12 text-muted-foreground">
-                      No inquiries yet
+                    <TableCell colSpan={7} className="text-center py-12 text-muted-foreground">
+                      {showArchived ? "No archived inquiries" : "No inquiries yet"}
                     </TableCell>
                   </TableRow>
                 ) : (
-                  inquiries.map((inq) => (
+                  paginatedInquiries.map((inq) => (
                     <>
                       <TableRow
                         key={inq.id}
                         className="border-border cursor-pointer hover:bg-muted/30 transition-colors"
                         onClick={() => setExpandedId(expandedId === inq.id ? null : inq.id)}
                       >
-                        <TableCell>
-                          <Badge variant="outline" className="text-xs border-border">
-                            {inq.type === "contact" ? (
-                              <><MessageSquare className="w-3 h-3 mr-1" /> Message</>
-                            ) : inq.type === "cal_booking" ? (
-                              <><Calendar className="w-3 h-3 mr-1" /> Calendar</>
-                            ) : inq.type === "playpack" ? (
-                              <><Magnet className="w-3 h-3 mr-1" /> Magnet</>
-                            ) : (
-                              <><Mic className="w-3 h-3 mr-1" /> Demo</>
-                            )}
-                          </Badge>
-                        </TableCell>
+                        <TableCell>{renderTypeBadge(inq)}</TableCell>
                         <TableCell className="font-medium">{inq.name}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.email}</TableCell>
                         <TableCell className="text-muted-foreground">{inq.phone || " - "}</TableCell>
@@ -241,16 +353,27 @@ const Admin = () => {
                           {format(parseISO(inq.created_at), "MMM d, HH:mm")}
                         </TableCell>
                         <TableCell>
-                          {expandedId === inq.id ? (
-                            <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                          ) : (
-                            <ChevronDown className="w-4 h-4 text-muted-foreground" />
-                          )}
+                          <div className="flex items-center gap-1">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-7 w-7 p-0 text-muted-foreground hover:text-foreground"
+                              title={inq.archived ? "Unarchive" : "Archive"}
+                              onClick={(e) => { e.stopPropagation(); handleArchive(inq.id); }}
+                            >
+                              <Archive className="w-3.5 h-3.5" />
+                            </Button>
+                            {expandedId === inq.id ? (
+                              <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                            ) : (
+                              <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                            )}
+                          </div>
                         </TableCell>
                       </TableRow>
                       {expandedId === inq.id && (
                         <TableRow key={`${inq.id}-detail`} className="border-border">
-                          <TableCell colSpan={8} className="bg-muted/10 px-6 py-4">
+                          <TableCell colSpan={7} className="bg-muted/10 px-6 py-4">
                             <div className="space-y-3 text-sm">
                               <div className="flex items-start gap-2">
                                 <Mail className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
@@ -293,10 +416,12 @@ const Admin = () => {
 
           {/* Mobile card list */}
           <div className="md:hidden divide-y divide-white/10">
-            {inquiries.length === 0 ? (
-              <p className="text-center py-12 text-muted-foreground text-sm">No inquiries yet</p>
+            {paginatedInquiries.length === 0 ? (
+              <p className="text-center py-12 text-muted-foreground text-sm">
+                {showArchived ? "No archived inquiries" : "No inquiries yet"}
+              </p>
             ) : (
-              inquiries.map((inq) => (
+              paginatedInquiries.map((inq) => (
                 <div
                   key={inq.id}
                   className="p-4 cursor-pointer active:bg-muted/20 transition-colors"
@@ -315,11 +440,22 @@ const Admin = () => {
                         {format(parseISO(inq.created_at), "MMM d, HH:mm")}
                       </p>
                     </div>
-                    {expandedId === inq.id ? (
-                      <ChevronUp className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
-                    )}
+                    <div className="flex items-center gap-1 shrink-0 mt-1">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 w-7 p-0 text-muted-foreground hover:text-foreground"
+                        title={inq.archived ? "Unarchive" : "Archive"}
+                        onClick={(e) => { e.stopPropagation(); handleArchive(inq.id); }}
+                      >
+                        <Archive className="w-3.5 h-3.5" />
+                      </Button>
+                      {expandedId === inq.id ? (
+                        <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                      ) : (
+                        <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                      )}
+                    </div>
                   </div>
 
                   {expandedId === inq.id && (
@@ -354,6 +490,9 @@ const Admin = () => {
               ))
             )}
           </div>
+
+          {/* Pagination */}
+          {renderPagination()}
         </div>
           </>
         )}

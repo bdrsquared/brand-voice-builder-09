@@ -54,7 +54,7 @@ const CaseStudyCTA = () => {
     Cal.ns["cs-30min"]("inline", {
       elementOrSelector: "#cs-cal-inline",
       config: { layout: "month_view", useSlotsViewOnSmallScreen: "true", theme: "dark" },
-      calLink: "earworm-accounts-fqzg4l/30min",
+      calLink: "earworm/30min",
     });
     Cal.ns["cs-30min"]("ui", { hideEventTypeDetails: false, layout: "month_view", theme: "dark", cssVarsPerTheme: { dark: { "cal-bg": "transparent" } } });
   }, [calLoaded]);

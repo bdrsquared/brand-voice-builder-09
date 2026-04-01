@@ -68,7 +68,7 @@ const caseStudies = [
 
 const mobileNavLinks = [
   { label: "Our service", href: "#services" },
-  { label: "Case studies", href: "#case-studies" },
+  { label: "Case studies", href: "/case-studies" },
   { label: "More", href: "#" },
 ];
 

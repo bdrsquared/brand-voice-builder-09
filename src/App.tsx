@@ -31,6 +31,7 @@ const BlogPostPage = lazy(() => import("./pages/BlogPost.tsx"));
 const Admin = lazy(() => import("./pages/Admin.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
 const Sandbox = lazy(() => import("./pages/Sandbox.tsx"));
+const CaseStudiesPage = lazy(() => import("./pages/CaseStudies.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const AnimatedRoutes = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/sandbox" element={<PageTransition><Sandbox /></PageTransition>} />
+          <Route path="/case-studies" element={<PageTransition><CaseStudiesPage /></PageTransition>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>

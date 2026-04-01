@@ -83,47 +83,67 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
   return (
     <Wrapper {...wrapperProps as any}>
       <motion.div
-        className="group relative aspect-[4/5] rounded-2xl overflow-hidden border border-border cursor-pointer"
+        className="group relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: index * 0.08 }}
       >
         {study.image && (
-          <img src={study.image} alt={study.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+          <img
+            src={study.image}
+            alt={study.title}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Gradient overlay — lifts on hover to reveal image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 group-hover:from-black/90 group-hover:via-black/30 group-hover:to-transparent transition-all duration-500" />
 
-        <div className="absolute top-4 right-4 z-10">
-          <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-200 group-hover:bg-black/50 group-hover:backdrop-blur-xl group-hover:border-white/30 group-hover:scale-110">
-            <Play className="w-4 h-4 text-white fill-white" />
+        {/* Subtle border glow on hover */}
+        <div className="absolute inset-0 rounded-2xl border border-white/[0.06] group-hover:border-white/[0.15] transition-colors duration-500" />
+
+        {/* Stats pill — top right */}
+        {study.stats && study.stats !== "Coming soon" && (
+          <div className="absolute top-4 right-4 z-10">
+            <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-full px-3 py-1.5 text-[10px] text-white/70 font-body tracking-wide group-hover:border-white/20 group-hover:bg-black/60 transition-all duration-300">
+              {study.stats.split("·")[0].trim()}
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="absolute top-5 left-5 z-10">
-          {study.logoImage ? (
-            <img src={study.logoImage} alt={study.logo} loading="lazy" className="h-8 w-auto brightness-0 invert opacity-80" />
-          ) : (
-            <span className="text-white/70 text-xs tracking-wider uppercase font-heading">
-              {study.logo}
-            </span>
-          )}
-        </div>
+        {/* Content — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+          {/* Client name */}
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-body mb-2 group-hover:text-white/60 transition-colors duration-300">
+            {study.logo}
+          </p>
 
-        <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-          <h3 className="text-lg sm:text-xl text-white mb-1 font-heading">
+          <h3 className="text-xl sm:text-2xl text-white mb-2 font-heading leading-tight">
             {study.title}
           </h3>
-          {study.stats && (
-            <p className="text-xs text-accent font-semibold mb-2 font-body">{study.stats}</p>
-          )}
-          <div className="flex items-end justify-between gap-3">
-            <p className="text-white/60 text-xs leading-relaxed font-body line-clamp-3">
-              {study.description}
-            </p>
-            <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 transition-all duration-200 group-hover:bg-black/50 group-hover:backdrop-blur-xl group-hover:border-white/30">
-              <ArrowUpRight className="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
+
+          {/* Description — revealed on hover */}
+          <p className="text-white/50 text-sm leading-relaxed font-body line-clamp-2 mb-4 group-hover:text-white/70 transition-colors duration-300">
+            {study.description}
+          </p>
+
+          {/* Bottom bar */}
+          <div className="flex items-center justify-between">
+            {study.stats && study.stats !== "Coming soon" ? (
+              <div className="flex items-center gap-2">
+                {study.stats.split("·").slice(1).map((stat, i) => (
+                  <span key={i} className="text-[10px] text-accent/80 font-semibold font-body">
+                    {stat.trim()}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <span className="text-[10px] text-white/30 font-body italic">Coming soon</span>
+            )}
+            <div className="w-9 h-9 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-accent/10 group-hover:border-accent/30 group-hover:scale-110">
+              <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-accent transition-colors duration-300" />
             </div>
           </div>
         </div>

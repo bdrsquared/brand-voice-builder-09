@@ -183,7 +183,7 @@ Deno.serve(async (req) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              channel: SLACK_CHANNEL_ID,
+              channel: SLACK_LEADS_CHANNEL_ID,
               blocks: slackBlocks,
               text: `📅 New booking request from ${name} (${email})`,
             }),

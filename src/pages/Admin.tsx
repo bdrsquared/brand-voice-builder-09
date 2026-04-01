@@ -407,6 +407,7 @@ const Admin = () => {
           </>
         )}
 
+        {insightsSubTab === "leads" && (
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
           {/* Toggle active / archived */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">

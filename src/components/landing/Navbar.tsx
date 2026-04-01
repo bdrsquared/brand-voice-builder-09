@@ -581,6 +581,7 @@ const Navbar = () => {
                         <BookOpen className="w-4 h-4 text-white/50" />
                         <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider">The stuff that's happening</h4>
                       </div>
+                      <p className="text-xs text-white/40 mb-3 -mt-2">News from across the industry</p>
                       <div className="flex flex-col gap-1">
                         {recentBlogs.map((blog) => (
                           <a

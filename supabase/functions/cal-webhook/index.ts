@@ -80,8 +80,9 @@ Deno.serve(async (req) => {
         source_page: "/book-a-call",
       });
 
-    if (error) {
-      console.error("Failed to insert inquiry:", error);
+      if (error) {
+        console.error("Failed to insert inquiry:", error);
+      }
     }
 
     // Send Slack notification

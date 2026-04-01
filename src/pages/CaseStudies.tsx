@@ -12,12 +12,6 @@ import caseWenodo from "@/assets/case-wenodo.webp";
 import casePulsetto from "@/assets/case-pulsetto.webp";
 import caseCfoPlaybook from "@/assets/case-cfo-playbook.webp";
 import caseUkUsTax from "@/assets/case-uk-us-tax.webp";
-import logoPolly from "@/assets/logos/polly.webp";
-import logoWenodo from "@/assets/logos/wenodo.webp";
-import logoPulsetto from "@/assets/logos/pulsetto.webp";
-import logoSoldo from "@/assets/logos/soldo.webp";
-import logoCollyerBristow from "@/assets/logos/collyer-bristow.webp";
-import logoFntv from "@/assets/logos/fntv.webp";
 
 const caseStudies = [
   {

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
@@ -71,69 +71,46 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
   return (
     <Wrapper {...wrapperProps as any}>
       <motion.div
-        className="group relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer"
+        className="group rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden cursor-pointer hover:border-white/20 hover:bg-white/[0.08] transition-all duration-300"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: index * 0.08 }}
       >
-        {study.image && (
-          <img
-            src={study.image}
-            alt={study.title}
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-        )}
+        <div className="aspect-video overflow-hidden">
+          {study.image && (
+            <img
+              src={study.image}
+              alt={study.title}
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          )}
+        </div>
+        <div className="p-4">
+          <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">{study.logo}</p>
+          <h3 className="text-base font-heading text-foreground mb-1">{study.title}</h3>
+          <p className="text-xs text-muted-foreground leading-snug font-body mb-3 line-clamp-2">{study.description}</p>
 
-        {/* Gradient overlay — lifts on hover to reveal image */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 group-hover:from-black/90 group-hover:via-black/30 group-hover:to-transparent transition-all duration-500" />
-
-        {/* Subtle border glow on hover */}
-        <div className="absolute inset-0 rounded-2xl border border-white/[0.06] group-hover:border-white/[0.15] transition-colors duration-500" />
-
-        {/* Stats pill — top right */}
-        {study.stats && study.stats !== "Coming soon" && (
-          <div className="absolute top-4 right-4 z-10">
-            <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-full px-3 py-1.5 text-[10px] text-white/70 font-body tracking-wide group-hover:border-white/20 group-hover:bg-black/60 transition-all duration-300">
-              {study.stats.split("·")[0].trim()}
+          {study.stats && study.stats !== "Coming soon" ? (
+            <div className="flex items-center gap-3 mb-3">
+              {study.stats.split("·").map((stat, i, arr) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-foreground">{stat.trim().split(" ").slice(0, -1).join(" ") || stat.trim()}</span>
+                    <span className="text-[9px] text-muted-foreground">{stat.trim().split(" ").pop()}</span>
+                  </div>
+                  {i < arr.length - 1 && <div className="w-px h-5 bg-white/10" />}
+                </div>
+              ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <p className="text-[10px] text-muted-foreground italic mb-3">Coming soon</p>
+          )}
 
-        {/* Content — bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-          {/* Client name */}
-          <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-body mb-2 group-hover:text-white/60 transition-colors duration-300">
-            {study.logo}
-          </p>
-
-          <h3 className="text-xl sm:text-2xl text-white mb-2 font-heading leading-tight">
-            {study.title}
-          </h3>
-
-          {/* Description — revealed on hover */}
-          <p className="text-white/50 text-sm leading-relaxed font-body line-clamp-2 mb-4 group-hover:text-white/70 transition-colors duration-300">
-            {study.description}
-          </p>
-
-          {/* Bottom bar */}
-          <div className="flex items-center justify-between">
-            {study.stats && study.stats !== "Coming soon" ? (
-              <div className="flex items-center gap-2">
-                {study.stats.split("·").slice(1).map((stat, i) => (
-                  <span key={i} className="text-[10px] text-accent/80 font-semibold font-body">
-                    {stat.trim()}
-                  </span>
-                ))}
-              </div>
-            ) : (
-              <span className="text-[10px] text-white/30 font-body italic">Coming soon</span>
-            )}
-            <div className="w-9 h-9 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-accent/10 group-hover:border-accent/30 group-hover:scale-110">
-              <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-accent transition-colors duration-300" />
-            </div>
-          </div>
+          <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary group-hover:brightness-125 transition-all">
+            {study.slug ? "See case study" : "Coming soon"} <ArrowRight className="w-3 h-3" />
+          </span>
         </div>
       </motion.div>
     </Wrapper>

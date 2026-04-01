@@ -41,7 +41,7 @@ const Showreel = () => {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 95%", "end start"],
+    offset: ["start 80%", "end start"],
   });
 
   const scale = useTransform(scrollYProgress, [0, 0.4], [0.65, 1]);

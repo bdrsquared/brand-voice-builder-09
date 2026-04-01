@@ -607,6 +607,7 @@ const Admin = () => {
           {/* Pagination */}
           {renderPagination()}
         </div>
+        )}
           </>
         )}
       </div>

@@ -182,6 +182,47 @@ const caseStudies: Record<string, CaseStudyData> = {
       result: "The three highlighted YouTube episodes total 370K+ views with a 66% consumption rate, showing strong early engagement. The content gives Pulsetto a reusable brand platform for ongoing expert-led storytelling.",
     },
   },
+  "the-cfo-playbook": {
+    slug: "the-cfo-playbook",
+    showName: "The CFO Playbook",
+    clientName: "Soldo",
+    tagline: "How Soldo used podcasting to position as a thought leader with CFOs and turn content into a £2M qualified pipeline.",
+    heroImage: caseSoldoHero,
+    heroObjectPosition: "center 30%",
+    stats: [
+      { label: "Audio downloads", value: "750K+" },
+      { label: "Social clip views", value: "2M+" },
+      { label: "ROI in 6 months", value: "20X" },
+    ],
+    impacts: [
+      { title: "Positioned Soldo at the centre of CFO conversations", description: "Established Soldo as a credible voice for finance leaders by building a show around the priorities, challenges and perspectives of senior CFOs." },
+      { title: "Created a high-value thought leadership platform", description: "Gave the brand a consistent way to engage senior decision-makers through insight-led content that felt authoritative, relevant and commercially meaningful." },
+      { title: "Built a scalable content engine for marketing and sales", description: "Turned each episode into a wider stream of usable content, helping the podcast support brand awareness, audience engagement and pipeline conversations across channels." },
+      { title: "Reduced internal lift while increasing output", description: "Delivered a true 'podcast on autopilot' model, allowing Soldo's team to benefit from a high-impact content programme without adding operational strain internally." },
+    ],
+    episodes: [
+      { thumbnail: caseSoldoHost, title: "Why Operational CFOs Win: Strategy, Speed, and Leading Through Change", guest: "Tom DiDesidero", duration: "45 min" },
+      { thumbnail: caseSoldoGuest, title: "From Metrics to Meaning: Building a Customer-Centric Finance Org", guest: "Senior CFO Guest", duration: "42 min" },
+      { thumbnail: caseSoldoSkyline, title: "CFO Leadership: Asking Better Questions Instead of Saying No", guest: "John Glasgow", duration: "40 min" },
+    ],
+    approach: [
+      { title: "Strategy", description: "Built as a virtual-first format to make the show accessible to senior CFOs globally, removing the barriers of travel, location and scheduling." },
+      { title: "Host sourcing", description: "We sourced David McClelland as host, bringing a credible presence, strong interview style and a high-quality home recording setup that elevated the overall production value." },
+      { title: "Guest mapping", description: "Focused on identifying and securing senior finance leaders from key markets, making it easier to bring global CFO perspectives into the series." },
+      { title: "Production", description: "Created a polished remote production model that combined flexibility with consistency, giving Soldo a repeatable format they could continue investing in episode after episode." },
+    ],
+    btsImages: [
+      caseSoldoHost,
+      caseSoldoEvent,
+      caseSoldoBags,
+      caseSoldoSkyline,
+    ],
+    summary: {
+      challenge: "Soldo wanted to be positioned as a thought-leader with CFOs and turn content into a qualified pipeline.",
+      solution: "We developed The CFO Playbook from concept to delivery, producing monthly remote video episodes with tier-one CFO guests, while handling host and guest sourcing, production, editing, motion graphics, and supporting social assets. With a full 'podcast on autopilot' model and CRM-linked performance reporting, Earworm managed the entire process.",
+      result: "In the first six months, The CFO Playbook generated 750k+ audio downloads, 2m+ social clip views, and £2m in attributed pipeline, delivering a 20x ROI with 68% average listener retention.",
+    },
+  },
 };
 
 const CaseStudy = () => {

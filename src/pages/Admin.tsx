@@ -133,6 +133,29 @@ const Admin = () => {
     }));
   }, [inquiries, timeRange]);
 
+  const pvChartData = useMemo(() => {
+    const days: Record<string, number> = {};
+    for (let i = pvTimeRange - 1; i >= 0; i--) {
+      const day = format(subDays(new Date(), i), "yyyy-MM-dd");
+      days[day] = 0;
+    }
+    pageViews.forEach((pv) => {
+      const day = format(parseISO(pv.created_at), "yyyy-MM-dd");
+      if (days[day] !== undefined) days[day]++;
+    });
+    return Object.entries(days).map(([date, count]) => ({
+      date: format(parseISO(date), pvTimeRange <= 7 ? "EEE" : "MMM d"),
+      count,
+    }));
+  }, [pageViews, pvTimeRange]);
+
+  const pvToday = pageViews.filter(
+    (pv) => format(parseISO(pv.created_at), "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd")
+  ).length;
+  const pvWeek = pageViews.filter(
+    (pv) => parseISO(pv.created_at) >= startOfDay(subDays(new Date(), 7))
+  ).length;
+
   const activeInquiries = inquiries.filter((i) => !i.archived);
   const totalInquiries = activeInquiries.length;
   const todayCount = activeInquiries.filter(

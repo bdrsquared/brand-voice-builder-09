@@ -3,9 +3,8 @@ import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import showreelThumb from "@/assets/showreel-thumb.webp";
 
-const ScrollRevealText = ({ text, gradient, scrollProgress, startAt, endAt }: {
+const ScrollRevealText = ({ text, scrollProgress, startAt, endAt }: {
   text: string;
-  gradient?: boolean;
   scrollProgress: any;
   startAt: number;
   endAt: number;
@@ -26,16 +25,6 @@ const ScrollRevealText = ({ text, gradient, scrollProgress, startAt, endAt }: {
             style={{
               opacity: 0.12 + charProgress * 0.88,
               transform: `translateY(${(1 - charProgress) * 14}px)`,
-              ...(gradient && charProgress > 0.5
-                ? {
-                    background: "linear-gradient(135deg, #6359EA 0%, #1CFA76 50%, #FFB347 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }
-                : gradient
-                ? { color: "rgba(115,115,115,0.3)" }
-                : {}),
             }}
           >
             {isSpace ? "\u00A0" : char}
@@ -81,7 +70,16 @@ const Showreel = () => {
               <ScrollRevealText text="Check out our" scrollProgress={scrollYProgress} startAt={0.03} endAt={0.15} />
             </span>
             <br className="hidden sm:block" />
-            <ScrollRevealText text="showreel" gradient scrollProgress={scrollYProgress} startAt={0.1} endAt={0.2} />
+            <span
+              style={{
+                background: "linear-gradient(90deg, #6359EA 0%, #1CFA76 50%, #FFB347 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              <ScrollRevealText text="showreel" scrollProgress={scrollYProgress} startAt={0.1} endAt={0.2} />
+            </span>
           </h2>
 
           <motion.div

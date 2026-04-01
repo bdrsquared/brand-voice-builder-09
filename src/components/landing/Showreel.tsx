@@ -26,8 +26,10 @@ const Showreel = () => {
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.35], [0.88, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.25], [0.7, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.4], [0.65, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0.3, 1]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.4], [40, 16]);
+  const y = useTransform(scrollYProgress, [0, 0.4], [80, 0]);
 
   return (
     <section ref={sectionRef} className="relative py-20 sm:py-28 px-6 pb-0">
@@ -89,8 +91,8 @@ const Showreel = () => {
         </div>
 
         <motion.div
-          className="relative rounded-2xl overflow-hidden border border-black/10 shadow-lg will-change-transform"
-          style={{ scale, opacity }}
+          className="relative overflow-hidden will-change-transform"
+          style={{ scale, opacity, y, borderRadius, boxShadow: "0 25px 60px -15px rgba(0,0,0,0.3)" }}
         >
           {/* Mobile: portrait | Desktop: 16:9 */}
           <div className="relative aspect-[3/4] sm:aspect-video">

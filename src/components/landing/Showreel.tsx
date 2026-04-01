@@ -1,18 +1,31 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import showreelThumb from "@/assets/showreel-thumb.webp";
 
+const AnimatedWord = ({ children, delay, className = "" }: { children: React.ReactNode; delay: number; className?: string }) => (
+  <motion.span
+    className={`inline-block ${className}`}
+    initial={{ opacity: 0, y: 60, rotateX: 40, scale: 0.85 }}
+    whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+  >
+    {children}
+  </motion.span>
+);
+
 const Showreel = () => {
   const [playing, setPlaying] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(headingRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  const gradientY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
   const scale = useTransform(scrollYProgress, [0, 0.35], [0.88, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.25], [0.7, 1]);
 
@@ -20,23 +33,60 @@ const Showreel = () => {
     <section ref={sectionRef} className="relative py-20 sm:py-28 px-6 pb-0">
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <motion.div
-          className="text-left sm:text-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 block text-light-text-tertiary">
+        <div ref={headingRef} className="text-left sm:text-center mb-12 sm:mb-16" style={{ perspective: "800px" }}>
+          <motion.span
+            className="inline-flex items-center gap-2 font-medium text-sm mb-6 text-light-text-tertiary"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             ● Working with businesses worldwide
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-light-text-primary">
-            Check out our <span className="text-light-text-tertiary">showreel</span>
+          </motion.span>
+
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-medium leading-[0.95] tracking-tight">
+            <AnimatedWord delay={0.1} className="text-light-text-primary mr-[0.25em]">Check</AnimatedWord>
+            <AnimatedWord delay={0.17} className="text-light-text-primary mr-[0.25em]">out</AnimatedWord>
+            <AnimatedWord delay={0.24} className="text-light-text-primary mr-[0.25em]">our</AnimatedWord>
+            <br className="hidden sm:block" />
+            <AnimatedWord delay={0.35}>
+              <span
+                className="relative"
+                style={{
+                  background: "linear-gradient(135deg, #6359EA 0%, #1CFA76 50%, #FFB347 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                showreel
+              </span>
+            </AnimatedWord>
           </h2>
-          <p className="mt-3 text-base text-light-text-secondary max-w-xl sm:mx-auto">
+
+          {/* Animated gradient line */}
+          <motion.div
+            className="mx-auto sm:mx-auto mt-6 sm:mt-8 h-[2px] rounded-full origin-left"
+            style={{
+              background: "linear-gradient(90deg, #6359EA, #1CFA76, #FFB347)",
+              maxWidth: "200px",
+            }}
+            initial={{ scaleX: 0, opacity: 0 }}
+            whileInView={{ scaleX: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          />
+
+          <motion.p
+            className="mt-5 sm:mt-6 text-base sm:text-lg text-light-text-secondary max-w-xl sm:mx-auto"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.55 }}
+          >
             World-class creative, built for brands that take content seriously.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
         <motion.div
           className="relative rounded-2xl overflow-hidden border border-black/10 shadow-lg will-change-transform"

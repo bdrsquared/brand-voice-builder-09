@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import DemoRequestModal from "@/components/DemoRequestModal";
 import ContactModal from "@/components/ContactModal";
+import PlayPackModal from "@/components/PlayPackModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, MessageCircle, Calendar, Layers, Activity, Eye, LogIn, BookOpen } from "lucide-react";

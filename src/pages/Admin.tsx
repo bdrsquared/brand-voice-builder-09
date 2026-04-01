@@ -166,8 +166,8 @@ const Admin = () => {
     safeCurrentPage * ITEMS_PER_PAGE
   );
 
-  // Reset page when switching views
-  useEffect(() => { setCurrentPage(1); }, [showArchived]);
+  // Reset page and selection when switching views
+  useEffect(() => { setCurrentPage(1); setSelectedIds(new Set()); }, [showArchived]);
 
   const chartData = useMemo(() => {
     const days: Record<string, number> = {};

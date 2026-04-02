@@ -115,8 +115,8 @@ ${researchText}
 {
   "style": "authority",
   "hero": {
-    "badge": "For ${icp_name}",
-    "headline": "Video podcasting for [role/team type] that want to [specific outcome]. Max 12 words. Bold, specific. IMPORTANT: The headline must NOT start with 'For' - just name the ICP directly.",
+    "badge": "${icp_name}",
+    "headline": "A bold, specific headline about video podcasting and [outcome]. Max 12 words. NEVER start with 'For' - position Earworm as experts IN this field, not outsiders delivering TO it.",
     "highlight_phrase": "The outcome phrase to highlight in green italic",
     "subheadline": "Built for [industry reality], not generic content strategies. One sentence that makes them think 'this is for me'.",
     "cta_primary": "Request a conversation",

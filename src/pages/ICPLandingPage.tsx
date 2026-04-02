@@ -182,6 +182,8 @@ const greyPhrase = (text: string, greyPart: string) => {
 const ICPLandingPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [copy, setCopy] = useState<GeneratedCopy | null>(null);
+  const [authorityCopy, setAuthorityCopy] = useState<AuthorityCopy | null>(null);
+  const [pageStyle, setPageStyle] = useState<string>("original");
   const [icpName, setIcpName] = useState("");
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -198,7 +200,13 @@ const ICPLandingPage = () => {
       if (error || !data || !data.generated_copy) {
         setNotFound(true);
       } else {
-        setCopy(data.generated_copy as GeneratedCopy);
+        const style = data.page_style || "original";
+        setPageStyle(style);
+        if (style === "authority") {
+          setAuthorityCopy(data.generated_copy as AuthorityCopy);
+        } else {
+          setCopy(data.generated_copy as GeneratedCopy);
+        }
         setIcpName(data.icp_name);
       }
       setLoading(false);

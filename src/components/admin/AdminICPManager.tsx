@@ -42,6 +42,8 @@ const AdminICPManager = () => {
   const [creating, setCreating] = useState(false);
   const [researching, setResearching] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [generating, setGenerating] = useState<string | null>(null);
+  const [toggling, setToggling] = useState<string | null>(null);
 
   const handleResearch = async (page: ICPPage) => {
     setResearching(page.id);

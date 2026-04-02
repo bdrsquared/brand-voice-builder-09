@@ -2,6 +2,8 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Shield } from "lucide-react";
+import DotsBackground from "@/components/landing/DotsBackground";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -20,26 +22,52 @@ const PrivacyPolicy = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
-      <main className="pt-32 pb-24 px-6">
-        <div className="max-w-3xl mx-auto">
+      {/* Mini hero */}
+      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-20 px-6 overflow-hidden">
+        <DotsBackground />
+        <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
+
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 mb-6"
+          >
+            <Shield className="w-8 h-8 text-primary" />
+          </motion.div>
+
           <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="text-4xl md:text-5xl font-bold font-heading mb-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold mb-4"
           >
             Privacy Policy
           </motion.h1>
 
           <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="text-muted-foreground mb-12 text-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-muted-foreground font-body text-base sm:text-lg max-w-lg mx-auto"
+          >
+            How we collect, use, and protect your data — no jargon, no surprises.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.35 }}
+            className="text-muted-foreground/50 text-xs mt-4 font-body"
           >
             Last updated: 2 April 2026
           </motion.p>
+        </div>
+      </section>
 
+      <main className="pb-24 px-6">
+        <div className="max-w-3xl mx-auto">
           <motion.p
             variants={fadeUp}
             initial="hidden"

@@ -350,6 +350,41 @@ const AdminICPManager = () => {
                     </div>
                   )}
 
+                  {/* Page Style Selector */}
+                  <div>
+                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1.5">
+                      Page Style
+                    </p>
+                    <div className="flex gap-2">
+                      {[
+                        { value: "original", label: "Original", desc: "Brand voice, opinionated" },
+                        { value: "authority", label: "Authority", desc: "Data-led, professional" },
+                      ].map((style) => (
+                        <button
+                          key={style.value}
+                          onClick={async () => {
+                            const { error } = await (supabase
+                              .from("icp_landing_pages" as any)
+                              .update({ page_style: style.value, updated_at: new Date().toISOString() } as any)
+                              .eq("id", page.id) as any);
+                            if (!error) {
+                              setPages((prev) => prev.map((p) => p.id === page.id ? { ...p, page_style: style.value } : p));
+                              toast.success(`Style set to ${style.label}`);
+                            }
+                          }}
+                          className={`flex-1 px-4 py-3 rounded-xl border text-left transition-all ${
+                            (page.page_style || "original") === style.value
+                              ? "border-primary bg-primary/10 text-foreground"
+                              : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/20"
+                          }`}
+                        >
+                          <span className="text-sm font-medium block">{style.label}</span>
+                          <span className="text-[10px] opacity-70">{style.desc}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Research data preview */}
                   {page.research_data && (
                     <div className="space-y-3">

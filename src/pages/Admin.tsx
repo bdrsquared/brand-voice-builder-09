@@ -9,6 +9,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recha
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
 import AdminPagesManager from "@/components/admin/AdminPagesManager";
+import AdminRedirectsManager from "@/components/admin/AdminRedirectsManager";
 
 type Inquiry = {
   id: string;

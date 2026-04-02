@@ -34,6 +34,7 @@ const Admin = lazy(() => import("./pages/Admin.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
 const Sandbox = lazy(() => import("./pages/Sandbox.tsx"));
 const CaseStudiesPage = lazy(() => import("./pages/CaseStudies.tsx"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 
 const queryClient = new QueryClient();
 

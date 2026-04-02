@@ -33,7 +33,7 @@ ${researchText}
 
 {
   "hero": {
-    "badge": "2-3 word category label",
+    "badge": "2-3 word category label - just the ICP name, NEVER start with 'For'",
     "headline": "Bold headline, max 10 words. Make one phrase the hero.",
     "highlight_phrase": "The exact phrase from the headline to highlight in brand green (italic)",
     "subheadline": "2 sentences. Speak directly to this ICP's reality.",
@@ -98,7 +98,7 @@ function buildAuthorityPrompt(icp_name: string, researchText: string) {
 - Sound like the smartest person in the room who also happens to be approachable
 - Lead with data, stats and specifics - not feelings
 - Use British English spelling
-- NEVER use em dashes (—) - use spaced hyphers ( - ) instead
+- NEVER use em dashes (—) - use spaced hyphens ( - ) instead
 - NEVER use Oxford commas
 - Be direct and confident. Not arrogant, but clearly expert
 - Use "you" and "your" throughout - speak directly to ${icp_name} decision-makers
@@ -115,8 +115,8 @@ ${researchText}
 {
   "style": "authority",
   "hero": {
-    "badge": "For ${icp_name}",
-    "headline": "Video podcasting for [role/team type] that want to [specific outcome]. Max 12 words. Bold, specific.",
+    "badge": "${icp_name}",
+    "headline": "A bold, specific headline about video podcasting and [outcome]. Max 12 words. NEVER start with 'For' - position Earworm as experts IN this field, not outsiders delivering TO it.",
     "highlight_phrase": "The outcome phrase to highlight in green italic",
     "subheadline": "Built for [industry reality], not generic content strategies. One sentence that makes them think 'this is for me'.",
     "cta_primary": "Request a conversation",

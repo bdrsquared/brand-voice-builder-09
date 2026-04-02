@@ -6,6 +6,7 @@ import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Footer from "@/components/landing/Footer";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { format, parseISO } from "date-fns";
+import { getThumbnailUrl } from "@/lib/image-utils";
 
 type BlogPost = {
   id: string;

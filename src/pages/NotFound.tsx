@@ -18,8 +18,8 @@ const NotFound = () => {
 
       <main className="flex-1 flex items-center justify-center relative overflow-hidden px-4">
         {/* Gradient blobs */}
-        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-[hsl(var(--brand-green))] opacity-15 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-[hsl(var(--brand-purple))] opacity-15 blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-[#1CFA76] opacity-[0.12] blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-[#6359EA] opacity-[0.15] blur-[120px] pointer-events-none" />
 
         <div className="text-center max-w-2xl mx-auto relative z-10">
           {/* Big 404 */}

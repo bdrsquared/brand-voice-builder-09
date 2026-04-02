@@ -1,6 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.100.1";
 
-const SITE_URL = "https://uk.earworm.co";
+const SITE_URL = "https://earworm.co";
 const DEFAULT_TITLE = "Video Podcast Agency for B2B & Enterprise | Earworm";
 const DEFAULT_DESC = "Earworm helps enterprise brands turn podcasting into a strategic content engine. Build authority, reach the right audience, and create high-quality video content that supports growth.";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;

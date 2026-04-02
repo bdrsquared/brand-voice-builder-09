@@ -69,6 +69,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
+        <RedirectHandler />
         <PageViewTracker />
         <ConditionalWidgets />
       </BrowserRouter>

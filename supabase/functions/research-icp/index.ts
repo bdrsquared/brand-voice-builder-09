@@ -43,20 +43,20 @@ serve(async (req) => {
       ? `Additional context: ${icp_description}`
       : "";
 
-    const prompt = `You are a senior marketing strategist specialising in branded podcast and audio content for B2B companies. Research and analyse the unique marketing challenges faced by "${icp_name}" (${contextLine}).
+    const prompt = `What are the main content marketing challenges faced by "${icp_name}" and how can they beat their competition?
 
-Provide a structured analysis covering:
+${contextLine ? contextLine + "\n\n" : ""}Provide a detailed, structured analysis covering:
 
-1. **Industry Overview**: Brief landscape of this ICP's industry and market dynamics
-2. **Top Marketing Challenges**: The 5 biggest marketing challenges this ICP faces right now (be specific and current)
-3. **Content & Attention Gap**: How this ICP struggles to cut through noise and build authority
-4. **Why Branded Podcasts Solve This**: Specific reasons why a branded podcast strategy would address their challenges
-5. **Competitor Landscape**: What competitors in this space are doing with content (and where the gaps are)
-6. **Key Metrics That Matter**: What KPIs and outcomes this ICP cares about most
-7. **Objections & Barriers**: Common objections this ICP might have to investing in podcast content
-8. **Talking Points**: 3-5 compelling talking points that would resonate with this ICP
+1. **Industry Overview**: Brief landscape of this ICP's industry and current market dynamics
+2. **Top Content Marketing Challenges**: The 5 biggest content marketing challenges "${icp_name}" face right now — be specific, reference real trends and data points
+3. **Content & Attention Gap**: How "${icp_name}" struggle to cut through noise, build authority, and differentiate from competitors
+4. **Competitive Content Landscape**: What are their competitors doing with content marketing? Where are the gaps and opportunities?
+5. **Why Branded Video Podcasts Beat the Competition**: Specific, evidence-based reasons why a branded video podcast strategy gives "${icp_name}" a competitive edge over traditional content approaches
+6. **Key Metrics That Matter**: What content marketing KPIs and business outcomes "${icp_name}" care about most
+7. **Common Objections**: Typical objections "${icp_name}" have to investing in podcast/video content — and how to reframe them
+8. **Winning Talking Points**: 5 compelling, data-backed talking points that would resonate with "${icp_name}" decision-makers
 
-Be specific, data-driven where possible, and cite real trends or statistics. Focus on 2024-2025 relevance.`;
+Be specific and data-driven. Cite real statistics, studies, and current trends. Focus on 2024-2026 relevance.`;
 
     const perplexityResponse = await fetch("https://api.perplexity.ai/chat/completions", {
       method: "POST",

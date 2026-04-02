@@ -19,6 +19,7 @@ const NotFound = () => {
 
       <main className="flex-1 flex items-center justify-center relative overflow-hidden px-4 min-h-[70vh]">
         <DotsBackground />
+        <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
 
         <div className="text-center max-w-2xl mx-auto relative z-10">
           {/* Big 404 */}

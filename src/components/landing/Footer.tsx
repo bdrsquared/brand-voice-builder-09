@@ -65,8 +65,8 @@ const Footer = () => {
               <h4 className="text-sm font-semibold text-white mb-5 tracking-wide">Legal</h4>
               <ul className="space-y-3 text-sm font-body mb-8">
                 {[
-                  { label: "Privacy Policy", to: "/cookies-policy" },
-                  { label: "Cookies Policy", to: "/cookies-policy" },
+                  { label: "Privacy Policy", to: "/privacy-policy" },
+                  { label: "Cookies Policy", to: "/cookies" },
                 ].map((link) => (
                   <li key={link.label}>
                     <Link to={link.to} className="text-white/50 hover:text-white transition-colors">

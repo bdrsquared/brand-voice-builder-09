@@ -7,6 +7,47 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+/**
+ * Scrape a URL via Firecrawl and return its markdown + summary.
+ * Returns null on failure (non-blocking).
+ */
+async function scrapeUrl(
+  url: string,
+  firecrawlKey: string
+): Promise<{ url: string; title: string; markdown: string; summary: string } | null> {
+  try {
+    const resp = await fetch("https://api.firecrawl.dev/v1/scrape", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${firecrawlKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url,
+        formats: ["markdown", "summary"],
+        onlyMainContent: true,
+      }),
+    });
+
+    if (!resp.ok) {
+      console.warn(`Firecrawl scrape failed for ${url}: ${resp.status}`);
+      return null;
+    }
+
+    const data = await resp.json();
+    const inner = data.data || data;
+    return {
+      url,
+      title: inner.metadata?.title || url,
+      markdown: (inner.markdown || "").slice(0, 3000), // cap per-source
+      summary: inner.summary || "",
+    };
+  } catch (err) {
+    console.warn(`Firecrawl error for ${url}:`, err);
+    return null;
+  }
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -15,6 +56,12 @@ serve(async (req) => {
   try {
     const PERPLEXITY_API_KEY = Deno.env.get("PERPLEXITY_API_KEY");
     if (!PERPLEXITY_API_KEY) throw new Error("PERPLEXITY_API_KEY is not configured");
+
+    const FIRECRAWL_API_KEY = Deno.env.get("FIRECRAWL_API_KEY");
+    // Firecrawl is optional — deep research degrades gracefully
+    if (!FIRECRAWL_API_KEY) {
+      console.warn("FIRECRAWL_API_KEY not set — skipping deep scraping");
+    }
 
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("Missing authorization header");
@@ -42,6 +89,9 @@ serve(async (req) => {
     const contextLine = icp_description
       ? `Additional context: ${icp_description}`
       : "";
+
+    // ─── Step 1: Perplexity research ───
+    console.log(`Step 1: Perplexity research for "${icp_name}"`);
 
     const prompt = `What are the main content marketing challenges faced by "${icp_name}" and how can they beat their competition?
 
@@ -85,11 +135,79 @@ Be specific and data-driven. Cite real statistics, studies, and current trends. 
 
     const perplexityData = await perplexityResponse.json();
     const researchContent = perplexityData.choices?.[0]?.message?.content;
-    const citations = perplexityData.citations || [];
+    const citations: string[] = perplexityData.citations || [];
 
     if (!researchContent) throw new Error("No research content returned from Perplexity");
 
-    // Store research data using service role
+    console.log(`Perplexity returned ${citations.length} citations`);
+
+    // ─── Step 2: Deep scrape relevant citations via Firecrawl ───
+    let scrapedSources: Array<{ url: string; title: string; markdown: string; summary: string }> = [];
+
+    if (FIRECRAWL_API_KEY && citations.length > 0) {
+      console.log("Step 2: Scraping relevant citations with Firecrawl");
+
+      // Build keyword tokens from the ICP name for relevance matching
+      const icpTokens = icp_name
+        .toLowerCase()
+        .split(/[\s,\-&]+/)
+        .filter((t: string) => t.length > 2);
+
+      // Filter citations: pick those whose URL or domain contains ICP-related terms
+      // Also include top citations regardless (they were deemed most relevant by Perplexity)
+      const relevantCitations: string[] = [];
+      const otherCitations: string[] = [];
+
+      for (const url of citations) {
+        const urlLower = url.toLowerCase();
+        const isRelevant = icpTokens.some((token: string) => urlLower.includes(token));
+        if (isRelevant) {
+          relevantCitations.push(url);
+        } else {
+          otherCitations.push(url);
+        }
+      }
+
+      // Take all ICP-relevant URLs + top 3 other citations, max 8 total
+      const urlsToScrape = [
+        ...relevantCitations,
+        ...otherCitations.slice(0, Math.max(0, 8 - relevantCitations.length)),
+      ].slice(0, 8);
+
+      console.log(`Scraping ${urlsToScrape.length} URLs (${relevantCitations.length} ICP-relevant)`);
+
+      // Scrape in parallel
+      const scrapeResults = await Promise.allSettled(
+        urlsToScrape.map((url) => scrapeUrl(url, FIRECRAWL_API_KEY))
+      );
+
+      scrapedSources = scrapeResults
+        .filter(
+          (r): r is PromiseFulfilledResult<NonNullable<Awaited<ReturnType<typeof scrapeUrl>>>> =>
+            r.status === "fulfilled" && r.value !== null
+        )
+        .map((r) => r.value);
+
+      console.log(`Successfully scraped ${scrapedSources.length} sources`);
+    }
+
+    // ─── Step 3: Compile comprehensive research document ───
+    const researchDocument = {
+      icp_name,
+      researched_at: new Date().toISOString(),
+      perplexity_analysis: researchContent,
+      citations,
+      deep_sources: scrapedSources.map((s) => ({
+        url: s.url,
+        title: s.title,
+        summary: s.summary,
+        key_content: s.markdown,
+      })),
+      sources_scraped: scrapedSources.length,
+      total_citations: citations.length,
+    };
+
+    // ─── Step 4: Store research data ───
     const adminSupabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
@@ -98,11 +216,7 @@ Be specific and data-driven. Cite real statistics, studies, and current trends. 
     const { error: updateError } = await adminSupabase
       .from("icp_landing_pages")
       .update({
-        research_data: {
-          content: researchContent,
-          citations,
-          researched_at: new Date().toISOString(),
-        },
+        research_data: researchDocument,
         status: "researched",
         updated_at: new Date().toISOString(),
       })
@@ -114,7 +228,12 @@ Be specific and data-driven. Cite real statistics, studies, and current trends. 
     }
 
     return new Response(
-      JSON.stringify({ success: true, research: researchContent, citations }),
+      JSON.stringify({
+        success: true,
+        research: researchContent,
+        citations,
+        sources_scraped: scrapedSources.length,
+      }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
     );
   } catch (e) {

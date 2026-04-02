@@ -200,8 +200,9 @@ const Blogs = () => {
                       <div className="aspect-[16/10] overflow-hidden">
                         {post.cover_image ? (
                           <img
-                            src={post.cover_image}
+                            src={getThumbnailUrl(post.cover_image, 400, 60) || post.cover_image}
                             alt={post.title}
+                            loading="lazy"
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : (

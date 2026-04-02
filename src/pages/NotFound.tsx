@@ -40,7 +40,7 @@ const NotFound = () => {
           <Link to="/">
             <Button
               size="lg"
-              className="rounded-full px-8 py-6 text-base font-medium gap-2 bg-[hsl(var(--brand-green))] hover:bg-[hsl(var(--brand-green))]/90 text-background"
+              className="rounded-full px-8 py-6 text-base font-medium gap-2 bg-[#1CFA76] hover:bg-[#1CFA76]/90 text-black"
             >
               <Home className="w-5 h-5" />
               Back to safety

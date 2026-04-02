@@ -16,9 +16,9 @@ import launchImg from "@/assets/launch-microphone-compressed.webp";
 import runScaleImg from "@/assets/run-scale-compressed.webp";
 import officeImg from "@/assets/office-compressed.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.jpeg";
-import caseNoStress from "@/assets/case-no-stress.jpeg";
-import caseCfoPlaybook from "@/assets/case-cfo-playbook.jpeg";
-import caseIgFirefly from "@/assets/case-ig-firefly.jpeg";
+import caseNoStress from "@/assets/case-no-stress-thumb.webp";
+import caseCfoPlaybook from "@/assets/case-cfo-playbook-thumb.webp";
+import caseIgFirefly from "@/assets/case-ig-firefly-thumb.webp";
 
 const megaMenuItems = [
   {

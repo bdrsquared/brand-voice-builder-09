@@ -28,6 +28,7 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Calendly from "@/components/landing/Calendly";
 import LogoWall from "@/components/landing/LogoWall";
+import AuthorityLandingPage, { type AuthorityCopy } from "@/components/icp/AuthorityLandingPage";
 
 // ── Icon map for dynamic rendering ──
 const iconMap: Record<string, any> = {

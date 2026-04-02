@@ -38,6 +38,43 @@ const AdminICPManager = () => {
   const [researching, setResearching] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
 
+  const handleResearch = async (page: ICPPage) => {
+    setResearching(page.id);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error("Not authenticated");
+        return;
+      }
+
+      const response = await supabase.functions.invoke("research-icp", {
+        body: {
+          icp_id: page.id,
+          icp_name: page.icp_name,
+          icp_description: page.icp_description,
+        },
+      });
+
+      if (response.error) {
+        toast.error("Research failed: " + (response.error.message || "Unknown error"));
+        return;
+      }
+
+      const data = response.data;
+      if (data?.error) {
+        toast.error("Research failed: " + data.error);
+        return;
+      }
+
+      toast.success("Research complete — data saved");
+      fetchPages();
+    } catch (err: any) {
+      toast.error("Research failed: " + (err.message || "Unknown error"));
+    } finally {
+      setResearching(null);
+    }
+  };
+
   useEffect(() => {
     fetchPages();
   }, []);

@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import DotsBackground from "@/components/landing/DotsBackground";
+import useMetaTags from "@/hooks/useMetaTags";
 
 const NotFound = () => {
+  useMetaTags({ title: "Page Not Found | Earworm", description: "The page you're looking for doesn't exist." });
   const location = useLocation();
 
   useEffect(() => {

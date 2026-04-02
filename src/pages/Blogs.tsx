@@ -7,6 +7,7 @@ import Footer from "@/components/landing/Footer";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { getThumbnailUrl } from "@/lib/image-utils";
+import useMetaTags from "@/hooks/useMetaTags";
 
 type BlogPost = {
   id: string;
@@ -22,6 +23,7 @@ type BlogPost = {
 const POSTS_PER_PAGE = 9;
 
 const Blogs = () => {
+  useMetaTags();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);

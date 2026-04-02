@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { useParams, Navigate } from "react-router-dom";
+import useMetaTags from "@/hooks/useMetaTags";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import casePrettyCoveredHero from "@/assets/case-pretty-covered-hero-new.webp";
@@ -232,6 +233,11 @@ const caseStudies: Record<string, CaseStudyData> = {
 const CaseStudy = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = slug ? caseStudies[slug] : undefined;
+
+  useMetaTags(data ? {
+    title: `${data.showName} — ${data.clientName} Case Study | Earworm`,
+    description: data.tagline,
+  } : undefined);
 
   if (!data) return <Navigate to="/\" replace />;
 

@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
+import useMetaTags from "@/hooks/useMetaTags";
 import ValueProps from "@/components/landing/ValueProps";
 
 const Showreel = lazy(() => import("@/components/landing/Showreel"));
@@ -16,6 +17,7 @@ const Calendly = lazy(() => import("@/components/landing/Calendly"));
 const Footer = lazy(() => import("@/components/landing/Footer"));
 
 const Index = () => {
+  useMetaTags();
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <TestimonialTicker />

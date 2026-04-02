@@ -5,6 +5,7 @@ import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Calendly from "@/components/landing/Calendly";
 import Footer from "@/components/landing/Footer";
+import useMetaTags from "@/hooks/useMetaTags";
 
 import officeHero from "@/assets/office-hero.webp";
 import officeDesk from "@/assets/office-desk.webp";
@@ -39,6 +40,7 @@ const fadeUp = {
 /* ───── page ───── */
 
 const OurStory = () => {
+  useMetaTags();
   const parallaxRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: parallaxRef, offset: ["start end", "end start"] });
   const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);

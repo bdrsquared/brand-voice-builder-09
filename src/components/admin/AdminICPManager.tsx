@@ -82,6 +82,62 @@ const AdminICPManager = () => {
     }
   };
 
+  const handleGenerateCopy = async (page: ICPPage) => {
+    if (!page.research_data) {
+      toast.error("Research this ICP first");
+      return;
+    }
+    setGenerating(page.id);
+    try {
+      const response = await supabase.functions.invoke("generate-icp-copy", {
+        body: {
+          icp_id: page.id,
+          icp_name: page.icp_name,
+          research_data: page.research_data.content || page.research_data,
+        },
+      });
+
+      if (response.error) {
+        toast.error("Generation failed: " + (response.error.message || "Unknown error"));
+        return;
+      }
+
+      const data = response.data;
+      if (data?.error) {
+        toast.error("Generation failed: " + data.error);
+        return;
+      }
+
+      toast.success("Landing page copy generated!");
+      fetchPages();
+    } catch (err: any) {
+      toast.error("Generation failed: " + (err.message || "Unknown error"));
+    } finally {
+      setGenerating(null);
+    }
+  };
+
+  const handleTogglePublish = async (page: ICPPage) => {
+    setToggling(page.id);
+    const newPublished = !page.published;
+    const { error } = await (supabase
+      .from("icp_landing_pages" as any)
+      .update({
+        published: newPublished,
+        status: newPublished ? "published" : "generated",
+        updated_at: new Date().toISOString(),
+      } as any)
+      .eq("id", page.id) as any);
+
+    if (error) {
+      toast.error("Failed to update");
+    } else {
+      toast.success(newPublished ? "Page published!" : "Page unpublished");
+      fetchPages();
+    }
+    setToggling(null);
+  };
+
   useEffect(() => {
     fetchPages();
   }, []);

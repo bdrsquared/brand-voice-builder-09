@@ -36,6 +36,7 @@ const Admin = () => {
   const [timeRange, setTimeRange] = useState(30);
   const [pvTimeRange, setPvTimeRange] = useState(30);
   const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages" | "redirects">("inquiries");
+  const [pagesSubTab, setPagesSubTab] = useState<"seo" | "icp">("seo");
   const [showArchived, setShowArchived] = useState(false);
   const [insightsSubTab, setInsightsSubTab] = useState<"leads" | "pageviews">("leads");
   const [currentPage, setCurrentPage] = useState(1);

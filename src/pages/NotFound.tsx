@@ -4,6 +4,7 @@ import { Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import DotsBackground from "@/components/landing/DotsBackground";
 
 const NotFound = () => {
   const location = useLocation();

@@ -73,8 +73,8 @@ const caseStudies = [
 
 const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: number }) => {
 
-  const Wrapper = study.slug ? Link : "div";
-  const wrapperProps = study.slug ? { to: `/case-study/${study.slug}` } : {};
+  const Wrapper = Link;
+  const wrapperProps = study.slug ? { to: `/case-study/${study.slug}` } : { to: `/case-studies` };
 
   return (
     <Wrapper {...wrapperProps as any}>

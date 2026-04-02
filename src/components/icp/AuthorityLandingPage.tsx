@@ -33,6 +33,13 @@ export type AuthorityCopy = {
     headline_grey_part: string;
     cards: Array<{ title: string; description: string }>;
   };
+  challenges?: {
+    label: string;
+    headline: string;
+    headline_green_phrase: string;
+    intro: string;
+    items: Array<{ challenge: string; insight: string }>;
+  };
   shift: {
     label: string;
     headline: string;

@@ -290,15 +290,11 @@ const AdminICPManager = () => {
                     </Button>
 
                     <div className="flex gap-2">
-                      {page.status === "draft" && (
+                      {(page.status === "draft" || !page.research_data) && (
                         <Button
                           size="sm"
                           disabled={researching === page.id}
-                          onClick={() => {
-                            toast.info(
-                              "Research feature coming next — will use Perplexity to analyse this ICP"
-                            );
-                          }}
+                          onClick={() => handleResearch(page)}
                           className="text-xs"
                         >
                           {researching === page.id ? (

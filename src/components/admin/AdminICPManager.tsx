@@ -95,6 +95,7 @@ const AdminICPManager = () => {
           icp_id: page.id,
           icp_name: page.icp_name,
           research_data: page.research_data.content || page.research_data,
+          page_style: page.page_style || "original",
         },
       });
 

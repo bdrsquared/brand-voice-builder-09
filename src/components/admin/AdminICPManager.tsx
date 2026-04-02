@@ -350,13 +350,50 @@ const AdminICPManager = () => {
 
                   {/* Research data preview */}
                   {page.research_data && (
-                    <div>
-                      <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1">
-                        Research Data
-                      </p>
-                      <pre className="text-xs bg-background/50 rounded-lg p-3 overflow-auto max-h-48 text-foreground/70">
-                        {JSON.stringify(page.research_data, null, 2)}
-                      </pre>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                          Research Data
+                        </p>
+                        <div className="flex gap-2">
+                          {page.research_data.total_citations > 0 && (
+                            <Badge variant="outline" className="text-[10px] border-border">
+                              {page.research_data.total_citations} citations
+                            </Badge>
+                          )}
+                          {page.research_data.sources_scraped > 0 && (
+                            <Badge className="text-[10px] bg-blue-500/20 text-blue-400 border-0">
+                              {page.research_data.sources_scraped} deep-scraped
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Perplexity analysis */}
+                      <div className="text-xs bg-background/50 rounded-lg p-3 overflow-auto max-h-64 text-foreground/80 whitespace-pre-wrap leading-relaxed">
+                        {page.research_data.perplexity_analysis || page.research_data.content || JSON.stringify(page.research_data, null, 2)}
+                      </div>
+
+                      {/* Deep sources summary */}
+                      {page.research_data.deep_sources?.length > 0 && (
+                        <div>
+                          <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider mb-1.5">
+                            Deep-scraped sources
+                          </p>
+                          <div className="space-y-1.5">
+                            {page.research_data.deep_sources.map((src: any, i: number) => (
+                              <div key={i} className="text-xs bg-background/30 rounded-lg p-2.5 border border-white/5">
+                                <a href={src.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+                                  {src.title}
+                                </a>
+                                {src.summary && (
+                                  <p className="text-foreground/60 mt-1 leading-relaxed">{src.summary}</p>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
 

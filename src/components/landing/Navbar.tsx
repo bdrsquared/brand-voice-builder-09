@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, MessageCircle, Calendar, Layers, Activity, Eye, LogIn, BookOpen } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { getThumbnailUrl } from "@/lib/image-utils";
 import logo from "@/assets/earworm-logo.webp";
 import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.webp";

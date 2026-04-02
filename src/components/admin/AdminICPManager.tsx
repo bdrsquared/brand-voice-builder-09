@@ -373,7 +373,7 @@ const AdminICPManager = () => {
                   )}
 
                   {/* Action buttons */}
-                  <div className="flex items-center gap-2 justify-between">
+                  <div className="flex items-center gap-2 justify-between flex-wrap">
                     <Button
                       variant="destructive"
                       size="sm"
@@ -389,21 +389,73 @@ const AdminICPManager = () => {
                       Delete
                     </Button>
 
-                    <div className="flex gap-2">
-                      {(page.status === "draft" || !page.research_data) && (
+                    <div className="flex gap-2 flex-wrap">
+                      {/* Research button */}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        disabled={researching === page.id}
+                        onClick={() => handleResearch(page)}
+                        className="text-xs"
+                      >
+                        {researching === page.id ? (
+                          <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                        ) : (
+                          <Search className="w-3.5 h-3.5 mr-1.5" />
+                        )}
+                        {page.research_data ? "Re-research" : "Research ICP"}
+                      </Button>
+
+                      {/* Generate copy button */}
+                      {page.research_data && (
                         <Button
                           size="sm"
-                          disabled={researching === page.id}
-                          onClick={() => handleResearch(page)}
+                          variant="outline"
+                          disabled={generating === page.id}
+                          onClick={() => handleGenerateCopy(page)}
                           className="text-xs"
                         >
-                          {researching === page.id ? (
+                          {generating === page.id ? (
                             <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
                           ) : (
-                            <Search className="w-3.5 h-3.5 mr-1.5" />
+                            <Sparkles className="w-3.5 h-3.5 mr-1.5" />
                           )}
-                          Research ICP
+                          {page.generated_copy ? "Regenerate Copy" : "Generate Copy"}
                         </Button>
+                      )}
+
+                      {/* Publish toggle */}
+                      {page.generated_copy && (
+                        <Button
+                          size="sm"
+                          variant={page.published ? "outline" : "default"}
+                          disabled={toggling === page.id}
+                          onClick={() => handleTogglePublish(page)}
+                          className="text-xs"
+                        >
+                          {toggling === page.id ? (
+                            <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                          ) : page.published ? (
+                            <EyeOff className="w-3.5 h-3.5 mr-1.5" />
+                          ) : (
+                            <Globe className="w-3.5 h-3.5 mr-1.5" />
+                          )}
+                          {page.published ? "Unpublish" : "Publish"}
+                        </Button>
+                      )}
+
+                      {/* Preview link */}
+                      {page.published && page.slug && (
+                        <a
+                          href={`/for/${page.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button size="sm" variant="ghost" className="text-xs">
+                            <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                            Preview
+                          </Button>
+                        </a>
                       )}
                     </div>
                   </div>

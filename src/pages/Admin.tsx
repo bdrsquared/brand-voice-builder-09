@@ -347,6 +347,8 @@ const Admin = () => {
           <AdminBlogManager />
         ) : activeTab === "pages" ? (
           <AdminPagesManager />
+        ) : activeTab === "redirects" ? (
+          <AdminRedirectsManager />
         ) : (
           <>
         {/* Sub-tabs: Leads / Page Views */}

@@ -245,7 +245,7 @@ ${researchText}
 }
 
 ## CONTENT RULES:
-- Generate exactly 4 problem cards, 4 opportunity items, 3 model steps, 3 proof metrics, 4 tangible items, 4 why_earworm points
+- Generate exactly 4 problem cards, 5 challenges, 4 opportunity items, 3 model steps, 3 proof metrics, 4 tangible items, 4 why_earworm points
 - Each model step needs exactly 3 details
 - Stats and metrics should reference real data from the research where possible
 - The testimonial should feel realistic (for a podcast production agency)

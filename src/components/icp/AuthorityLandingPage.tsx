@@ -33,6 +33,13 @@ export type AuthorityCopy = {
     headline_grey_part: string;
     cards: Array<{ title: string; description: string }>;
   };
+  challenges?: {
+    label: string;
+    headline: string;
+    headline_green_phrase: string;
+    intro: string;
+    items: Array<{ challenge: string; insight: string }>;
+  };
   shift: {
     label: string;
     headline: string;
@@ -204,6 +211,38 @@ const AuthorityLandingPage = ({ copy }: { copy: AuthorityCopy }) => {
           </div>
         </div>
       </section>
+
+      {/* ════════ UNIQUE CHALLENGES ════════ */}
+      {copy.challenges && (
+        <section className="relative py-20 sm:py-28 px-6">
+          <div className="absolute top-[-80px] right-[-150px] w-[350px] h-[350px] blob-blue pointer-events-none" />
+          <div className="relative z-10 max-w-6xl mx-auto">
+            <motion.div className="mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }}>
+              <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">{copy.challenges.label}</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-4 text-text-primary font-heading">
+                {greenGradientPhrase(copy.challenges.headline, copy.challenges.headline_green_phrase)}
+              </h2>
+              <p className="text-base text-text-secondary max-w-2xl leading-relaxed font-body">{copy.challenges.intro}</p>
+            </motion.div>
+
+            <div className="space-y-4">
+              {copy.challenges.items.map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="p-6 sm:p-8 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                >
+                  <h3 className="text-lg text-text-primary font-heading font-medium mb-2">{item.challenge}</h3>
+                  <p className="text-sm text-text-secondary font-body leading-relaxed">{item.insight}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ════════ 3. THE SHIFT ════════ */}
       <section className="relative py-20 sm:py-28 px-6">

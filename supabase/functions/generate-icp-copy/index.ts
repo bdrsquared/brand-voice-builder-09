@@ -145,6 +145,18 @@ ${researchText}
       }
     ]
   },
+  "challenges": {
+    "label": "● Your unique challenges",
+    "headline": "A headline that shows deep understanding of ${icp_name}-specific challenges. Max 12 words.",
+    "headline_green_phrase": "Key phrase to render in green gradient",
+    "intro": "1-2 sentences. Show you understand their world intimately. Use their language.",
+    "items": [
+      {
+        "challenge": "A specific challenge unique to ${icp_name} (use industry jargon naturally)",
+        "insight": "2-3 sentences. Show deep understanding. Reference specific tools, metrics, processes or realities from their world. Sound like an insider, not a consultant."
+      }
+    ]
+  },
   "shift": {
     "label": "● The shift",
     "headline": "A reframing headline. Position podcasting as a system, not a channel.",
@@ -233,7 +245,7 @@ ${researchText}
 }
 
 ## CONTENT RULES:
-- Generate exactly 4 problem cards, 4 opportunity items, 3 model steps, 3 proof metrics, 4 tangible items, 4 why_earworm points
+- Generate exactly 4 problem cards, 5 challenges, 4 opportunity items, 3 model steps, 3 proof metrics, 4 tangible items, 4 why_earworm points
 - Each model step needs exactly 3 details
 - Stats and metrics should reference real data from the research where possible
 - The testimonial should feel realistic (for a podcast production agency)

@@ -616,7 +616,7 @@ const Navbar = () => {
                             className="group/blog flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/[0.06] transition-all"
                           >
                             {blog.cover_image ? (
-                              <img src={blog.cover_image} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0 border border-white/10" />
+                              <img src={getThumbnailUrl(blog.cover_image, 80, 50) || blog.cover_image} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0 border border-white/10" />
                             ) : (
                               <div className="w-10 h-10 rounded-lg bg-white/[0.08] border border-white/10 shrink-0 flex items-center justify-center">
                                 <BookOpen className="w-4 h-4 text-white/30" />

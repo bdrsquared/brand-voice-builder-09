@@ -1,0 +1,1 @@
+ALTER TABLE public.icp_landing_pages ADD COLUMN page_style text NOT NULL DEFAULT 'original';

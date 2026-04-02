@@ -99,6 +99,7 @@ export type Database = {
           icp_description: string | null
           icp_name: string
           id: string
+          page_style: string
           published: boolean
           research_data: Json | null
           slug: string | null
@@ -111,6 +112,7 @@ export type Database = {
           icp_description?: string | null
           icp_name: string
           id?: string
+          page_style?: string
           published?: boolean
           research_data?: Json | null
           slug?: string | null
@@ -123,6 +125,7 @@ export type Database = {
           icp_description?: string | null
           icp_name?: string
           id?: string
+          page_style?: string
           published?: boolean
           research_data?: Json | null
           slug?: string | null

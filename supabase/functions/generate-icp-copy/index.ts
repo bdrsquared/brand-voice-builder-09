@@ -98,7 +98,7 @@ function buildAuthorityPrompt(icp_name: string, researchText: string) {
 - Sound like the smartest person in the room who also happens to be approachable
 - Lead with data, stats and specifics - not feelings
 - Use British English spelling
-- NEVER use em dashes (—) - use spaced hyphers ( - ) instead
+- NEVER use em dashes (—) - use spaced hyphens ( - ) instead
 - NEVER use Oxford commas
 - Be direct and confident. Not arrogant, but clearly expert
 - Use "you" and "your" throughout - speak directly to ${icp_name} decision-makers

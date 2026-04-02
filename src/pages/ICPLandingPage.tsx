@@ -216,7 +216,7 @@ const ICPLandingPage = () => {
 
   if (loading) return <div className="min-h-screen bg-background" />;
 
-  if (notFound || !copy) {
+  if (notFound || (!copy && !authorityCopy)) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center text-foreground">
         <div className="text-center">
@@ -226,6 +226,12 @@ const ICPLandingPage = () => {
       </div>
     );
   }
+
+  if (pageStyle === "authority" && authorityCopy) {
+    return <AuthorityLandingPage copy={authorityCopy} />;
+  }
+
+  if (!copy) return null;
 
   const vpIcons = [Target, Layers, TrendingUp, Crown];
 

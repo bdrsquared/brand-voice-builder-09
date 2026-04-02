@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { useParams, Navigate } from "react-router-dom";
+import useMetaTags from "@/hooks/useMetaTags";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import casePrettyCoveredHero from "@/assets/case-pretty-covered-hero-new.webp";

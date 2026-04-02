@@ -33,7 +33,7 @@ ${researchText}
 
 {
   "hero": {
-    "badge": "2-3 word category label",
+    "badge": "2-3 word category label - just the ICP name, NEVER start with 'For'",
     "headline": "Bold headline, max 10 words. Make one phrase the hero.",
     "highlight_phrase": "The exact phrase from the headline to highlight in brand green (italic)",
     "subheadline": "2 sentences. Speak directly to this ICP's reality.",

@@ -457,7 +457,7 @@ const AdminICPManager = () => {
                           ) : (
                             <Sparkles className="w-3.5 h-3.5 mr-1.5" />
                           )}
-                          {page.generated_copy ? "Regenerate Copy" : "Generate Copy"}
+                          {page.generated_copy ? "Regenerate Page" : "Generate Page"}
                         </Button>
                       )}
 

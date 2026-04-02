@@ -92,6 +92,45 @@ export type Database = {
         }
         Relationships: []
       }
+      icp_landing_pages: {
+        Row: {
+          created_at: string
+          generated_copy: Json | null
+          icp_description: string | null
+          icp_name: string
+          id: string
+          published: boolean
+          research_data: Json | null
+          slug: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          generated_copy?: Json | null
+          icp_description?: string | null
+          icp_name: string
+          id?: string
+          published?: boolean
+          research_data?: Json | null
+          slug?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          generated_copy?: Json | null
+          icp_description?: string | null
+          icp_name?: string
+          id?: string
+          published?: boolean
+          research_data?: Json | null
+          slug?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       inquiries: {
         Row: {
           archived: boolean

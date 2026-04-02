@@ -92,165 +92,88 @@ ${researchText}
 }
 
 function buildAuthorityPrompt(icp_name: string, researchText: string) {
-  return `You are writing a high-converting landing page for Earworm - a B2B branded podcast and video content production agency. This page targets "${icp_name}".
+  return `You are a head of marketing at a B2B podcast production agency called Earworm. You're writing a landing page that sells directly to "${icp_name}" decision-makers. Keep it SHORT and punchy - every word must earn its place.
 
-## TONE: Casual professional. Data-led. Authoritative. Clever.
-- Sound like the smartest person in the room who also happens to be approachable
-- Lead with data, stats and specifics - not feelings
-- Use British English spelling
-- NEVER use em dashes (—) - use spaced hyphens ( - ) instead
+## TONE:
+- Confident, data-led, clever. Not salesy
+- Use British English. NEVER use em dashes (—) - use spaced hyphens ( - ) instead
 - NEVER use Oxford commas
-- Be direct and confident. Not arrogant, but clearly expert
-- Use "you" and "your" throughout - speak directly to ${icp_name} decision-makers
-- Reference specific industry realities, not generic marketing speak
-- Short paragraphs. Punchy sentences. Let the data do the heavy lifting
-- NEVER use corporate jargon: leverage, ecosystem, robust, game-changer, synergy, disruptive, cutting-edge
-- NEVER use AI-isms: In conclusion, Let's dive in, In today's landscape
+- NEVER use: leverage, ecosystem, robust, game-changer, synergy, cutting-edge, In conclusion, Let's dive in
+- Speak their language. Use a small amount of ${icp_name} industry jargon naturally
+- Short sentences. One idea per sentence. No fluff
 
 ## RESEARCH DATA:
 ${researchText}
 
-## GENERATE THIS JSON STRUCTURE:
+## GENERATE THIS JSON (keep copy SHORT - this is a visual page, not a blog):
 
 {
   "style": "authority",
   "hero": {
     "badge": "${icp_name}",
-    "headline": "A bold, specific headline about video podcasting and [outcome]. Max 12 words. NEVER start with 'For' - position Earworm as experts IN this field, not outsiders delivering TO it.",
-    "highlight_phrase": "The outcome phrase to highlight in green italic",
-    "subheadline": "Built for [industry reality], not generic content strategies. One sentence that makes them think 'this is for me'.",
+    "headline": "Max 10 words. Bold. Outcome-focused. NEVER start with 'For'. Position Earworm as experts IN this field.",
+    "highlight_phrase": "The 2-3 word outcome phrase to highlight in green italic",
+    "subheadline": "One sentence. Max 20 words. Make them think 'this is for me'.",
     "cta_primary": "Request a conversation",
-    "cta_secondary": "See how it works"
+    "cta_secondary": "See how it works",
+    "image_query": "A 2-3 word Unsplash search query related to ${icp_name} industry (e.g. 'cybersecurity technology', 'fintech office', 'healthcare team')"
   },
-  "problem": {
+  "pain_points": {
     "label": "● Sound familiar?",
-    "headline": "A headline that captures their frustration. Max 12 words.",
-    "headline_grey_part": "The trailing grey phrase",
-    "cards": [
-      {
-        "title": "What you're doing",
-        "description": "2-3 sentences about their current content approach. Be specific to ${icp_name}."
-      },
-      {
-        "title": "What's not working",
-        "description": "2-3 sentences about why it's failing. Use data from the research."
-      },
-      {
-        "title": "The internal challenge",
-        "description": "2-3 sentences about budget, buy-in, consistency struggles."
-      },
-      {
-        "title": "The market reality",
-        "description": "2-3 sentences about competitive pressure and changing buyer behaviour."
-      }
-    ]
-  },
-  "challenges": {
-    "label": "● Your unique challenges",
-    "headline": "A headline that shows deep understanding of ${icp_name}-specific challenges. Max 12 words.",
-    "headline_green_phrase": "Key phrase to render in green gradient",
-    "intro": "1-2 sentences. Show you understand their world intimately. Use their language.",
+    "headline": "Max 10 words. Name their frustration.",
     "items": [
       {
-        "challenge": "A specific challenge unique to ${icp_name} (use industry jargon naturally)",
-        "insight": "2-3 sentences. Show deep understanding. Reference specific tools, metrics, processes or realities from their world. Sound like an insider, not a consultant."
+        "title": "Max 6 words",
+        "description": "One sentence. Max 20 words. Specific to ${icp_name}."
       }
     ]
   },
-  "shift": {
-    "label": "● The shift",
-    "headline": "A reframing headline. Position podcasting as a system, not a channel.",
-    "headline_green_phrase": "Key phrase to render in green gradient",
-    "description": "2-3 sentences. Reframe how they should think about content. Bold, opinionated."
-  },
-  "opportunity": {
-    "label": "● Why now",
-    "headline": "A headline about why the timing is right for ${icp_name}",
-    "items": [
-      {
-        "stat": "A compelling data point (e.g. '73%', '3.2x')",
-        "title": "Short title (4-6 words)",
-        "description": "1-2 sentences. Why this matters for ${icp_name} specifically.",
-        "source": "Source attribution"
-      }
-    ]
-  },
-  "model": {
+  "how_it_works": {
     "label": "● How it works",
     "headline": "Record once. Distribute everywhere.",
-    "headline_secondary": "A supporting line about the system",
     "steps": [
       {
         "number": "01",
-        "title": "Strategy",
-        "description": "2-3 sentences. What happens in this phase. Specific to ${icp_name}.",
-        "details": ["Detail 1", "Detail 2", "Detail 3"]
-      },
-      {
-        "number": "02",
-        "title": "Production",
-        "description": "2-3 sentences.",
-        "details": ["Detail 1", "Detail 2", "Detail 3"]
-      },
-      {
-        "number": "03",
-        "title": "Distribution",
-        "description": "2-3 sentences.",
-        "details": ["Detail 1", "Detail 2", "Detail 3"]
+        "title": "One word (Strategy / Production / Distribution)",
+        "description": "One sentence. Max 25 words. What happens in this phase.",
+        "image_query": "A 2-3 word Unsplash search query for this step (e.g. 'podcast studio', 'video editing', 'social media content')"
       }
     ]
   },
-  "proof": {
-    "label": "● It works",
-    "headline": "A headline about results",
-    "metrics": [
-      { "value": "A metric (e.g. '400%')", "label": "What it measures", "context": "Brief context" }
-    ],
-    "testimonial": {
-      "quote": "A short, punchy testimonial quote (make it realistic and specific to content/podcasting results)",
-      "author": "Name",
-      "role": "Title, Company"
-    }
-  },
-  "tangible": {
-    "label": "● What this looks like for you",
-    "headline": "Working with Earworm",
+  "stats": {
+    "headline": "Max 10 words about why ${icp_name} are investing in podcasts",
     "items": [
       {
-        "title": "Short title (3-5 words)",
-        "description": "1-2 sentences about the experience or deliverable"
+        "value": "A stat (e.g. '73%', '3.2x', '47%')",
+        "label": "Max 8 words. What it measures.",
+        "source": "Source name"
       }
     ]
   },
-  "why_earworm": {
+  "differentiators": {
     "label": "● Why Earworm",
-    "headline": "A differentiation headline. Subtle premium positioning.",
-    "points": [
+    "headline": "Max 10 words. Subtle premium positioning.",
+    "items": [
       {
-        "title": "One word or short phrase (e.g. 'Quality', 'Strategy-first')",
-        "description": "1-2 sentences. What makes Earworm different here."
+        "title": "One word or two (e.g. 'Quality', 'Strategy-first')",
+        "description": "One sentence. Max 20 words."
       }
     ]
-  },
-  "qualification": {
-    "headline": "We work with a small number of teams at any one time.",
-    "description": "1-2 sentences. Soft qualification. Make selectivity feel valuable, not exclusive."
   },
   "cta_section": {
-    "headline": "A final headline. Specific outcome for ${icp_name}.",
-    "headline_green_phrase": "The green gradient phrase",
-    "subheadline": "Request a conversation. If it's a fit, we'll take it from there.",
+    "headline": "Max 10 words. Specific outcome for ${icp_name}.",
+    "headline_green_phrase": "The 2-3 word green gradient phrase",
+    "subheadline": "One sentence. Direct.",
     "cta_text": "Request a conversation"
   }
 }
 
 ## CONTENT RULES:
-- Generate exactly 4 problem cards, 5 challenges, 4 opportunity items, 3 model steps, 3 proof metrics, 4 tangible items, 4 why_earworm points
-- Each model step needs exactly 3 details
-- Stats and metrics should reference real data from the research where possible
-- The testimonial should feel realistic (for a podcast production agency)
-- The whole page should feel like it was written by someone who deeply understands ${icp_name}
-- Use a small amount of ICP-specific jargon naturally
+- Generate exactly 3 pain_points, 3 how_it_works steps, 3 stats, 4 differentiators
+- Keep ALL descriptions to ONE sentence max
+- Stats should use real data from the research where possible
+- image_query values should be simple Unsplash search terms relevant to the ICP industry
+- The page should feel like it was written by an insider who knows ${icp_name}
 - Return ONLY valid JSON. No markdown wrapping. No explanation.`;
 }
 

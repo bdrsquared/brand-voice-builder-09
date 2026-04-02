@@ -348,7 +348,23 @@ const Admin = () => {
         {activeTab === "blog" ? (
           <AdminBlogManager />
         ) : activeTab === "pages" ? (
-          <AdminPagesManager />
+          <div className="space-y-4">
+            <div className="flex gap-1 bg-white/5 rounded-lg p-0.5 w-fit">
+              <button
+                onClick={() => setPagesSubTab("seo")}
+                className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${pagesSubTab === "seo" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                SEO Metadata
+              </button>
+              <button
+                onClick={() => setPagesSubTab("icp")}
+                className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${pagesSubTab === "icp" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                <Users className="w-3.5 h-3.5 inline mr-1" />ICP Pages
+              </button>
+            </div>
+            {pagesSubTab === "seo" ? <AdminPagesManager /> : <AdminICPManager />}
+          </div>
         ) : activeTab === "redirects" ? (
           <AdminRedirectsManager />
         ) : (

@@ -5,6 +5,7 @@ import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Footer from "@/components/landing/Footer";
 import DotsBackground from "@/components/landing/DotsBackground";
+import useMetaTags from "@/hooks/useMetaTags";
 
 import caseCarrier from "@/assets/case-carrier.webp";
 import casePrettyCovered from "@/assets/case-pretty-covered.webp";

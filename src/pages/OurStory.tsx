@@ -5,6 +5,7 @@ import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Calendly from "@/components/landing/Calendly";
 import Footer from "@/components/landing/Footer";
+import useMetaTags from "@/hooks/useMetaTags";
 
 import officeHero from "@/assets/office-hero.webp";
 import officeDesk from "@/assets/office-desk.webp";

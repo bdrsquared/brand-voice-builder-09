@@ -3,6 +3,7 @@ import Footer from "@/components/landing/Footer";
 import { motion } from "framer-motion";
 import { Cookie } from "lucide-react";
 import DotsBackground from "@/components/landing/DotsBackground";
+import useMetaTags from "@/hooks/useMetaTags";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },

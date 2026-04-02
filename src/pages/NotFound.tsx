@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import DotsBackground from "@/components/landing/DotsBackground";
+import useMetaTags from "@/hooks/useMetaTags";
 
 const NotFound = () => {
   const location = useLocation();

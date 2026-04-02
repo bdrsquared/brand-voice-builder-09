@@ -17,6 +17,7 @@ const Calendly = lazy(() => import("@/components/landing/Calendly"));
 const Footer = lazy(() => import("@/components/landing/Footer"));
 
 const Index = () => {
+  useMetaTags();
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <TestimonialTicker />

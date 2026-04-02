@@ -7,6 +7,7 @@ import Footer from "@/components/landing/Footer";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { getThumbnailUrl } from "@/lib/image-utils";
+import useMetaTags from "@/hooks/useMetaTags";
 
 type BlogPost = {
   id: string;

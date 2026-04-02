@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Shield } from "lucide-react";
 import DotsBackground from "@/components/landing/DotsBackground";
+import useMetaTags from "@/hooks/useMetaTags";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },

@@ -116,7 +116,7 @@ ${researchText}
   "style": "authority",
   "hero": {
     "badge": "For ${icp_name}",
-    "headline": "Video podcasting for [role/team type] that want to [specific outcome]. Max 12 words. Bold, specific.",
+    "headline": "Video podcasting for [role/team type] that want to [specific outcome]. Max 12 words. Bold, specific. IMPORTANT: The headline must NOT start with 'For' - just name the ICP directly.",
     "highlight_phrase": "The outcome phrase to highlight in green italic",
     "subheadline": "Built for [industry reality], not generic content strategies. One sentence that makes them think 'this is for me'.",
     "cta_primary": "Request a conversation",

@@ -42,7 +42,13 @@ const BlogPost = () => {
     fetchPost();
   }, [slug]);
 
-  useMetaTags(post);
+  useMetaTags(post ? {
+    title: `${post.title} | Earworm`,
+    description: post.excerpt || `Read "${post.title}" on the Earworm blog.`,
+    ogTitle: post.title,
+    ogDescription: post.excerpt || `Read "${post.title}" on the Earworm blog.`,
+    ogImage: post.cover_image || undefined,
+  } : undefined);
 
   if (loading) {
     return (

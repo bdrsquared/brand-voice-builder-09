@@ -8,7 +8,7 @@ import casePrettyCoveredBts2 from "@/assets/case-pretty-covered-bts2.webp";
 import casePrettyCoveredBts3 from "@/assets/case-pretty-covered-bts3.webp";
 import casePrettyCoveredBts4 from "@/assets/case-pretty-covered-bts4.webp";
 import caseIgHero from "@/assets/case-ig-bts-studio.webp";
-import caseIgBtsControl from "@/assets/case-ig-bts-control.jpg";
+import caseIgBtsControl from "@/assets/case-ig-bts-control.webp";
 import caseIgLogoArt from "@/assets/case-ig-logo-art.webp";
 import caseIgMarketChaos from "@/assets/case-ig-market-chaos.webp";
 import caseIgOrigami from "@/assets/case-ig-origami.jpg";

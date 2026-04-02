@@ -329,6 +329,12 @@ const Admin = () => {
             >
               <Globe className="w-3.5 h-3.5 inline mr-1" />Pages
             </button>
+            <button
+              onClick={() => setActiveTab("redirects")}
+              className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "redirects" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <ExternalLink className="w-3.5 h-3.5 inline mr-1" />Redirects
+            </button>
           </div>
           <Button variant="ghost" size="sm" onClick={handleSignOut} className="text-xs sm:text-sm">
             <LogOut className="w-4 h-4 sm:mr-2" /> <span className="hidden sm:inline">Sign Out</span>

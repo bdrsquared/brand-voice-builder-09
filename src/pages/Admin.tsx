@@ -4,11 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye, Trash2, CheckCircle, MoreHorizontal, BellDot, ExternalLink } from "lucide-react";
+import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye, Trash2, CheckCircle, MoreHorizontal, BellDot, ExternalLink, Users } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
 import AdminPagesManager from "@/components/admin/AdminPagesManager";
+import AdminICPManager from "@/components/admin/AdminICPManager";
 import AdminRedirectsManager from "@/components/admin/AdminRedirectsManager";
 
 type Inquiry = {
@@ -35,6 +36,7 @@ const Admin = () => {
   const [timeRange, setTimeRange] = useState(30);
   const [pvTimeRange, setPvTimeRange] = useState(30);
   const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages" | "redirects">("inquiries");
+  const [pagesSubTab, setPagesSubTab] = useState<"seo" | "icp">("seo");
   const [showArchived, setShowArchived] = useState(false);
   const [insightsSubTab, setInsightsSubTab] = useState<"leads" | "pageviews">("leads");
   const [currentPage, setCurrentPage] = useState(1);
@@ -346,7 +348,23 @@ const Admin = () => {
         {activeTab === "blog" ? (
           <AdminBlogManager />
         ) : activeTab === "pages" ? (
-          <AdminPagesManager />
+          <div className="space-y-4">
+            <div className="flex gap-1 bg-white/5 rounded-lg p-0.5 w-fit">
+              <button
+                onClick={() => setPagesSubTab("seo")}
+                className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${pagesSubTab === "seo" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                SEO Metadata
+              </button>
+              <button
+                onClick={() => setPagesSubTab("icp")}
+                className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${pagesSubTab === "icp" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                <Users className="w-3.5 h-3.5 inline mr-1" />ICP Pages
+              </button>
+            </div>
+            {pagesSubTab === "seo" ? <AdminPagesManager /> : <AdminICPManager />}
+          </div>
         ) : activeTab === "redirects" ? (
           <AdminRedirectsManager />
         ) : (

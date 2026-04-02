@@ -100,7 +100,7 @@ const Navbar = () => {
       .select("title, excerpt, created_at, slug, cover_image")
       .eq("published", true)
       .order("created_at", { ascending: false })
-      .limit(4)
+      .limit(5)
       .then(({ data }) => { if (data) setRecentBlogs(data); });
   }, []);
 

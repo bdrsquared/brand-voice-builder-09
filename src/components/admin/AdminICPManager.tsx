@@ -12,6 +12,11 @@ import {
   Loader2,
   Trash2,
   Search,
+  Sparkles,
+  ExternalLink,
+  Globe,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { toast } from "sonner";
 

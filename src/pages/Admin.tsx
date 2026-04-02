@@ -4,11 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye, Trash2, CheckCircle, MoreHorizontal, BellDot } from "lucide-react";
+import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye, Trash2, CheckCircle, MoreHorizontal, BellDot, ExternalLink } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
 import AdminPagesManager from "@/components/admin/AdminPagesManager";
+import AdminRedirectsManager from "@/components/admin/AdminRedirectsManager";
 
 type Inquiry = {
   id: string;
@@ -33,7 +34,7 @@ const Admin = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(30);
   const [pvTimeRange, setPvTimeRange] = useState(30);
-  const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages">("inquiries");
+  const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages" | "redirects">("inquiries");
   const [showArchived, setShowArchived] = useState(false);
   const [insightsSubTab, setInsightsSubTab] = useState<"leads" | "pageviews">("leads");
   const [currentPage, setCurrentPage] = useState(1);
@@ -328,6 +329,12 @@ const Admin = () => {
             >
               <Globe className="w-3.5 h-3.5 inline mr-1" />Pages
             </button>
+            <button
+              onClick={() => setActiveTab("redirects")}
+              className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "redirects" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <ExternalLink className="w-3.5 h-3.5 inline mr-1" />Redirects
+            </button>
           </div>
           <Button variant="ghost" size="sm" onClick={handleSignOut} className="text-xs sm:text-sm">
             <LogOut className="w-4 h-4 sm:mr-2" /> <span className="hidden sm:inline">Sign Out</span>
@@ -340,6 +347,8 @@ const Admin = () => {
           <AdminBlogManager />
         ) : activeTab === "pages" ? (
           <AdminPagesManager />
+        ) : activeTab === "redirects" ? (
+          <AdminRedirectsManager />
         ) : (
           <>
         {/* Sub-tabs: Leads / Page Views */}

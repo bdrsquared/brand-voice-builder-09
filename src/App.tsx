@@ -9,6 +9,7 @@ import PageTransition from "./components/PageTransition";
 import CookieConsent from "./components/CookieConsent";
 import ChatWidget from "./components/ChatWidget";
 import PageViewTracker from "./components/PageViewTracker";
+import RedirectHandler from "./components/RedirectHandler";
 
 const ConditionalWidgets = () => {
   const location = useLocation();
@@ -68,6 +69,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
+        <RedirectHandler />
         <PageViewTracker />
         <ConditionalWidgets />
       </BrowserRouter>

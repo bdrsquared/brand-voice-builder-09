@@ -19,6 +19,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 );
 
 const PrivacyPolicy = () => {
+  useMetaTags();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />

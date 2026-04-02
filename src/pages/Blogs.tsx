@@ -23,6 +23,7 @@ type BlogPost = {
 const POSTS_PER_PAGE = 9;
 
 const Blogs = () => {
+  useMetaTags();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);

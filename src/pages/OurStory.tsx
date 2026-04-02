@@ -40,6 +40,7 @@ const fadeUp = {
 /* ───── page ───── */
 
 const OurStory = () => {
+  useMetaTags();
   const parallaxRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: parallaxRef, offset: ["start end", "end start"] });
   const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);

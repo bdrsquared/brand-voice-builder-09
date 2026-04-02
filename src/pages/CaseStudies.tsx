@@ -119,6 +119,7 @@ const CaseStudyCard = ({ study, index }: { study: typeof caseStudies[0]; index: 
 };
 
 const CaseStudiesPage = () => {
+  useMetaTags();
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <TestimonialTicker />

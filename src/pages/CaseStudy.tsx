@@ -20,10 +20,10 @@ import caseNostressBranded from "@/assets/case-nostress-branded.webp";
 import caseNostressSpeaker from "@/assets/case-nostress-speaker.webp";
 import caseSoldoHero from "@/assets/case-soldo-hero.webp";
 import caseSoldoHost from "@/assets/case-soldo-host.webp";
-import caseSoldoEvent from "@/assets/case-soldo-event.jpg";
+import caseSoldoEvent from "@/assets/case-soldo-event.webp";
 import caseSoldoSkyline from "@/assets/case-soldo-skyline.webp";
 import caseSoldoGuest from "@/assets/case-soldo-guest.webp";
-import caseSoldoBags from "@/assets/case-soldo-bags.jpg";
+import caseSoldoBags from "@/assets/case-soldo-bags.webp";
 
 const CaseStudyHero = lazy(() => import("@/components/case-study/CaseStudyHero"));
 const CaseStudyImpact = lazy(() => import("@/components/case-study/CaseStudyImpact"));

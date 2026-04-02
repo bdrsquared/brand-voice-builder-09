@@ -11,7 +11,7 @@ import casePrettyCovered from "@/assets/case-pretty-covered.webp";
 import caseWenodo from "@/assets/case-wenodo.webp";
 import casePulsetto from "@/assets/case-pulsetto.webp";
 import caseCfoPlaybook from "@/assets/case-cfo-playbook.webp";
-import caseUkUsTax from "@/assets/case-ig-hero.png";
+import caseUkUsTax from "@/assets/case-ig-hero.webp";
 
 const caseStudies = [
   {

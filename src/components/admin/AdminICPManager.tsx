@@ -12,6 +12,11 @@ import {
   Loader2,
   Trash2,
   Search,
+  Sparkles,
+  ExternalLink,
+  Globe,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -37,6 +42,8 @@ const AdminICPManager = () => {
   const [creating, setCreating] = useState(false);
   const [researching, setResearching] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [generating, setGenerating] = useState<string | null>(null);
+  const [toggling, setToggling] = useState<string | null>(null);
 
   const handleResearch = async (page: ICPPage) => {
     setResearching(page.id);
@@ -73,6 +80,62 @@ const AdminICPManager = () => {
     } finally {
       setResearching(null);
     }
+  };
+
+  const handleGenerateCopy = async (page: ICPPage) => {
+    if (!page.research_data) {
+      toast.error("Research this ICP first");
+      return;
+    }
+    setGenerating(page.id);
+    try {
+      const response = await supabase.functions.invoke("generate-icp-copy", {
+        body: {
+          icp_id: page.id,
+          icp_name: page.icp_name,
+          research_data: page.research_data.content || page.research_data,
+        },
+      });
+
+      if (response.error) {
+        toast.error("Generation failed: " + (response.error.message || "Unknown error"));
+        return;
+      }
+
+      const data = response.data;
+      if (data?.error) {
+        toast.error("Generation failed: " + data.error);
+        return;
+      }
+
+      toast.success("Landing page copy generated!");
+      fetchPages();
+    } catch (err: any) {
+      toast.error("Generation failed: " + (err.message || "Unknown error"));
+    } finally {
+      setGenerating(null);
+    }
+  };
+
+  const handleTogglePublish = async (page: ICPPage) => {
+    setToggling(page.id);
+    const newPublished = !page.published;
+    const { error } = await (supabase
+      .from("icp_landing_pages" as any)
+      .update({
+        published: newPublished,
+        status: newPublished ? "published" : "generated",
+        updated_at: new Date().toISOString(),
+      } as any)
+      .eq("id", page.id) as any);
+
+    if (error) {
+      toast.error("Failed to update");
+    } else {
+      toast.success(newPublished ? "Page published!" : "Page unpublished");
+      fetchPages();
+    }
+    setToggling(null);
   };
 
   useEffect(() => {
@@ -310,7 +373,7 @@ const AdminICPManager = () => {
                   )}
 
                   {/* Action buttons */}
-                  <div className="flex items-center gap-2 justify-between">
+                  <div className="flex items-center gap-2 justify-between flex-wrap">
                     <Button
                       variant="destructive"
                       size="sm"
@@ -326,21 +389,73 @@ const AdminICPManager = () => {
                       Delete
                     </Button>
 
-                    <div className="flex gap-2">
-                      {(page.status === "draft" || !page.research_data) && (
+                    <div className="flex gap-2 flex-wrap">
+                      {/* Research button */}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        disabled={researching === page.id}
+                        onClick={() => handleResearch(page)}
+                        className="text-xs"
+                      >
+                        {researching === page.id ? (
+                          <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                        ) : (
+                          <Search className="w-3.5 h-3.5 mr-1.5" />
+                        )}
+                        {page.research_data ? "Re-research" : "Research ICP"}
+                      </Button>
+
+                      {/* Generate copy button */}
+                      {page.research_data && (
                         <Button
                           size="sm"
-                          disabled={researching === page.id}
-                          onClick={() => handleResearch(page)}
+                          variant="outline"
+                          disabled={generating === page.id}
+                          onClick={() => handleGenerateCopy(page)}
                           className="text-xs"
                         >
-                          {researching === page.id ? (
+                          {generating === page.id ? (
                             <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
                           ) : (
-                            <Search className="w-3.5 h-3.5 mr-1.5" />
+                            <Sparkles className="w-3.5 h-3.5 mr-1.5" />
                           )}
-                          Research ICP
+                          {page.generated_copy ? "Regenerate Copy" : "Generate Copy"}
                         </Button>
+                      )}
+
+                      {/* Publish toggle */}
+                      {page.generated_copy && (
+                        <Button
+                          size="sm"
+                          variant={page.published ? "outline" : "default"}
+                          disabled={toggling === page.id}
+                          onClick={() => handleTogglePublish(page)}
+                          className="text-xs"
+                        >
+                          {toggling === page.id ? (
+                            <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                          ) : page.published ? (
+                            <EyeOff className="w-3.5 h-3.5 mr-1.5" />
+                          ) : (
+                            <Globe className="w-3.5 h-3.5 mr-1.5" />
+                          )}
+                          {page.published ? "Unpublish" : "Publish"}
+                        </Button>
+                      )}
+
+                      {/* Preview link */}
+                      {page.published && page.slug && (
+                        <a
+                          href={`/for/${page.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button size="sm" variant="ghost" className="text-xs">
+                            <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                            Preview
+                          </Button>
+                        </a>
                       )}
                     </div>
                   </div>

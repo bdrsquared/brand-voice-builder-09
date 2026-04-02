@@ -29,6 +29,7 @@ type ICPPage = {
   slug: string | null;
   status: string;
   published: boolean;
+  page_style: string;
   created_at: string;
   updated_at: string;
 };

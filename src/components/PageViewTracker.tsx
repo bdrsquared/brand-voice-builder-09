@@ -15,6 +15,13 @@ const PageViewTracker = () => {
     // Don't track admin pages
     if (path.startsWith("/admin")) return;
 
+    // Send pageview to Google Analytics for SPA navigation
+    if (typeof window.gtag === "function") {
+      window.gtag("config", "G-GL0VCRK86G", {
+        page_path: path,
+      });
+    }
+
     supabase
       .from("page_views")
       .insert({

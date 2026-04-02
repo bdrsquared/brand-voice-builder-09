@@ -234,6 +234,11 @@ const CaseStudy = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = slug ? caseStudies[slug] : undefined;
 
+  useMetaTags(data ? {
+    title: `${data.showName} — ${data.clientName} Case Study | Earworm`,
+    description: data.tagline,
+  } : undefined);
+
   if (!data) return <Navigate to="/\" replace />;
 
   return (

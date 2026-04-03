@@ -48,6 +48,9 @@ const ContentCalendar = ({ posts, topics, onUpdate }: ContentCalendarProps) => {
   const [view, setView] = useState<"week" | "month">("month");
   const [currentDate, setCurrentDate] = useState(new Date());
   const [draggingPostId, setDraggingPostId] = useState<string | null>(null);
+  const [selectedPost, setSelectedPost] = useState<SocialPost | null>(null);
+  const [editing, setEditing] = useState(false);
+  const [editContent, setEditContent] = useState("");
 
   const unscheduledPosts = posts.filter((p) => !p.scheduled_date);
 

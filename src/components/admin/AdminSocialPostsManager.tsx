@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Trash2, Edit2, X, Check, Users } from "lucide-react";
+import { Plus, Trash2, Edit2, X, Check, Users, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
+import TeamMemberProfile from "./TeamMemberProfile";
 
 const POSITIONS = [
   "Sales",
@@ -32,6 +33,7 @@ const AdminSocialPostsManager = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [form, setForm] = useState({ name: "", position: "", description: "", email: "", interests: "" });
 
   const fetchMembers = async () => {
@@ -88,7 +90,8 @@ const AdminSocialPostsManager = () => {
     fetchMembers();
   };
 
-  const handleEdit = (member: TeamMember) => {
+  const handleEdit = (e: React.MouseEvent, member: TeamMember) => {
+    e.stopPropagation();
     setForm({
       name: member.name,
       position: member.position,
@@ -100,7 +103,8 @@ const AdminSocialPostsManager = () => {
     setShowForm(true);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
     const { error } = await supabase.from("team_members").delete().eq("id", id);
     if (error) { toast.error("Failed to delete"); return; }
     toast.success("Team member removed");
@@ -108,6 +112,10 @@ const AdminSocialPostsManager = () => {
   };
 
   if (loading) return <p className="text-muted-foreground text-sm">Loading…</p>;
+
+  if (selectedMember) {
+    return <TeamMemberProfile member={selectedMember} onBack={() => setSelectedMember(null)} />;
+  }
 
   return (
     <div className="space-y-6">
@@ -126,47 +134,20 @@ const AdminSocialPostsManager = () => {
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 space-y-4">
           <h3 className="text-sm font-medium">{editingId ? "Edit" : "Add"} Team Member</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Input
-              placeholder="Full name"
-              value={form.name}
-              onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-            />
+            <Input placeholder="Full name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
             <Select value={form.position} onValueChange={(v) => setForm((f) => ({ ...f, position: v }))}>
-              <SelectTrigger>
-                <SelectValue placeholder="Position" />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue placeholder="Position" /></SelectTrigger>
               <SelectContent>
-                {POSITIONS.map((p) => (
-                  <SelectItem key={p} value={p}>{p}</SelectItem>
-                ))}
+                {POSITIONS.map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}
               </SelectContent>
             </Select>
-            <Input
-              placeholder="Email address"
-              type="email"
-              value={form.email}
-              onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-            />
+            <Input placeholder="Email address" type="email" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
           </div>
-          <Textarea
-            placeholder="Brief description of their role and expertise…"
-            value={form.description}
-            onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
-            rows={3}
-          />
-          <Textarea
-            placeholder="Interests, topics and themes they care about (e.g. AI in marketing, brand storytelling, SaaS growth)…"
-            value={form.interests}
-            onChange={(e) => setForm((f) => ({ ...f, interests: e.target.value }))}
-            rows={2}
-          />
+          <Textarea placeholder="Brief description of their role and expertise…" value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} rows={3} />
+          <Textarea placeholder="Interests, topics and themes they care about…" value={form.interests} onChange={(e) => setForm((f) => ({ ...f, interests: e.target.value }))} rows={2} />
           <div className="flex gap-2">
-            <Button size="sm" onClick={handleSave}>
-              <Check className="w-4 h-4 mr-1" /> {editingId ? "Update" : "Save"}
-            </Button>
-            <Button size="sm" variant="ghost" onClick={resetForm}>
-              <X className="w-4 h-4 mr-1" /> Cancel
-            </Button>
+            <Button size="sm" onClick={handleSave}><Check className="w-4 h-4 mr-1" /> {editingId ? "Update" : "Save"}</Button>
+            <Button size="sm" variant="ghost" onClick={resetForm}><X className="w-4 h-4 mr-1" /> Cancel</Button>
           </div>
         </div>
       )}
@@ -181,7 +162,8 @@ const AdminSocialPostsManager = () => {
           {members.map((member) => (
             <div
               key={member.id}
-              className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 flex items-start justify-between gap-4"
+              onClick={() => setSelectedMember(member)}
+              className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 flex items-center justify-between gap-4 cursor-pointer hover:bg-white/10 transition-colors"
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
@@ -190,23 +172,16 @@ const AdminSocialPostsManager = () => {
                     {member.position}
                   </span>
                 </div>
-                {member.description && (
-                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{member.description}</p>
-                )}
-                {member.email && (
-                  <p className="text-xs text-muted-foreground mt-0.5">{member.email}</p>
-                )}
-                {member.interests && (
-                  <p className="text-xs text-muted-foreground mt-0.5 italic">Interests: {member.interests}</p>
-                )}
+                {member.description && <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{member.description}</p>}
               </div>
-              <div className="flex gap-1 shrink-0">
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleEdit(member)}>
+              <div className="flex items-center gap-1 shrink-0">
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={(e) => handleEdit(e, member)}>
                   <Edit2 className="w-3.5 h-3.5" />
                 </Button>
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-destructive hover:text-destructive" onClick={() => handleDelete(member.id)}>
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-destructive hover:text-destructive" onClick={(e) => handleDelete(e, member.id)}>
                   <Trash2 className="w-3.5 h-3.5" />
                 </Button>
+                <ChevronRight className="w-4 h-4 text-muted-foreground" />
               </div>
             </div>
           ))}

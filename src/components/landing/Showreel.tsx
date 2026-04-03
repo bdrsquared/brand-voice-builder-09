@@ -71,7 +71,7 @@ const Showreel = () => {
             className="mb-5 sm:mb-6"
             style={{ opacity: useTransform(scrollYProgress, [0.02, 0.08], [0, 1]) }}
           >
-            <SectionPill variant="light">Working with businesses worldwide</SectionPill>
+            <SectionPill variant="light" className="mb-[25px]">Working with businesses worldwide</SectionPill>
           </motion.span>
 
           <h2 className="text-[11vw] sm:text-5xl md:text-7xl lg:text-8xl font-heading font-medium leading-[0.95] tracking-tight text-light-text-primary">

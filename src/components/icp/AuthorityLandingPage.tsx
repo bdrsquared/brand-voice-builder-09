@@ -220,7 +220,7 @@ const AuthorityLandingPage = ({ copy, images }: { copy: AuthorityCopy; images?: 
               >
                 <div className="aspect-[16/10] overflow-hidden">
                   <img
-                    src={unsplashSearch(step.image_query)}
+                    src={images?.[i === 0 ? "feature" : i === 1 ? "social_proof" : "solution"] || unsplashSearch(step.image_query)}
                     alt={step.title}
                     className="w-full h-full object-cover"
                     loading="lazy"

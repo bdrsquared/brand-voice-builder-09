@@ -447,6 +447,8 @@ interface TopicCardProps {
   onDecline?: () => void;
   onRestore?: () => void;
   showReviewActions?: boolean;
+  selectedPostIds?: Set<string>;
+  onTogglePostSelection?: (postId: string) => void;
   expandedPostId: string | null;
   setExpandedPostId: (id: string | null) => void;
   editingPostId: string | null;
@@ -460,6 +462,7 @@ interface TopicCardProps {
 const TopicCard = ({
   topic, posts, drafting, onDraft, onCopy,
   onApprove, onDecline, onRestore, showReviewActions,
+  selectedPostIds, onTogglePostSelection,
   expandedPostId, setExpandedPostId,
   editingPostId, editContent, onStartEdit, onCancelEdit, onSaveEdit, setEditContent,
 }: TopicCardProps) => (

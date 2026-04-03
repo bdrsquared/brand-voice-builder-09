@@ -58,7 +58,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
-  const [activeTab, setActiveTab] = useState<"topics" | "calendar">("topics");
+  const [activeTab, setActiveTab] = useState<"topics" | "drafts" | "calendar">("topics");
 
   const fetchData = async () => {
     const [topicsRes, postsRes, memberRes] = await Promise.all([
@@ -235,7 +235,13 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
           onClick={() => setActiveTab("topics")}
           className={`text-xs px-3 py-1.5 rounded-t-lg transition-colors ${activeTab === "topics" ? "bg-white/10 text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
         >
-          <Sparkles className="w-3 h-3 inline mr-1" />Topics & Drafts
+          <Sparkles className="w-3 h-3 inline mr-1" />Topics & Ideas
+        </button>
+        <button
+          onClick={() => setActiveTab("drafts")}
+          className={`text-xs px-3 py-1.5 rounded-t-lg transition-colors ${activeTab === "drafts" ? "bg-white/10 text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          <PenLine className="w-3 h-3 inline mr-1" />Drafts
         </button>
         <button
           onClick={() => setActiveTab("calendar")}
@@ -247,6 +253,38 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
 
       {activeTab === "calendar" ? (
         <ContentCalendar posts={posts} topics={topics} onUpdate={fetchData} />
+      ) : activeTab === "drafts" ? (
+        <>
+          {loading ? (
+            <p className="text-muted-foreground text-sm">Loading drafts…</p>
+          ) : approvedTopics.length === 0 ? (
+            <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 text-center text-muted-foreground">
+              <PenLine className="w-8 h-8 mx-auto mb-3 opacity-40" />
+              <p className="text-sm">No approved topics yet. Approve ideas from the Topics & Ideas tab to start drafting.</p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {approvedTopics.map((topic) => (
+                <TopicCard
+                  key={topic.id}
+                  topic={topic}
+                  posts={posts.filter((p) => p.topic_id === topic.id)}
+                  drafting={draftingTopicId === topic.id}
+                  onDraft={() => handleDraftPost(topic.id)}
+                  onCopy={handleCopyPost}
+                  expandedPostId={expandedPostId}
+                  setExpandedPostId={setExpandedPostId}
+                  editingPostId={editingPostId}
+                  editContent={editContent}
+                  onStartEdit={(post) => { setEditingPostId(post.id); setEditContent(post.content); }}
+                  onCancelEdit={() => setEditingPostId(null)}
+                  onSaveEdit={handleSaveEdit}
+                  setEditContent={setEditContent}
+                />
+              ))}
+            </div>
+          )}
+        </>
       ) : (
       <>
       {/* Research button */}
@@ -265,14 +303,14 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
 
       {loading ? (
         <p className="text-muted-foreground text-sm">Loading topics…</p>
-      ) : topics.length === 0 ? (
+      ) : newTopics.length === 0 && declinedTopics.length === 0 ? (
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 text-center text-muted-foreground">
           <Search className="w-8 h-8 mx-auto mb-3 opacity-40" />
-          <p className="text-sm">No topics yet. Click "Research Topics" to generate LinkedIn post ideas.</p>
+          <p className="text-sm">No topics to review. Click "Research Topics" to generate LinkedIn post ideas.</p>
         </div>
       ) : (
         <div className="space-y-6">
-          {/* New / Pending Review */}
+          {/* Pending Review */}
           {newTopics.length > 0 && (
             <div className="space-y-2">
               <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
@@ -289,33 +327,6 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
                   onApprove={() => handleTopicStatus(topic.id, "approved")}
                   onDecline={() => handleTopicStatus(topic.id, "declined")}
                   showReviewActions
-                  expandedPostId={expandedPostId}
-                  setExpandedPostId={setExpandedPostId}
-                  editingPostId={editingPostId}
-                  editContent={editContent}
-                  onStartEdit={(post) => { setEditingPostId(post.id); setEditContent(post.content); }}
-                  onCancelEdit={() => setEditingPostId(null)}
-                  onSaveEdit={handleSaveEdit}
-                  setEditContent={setEditContent}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* Approved / Ready to Draft */}
-          {approvedTopics.length > 0 && (
-            <div className="space-y-2">
-              <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                <CheckCircle className="w-3.5 h-3.5 text-green-400" /> Approved ({approvedTopics.length})
-              </h4>
-              {approvedTopics.map((topic) => (
-                <TopicCard
-                  key={topic.id}
-                  topic={topic}
-                  posts={posts.filter((p) => p.topic_id === topic.id)}
-                  drafting={draftingTopicId === topic.id}
-                  onDraft={() => handleDraftPost(topic.id)}
-                  onCopy={handleCopyPost}
                   expandedPostId={expandedPostId}
                   setExpandedPostId={setExpandedPostId}
                   editingPostId={editingPostId}

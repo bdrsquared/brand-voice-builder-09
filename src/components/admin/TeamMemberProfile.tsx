@@ -152,8 +152,19 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     fetchData();
   };
 
-  const newsTopics = topics.filter((t) => t.topic_type === "news");
-  const generalTopics = topics.filter((t) => t.topic_type === "general");
+  const handleTopicStatus = async (topicId: string, status: string) => {
+    const { error } = await supabase
+      .from("social_post_topics")
+      .update({ status, updated_at: new Date().toISOString() })
+      .eq("id", topicId);
+    if (error) toast.error("Failed to update topic");
+    else toast.success(status === "approved" ? "Topic approved!" : status === "declined" ? "Topic declined" : "Status updated");
+    fetchData();
+  };
+
+  const newTopics = topics.filter((t) => t.status === "new");
+  const approvedTopics = topics.filter((t) => t.status === "approved" || t.status === "drafted");
+  const declinedTopics = topics.filter((t) => t.status === "declined");
   const selectedTone = TONES.find((t) => t.value === toneOfVoice);
 
   return (

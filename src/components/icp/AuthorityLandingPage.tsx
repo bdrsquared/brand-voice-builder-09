@@ -89,7 +89,9 @@ const unsplashSearch = (keywords: string, w = 800, h = 600) =>
 
 const painIcons = [AlertTriangle, TrendingUp, Shield];
 
-const AuthorityLandingPage = ({ copy }: { copy: AuthorityCopy }) => {
+type GeneratedImages = Record<string, string> | null;
+
+const AuthorityLandingPage = ({ copy, images }: { copy: AuthorityCopy; images?: GeneratedImages }) => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
@@ -134,7 +136,7 @@ const AuthorityLandingPage = ({ copy }: { copy: AuthorityCopy }) => {
             >
               <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl aspect-[4/3]">
                 <img
-                  src={unsplashSearch(copy.hero.image_query)}
+                  src={images?.hero || unsplashSearch(copy.hero.image_query)}
                   alt={copy.hero.badge}
                   className="w-full h-full object-cover"
                   loading="eager"
@@ -218,7 +220,7 @@ const AuthorityLandingPage = ({ copy }: { copy: AuthorityCopy }) => {
               >
                 <div className="aspect-[16/10] overflow-hidden">
                   <img
-                    src={unsplashSearch(step.image_query)}
+                    src={images?.[i === 0 ? "feature" : i === 1 ? "social_proof" : "solution"] || unsplashSearch(step.image_query)}
                     alt={step.title}
                     className="w-full h-full object-cover"
                     loading="lazy"

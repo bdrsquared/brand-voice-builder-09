@@ -187,6 +187,7 @@ const ICPLandingPage = () => {
   const [icpName, setIcpName] = useState("");
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [generatedImages, setGeneratedImages] = useState<Record<string, string> | null>(null);
 
   useEffect(() => {
     const fetchPage = async () => {
@@ -208,6 +209,9 @@ const ICPLandingPage = () => {
           setCopy(data.generated_copy as GeneratedCopy);
         }
         setIcpName(data.icp_name);
+        if (data.research_data?.generated_images) {
+          setGeneratedImages(data.research_data.generated_images);
+        }
       }
       setLoading(false);
     };
@@ -228,7 +232,7 @@ const ICPLandingPage = () => {
   }
 
   if (pageStyle === "authority" && authorityCopy) {
-    return <AuthorityLandingPage copy={authorityCopy} />;
+    return <AuthorityLandingPage copy={authorityCopy} images={generatedImages} />;
   }
 
   if (!copy) return null;

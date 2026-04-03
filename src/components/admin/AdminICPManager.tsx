@@ -17,6 +17,7 @@ import {
   Globe,
   Eye,
   EyeOff,
+  ImageIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -45,6 +46,42 @@ const AdminICPManager = () => {
   const [deleting, setDeleting] = useState<string | null>(null);
   const [generating, setGenerating] = useState<string | null>(null);
   const [toggling, setToggling] = useState<string | null>(null);
+  const [generatingImages, setGeneratingImages] = useState<string | null>(null);
+
+  const handleGenerateImages = async (page: ICPPage) => {
+    if (!page.research_data) {
+      toast.error("Research this ICP first");
+      return;
+    }
+    setGeneratingImages(page.id);
+    try {
+      const response = await supabase.functions.invoke("generate-icp-images", {
+        body: {
+          icp_id: page.id,
+          icp_name: page.icp_name,
+          research_data: page.research_data.content || page.research_data,
+        },
+      });
+
+      if (response.error) {
+        toast.error("Image generation failed: " + (response.error.message || "Unknown error"));
+        return;
+      }
+
+      const data = response.data;
+      if (data?.error) {
+        toast.error("Image generation failed: " + data.error);
+        return;
+      }
+
+      toast.success(`Generated ${data.count} images successfully!`);
+      fetchPages();
+    } catch (err: any) {
+      toast.error("Image generation failed: " + (err.message || "Unknown error"));
+    } finally {
+      setGeneratingImages(null);
+    }
+  };
 
   const handleResearch = async (page: ICPPage) => {
     setResearching(page.id);
@@ -434,7 +471,25 @@ const AdminICPManager = () => {
                     </div>
                   )}
 
-                  {/* Generated copy preview */}
+                  {/* Generated images preview */}
+                  {page.research_data?.generated_images && (
+                    <div>
+                      <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-2">
+                        Generated Images
+                      </p>
+                      <div className="grid grid-cols-5 gap-2">
+                        {Object.entries(page.research_data.generated_images as Record<string, string>).map(([section, url]) => (
+                          <div key={section} className="space-y-1">
+                            <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border">
+                              <img src={url} alt={section} className="w-full h-full object-cover" />
+                            </div>
+                            <p className="text-[10px] text-muted-foreground text-center capitalize">{section.replace("_", " ")}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {page.generated_copy && (
                     <div>
                       <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1">
@@ -480,8 +535,26 @@ const AdminICPManager = () => {
                         {page.research_data ? "Re-research" : "Research ICP"}
                       </Button>
 
-                      {/* Generate copy button */}
+                      {/* Generate images button */}
                       {page.research_data && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          disabled={generatingImages === page.id}
+                          onClick={() => handleGenerateImages(page)}
+                          className="text-xs"
+                        >
+                          {generatingImages === page.id ? (
+                            <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                          ) : (
+                            <ImageIcon className="w-3.5 h-3.5 mr-1.5" />
+                          )}
+                          {page.research_data?.generated_images ? "Regenerate Images" : "Generate Images"}
+                        </Button>
+                      )}
+
+                      {/* Generate copy button - requires images */}
+                      {page.research_data?.generated_images && (
                         <Button
                           size="sm"
                           variant="outline"

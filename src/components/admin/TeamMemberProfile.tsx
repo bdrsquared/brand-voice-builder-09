@@ -218,6 +218,26 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
         </div>
       </div>
 
+      {/* Tab switcher */}
+      <div className="flex items-center gap-1 border-b border-white/10 pb-1">
+        <button
+          onClick={() => setActiveTab("topics")}
+          className={`text-xs px-3 py-1.5 rounded-t-lg transition-colors ${activeTab === "topics" ? "bg-white/10 text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          <Sparkles className="w-3 h-3 inline mr-1" />Topics & Drafts
+        </button>
+        <button
+          onClick={() => setActiveTab("calendar")}
+          className={`text-xs px-3 py-1.5 rounded-t-lg transition-colors ${activeTab === "calendar" ? "bg-white/10 text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          <CalendarIcon className="w-3 h-3 inline mr-1" />Content Calendar
+        </button>
+      </div>
+
+      {activeTab === "calendar" ? (
+        <ContentCalendar posts={posts} topics={topics} onUpdate={fetchData} />
+      ) : (
+      <>
       {/* Research button */}
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium flex items-center gap-2">
@@ -292,6 +312,8 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
             </div>
           )}
         </div>
+      )}
+      </>
       )}
     </div>
   );

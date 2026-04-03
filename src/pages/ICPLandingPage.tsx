@@ -232,7 +232,7 @@ const ICPLandingPage = () => {
   }
 
   if (pageStyle === "authority" && authorityCopy) {
-    return <AuthorityLandingPage copy={authorityCopy} />;
+    return <AuthorityLandingPage copy={authorityCopy} images={generatedImages} />;
   }
 
   if (!copy) return null;

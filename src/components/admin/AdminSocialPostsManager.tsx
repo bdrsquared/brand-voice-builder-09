@@ -154,6 +154,12 @@ const AdminSocialPostsManager = () => {
             onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
             rows={3}
           />
+          <Textarea
+            placeholder="Interests, topics and themes they care about (e.g. AI in marketing, brand storytelling, SaaS growth)…"
+            value={form.interests}
+            onChange={(e) => setForm((f) => ({ ...f, interests: e.target.value }))}
+            rows={2}
+          />
           <div className="flex gap-2">
             <Button size="sm" onClick={handleSave}>
               <Check className="w-4 h-4 mr-1" /> {editingId ? "Update" : "Save"}

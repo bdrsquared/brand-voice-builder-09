@@ -17,6 +17,7 @@ import {
   Globe,
   Eye,
   EyeOff,
+  ImageIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 

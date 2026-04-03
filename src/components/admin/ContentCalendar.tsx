@@ -196,6 +196,7 @@ const ContentCalendar = ({ posts, topics, onUpdate }: ContentCalendarProps) => {
                           setDraggingPostId(post.id);
                         }}
                         onDragEnd={() => setDraggingPostId(null)}
+                        onClick={() => { setSelectedPost(post); setEditing(false); }}
                         title={getTopicTitle(post.topic_id)}
                       >
                         <span className="truncate block pr-3">{getTopicTitle(post.topic_id)}</span>

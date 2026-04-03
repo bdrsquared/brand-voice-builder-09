@@ -89,7 +89,9 @@ const unsplashSearch = (keywords: string, w = 800, h = 600) =>
 
 const painIcons = [AlertTriangle, TrendingUp, Shield];
 
-const AuthorityLandingPage = ({ copy }: { copy: AuthorityCopy }) => {
+type GeneratedImages = Record<string, string> | null;
+
+const AuthorityLandingPage = ({ copy, images }: { copy: AuthorityCopy; images?: GeneratedImages }) => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />

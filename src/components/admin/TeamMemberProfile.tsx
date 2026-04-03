@@ -532,6 +532,15 @@ const TopicCard = ({
     {/* Drafted posts */}
     {posts.map((post) => (
       <div key={post.id} className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-3">
+        <div className="flex gap-2">
+          {selectedPostIds && onTogglePostSelection && (
+            <Checkbox
+              checked={selectedPostIds.has(post.id)}
+              onCheckedChange={() => onTogglePostSelection(post.id)}
+              className="mt-0.5 shrink-0"
+            />
+          )}
+          <div className="flex-1">
         {editingPostId === post.id ? (
           <div className="space-y-2">
             <Textarea

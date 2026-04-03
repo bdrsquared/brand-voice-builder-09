@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Search, Sparkles, ExternalLink, Newspaper, Lightbulb, Loader2, PenLine, Copy, Check, X, Calendar as CalendarIcon } from "lucide-react";
+import { ArrowLeft, Search, Sparkles, ExternalLink, Newspaper, Lightbulb, Loader2, PenLine, Copy, Check, X, Calendar as CalendarIcon, ThumbsUp, ThumbsDown, Trash2, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import ContentCalendar from "./ContentCalendar";
 
@@ -152,8 +152,19 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     fetchData();
   };
 
-  const newsTopics = topics.filter((t) => t.topic_type === "news");
-  const generalTopics = topics.filter((t) => t.topic_type === "general");
+  const handleTopicStatus = async (topicId: string, status: string) => {
+    const { error } = await supabase
+      .from("social_post_topics")
+      .update({ status, updated_at: new Date().toISOString() })
+      .eq("id", topicId);
+    if (error) toast.error("Failed to update topic");
+    else toast.success(status === "approved" ? "Topic approved!" : status === "declined" ? "Topic declined" : "Status updated");
+    fetchData();
+  };
+
+  const newTopics = topics.filter((t) => t.status === "new");
+  const approvedTopics = topics.filter((t) => t.status === "approved" || t.status === "drafted");
+  const declinedTopics = topics.filter((t) => t.status === "declined");
   const selectedTone = TONES.find((t) => t.value === toneOfVoice);
 
   return (
@@ -260,13 +271,44 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
           <p className="text-sm">No topics yet. Click "Research Topics" to generate LinkedIn post ideas.</p>
         </div>
       ) : (
-        <div className="space-y-4">
-          {newsTopics.length > 0 && (
+        <div className="space-y-6">
+          {/* New / Pending Review */}
+          {newTopics.length > 0 && (
             <div className="space-y-2">
               <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                <Newspaper className="w-3.5 h-3.5" /> News-Based ({newsTopics.length})
+                <Sparkles className="w-3.5 h-3.5" /> Pending Review ({newTopics.length})
               </h4>
-              {newsTopics.map((topic) => (
+              {newTopics.map((topic) => (
+                <TopicCard
+                  key={topic.id}
+                  topic={topic}
+                  posts={posts.filter((p) => p.topic_id === topic.id)}
+                  drafting={draftingTopicId === topic.id}
+                  onDraft={() => handleDraftPost(topic.id)}
+                  onCopy={handleCopyPost}
+                  onApprove={() => handleTopicStatus(topic.id, "approved")}
+                  onDecline={() => handleTopicStatus(topic.id, "declined")}
+                  showReviewActions
+                  expandedPostId={expandedPostId}
+                  setExpandedPostId={setExpandedPostId}
+                  editingPostId={editingPostId}
+                  editContent={editContent}
+                  onStartEdit={(post) => { setEditingPostId(post.id); setEditContent(post.content); }}
+                  onCancelEdit={() => setEditingPostId(null)}
+                  onSaveEdit={handleSaveEdit}
+                  setEditContent={setEditContent}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Approved / Ready to Draft */}
+          {approvedTopics.length > 0 && (
+            <div className="space-y-2">
+              <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                <CheckCircle className="w-3.5 h-3.5 text-green-400" /> Approved ({approvedTopics.length})
+              </h4>
+              {approvedTopics.map((topic) => (
                 <TopicCard
                   key={topic.id}
                   topic={topic}
@@ -286,19 +328,22 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
               ))}
             </div>
           )}
-          {generalTopics.length > 0 && (
+
+          {/* Declined / Bin */}
+          {declinedTopics.length > 0 && (
             <div className="space-y-2">
               <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                <Lightbulb className="w-3.5 h-3.5" /> General Content ({generalTopics.length})
+                <Trash2 className="w-3.5 h-3.5 text-red-400" /> Declined ({declinedTopics.length})
               </h4>
-              {generalTopics.map((topic) => (
+              {declinedTopics.map((topic) => (
                 <TopicCard
                   key={topic.id}
                   topic={topic}
-                  posts={posts.filter((p) => p.topic_id === topic.id)}
-                  drafting={draftingTopicId === topic.id}
-                  onDraft={() => handleDraftPost(topic.id)}
+                  posts={[]}
+                  drafting={false}
+                  onDraft={() => {}}
                   onCopy={handleCopyPost}
+                  onRestore={() => handleTopicStatus(topic.id, "new")}
                   expandedPostId={expandedPostId}
                   setExpandedPostId={setExpandedPostId}
                   editingPostId={editingPostId}
@@ -325,6 +370,10 @@ interface TopicCardProps {
   drafting: boolean;
   onDraft: () => void;
   onCopy: (content: string) => void;
+  onApprove?: () => void;
+  onDecline?: () => void;
+  onRestore?: () => void;
+  showReviewActions?: boolean;
   expandedPostId: string | null;
   setExpandedPostId: (id: string | null) => void;
   editingPostId: string | null;
@@ -337,6 +386,7 @@ interface TopicCardProps {
 
 const TopicCard = ({
   topic, posts, drafting, onDraft, onCopy,
+  onApprove, onDecline, onRestore, showReviewActions,
   expandedPostId, setExpandedPostId,
   editingPostId, editContent, onStartEdit, onCancelEdit, onSaveEdit, setEditContent,
 }: TopicCardProps) => (
@@ -354,29 +404,53 @@ const TopicCard = ({
     {topic.description && (
       <p className="text-xs text-muted-foreground">{topic.description}</p>
     )}
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 flex-wrap">
       <span className={`text-[10px] px-1.5 py-0.5 rounded-full border ${
         topic.status === 'new'
           ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-          : topic.status === 'drafted'
+          : topic.status === 'approved'
           ? 'bg-green-500/10 text-green-400 border-green-500/20'
+          : topic.status === 'drafted'
+          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+          : topic.status === 'declined'
+          ? 'bg-red-500/10 text-red-400 border-red-500/20'
           : 'bg-muted text-muted-foreground border-white/10'
       }`}>
         {topic.status}
       </span>
-      <Button
-        variant="ghost"
-        size="sm"
-        className="h-6 text-xs px-2"
-        onClick={onDraft}
-        disabled={drafting}
-      >
-        {drafting ? (
-          <><Loader2 className="w-3 h-3 mr-1 animate-spin" /> Drafting…</>
-        ) : (
-          <><PenLine className="w-3 h-3 mr-1" /> {posts.length > 0 ? 'Redraft' : 'Draft Post'}</>
-        )}
-      </Button>
+      {/* Approve / Decline for new topics */}
+      {showReviewActions && (
+        <>
+          <Button variant="ghost" size="sm" className="h-6 text-xs px-2 text-green-400 hover:text-green-300 hover:bg-green-500/10" onClick={onApprove}>
+            <ThumbsUp className="w-3 h-3 mr-1" /> Approve
+          </Button>
+          <Button variant="ghost" size="sm" className="h-6 text-xs px-2 text-red-400 hover:text-red-300 hover:bg-red-500/10" onClick={onDecline}>
+            <ThumbsDown className="w-3 h-3 mr-1" /> Decline
+          </Button>
+        </>
+      )}
+      {/* Restore for declined topics */}
+      {onRestore && (
+        <Button variant="ghost" size="sm" className="h-6 text-xs px-2" onClick={onRestore}>
+          <ArrowLeft className="w-3 h-3 mr-1" /> Restore
+        </Button>
+      )}
+      {/* Draft button only for approved topics */}
+      {(topic.status === 'approved' || topic.status === 'drafted') && (
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-6 text-xs px-2"
+          onClick={onDraft}
+          disabled={drafting}
+        >
+          {drafting ? (
+            <><Loader2 className="w-3 h-3 mr-1 animate-spin" /> Drafting…</>
+          ) : (
+            <><PenLine className="w-3 h-3 mr-1" /> {posts.length > 0 ? 'Redraft' : 'Draft Post'}</>
+          )}
+        </Button>
+      )}
     </div>
 
     {/* Drafted posts */}

@@ -50,6 +50,8 @@ Deno.serve(async (req) => {
 
 ${focusGuidance}
 
+IMPORTANT: Do NOT use any sources from earworm.co.uk, earwormmedia.com, or any Earworm-owned domains. Only use external, third-party sources.
+
 Find 5 strong LinkedIn content angles based on:
 - current hot takes and emerging debates
 - interesting edge cases and non-obvious use cases

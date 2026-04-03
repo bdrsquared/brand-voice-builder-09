@@ -65,6 +65,7 @@ const AdminSocialPostsManager = () => {
           position: form.position,
           description: form.description.trim() || null,
           email: form.email.trim() || null,
+          interests: form.interests.trim() || null,
         })
         .eq("id", editingId);
       if (error) { toast.error("Failed to update"); return; }

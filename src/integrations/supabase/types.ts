@@ -307,6 +307,51 @@ export type Database = {
           },
         ]
       }
+      social_posts: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          status: string
+          team_member_id: string
+          topic_id: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          status?: string
+          team_member_id: string
+          topic_id: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          status?: string
+          team_member_id?: string
+          topic_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "social_posts_team_member_id_fkey"
+            columns: ["team_member_id"]
+            isOneToOne: false
+            referencedRelation: "team_members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "social_posts_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "social_post_topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       team_members: {
         Row: {
           created_at: string
@@ -316,6 +361,7 @@ export type Database = {
           interests: string | null
           name: string
           position: string
+          tone_of_voice: string
           updated_at: string
         }
         Insert: {
@@ -326,6 +372,7 @@ export type Database = {
           interests?: string | null
           name: string
           position: string
+          tone_of_voice?: string
           updated_at?: string
         }
         Update: {
@@ -336,6 +383,7 @@ export type Database = {
           interests?: string | null
           name?: string
           position?: string
+          tone_of_voice?: string
           updated_at?: string
         }
         Relationships: []

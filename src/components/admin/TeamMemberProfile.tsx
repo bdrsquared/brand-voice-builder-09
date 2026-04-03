@@ -89,6 +89,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const [researching, setResearching] = useState(false);
   const [deepResearchingId, setDeepResearchingId] = useState<string | null>(null);
   const [draftingTopicId, setDraftingTopicId] = useState<string | null>(null);
+  const [polishingPostId, setPolishingPostId] = useState<string | null>(null);
   const [toneOfVoice, setToneOfVoice] = useState("earworm");
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
@@ -219,6 +220,25 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     toast.success("Post updated");
     setEditingPostId(null);
     fetchData();
+  };
+
+  const handlePolishPost = async (postId: string) => {
+    setPolishingPostId(postId);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { toast.error("Not authenticated"); return; }
+      const { data, error } = await supabase.functions.invoke("polish-social-post", {
+        body: { post_id: postId },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      toast.success("Post polished!");
+      fetchData();
+    } catch (err: any) {
+      toast.error(err.message || "Failed to polish post");
+    } finally {
+      setPolishingPostId(null);
+    }
   };
 
   const togglePostSelection = (postId: string) => {
@@ -412,6 +432,8 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
                   setEditContent={setEditContent}
                   selectedPostIds={selectedPostIds}
                   onTogglePostSelection={togglePostSelection}
+                  polishingPostId={polishingPostId}
+                  onPolish={handlePolishPost}
                 />
               ))}
             </div>
@@ -814,6 +836,8 @@ interface TopicCardProps {
   onCancelEdit: () => void;
   onSaveEdit: (id: string) => void;
   setEditContent: (content: string) => void;
+  polishingPostId: string | null;
+  onPolish: (postId: string) => void;
 }
 
 const TopicCard = ({
@@ -821,6 +845,7 @@ const TopicCard = ({
   selectedPostIds, onTogglePostSelection,
   expandedPostId, setExpandedPostId,
   editingPostId, editContent, onStartEdit, onCancelEdit, onSaveEdit, setEditContent,
+  polishingPostId, onPolish,
 }: TopicCardProps) => (
   <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 space-y-2">
     <div className="flex items-start justify-between gap-3">
@@ -914,6 +939,19 @@ const TopicCard = ({
               </Button>
               <Button variant="ghost" size="sm" className="h-6 text-xs px-2" onClick={() => onStartEdit(post)}>
                 <PenLine className="w-3 h-3 mr-1" /> Edit
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 text-xs px-2"
+                disabled={polishingPostId === post.id}
+                onClick={() => onPolish(post.id)}
+              >
+                {polishingPostId === post.id ? (
+                  <><Loader2 className="w-3 h-3 mr-1 animate-spin" /> Polishing...</>
+                ) : (
+                  <><Sparkles className="w-3 h-3 mr-1" /> Polish</>
+                )}
               </Button>
             </div>
           </>

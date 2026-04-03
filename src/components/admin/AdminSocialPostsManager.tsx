@@ -23,6 +23,7 @@ type TeamMember = {
   position: string;
   description: string | null;
   email: string | null;
+  interests: string | null;
   created_at: string;
 };
 
@@ -31,7 +32,7 @@ const AdminSocialPostsManager = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: "", position: "", description: "", email: "" });
+  const [form, setForm] = useState({ name: "", position: "", description: "", email: "", interests: "" });
 
   const fetchMembers = async () => {
     const { data, error } = await supabase
@@ -45,7 +46,7 @@ const AdminSocialPostsManager = () => {
   useEffect(() => { fetchMembers(); }, []);
 
   const resetForm = () => {
-    setForm({ name: "", position: "", description: "", email: "" });
+    setForm({ name: "", position: "", description: "", email: "", interests: "" });
     setShowForm(false);
     setEditingId(null);
   };
@@ -64,6 +65,7 @@ const AdminSocialPostsManager = () => {
           position: form.position,
           description: form.description.trim() || null,
           email: form.email.trim() || null,
+          interests: form.interests.trim() || null,
         })
         .eq("id", editingId);
       if (error) { toast.error("Failed to update"); return; }
@@ -76,6 +78,7 @@ const AdminSocialPostsManager = () => {
           position: form.position,
           description: form.description.trim() || null,
           email: form.email.trim() || null,
+          interests: form.interests.trim() || null,
         });
       if (error) { toast.error("Failed to add"); return; }
       toast.success("Team member added");
@@ -91,6 +94,7 @@ const AdminSocialPostsManager = () => {
       position: member.position,
       description: member.description || "",
       email: member.email || "",
+      interests: member.interests || "",
     });
     setEditingId(member.id);
     setShowForm(true);
@@ -150,6 +154,12 @@ const AdminSocialPostsManager = () => {
             onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
             rows={3}
           />
+          <Textarea
+            placeholder="Interests, topics and themes they care about (e.g. AI in marketing, brand storytelling, SaaS growth)…"
+            value={form.interests}
+            onChange={(e) => setForm((f) => ({ ...f, interests: e.target.value }))}
+            rows={2}
+          />
           <div className="flex gap-2">
             <Button size="sm" onClick={handleSave}>
               <Check className="w-4 h-4 mr-1" /> {editingId ? "Update" : "Save"}
@@ -185,6 +195,9 @@ const AdminSocialPostsManager = () => {
                 )}
                 {member.email && (
                   <p className="text-xs text-muted-foreground mt-0.5">{member.email}</p>
+                )}
+                {member.interests && (
+                  <p className="text-xs text-muted-foreground mt-0.5 italic">Interests: {member.interests}</p>
                 )}
               </div>
               <div className="flex gap-1 shrink-0">

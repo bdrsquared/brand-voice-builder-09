@@ -269,6 +269,7 @@ export type Database = {
           description: string | null
           email: string | null
           id: string
+          interests: string | null
           name: string
           position: string
           updated_at: string
@@ -278,6 +279,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           id?: string
+          interests?: string | null
           name: string
           position: string
           updated_at?: string
@@ -287,6 +289,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           id?: string
+          interests?: string | null
           name?: string
           position?: string
           updated_at?: string

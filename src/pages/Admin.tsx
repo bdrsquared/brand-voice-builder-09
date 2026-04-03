@@ -333,6 +333,12 @@ const Admin = () => {
               <Globe className="w-3.5 h-3.5 inline mr-1" />Pages
             </button>
             <button
+              onClick={() => setActiveTab("social")}
+              className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "social" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <Share2 className="w-3.5 h-3.5 inline mr-1" />Social Posts
+            </button>
+            <button
               onClick={() => setActiveTab("redirects")}
               className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "redirects" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
             >

@@ -4,8 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Search, Sparkles, ExternalLink, Newspaper, Lightbulb, Loader2, PenLine, Copy, Check, X } from "lucide-react";
+import { ArrowLeft, Search, Sparkles, ExternalLink, Newspaper, Lightbulb, Loader2, PenLine, Copy, Check, X, Calendar as CalendarIcon } from "lucide-react";
 import { toast } from "sonner";
+import ContentCalendar from "./ContentCalendar";
 
 type TeamMember = {
   id: string;
@@ -32,6 +33,7 @@ type SocialPost = {
   topic_id: string;
   content: string;
   status: string;
+  scheduled_date: string | null;
   created_at: string;
 };
 
@@ -56,6 +58,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
+  const [activeTab, setActiveTab] = useState<"topics" | "calendar">("topics");
 
   const fetchData = async () => {
     const [topicsRes, postsRes, memberRes] = await Promise.all([
@@ -215,6 +218,26 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
         </div>
       </div>
 
+      {/* Tab switcher */}
+      <div className="flex items-center gap-1 border-b border-white/10 pb-1">
+        <button
+          onClick={() => setActiveTab("topics")}
+          className={`text-xs px-3 py-1.5 rounded-t-lg transition-colors ${activeTab === "topics" ? "bg-white/10 text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          <Sparkles className="w-3 h-3 inline mr-1" />Topics & Drafts
+        </button>
+        <button
+          onClick={() => setActiveTab("calendar")}
+          className={`text-xs px-3 py-1.5 rounded-t-lg transition-colors ${activeTab === "calendar" ? "bg-white/10 text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          <CalendarIcon className="w-3 h-3 inline mr-1" />Content Calendar
+        </button>
+      </div>
+
+      {activeTab === "calendar" ? (
+        <ContentCalendar posts={posts} topics={topics} onUpdate={fetchData} />
+      ) : (
+      <>
       {/* Research button */}
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium flex items-center gap-2">
@@ -289,6 +312,8 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
             </div>
           )}
         </div>
+      )}
+      </>
       )}
     </div>
   );

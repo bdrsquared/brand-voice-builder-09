@@ -68,7 +68,7 @@ const Showreel = () => {
           </div>
 
           <motion.span
-            className="mb-5 sm:mb-6"
+            className="mb-6 sm:mb-8"
             style={{ opacity: useTransform(scrollYProgress, [0.02, 0.08], [0, 1]) }}
           >
             <SectionPill variant="light">Working with businesses worldwide</SectionPill>

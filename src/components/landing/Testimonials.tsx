@@ -91,7 +91,7 @@ const Testimonials = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <SectionPill variant="dark" className="mb-4">What our clients say</SectionPill>
+          <SectionPill variant="dark" className="mb-6">What our clients say</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Trusted by <br />
             <span className="text-gradient-green">ambitious</span> businesses

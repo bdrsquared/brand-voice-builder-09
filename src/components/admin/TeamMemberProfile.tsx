@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -62,6 +64,8 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const [editContent, setEditContent] = useState("");
   const [activeTab, setActiveTab] = useState<"topics" | "drafts" | "calendar">("topics");
   const [selectedPostIds, setSelectedPostIds] = useState<Set<string>>(new Set());
+  const [showResearchDialog, setShowResearchDialog] = useState(false);
+  const [researchTopicInput, setResearchTopicInput] = useState("");
 
   const fetchData = async () => {
     const [topicsRes, postsRes, memberRes] = await Promise.all([
@@ -103,15 +107,17 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
 
   const handleResearch = async () => {
     setResearching(true);
+    setShowResearchDialog(false);
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { toast.error("Not authenticated"); return; }
-      const { data, error } = await supabase.functions.invoke("research-social-topics", {
-        body: { team_member_id: member.id },
-      });
+      const body: any = { team_member_id: member.id };
+      if (researchTopicInput.trim()) body.custom_topic = researchTopicInput.trim();
+      const { data, error } = await supabase.functions.invoke("research-social-topics", { body });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
       toast.success("5 new topic ideas generated!");
+      setResearchTopicInput("");
       fetchData();
     } catch (err: any) {
       toast.error(err.message || "Failed to research topics");
@@ -350,12 +356,42 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
         </>
       ) : (
       <>
+      {/* Research dialog */}
+      <Dialog open={showResearchDialog} onOpenChange={setShowResearchDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Research Topic Ideas</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Enter a specific topic to research, or leave blank to generate ideas based on {member.name}'s interests.
+            </p>
+            <Input
+              placeholder="e.g. AI in content marketing, B2B podcasting trends…"
+              value={researchTopicInput}
+              onChange={(e) => setResearchTopicInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleResearch()}
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="ghost" size="sm" onClick={() => setShowResearchDialog(false)}>Cancel</Button>
+            <Button size="sm" onClick={handleResearch} disabled={researching}>
+              {researching ? (
+                <><Loader2 className="w-4 h-4 mr-1 animate-spin" /> Researching…</>
+              ) : (
+                <><Search className="w-4 h-4 mr-1" /> {researchTopicInput.trim() ? "Research This Topic" : "Research General Ideas"}</>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {/* Research button */}
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-primary" /> LinkedIn Topic Ideas
         </h3>
-        <Button size="sm" onClick={handleResearch} disabled={researching}>
+        <Button size="sm" onClick={() => setShowResearchDialog(true)} disabled={researching}>
           {researching ? (
             <><Loader2 className="w-4 h-4 mr-1 animate-spin" /> Researching…</>
           ) : (

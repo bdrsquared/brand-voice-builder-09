@@ -209,6 +209,9 @@ const ICPLandingPage = () => {
           setCopy(data.generated_copy as GeneratedCopy);
         }
         setIcpName(data.icp_name);
+        if (data.research_data?.generated_images) {
+          setGeneratedImages(data.research_data.generated_images);
+        }
       }
       setLoading(false);
     };

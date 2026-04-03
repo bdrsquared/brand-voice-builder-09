@@ -33,6 +33,7 @@ type SocialPost = {
   topic_id: string;
   content: string;
   status: string;
+  scheduled_date: string | null;
   created_at: string;
 };
 

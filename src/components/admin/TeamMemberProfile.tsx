@@ -222,6 +222,24 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     fetchData();
   };
 
+  const handlePolishPost = async (postId: string) => {
+    setPolishingPostId(postId);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { toast.error("Not authenticated"); return; }
+      const { data, error } = await supabase.functions.invoke("polish-social-post", {
+        body: { post_id: postId },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      toast.success("Post polished!");
+      fetchData();
+    } catch (err: any) {
+      toast.error(err.message || "Failed to polish post");
+    } finally {
+      setPolishingPostId(null);
+    }
+
   const togglePostSelection = (postId: string) => {
     setSelectedPostIds((prev) => {
       const next = new Set(prev);

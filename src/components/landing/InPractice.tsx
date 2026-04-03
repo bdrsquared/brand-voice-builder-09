@@ -25,7 +25,7 @@ const InPractice = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <SectionPill variant="light" className="mb-4">What this looks like in practice</SectionPill>
+          <SectionPill variant="light" className="mb-6">What this looks like in practice</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-2 text-light-text-primary">
             A repeatable system.
           </h2>

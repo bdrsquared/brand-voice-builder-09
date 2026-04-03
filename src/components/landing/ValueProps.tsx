@@ -56,7 +56,7 @@ const ValueProps = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <SectionPill variant="dark" className="mb-4">Why podcasting</SectionPill>
+          <SectionPill variant="dark" className="mb-6">Why podcasting</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Plug the power of a{" "}
             <span className="text-gradient-green">video podcast</span>{" "}

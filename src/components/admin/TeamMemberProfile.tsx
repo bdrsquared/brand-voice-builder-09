@@ -107,15 +107,17 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
 
   const handleResearch = async () => {
     setResearching(true);
+    setShowResearchDialog(false);
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { toast.error("Not authenticated"); return; }
-      const { data, error } = await supabase.functions.invoke("research-social-topics", {
-        body: { team_member_id: member.id },
-      });
+      const body: any = { team_member_id: member.id };
+      if (researchTopicInput.trim()) body.custom_topic = researchTopicInput.trim();
+      const { data, error } = await supabase.functions.invoke("research-social-topics", { body });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
       toast.success("5 new topic ideas generated!");
+      setResearchTopicInput("");
       fetchData();
     } catch (err: any) {
       toast.error(err.message || "Failed to research topics");

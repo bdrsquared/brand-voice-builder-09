@@ -89,6 +89,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const [researching, setResearching] = useState(false);
   const [deepResearchingId, setDeepResearchingId] = useState<string | null>(null);
   const [draftingTopicId, setDraftingTopicId] = useState<string | null>(null);
+  const [polishingPostId, setPolishingPostId] = useState<string | null>(null);
   const [toneOfVoice, setToneOfVoice] = useState("earworm");
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
   const [editingPostId, setEditingPostId] = useState<string | null>(null);

@@ -23,6 +23,7 @@ type TeamMember = {
   position: string;
   description: string | null;
   email: string | null;
+  interests: string | null;
   created_at: string;
 };
 

@@ -271,13 +271,44 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
           <p className="text-sm">No topics yet. Click "Research Topics" to generate LinkedIn post ideas.</p>
         </div>
       ) : (
-        <div className="space-y-4">
-          {newsTopics.length > 0 && (
+        <div className="space-y-6">
+          {/* New / Pending Review */}
+          {newTopics.length > 0 && (
             <div className="space-y-2">
               <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                <Newspaper className="w-3.5 h-3.5" /> News-Based ({newsTopics.length})
+                <Sparkles className="w-3.5 h-3.5" /> Pending Review ({newTopics.length})
               </h4>
-              {newsTopics.map((topic) => (
+              {newTopics.map((topic) => (
+                <TopicCard
+                  key={topic.id}
+                  topic={topic}
+                  posts={posts.filter((p) => p.topic_id === topic.id)}
+                  drafting={draftingTopicId === topic.id}
+                  onDraft={() => handleDraftPost(topic.id)}
+                  onCopy={handleCopyPost}
+                  onApprove={() => handleTopicStatus(topic.id, "approved")}
+                  onDecline={() => handleTopicStatus(topic.id, "declined")}
+                  showReviewActions
+                  expandedPostId={expandedPostId}
+                  setExpandedPostId={setExpandedPostId}
+                  editingPostId={editingPostId}
+                  editContent={editContent}
+                  onStartEdit={(post) => { setEditingPostId(post.id); setEditContent(post.content); }}
+                  onCancelEdit={() => setEditingPostId(null)}
+                  onSaveEdit={handleSaveEdit}
+                  setEditContent={setEditContent}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Approved / Ready to Draft */}
+          {approvedTopics.length > 0 && (
+            <div className="space-y-2">
+              <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                <CheckCircle className="w-3.5 h-3.5 text-green-400" /> Approved ({approvedTopics.length})
+              </h4>
+              {approvedTopics.map((topic) => (
                 <TopicCard
                   key={topic.id}
                   topic={topic}
@@ -297,19 +328,22 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
               ))}
             </div>
           )}
-          {generalTopics.length > 0 && (
+
+          {/* Declined / Bin */}
+          {declinedTopics.length > 0 && (
             <div className="space-y-2">
               <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                <Lightbulb className="w-3.5 h-3.5" /> General Content ({generalTopics.length})
+                <Trash2 className="w-3.5 h-3.5 text-red-400" /> Declined ({declinedTopics.length})
               </h4>
-              {generalTopics.map((topic) => (
+              {declinedTopics.map((topic) => (
                 <TopicCard
                   key={topic.id}
                   topic={topic}
-                  posts={posts.filter((p) => p.topic_id === topic.id)}
-                  drafting={draftingTopicId === topic.id}
-                  onDraft={() => handleDraftPost(topic.id)}
+                  posts={[]}
+                  drafting={false}
+                  onDraft={() => {}}
                   onCopy={handleCopyPost}
+                  onRestore={() => handleTopicStatus(topic.id, "new")}
                   expandedPostId={expandedPostId}
                   setExpandedPostId={setExpandedPostId}
                   editingPostId={editingPostId}

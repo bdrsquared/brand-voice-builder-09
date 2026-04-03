@@ -94,6 +94,7 @@ const AdminSocialPostsManager = () => {
       position: member.position,
       description: member.description || "",
       email: member.email || "",
+      interests: member.interests || "",
     });
     setEditingId(member.id);
     setShowForm(true);

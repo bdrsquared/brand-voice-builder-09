@@ -432,6 +432,8 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
                   setEditContent={setEditContent}
                   selectedPostIds={selectedPostIds}
                   onTogglePostSelection={togglePostSelection}
+                  polishingPostId={polishingPostId}
+                  onPolish={handlePolishPost}
                 />
               ))}
             </div>

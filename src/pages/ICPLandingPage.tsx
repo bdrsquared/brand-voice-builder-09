@@ -187,6 +187,7 @@ const ICPLandingPage = () => {
   const [icpName, setIcpName] = useState("");
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [generatedImages, setGeneratedImages] = useState<Record<string, string> | null>(null);
 
   useEffect(() => {
     const fetchPage = async () => {

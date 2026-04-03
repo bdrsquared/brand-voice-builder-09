@@ -32,7 +32,7 @@ const AdminSocialPostsManager = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: "", position: "", description: "", email: "" });
+  const [form, setForm] = useState({ name: "", position: "", description: "", email: "", interests: "" });
 
   const fetchMembers = async () => {
     const { data, error } = await supabase

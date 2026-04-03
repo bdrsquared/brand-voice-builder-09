@@ -248,7 +248,7 @@ const CaseStudy = () => {
       <Suspense fallback={<div className="min-h-screen bg-background" />}>
         <CaseStudyHero data={data} />
         <CaseStudyImpact data={data} />
-        <CaseStudyEpisodes data={data} />
+        
         <CaseStudyApproach data={data} />
         <CaseStudyBTS data={data} />
         <CaseStudySummary data={data} />

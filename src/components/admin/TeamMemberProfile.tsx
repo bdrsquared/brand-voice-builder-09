@@ -585,6 +585,8 @@ const TopicCard = ({
             </div>
           </>
         )}
+          </div>
+        </div>
       </div>
     ))}
   </div>

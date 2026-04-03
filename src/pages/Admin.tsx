@@ -372,6 +372,8 @@ const Admin = () => {
             </div>
             {pagesSubTab === "seo" ? <AdminPagesManager /> : <AdminICPManager />}
           </div>
+        ) : activeTab === "social" ? (
+          <AdminSocialPostsManager />
         ) : activeTab === "redirects" ? (
           <AdminRedirectsManager />
         ) : (

@@ -404,29 +404,53 @@ const TopicCard = ({
     {topic.description && (
       <p className="text-xs text-muted-foreground">{topic.description}</p>
     )}
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 flex-wrap">
       <span className={`text-[10px] px-1.5 py-0.5 rounded-full border ${
         topic.status === 'new'
           ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-          : topic.status === 'drafted'
+          : topic.status === 'approved'
           ? 'bg-green-500/10 text-green-400 border-green-500/20'
+          : topic.status === 'drafted'
+          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+          : topic.status === 'declined'
+          ? 'bg-red-500/10 text-red-400 border-red-500/20'
           : 'bg-muted text-muted-foreground border-white/10'
       }`}>
         {topic.status}
       </span>
-      <Button
-        variant="ghost"
-        size="sm"
-        className="h-6 text-xs px-2"
-        onClick={onDraft}
-        disabled={drafting}
-      >
-        {drafting ? (
-          <><Loader2 className="w-3 h-3 mr-1 animate-spin" /> Drafting…</>
-        ) : (
-          <><PenLine className="w-3 h-3 mr-1" /> {posts.length > 0 ? 'Redraft' : 'Draft Post'}</>
-        )}
-      </Button>
+      {/* Approve / Decline for new topics */}
+      {showReviewActions && (
+        <>
+          <Button variant="ghost" size="sm" className="h-6 text-xs px-2 text-green-400 hover:text-green-300 hover:bg-green-500/10" onClick={onApprove}>
+            <ThumbsUp className="w-3 h-3 mr-1" /> Approve
+          </Button>
+          <Button variant="ghost" size="sm" className="h-6 text-xs px-2 text-red-400 hover:text-red-300 hover:bg-red-500/10" onClick={onDecline}>
+            <ThumbsDown className="w-3 h-3 mr-1" /> Decline
+          </Button>
+        </>
+      )}
+      {/* Restore for declined topics */}
+      {onRestore && (
+        <Button variant="ghost" size="sm" className="h-6 text-xs px-2" onClick={onRestore}>
+          <ArrowLeft className="w-3 h-3 mr-1" /> Restore
+        </Button>
+      )}
+      {/* Draft button only for approved topics */}
+      {(topic.status === 'approved' || topic.status === 'drafted') && (
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-6 text-xs px-2"
+          onClick={onDraft}
+          disabled={drafting}
+        >
+          {drafting ? (
+            <><Loader2 className="w-3 h-3 mr-1 animate-spin" /> Drafting…</>
+          ) : (
+            <><PenLine className="w-3 h-3 mr-1" /> {posts.length > 0 ? 'Redraft' : 'Draft Post'}</>
+          )}
+        </Button>
+      )}
     </div>
 
     {/* Drafted posts */}

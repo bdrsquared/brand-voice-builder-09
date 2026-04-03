@@ -197,10 +197,11 @@ const AdminICPManager = () => {
     }
     setCreating(true);
 
-    const slug = newICP.icp_name
+    const baseSlug = newICP.icp_name
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
+    const slug = `for-${baseSlug}`;
 
     const { error } = await (supabase
       .from("icp_landing_pages" as any)
@@ -594,7 +595,7 @@ const AdminICPManager = () => {
                       {/* Preview link */}
                       {page.published && page.slug && (
                         <a
-                          href={`/for/${page.slug}`}
+                          href={`/content-marketing/${page.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

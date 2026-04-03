@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
     const { data: hasAdmin } = await supabase.rpc('has_role', { _user_id: user.id, _role: 'admin' })
     if (!hasAdmin) throw new Error('Admin access required')
 
-    const { team_member_id } = await req.json()
+    const { team_member_id, custom_topic } = await req.json()
     if (!team_member_id) throw new Error('team_member_id is required')
 
     // Fetch team member
@@ -40,7 +40,11 @@ Deno.serve(async (req) => {
       .single()
     if (memberError || !member) throw new Error('Team member not found')
 
-    const prompt = `You are a LinkedIn content strategist. Research current topics for a ${member.position} professional${member.description ? ` who ${member.description}` : ''}.${member.interests ? ` Their interests include: ${member.interests}.` : ''}
+    const topicContext = custom_topic
+      ? `Focus specifically on this topic area: "${custom_topic}". Generate ideas that explore different angles, subtopics, and perspectives within this theme.`
+      : `${member.interests ? `Their interests include: ${member.interests}.` : ''}`
+
+    const prompt = `You are a LinkedIn content strategist. Research current topics for a ${member.position} professional${member.description ? ` who ${member.description}` : ''}.${topicContext ? ` ${topicContext}` : ''}
 
 Generate exactly 5 LinkedIn post topic ideas:
 - 2 must be NEWS-BASED: tied to a specific current event, announcement, trend, or industry development from the last 7 days. Include the source URL.

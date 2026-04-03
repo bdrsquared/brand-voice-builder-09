@@ -67,6 +67,9 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
       if (fnError) throw fnError;
       if (data && !data.success) throw new Error(data.error || "Something went wrong");
 
+      if (typeof window.gtag === "function") {
+        window.gtag('event', 'conversion', { 'send_to': 'AW-11137316015/86-ECMzzhZUcEK_p174p' });
+      }
       setSubmitted(true);
     } catch (err: any) {
       console.error(err);

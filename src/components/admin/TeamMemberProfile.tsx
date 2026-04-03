@@ -239,6 +239,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     } finally {
       setPolishingPostId(null);
     }
+  };
 
   const togglePostSelection = (postId: string) => {
     setSelectedPostIds((prev) => {

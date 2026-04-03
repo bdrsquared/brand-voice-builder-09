@@ -834,6 +834,8 @@ interface TopicCardProps {
   onCancelEdit: () => void;
   onSaveEdit: (id: string) => void;
   setEditContent: (content: string) => void;
+  polishingPostId: string | null;
+  onPolish: (postId: string) => void;
 }
 
 const TopicCard = ({
@@ -841,6 +843,7 @@ const TopicCard = ({
   selectedPostIds, onTogglePostSelection,
   expandedPostId, setExpandedPostId,
   editingPostId, editContent, onStartEdit, onCancelEdit, onSaveEdit, setEditContent,
+  polishingPostId, onPolish,
 }: TopicCardProps) => (
   <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 space-y-2">
     <div className="flex items-start justify-between gap-3">

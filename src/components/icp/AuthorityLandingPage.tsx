@@ -136,7 +136,7 @@ const AuthorityLandingPage = ({ copy, images }: { copy: AuthorityCopy; images?: 
             >
               <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl aspect-[4/3]">
                 <img
-                  src={unsplashSearch(copy.hero.image_query)}
+                  src={images?.hero || unsplashSearch(copy.hero.image_query)}
                   alt={copy.hero.badge}
                   className="w-full h-full object-cover"
                   loading="eager"

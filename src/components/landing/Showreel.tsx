@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import SectionPill from "./SectionPill";
 import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import showreelThumb from "@/assets/showreel-thumb.webp";

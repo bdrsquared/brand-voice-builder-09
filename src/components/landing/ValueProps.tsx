@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionPill from "./SectionPill";
 import { Crown, Target, Layers, TrendingUp } from "lucide-react";
 import EngagementScroll from "./EngagementScroll";
 import AuthorityPulse from "./AuthorityPulse";

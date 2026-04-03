@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionPill from "./SectionPill";
 import { Clock, TrendingUp, Eye, Zap } from "lucide-react";
 
 const reasons = [

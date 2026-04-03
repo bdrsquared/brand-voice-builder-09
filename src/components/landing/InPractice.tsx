@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionPill from "./SectionPill";
 import { Video, Scissors, Share2, Library, Calendar, Mic, BarChart3, Sparkles } from "lucide-react";
 import microphoneImg from "@/assets/earworm-microphone.png";
 import booksImg from "@/assets/earworm-books.png";

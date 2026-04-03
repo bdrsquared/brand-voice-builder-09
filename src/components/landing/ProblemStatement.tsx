@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionPill from "./SectionPill";
 
 const ProblemStatement = () => {
   return (
@@ -13,9 +14,7 @@ const ProblemStatement = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
-            ● The problem
-          </span>
+          <SectionPill variant="dark" className="mb-4">The problem</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-8 text-text-primary">
             Most B2B content doesn't build{" "}
             <span className="text-text-secondary">relationships.</span>{" "}

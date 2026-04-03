@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionPill from "./SectionPill";
 
 
 const testimonials = [
@@ -90,9 +91,7 @@ const Testimonials = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 text-text-tertiary font-medium text-sm mb-4 block">
-            ● What our clients say
-          </span>
+          <SectionPill variant="dark" className="mb-4">What our clients say</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Trusted by <br />
             <span className="text-gradient-green">ambitious</span> businesses

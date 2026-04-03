@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionPill from "./SectionPill";
 import { Crown, Target, Layers, TrendingUp } from "lucide-react";
 import EngagementScroll from "./EngagementScroll";
 import AuthorityPulse from "./AuthorityPulse";
@@ -55,9 +56,7 @@ const ValueProps = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 text-primary font-medium text-sm mb-4 block">
-            ● Why podcasting
-          </span>
+          <SectionPill variant="dark" className="mb-4">Why podcasting</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
             Plug the power of a{" "}
             <span className="text-gradient-green">video podcast</span>{" "}

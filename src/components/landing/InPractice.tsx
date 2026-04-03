@@ -24,9 +24,7 @@ const InPractice = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 font-medium text-sm mb-4 text-light-text-tertiary">
-            ● What this looks like in practice
-          </span>
+          <SectionPill variant="light" className="mb-4">What this looks like in practice</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-2 text-light-text-primary">
             A repeatable system.
           </h2>

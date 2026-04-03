@@ -4,8 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Search, Sparkles, ExternalLink, Newspaper, Lightbulb, Loader2, PenLine, Copy, Check, X } from "lucide-react";
+import { ArrowLeft, Search, Sparkles, ExternalLink, Newspaper, Lightbulb, Loader2, PenLine, Copy, Check, X, Calendar as CalendarIcon } from "lucide-react";
 import { toast } from "sonner";
+import ContentCalendar from "./ContentCalendar";
 
 type TeamMember = {
   id: string;

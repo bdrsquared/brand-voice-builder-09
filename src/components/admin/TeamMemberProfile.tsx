@@ -287,6 +287,34 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
         <ContentCalendar posts={posts} topics={topics} onUpdate={fetchData} />
       ) : activeTab === "drafts" ? (
         <>
+          {/* Batch actions bar */}
+          {allDraftPostIds.length > 0 && (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  checked={selectedPostIds.size === allDraftPostIds.length && allDraftPostIds.length > 0}
+                  onCheckedChange={toggleSelectAll}
+                />
+                <span className="text-xs text-muted-foreground">
+                  {selectedPostIds.size > 0 ? `${selectedPostIds.size} selected` : "Select all"}
+                </span>
+              </div>
+              {selectedPostIds.size > 0 && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="h-7 text-xs">
+                      <MoreHorizontal className="w-3.5 h-3.5 mr-1" /> Actions
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={handleBatchDeletePosts} className="text-red-400 focus:text-red-300">
+                      <Trash2 className="w-3.5 h-3.5 mr-2" /> Delete {selectedPostIds.size} post(s)
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+            </div>
+          )}
           {loading ? (
             <p className="text-muted-foreground text-sm">Loading drafts…</p>
           ) : approvedTopics.length === 0 ? (
@@ -312,6 +340,8 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
                   onCancelEdit={() => setEditingPostId(null)}
                   onSaveEdit={handleSaveEdit}
                   setEditContent={setEditContent}
+                  selectedPostIds={selectedPostIds}
+                  onTogglePostSelection={togglePostSelection}
                 />
               ))}
             </div>

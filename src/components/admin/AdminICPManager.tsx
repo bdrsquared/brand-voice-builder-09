@@ -594,7 +594,7 @@ const AdminICPManager = () => {
                       {/* Preview link */}
                       {page.published && page.slug && (
                         <a
-                          href={`/for/${page.slug}`}
+                          href={`/content-marketing/${page.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

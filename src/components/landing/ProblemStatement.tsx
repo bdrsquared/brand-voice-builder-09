@@ -14,7 +14,7 @@ const ProblemStatement = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <SectionPill variant="dark" className="mb-6">The problem</SectionPill>
+          <SectionPill variant="dark" className="mb-4">The problem</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-8 text-text-primary">
             Most B2B content doesn't build{" "}
             <span className="text-text-secondary">relationships.</span>{" "}

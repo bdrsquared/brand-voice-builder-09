@@ -31,7 +31,7 @@ const WhyNow = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <SectionPill variant="light" className="mb-6">Why now</SectionPill>
+          <SectionPill variant="light" className="mb-4">Why now</SectionPill>
           <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-4 text-light-text-primary">
             First mover advantage.{" "}
             <span className="text-light-text-tertiary">The brands that start now will own the conversation.</span>

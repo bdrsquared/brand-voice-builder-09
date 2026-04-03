@@ -26,6 +26,9 @@ const PageViewTracker = () => {
       window.gtag("config", "G-GL0VCRK86G", {
         page_path: path,
       });
+      window.gtag("config", "G-L7W5E4NQLQ", {
+        page_path: path,
+      });
     }
 
     supabase

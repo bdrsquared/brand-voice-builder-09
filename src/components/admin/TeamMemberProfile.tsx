@@ -184,7 +184,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     fetchData();
   };
 
-
+  const handleTopicStatus = async (topicId: string, status: string) => {
     const { error } = await supabase
       .from("social_post_topics")
       .update({ status, updated_at: new Date().toISOString() })

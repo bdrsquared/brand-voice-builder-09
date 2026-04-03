@@ -4,7 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Search, Sparkles, ExternalLink, Newspaper, Lightbulb, Loader2, PenLine, Copy, Check, X, Calendar as CalendarIcon, ThumbsUp, ThumbsDown, Trash2, CheckCircle } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ArrowLeft, Search, Sparkles, ExternalLink, Newspaper, Lightbulb, Loader2, PenLine, Copy, Check, X, Calendar as CalendarIcon, ThumbsUp, ThumbsDown, Trash2, CheckCircle, MoreHorizontal } from "lucide-react";
 import { toast } from "sonner";
 import ContentCalendar from "./ContentCalendar";
 
@@ -59,6 +61,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
   const [activeTab, setActiveTab] = useState<"topics" | "drafts" | "calendar">("topics");
+  const [selectedPostIds, setSelectedPostIds] = useState<Set<string>>(new Set());
 
   const fetchData = async () => {
     const [topicsRes, postsRes, memberRes] = await Promise.all([
@@ -149,6 +152,35 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     if (error) { toast.error("Failed to save"); return; }
     toast.success("Post updated");
     setEditingPostId(null);
+    fetchData();
+  };
+  const togglePostSelection = (postId: string) => {
+    setSelectedPostIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(postId)) next.delete(postId); else next.add(postId);
+      return next;
+    });
+  };
+
+  const allDraftPostIds = posts.filter((p) => approvedTopics.some((t) => t.id === p.topic_id)).map((p) => p.id);
+
+  const toggleSelectAll = () => {
+    if (selectedPostIds.size === allDraftPostIds.length && allDraftPostIds.length > 0) {
+      setSelectedPostIds(new Set());
+    } else {
+      setSelectedPostIds(new Set(allDraftPostIds));
+    }
+  };
+
+  const handleBatchDeletePosts = async () => {
+    if (selectedPostIds.size === 0) return;
+    const { error } = await supabase
+      .from("social_posts")
+      .delete()
+      .in("id", Array.from(selectedPostIds));
+    if (error) { toast.error("Failed to delete posts"); return; }
+    toast.success(`${selectedPostIds.size} post(s) deleted`);
+    setSelectedPostIds(new Set());
     fetchData();
   };
 
@@ -255,6 +287,34 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
         <ContentCalendar posts={posts} topics={topics} onUpdate={fetchData} />
       ) : activeTab === "drafts" ? (
         <>
+          {/* Batch actions bar */}
+          {allDraftPostIds.length > 0 && (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  checked={selectedPostIds.size === allDraftPostIds.length && allDraftPostIds.length > 0}
+                  onCheckedChange={toggleSelectAll}
+                />
+                <span className="text-xs text-muted-foreground">
+                  {selectedPostIds.size > 0 ? `${selectedPostIds.size} selected` : "Select all"}
+                </span>
+              </div>
+              {selectedPostIds.size > 0 && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="h-7 text-xs">
+                      <MoreHorizontal className="w-3.5 h-3.5 mr-1" /> Actions
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={handleBatchDeletePosts} className="text-red-400 focus:text-red-300">
+                      <Trash2 className="w-3.5 h-3.5 mr-2" /> Delete {selectedPostIds.size} post(s)
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+            </div>
+          )}
           {loading ? (
             <p className="text-muted-foreground text-sm">Loading drafts…</p>
           ) : approvedTopics.length === 0 ? (
@@ -280,6 +340,8 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
                   onCancelEdit={() => setEditingPostId(null)}
                   onSaveEdit={handleSaveEdit}
                   setEditContent={setEditContent}
+                  selectedPostIds={selectedPostIds}
+                  onTogglePostSelection={togglePostSelection}
                 />
               ))}
             </div>
@@ -385,6 +447,8 @@ interface TopicCardProps {
   onDecline?: () => void;
   onRestore?: () => void;
   showReviewActions?: boolean;
+  selectedPostIds?: Set<string>;
+  onTogglePostSelection?: (postId: string) => void;
   expandedPostId: string | null;
   setExpandedPostId: (id: string | null) => void;
   editingPostId: string | null;
@@ -398,6 +462,7 @@ interface TopicCardProps {
 const TopicCard = ({
   topic, posts, drafting, onDraft, onCopy,
   onApprove, onDecline, onRestore, showReviewActions,
+  selectedPostIds, onTogglePostSelection,
   expandedPostId, setExpandedPostId,
   editingPostId, editContent, onStartEdit, onCancelEdit, onSaveEdit, setEditContent,
 }: TopicCardProps) => (
@@ -467,6 +532,15 @@ const TopicCard = ({
     {/* Drafted posts */}
     {posts.map((post) => (
       <div key={post.id} className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] p-3">
+        <div className="flex gap-2">
+          {selectedPostIds && onTogglePostSelection && (
+            <Checkbox
+              checked={selectedPostIds.has(post.id)}
+              onCheckedChange={() => onTogglePostSelection(post.id)}
+              className="mt-0.5 shrink-0"
+            />
+          )}
+          <div className="flex-1">
         {editingPostId === post.id ? (
           <div className="space-y-2">
             <Textarea
@@ -511,6 +585,8 @@ const TopicCard = ({
             </div>
           </>
         )}
+          </div>
+        </div>
       </div>
     ))}
   </div>

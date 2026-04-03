@@ -46,7 +46,7 @@ const AdminSocialPostsManager = () => {
   useEffect(() => { fetchMembers(); }, []);
 
   const resetForm = () => {
-    setForm({ name: "", position: "", description: "", email: "" });
+    setForm({ name: "", position: "", description: "", email: "", interests: "" });
     setShowForm(false);
     setEditingId(null);
   };

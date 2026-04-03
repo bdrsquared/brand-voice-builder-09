@@ -64,6 +64,8 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const [editContent, setEditContent] = useState("");
   const [activeTab, setActiveTab] = useState<"topics" | "drafts" | "calendar">("topics");
   const [selectedPostIds, setSelectedPostIds] = useState<Set<string>>(new Set());
+  const [showResearchDialog, setShowResearchDialog] = useState(false);
+  const [researchTopicInput, setResearchTopicInput] = useState("");
 
   const fetchData = async () => {
     const [topicsRes, postsRes, memberRes] = await Promise.all([

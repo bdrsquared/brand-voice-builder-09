@@ -312,6 +312,7 @@ export type Database = {
           content: string
           created_at: string
           id: string
+          scheduled_date: string | null
           status: string
           team_member_id: string
           topic_id: string
@@ -321,6 +322,7 @@ export type Database = {
           content?: string
           created_at?: string
           id?: string
+          scheduled_date?: string | null
           status?: string
           team_member_id: string
           topic_id: string
@@ -330,6 +332,7 @@ export type Database = {
           content?: string
           created_at?: string
           id?: string
+          scheduled_date?: string | null
           status?: string
           team_member_id?: string
           topic_id?: string

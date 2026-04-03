@@ -2,8 +2,10 @@
 import { useState, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, GripVertical, X } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, GripVertical, X, Expand, Copy, PenLine, Check } from "lucide-react";
 import { toast } from "sonner";
 import {
   format,
@@ -46,6 +48,9 @@ const ContentCalendar = ({ posts, topics, onUpdate }: ContentCalendarProps) => {
   const [view, setView] = useState<"week" | "month">("month");
   const [currentDate, setCurrentDate] = useState(new Date());
   const [draggingPostId, setDraggingPostId] = useState<string | null>(null);
+  const [selectedPost, setSelectedPost] = useState<SocialPost | null>(null);
+  const [editing, setEditing] = useState(false);
+  const [editContent, setEditContent] = useState("");
 
   const unscheduledPosts = posts.filter((p) => !p.scheduled_date);
 
@@ -191,6 +196,7 @@ const ContentCalendar = ({ posts, topics, onUpdate }: ContentCalendarProps) => {
                           setDraggingPostId(post.id);
                         }}
                         onDragEnd={() => setDraggingPostId(null)}
+                        onClick={() => { setSelectedPost(post); setEditing(false); }}
                         title={getTopicTitle(post.topic_id)}
                       >
                         <span className="truncate block pr-3">{getTopicTitle(post.topic_id)}</span>
@@ -219,7 +225,7 @@ const ContentCalendar = ({ posts, topics, onUpdate }: ContentCalendarProps) => {
               {unscheduledPosts.map((post) => (
                 <div
                   key={post.id}
-                  className="text-xs px-2 py-2 rounded-lg border border-white/10 bg-white/5 cursor-grab flex items-start gap-1.5 hover:bg-white/10 transition-colors"
+                  className="text-xs px-2 py-2 rounded-lg border border-white/10 bg-white/5 cursor-grab flex items-start gap-1.5 hover:bg-white/10 transition-colors group"
                   draggable
                   onDragStart={(e) => {
                     e.dataTransfer.setData("text/plain", post.id);
@@ -228,16 +234,103 @@ const ContentCalendar = ({ posts, topics, onUpdate }: ContentCalendarProps) => {
                   onDragEnd={() => setDraggingPostId(null)}
                 >
                   <GripVertical className="w-3 h-3 text-muted-foreground shrink-0 mt-0.5" />
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <p className="font-medium truncate">{getTopicTitle(post.topic_id)}</p>
                     <p className="text-[10px] text-muted-foreground mt-0.5 line-clamp-2">{post.content.slice(0, 80)}…</p>
                   </div>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setSelectedPost(post); setEditing(false); }}
+                    className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity mt-0.5"
+                  >
+                    <Expand className="w-3 h-3 text-muted-foreground hover:text-foreground" />
+                  </button>
                 </div>
               ))}
             </div>
           </div>
         )}
       </div>
+
+      {/* Post lightbox */}
+      <Dialog open={!!selectedPost} onOpenChange={(open) => { if (!open) { setSelectedPost(null); setEditing(false); } }}>
+        <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto bg-background/95 backdrop-blur-xl border-white/10">
+          {selectedPost && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-sm font-medium">
+                  {getTopicTitle(selectedPost.topic_id)}
+                </DialogTitle>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full border ${
+                    selectedPost.status === "scheduled"
+                      ? "bg-green-500/10 text-green-400 border-green-500/20"
+                      : "bg-blue-500/10 text-blue-400 border-blue-500/20"
+                  }`}>
+                    {selectedPost.status}
+                  </span>
+                  {selectedPost.scheduled_date && (
+                    <span className="text-[10px] text-muted-foreground">
+                      {format(new Date(selectedPost.scheduled_date + "T00:00:00"), "d MMM yyyy")}
+                    </span>
+                  )}
+                </div>
+              </DialogHeader>
+
+              <div className="mt-4">
+                {editing ? (
+                  <div className="space-y-3">
+                    <Textarea
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                      rows={12}
+                      className="text-sm leading-relaxed"
+                    />
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-muted-foreground">{editContent.length} characters</span>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="ghost" onClick={() => setEditing(false)}>
+                          <X className="w-3.5 h-3.5 mr-1" /> Cancel
+                        </Button>
+                        <Button size="sm" onClick={async () => {
+                          const { error } = await supabase
+                            .from("social_posts")
+                            .update({ content: editContent, updated_at: new Date().toISOString() })
+                            .eq("id", selectedPost.id);
+                          if (error) { toast.error("Failed to save"); return; }
+                          toast.success("Post updated");
+                          setSelectedPost({ ...selectedPost, content: editContent });
+                          setEditing(false);
+                          onUpdate();
+                        }}>
+                          <Check className="w-3.5 h-3.5 mr-1" /> Save
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <p className="text-sm whitespace-pre-wrap leading-relaxed">{selectedPost.content}</p>
+                    <div className="flex items-center justify-between pt-2 border-t border-white/10">
+                      <span className="text-[10px] text-muted-foreground">{selectedPost.content.length} characters</span>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="ghost" onClick={() => {
+                          navigator.clipboard.writeText(selectedPost.content);
+                          toast.success("Copied to clipboard");
+                        }}>
+                          <Copy className="w-3.5 h-3.5 mr-1" /> Copy
+                        </Button>
+                        <Button size="sm" variant="ghost" onClick={() => { setEditContent(selectedPost.content); setEditing(true); }}>
+                          <PenLine className="w-3.5 h-3.5 mr-1" /> Edit
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

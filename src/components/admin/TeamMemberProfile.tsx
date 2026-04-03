@@ -235,7 +235,13 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
           onClick={() => setActiveTab("topics")}
           className={`text-xs px-3 py-1.5 rounded-t-lg transition-colors ${activeTab === "topics" ? "bg-white/10 text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
         >
-          <Sparkles className="w-3 h-3 inline mr-1" />Topics & Drafts
+          <Sparkles className="w-3 h-3 inline mr-1" />Topics & Ideas
+        </button>
+        <button
+          onClick={() => setActiveTab("drafts")}
+          className={`text-xs px-3 py-1.5 rounded-t-lg transition-colors ${activeTab === "drafts" ? "bg-white/10 text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          <PenLine className="w-3 h-3 inline mr-1" />Drafts
         </button>
         <button
           onClick={() => setActiveTab("calendar")}

@@ -58,6 +58,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
+  const [activeTab, setActiveTab] = useState<"topics" | "calendar">("topics");
 
   const fetchData = async () => {
     const [topicsRes, postsRes, memberRes] = await Promise.all([

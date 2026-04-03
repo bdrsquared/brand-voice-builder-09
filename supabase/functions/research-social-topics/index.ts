@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
     const { data: hasAdmin } = await supabase.rpc('has_role', { _user_id: user.id, _role: 'admin' })
     if (!hasAdmin) throw new Error('Admin access required')
 
-    const { team_member_id, custom_topic } = await req.json()
+    const { team_member_id, custom_topic, research_focus } = await req.json()
     if (!team_member_id) throw new Error('team_member_id is required')
 
     // Fetch team member
@@ -40,25 +40,49 @@ Deno.serve(async (req) => {
       .single()
     if (memberError || !member) throw new Error('Team member not found')
 
-    const topicContext = custom_topic
-      ? `Focus specifically on this topic area: "${custom_topic}". Generate ideas that explore different angles, subtopics, and perspectives within this theme.`
-      : `${member.interests ? `Their interests include: ${member.interests}.` : ''}`
+    const topicArea = custom_topic || (member.interests ? `Topics related to: ${member.interests}` : 'general professional content')
+    
+    const focusGuidance = research_focus
+      ? `The user has asked for specific focus on: "${research_focus}".`
+      : `Default focus: hot takes, edge cases, contrarian opinions, important trends, practical business implications.`
 
-    const prompt = `You are a LinkedIn content strategist. Research current topics for a ${member.position} professional${member.description ? ` who ${member.description}` : ''}.${topicContext ? ` ${topicContext}` : ''}
+    const prompt = `Research the topic: "${topicArea}" for a ${member.position} professional${member.description ? ` who ${member.description}` : ''}.
 
-Generate exactly 5 LinkedIn post topic ideas:
-- 2 must be NEWS-BASED: tied to a specific current event, announcement, trend, or industry development from the last 7 days. Include the source URL.
-- 3 must be GENERAL CONTENT: evergreen thought leadership, insights, or opinion pieces relevant to their role and interests.
+${focusGuidance}
 
-Each topic should be specific enough to write a full LinkedIn post from. Include a compelling angle, not just a broad subject.
+Find 5 strong LinkedIn content angles based on:
+- current hot takes and emerging debates
+- interesting edge cases and non-obvious use cases
+- controversial or non-consensus opinions
+- meaningful business implications
+- strategic insights for operators, founders, marketers, or B2B leaders
 
-Return JSON array with exactly 5 objects:
+Prioritise larger, credible sources — avoid generic SEO roundups. Use a mix of major publications, research firms, company blogs, industry analysis, and respected expert commentary.
+
+For each angle, provide:
+- A sharp, specific title/hook (not a broad topic — an actual post angle someone would write)
+- A 2-4 sentence angle summary explaining the idea and why it's interesting
+- Why this matters right now (1-2 sentences)
+- The most interesting non-obvious insight
+- A suggested LinkedIn stance: practical, contrarian, strategic, cautionary, or opinion-led
+- 2-4 supporting source URLs with short descriptions
+- Whether this is news-based (tied to a specific recent event) or general thought leadership
+
+BAD title examples: "AI in marketing", "The future of content"
+GOOD title examples: "AI won't replace content teams — it will expose weak strategy faster", "The biggest missed AI use case in content is not writing, it's judgement"
+
+Return a JSON array with exactly 5 objects:
 [
   {
-    "title": "Short punchy title",
-    "description": "2-3 sentence description of the angle and key points to cover",
-    "topic_type": "news" or "general",
-    "source_url": "URL for news items, null for general"
+    "title": "Sharp punchy hook that could be a LinkedIn first line",
+    "angle_summary": "2-4 sentences explaining the idea, the angle, and why it's interesting",
+    "why_now": "1-2 sentences on why this matters right now",
+    "non_obvious_insight": "The most interesting non-obvious takeaway",
+    "suggested_stance": "practical|contrarian|strategic|cautionary|opinion-led",
+    "topic_type": "news|general",
+    "sources": [
+      { "url": "https://...", "title": "Source title", "description": "Brief description of what this source says" }
+    ]
   }
 ]
 
@@ -73,7 +97,7 @@ Return ONLY the JSON array, no other text.`
       body: JSON.stringify({
         model: 'sonar',
         messages: [
-          { role: 'system', content: 'You are a LinkedIn content strategist. Return only valid JSON arrays.' },
+          { role: 'system', content: 'You are a sharp LinkedIn content strategist who finds non-obvious angles. Return only valid JSON arrays. Prioritise credible, larger sources.' },
           { role: 'user', content: prompt }
         ],
         temperature: 0.7,
@@ -94,14 +118,21 @@ Return ONLY the JSON array, no other text.`
     
     const topics = JSON.parse(jsonMatch[0])
 
-    // Insert topics
+    // Insert topics with rich research data
     const topicsToInsert = topics.map((t: any) => ({
       team_member_id,
       title: t.title,
-      description: t.description,
+      description: t.angle_summary || t.description,
       topic_type: t.topic_type === 'news' ? 'news' : 'general',
-      source_url: t.source_url || null,
+      source_url: t.sources?.[0]?.url || null,
       status: 'new',
+      research_data: {
+        angle_summary: t.angle_summary,
+        why_now: t.why_now,
+        non_obvious_insight: t.non_obvious_insight,
+        suggested_stance: t.suggested_stance,
+        sources: t.sources || [],
+      },
     }))
 
     const { error: insertError } = await supabase

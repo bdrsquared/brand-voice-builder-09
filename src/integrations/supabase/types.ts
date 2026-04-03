@@ -266,8 +266,10 @@ export type Database = {
       social_post_topics: {
         Row: {
           created_at: string
+          deep_research_data: Json | null
           description: string | null
           id: string
+          research_data: Json | null
           source_url: string | null
           status: string
           team_member_id: string
@@ -277,8 +279,10 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          deep_research_data?: Json | null
           description?: string | null
           id?: string
+          research_data?: Json | null
           source_url?: string | null
           status?: string
           team_member_id: string
@@ -288,8 +292,10 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          deep_research_data?: Json | null
           description?: string | null
           id?: string
+          research_data?: Json | null
           source_url?: string | null
           status?: string
           team_member_id?: string

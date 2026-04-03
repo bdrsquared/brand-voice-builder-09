@@ -162,7 +162,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     });
   };
 
-  const allDraftPostIds = posts.filter((p) => approvedTopics.some((t) => t.id === p.topic_id)).map((p) => p.id);
+  
 
   const toggleSelectAll = () => {
     if (selectedPostIds.size === allDraftPostIds.length && allDraftPostIds.length > 0) {

@@ -471,7 +471,25 @@ const AdminICPManager = () => {
                     </div>
                   )}
 
-                  {/* Generated copy preview */}
+                  {/* Generated images preview */}
+                  {page.research_data?.generated_images && (
+                    <div>
+                      <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-2">
+                        Generated Images
+                      </p>
+                      <div className="grid grid-cols-5 gap-2">
+                        {Object.entries(page.research_data.generated_images as Record<string, string>).map(([section, url]) => (
+                          <div key={section} className="space-y-1">
+                            <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border">
+                              <img src={url} alt={section} className="w-full h-full object-cover" />
+                            </div>
+                            <p className="text-[10px] text-muted-foreground text-center capitalize">{section.replace("_", " ")}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {page.generated_copy && (
                     <div>
                       <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1">

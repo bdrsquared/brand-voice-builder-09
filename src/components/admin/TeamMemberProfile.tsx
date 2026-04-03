@@ -356,12 +356,42 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
         </>
       ) : (
       <>
+      {/* Research dialog */}
+      <Dialog open={showResearchDialog} onOpenChange={setShowResearchDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Research Topic Ideas</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Enter a specific topic to research, or leave blank to generate ideas based on {member.name}'s interests.
+            </p>
+            <Input
+              placeholder="e.g. AI in content marketing, B2B podcasting trends…"
+              value={researchTopicInput}
+              onChange={(e) => setResearchTopicInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleResearch()}
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="ghost" size="sm" onClick={() => setShowResearchDialog(false)}>Cancel</Button>
+            <Button size="sm" onClick={handleResearch} disabled={researching}>
+              {researching ? (
+                <><Loader2 className="w-4 h-4 mr-1 animate-spin" /> Researching…</>
+              ) : (
+                <><Search className="w-4 h-4 mr-1" /> {researchTopicInput.trim() ? "Research This Topic" : "Research General Ideas"}</>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {/* Research button */}
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-primary" /> LinkedIn Topic Ideas
         </h3>
-        <Button size="sm" onClick={handleResearch} disabled={researching}>
+        <Button size="sm" onClick={() => setShowResearchDialog(true)} disabled={researching}>
           {researching ? (
             <><Loader2 className="w-4 h-4 mr-1 animate-spin" /> Researching…</>
           ) : (

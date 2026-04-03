@@ -517,8 +517,26 @@ const AdminICPManager = () => {
                         {page.research_data ? "Re-research" : "Research ICP"}
                       </Button>
 
-                      {/* Generate copy button */}
+                      {/* Generate images button */}
                       {page.research_data && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          disabled={generatingImages === page.id}
+                          onClick={() => handleGenerateImages(page)}
+                          className="text-xs"
+                        >
+                          {generatingImages === page.id ? (
+                            <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                          ) : (
+                            <ImageIcon className="w-3.5 h-3.5 mr-1.5" />
+                          )}
+                          {page.research_data?.generated_images ? "Regenerate Images" : "Generate Images"}
+                        </Button>
+                      )}
+
+                      {/* Generate copy button - requires images */}
+                      {page.research_data?.generated_images && (
                         <Button
                           size="sm"
                           variant="outline"

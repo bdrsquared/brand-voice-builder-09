@@ -55,6 +55,8 @@ Deno.serve(async (req) => {
 
 ${contextParts}
 
+IMPORTANT: Do NOT use any sources from earworm.co.uk, earwormmedia.com, or any Earworm-owned domains. Only use external, third-party sources.
+
 Provide a comprehensive research pack that will help someone write a high-quality LinkedIn post (not an academic report). Include:
 
 1. CORE THESIS: The central argument or observation in 1-2 sentences

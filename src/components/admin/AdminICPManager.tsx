@@ -46,6 +46,42 @@ const AdminICPManager = () => {
   const [deleting, setDeleting] = useState<string | null>(null);
   const [generating, setGenerating] = useState<string | null>(null);
   const [toggling, setToggling] = useState<string | null>(null);
+  const [generatingImages, setGeneratingImages] = useState<string | null>(null);
+
+  const handleGenerateImages = async (page: ICPPage) => {
+    if (!page.research_data) {
+      toast.error("Research this ICP first");
+      return;
+    }
+    setGeneratingImages(page.id);
+    try {
+      const response = await supabase.functions.invoke("generate-icp-images", {
+        body: {
+          icp_id: page.id,
+          icp_name: page.icp_name,
+          research_data: page.research_data.content || page.research_data,
+        },
+      });
+
+      if (response.error) {
+        toast.error("Image generation failed: " + (response.error.message || "Unknown error"));
+        return;
+      }
+
+      const data = response.data;
+      if (data?.error) {
+        toast.error("Image generation failed: " + data.error);
+        return;
+      }
+
+      toast.success(`Generated ${data.count} images successfully!`);
+      fetchPages();
+    } catch (err: any) {
+      toast.error("Image generation failed: " + (err.message || "Unknown error"));
+    } finally {
+      setGeneratingImages(null);
+    }
+  };
 
   const handleResearch = async (page: ICPPage) => {
     setResearching(page.id);

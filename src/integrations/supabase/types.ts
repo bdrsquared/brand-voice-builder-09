@@ -263,6 +263,50 @@ export type Database = {
         }
         Relationships: []
       }
+      social_post_topics: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          source_url: string | null
+          status: string
+          team_member_id: string
+          title: string
+          topic_type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          source_url?: string | null
+          status?: string
+          team_member_id: string
+          title: string
+          topic_type?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          source_url?: string | null
+          status?: string
+          team_member_id?: string
+          title?: string
+          topic_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "social_post_topics_team_member_id_fkey"
+            columns: ["team_member_id"]
+            isOneToOne: false
+            referencedRelation: "team_members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       team_members: {
         Row: {
           created_at: string

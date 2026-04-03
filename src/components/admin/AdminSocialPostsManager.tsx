@@ -196,6 +196,9 @@ const AdminSocialPostsManager = () => {
                 {member.email && (
                   <p className="text-xs text-muted-foreground mt-0.5">{member.email}</p>
                 )}
+                {member.interests && (
+                  <p className="text-xs text-muted-foreground mt-0.5 italic">Interests: {member.interests}</p>
+                )}
               </div>
               <div className="flex gap-1 shrink-0">
                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleEdit(member)}>

@@ -78,6 +78,7 @@ const AdminSocialPostsManager = () => {
           position: form.position,
           description: form.description.trim() || null,
           email: form.email.trim() || null,
+          interests: form.interests.trim() || null,
         });
       if (error) { toast.error("Failed to add"); return; }
       toast.success("Team member added");

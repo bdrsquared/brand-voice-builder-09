@@ -945,7 +945,7 @@ const TopicCard = ({
                 size="sm"
                 className="h-6 text-xs px-2"
                 disabled={polishingPostId === post.id}
-                onClick={() => handlePolishPost(post.id)}
+                onClick={() => onPolish(post.id)}
               >
                 {polishingPostId === post.id ? (
                   <><Loader2 className="w-3 h-3 mr-1 animate-spin" /> Polishing...</>

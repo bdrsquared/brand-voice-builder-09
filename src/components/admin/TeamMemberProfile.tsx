@@ -154,8 +154,37 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
     setEditingPostId(null);
     fetchData();
   };
+  const togglePostSelection = (postId: string) => {
+    setSelectedPostIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(postId)) next.delete(postId); else next.add(postId);
+      return next;
+    });
+  };
 
-  const handleTopicStatus = async (topicId: string, status: string) => {
+  const allDraftPostIds = posts.filter((p) => approvedTopics.some((t) => t.id === p.topic_id)).map((p) => p.id);
+
+  const toggleSelectAll = () => {
+    if (selectedPostIds.size === allDraftPostIds.length && allDraftPostIds.length > 0) {
+      setSelectedPostIds(new Set());
+    } else {
+      setSelectedPostIds(new Set(allDraftPostIds));
+    }
+  };
+
+  const handleBatchDeletePosts = async () => {
+    if (selectedPostIds.size === 0) return;
+    const { error } = await supabase
+      .from("social_posts")
+      .delete()
+      .in("id", Array.from(selectedPostIds));
+    if (error) { toast.error("Failed to delete posts"); return; }
+    toast.success(`${selectedPostIds.size} post(s) deleted`);
+    setSelectedPostIds(new Set());
+    fetchData();
+  };
+
+
     const { error } = await supabase
       .from("social_post_topics")
       .update({ status, updated_at: new Date().toISOString() })

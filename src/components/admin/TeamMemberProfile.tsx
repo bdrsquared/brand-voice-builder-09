@@ -198,6 +198,7 @@ const TeamMemberProfile = ({ member, onBack }: TeamMemberProfileProps) => {
   const approvedTopics = topics.filter((t) => t.status === "approved" || t.status === "drafted");
   const declinedTopics = topics.filter((t) => t.status === "declined");
   const selectedTone = TONES.find((t) => t.value === toneOfVoice);
+  const allDraftPostIds = posts.filter((p) => approvedTopics.some((t) => t.id === p.topic_id)).map((p) => p.id);
 
   return (
     <div className="space-y-6">

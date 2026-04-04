@@ -72,6 +72,12 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
       if (typeof window.gtag === "function") {
         window.gtag('event', 'conversion', { 'send_to': 'AW-11137316015/86-ECMzzhZUcEK_p174p' });
       }
+
+      // Send thank-you email & add to audience (fire-and-forget)
+      supabase.functions.invoke("send-thank-you", {
+        body: { name: name.trim(), email: email.trim() },
+      }).catch((err) => console.error("Thank you email failed:", err));
+
       setSubmitted(true);
     } catch (err: any) {
       console.error(err);

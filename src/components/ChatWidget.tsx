@@ -4,6 +4,7 @@ import { MessageCircle, X, ArrowRight, Check, ChevronDown, Search } from "lucide
 import { supabase } from "@/integrations/supabase/client";
 import { countryCodes, UK_DEFAULT_INDEX } from "@/lib/country-codes";
 import BudgetSelect from "@/components/BudgetSelect";
+import benProfile from "@/assets/ben-profile.png";
 
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { lazy, Suspense } from "react";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Navbar from "@/components/landing/Navbar";
-import Hero from "@/components/landing/Hero";
+import HeroSplit from "@/components/landing/HeroSplit";
 import ValueProps from "@/components/landing/ValueProps";
 
 const Showreel = lazy(() => import("@/components/landing/Showreel"));

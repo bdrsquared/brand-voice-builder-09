@@ -70,12 +70,7 @@ const HeroSplit = () => {
           >
             <div className="relative">
               {/* Image container with notch cutout */}
-              <div
-                className="relative overflow-hidden rounded-2xl"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 100% 100%, 30% 100%, 30% calc(100% - 80px), 0 calc(100% - 80px))",
-                }}
-              >
+              <div className="relative overflow-hidden rounded-2xl">
                 <img
                   src={heroImage}
                   alt="Professional podcast microphone"

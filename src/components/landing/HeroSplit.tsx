@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LogoWall from "./LogoWall";
 import DotsBackground from "./DotsBackground";
-import heroImage from "@/assets/hero-podcast-mic.jpg";
+import heroImage from "@/assets/hero-podcast-mic.png";
 
 const HeroSplit = () => {
   return (
@@ -70,12 +70,7 @@ const HeroSplit = () => {
           >
             <div className="relative">
               {/* Image container with notch cutout */}
-              <div
-                className="relative overflow-hidden rounded-2xl"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 100% 100%, 30% 100%, 30% calc(100% - 80px), 0 calc(100% - 80px))",
-                }}
-              >
+              <div className="relative overflow-hidden rounded-2xl">
                 <img
                   src={heroImage}
                   alt="Professional podcast microphone"
@@ -84,19 +79,6 @@ const HeroSplit = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
               </div>
 
-              {/* Floating label bar in the notch area */}
-              <div className="absolute bottom-4 left-0 right-4">
-                <div className="flex items-center gap-1 px-3 py-2.5 rounded-full bg-white/[0.06] backdrop-blur-2xl border border-white/[0.1]">
-                  {["Smart Scheduling", "AI Show Notes", "Team & Contacts", "Multi-Platform"].map((label) => (
-                    <span
-                      key={label}
-                      className="text-xs text-text-secondary font-medium px-3 py-1 whitespace-nowrap"
-                    >
-                      {label}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>

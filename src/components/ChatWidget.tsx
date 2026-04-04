@@ -4,6 +4,7 @@ import { MessageCircle, X, ArrowRight, Check, ChevronDown, Search } from "lucide
 import { supabase } from "@/integrations/supabase/client";
 import { countryCodes, UK_DEFAULT_INDEX } from "@/lib/country-codes";
 import BudgetSelect from "@/components/BudgetSelect";
+import benProfile from "@/assets/ben-profile.png";
 
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
@@ -145,6 +146,22 @@ const ChatWidget = () => {
             </button>
 
             <div className="relative z-10 p-6 overflow-visible">
+              {/* Profile card */}
+              <div className={`rounded-xl backdrop-blur-xl p-3 mb-4 flex items-center gap-3 ${
+                light
+                  ? "bg-black/[0.04] border border-black/[0.08]"
+                  : "bg-white/[0.04] border border-white/[0.08]"
+              }`}>
+                <div className="relative shrink-0">
+                  <img src={benProfile} alt="Ben Farley" className="w-10 h-10 rounded-full object-cover" />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary border-2 border-background" />
+                </div>
+                <div className="min-w-0">
+                  <p className={`text-sm font-heading leading-tight ${light ? "text-gray-900" : "text-foreground"}`}>Ben Farley</p>
+                  <p className={`text-[11px] font-body leading-tight ${light ? "text-gray-500" : "text-muted-foreground"}`}>Founder, Earworm</p>
+                </div>
+                <span className={`ml-auto text-[10px] font-body shrink-0 ${light ? "text-gray-400" : "text-white/40"}`}>Online</span>
+              </div>
               <AnimatePresence mode="wait">
                 {submitted ? (
                   <motion.div

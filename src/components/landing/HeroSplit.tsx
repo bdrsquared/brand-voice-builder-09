@@ -66,19 +66,20 @@ const HeroSplit = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative hidden lg:block"
+            className="relative hidden lg:flex justify-end"
           >
-            <div className="relative">
-              {/* Image container with notch cutout */}
-              <div className="relative overflow-hidden rounded-2xl">
-                <img
-                  src={heroImage}
-                  alt="Professional podcast microphone"
-                  className="w-full h-auto object-cover aspect-[5/6]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-              </div>
-
+            <div
+              className="relative w-[380px] h-[380px] overflow-hidden rounded-2xl"
+              style={{
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 30% 100%, 30% 75%, 0 75%)",
+              }}
+            >
+              <img
+                src={heroImage}
+                alt="Professional podcast microphone"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
             </div>
           </motion.div>
         </div>

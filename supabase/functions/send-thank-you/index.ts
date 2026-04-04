@@ -142,7 +142,7 @@ serve(async (req) => {
         'X-Connection-Api-Key': RESEND_API_KEY,
       },
       body: JSON.stringify({
-        from: 'Ben from Earworm <hi@earworm.co>',
+        from: 'Ben from Earworm <ben@earworm.co>',
         to: [email],
         subject: `Thanks for getting in touch, ${firstName}`,
         html: emailHtml,

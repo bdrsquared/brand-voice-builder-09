@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye, Trash2, CheckCircle, MoreHorizontal, BellDot, ExternalLink, Users, Share2 } from "lucide-react";
+import { LogOut, MessageSquare, Mic, Mail, Phone, Calendar, ChevronDown, ChevronUp, FileText, BarChart3, Globe, Magnet, Archive, ChevronLeft, ChevronRight, Eye, Trash2, CheckCircle, MoreHorizontal, BellDot, ExternalLink, Users, Share2, Contact } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay, parseISO } from "date-fns";
 import AdminBlogManager from "@/components/admin/AdminBlogManager";
@@ -12,6 +12,7 @@ import AdminPagesManager from "@/components/admin/AdminPagesManager";
 import AdminICPManager from "@/components/admin/AdminICPManager";
 import AdminRedirectsManager from "@/components/admin/AdminRedirectsManager";
 import AdminSocialPostsManager from "@/components/admin/AdminSocialPostsManager";
+import AdminGojiBerryContacts from "@/components/admin/AdminGojiBerryContacts";
 
 type Inquiry = {
   id: string;
@@ -36,7 +37,7 @@ const Admin = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(30);
   const [pvTimeRange, setPvTimeRange] = useState(30);
-  const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages" | "redirects" | "social">("inquiries");
+  const [activeTab, setActiveTab] = useState<"inquiries" | "blog" | "pages" | "redirects" | "social" | "contacts">("inquiries");
   const [pagesSubTab, setPagesSubTab] = useState<"seo" | "icp">("seo");
   const [showArchived, setShowArchived] = useState(false);
   const [insightsSubTab, setInsightsSubTab] = useState<"leads" | "pageviews">("leads");
@@ -339,6 +340,12 @@ const Admin = () => {
               <Share2 className="w-3.5 h-3.5 inline mr-1" />Social Posts
             </button>
             <button
+              onClick={() => setActiveTab("contacts")}
+              className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "contacts" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <Contact className="w-3.5 h-3.5 inline mr-1" />Contacts
+            </button>
+            <button
               onClick={() => setActiveTab("redirects")}
               className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm rounded-md transition-colors ${activeTab === "redirects" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
             >
@@ -374,6 +381,8 @@ const Admin = () => {
           </div>
         ) : activeTab === "social" ? (
           <AdminSocialPostsManager />
+        ) : activeTab === "contacts" ? (
+          <AdminGojiBerryContacts />
         ) : activeTab === "redirects" ? (
           <AdminRedirectsManager />
         ) : (

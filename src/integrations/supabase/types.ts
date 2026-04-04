@@ -92,6 +92,45 @@ export type Database = {
         }
         Relationships: []
       }
+      gojiberry_contacts: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          job_title: string | null
+          last_name: string | null
+          linkedin_url: string | null
+          raw_data: Json | null
+          source: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id?: string
+          job_title?: string | null
+          last_name?: string | null
+          linkedin_url?: string | null
+          raw_data?: Json | null
+          source?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          job_title?: string | null
+          last_name?: string | null
+          linkedin_url?: string | null
+          raw_data?: Json | null
+          source?: string | null
+        }
+        Relationships: []
+      }
       icp_landing_pages: {
         Row: {
           created_at: string

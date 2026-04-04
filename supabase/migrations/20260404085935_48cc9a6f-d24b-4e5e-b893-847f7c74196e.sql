@@ -1,0 +1,1 @@
+ALTER TABLE public.gojiberry_contacts ADD CONSTRAINT gojiberry_contacts_email_unique UNIQUE (email);

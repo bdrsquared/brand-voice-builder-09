@@ -375,8 +375,6 @@ const Admin = () => {
           </div>
         ) : activeTab === "social" ? (
           <AdminSocialPostsManager />
-        ) : activeTab === "contacts" ? (
-          <AdminGojiBerryContacts />
         ) : activeTab === "redirects" ? (
           <AdminRedirectsManager />
         ) : (

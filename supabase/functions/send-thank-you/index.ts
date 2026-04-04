@@ -80,7 +80,7 @@ serve(async (req) => {
           <!-- Logo -->
           <tr>
             <td style="padding:32px 32px 0;">
-              <span style="font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.5px;">earworm</span>
+              <img src="https://earworm.co/assets/earworm-logo.webp" alt="Earworm" width="120" style="height:auto;display:block;" />
             </td>
           </tr>
           

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { lazy, Suspense } from "react";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
 import Navbar from "@/components/landing/Navbar";
-import Hero from "@/components/landing/Hero";
+import HeroSplit from "@/components/landing/HeroSplit";
 import ValueProps from "@/components/landing/ValueProps";
 
 const Showreel = lazy(() => import("@/components/landing/Showreel"));
@@ -29,7 +29,7 @@ const Sandbox = () => {
     <div className="min-h-screen bg-background overflow-x-hidden">
       <TestimonialTicker />
       <Navbar />
-      <Hero variant="dots" />
+      <HeroSplit />
       
       <Suspense fallback={null}>
         <CaseStudies />

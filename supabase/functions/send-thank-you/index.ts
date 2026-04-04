@@ -117,9 +117,26 @@ serve(async (req) => {
             </td>
           </tr>
           
+          <!-- Profile card -->
+          <tr>
+            <td style="padding:24px 32px 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" style="background-color:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;width:100%;">
+                <tr>
+                  <td style="vertical-align:middle;padding-right:14px;width:48px;">
+                    <img src="https://opzkaxzcmqqqdbteuhas.supabase.co/storage/v1/object/public/email-assets/ben-profile.png" alt="Ben Farley" width="48" height="48" style="border-radius:50%;display:block;object-fit:cover;" />
+                  </td>
+                  <td style="vertical-align:middle;">
+                    <p style="margin:0;font-size:14px;font-weight:700;color:#ffffff;line-height:1.3;">Ben Farley</p>
+                    <p style="margin:2px 0 0;font-size:12px;color:#71717a;line-height:1.3;">Founder, Earworm</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
           <!-- Footer -->
           <tr>
-            <td style="padding:0 32px 28px;">
+            <td style="padding:20px 32px 28px;">
               <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:0 0 20px;" />
               <p style="margin:0;font-size:11px;color:#52525b;line-height:1.5;">
                 Earworm Media · London, UK<br/>

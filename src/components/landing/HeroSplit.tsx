@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LogoWall from "./LogoWall";
 import DotsBackground from "./DotsBackground";
-import heroImage from "@/assets/hero-podcast-mic.jpg";
+import heroImage from "@/assets/hero-podcast-mic.png";
 
 const HeroSplit = () => {
   return (

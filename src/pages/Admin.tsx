@@ -30,7 +30,7 @@ type Inquiry = {
 
 const ITEMS_PER_PAGE = 20;
 
-const Admin = () => {
+const Admin = () => { 
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [pageViews, setPageViews] = useState<Array<{ page_path: string; created_at: string }>>([]);
   const [loading, setLoading] = useState(true);

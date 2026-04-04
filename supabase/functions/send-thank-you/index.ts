@@ -80,7 +80,7 @@ serve(async (req) => {
           <!-- Logo -->
           <tr>
             <td style="padding:32px 32px 0;">
-              <img src="https://earworm.co/assets/earworm-logo.webp" alt="Earworm" width="120" style="height:auto;display:block;" />
+              <img src="https://opzkaxzcmqqqdbteuhas.supabase.co/storage/v1/object/public/email-assets/earworm-logo.png" alt="Earworm" width="120" style="height:auto;display:block;" />
             </td>
           </tr>
           

@@ -12,6 +12,7 @@ import AdminPagesManager from "@/components/admin/AdminPagesManager";
 import AdminICPManager from "@/components/admin/AdminICPManager";
 import AdminRedirectsManager from "@/components/admin/AdminRedirectsManager";
 import AdminSocialPostsManager from "@/components/admin/AdminSocialPostsManager";
+import AdminGojiBerryContacts from "@/components/admin/AdminGojiBerryContacts";
 
 type Inquiry = {
   id: string;

@@ -181,7 +181,7 @@ const ContentPlaybook = () => {
               { n: "03", t: "Optimise for forwardability", d: "The most valuable clip is often the one pasted into Slack, WhatsApp, or a buying-committee deck - not the one with the most likes." },
               { n: "04", t: "Use hosts as trust infrastructure", d: "In 2026/2027, the host is the trust interface between brand and buyer - not just talent." },
             ].map((r) => (
-              <div key={r.n} className="bg-background p-5 flex gap-4 items-start">
+              <div key={r.n} className="bg-white/60 backdrop-blur-sm p-5 flex gap-4 items-start">
                 <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">{r.n}</span>
                 <div>
                   <div className="font-semibold text-sm text-text-primary mb-1">{r.t}</div>

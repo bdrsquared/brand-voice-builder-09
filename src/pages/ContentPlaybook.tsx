@@ -31,7 +31,7 @@ const BarChart = ({ title, rows }: { title: string; rows: { label: string; pct: 
     <div className="font-body text-xs tracking-[0.12em] uppercase text-text-secondary mb-5">{title}</div>
     <div className="flex flex-col gap-3">
       {rows.map((r) => (
-        <div key={r.label} className="grid grid-cols-[minmax(120px,200px)_1fr_60px] items-center gap-4">
+        <div key={r.label} className="grid grid-cols-[minmax(80px,160px)_1fr_50px] md:grid-cols-[minmax(120px,200px)_1fr_60px] items-center gap-2 md:gap-4">
           <div className="text-sm text-text-secondary text-right leading-tight">{r.label}</div>
           <div className="bg-border h-7 rounded-sm overflow-hidden">
             <div className="h-full rounded-sm" style={{ width: `${r.pct}%`, background: r.color ?? "hsl(var(--primary))" }} />
@@ -99,10 +99,10 @@ const ContentPlaybook = () => {
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
 
         <div className="relative max-w-5xl mx-auto">
-          <div className="mb-6">
+          <div className="mb-6 mt-6">
             <SectionPill>Senior Marketer Edition</SectionPill>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6">
+          <h1 className="text-3xl md:text-6xl lg:text-7xl mb-6">
             The Content Playbook<br />for <span className="bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent">2026 / 2027</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-xl leading-relaxed mb-10">
@@ -130,8 +130,8 @@ const ContentPlaybook = () => {
               >
                 {/* sweep shimmer */}
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none" />
-                <span className="font-heading text-3xl text-primary block leading-none mb-3">{s.num}</span>
-                <span className="text-text-secondary text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
+               <span className="font-heading text-2xl md:text-3xl text-primary block leading-none mb-3">{s.num}</span>
+                <span className="text-text-secondary text-xs md:text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
               </div>
             ))}
           </div>
@@ -139,12 +139,12 @@ const ContentPlaybook = () => {
       </header>
 
       {/* ── SECTIONS ── */}
-      <main className="max-w-5xl mx-auto px-6 md:px-10">
+      <main className="max-w-5xl mx-auto px-4 md:px-10">
 
         {/* ── 01 STRATEGY ── */}
-        <section className="py-20 border-b border-border" id="strategy">
+        <section className="py-12 md:py-20 border-b border-border" id="strategy">
           <SectionNum>01 — The Strategic Model</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">Win minds before<br />buyers raise hands</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">Win minds before<br />buyers raise hands</h2>
           <p className="text-text-secondary leading-relaxed mb-4">The big shift is this: TOFU is no longer mainly about "awareness." It is about <strong className="text-text-primary">shaping buyer preference before a buyer is ready to talk to sales.</strong> The teams that win in 2026/2027 will look less like blog factories and more like a hybrid of newsroom, studio, and measurement lab.</p>
           <Pullquote>"The most important content moment is not when a buyer reaches out. It is the six months before they do."</Pullquote>
           <p className="text-text-secondary leading-relaxed mb-4">CMI's top performers attribute their success to a clear set of factors. Here's how they rank:</p>
@@ -188,9 +188,9 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 02 VIDEO ── */}
-        <section className="py-20 border-b border-border" id="video">
+        <section className="py-12 md:py-20 border-b border-border" id="video">
           <SectionNum>02 — Video as the Content Nucleus</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">Video is no longer<br />a supporting asset</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">Video is no longer<br />a supporting asset</h2>
           <p className="text-text-secondary leading-relaxed mb-4">HubSpot's 2026 data is unambiguous: the three highest-ROI content formats are all video-based. YouTube now reports over 700 million hours of podcast content watched on living-room devices in October 2025. The flagship content asset for 2026/2027 should be a <strong className="text-text-primary">video podcast or episodic show.</strong></p>
 
           <BarChart
@@ -229,9 +229,9 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 03 TRUST ── */}
-        <section className="py-20 border-b border-border" id="trust">
+        <section className="py-12 md:py-20 border-b border-border" id="trust">
           <SectionNum>03 — Parasocial Trust</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">Design for parasocial<br />connection deliberately</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">Design for parasocial<br />connection deliberately</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Parasocial trust is not fluff. It is a demand-creation mechanism. Spotify's data makes the case plainly:</p>
 
           <StatGrid stats={[
@@ -253,9 +253,9 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 04 TOFU ── */}
-        <section className="py-20 border-b border-border" id="tofu">
+        <section className="py-12 md:py-20 border-b border-border" id="tofu">
           <SectionNum>04 — Revenue-Grade TOFU</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">Top-of-funnel that<br />actually moves revenue</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">Top-of-funnel that<br />actually moves revenue</h2>
           <p className="text-text-secondary leading-relaxed mb-4">High-performing TOFU is not generic educational content. It is content that helps the buyer group see the problem, explain the stakes internally, and justify a direction.</p>
 
           <StatGrid stats={[
@@ -305,9 +305,9 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 05 DARK SOCIAL ── */}
-        <section className="py-20 border-b border-border" id="dark-social">
+        <section className="py-12 md:py-20 border-b border-border" id="dark-social">
           <SectionNum>05 — Dark Social</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">What dark social is<br />and why it matters</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">What dark social is<br />and why it matters</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Dark social is what happens when your content moves through private or referrer-obscured spaces: WhatsApp, Slack, Teams, DMs, text messages, forwarded emails, copied links, and internal docs.</p>
 
           <Callout label="Key Insight">
@@ -343,9 +343,9 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 06 MEASUREMENT ── */}
-        <section className="py-20 border-b border-border" id="measurement">
+        <section className="py-12 md:py-20 border-b border-border" id="measurement">
           <SectionNum>06 — Measurement</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">The four-layer<br />measurement scorecard</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">The four-layer<br />measurement scorecard</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Your scorecard should move from attention quality all the way to revenue impact. Never report impressions, views, and MQLs in a vacuum and call that content ROI.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
@@ -385,9 +385,9 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 07 EXECUTION ── */}
-        <section className="py-20" id="execution">
+        <section className="py-12 md:py-20" id="execution">
           <SectionNum>07 — Team, Process & AI</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">The studio with<br />revenue ops attached</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">The studio with<br />revenue ops attached</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Wistia says over 40% of companies create at least one video per week, almost 60% are increasing video budgets, and 71% now handle video production in-house. CMI says 45% of B2B marketers still lack a scalable model for content creation. <strong className="text-text-primary">That gap is your opportunity.</strong></p>
 
           <h3 className="text-lg md:text-2xl mt-10 mb-5 text-text-primary">Minimum viable team</h3>

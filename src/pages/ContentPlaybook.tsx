@@ -103,7 +103,7 @@ const ContentPlaybook = () => {
             Senior Marketer Edition
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6">
-            The Content Playbook<br />for <span className="text-gradient-green">2026 / 2027</span>
+            The Content Playbook<br />for <span className="bg-gradient-to-r from-primary via-[#6359EA] to-[#FFB347] bg-clip-text text-transparent">2026 / 2027</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-xl leading-relaxed mb-10">
             Top-of-funnel content that creates revenue, not just reach. Built for B2B and high-consideration brands navigating a buyer-led, AI-shaped, video-first world.

@@ -297,7 +297,7 @@ const ContentPlaybook = () => {
           </Callout>
 
           <BarChart
-            title="Attribution loss by channel — % of visits appearing as "(direct)" in GA (SparkToro)"
+            title={'Attribution loss by channel — % of visits appearing as "(direct)" in GA (SparkToro)'}
             rows={[
               { label: "TikTok", pct: 100, val: "100%" },
               { label: "Slack", pct: 100, val: "100%" },

@@ -102,7 +102,7 @@ const ContentPlaybook = () => {
           <div className="mb-6 mt-6">
             <SectionPill>Senior Marketer Edition</SectionPill>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6">
+          <h1 className="text-3xl md:text-6xl lg:text-7xl mb-6">
             The Content Playbook<br />for <span className="bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent">2026 / 2027</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-xl leading-relaxed mb-10">

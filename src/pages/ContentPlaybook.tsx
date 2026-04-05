@@ -109,6 +109,15 @@ const ContentPlaybook = () => {
             Top-of-funnel content that creates revenue, not just reach. Built for B2B and high-consideration brands navigating a buyer-led, AI-shaped, video-first world.
           </p>
 
+          <a
+            href="/Content-Playbook-2026-2027.pdf"
+            download
+            className="inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-full text-sm transition-all duration-300 text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.12] shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:bg-white/[0.14] hover:border-white/[0.2] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_20px_rgba(255,255,255,0.04)] mb-10"
+          >
+            <Download className="w-4 h-4" />
+            Download PDF
+          </a>
+
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/40 border border-border rounded-lg overflow-hidden">
             {[
               { num: "95%", label: "of B2B buyers are not in-market at any given moment", src: "Edelman" },

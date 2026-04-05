@@ -100,7 +100,12 @@ const ContentPlaybook = () => {
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
 
         <div className="relative max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-10 items-center">
+          {/* Animated vertical content engine - left */}
+          <div className="hidden lg:block h-[420px]">
+            <ContentEngineVertical />
+          </div>
+
           <div>
             <div className="mb-6">
               <SectionPill>Senior Marketer Edition</SectionPill>
@@ -120,11 +125,6 @@ const ContentPlaybook = () => {
               <Download className="w-4 h-4" />
               Download PDF
             </a>
-          </div>
-
-          {/* Animated vertical content engine */}
-          <div className="hidden lg:block h-[420px]">
-            <ContentEngineVertical />
           </div>
         </div>
 

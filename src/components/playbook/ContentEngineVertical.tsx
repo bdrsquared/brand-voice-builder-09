@@ -1,21 +1,23 @@
 import { useEffect, useRef, useState } from "react";
+import { Play, Scissors, FileText, Mail, MessageSquare, BarChart3, Smartphone, Headphones, Quote, Briefcase, Image, AtSign } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const col1 = [
-  { label: "Full Episode", icon: "▶", accent: true },
-  { label: "Blog Post", icon: "📝", accent: false },
-  { label: "Newsletter", icon: "✉", accent: true },
-  { label: "Social Post", icon: "💬", accent: false },
-  { label: "Case Study", icon: "📊", accent: true },
-  { label: "YouTube Short", icon: "📱", accent: false },
+const col1: { label: string; Icon: LucideIcon }[] = [
+  { label: "Full Episode", Icon: Play },
+  { label: "Blog Post", Icon: FileText },
+  { label: "Newsletter", Icon: Mail },
+  { label: "Social Post", Icon: MessageSquare },
+  { label: "Case Study", Icon: BarChart3 },
+  { label: "YouTube Short", Icon: Smartphone },
 ];
 
-const col2 = [
-  { label: "Short Clip", icon: "🎬", accent: false },
-  { label: "Audiogram", icon: "🎧", accent: true },
-  { label: "Quote Card", icon: "❝", accent: false },
-  { label: "LinkedIn Post", icon: "💼", accent: true },
-  { label: "Carousel", icon: "🖼", accent: false },
-  { label: "Thread", icon: "🧵", accent: false },
+const col2: { label: string; Icon: LucideIcon }[] = [
+  { label: "Short Clip", Icon: Scissors },
+  { label: "Audiogram", Icon: Headphones },
+  { label: "Quote Card", Icon: Quote },
+  { label: "LinkedIn Post", Icon: Briefcase },
+  { label: "Carousel", Icon: Image },
+  { label: "Thread", Icon: AtSign },
 ];
 
 const speeds = [0.3, -0.25];
@@ -54,7 +56,13 @@ const ContentEngineVertical = () => {
   }, [reduced]);
 
   return (
-    <div className="relative w-full h-full overflow-hidden" style={{ mask: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)", WebkitMask: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)" }}>
+    <div
+      className="relative w-full h-full overflow-hidden"
+      style={{
+        mask: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+        WebkitMask: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+      }}
+    >
       <div className="flex gap-3 h-full justify-center px-2">
         {columns.map((items, ci) => {
           const tripled = [...items, ...items, ...items];
@@ -62,7 +70,7 @@ const ContentEngineVertical = () => {
             <div key={ci} className="overflow-hidden flex-shrink-0 w-[150px]">
               <div ref={refs[ci]} className="flex flex-col gap-3">
                 {tripled.map((item, i) => (
-                  <ContentCardV key={`c${ci}-${i}`} {...item} />
+                  <ContentCardV key={`c${ci}-${i}`} label={item.label} Icon={item.Icon} />
                 ))}
               </div>
             </div>
@@ -73,13 +81,9 @@ const ContentEngineVertical = () => {
   );
 };
 
-const ContentCardV = ({ label, icon, accent }: { label: string; icon: string; accent: boolean }) => (
-  <div
-    className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border shrink-0 backdrop-blur-sm ${
-      accent ? "border-white/[0.12] bg-white/[0.06]" : "border-white/[0.06] bg-white/[0.03]"
-    }`}
-  >
-    <span className="text-sm shrink-0">{icon}</span>
+const ContentCardV = ({ label, Icon }: { label: string; Icon: LucideIcon }) => (
+  <div className="flex items-center gap-2.5 px-4 py-3 rounded-xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm shrink-0">
+    <Icon className="w-4 h-4 text-white/60 shrink-0" strokeWidth={1.5} />
     <p className="text-xs text-text-primary font-medium whitespace-nowrap font-body">{label}</p>
   </div>
 );

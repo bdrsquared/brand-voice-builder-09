@@ -156,8 +156,8 @@ const ContentPlaybook = () => {
         {/* ── 01 STRATEGY ── */}
         <section className="py-20 border-b border-black/10" id="strategy">
           <SectionNum variant="light">01 — The Strategic Model</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">Win minds before<br />buyers raise hands</h2>
-          <p className="text-text-secondary leading-relaxed mb-4">The big shift is this: TOFU is no longer mainly about "awareness." It is about <strong className="text-text-primary">shaping buyer preference before a buyer is ready to talk to sales.</strong> The teams that win in 2026/2027 will look less like blog factories and more like a hybrid of newsroom, studio, and measurement lab.</p>
+          <h2 className="text-3xl md:text-5xl mb-8 text-light-text-primary">Win minds before<br />buyers raise hands</h2>
+          <p className="text-light-text-secondary leading-relaxed mb-4">The big shift is this: TOFU is no longer mainly about "awareness." It is about <strong className="text-light-text-primary">shaping buyer preference before a buyer is ready to talk to sales.</strong> The teams that win in 2026/2027 will look less like blog factories and more like a hybrid of newsroom, studio, and measurement lab.</p>
           <Pullquote>"The most important content moment is not when a buyer reaches out. It is the six months before they do."</Pullquote>
           <p className="text-text-secondary leading-relaxed mb-4">CMI's top performers attribute their success to a clear set of factors. Here's how they rank:</p>
 

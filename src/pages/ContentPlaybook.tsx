@@ -255,7 +255,7 @@ const ContentPlaybook = () => {
         {/* ── 04 TOFU ── */}
         <section className="py-20 border-b border-border" id="tofu">
           <SectionNum>04 — Revenue-Grade TOFU</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">Top-of-funnel that<br />actually moves revenue</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">Top-of-funnel that<br />actually moves revenue</h2>
           <p className="text-text-secondary leading-relaxed mb-4">High-performing TOFU is not generic educational content. It is content that helps the buyer group see the problem, explain the stakes internally, and justify a direction.</p>
 
           <StatGrid stats={[

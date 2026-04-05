@@ -139,7 +139,7 @@ const ContentPlaybook = () => {
       </header>
 
       {/* ── SECTIONS ── */}
-      <main className="max-w-5xl mx-auto px-6 md:px-10">
+      <main className="max-w-5xl mx-auto px-4 md:px-10">
 
         {/* ── 01 STRATEGY ── */}
         <section className="py-20 border-b border-border" id="strategy">

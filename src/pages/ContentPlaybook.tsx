@@ -26,7 +26,7 @@ const Callout = ({ label, children }: { label: string; children: React.ReactNode
 
 const BarChart = ({ title, rows }: { title: string; rows: { label: string; pct: number; val: string; color?: string }[] }) => (
   <div className="bg-secondary/40 border border-border rounded-lg p-6 my-8">
-    <div className="font-body text-[0.68rem] tracking-[0.12em] uppercase text-text-tertiary mb-5">{title}</div>
+    <div className="font-body text-xs tracking-[0.12em] uppercase text-text-secondary mb-5">{title}</div>
     <div className="flex flex-col gap-3">
       {rows.map((r) => (
         <div key={r.label} className="grid grid-cols-[minmax(120px,200px)_1fr_60px] items-center gap-4">
@@ -34,7 +34,7 @@ const BarChart = ({ title, rows }: { title: string; rows: { label: string; pct: 
           <div className="bg-border h-7 rounded-sm overflow-hidden">
             <div className="h-full rounded-sm" style={{ width: `${r.pct}%`, background: r.color ?? "hsl(var(--primary))" }} />
           </div>
-          <div className="font-body text-xs text-text-tertiary">{r.val}</div>
+          <div className="font-body text-sm text-text-secondary">{r.val}</div>
         </div>
       ))}
     </div>

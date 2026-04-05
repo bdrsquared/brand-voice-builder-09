@@ -427,23 +427,41 @@ const ContentPlaybook = () => {
             HubSpot 2026: 80% of marketers use AI for content creation. CMI: only 4% have a high level of trust in AI output, and 43% already struggle to differentiate their content. <strong className="text-text-primary">Use AI to remove toil - not to manufacture your point of view.</strong>
           </Callout>
 
-          <h3 className="text-lg md:text-2xl mt-10 mb-5 text-text-primary">The 90-day rollout</h3>
-          <div className="relative my-8 ml-4 md:ml-20 border-l border-border pl-8">
+          <h3 className="text-lg md:text-2xl mt-10 mb-8 text-text-primary">The 90-day rollout</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { period: "Days 1-30", title: "Foundation & Strategy", items: ["Define ICP, buying jobs, hidden buyers, show thesis, host roles", "Build the measurement framework", "Lock UTM taxonomy and self-reported attribution questions before publishing anything"] },
-              { period: "Days 31-60", title: "Production & Systems", items: ["Record four to six episodes before launch", "Build template systems: full episodes, segment cuts, shorts, articles, thumbnails, captions, sales one-pagers", "Train sales on how to use clips in outreach and follow-up"] },
-              { period: "Days 61-90", title: "Launch & Iterate", items: ["Launch in batches, not as one-off hero content", "Watch for direct traffic to deep pages, branded search movement, self-reported mentions, repeat viewers", "Double down on themes that get forwarded privately - not just publicly applauded"] },
-            ].map((tl) => (
-              <div key={tl.period} className="relative mb-10">
-                <div className="absolute -left-[2.55rem] top-1.5 w-2 h-2 bg-primary rounded-full" />
-                <div className="font-body text-sm text-primary tracking-wide mb-1 font-medium">{tl.period}</div>
-                <div className="font-semibold text-base text-text-primary mb-2">{tl.title}</div>
-                <ul className="space-y-1">
-                  {tl.items.map((item) => (
-                    <li key={item} className="text-sm text-text-secondary pl-4 relative before:content-['—'] before:absolute before:left-0 before:opacity-40">{item}</li>
-                  ))}
-                </ul>
-              </div>
+              { period: "Days 1-30", title: "Foundation & Strategy", icon: "🧭", color: "#1CFA76", items: ["Define ICP, buying jobs, hidden buyers, show thesis, host roles", "Build the measurement framework", "Lock UTM taxonomy and self-reported attribution questions before publishing anything"] },
+              { period: "Days 31-60", title: "Production & Systems", icon: "⚙️", color: "#6359EA", items: ["Record four to six episodes before launch", "Build template systems: full episodes, segment cuts, shorts, articles, thumbnails, captions, sales one-pagers", "Train sales on how to use clips in outreach and follow-up"] },
+              { period: "Days 61-90", title: "Launch & Iterate", icon: "🚀", color: "#40ABB2", items: ["Launch in batches, not as one-off hero content", "Watch for direct traffic to deep pages, branded search movement, self-reported mentions, repeat viewers", "Double down on themes that get forwarded privately - not just publicly applauded"] },
+            ].map((tl, i) => (
+              <motion.div
+                key={tl.period}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="group relative rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 hover:bg-white/[0.07] hover:border-white/[0.14] transition-all duration-500 overflow-hidden"
+              >
+                {/* Hover sweep */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/[0.04] to-transparent pointer-events-none" />
+
+                {/* Top accent line */}
+                <div className="absolute top-0 left-6 right-6 h-px" style={{ background: `linear-gradient(90deg, transparent, ${tl.color}, transparent)` }} />
+
+                <div className="relative z-10">
+                  <span className="text-3xl mb-4 block">{tl.icon}</span>
+                  <div className="font-body text-sm tracking-wide mb-1 font-medium" style={{ color: tl.color }}>{tl.period}</div>
+                  <div className="font-semibold text-lg text-text-primary mb-4">{tl.title}</div>
+                  <ul className="space-y-2.5">
+                    {tl.items.map((item) => (
+                      <li key={item} className="text-sm text-text-secondary pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[9px] before:w-2 before:h-px before:opacity-40" style={{ ['--tw-before-bg' as string]: tl.color }}>
+                        <span className="absolute left-0 top-[9px] w-2 h-px opacity-40" style={{ background: tl.color }} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
             ))}
           </div>
         </section>

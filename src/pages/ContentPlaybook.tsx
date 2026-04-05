@@ -59,7 +59,7 @@ const DataTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) =
       <thead>
         <tr className="bg-card">
           {headers.map((h) => (
-            <th key={h} className="p-3 text-left font-body text-[0.65rem] tracking-[0.1em] uppercase text-text-tertiary font-medium">{h}</th>
+            <th key={h} className="p-3 text-left font-body text-xs tracking-[0.1em] uppercase text-text-secondary font-medium">{h}</th>
           ))}
         </tr>
       </thead>
@@ -67,7 +67,7 @@ const DataTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) =
         {rows.map((row, i) => (
           <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-secondary/30"}>
             {row.map((cell, j) => (
-              <td key={j} className={`p-3 border-t border-border leading-relaxed ${j === 0 ? "font-semibold text-accent text-xs whitespace-nowrap" : "text-text-secondary"}`}>{cell}</td>
+              <td key={j} className={`p-3 border-t border-border leading-relaxed ${j === 0 ? "font-semibold text-accent text-sm whitespace-nowrap" : "text-text-secondary text-sm"}`}>{cell}</td>
             ))}
           </tr>
         ))}

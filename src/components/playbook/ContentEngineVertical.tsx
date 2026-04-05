@@ -13,26 +13,17 @@ const col2 = [
   { label: "Short Clip", icon: "🎬", accent: false },
   { label: "Audiogram", icon: "🎧", accent: true },
   { label: "Quote Card", icon: "❝", accent: false },
-  { label: "Carousel", icon: "🖼", accent: false },
   { label: "LinkedIn Post", icon: "💼", accent: true },
+  { label: "Carousel", icon: "🖼", accent: false },
   { label: "Thread", icon: "🧵", accent: false },
 ];
 
-const col3 = [
-  { label: "Sales One-Pager", icon: "📄", accent: true },
-  { label: "Reel", icon: "🎞", accent: false },
-  { label: "Infographic", icon: "📈", accent: true },
-  { label: "Podcast Clip", icon: "🎙", accent: false },
-  { label: "Email Sequence", icon: "📨", accent: true },
-  { label: "Thumbnail", icon: "🖼", accent: false },
-];
-
-const speeds = [0.25, 0.35, 0.2];
-const columns = [col1, col2, col3];
+const speeds = [0.3, -0.25];
+const columns = [col1, col2];
 
 const ContentEngineVertical = () => {
   const [reduced, setReduced] = useState(false);
-  const refs = [useRef<HTMLDivElement>(null), useRef<HTMLDivElement>(null), useRef<HTMLDivElement>(null)];
+  const refs = [useRef<HTMLDivElement>(null), useRef<HTMLDivElement>(null)];
 
   useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -43,17 +34,16 @@ const ContentEngineVertical = () => {
     const els = refs.map(r => r.current);
     if (els.some(e => !e)) return;
 
-    const offsets = [0, 0, 0];
+    const offsets = [0, 0];
     let animId: number;
 
     const animate = () => {
       els.forEach((el, i) => {
         if (!el) return;
-        const dir = i % 2 === 0 ? 1 : -1;
-        offsets[i] += speeds[i] * dir;
+        offsets[i] += speeds[i];
         const half = el.scrollHeight / 2;
-        if (dir > 0 && offsets[i] >= half) offsets[i] -= half;
-        if (dir < 0 && offsets[i] <= -half) offsets[i] += half;
+        if (offsets[i] >= half) offsets[i] -= half;
+        if (offsets[i] <= 0) offsets[i] += half;
         el.style.transform = `translateY(${-offsets[i]}px)`;
       });
       animId = requestAnimationFrame(animate);
@@ -64,19 +54,12 @@ const ContentEngineVertical = () => {
   }, [reduced]);
 
   return (
-    <div className="relative w-full h-full overflow-hidden">
-      {/* Vertical fade edges */}
-      <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-card to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent z-20 pointer-events-none" />
-      {/* Horizontal fade edges */}
-      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-card to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-card to-transparent z-20 pointer-events-none" />
-
+    <div className="relative w-full h-full overflow-hidden" style={{ mask: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)", WebkitMask: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)" }}>
       <div className="flex gap-3 h-full justify-center px-2">
         {columns.map((items, ci) => {
           const tripled = [...items, ...items, ...items];
           return (
-            <div key={ci} className="overflow-hidden flex-shrink-0 w-[140px]">
+            <div key={ci} className="overflow-hidden flex-shrink-0 w-[150px]">
               <div ref={refs[ci]} className="flex flex-col gap-3">
                 {tripled.map((item, i) => (
                   <ContentCardV key={`c${ci}-${i}`} {...item} />
@@ -92,8 +75,8 @@ const ContentEngineVertical = () => {
 
 const ContentCardV = ({ label, icon, accent }: { label: string; icon: string; accent: boolean }) => (
   <div
-    className={`flex items-center gap-2 px-3 py-3 rounded-xl border shrink-0 ${
-      accent ? "border-accent/20 bg-accent/5" : "border-border/50 bg-white/[0.03]"
+    className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border shrink-0 backdrop-blur-sm ${
+      accent ? "border-white/[0.12] bg-white/[0.06]" : "border-white/[0.06] bg-white/[0.03]"
     }`}
   >
     <span className="text-sm shrink-0">{icon}</span>

@@ -1109,6 +1109,7 @@ const Navbar = () => {
       <DemoRequestModal open={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
       <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
       <PlayPackModal open={playPackModalOpen} onClose={() => setPlayPackModalOpen(false)} />
+      <PlaybookGateModal open={playbookGateOpen} onClose={() => setPlaybookGateOpen(false)} />
     </>
   );
 };

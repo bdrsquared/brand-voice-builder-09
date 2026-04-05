@@ -192,18 +192,18 @@ const ContentPlaybook = () => {
           <h3 className="text-lg md:text-2xl mt-10 mb-5 text-text-primary">The four-layer content system</h3>
           <p className="text-text-secondary leading-relaxed mb-6">One flagship episode should systematically generate content across all four layers. This is not a content calendar - it is a production system.</p>
 
-          <div className="flex flex-col gap-1 my-8">
+          <div className="flex flex-col gap-4 my-8">
             {[
               { emoji: "🎬", label: "Flagship Episode - 35-75 min", w: "100%", bg: "hsl(var(--card))", textColor: "text-text-primary", desc: "" },
               { emoji: "✂️", label: "Mid-form Segments - 5-15 min", w: "85%", bg: "hsl(var(--accent))", textColor: "text-white", desc: "Conversion & nurture layer - 5-30 min videos average a 10% conversion rate (Wistia)" },
               { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "hsl(var(--primary))", textColor: "text-primary-foreground", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
               { emoji: "📄", label: "Written Companion Assets", w: "50%", bg: "hsl(145, 60%, 25%)", textColor: "text-white", desc: "Search, AI retrieval & internal shareability" },
             ].map((l) => (
-              <div key={l.label} className="flex items-center gap-4">
-                <div className={`h-16 rounded-lg flex items-center px-5 font-medium text-sm shrink-0 ${l.textColor}`} style={{ width: l.w, background: l.bg, maxWidth: "100%" }}>
+              <div key={l.label} className="flex items-center gap-5">
+                <div className={`h-14 rounded-lg flex items-center px-5 font-medium text-sm shrink-0 ${l.textColor}`} style={{ width: l.w, background: l.bg, maxWidth: "100%" }}>
                   {l.emoji}&nbsp; {l.label}
                 </div>
-                {l.desc && <div className="text-sm text-text-secondary leading-snug hidden md:block">{l.desc}</div>}
+                {l.desc && <div className="text-sm text-text-secondary leading-snug hidden md:block max-w-[280px]">{l.desc}</div>}
               </div>
             ))}
           </div>

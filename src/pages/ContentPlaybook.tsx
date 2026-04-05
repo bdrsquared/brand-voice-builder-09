@@ -116,7 +116,7 @@ const ContentPlaybook = () => {
             ].map((s) => (
               <div key={s.num + s.label} className="bg-background/40 backdrop-blur p-5 text-center">
                 <span className="font-heading text-3xl text-primary block leading-none mb-1">{s.num}</span>
-                <span className="text-text-tertiary text-xs leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
+                <span className="text-text-secondary text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
               </div>
             ))}
           </div>
@@ -281,7 +281,7 @@ const ContentPlaybook = () => {
 
           {/* Formula box */}
           <div className="bg-card border border-border rounded-lg p-8 my-10 text-center">
-            <div className="font-body text-[0.65rem] tracking-[0.15em] uppercase text-text-tertiary mb-4">The TOFU Content Formula</div>
+            <div className="font-body text-xs tracking-[0.15em] uppercase text-text-tertiary mb-4">The TOFU Content Formula</div>
             <div className="font-heading text-xl md:text-2xl italic text-text-primary leading-relaxed">
               <span className="text-primary">Teach</span> + <span className="text-primary">Diagnose</span> + <span className="text-primary">Reframe</span> + <span className="text-primary">Equip</span> + <span className="text-primary">Invite</span>
             </div>
@@ -341,11 +341,11 @@ const ContentPlaybook = () => {
               { label: "Layer 4 — Revenue Impact", color: "text-yellow-500", items: ["Opportunity creation (influenced)", "Exposed-account win rate lift", "Sales-cycle compression", "ACV delta: exposed vs. unexposed", "Influenced pipeline per content pillar"] },
             ].map((q) => (
               <div key={q.label} className="bg-background p-5">
-                <div className={`font-body text-[0.65rem] tracking-[0.12em] uppercase ${q.color} mb-3 pb-2 border-b border-border`}>{q.label}</div>
+                <div className={`font-body text-xs tracking-[0.12em] uppercase ${q.color} mb-3 pb-2 border-b border-border`}>{q.label}</div>
                 <ul className="space-y-1">
                   {q.items.map((item) => (
                     <li key={item} className="text-sm text-text-secondary flex items-baseline gap-2">
-                      <span className="font-body text-[0.7rem] opacity-40 shrink-0">→</span>{item}
+                      <span className="font-body text-xs opacity-40 shrink-0">→</span>{item}
                     </li>
                   ))}
                 </ul>
@@ -392,7 +392,7 @@ const ContentPlaybook = () => {
           <h3 className="text-lg md:text-2xl mt-10 mb-5 text-text-primary">AI: right use cases vs. wrong use cases</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
             <div className="bg-background p-5">
-              <div className="font-body text-[0.65rem] tracking-[0.12em] uppercase text-primary mb-3 pb-2 border-b border-border">✓ Right use cases</div>
+              <div className="font-body text-xs tracking-[0.12em] uppercase text-primary mb-3 pb-2 border-b border-border">✓ Right use cases</div>
               <ul className="space-y-1">
                 {["Transcript cleanup and chaptering", "Title and headline variants", "Clip selection suggestions", "Metadata, captions, translation", "Repurposing drafts from episode summaries", "Research clustering"].map((item) => (
                   <li key={item} className="text-sm text-text-secondary">✓ {item}</li>
@@ -400,7 +400,7 @@ const ContentPlaybook = () => {
               </ul>
             </div>
             <div className="bg-secondary/30 p-5">
-              <div className="font-body text-[0.65rem] tracking-[0.12em] uppercase text-destructive mb-3 pb-2 border-b border-border">✕ Wrong use cases</div>
+              <div className="font-body text-xs tracking-[0.12em] uppercase text-destructive mb-3 pb-2 border-b border-border">✕ Wrong use cases</div>
               <ul className="space-y-1">
                 {["Outsourcing your point of view", "Manufacturing originality at scale", "Replacing host voice with synthetic tone", "Publishing unreviewed AI copy as thought leadership"].map((item) => (
                   <li key={item} className="text-sm text-text-secondary">✕ {item}</li>

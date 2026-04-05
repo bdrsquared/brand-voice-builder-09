@@ -580,20 +580,21 @@ const Navbar = () => {
               >
                 <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 transition-colors duration-300`}>
                   <div className="flex gap-6">
-                    {/* First column — Play Pack */}
+                    {/* First column — Content Playbook */}
                     <div className="w-64 shrink-0">
-                      <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4 px-3">Play Pack</h4>
+                      <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4 px-3">Content Playbook</h4>
                       <div className="px-3">
-                        <img src={playbookCover} alt="2026 Video Podcast Play Pack" className="w-full h-auto rounded-lg border border-white/10 mb-4" />
-                        <h5 className="text-sm font-heading font-bold text-white mb-2">2026 Video Podcast Play Pack</h5>
-                        <p className="text-xs text-white/50 font-body leading-relaxed mb-4">A curated set of 24+ spreadsheets, guides, and tools we use with our clients to plan, launch, and grow video podcasts that drive pipeline.</p>
-                        <button
-                          onClick={() => { setMegaOpen(null); setPlayPackModalOpen(true); }}
+                        <img src={playbookCover} alt="Content Playbook 2026/2027" className="w-full h-auto rounded-lg border border-white/10 mb-4" loading="lazy" />
+                        <h5 className="text-sm font-heading font-bold text-white mb-2">The Content Playbook for 2026 / 2027</h5>
+                        <p className="text-xs text-white/50 font-body leading-relaxed mb-4">Top-of-funnel content that creates revenue, not just reach. Built for B2B and high-consideration brands navigating a buyer-led, AI-shaped, video-first world.</p>
+                        <a
+                          href="/content-playbook"
+                          onClick={(e) => { e.preventDefault(); navigate("/content-playbook"); setMegaOpen(null); }}
                           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all"
                         >
-                          Request access
+                          Read the playbook
                           <ArrowRight className="w-3 h-3" />
-                        </button>
+                        </a>
                       </div>
                     </div>
 

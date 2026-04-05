@@ -10,7 +10,7 @@ import { getThumbnailUrl } from "@/lib/image-utils";
 import logo from "@/assets/earworm-logo.webp";
 import logoDark from "@/assets/earworm-logo-dark.svg";
 import podplannerIcon from "@/assets/podplanner-icon.webp";
-import playbookCover from "@/assets/earworm-playbook.jpeg";
+import playbookCover from "@/assets/content-playbook-cover.jpg";
 import brightLogo from "@/assets/bright-logo-compressed.webp";
 import launchImg from "@/assets/launch-microphone-compressed.webp";
 import runScaleImg from "@/assets/run-scale-compressed.webp";

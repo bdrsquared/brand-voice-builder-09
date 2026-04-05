@@ -174,7 +174,7 @@ const ContentPlaybook = () => {
           />
 
           <h2 className="text-2xl md:text-4xl mt-10 mb-6">The five strategic rules</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/10 border border-black/10 rounded-lg overflow-hidden my-8">
             {[
               { n: "01", t: "Build memory before demand capture", d: "Create recall, trust, and internal advocacy among buyers who are not ready to convert yet." },
               { n: "02", t: "Treat video podcasting as the hub", d: "Long-form creates conviction. Short-form creates discovery. Written assets create retrieval." },

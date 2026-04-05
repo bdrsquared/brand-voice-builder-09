@@ -307,7 +307,7 @@ const ContentPlaybook = () => {
         {/* ── 05 DARK SOCIAL ── */}
         <section className="py-20 border-b border-border" id="dark-social">
           <SectionNum>05 — Dark Social</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">What dark social is<br />and why it matters</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">What dark social is<br />and why it matters</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Dark social is what happens when your content moves through private or referrer-obscured spaces: WhatsApp, Slack, Teams, DMs, text messages, forwarded emails, copied links, and internal docs.</p>
 
           <Callout label="Key Insight">

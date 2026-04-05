@@ -263,6 +263,16 @@ const ContentPlaybook = () => {
             ]}
           />
         </section>
+        </main>
+      </div>
+
+      {/* Rounded divider: light to dark */}
+      <div id="light-section-end" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+        <div className="bg-background rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" />
+      </div>
+
+      {/* ── DARK SECTIONS ── */}
+      <main className="max-w-5xl mx-auto px-6 md:px-10">
 
         {/* ── 04 TOFU ── */}
         <section className="py-20 border-b border-border" id="tofu">

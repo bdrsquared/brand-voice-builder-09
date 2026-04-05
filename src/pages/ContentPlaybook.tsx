@@ -189,7 +189,7 @@ const ContentPlaybook = () => {
                 </div>
               </div>
             ))}
-            <div className="bg-background p-5 flex gap-4 items-start md:col-span-2">
+            <div className="bg-white/60 backdrop-blur-sm p-5 flex gap-4 items-start md:col-span-2">
               <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">05</span>
               <div>
                 <div className="font-semibold text-sm text-text-primary mb-1">Measure influence, not just last-click source purity</div>

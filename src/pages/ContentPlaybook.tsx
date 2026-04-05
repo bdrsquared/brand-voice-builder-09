@@ -4,6 +4,7 @@ import { Download } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
+import ContentEngineVertical from "@/components/playbook/ContentEngineVertical";
 import useMetaTags from "@/hooks/useMetaTags";
 
 /* ── tiny reusable pieces ── */

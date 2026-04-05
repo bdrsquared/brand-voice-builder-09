@@ -584,15 +584,28 @@ const Navbar = () => {
                     <div className="w-64 shrink-0">
                       <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4 px-3">Content Playbook</h4>
                       <div className="px-3">
-                        <img src={playbookCover} alt="Content Playbook 2026/2027" className="w-full h-auto rounded-lg border border-white/10 mb-4" loading="lazy" />
+                        {/* UI card instead of image */}
+                        <div className="relative w-full aspect-[4/3] rounded-lg border border-white/10 mb-4 overflow-hidden bg-card">
+                          {/* Grid background */}
+                          <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 19px,rgba(255,255,255,0.04) 19px,rgba(255,255,255,0.04) 20px), repeating-linear-gradient(90deg,transparent,transparent 19px,rgba(255,255,255,0.04) 19px,rgba(255,255,255,0.04) 20px)" }} />
+                          {/* Gradient blob */}
+                          <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-[#40ABB2]/30 via-[#6359EA]/20 to-[#E040FB]/20 blur-2xl" />
+                          <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-primary/10 blur-xl" />
+                          {/* Text content */}
+                          <div className="relative z-10 flex flex-col justify-end h-full p-4">
+                            <span className="text-[9px] font-body uppercase tracking-[0.15em] text-white/40 mb-1">Earworm Report</span>
+                            <span className="text-sm font-heading font-bold text-white leading-tight">Content<br />Playbook</span>
+                            <span className="text-lg font-heading font-bold bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent leading-tight">2026 / 2027</span>
+                          </div>
+                        </div>
                         <h5 className="text-sm font-heading font-bold text-white mb-2">The Content Playbook for 2026 / 2027</h5>
-                        <p className="text-xs text-white/50 font-body leading-relaxed mb-4">Top-of-funnel content that creates revenue, not just reach. Built for B2B and high-consideration brands navigating a buyer-led, AI-shaped, video-first world.</p>
+                        <p className="text-xs text-white/50 font-body leading-relaxed mb-4">Content is changing fast. Our latest report breaks down the trends, data, and strategies shaping B2B content in 2026 — so you can stay ahead.</p>
                         <a
                           href="/content-playbook"
                           onClick={(e) => { e.preventDefault(); navigate("/content-playbook"); setMegaOpen(null); }}
                           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all"
                         >
-                          Read the playbook
+                          Read the report
                           <ArrowRight className="w-3 h-3" />
                         </a>
                       </div>

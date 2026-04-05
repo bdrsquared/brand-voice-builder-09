@@ -200,8 +200,8 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 02 VIDEO ── */}
-        <section className="py-20 border-b border-border" id="video">
-          <SectionNum>02 — Video as the Content Nucleus</SectionNum>
+        <section className="py-20 border-b border-black/10" id="video">
+          <SectionNum variant="light">02 — Video as the Content Nucleus</SectionNum>
           <h2 className="text-3xl md:text-5xl mb-8">Video is no longer<br />a supporting asset</h2>
           <p className="text-text-secondary leading-relaxed mb-4">HubSpot's 2026 data is unambiguous: the three highest-ROI content formats are all video-based. YouTube now reports over 700 million hours of podcast content watched on living-room devices in October 2025. The flagship content asset for 2026/2027 should be a <strong className="text-text-primary">video podcast or episodic show.</strong></p>
 

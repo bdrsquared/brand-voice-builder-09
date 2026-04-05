@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { Download } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import SectionPill from "@/components/landing/SectionPill";
 import useMetaTags from "@/hooks/useMetaTags";
 
 /* ── tiny reusable pieces ── */
 const SectionNum = ({ children }: { children: string }) => (
-  <div className="font-body text-[0.7rem] tracking-[0.18em] uppercase text-primary mb-3 flex items-center gap-3">
-    <span className="w-6 h-px bg-primary inline-block" />
-    {children}
+  <div className="mb-5">
+    <SectionPill>{children}</SectionPill>
   </div>
 );
 
@@ -98,9 +98,8 @@ const ContentPlaybook = () => {
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
 
         <div className="relative max-w-5xl mx-auto">
-          <div className="font-body text-xs tracking-[0.18em] uppercase text-primary mb-4 flex items-center gap-3">
-            <span className="w-8 h-px bg-primary inline-block" />
-            Senior Marketer Edition
+          <div className="mb-6">
+            <SectionPill>Senior Marketer Edition</SectionPill>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6">
             The Content Playbook<br />for <span className="bg-gradient-to-r from-primary via-[#6359EA] to-[#FFB347] bg-clip-text text-transparent">2026 / 2027</span>

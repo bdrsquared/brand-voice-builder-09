@@ -4,6 +4,7 @@ import { Download } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
+import ContentEngineVertical from "@/components/playbook/ContentEngineVertical";
 import useMetaTags from "@/hooks/useMetaTags";
 
 /* ── tiny reusable pieces ── */
@@ -98,43 +99,51 @@ const ContentPlaybook = () => {
         <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
 
-        <div className="relative max-w-5xl mx-auto">
-          <div className="mb-6">
-            <SectionPill>Senior Marketer Edition</SectionPill>
-          </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6">
-            The Content Playbook<br />for <span className="bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent">2026 / 2027</span>
-          </h1>
-          <p className="text-text-secondary text-lg max-w-xl leading-relaxed mb-10">
-            Top-of-funnel content that creates revenue, not just reach. Built for B2B and high-consideration brands navigating a buyer-led, AI-shaped, video-first world.
-          </p>
+        <div className="relative max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 items-center">
+          <div>
+            <div className="mb-6">
+              <SectionPill>Senior Marketer Edition</SectionPill>
+            </div>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6">
+              The Content Playbook<br />for <span className="bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent">2026 / 2027</span>
+            </h1>
+            <p className="text-text-secondary text-lg max-w-xl leading-relaxed mb-10">
+              Top-of-funnel content that creates revenue, not just reach. Built for B2B and high-consideration brands navigating a buyer-led, AI-shaped, video-first world.
+            </p>
 
-          <a
-            href="/Content-Playbook-2026-2027.pdf"
-            download
-            className="inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-full text-sm transition-all duration-300 text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.12] shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:bg-white/[0.14] hover:border-white/[0.2] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_20px_rgba(255,255,255,0.04)] mb-10"
-          >
-            <Download className="w-4 h-4" />
-            Download PDF
-          </a>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[
-              { num: "95%", label: "of B2B buyers are not in-market at any given moment", src: "Edelman" },
-              { num: "67%", label: "of B2B buyers now prefer a rep-free experience", src: "Gartner" },
-              { num: "95%", label: "of hidden decision-makers say strong thought leadership makes them more receptive to outreach", src: "Edelman/LinkedIn" },
-            ].map((s) => (
-              <div
-                key={s.num + s.label}
-                className="relative overflow-hidden rounded-xl bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] p-8 text-center transition-all duration-300 hover:border-white/[0.16] hover:shadow-[0_4px_30px_rgba(0,0,0,0.3)] group"
-              >
-                {/* sweep shimmer */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none" />
-                <span className="font-heading text-3xl text-primary block leading-none mb-3">{s.num}</span>
-                <span className="text-text-secondary text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
-              </div>
-            ))}
+            <a
+              href="/Content-Playbook-2026-2027.pdf"
+              download
+              className="inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-full text-sm transition-all duration-300 text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.12] shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:bg-white/[0.14] hover:border-white/[0.2] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_20px_rgba(255,255,255,0.04)]"
+            >
+              <Download className="w-4 h-4" />
+              Download PDF
+            </a>
           </div>
+
+          {/* Animated vertical content engine */}
+          <div className="hidden lg:block h-[420px]">
+            <ContentEngineVertical />
+          </div>
+        </div>
+
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-5xl">
+          {[
+            { num: "95%", label: "of B2B buyers are not in-market at any given moment", src: "Edelman" },
+            { num: "67%", label: "of B2B buyers now prefer a rep-free experience", src: "Gartner" },
+            { num: "95%", label: "of hidden decision-makers say strong thought leadership makes them more receptive to outreach", src: "Edelman/LinkedIn" },
+          ].map((s) => (
+            <div
+              key={s.num + s.label}
+              className="relative overflow-hidden rounded-xl bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] p-8 text-center transition-all duration-300 hover:border-white/[0.16] hover:shadow-[0_4px_30px_rgba(0,0,0,0.3)] group"
+            >
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none" />
+              <span className="font-heading text-3xl text-primary block leading-none mb-3">{s.num}</span>
+              <span className="text-text-secondary text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
+            </div>
+          ))}
+        </div>
         </div>
       </header>
 

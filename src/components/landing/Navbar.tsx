@@ -89,6 +89,7 @@ const Navbar = () => {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [playPackModalOpen, setPlayPackModalOpen] = useState(false);
+  const [playbookGateOpen, setPlaybookGateOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
   const [bottomBarTop, setBottomBarTop] = useState<number | null>(null);
   const [recentBlogs, setRecentBlogs] = useState<Array<{ title: string; excerpt: string | null; created_at: string; slug: string; cover_image: string | null }>>([]);

@@ -118,14 +118,19 @@ const ContentPlaybook = () => {
             Download PDF
           </a>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/40 border border-border rounded-lg overflow-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { num: "95%", label: "of B2B buyers are not in-market at any given moment", src: "Edelman" },
               { num: "67%", label: "of B2B buyers now prefer a rep-free experience", src: "Gartner" },
               { num: "95%", label: "of hidden decision-makers say strong thought leadership makes them more receptive to outreach", src: "Edelman/LinkedIn" },
             ].map((s) => (
-              <div key={s.num + s.label} className="bg-background/40 backdrop-blur p-5 text-center">
-                <span className="font-heading text-3xl text-primary block leading-none mb-1">{s.num}</span>
+              <div
+                key={s.num + s.label}
+                className="relative overflow-hidden rounded-xl bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] p-8 text-center transition-all duration-300 hover:border-white/[0.16] hover:shadow-[0_4px_30px_rgba(0,0,0,0.3)] group"
+              >
+                {/* sweep shimmer */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none" />
+                <span className="font-heading text-3xl text-primary block leading-none mb-3">{s.num}</span>
                 <span className="text-text-secondary text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
               </div>
             ))}

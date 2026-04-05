@@ -158,7 +158,7 @@ const ContentPlaybook = () => {
                 <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">{r.n}</span>
                 <div>
                   <div className="font-semibold text-sm text-text-primary mb-1">{r.t}</div>
-                  <p className="text-xs text-text-tertiary leading-relaxed m-0">{r.d}</p>
+                  <p className="text-sm text-text-secondary leading-relaxed m-0">{r.d}</p>
                 </div>
               </div>
             ))}
@@ -166,7 +166,7 @@ const ContentPlaybook = () => {
               <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">05</span>
               <div>
                 <div className="font-semibold text-sm text-text-primary mb-1">Measure influence, not just last-click source purity</div>
-                <p className="text-xs text-text-tertiary leading-relaxed m-0">Perfect attribution is fantasy. Decision-grade attribution is enough. Build for probabilistic measurement from the start.</p>
+                <p className="text-sm text-text-secondary leading-relaxed m-0">Perfect attribution is fantasy. Decision-grade attribution is enough. Build for probabilistic measurement from the start.</p>
               </div>
             </div>
           </div>
@@ -203,7 +203,7 @@ const ContentPlaybook = () => {
                 <div className="h-16 rounded-sm flex items-center px-4 text-white font-medium text-sm shrink-0" style={{ width: l.w, background: l.bg, maxWidth: "100%" }}>
                   {l.emoji}&nbsp; {l.label}
                 </div>
-                {l.desc && <div className="text-xs text-text-tertiary leading-snug hidden md:block">{l.desc}</div>}
+                {l.desc && <div className="text-sm text-text-secondary leading-snug hidden md:block">{l.desc}</div>}
               </div>
             ))}
           </div>
@@ -274,7 +274,7 @@ const ContentPlaybook = () => {
             ].map((f, i) => (
               <div key={f.name} className={`p-4 grid grid-cols-1 md:grid-cols-[180px_1fr] gap-1 md:gap-6 items-start ${i % 2 ? "bg-secondary/30" : "bg-background"}`}>
                 <div className="font-semibold text-sm text-accent">{f.name}</div>
-                <p className="text-xs text-text-tertiary leading-relaxed m-0">{f.desc}</p>
+                <p className="text-sm text-text-secondary leading-relaxed m-0">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -344,7 +344,7 @@ const ContentPlaybook = () => {
                 <div className={`font-body text-[0.65rem] tracking-[0.12em] uppercase ${q.color} mb-3 pb-2 border-b border-border`}>{q.label}</div>
                 <ul className="space-y-1">
                   {q.items.map((item) => (
-                    <li key={item} className="text-xs text-text-secondary flex items-baseline gap-2">
+                    <li key={item} className="text-sm text-text-secondary flex items-baseline gap-2">
                       <span className="font-body text-[0.7rem] opacity-40 shrink-0">→</span>{item}
                     </li>
                   ))}
@@ -395,7 +395,7 @@ const ContentPlaybook = () => {
               <div className="font-body text-[0.65rem] tracking-[0.12em] uppercase text-primary mb-3 pb-2 border-b border-border">✓ Right use cases</div>
               <ul className="space-y-1">
                 {["Transcript cleanup and chaptering", "Title and headline variants", "Clip selection suggestions", "Metadata, captions, translation", "Repurposing drafts from episode summaries", "Research clustering"].map((item) => (
-                  <li key={item} className="text-xs text-text-secondary">✓ {item}</li>
+                  <li key={item} className="text-sm text-text-secondary">✓ {item}</li>
                 ))}
               </ul>
             </div>
@@ -403,7 +403,7 @@ const ContentPlaybook = () => {
               <div className="font-body text-[0.65rem] tracking-[0.12em] uppercase text-destructive mb-3 pb-2 border-b border-border">✕ Wrong use cases</div>
               <ul className="space-y-1">
                 {["Outsourcing your point of view", "Manufacturing originality at scale", "Replacing host voice with synthetic tone", "Publishing unreviewed AI copy as thought leadership"].map((item) => (
-                  <li key={item} className="text-xs text-text-secondary">✕ {item}</li>
+                  <li key={item} className="text-sm text-text-secondary">✕ {item}</li>
                 ))}
               </ul>
             </div>
@@ -426,7 +426,7 @@ const ContentPlaybook = () => {
                 <div className="font-semibold text-sm text-text-primary mb-2">{tl.title}</div>
                 <ul className="space-y-1">
                   {tl.items.map((item) => (
-                    <li key={item} className="text-xs text-text-tertiary pl-4 relative before:content-['—'] before:absolute before:left-0 before:opacity-40">{item}</li>
+                    <li key={item} className="text-sm text-text-secondary pl-4 relative before:content-['—'] before:absolute before:left-0 before:opacity-40">{item}</li>
                   ))}
                 </ul>
               </div>
@@ -438,9 +438,9 @@ const ContentPlaybook = () => {
         <section className="py-16 text-center border-t border-border">
           <h2 className="text-2xl md:text-4xl italic mb-4">Content that drives sales looks like trust media.</h2>
           <div className="w-10 h-px bg-primary mx-auto my-6" />
-          <p className="text-text-tertiary text-sm max-w-2xl mx-auto leading-relaxed">Strong point of view. Strong host. Strong long-form core. Aggressive short-form distribution. Low-friction private sharing. Measurement built for imperfect visibility. The teams that accept that reality earlier will beat the teams still trying to force every buying journey into last-click analytics.</p>
+          <p className="text-text-secondary text-sm max-w-2xl mx-auto leading-relaxed">Strong point of view. Strong host. Strong long-form core. Aggressive short-form distribution. Low-friction private sharing. Measurement built for imperfect visibility. The teams that accept that reality earlier will beat the teams still trying to force every buying journey into last-click analytics.</p>
           <div className="w-10 h-px bg-primary mx-auto my-6" />
-          <p className="text-text-tertiary text-xs">Content Marketing Playbook 2026/2027 — Sources: Edelman, Gartner, HubSpot, CMI, Wistia, Spotify, YouTube, SparkToro, Edison Research, LinkedIn</p>
+          <p className="text-text-secondary text-xs">Content Marketing Playbook 2026/2027 — Sources: Edelman, Gartner, HubSpot, CMI, Wistia, Spotify, YouTube, SparkToro, Edison Research, LinkedIn</p>
         </section>
       </main>
 

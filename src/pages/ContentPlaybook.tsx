@@ -12,7 +12,7 @@ const SectionNum = ({ children }: { children: string }) => (
 );
 
 const Pullquote = ({ children }: { children: React.ReactNode }) => (
-  <blockquote className="border-l-[3px] border-primary pl-6 py-4 my-10 bg-secondary/40 rounded-r-lg font-heading text-lg italic text-text-primary leading-relaxed">
+  <blockquote className="border-l-[3px] border-primary pl-6 py-5 my-10 bg-secondary/40 rounded-r-lg font-heading text-lg md:text-xl italic text-text-primary leading-relaxed">
     {children}
   </blockquote>
 );

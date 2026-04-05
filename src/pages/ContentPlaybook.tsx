@@ -226,7 +226,7 @@ const ContentPlaybook = () => {
               { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "hsl(var(--primary))", textColor: "text-primary-foreground", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
               { emoji: "📄", label: "Written Companion Assets", w: "50%", bg: "hsl(145, 60%, 25%)", textColor: "text-white", desc: "Search, AI retrieval & internal shareability" },
             ].map((l) => (
-              <div key={l.label} className="rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-4">
+              <div key={l.label} className="rounded-xl border border-black/10 bg-white/40 backdrop-blur-md p-4">
                 <div className={`h-12 rounded-lg flex items-center px-5 font-medium text-sm ${l.textColor}`} style={{ width: l.w, background: l.bg }}>
                   {l.emoji}&nbsp; {l.label}
                 </div>

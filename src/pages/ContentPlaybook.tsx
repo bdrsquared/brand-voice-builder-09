@@ -385,7 +385,7 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 07 EXECUTION ── */}
-        <section className="py-20" id="execution">
+        <section className="py-12 md:py-20" id="execution">
           <SectionNum>07 — Team, Process & AI</SectionNum>
           <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">The studio with<br />revenue ops attached</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Wistia says over 40% of companies create at least one video per week, almost 60% are increasing video budgets, and 71% now handle video production in-house. CMI says 45% of B2B marketers still lack a scalable model for content creation. <strong className="text-text-primary">That gap is your opportunity.</strong></p>

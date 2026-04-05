@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { Download } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import SectionPill from "@/components/landing/SectionPill";
 import useMetaTags from "@/hooks/useMetaTags";
 
 /* ── tiny reusable pieces ── */
 const SectionNum = ({ children }: { children: string }) => (
-  <div className="font-body text-[0.7rem] tracking-[0.18em] uppercase text-primary mb-3 flex items-center gap-3">
-    <span className="w-6 h-px bg-primary inline-block" />
-    {children}
+  <div className="mb-5">
+    <SectionPill>{children}</SectionPill>
   </div>
 );
 

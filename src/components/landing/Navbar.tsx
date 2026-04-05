@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import DemoRequestModal from "@/components/DemoRequestModal";
 import ContactModal from "@/components/ContactModal";
 import PlayPackModal from "@/components/PlayPackModal";
+import PlaybookGateModal from "@/components/PlaybookGateModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, MessageCircle, Calendar, Layers, Activity, Eye, LogIn, BookOpen } from "lucide-react";
@@ -88,6 +89,7 @@ const Navbar = () => {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [playPackModalOpen, setPlayPackModalOpen] = useState(false);
+  const [playbookGateOpen, setPlaybookGateOpen] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
   const [bottomBarTop, setBottomBarTop] = useState<number | null>(null);
   const [recentBlogs, setRecentBlogs] = useState<Array<{ title: string; excerpt: string | null; created_at: string; slug: string; cover_image: string | null }>>([]);
@@ -600,14 +602,13 @@ const Navbar = () => {
                         </div>
                         <h5 className="text-sm font-heading font-bold text-white mb-2">The Content Playbook for 2026 / 2027</h5>
                         <p className="text-xs text-white/50 font-body leading-relaxed mb-4">Content is changing fast. Our latest report breaks down the trends, data, and strategies shaping B2B content in 2026 — so you can stay ahead.</p>
-                        <a
-                          href="/content-playbook"
-                          onClick={(e) => { e.preventDefault(); navigate("/content-playbook"); setMegaOpen(null); }}
-                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all"
+                        <button
+                          onClick={() => { setMegaOpen(null); setPlaybookGateOpen(true); }}
+                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all cursor-pointer"
                         >
                           Read the report
                           <ArrowRight className="w-3 h-3" />
-                        </a>
+                        </button>
                       </div>
                     </div>
 
@@ -1108,6 +1109,7 @@ const Navbar = () => {
       <DemoRequestModal open={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
       <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
       <PlayPackModal open={playPackModalOpen} onClose={() => setPlayPackModalOpen(false)} />
+      <PlaybookGateModal open={playbookGateOpen} onClose={() => setPlaybookGateOpen(false)} />
     </>
   );
 };

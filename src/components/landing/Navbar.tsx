@@ -985,18 +985,33 @@ const Navbar = () => {
                       </button>
                     </nav>
 
-                    {/* Book a strategy call CTA */}
-                    <motion.a
-                      href="#contact"
-                      className="glow-on-hover group inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-full text-base w-full mt-auto"
-                      initial={{ opacity: 0, y: 20 }}
+                    {/* Content Playbook card */}
+                    <motion.div
+                      className="mt-auto rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden"
+                      initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.3 }}
-                      onClick={() => { setMobileOpen(false); setMobileSubMenu(null); }}
+                      transition={{ duration: 0.35, delay: 0.25 }}
                     >
-                      Start a conversation
-                      <MessageCircle className="w-4 h-4" />
-                    </motion.a>
+                      <div className="relative w-full aspect-[2/1] overflow-hidden">
+                        <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 19px,rgba(255,255,255,0.04) 19px,rgba(255,255,255,0.04) 20px), repeating-linear-gradient(90deg,transparent,transparent 19px,rgba(255,255,255,0.04) 19px,rgba(255,255,255,0.04) 20px)" }} />
+                        <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-[#40ABB2]/20 blur-3xl" />
+                        <div className="absolute bottom-1/4 right-1/4 w-28 h-28 rounded-full bg-[#6359EA]/20 blur-3xl" />
+                        <div className="absolute bottom-0 right-1/3 w-24 h-24 rounded-full bg-[#E040FB]/15 blur-3xl" />
+                        <div className="relative z-10 flex flex-col justify-end h-full p-4">
+                          <span className="text-sm font-heading font-bold text-foreground leading-tight">Content Playbook</span>
+                          <span className="text-lg font-heading font-bold bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent">2026 / 2027</span>
+                        </div>
+                      </div>
+                      <div className="p-4 pt-2">
+                        <p className="text-xs text-muted-foreground leading-relaxed font-body mb-3">Content is changing fast. Our report breaks down the trends, data, and strategies shaping B2B content.</p>
+                        <button
+                          onClick={() => { setMobileOpen(false); setMobileSubMenu(null); setPlaybookGateOpen(true); }}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80 transition-colors"
+                        >
+                          Read the report <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </motion.div>
                   </motion.div>
                 ) : mobileSubMenu === "podplanner" ? (
                   <motion.div

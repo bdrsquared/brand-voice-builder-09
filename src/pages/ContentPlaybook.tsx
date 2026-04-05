@@ -130,8 +130,8 @@ const ContentPlaybook = () => {
               >
                 {/* sweep shimmer */}
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none" />
-                <span className="font-heading text-3xl text-primary block leading-none mb-3">{s.num}</span>
-                <span className="text-text-secondary text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
+               <span className="font-heading text-2xl md:text-3xl text-primary block leading-none mb-3">{s.num}</span>
+                <span className="text-text-secondary text-xs md:text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
               </div>
             ))}
           </div>

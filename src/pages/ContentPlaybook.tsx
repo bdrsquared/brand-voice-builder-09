@@ -144,6 +144,7 @@ const ContentPlaybook = () => {
             </div>
           ))}
         </div>
+        </div>
       </header>
 
       {/* ── SECTIONS ── */}

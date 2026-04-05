@@ -6,9 +6,9 @@ import SectionPill from "@/components/landing/SectionPill";
 import useMetaTags from "@/hooks/useMetaTags";
 
 /* ── tiny reusable pieces ── */
-const SectionNum = ({ children }: { children: string }) => (
+const SectionNum = ({ children, variant = "dark" }: { children: string; variant?: "dark" | "light" }) => (
   <div className="mb-5">
-    <SectionPill>{children}</SectionPill>
+    <SectionPill variant={variant}>{children}</SectionPill>
   </div>
 );
 

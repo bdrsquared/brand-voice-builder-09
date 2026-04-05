@@ -137,12 +137,25 @@ const ContentPlaybook = () => {
         </div>
       </header>
 
-      {/* ── SECTIONS ── */}
-      <main className="max-w-5xl mx-auto px-6 md:px-10">
+      {/* Rounded divider: dark to light */}
+      <div id="light-section-start" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+        <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+      </div>
+
+      {/* Light mode sections 01-03 */}
+      <div id="light-sections" className="relative" style={{ backgroundColor: '#E4E5E9' }}>
+        <div
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: "radial-gradient(ellipse 70% 40% at 15% 40%, rgba(28, 250, 118, 0.25), transparent 70%), radial-gradient(ellipse 70% 40% at 55% 55%, rgba(99, 89, 234, 0.2), transparent 70%), radial-gradient(ellipse 70% 40% at 85% 35%, rgba(255, 179, 71, 0.2), transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
+        <main className="relative z-10 max-w-5xl mx-auto px-6 md:px-10">
 
         {/* ── 01 STRATEGY ── */}
-        <section className="py-20 border-b border-border" id="strategy">
-          <SectionNum>01 — The Strategic Model</SectionNum>
+        <section className="py-20 border-b border-black/10" id="strategy">
+          <SectionNum variant="light">01 — The Strategic Model</SectionNum>
           <h2 className="text-3xl md:text-5xl mb-8">Win minds before<br />buyers raise hands</h2>
           <p className="text-text-secondary leading-relaxed mb-4">The big shift is this: TOFU is no longer mainly about "awareness." It is about <strong className="text-text-primary">shaping buyer preference before a buyer is ready to talk to sales.</strong> The teams that win in 2026/2027 will look less like blog factories and more like a hybrid of newsroom, studio, and measurement lab.</p>
           <Pullquote>"The most important content moment is not when a buyer reaches out. It is the six months before they do."</Pullquote>

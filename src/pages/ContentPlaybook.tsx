@@ -12,21 +12,21 @@ const SectionNum = ({ children }: { children: string }) => (
 );
 
 const Pullquote = ({ children }: { children: React.ReactNode }) => (
-  <blockquote className="border-l-[3px] border-primary pl-6 py-4 my-10 bg-secondary/40 rounded-r-lg font-heading text-lg italic text-text-primary leading-relaxed">
+  <blockquote className="border-l-[3px] border-primary pl-6 py-5 my-10 bg-secondary/40 rounded-r-lg font-heading text-lg md:text-xl italic text-text-primary leading-relaxed">
     {children}
   </blockquote>
 );
 
 const Callout = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <div className="bg-secondary/60 border border-border rounded-lg p-6 my-8">
-    <div className="font-body text-[0.65rem] tracking-[0.15em] uppercase text-accent mb-3 pb-2 border-b border-border">{label}</div>
-    <div className="text-text-secondary text-sm leading-relaxed">{children}</div>
+    <div className="font-body text-xs tracking-[0.15em] uppercase text-accent mb-3 pb-2 border-b border-border">{label}</div>
+    <div className="text-text-secondary text-sm md:text-base leading-relaxed">{children}</div>
   </div>
 );
 
 const BarChart = ({ title, rows }: { title: string; rows: { label: string; pct: number; val: string; color?: string }[] }) => (
   <div className="bg-secondary/40 border border-border rounded-lg p-6 my-8">
-    <div className="font-body text-[0.68rem] tracking-[0.12em] uppercase text-text-tertiary mb-5">{title}</div>
+    <div className="font-body text-xs tracking-[0.12em] uppercase text-text-secondary mb-5">{title}</div>
     <div className="flex flex-col gap-3">
       {rows.map((r) => (
         <div key={r.label} className="grid grid-cols-[minmax(120px,200px)_1fr_60px] items-center gap-4">
@@ -34,7 +34,7 @@ const BarChart = ({ title, rows }: { title: string; rows: { label: string; pct: 
           <div className="bg-border h-7 rounded-sm overflow-hidden">
             <div className="h-full rounded-sm" style={{ width: `${r.pct}%`, background: r.color ?? "hsl(var(--primary))" }} />
           </div>
-          <div className="font-body text-xs text-text-tertiary">{r.val}</div>
+          <div className="font-body text-sm text-text-secondary">{r.val}</div>
         </div>
       ))}
     </div>
@@ -46,8 +46,8 @@ const StatGrid = ({ stats }: { stats: { num: string; desc: string; source: strin
     {stats.map((s) => (
       <div key={s.num + s.desc} className="bg-card p-6 text-center">
         <span className="font-heading text-4xl text-primary block leading-none mb-2">{s.num}</span>
-        <span className="text-text-secondary text-xs leading-snug block">{s.desc}</span>
-        <span className="font-body text-[0.6rem] tracking-[0.05em] uppercase text-text-tertiary mt-2 block">{s.source}</span>
+        <span className="text-text-secondary text-sm leading-snug block">{s.desc}</span>
+        <span className="font-body text-xs tracking-[0.05em] uppercase text-text-tertiary mt-2 block">{s.source}</span>
       </div>
     ))}
   </div>
@@ -59,7 +59,7 @@ const DataTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) =
       <thead>
         <tr className="bg-card">
           {headers.map((h) => (
-            <th key={h} className="p-3 text-left font-body text-[0.65rem] tracking-[0.1em] uppercase text-text-tertiary font-medium">{h}</th>
+            <th key={h} className="p-3 text-left font-body text-xs tracking-[0.1em] uppercase text-text-secondary font-medium">{h}</th>
           ))}
         </tr>
       </thead>
@@ -67,7 +67,7 @@ const DataTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) =
         {rows.map((row, i) => (
           <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-secondary/30"}>
             {row.map((cell, j) => (
-              <td key={j} className={`p-3 border-t border-border leading-relaxed ${j === 0 ? "font-semibold text-accent text-xs whitespace-nowrap" : "text-text-secondary"}`}>{cell}</td>
+              <td key={j} className={`p-3 border-t border-border leading-relaxed ${j === 0 ? "font-semibold text-accent text-sm whitespace-nowrap" : "text-text-secondary text-sm"}`}>{cell}</td>
             ))}
           </tr>
         ))}
@@ -116,7 +116,7 @@ const ContentPlaybook = () => {
             ].map((s) => (
               <div key={s.num + s.label} className="bg-background/40 backdrop-blur p-5 text-center">
                 <span className="font-heading text-3xl text-primary block leading-none mb-1">{s.num}</span>
-                <span className="text-text-tertiary text-xs leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
+                <span className="text-text-secondary text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
               </div>
             ))}
           </div>
@@ -158,7 +158,7 @@ const ContentPlaybook = () => {
                 <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">{r.n}</span>
                 <div>
                   <div className="font-semibold text-sm text-text-primary mb-1">{r.t}</div>
-                  <p className="text-xs text-text-tertiary leading-relaxed m-0">{r.d}</p>
+                  <p className="text-sm text-text-secondary leading-relaxed m-0">{r.d}</p>
                 </div>
               </div>
             ))}
@@ -166,7 +166,7 @@ const ContentPlaybook = () => {
               <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">05</span>
               <div>
                 <div className="font-semibold text-sm text-text-primary mb-1">Measure influence, not just last-click source purity</div>
-                <p className="text-xs text-text-tertiary leading-relaxed m-0">Perfect attribution is fantasy. Decision-grade attribution is enough. Build for probabilistic measurement from the start.</p>
+                <p className="text-sm text-text-secondary leading-relaxed m-0">Perfect attribution is fantasy. Decision-grade attribution is enough. Build for probabilistic measurement from the start.</p>
               </div>
             </div>
           </div>
@@ -194,16 +194,16 @@ const ContentPlaybook = () => {
 
           <div className="flex flex-col gap-1 my-8">
             {[
-              { emoji: "🎬", label: "Flagship Episode - 35-75 min", w: "100%", bg: "hsl(var(--foreground))", desc: "" },
-              { emoji: "✂️", label: "Mid-form Segments - 5-15 min", w: "85%", bg: "hsl(var(--accent))", desc: "Conversion & nurture layer - 5-30 min videos average a 10% conversion rate (Wistia)" },
-              { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "hsl(var(--primary))", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
-              { emoji: "📄", label: "Written Companion Assets", w: "50%", bg: "hsl(145, 60%, 25%)", desc: "Search, AI retrieval & internal shareability" },
+              { emoji: "🎬", label: "Flagship Episode - 35-75 min", w: "100%", bg: "hsl(var(--card))", textColor: "text-text-primary", desc: "" },
+              { emoji: "✂️", label: "Mid-form Segments - 5-15 min", w: "85%", bg: "hsl(var(--accent))", textColor: "text-white", desc: "Conversion & nurture layer - 5-30 min videos average a 10% conversion rate (Wistia)" },
+              { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "hsl(var(--primary))", textColor: "text-primary-foreground", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
+              { emoji: "📄", label: "Written Companion Assets", w: "50%", bg: "hsl(145, 60%, 25%)", textColor: "text-white", desc: "Search, AI retrieval & internal shareability" },
             ].map((l) => (
               <div key={l.label} className="flex items-center gap-4">
-                <div className="h-16 rounded-sm flex items-center px-4 text-white font-medium text-sm shrink-0" style={{ width: l.w, background: l.bg, maxWidth: "100%" }}>
+                <div className={`h-16 rounded-lg flex items-center px-5 font-medium text-sm shrink-0 ${l.textColor}`} style={{ width: l.w, background: l.bg, maxWidth: "100%" }}>
                   {l.emoji}&nbsp; {l.label}
                 </div>
-                {l.desc && <div className="text-xs text-text-tertiary leading-snug hidden md:block">{l.desc}</div>}
+                {l.desc && <div className="text-sm text-text-secondary leading-snug hidden md:block">{l.desc}</div>}
               </div>
             ))}
           </div>
@@ -274,14 +274,14 @@ const ContentPlaybook = () => {
             ].map((f, i) => (
               <div key={f.name} className={`p-4 grid grid-cols-1 md:grid-cols-[180px_1fr] gap-1 md:gap-6 items-start ${i % 2 ? "bg-secondary/30" : "bg-background"}`}>
                 <div className="font-semibold text-sm text-accent">{f.name}</div>
-                <p className="text-xs text-text-tertiary leading-relaxed m-0">{f.desc}</p>
+                <p className="text-sm text-text-secondary leading-relaxed m-0">{f.desc}</p>
               </div>
             ))}
           </div>
 
           {/* Formula box */}
           <div className="bg-card border border-border rounded-lg p-8 my-10 text-center">
-            <div className="font-body text-[0.65rem] tracking-[0.15em] uppercase text-text-tertiary mb-4">The TOFU Content Formula</div>
+            <div className="font-body text-xs tracking-[0.15em] uppercase text-text-tertiary mb-4">The TOFU Content Formula</div>
             <div className="font-heading text-xl md:text-2xl italic text-text-primary leading-relaxed">
               <span className="text-primary">Teach</span> + <span className="text-primary">Diagnose</span> + <span className="text-primary">Reframe</span> + <span className="text-primary">Equip</span> + <span className="text-primary">Invite</span>
             </div>
@@ -341,11 +341,11 @@ const ContentPlaybook = () => {
               { label: "Layer 4 — Revenue Impact", color: "text-yellow-500", items: ["Opportunity creation (influenced)", "Exposed-account win rate lift", "Sales-cycle compression", "ACV delta: exposed vs. unexposed", "Influenced pipeline per content pillar"] },
             ].map((q) => (
               <div key={q.label} className="bg-background p-5">
-                <div className={`font-body text-[0.65rem] tracking-[0.12em] uppercase ${q.color} mb-3 pb-2 border-b border-border`}>{q.label}</div>
+                <div className={`font-body text-xs tracking-[0.12em] uppercase ${q.color} mb-3 pb-2 border-b border-border`}>{q.label}</div>
                 <ul className="space-y-1">
                   {q.items.map((item) => (
-                    <li key={item} className="text-xs text-text-secondary flex items-baseline gap-2">
-                      <span className="font-body text-[0.7rem] opacity-40 shrink-0">→</span>{item}
+                    <li key={item} className="text-sm text-text-secondary flex items-baseline gap-2">
+                      <span className="font-body text-xs opacity-40 shrink-0">→</span>{item}
                     </li>
                   ))}
                 </ul>
@@ -392,18 +392,18 @@ const ContentPlaybook = () => {
           <h3 className="text-lg md:text-2xl mt-10 mb-5 text-text-primary">AI: right use cases vs. wrong use cases</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
             <div className="bg-background p-5">
-              <div className="font-body text-[0.65rem] tracking-[0.12em] uppercase text-primary mb-3 pb-2 border-b border-border">✓ Right use cases</div>
+              <div className="font-body text-xs tracking-[0.12em] uppercase text-primary mb-3 pb-2 border-b border-border">✓ Right use cases</div>
               <ul className="space-y-1">
                 {["Transcript cleanup and chaptering", "Title and headline variants", "Clip selection suggestions", "Metadata, captions, translation", "Repurposing drafts from episode summaries", "Research clustering"].map((item) => (
-                  <li key={item} className="text-xs text-text-secondary">✓ {item}</li>
+                  <li key={item} className="text-sm text-text-secondary">✓ {item}</li>
                 ))}
               </ul>
             </div>
             <div className="bg-secondary/30 p-5">
-              <div className="font-body text-[0.65rem] tracking-[0.12em] uppercase text-destructive mb-3 pb-2 border-b border-border">✕ Wrong use cases</div>
+              <div className="font-body text-xs tracking-[0.12em] uppercase text-destructive mb-3 pb-2 border-b border-border">✕ Wrong use cases</div>
               <ul className="space-y-1">
                 {["Outsourcing your point of view", "Manufacturing originality at scale", "Replacing host voice with synthetic tone", "Publishing unreviewed AI copy as thought leadership"].map((item) => (
-                  <li key={item} className="text-xs text-text-secondary">✕ {item}</li>
+                  <li key={item} className="text-sm text-text-secondary">✕ {item}</li>
                 ))}
               </ul>
             </div>
@@ -422,11 +422,11 @@ const ContentPlaybook = () => {
             ].map((tl) => (
               <div key={tl.period} className="relative mb-10">
                 <div className="absolute -left-[2.55rem] top-1.5 w-2 h-2 bg-primary rounded-full" />
-                <div className="font-body text-xs text-primary tracking-wide mb-1">{tl.period}</div>
-                <div className="font-semibold text-sm text-text-primary mb-2">{tl.title}</div>
+                <div className="font-body text-sm text-primary tracking-wide mb-1 font-medium">{tl.period}</div>
+                <div className="font-semibold text-base text-text-primary mb-2">{tl.title}</div>
                 <ul className="space-y-1">
                   {tl.items.map((item) => (
-                    <li key={item} className="text-xs text-text-tertiary pl-4 relative before:content-['—'] before:absolute before:left-0 before:opacity-40">{item}</li>
+                    <li key={item} className="text-sm text-text-secondary pl-4 relative before:content-['—'] before:absolute before:left-0 before:opacity-40">{item}</li>
                   ))}
                 </ul>
               </div>
@@ -438,9 +438,9 @@ const ContentPlaybook = () => {
         <section className="py-16 text-center border-t border-border">
           <h2 className="text-2xl md:text-4xl italic mb-4">Content that drives sales looks like trust media.</h2>
           <div className="w-10 h-px bg-primary mx-auto my-6" />
-          <p className="text-text-tertiary text-sm max-w-2xl mx-auto leading-relaxed">Strong point of view. Strong host. Strong long-form core. Aggressive short-form distribution. Low-friction private sharing. Measurement built for imperfect visibility. The teams that accept that reality earlier will beat the teams still trying to force every buying journey into last-click analytics.</p>
+          <p className="text-text-secondary text-sm max-w-2xl mx-auto leading-relaxed">Strong point of view. Strong host. Strong long-form core. Aggressive short-form distribution. Low-friction private sharing. Measurement built for imperfect visibility. The teams that accept that reality earlier will beat the teams still trying to force every buying journey into last-click analytics.</p>
           <div className="w-10 h-px bg-primary mx-auto my-6" />
-          <p className="text-text-tertiary text-xs">Content Marketing Playbook 2026/2027 — Sources: Edelman, Gartner, HubSpot, CMI, Wistia, Spotify, YouTube, SparkToro, Edison Research, LinkedIn</p>
+          <p className="text-text-secondary text-sm">Content Marketing Playbook 2026/2027 — Sources: Edelman, Gartner, HubSpot, CMI, Wistia, Spotify, YouTube, SparkToro, Edison Research, LinkedIn</p>
         </section>
       </main>
 

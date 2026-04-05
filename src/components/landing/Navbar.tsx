@@ -602,14 +602,13 @@ const Navbar = () => {
                         </div>
                         <h5 className="text-sm font-heading font-bold text-white mb-2">The Content Playbook for 2026 / 2027</h5>
                         <p className="text-xs text-white/50 font-body leading-relaxed mb-4">Content is changing fast. Our latest report breaks down the trends, data, and strategies shaping B2B content in 2026 — so you can stay ahead.</p>
-                        <a
-                          href="/content-playbook"
-                          onClick={(e) => { e.preventDefault(); navigate("/content-playbook"); setMegaOpen(null); }}
-                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all"
+                        <button
+                          onClick={() => { setMegaOpen(null); setPlaybookGateOpen(true); }}
+                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all cursor-pointer"
                         >
                           Read the report
                           <ArrowRight className="w-3 h-3" />
-                        </a>
+                        </button>
                       </div>
                     </div>
 

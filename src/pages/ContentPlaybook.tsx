@@ -142,7 +142,7 @@ const ContentPlaybook = () => {
       <main className="max-w-5xl mx-auto px-4 md:px-10">
 
         {/* ── 01 STRATEGY ── */}
-        <section className="py-20 border-b border-border" id="strategy">
+        <section className="py-12 md:py-20 border-b border-border" id="strategy">
           <SectionNum>01 — The Strategic Model</SectionNum>
           <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">Win minds before<br />buyers raise hands</h2>
           <p className="text-text-secondary leading-relaxed mb-4">The big shift is this: TOFU is no longer mainly about "awareness." It is about <strong className="text-text-primary">shaping buyer preference before a buyer is ready to talk to sales.</strong> The teams that win in 2026/2027 will look less like blog factories and more like a hybrid of newsroom, studio, and measurement lab.</p>

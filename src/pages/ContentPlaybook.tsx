@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
@@ -78,68 +78,6 @@ const DataTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) =
   </div>
 );
 
-const PlaybookHero = ({ children }: { children: React.ReactNode }) => {
-  const vantaRef = useRef<HTMLDivElement>(null);
-  const vantaEffect = useRef<any>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadVanta = async () => {
-      // Load Three.js
-      if (!(window as any).THREE) {
-        await new Promise<void>((resolve, reject) => {
-          const s = document.createElement("script");
-          s.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
-          s.onload = () => resolve();
-          s.onerror = reject;
-          document.head.appendChild(s);
-        });
-      }
-      // Load Vanta Dots
-      if (!(window as any).VANTA) {
-        await new Promise<void>((resolve, reject) => {
-          const s = document.createElement("script");
-          s.src = "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js";
-          s.onload = () => resolve();
-          s.onerror = reject;
-          document.head.appendChild(s);
-        });
-      }
-      if (cancelled || !vantaRef.current) return;
-      vantaEffect.current = (window as any).VANTA.DOTS({
-        el: vantaRef.current,
-        THREE: (window as any).THREE,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200,
-        minWidth: 200,
-        scale: 1.0,
-        scaleMobile: 1.0,
-        color: 0x1cfa76,
-        color2: 0x1cfa76,
-        backgroundColor: 0x0,
-        size: 1.4,
-        spacing: 11.0,
-        showLines: false,
-      });
-    };
-
-    loadVanta();
-    return () => {
-      cancelled = true;
-      if (vantaEffect.current) vantaEffect.current.destroy();
-    };
-  }, []);
-
-  return (
-    <header ref={vantaRef} className="relative overflow-hidden pt-24 md:pt-32 pb-20 md:pb-24 px-6 rounded-b-[40px] md:rounded-b-[60px]">
-      {children}
-    </header>
-  );
-};
-
 /* ════════════════════════════════════════════════════════════ */
 
 const ContentPlaybook = () => {
@@ -155,7 +93,10 @@ const ContentPlaybook = () => {
       <Navbar />
 
       {/* ── HERO ── */}
-      <PlaybookHero>
+      <header className="relative bg-card overflow-hidden pt-24 md:pt-32 pb-20 md:pb-24 px-6 rounded-b-[40px] md:rounded-b-[60px]">
+        {/* subtle grid lines */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
+        <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
 
         <div className="relative max-w-5xl mx-auto">
           <div className="mb-6 mt-6">
@@ -195,7 +136,7 @@ const ContentPlaybook = () => {
             ))}
           </div>
         </div>
-      </PlaybookHero>
+      </header>
 
       {/* ── SECTIONS ── */}
       <main className="max-w-5xl mx-auto px-4 md:px-10">

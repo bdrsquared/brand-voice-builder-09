@@ -143,7 +143,7 @@ const ContentPlaybook = () => {
       </div>
 
       {/* Light mode sections 01-03 */}
-      <div id="light-sections" className="relative" style={{ backgroundColor: '#E4E5E9' }}>
+      <div id="light-sections" className="relative" style={{ backgroundColor: '#E4E5E9', ['--text-primary' as string]: '#0A0A0A', ['--text-secondary' as string]: '#4D4D4D', ['--text-tertiary' as string]: '#737373', ['--foreground' as string]: '0 0% 4%', ['--card' as string]: '0 0% 100%', ['--border' as string]: '0 0% 80%', ['--secondary' as string]: '0 0% 93%', ['--background' as string]: '0 0% 96%', ['--muted-foreground' as string]: '0 0% 45%' }}>
         <div
           className="absolute inset-0 pointer-events-none z-0"
           style={{

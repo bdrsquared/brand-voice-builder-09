@@ -5,7 +5,10 @@ import useMetaTags from "@/hooks/useMetaTags";
 
 /* ── tiny reusable pieces ── */
 const SectionNum = ({ children }: { children: string }) => (
-  <div className="font-body text-xs tracking-[0.15em] uppercase text-primary mb-2">{children}</div>
+  <div className="font-body text-[0.7rem] tracking-[0.18em] uppercase text-primary mb-3 flex items-center gap-3">
+    <span className="w-6 h-px bg-primary inline-block" />
+    {children}
+  </div>
 );
 
 const Pullquote = ({ children }: { children: React.ReactNode }) => (

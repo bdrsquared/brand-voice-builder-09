@@ -231,7 +231,7 @@ const ContentPlaybook = () => {
         {/* ── 03 TRUST ── */}
         <section className="py-20 border-b border-border" id="trust">
           <SectionNum>03 — Parasocial Trust</SectionNum>
-          <h2 className="text-3xl md:text-5xl mb-8">Design for parasocial<br />connection deliberately</h2>
+          <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">Design for parasocial<br />connection deliberately</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Parasocial trust is not fluff. It is a demand-creation mechanism. Spotify's data makes the case plainly:</p>
 
           <StatGrid stats={[

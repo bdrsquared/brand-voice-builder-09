@@ -99,7 +99,8 @@ const ContentPlaybook = () => {
         <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 items-center">
+        <div className="relative max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 items-center">
           <div>
             <div className="mb-6">
               <SectionPill>Senior Marketer Edition</SectionPill>

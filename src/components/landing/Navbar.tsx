@@ -952,6 +952,12 @@ const Navbar = () => {
                       >
                         Blog
                       </a>
+                      <a
+                        href="/content-playbook"
+                        className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); navigate("/content-playbook"); }}
+                      >
+                        Content Playbook
                       <button
                         className="flex items-center justify-between text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left w-full"
                         onClick={() => setMobileSubMenu("podplanner")}

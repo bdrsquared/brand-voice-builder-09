@@ -106,7 +106,7 @@ const ContentPlaybook = () => {
             The Content Playbook<br />for <span className="bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent">2026 / 2027</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-xl leading-relaxed mb-10">
-            Top-of-funnel content that creates revenue, not just reach. Built for B2B and high-consideration brands navigating a buyer-led, AI-shaped, video-first world.
+            Content is changing fast. This report breaks down the trends, data, and strategies reshaping B2B content — so you can lead the conversation, not chase it.
           </p>
 
           <a

@@ -422,8 +422,8 @@ const ContentPlaybook = () => {
             ].map((tl) => (
               <div key={tl.period} className="relative mb-10">
                 <div className="absolute -left-[2.55rem] top-1.5 w-2 h-2 bg-primary rounded-full" />
-                <div className="font-body text-xs text-primary tracking-wide mb-1">{tl.period}</div>
-                <div className="font-semibold text-sm text-text-primary mb-2">{tl.title}</div>
+                <div className="font-body text-sm text-primary tracking-wide mb-1 font-medium">{tl.period}</div>
+                <div className="font-semibold text-base text-text-primary mb-2">{tl.title}</div>
                 <ul className="space-y-1">
                   {tl.items.map((item) => (
                     <li key={item} className="text-sm text-text-secondary pl-4 relative before:content-['—'] before:absolute before:left-0 before:opacity-40">{item}</li>

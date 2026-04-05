@@ -19,8 +19,8 @@ const Pullquote = ({ children }: { children: React.ReactNode }) => (
 
 const Callout = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <div className="bg-secondary/60 border border-border rounded-lg p-6 my-8">
-    <div className="font-body text-[0.65rem] tracking-[0.15em] uppercase text-accent mb-3 pb-2 border-b border-border">{label}</div>
-    <div className="text-text-secondary text-sm leading-relaxed">{children}</div>
+    <div className="font-body text-xs tracking-[0.15em] uppercase text-accent mb-3 pb-2 border-b border-border">{label}</div>
+    <div className="text-text-secondary text-sm md:text-base leading-relaxed">{children}</div>
   </div>
 );
 

@@ -31,7 +31,7 @@ const BarChart = ({ title, rows }: { title: string; rows: { label: string; pct: 
     <div className="font-body text-xs tracking-[0.12em] uppercase text-text-secondary mb-5">{title}</div>
     <div className="flex flex-col gap-3">
       {rows.map((r) => (
-        <div key={r.label} className="grid grid-cols-[minmax(120px,200px)_1fr_60px] items-center gap-4">
+        <div key={r.label} className="grid grid-cols-[minmax(80px,160px)_1fr_50px] md:grid-cols-[minmax(120px,200px)_1fr_60px] items-center gap-2 md:gap-4">
           <div className="text-sm text-text-secondary text-right leading-tight">{r.label}</div>
           <div className="bg-border h-7 rounded-sm overflow-hidden">
             <div className="h-full rounded-sm" style={{ width: `${r.pct}%`, background: r.color ?? "hsl(var(--primary))" }} />

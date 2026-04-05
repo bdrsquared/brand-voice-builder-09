@@ -6,9 +6,9 @@ import SectionPill from "@/components/landing/SectionPill";
 import useMetaTags from "@/hooks/useMetaTags";
 
 /* ── tiny reusable pieces ── */
-const SectionNum = ({ children }: { children: string }) => (
+const SectionNum = ({ children, variant = "dark" }: { children: string; variant?: "dark" | "light" }) => (
   <div className="mb-5">
-    <SectionPill>{children}</SectionPill>
+    <SectionPill variant={variant}>{children}</SectionPill>
   </div>
 );
 
@@ -137,12 +137,25 @@ const ContentPlaybook = () => {
         </div>
       </header>
 
-      {/* ── SECTIONS ── */}
-      <main className="max-w-5xl mx-auto px-6 md:px-10">
+      {/* Rounded divider: dark to light */}
+      <div id="light-section-start" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+        <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+      </div>
+
+      {/* Light mode sections 01-03 */}
+      <div id="light-sections" className="relative" style={{ backgroundColor: '#E4E5E9', ['--text-primary' as string]: '#0A0A0A', ['--text-secondary' as string]: '#4D4D4D', ['--text-tertiary' as string]: '#737373', ['--foreground' as string]: '0 0% 4%', ['--card' as string]: '0 0% 100%', ['--border' as string]: '0 0% 80%', ['--secondary' as string]: '0 0% 93%', ['--background' as string]: '0 0% 96%', ['--muted-foreground' as string]: '0 0% 45%' }}>
+        <div
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: "radial-gradient(ellipse 70% 40% at 15% 40%, rgba(28, 250, 118, 0.25), transparent 70%), radial-gradient(ellipse 70% 40% at 55% 55%, rgba(99, 89, 234, 0.2), transparent 70%), radial-gradient(ellipse 70% 40% at 85% 35%, rgba(255, 179, 71, 0.2), transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
+        <main className="relative z-10 max-w-5xl mx-auto px-6 md:px-10">
 
         {/* ── 01 STRATEGY ── */}
-        <section className="py-20 border-b border-border" id="strategy">
-          <SectionNum>01 — The Strategic Model</SectionNum>
+        <section className="py-20 border-b border-black/10" id="strategy">
+          <SectionNum variant="light">01 — The Strategic Model</SectionNum>
           <h2 className="text-3xl md:text-5xl mb-8">Win minds before<br />buyers raise hands</h2>
           <p className="text-text-secondary leading-relaxed mb-4">The big shift is this: TOFU is no longer mainly about "awareness." It is about <strong className="text-text-primary">shaping buyer preference before a buyer is ready to talk to sales.</strong> The teams that win in 2026/2027 will look less like blog factories and more like a hybrid of newsroom, studio, and measurement lab.</p>
           <Pullquote>"The most important content moment is not when a buyer reaches out. It is the six months before they do."</Pullquote>
@@ -161,14 +174,14 @@ const ContentPlaybook = () => {
           />
 
           <h2 className="text-2xl md:text-4xl mt-10 mb-6">The five strategic rules</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/10 border border-black/10 rounded-lg overflow-hidden my-8">
             {[
               { n: "01", t: "Build memory before demand capture", d: "Create recall, trust, and internal advocacy among buyers who are not ready to convert yet." },
               { n: "02", t: "Treat video podcasting as the hub", d: "Long-form creates conviction. Short-form creates discovery. Written assets create retrieval." },
               { n: "03", t: "Optimise for forwardability", d: "The most valuable clip is often the one pasted into Slack, WhatsApp, or a buying-committee deck - not the one with the most likes." },
               { n: "04", t: "Use hosts as trust infrastructure", d: "In 2026/2027, the host is the trust interface between brand and buyer - not just talent." },
             ].map((r) => (
-              <div key={r.n} className="bg-background p-5 flex gap-4 items-start">
+              <div key={r.n} className="bg-white/60 backdrop-blur-sm p-5 flex gap-4 items-start">
                 <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">{r.n}</span>
                 <div>
                   <div className="font-semibold text-sm text-text-primary mb-1">{r.t}</div>
@@ -176,7 +189,7 @@ const ContentPlaybook = () => {
                 </div>
               </div>
             ))}
-            <div className="bg-background p-5 flex gap-4 items-start md:col-span-2">
+            <div className="bg-white/60 backdrop-blur-sm p-5 flex gap-4 items-start md:col-span-2">
               <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">05</span>
               <div>
                 <div className="font-semibold text-sm text-text-primary mb-1">Measure influence, not just last-click source purity</div>
@@ -187,8 +200,8 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 02 VIDEO ── */}
-        <section className="py-20 border-b border-border" id="video">
-          <SectionNum>02 — Video as the Content Nucleus</SectionNum>
+        <section className="py-20 border-b border-black/10" id="video">
+          <SectionNum variant="light">02 — Video as the Content Nucleus</SectionNum>
           <h2 className="text-3xl md:text-5xl mb-8">Video is no longer<br />a supporting asset</h2>
           <p className="text-text-secondary leading-relaxed mb-4">HubSpot's 2026 data is unambiguous: the three highest-ROI content formats are all video-based. YouTube now reports over 700 million hours of podcast content watched on living-room devices in October 2025. The flagship content asset for 2026/2027 should be a <strong className="text-text-primary">video podcast or episodic show.</strong></p>
 
@@ -213,7 +226,7 @@ const ContentPlaybook = () => {
               { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "hsl(var(--primary))", textColor: "text-primary-foreground", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
               { emoji: "📄", label: "Written Companion Assets", w: "50%", bg: "hsl(145, 60%, 25%)", textColor: "text-white", desc: "Search, AI retrieval & internal shareability" },
             ].map((l) => (
-              <div key={l.label} className="rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-4">
+              <div key={l.label} className="rounded-xl border border-black/10 bg-white/40 backdrop-blur-md p-4">
                 <div className={`h-12 rounded-lg flex items-center px-5 font-medium text-sm ${l.textColor}`} style={{ width: l.w, background: l.bg }}>
                   {l.emoji}&nbsp; {l.label}
                 </div>
@@ -228,8 +241,8 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 03 TRUST ── */}
-        <section className="py-20 border-b border-border" id="trust">
-          <SectionNum>03 — Parasocial Trust</SectionNum>
+        <section className="py-20 border-b border-black/10" id="trust">
+          <SectionNum variant="light">03 — Parasocial Trust</SectionNum>
           <h2 className="text-3xl md:text-5xl mb-8">Design for parasocial<br />connection deliberately</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Parasocial trust is not fluff. It is a demand-creation mechanism. Spotify's data makes the case plainly:</p>
 
@@ -250,6 +263,16 @@ const ContentPlaybook = () => {
             ]}
           />
         </section>
+        </main>
+      </div>
+
+      {/* Rounded divider: light to dark */}
+      <div id="light-section-end" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+        <div className="bg-background rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" />
+      </div>
+
+      {/* ── DARK SECTIONS ── */}
+      <main className="max-w-5xl mx-auto px-6 md:px-10">
 
         {/* ── 04 TOFU ── */}
         <section className="py-20 border-b border-border" id="tofu">

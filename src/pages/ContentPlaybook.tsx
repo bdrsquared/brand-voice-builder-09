@@ -343,7 +343,7 @@ const ContentPlaybook = () => {
         </section>
 
         {/* ── 06 MEASUREMENT ── */}
-        <section className="py-20 border-b border-border" id="measurement">
+        <section className="py-12 md:py-20 border-b border-border" id="measurement">
           <SectionNum>06 — Measurement</SectionNum>
           <h2 className="text-2xl md:text-5xl mb-6 md:mb-8">The four-layer<br />measurement scorecard</h2>
           <p className="text-text-secondary leading-relaxed mb-4">Your scorecard should move from attention quality all the way to revenue impact. Never report impressions, views, and MQLs in a vacuum and call that content ROI.</p>

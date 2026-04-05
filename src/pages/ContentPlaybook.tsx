@@ -93,7 +93,7 @@ const ContentPlaybook = () => {
         <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
 
-        <div className="relative max-w-3xl mx-auto">
+        <div className="relative max-w-5xl mx-auto">
           <div className="font-body text-xs tracking-[0.18em] uppercase text-primary mb-4 flex items-center gap-3">
             <span className="w-8 h-px bg-primary inline-block" />
             Senior Marketer Edition

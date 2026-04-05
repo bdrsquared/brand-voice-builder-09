@@ -92,7 +92,7 @@ const ContentPlaybook = () => {
       <Navbar />
 
       {/* ── HERO ── */}
-      <header className="relative bg-card overflow-hidden pt-24 md:pt-32 pb-32 md:pb-40 px-6 rounded-b-[40px] md:rounded-b-[60px]">
+      <header className="relative bg-card overflow-hidden pt-24 md:pt-32 pb-20 md:pb-24 px-6 rounded-b-[40px] md:rounded-b-[60px]">
         {/* subtle grid lines */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />

@@ -99,7 +99,7 @@ const ContentPlaybook = () => {
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
 
         <div className="relative max-w-5xl mx-auto">
-          <div className="mb-6">
+          <div className="mb-6 mt-6">
             <SectionPill>Senior Marketer Edition</SectionPill>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6">

@@ -440,7 +440,7 @@ const ContentPlaybook = () => {
           <div className="w-10 h-px bg-primary mx-auto my-6" />
           <p className="text-text-secondary text-sm max-w-2xl mx-auto leading-relaxed">Strong point of view. Strong host. Strong long-form core. Aggressive short-form distribution. Low-friction private sharing. Measurement built for imperfect visibility. The teams that accept that reality earlier will beat the teams still trying to force every buying journey into last-click analytics.</p>
           <div className="w-10 h-px bg-primary mx-auto my-6" />
-          <p className="text-text-secondary text-xs">Content Marketing Playbook 2026/2027 — Sources: Edelman, Gartner, HubSpot, CMI, Wistia, Spotify, YouTube, SparkToro, Edison Research, LinkedIn</p>
+          <p className="text-text-secondary text-sm">Content Marketing Playbook 2026/2027 — Sources: Edelman, Gartner, HubSpot, CMI, Wistia, Spotify, YouTube, SparkToro, Edison Research, LinkedIn</p>
         </section>
       </main>
 

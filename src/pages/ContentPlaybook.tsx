@@ -210,9 +210,9 @@ const ContentPlaybook = () => {
           <div className="flex flex-col gap-4 my-8">
             {[
               { emoji: "🎬", label: "Flagship Episode - 35-75 min", w: "100%", bg: "hsl(var(--card))", textColor: "text-text-primary", desc: "The anchor asset - full depth, full conviction, full story" },
-              { emoji: "✂️", label: "Mid-form Segments - 5-15 min", w: "85%", bg: "hsl(var(--accent))", textColor: "text-white", desc: "Conversion & nurture layer - 5-30 min videos average a 10% conversion rate (Wistia)" },
-              { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "hsl(var(--primary))", textColor: "text-primary-foreground", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
-              { emoji: "📄", label: "Written Companion Assets", w: "50%", bg: "hsl(145, 60%, 25%)", textColor: "text-white", desc: "Search, AI retrieval & internal shareability" },
+              { emoji: "✂️", label: "Mid-form Segments - 5-15 min", w: "85%", bg: "#6A7A8C", textColor: "text-white", desc: "Conversion & nurture layer - 5-30 min videos average a 10% conversion rate (Wistia)" },
+              { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "#7BAF8E", textColor: "text-white", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
+              { emoji: "📄", label: "Written Companion Assets", w: "50%", bg: "#5C7A6A", textColor: "text-white", desc: "Search, AI retrieval & internal shareability" },
             ].map((l) => (
               <div key={l.label} className="rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-4">
                 <div className={`h-12 rounded-lg flex items-center px-5 font-medium text-sm ${l.textColor}`} style={{ width: l.w, background: l.bg }}>

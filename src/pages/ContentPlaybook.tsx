@@ -407,7 +407,7 @@ const ContentPlaybook = () => {
           <h3 className="text-lg md:text-2xl mt-10 mb-5 text-text-primary">AI: right use cases vs. wrong use cases</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
             <div className="bg-background p-5">
-              <div className="font-body text-xs tracking-[0.12em] uppercase text-primary mb-3 pb-2 border-b border-border">✓ Right use cases</div>
+              <div className="font-body text-xs tracking-[0.12em] uppercase text-[#7BAF8E] mb-3 pb-2 border-b border-border">✓ Right use cases</div>
               <ul className="space-y-1">
                 {["Transcript cleanup and chaptering", "Title and headline variants", "Clip selection suggestions", "Metadata, captions, translation", "Repurposing drafts from episode summaries", "Research clustering"].map((item) => (
                   <li key={item} className="text-sm text-text-secondary">✓ {item}</li>

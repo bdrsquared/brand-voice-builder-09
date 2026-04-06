@@ -196,11 +196,11 @@ const ContentPlaybook = () => {
           <BarChart
             title="Highest-ROI content formats — 2026 (HubSpot)"
             rows={[
-              { label: "Short-form video", pct: 97, val: "48.6%", color: "hsl(var(--accent))" },
-              { label: "Long-form video", pct: 57, val: "28.6%", color: "hsl(var(--accent))" },
-              { label: "Live-streaming video", pct: 50, val: "25.1%", color: "hsl(var(--accent))" },
-              { label: "Blog / written content", pct: 38, val: "~19%", color: "hsl(var(--muted-foreground))" },
-              { label: "Infographics / visual", pct: 28, val: "~14%", color: "hsl(var(--muted-foreground))" },
+              { label: "Short-form video", pct: 97, val: "48.6%", color: "#6A9FA3" },
+              { label: "Long-form video", pct: 57, val: "28.6%", color: "#6A9FA3" },
+              { label: "Live-streaming video", pct: 50, val: "25.1%", color: "#6A9FA3" },
+              { label: "Blog / written content", pct: 38, val: "~19%", color: "#6A7A8C" },
+              { label: "Infographics / visual", pct: 28, val: "~14%", color: "#6A7A8C" },
             ]}
           />
 

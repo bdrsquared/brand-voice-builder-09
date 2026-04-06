@@ -269,11 +269,11 @@ const ContentPlaybook = () => {
           <BarChart
             title="Hidden buyer priorities at final vendor selection (Edelman/LinkedIn 2025)"
             rows={[
-              { label: "Understanding our challenges & needs", pct: 85, val: "85%", color: "hsl(160, 50%, 35%)" },
-              { label: "Strategic fit", pct: 76, val: "76%", color: "hsl(160, 50%, 35%)" },
-              { label: "Understanding industry trends", pct: 74, val: "74%", color: "hsl(160, 50%, 35%)" },
-              { label: "Relevant expertise", pct: 68, val: "68%", color: "hsl(160, 50%, 35%)" },
-              { label: "Being the \"safest choice\"", pct: 41, val: "41%", color: "hsl(var(--muted-foreground))" },
+              { label: "Understanding our challenges & needs", pct: 85, val: "85%", color: "#6A9FA3" },
+              { label: "Strategic fit", pct: 76, val: "76%", color: "#6A9FA3" },
+              { label: "Understanding industry trends", pct: 74, val: "74%", color: "#6A9FA3" },
+              { label: "Relevant expertise", pct: 68, val: "68%", color: "#6A9FA3" },
+              { label: "Being the \"safest choice\"", pct: 41, val: "41%", color: "#6A7A8C" },
             ]}
           />
 

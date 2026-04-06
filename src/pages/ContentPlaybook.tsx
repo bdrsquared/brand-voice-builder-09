@@ -431,9 +431,9 @@ const ContentPlaybook = () => {
           <h3 className="text-lg md:text-2xl mt-10 mb-8 text-text-primary">The 90-day rollout</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { period: "Days 1-30", title: "Foundation & Strategy", icon: "🧭", color: "#1CFA76", items: ["Define ICP, buying jobs, hidden buyers, show thesis, host roles", "Build the measurement framework", "Lock UTM taxonomy and self-reported attribution questions before publishing anything"] },
-              { period: "Days 31-60", title: "Production & Systems", icon: "⚙️", color: "#6359EA", items: ["Record four to six episodes before launch", "Build template systems: full episodes, segment cuts, shorts, articles, thumbnails, captions, sales one-pagers", "Train sales on how to use clips in outreach and follow-up"] },
-              { period: "Days 61-90", title: "Launch & Iterate", icon: "🚀", color: "#40ABB2", items: ["Launch in batches, not as one-off hero content", "Watch for direct traffic to deep pages, branded search movement, self-reported mentions, repeat viewers", "Double down on themes that get forwarded privately - not just publicly applauded"] },
+              { period: "Days 1-30", title: "Foundation & Strategy", icon: "🧭", color: "#7BAF8E", items: ["Define ICP, buying jobs, hidden buyers, show thesis, host roles", "Build the measurement framework", "Lock UTM taxonomy and self-reported attribution questions before publishing anything"] },
+              { period: "Days 31-60", title: "Production & Systems", icon: "⚙️", color: "#8B83C7", items: ["Record four to six episodes before launch", "Build template systems: full episodes, segment cuts, shorts, articles, thumbnails, captions, sales one-pagers", "Train sales on how to use clips in outreach and follow-up"] },
+              { period: "Days 61-90", title: "Launch & Iterate", icon: "🚀", color: "#6A9FA3", items: ["Launch in batches, not as one-off hero content", "Watch for direct traffic to deep pages, branded search movement, self-reported mentions, repeat viewers", "Double down on themes that get forwarded privately - not just publicly applauded"] },
             ].map((tl, i) => (
               <motion.div
                 key={tl.period}

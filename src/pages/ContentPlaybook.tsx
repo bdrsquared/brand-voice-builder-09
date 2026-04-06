@@ -298,7 +298,7 @@ const ContentPlaybook = () => {
           <div className="bg-card border border-border rounded-lg p-8 my-10 text-center">
             <div className="font-body text-xs tracking-[0.15em] uppercase text-text-tertiary mb-4">The TOFU Content Formula</div>
             <div className="font-heading text-xl md:text-2xl italic text-text-primary leading-relaxed">
-              <span className="text-primary">Teach</span> + <span className="text-primary">Diagnose</span> + <span className="text-primary">Reframe</span> + <span className="text-primary">Equip</span> + <span className="text-primary">Invite</span>
+              <span className="text-[#7BAF8E]">Teach</span> + <span className="text-[#7BAF8E]">Diagnose</span> + <span className="text-[#7BAF8E]">Reframe</span> + <span className="text-[#7BAF8E]">Equip</span> + <span className="text-[#7BAF8E]">Invite</span>
             </div>
             <p className="text-text-tertiary text-xs mt-3 mb-0">If the content doesn't give the buyer something they can reuse internally, it's probably not revenue-grade TOFU yet.</p>
           </div>

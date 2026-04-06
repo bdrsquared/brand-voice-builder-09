@@ -69,7 +69,7 @@ const DataTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) =
         {rows.map((row, i) => (
           <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-secondary/30"}>
             {row.map((cell, j) => (
-              <td key={j} className={`p-3 border-t border-border leading-relaxed ${j === 0 ? "font-semibold text-accent text-sm whitespace-nowrap" : "text-text-secondary text-sm"}`}>{cell}</td>
+              <td key={j} className={`p-3 border-t border-border leading-relaxed ${j === 0 ? "font-semibold text-[#6A9FA3] text-sm whitespace-nowrap" : "text-text-secondary text-sm"}`}>{cell}</td>
             ))}
           </tr>
         ))}

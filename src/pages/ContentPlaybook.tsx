@@ -321,8 +321,8 @@ const ContentPlaybook = () => {
               { label: "Slack", pct: 100, val: "100%" },
               { label: "Discord", pct: 100, val: "100%" },
               { label: "WhatsApp", pct: 100, val: "100%" },
-              { label: "FB Messenger", pct: 75, val: "75%", color: "hsl(var(--accent))" },
-              { label: "Instagram DMs", pct: 60, val: "~60%", color: "hsl(var(--accent))" },
+              { label: "FB Messenger", pct: 75, val: "75%", color: "#8B83C7" },
+              { label: "Instagram DMs", pct: 60, val: "~60%", color: "#8B83C7" },
             ]}
           />
 

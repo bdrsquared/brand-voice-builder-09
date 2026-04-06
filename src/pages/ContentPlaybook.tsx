@@ -178,7 +178,7 @@ const ContentPlaybook = () => {
               </div>
             ))}
             <div className="bg-background p-5 flex gap-4 items-start md:col-span-2">
-              <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">05</span>
+              <span className="font-body text-2xl text-[#7BAF8E] font-medium leading-none shrink-0">05</span>
               <div>
                 <div className="font-semibold text-sm text-text-primary mb-1">Measure influence, not just last-click source purity</div>
                 <p className="text-sm text-text-secondary leading-relaxed m-0">Perfect attribution is fantasy. Decision-grade attribution is enough. Build for probabilistic measurement from the start.</p>

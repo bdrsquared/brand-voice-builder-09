@@ -170,7 +170,7 @@ const ContentPlaybook = () => {
               { n: "04", t: "Use hosts as trust infrastructure", d: "In 2026/2027, the host is the trust interface between brand and buyer - not just talent." },
             ].map((r) => (
               <div key={r.n} className="bg-background p-5 flex gap-4 items-start">
-                <span className="font-body text-2xl text-primary font-medium leading-none shrink-0">{r.n}</span>
+                <span className="font-body text-2xl text-[#7BAF8E] font-medium leading-none shrink-0">{r.n}</span>
                 <div>
                   <div className="font-semibold text-sm text-text-primary mb-1">{r.t}</div>
                   <p className="text-sm text-text-secondary leading-relaxed m-0">{r.d}</p>

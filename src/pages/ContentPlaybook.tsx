@@ -288,7 +288,7 @@ const ContentPlaybook = () => {
               { name: "Buyer Guides", desc: "\"How leaders should evaluate X in 2026.\" Feels like TOFU, secretly a sales acceleration asset. Write it for internal forwarding." },
             ].map((f, i) => (
               <div key={f.name} className={`p-4 grid grid-cols-1 md:grid-cols-[180px_1fr] gap-1 md:gap-6 items-start ${i % 2 ? "bg-secondary/30" : "bg-background"}`}>
-                <div className="font-semibold text-sm text-accent">{f.name}</div>
+                <div className="font-semibold text-sm text-[#6A9FA3]">{f.name}</div>
                 <p className="text-sm text-text-secondary leading-relaxed m-0">{f.desc}</p>
               </div>
             ))}

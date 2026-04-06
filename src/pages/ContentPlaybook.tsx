@@ -155,9 +155,9 @@ const ContentPlaybook = () => {
               { label: "Understanding the audience", pct: 82, val: "82%" },
               { label: "Producing high-quality content", pct: 77, val: "77%" },
               { label: "Possessing industry expertise", pct: 70, val: "70%" },
-              { label: "Aligning to business objectives", pct: 62, val: "62%", color: "hsl(var(--accent))" },
-              { label: "Measuring performance effectively", pct: 53, val: "53%", color: "hsl(var(--accent))" },
-              { label: "Having a documented strategy", pct: 47, val: "47%", color: "hsl(var(--accent))" },
+              { label: "Aligning to business objectives", pct: 62, val: "62%", color: "#8B83C7" },
+              { label: "Measuring performance effectively", pct: 53, val: "53%", color: "#8B83C7" },
+              { label: "Having a documented strategy", pct: 47, val: "47%", color: "#8B83C7" },
             ]}
           />
 

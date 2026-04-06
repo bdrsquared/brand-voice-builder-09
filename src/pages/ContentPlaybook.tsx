@@ -350,10 +350,10 @@ const ContentPlaybook = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
             {[
-              { label: "Layer 1 — Attention Quality", color: "text-primary", items: ["Watch time & average % viewed", "Consumption hours", "Completion rate", "Returning viewers", "Live watch behaviour"] },
-              { label: "Layer 2 — Relationship Depth", color: "text-accent", items: ["Follower / subscriber growth", "Repeat viewers", "Newsletter opt-ins", "Comments, saves, audience participation", "Episode-to-episode retention"] },
+              { label: "Layer 1 — Attention Quality", color: "text-[#7BAF8E]", items: ["Watch time & average % viewed", "Consumption hours", "Completion rate", "Returning viewers", "Live watch behaviour"] },
+              { label: "Layer 2 — Relationship Depth", color: "text-[#8B83C7]", items: ["Follower / subscriber growth", "Repeat viewers", "Newsletter opt-ins", "Comments, saves, audience participation", "Episode-to-episode retention"] },
               { label: "Layer 3 — Dark-Funnel Movement", color: "text-text-secondary", items: ["Direct deep-link ratio", "Branded search lift", "Self-reported mentions", "Episode-assist rate in CRM", "Copy-link click volume"] },
-              { label: "Layer 4 — Revenue Impact", color: "text-yellow-500", items: ["Opportunity creation (influenced)", "Exposed-account win rate lift", "Sales-cycle compression", "ACV delta: exposed vs. unexposed", "Influenced pipeline per content pillar"] },
+              { label: "Layer 4 — Revenue Impact", color: "text-[#C9A96E]", items: ["Opportunity creation (influenced)", "Exposed-account win rate lift", "Sales-cycle compression", "ACV delta: exposed vs. unexposed", "Influenced pipeline per content pillar"] },
             ].map((q) => (
               <div key={q.label} className="bg-background p-5">
                 <div className={`font-body text-xs tracking-[0.12em] uppercase ${q.color} mb-3 pb-2 border-b border-border`}>{q.label}</div>

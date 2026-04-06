@@ -103,7 +103,7 @@ const ContentPlaybook = () => {
             <SectionPill>Senior Marketer Edition</SectionPill>
           </div>
           <h1 className="text-3xl md:text-6xl lg:text-7xl mb-6">
-            The Content Playbook<br />for <span className="bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent">2026 / 2027</span>
+            The Content Playbook<br />for <span className="bg-gradient-to-r from-[#6A9FA3] via-[#8B83C7] to-[#C484C9] bg-clip-text text-transparent">2026 / 2027</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-xl leading-relaxed mb-10">
             Content is changing fast. This report breaks down the trends, data, and strategies reshaping B2B content — so you can lead the conversation, not chase it.

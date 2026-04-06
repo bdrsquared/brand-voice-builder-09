@@ -47,7 +47,7 @@ const StatGrid = ({ stats }: { stats: { num: string; desc: string; source: strin
   <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
     {stats.map((s) => (
       <div key={s.num + s.desc} className="bg-card p-6 text-center">
-        <span className="font-heading text-4xl text-primary block leading-none mb-2">{s.num}</span>
+        <span className="font-heading text-4xl text-[#7BAF8E] block leading-none mb-2">{s.num}</span>
         <span className="text-text-secondary text-sm leading-snug block">{s.desc}</span>
         <span className="font-body text-xs tracking-[0.05em] uppercase text-text-tertiary mt-2 block">{s.source}</span>
       </div>

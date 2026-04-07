@@ -37,6 +37,7 @@ const CaseStudiesPage = lazy(() => import("./pages/CaseStudies.tsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const ICPLandingPage = lazy(() => import("./pages/ICPLandingPage.tsx"));
 const ContentPlaybook = lazy(() => import("./pages/ContentPlaybook.tsx"));
+const Careers = lazy(() => import("./pages/Careers.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const AnimatedRoutes = () => {
           <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
           <Route path="/content-marketing/:slug" element={<PageTransition><ICPLandingPage /></PageTransition>} />
           <Route path="/content-playbook" element={<PageTransition><ContentPlaybook /></PageTransition>} />
+          <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>

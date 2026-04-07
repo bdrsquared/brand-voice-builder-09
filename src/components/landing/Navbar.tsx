@@ -973,6 +973,13 @@ const Navbar = () => {
                       >
                         Blog
                       </a>
+                      <a
+                        href="/careers"
+                        className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); navigate("/careers"); }}
+                      >
+                        Careers
+                      </a>
                       <button
                         className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left w-full"
                         onClick={() => { setMobileOpen(false); setMobileSubMenu(null); setPlaybookGateOpen(true); }}

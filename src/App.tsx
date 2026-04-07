@@ -37,6 +37,7 @@ const CaseStudiesPage = lazy(() => import("./pages/CaseStudies.tsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const ICPLandingPage = lazy(() => import("./pages/ICPLandingPage.tsx"));
 const ContentPlaybook = lazy(() => import("./pages/ContentPlaybook.tsx"));
+const Careers = lazy(() => import("./pages/Careers.tsx"));
 
 const queryClient = new QueryClient();
 

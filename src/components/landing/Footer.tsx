@@ -46,7 +46,7 @@ const Footer = () => {
               <h4 className="text-sm font-semibold text-white mb-5 tracking-wide">Quick Links</h4>
               <ul className="space-y-3 text-sm font-body">
                 {[
-                  { label: "Our Story", to: "/our-story" },
+                  { label: "Our Story", to: "/about-earworm" },
                   { label: "Case Studies", to: "/case-studies" },
                   { label: "Blog", to: "/blogs" },
                   { label: "Book a Call", to: "/book-a-call" },

@@ -5,7 +5,7 @@ import PlayPackModal from "@/components/PlayPackModal";
 import PlaybookGateModal from "@/components/PlaybookGateModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, MessageCircle, Calendar, Layers, Activity, Eye, LogIn, BookOpen } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, MessageCircle, Calendar, Layers, Activity, Eye, LogIn, BookOpen, GraduationCap } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { getThumbnailUrl } from "@/lib/image-utils";
 import logo from "@/assets/earworm-logo.webp";
@@ -689,6 +689,13 @@ const Navbar = () => {
                           Our story
                         </button>
                         <button
+                          onClick={() => { navigate("/careers"); setMegaOpen(null); }}
+                          className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all text-left"
+                        >
+                          <GraduationCap className="w-4 h-4 text-white/50" />
+                          Careers
+                        </button>
+                        <button
                           onClick={() => { navigate("/blogs"); setMegaOpen(null); }}
                           className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all text-left"
                         >
@@ -965,6 +972,13 @@ const Navbar = () => {
                         onClick={() => { setMobileOpen(false); setMobileSubMenu(null); navigate("/blogs"); }}
                       >
                         Blog
+                      </a>
+                      <a
+                        href="/careers"
+                        className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary"
+                        onClick={() => { setMobileOpen(false); setMobileSubMenu(null); navigate("/careers"); }}
+                      >
+                        Careers
                       </a>
                       <button
                         className="text-lg font-heading text-foreground py-3 border-b border-white/10 transition-colors hover:text-primary text-left w-full"

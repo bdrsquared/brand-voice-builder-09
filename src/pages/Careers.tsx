@@ -250,9 +250,12 @@ const Careers = () => {
           </motion.div>
         </div>
 
-        {/* Curved bottom divider */}
-        <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-[#E4E5E9] rounded-t-[40px]" />
       </section>
+
+      {/* Rounded divider: dark to light */}
+      <div id="light-section-start" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+        <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+      </div>
 
       {/* ── Light Section: Why Earworm ── */}
       <section className="bg-[#E4E5E9] relative px-6 py-16 sm:py-20">
@@ -283,10 +286,10 @@ const Careers = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 custom={i}
                 variants={fadeUp}
-                className="rounded-2xl bg-white/70 backdrop-blur-sm border border-black/[0.06] p-6 sm:p-7"
+                className="rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 p-6 sm:p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_4px_16px_rgba(0,0,0,0.06)]"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <perk.icon className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 rounded-xl bg-[#1a1a1a]/[0.08] backdrop-blur-sm flex items-center justify-center mb-4">
+                  <perk.icon className="w-5 h-5 text-[#1a1a1a]/70" />
                 </div>
                 <h3 className="text-lg font-semibold text-light-text-primary mb-1">{perk.title}</h3>
                 <p className="text-sm text-light-text-secondary font-body leading-relaxed">{perk.desc}</p>

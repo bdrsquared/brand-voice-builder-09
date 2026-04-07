@@ -682,7 +682,7 @@ const Navbar = () => {
                           How we work
                         </a>
                         <button
-                          onClick={() => { navigate("/our-story"); setMegaOpen(null); }}
+                          onClick={() => { navigate("/about-earworm"); setMegaOpen(null); }}
                           className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/90 hover:text-white hover:bg-white/[0.06] transition-all text-left"
                         >
                           <Activity className="w-4 h-4 text-white/50" />
@@ -795,7 +795,7 @@ const Navbar = () => {
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.35, delay: 0.25 }}
-                        onClick={() => { navigate("/our-story"); setMobileOpen(false); setMobileSubMenu(null); }}
+                        onClick={() => { navigate("/about-earworm"); setMobileOpen(false); setMobileSubMenu(null); }}
                       >
                         <div className="aspect-video overflow-hidden">
                           <img src={officeImg} alt="Earworm studio" className="w-full h-full object-cover" />

@@ -61,6 +61,7 @@ const AnimatedRoutes = () => {
           <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
           <Route path="/content-marketing/:slug" element={<PageTransition><ICPLandingPage /></PageTransition>} />
           <Route path="/content-playbook" element={<PageTransition><ContentPlaybook /></PageTransition>} />
+          <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>

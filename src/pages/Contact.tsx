@@ -126,7 +126,7 @@ const Contact = () => {
                 className="text-4xl sm:text-5xl md:text-6xl text-text-primary leading-[1.1] mb-5"
               >
                 Let's start a{" "}
-                <span className="text-gradient-green italic">conversation</span>
+                <span className="text-gradient-green italic pr-1">conversation</span>
               </motion.h1>
 
               <motion.p

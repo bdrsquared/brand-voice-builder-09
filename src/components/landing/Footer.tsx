@@ -49,6 +49,7 @@ const Footer = () => {
                   { label: "Our Story", to: "/about-earworm" },
                   { label: "Case Studies", to: "/case-studies" },
                   { label: "Blog", to: "/blogs" },
+                  { label: "Careers", to: "/careers" },
                   { label: "Book a Call", to: "/book-a-call" },
                 ].map((link) => (
                   <li key={link.to}>

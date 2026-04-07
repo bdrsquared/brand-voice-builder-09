@@ -328,10 +328,12 @@ const Careers = () => {
             ))}
           </div>
         </div>
-
-        {/* Curved bottom divider back to dark */}
-        <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-background rounded-t-[40px]" />
       </section>
+
+      {/* Rounded divider: light to dark */}
+      <div id="light-section-end" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>
+        <div className="bg-background rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" />
+      </div>
 
       {/* ── Dark CTA ── */}
       <section className="relative py-20 sm:py-28 px-6">

@@ -81,10 +81,7 @@ const DataTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) =
 /* ════════════════════════════════════════════════════════════ */
 
 const ContentPlaybook = () => {
-  useMetaTags({
-    title: "Content Marketing Playbook 2026/2027 | Earworm",
-    description: "Top-of-funnel content that creates revenue, not just reach. Built for B2B and high-consideration brands navigating a buyer-led, AI-shaped, video-first world.",
-  });
+  useMetaTags();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 

@@ -47,7 +47,7 @@ const AnimatedRoutes = () => {
       <Suspense fallback={<div className="min-h-screen bg-background" />}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageTransition><Index /></PageTransition>} />
-          <Route path="/our-story" element={<PageTransition><OurStory /></PageTransition>} />
+          <Route path="/about-earworm" element={<PageTransition><OurStory /></PageTransition>} />
           <Route path="/case-study/:slug" element={<PageTransition><CaseStudy /></PageTransition>} />
           <Route path="/cookies" element={<PageTransition><CookiesPolicy /></PageTransition>} />
           <Route path="/book-a-call" element={<PageTransition><BookACall /></PageTransition>} />

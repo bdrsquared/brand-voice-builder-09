@@ -125,14 +125,14 @@ const tiers = [
 const Tier1Content = () => (
   <>
     <div className="mb-6"><SectionTitle>Strategy</SectionTitle><BulletList items={[
-      "Define your target audience (ICP) — who you're talking to and why they'll care",
+      "Define your target audience (ICP) who you're talking to and why they'll care",
       "Shape the podcast concept, format and market positioning",
       "Identify content pillars and themes that drive real engagement",
       "Build a distribution plan so the show actually gets heard",
     ]} /></div>
-    <div className="mb-6"><SectionTitle>Production — 6 fully produced episodes</SectionTitle><BulletList items={[
+    <div className="mb-6"><SectionTitle>Production 6 fully produced episodes</SectionTitle><BulletList items={[
       "High-quality video and audio recording",
-      "Professional editing — paced, clear, engaging",
+      "Professional editing paced, clear, engaging",
       "Published across all major podcast platforms from day one",
     ]} /></div>
     <div className="mb-6"><SectionTitle>Content</SectionTitle><BulletList items={[
@@ -142,7 +142,7 @@ const Tier1Content = () => (
       "SEO-optimised show notes",
     ]} /><InsightChip color={C.teal} bg="rgba(106,159,163,0.12)">Content designed to be shared, not just watched</InsightChip></div>
     <div className="mb-6"><SectionTitle>Guest & performance</SectionTitle><BulletList items={[
-      "Identify relevant, on-brand guests — targeted, not random",
+      "Identify relevant, on-brand guests targeted, not random",
       "Personalised outreach and booking",
       "Clear early reporting on what's landing with your audience",
     ]} /></div>
@@ -150,46 +150,46 @@ const Tier1Content = () => (
       "Every episode delivered to agreed brief and quality standard",
       "All guests meet the ICP profile defined at strategy stage",
       "Performance report delivered within 7 days of final episode",
-      "If we're not proud of the work, we'll tell you — and fix it",
+      "If we're not proud of the work, we'll tell you and fix it",
     ]} />
-    <RoiBox><strong className="text-text-primary">Making the case internally:</strong> Six episodes at £19,500 costs less than one month of a mid-level content hire — and produces a permanent asset your brand owns.</RoiBox>
+    <RoiBox><strong className="text-text-primary">Making the case internally:</strong> Six episodes at £19,500 costs less than one month of a mid-level content hire and produces a permanent asset your brand owns. Unlike headcount, it ships on a fixed timeline and comes with a proven system you can scale into.</RoiBox>
     <UnlockQuote>"A credible show in market. Your brand sounds like it means it. Your leadership wants to be on it. Your audience starts to notice."</UnlockQuote>
   </>
 );
 
 const Tier2Content = () => (
   <>
-    <div className="mb-6"><SectionTitle>Strategy & system design — first 8 weeks</SectionTitle><BulletList items={[
-      "Deep ICP and buyer mapping — who, where, and what moves them",
+    <div className="mb-6"><SectionTitle>Strategy & system design first 8 weeks</SectionTitle><BulletList items={[
+      "Deep ICP and buyer mapping who, where, and what moves them",
       "Content strategy and roadmap built around your audience's actual priorities",
-      "Multi-channel distribution — LinkedIn, YouTube, email",
+      "Multi-channel distribution LinkedIn, YouTube, email",
       "Full integration into your existing marketing activity",
       "Host sourcing, testing and training",
       "Studio setup and creative direction",
     ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>You don't just get a podcast. You get a system for how it drives attention.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Production — 2 episodes per month, end-to-end</SectionTitle><BulletList items={[
+    <div className="mb-6"><SectionTitle>Production 2 episodes per month, end-to-end</SectionTitle><BulletList items={[
       "Guest booking, scheduling and all logistics handled",
-      "Recording — studio or remote, your choice",
+      "Recording studio or remote, your choice",
       "Full video + audio editing to broadcast standard",
       "Publishing and distribution managed for you",
     ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>Fully managed. Zero added workload for your team.</InsightChip></div>
     <div className="mb-6"><SectionTitle>Distribution & guest engine</SectionTitle><BulletList items={[
-      "Published across all podcast platforms and social channels — we write and post",
+      "Published across all podcast platforms and social channels we write and post",
       "Episodes repurposed into clips, copy and multiple formats",
-      "High-value guests your audience respects — personalised outreach, consistent pipeline",
-    ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>Your content shows up where your buyers already are — every month, without fail.</InsightChip></div>
+      "High-value guests your audience respects personalised outreach, consistent pipeline",
+    ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>Your content shows up where your buyers already are every month, without fail.</InsightChip></div>
     <GuaranteeBlock title="What we commit to in writing" items={[
-      "2 fully produced episodes per month, every month — delivered on schedule",
+      "2 fully produced episodes per month, every month delivered on schedule",
       "All guests meet the seniority and ICP criteria agreed at onboarding",
-      "Monthly performance report delivered on a fixed date — commercial metrics, not vanity numbers",
+      "Monthly performance report delivered on a fixed date commercial metrics, not vanity numbers",
       "Senior point of contact accessible within 24 hours",
       "90-day performance review with defined exit rights if agreed leading indicators aren't being met",
     ]} />
     <NoGuaranteeBlock title="What no agency can honestly guarantee" items={[
-      "Specific impression volumes — platform algorithms change and targeting precision affects reach",
-      "Pipeline numbers — too many variables sit outside content alone",
+      "Specific impression volumes platform algorithms change and targeting precision affects reach",
+      "Pipeline numbers too many variables sit outside content alone",
     ]} />
-    <RoiBox><strong className="text-text-primary">Making the case internally:</strong> A senior content strategist + producer + social manager costs £90–120k in salary alone. This delivers equivalent output — fully coordinated, immediately operational — for £75k, with no recruitment, no onboarding, no management overhead.</RoiBox>
+    <RoiBox><strong className="text-text-primary">Making the case internally:</strong> A senior content strategist + producer + social manager costs £90–120k in salary alone. This delivers equivalent output fully coordinated, immediately operational for £75k, with no recruitment, no onboarding, no management overhead.</RoiBox>
     <UnlockQuote>"Your brand stops being invisible between sales cycles. Prospects recognise you before your team ever reaches out."</UnlockQuote>
   </>
 );

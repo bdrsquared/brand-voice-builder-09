@@ -146,12 +146,7 @@ const Tier1Content = () => (
       "Personalised outreach and booking",
       "Clear early reporting on what's landing with your audience",
     ]} /></div>
-    <GuaranteeBlock title="What we commit to" items={[
-      "Every episode delivered to agreed brief and quality standard",
-      "All guests meet the ICP profile defined at strategy stage",
-      "Performance report delivered within 7 days of final episode",
-      "If we're not proud of the work, we'll tell you and fix it",
-    ]} />
+    
     <RoiBox><strong className="text-text-primary">Making the case internally:</strong> Six episodes at £19,500 costs less than one month of a mid-level content hire and produces a permanent asset your brand owns. Unlike headcount, it ships on a fixed timeline and comes with a proven system you can scale into.</RoiBox>
     <UnlockQuote>"A credible show in market. Your brand sounds like it means it. Your leadership wants to be on it. Your audience starts to notice."</UnlockQuote>
   </>
@@ -178,17 +173,7 @@ const Tier2Content = () => (
       "Episodes repurposed into clips, copy and multiple formats",
       "High-value guests your audience respects personalised outreach, consistent pipeline",
     ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>Your content shows up where your buyers already are every month, without fail.</InsightChip></div>
-    <GuaranteeBlock title="What we commit to in writing" items={[
-      "2 fully produced episodes per month, every month delivered on schedule",
-      "All guests meet the seniority and ICP criteria agreed at onboarding",
-      "Monthly performance report delivered on a fixed date commercial metrics, not vanity numbers",
-      "Senior point of contact accessible within 24 hours",
-      "90-day performance review with defined exit rights if agreed leading indicators aren't being met",
-    ]} />
-    <NoGuaranteeBlock title="What no agency can honestly guarantee" items={[
-      "Specific impression volumes platform algorithms change and targeting precision affects reach",
-      "Pipeline numbers too many variables sit outside content alone",
-    ]} />
+    
     <RoiBox><strong className="text-text-primary">Making the case internally:</strong> A senior content strategist + producer + social manager costs £90–120k in salary alone. This delivers equivalent output fully coordinated, immediately operational for £75k, with no recruitment, no onboarding, no management overhead.</RoiBox>
     <UnlockQuote>"Your brand stops being invisible between sales cycles. Prospects recognise you before your team ever reaches out."</UnlockQuote>
   </>

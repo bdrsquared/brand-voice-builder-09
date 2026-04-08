@@ -173,17 +173,7 @@ const Tier2Content = () => (
       "Episodes repurposed into clips, copy and multiple formats",
       "High-value guests your audience respects personalised outreach, consistent pipeline",
     ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>Your content shows up where your buyers already are every month, without fail.</InsightChip></div>
-    <GuaranteeBlock title="What we commit to in writing" items={[
-      "2 fully produced episodes per month, every month delivered on schedule",
-      "All guests meet the seniority and ICP criteria agreed at onboarding",
-      "Monthly performance report delivered on a fixed date commercial metrics, not vanity numbers",
-      "Senior point of contact accessible within 24 hours",
-      "90-day performance review with defined exit rights if agreed leading indicators aren't being met",
-    ]} />
-    <NoGuaranteeBlock title="What no agency can honestly guarantee" items={[
-      "Specific impression volumes platform algorithms change and targeting precision affects reach",
-      "Pipeline numbers too many variables sit outside content alone",
-    ]} />
+    
     <RoiBox><strong className="text-text-primary">Making the case internally:</strong> A senior content strategist + producer + social manager costs £90–120k in salary alone. This delivers equivalent output fully coordinated, immediately operational for £75k, with no recruitment, no onboarding, no management overhead.</RoiBox>
     <UnlockQuote>"Your brand stops being invisible between sales cycles. Prospects recognise you before your team ever reaches out."</UnlockQuote>
   </>

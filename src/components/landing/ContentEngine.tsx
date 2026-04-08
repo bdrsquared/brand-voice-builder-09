@@ -58,10 +58,11 @@ const ContentEngine = () => {
 
   return (
     <div
-      className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-accent/5 flex flex-col justify-center gap-2.5 py-4 h-[280px]"
+      className="relative w-full rounded-2xl border border-black/[0.08] overflow-hidden shadow-lg shadow-black/5 flex flex-col justify-center gap-2.5 py-4 h-[280px]"
+      style={{ background: "linear-gradient(135deg, #f8f9fa 0%, #eef0f4 50%, #f0f1f5 100%)" }}
     >
-      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-card/90 to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-card/90 to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#f8f9fa] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#f0f1f5] to-transparent z-20 pointer-events-none" />
 
       {rows.map((items, ri) => {
         const tripled = [...items, ...items, ...items];
@@ -82,11 +83,11 @@ const ContentEngine = () => {
 const ContentCard = ({ label, icon, accent }: { label: string; icon: string; accent: boolean }) => (
   <div
     className={`flex items-center gap-2 px-3 py-2.5 rounded-lg border shrink-0 ${
-      accent ? "border-accent/20 bg-accent/5" : "border-border/50 bg-secondary/50"
+      accent ? "border-accent/20 bg-accent/10" : "border-black/[0.06] bg-white/70"
     }`}
   >
     <span className="text-xs shrink-0">{icon}</span>
-    <p className="text-[10px] text-text-primary font-medium whitespace-nowrap font-body">{label}</p>
+    <p className="text-[10px] text-light-text-primary font-medium whitespace-nowrap font-body">{label}</p>
   </div>
 );
 

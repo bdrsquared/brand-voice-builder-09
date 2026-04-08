@@ -8,17 +8,17 @@ const AuthorityPulse = () => {
   }, []);
 
   return (
-    <div className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5 flex items-end justify-center gap-3 px-8 pb-8 pt-16 h-[280px]">
+    <div className="relative w-full rounded-2xl border border-black/[0.08] overflow-hidden shadow-lg shadow-black/5 flex items-end justify-center gap-3 px-8 pb-8 pt-16 h-[280px]" style={{ background: "linear-gradient(135deg, #f8f9fa 0%, #eef0f4 50%, #f0f1f5 100%)" }}>
       {/* Background glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full bg-primary/10 blur-[60px] pointer-events-none" />
 
       {/* Left podium */}
       <div className="relative flex flex-col items-center gap-2 z-10">
         <div className="w-2 h-2 rounded-full bg-text-tertiary/40" />
-        <div className="w-20 rounded-t-lg bg-gradient-to-b from-secondary to-card border border-border/60 h-[80px]">
-          <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/[0.04] to-transparent" />
-        </div>
-        <span className="text-[9px] text-text-tertiary font-body tracking-wide uppercase">2nd</span>
+        <div className="w-20 rounded-t-lg bg-gradient-to-b from-black/[0.06] to-black/[0.03] border border-black/[0.08] h-[80px]">
+           <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/40 to-transparent" />
+         </div>
+         <span className="text-[9px] text-light-text-tertiary font-body tracking-wide uppercase">2nd</span>
       </div>
 
       {/* Centre podium (tallest) */}
@@ -51,19 +51,19 @@ const AuthorityPulse = () => {
           )}
         </div>
 
-        <div className="w-24 rounded-t-lg bg-gradient-to-b from-primary/20 to-secondary border border-primary/20 h-[120px]">
-          <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/[0.06] to-transparent" />
-        </div>
-        <span className="text-[9px] text-primary font-body tracking-wide uppercase font-medium">1st</span>
+        <div className="w-24 rounded-t-lg bg-gradient-to-b from-primary/25 to-primary/10 border border-primary/20 h-[120px]">
+           <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/30 to-transparent" />
+         </div>
+         <span className="text-[9px] text-primary font-body tracking-wide uppercase font-medium">1st</span>
       </div>
 
       {/* Right podium */}
       <div className="relative flex flex-col items-center gap-2 z-10">
         <div className="w-2 h-2 rounded-full bg-text-tertiary/40" />
-        <div className="w-20 rounded-t-lg bg-gradient-to-b from-secondary to-card border border-border/60 h-[60px]">
-          <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/[0.04] to-transparent" />
-        </div>
-        <span className="text-[9px] text-text-tertiary font-body tracking-wide uppercase">3rd</span>
+        <div className="w-20 rounded-t-lg bg-gradient-to-b from-black/[0.06] to-black/[0.03] border border-black/[0.08] h-[60px]">
+           <div className="w-full h-full rounded-t-lg bg-gradient-to-br from-white/40 to-transparent" />
+         </div>
+         <span className="text-[9px] text-light-text-tertiary font-body tracking-wide uppercase">3rd</span>
       </div>
     </div>
   );

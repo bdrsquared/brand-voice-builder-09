@@ -48,17 +48,17 @@ const EngagementScroll = () => {
   const doubled = [...notifications, ...notifications];
 
   return (
-    <div className="relative w-full rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden shadow-lg shadow-primary/5 h-[280px]">
+    <div className="relative w-full rounded-2xl border border-black/[0.08] overflow-hidden shadow-lg shadow-black/5 h-[280px]" style={{ background: "linear-gradient(135deg, #f8f9fa 0%, #eef0f4 50%, #f0f1f5 100%)" }}>
       {/* Top/bottom fade masks */}
-      <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-card/90 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-card/90 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#f8f9fa] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#eef0f4] to-transparent z-10 pointer-events-none" />
 
       <div className="p-4 h-full overflow-hidden">
         <div ref={scrollRef} className="flex flex-col gap-2.5">
           {doubled.map((item, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 p-2.5 rounded-xl bg-secondary/50 border border-border/50"
+              className="flex items-center gap-3 p-2.5 rounded-xl bg-white/70 border border-black/[0.06]"
             >
               {item.image ? (
                 <img src={item.image} alt={item.name} className="w-8 h-8 rounded-full object-cover shrink-0" />
@@ -67,11 +67,11 @@ const EngagementScroll = () => {
                   {item.avatar}
                 </div>
               )}
-              <p className="text-xs text-text-secondary font-body leading-tight flex-1">
-                <span className="font-medium text-text-primary">{item.name}</span>{" "}
+              <p className="text-xs text-light-text-secondary font-body leading-tight flex-1">
+                <span className="font-medium text-light-text-primary">{item.name}</span>{" "}
                 {item.action}
               </p>
-              <div className="shrink-0 text-text-tertiary">
+              <div className="shrink-0 text-light-text-tertiary">
                 {item.action.includes("liked") && <Heart size={14} />}
                 {item.action.includes("commented") && <MessageCircle size={14} />}
                 {item.action.includes("shared") && <Share2 size={14} />}

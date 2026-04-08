@@ -327,7 +327,52 @@ const AddOnContent = () => (
   </>
 );
 
+/* ── Animated modal header ── */
+const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.ReactNode; accentColor?: string }) => (
+  <div className="relative overflow-hidden border-b border-border">
+    {/* Gradient top edge */}
+    <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, #8B83C7, #C484C9, transparent)` }} />
+
+    {/* Floating blur blobs */}
+    <motion.div
+      animate={{ x: [0, 30, -20, 0], y: [0, -15, 10, 0], scale: [1, 1.2, 0.9, 1] }}
+      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -top-16 -right-16 w-40 h-40 rounded-full pointer-events-none"
+      style={{ background: accentColor, opacity: 0.08, filter: "blur(60px)" }}
+    />
+    <motion.div
+      animate={{ x: [0, -20, 15, 0], y: [0, 10, -10, 0], scale: [1, 0.85, 1.15, 1] }}
+      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -bottom-12 -left-12 w-36 h-36 rounded-full pointer-events-none"
+      style={{ background: "#8B83C7", opacity: 0.07, filter: "blur(50px)" }}
+    />
+    <motion.div
+      animate={{ x: [0, 15, -10, 0], y: [0, -8, 12, 0] }}
+      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 rounded-full pointer-events-none"
+      style={{ background: "#C484C9", opacity: 0.05, filter: "blur(50px)" }}
+    />
+
+    {/* Shimmer sweep */}
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <motion.div
+        animate={{ x: ["-100%", "200%"] }}
+        transition={{ duration: 4, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
+        className="absolute inset-y-0 w-1/2"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent)" }}
+      />
+    </div>
+
+    {/* Subtle grid texture */}
+    <div className="absolute inset-0 pointer-events-none opacity-30" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.02) 39px,rgba(255,255,255,0.02) 40px)" }} />
+
+    <div className="relative p-6 sm:p-8 pb-5">{children}</div>
+  </div>
+);
+
 /* ── Modal wrapper ── */
+const tierAccent: Record<string, string> = { t1: "#6A9FA3", t2: "#7BAF8E", t3: "#8B83C7" };
+
 const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: () => void; tier: typeof tiers[0] | null; children: React.ReactNode }) => (
   <AnimatePresence>
     {open && tier && (
@@ -346,9 +391,8 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
           transition={{ duration: 0.3 }}
           className="relative w-full max-w-[620px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
         >
-          {/* header */}
-          <div className={`p-6 sm:p-8 pb-5 border-b border-border ${tier.featured ? "bg-background" : ""}`}>
-            <button onClick={onClose} className="absolute top-4 right-4 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
+          <ModalHeader accentColor={tierAccent[tier.id] || "#6A9FA3"}>
+            <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
               <X className="w-4 h-4" />
             </button>
             <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">{tier.num}</div>
@@ -363,7 +407,7 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
                 "What does a single warm conversation with a dream client cost you through paid channels? This builds a system that generates them every month."
               </div>
             )}
-          </div>
+          </ModalHeader>
           {/* body */}
           <div className="p-6 sm:p-8">{children}</div>
         </motion.div>

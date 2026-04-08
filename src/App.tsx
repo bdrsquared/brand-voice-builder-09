@@ -39,6 +39,7 @@ const ICPLandingPage = lazy(() => import("./pages/ICPLandingPage.tsx"));
 const ContentPlaybook = lazy(() => import("./pages/ContentPlaybook.tsx"));
 const Careers = lazy(() => import("./pages/Careers.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
+const PricingTiers = lazy(() => import("./pages/PricingTiers.tsx"));
 
 const queryClient = new QueryClient();
 

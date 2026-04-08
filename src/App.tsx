@@ -65,6 +65,7 @@ const AnimatedRoutes = () => {
           <Route path="/content-playbook" element={<PageTransition><ContentPlaybook /></PageTransition>} />
           <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="/pricing" element={<PageTransition><PricingTiers /></PageTransition>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>

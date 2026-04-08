@@ -414,7 +414,18 @@ const AddOnModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =
 
 const PricingTiers = () => {
   useMetaTags();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // Block search engine indexing
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "robots";
+      document.head.appendChild(meta);
+    }
+    meta.content = "noindex, nofollow";
+    return () => { meta.remove(); };
+  }, []);
 
   const [activeModal, setActiveModal] = useState<string | null>(null);
 
@@ -435,7 +446,7 @@ const PricingTiers = () => {
           <h1 className="text-3xl md:text-6xl lg:text-7xl mb-6">
             Your show.<br />
             <span className="bg-gradient-to-r from-[#6A9FA3] via-[#8B83C7] to-[#C484C9] bg-clip-text text-transparent">Your market.</span><br />
-            Owned. Not rented.
+            Owned by you.
           </h1>
           <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed">
             Three ways to work together — from establishing authority to driving pipeline. Choose the level that matches where you want to go.

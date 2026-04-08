@@ -435,8 +435,8 @@ const AddOnModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =
           transition={{ duration: 0.3 }}
           className="relative w-full max-w-[620px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
         >
-          <div className="p-6 sm:p-8 pb-5 border-b border-border">
-            <button onClick={onClose} className="absolute top-4 right-4 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
+          <ModalHeader accentColor="#C9A96E">
+            <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
               <X className="w-4 h-4" />
             </button>
             <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Optional add-on</div>
@@ -446,7 +446,7 @@ const AddOnModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =
               <span className="font-heading text-3xl text-text-primary">£2,000–£10,000+</span>
               <span className="text-xs text-text-tertiary">per month · separate managed budget</span>
             </div>
-          </div>
+          </ModalHeader>
           <div className="p-6 sm:p-8"><AddOnContent /></div>
         </motion.div>
       </motion.div>

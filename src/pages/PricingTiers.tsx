@@ -404,15 +404,15 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
               <X className="w-4 h-4" />
             </button>
             <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">{tier.num}</div>
-            <h3 className="font-heading text-2xl text-text-primary mb-2">{tier.name.split("\n")[0]}</h3>
-            <p className="text-sm text-text-secondary leading-relaxed mb-4">{tier.hook}</p>
+            <h3 className="font-heading text-2xl text-text-primary mb-2">{tier.modalTitle || tier.name.split("\n")[0]}</h3>
+            <p className="text-sm text-text-secondary leading-relaxed mb-4">{tier.modalPitch || tier.hook}</p>
             <div className="flex items-baseline gap-2.5">
               <span className="font-heading text-3xl text-text-primary">{tier.price}</span>
               <span className="text-xs text-text-tertiary">{tier.priceNote}</span>
             </div>
-            {tier.featured && (
+            {tier.modalDopamine && (
               <div className="mt-4 p-3 rounded-lg bg-white/[0.06] font-heading text-sm italic text-text-secondary leading-relaxed">
-                "What does a single warm conversation with a dream client cost you through paid channels? This builds a system that generates them every month."
+                "{tier.modalDopamine}"
               </div>
             )}
           </ModalHeader>

@@ -557,13 +557,13 @@ const PricingTiers = () => {
       </main>
 
       {/* ── MODALS ── */}
-      <TierModal open={activeModal === "t1"} onClose={() => setActiveModal(null)} tier={tiers[0]}>
+      <TierModal open={activeModal === "t1"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t1")!}>
         <Tier1Content />
       </TierModal>
-      <TierModal open={activeModal === "t2"} onClose={() => setActiveModal(null)} tier={tiers[1]}>
+      <TierModal open={activeModal === "t2"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t2")!}>
         <Tier2Content />
       </TierModal>
-      <TierModal open={activeModal === "t3"} onClose={() => setActiveModal(null)} tier={tiers[2]}>
+      <TierModal open={activeModal === "t3"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t3")!}>
         <Tier3Tabs />
       </TierModal>
       <AddOnModal open={activeModal === "addon"} onClose={() => setActiveModal(null)} />

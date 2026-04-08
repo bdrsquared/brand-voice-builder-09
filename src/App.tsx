@@ -39,6 +39,7 @@ const ICPLandingPage = lazy(() => import("./pages/ICPLandingPage.tsx"));
 const ContentPlaybook = lazy(() => import("./pages/ContentPlaybook.tsx"));
 const Careers = lazy(() => import("./pages/Careers.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
+const PricingTiers = lazy(() => import("./pages/PricingTiers.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,7 @@ const AnimatedRoutes = () => {
           <Route path="/content-playbook" element={<PageTransition><ContentPlaybook /></PageTransition>} />
           <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="/pricing" element={<PageTransition><PricingTiers /></PageTransition>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>

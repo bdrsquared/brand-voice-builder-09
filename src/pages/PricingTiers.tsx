@@ -414,7 +414,18 @@ const AddOnModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =
 
 const PricingTiers = () => {
   useMetaTags();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // Block search engine indexing
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "robots";
+      document.head.appendChild(meta);
+    }
+    meta.content = "noindex, nofollow";
+    return () => { meta.remove(); };
+  }, []);
 
   const [activeModal, setActiveModal] = useState<string | null>(null);
 

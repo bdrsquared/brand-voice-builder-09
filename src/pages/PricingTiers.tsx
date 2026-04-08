@@ -146,12 +146,7 @@ const Tier1Content = () => (
       "Personalised outreach and booking",
       "Clear early reporting on what's landing with your audience",
     ]} /></div>
-    <GuaranteeBlock title="What we commit to" items={[
-      "Every episode delivered to agreed brief and quality standard",
-      "All guests meet the ICP profile defined at strategy stage",
-      "Performance report delivered within 7 days of final episode",
-      "If we're not proud of the work, we'll tell you and fix it",
-    ]} />
+    
     <RoiBox><strong className="text-text-primary">Making the case internally:</strong> Six episodes at £19,500 costs less than one month of a mid-level content hire and produces a permanent asset your brand owns. Unlike headcount, it ships on a fixed timeline and comes with a proven system you can scale into.</RoiBox>
     <UnlockQuote>"A credible show in market. Your brand sounds like it means it. Your leadership wants to be on it. Your audience starts to notice."</UnlockQuote>
   </>

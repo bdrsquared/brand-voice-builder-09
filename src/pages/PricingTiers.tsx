@@ -444,8 +444,8 @@ const PricingTiers = () => {
       </header>
 
       {/* ── TIER CARDS ── */}
-      <main className="max-w-5xl mx-auto px-4 md:px-10 -mt-10 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden">
+      <main className="max-w-6xl mx-auto px-4 md:px-10 -mt-10 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
           {tiers.map((tier, i) => (
             <motion.div
               key={tier.id}

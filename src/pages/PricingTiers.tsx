@@ -287,21 +287,21 @@ const Tier3AdSpend = () => (
 
 const Tier3Guarantees = () => (
   <>
-    <p className="text-sm text-text-secondary leading-relaxed mb-5">Any agency promising specific pipeline numbers or impression guarantees is telling you what you want to hear. Here's what we'll commit to in writing — and what we won't, and why.</p>
+    <p className="text-sm text-text-secondary leading-relaxed mb-5">Any agency promising specific pipeline numbers or impression guarantees is telling you what you want to hear. Here's what we'll commit to in writing and what we won't, and why.</p>
     <GuaranteeBlock title="What we commit to in writing" items={[
-      "All production deliverables — episodes, clips, show notes — delivered on schedule to agreed quality standards",
+      "All production deliverables episodes, clips, show notes delivered on schedule to agreed quality standards",
       "All guests meet seniority and ICP criteria defined at onboarding. You have approval rights on the guest list.",
-      "Monthly reporting delivered on a fixed date — commercial metrics, not vanity numbers",
+      "Monthly reporting delivered on a fixed date commercial metrics, not vanity numbers",
       "Senior point of contact accessible within 24 hours, always",
       "Quarterly strategy sessions in the diary before the quarter begins",
-      "Transparent reporting — including what isn't working, not just what is",
+      "Transparent reporting including what isn't working, not just what is",
     ]} />
-    <NoGuaranteeBlock title="What we won't guarantee — and why you should be suspicious of anyone who does" items={[
-      "Specific impression volumes — LinkedIn CPMs shift with targeting precision and algorithm changes",
-      "Pipeline numbers — your offer, your sales team, your market timing, and a dozen variables outside content all play a role",
+    <NoGuaranteeBlock title="What we won't guarantee and why you should be suspicious of anyone who does" items={[
+      "Specific impression volumes LinkedIn CPMs shift with targeting precision and algorithm changes. Anyone guaranteeing a number hasn't run these campaigns recently.",
+      "Pipeline numbers your offer, your sales team, your market timing, and a dozen variables outside content all play a role. A guarantee here is either meaningless or has a very low bar baked in.",
     ]} />
     <div className="bg-secondary/40 rounded-xl p-5 my-5">
-      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">90-day performance review with exit rights.</strong> At the 90-day mark we review agreed leading indicators together. If we're not hitting the bar we set, you have the right to exit the contract with 30 days notice.</p>
+      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">90-day performance review with exit rights.</strong> At the 90-day mark we review agreed leading indicators together engagement benchmarks, guest quality, content output, early audience signals. If we're not hitting the bar we set, you have the right to exit the contract with 30 days notice. We're confident enough in the work to back that in writing.</p>
     </div>
     <div className="bg-secondary/40 rounded-xl p-5 my-5">
       <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Before you sign, ask us for references.</strong> A conversation with a current Tier 3 client will tell you more than any contractual clause. We'll arrange it.</p>

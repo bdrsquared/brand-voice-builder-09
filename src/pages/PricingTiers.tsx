@@ -210,23 +210,23 @@ const Tier3Tabs = () => {
 
 const Tier3Included = () => (
   <>
-    <div className="text-sm text-text-secondary p-3 border border-border rounded-lg mb-6">Includes everything in Launch & Scale — plus the full category ownership layer.</div>
-    <div className="mb-6"><SectionTitle>Global paid amplification</SectionTitle><BulletList items={[
+    <div className="text-sm text-text-secondary p-3 border border-border rounded-lg mb-6">Includes everything in Launch & Scale plus the full category ownership layer.</div>
+    <div className="mb-6"><SectionTitle>Global paid amplification own every channel your buyers use</SectionTitle><BulletList items={[
       "Multi-channel paid campaigns across LinkedIn, YouTube, Spotify, display and beyond",
-      "Content distributed into every market your buyers operate in — not just your home territory",
-      "Continuous creative testing at scale — what works gets amplified, what doesn't gets cut",
+      "Content distributed into every market your buyers operate in not just your home territory",
+      "Continuous creative testing at scale what works gets amplified, what doesn't gets cut",
       "Retargeting infrastructure that keeps your brand in front of warm audiences across platforms",
     ]} /><InsightChip color={C.plum} bg={C.plumBg}>Your buyers can't go a week without encountering your brand somewhere.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Category conversation strategy</SectionTitle><BulletList items={[
+    <div className="mb-6"><SectionTitle>Category conversation strategy you set the agenda</SectionTitle><BulletList items={[
       "Episode themes and guests chosen to own the defining conversations in your space",
       "Your show becomes the reference point competitors are measured against",
-      "PR layer turns episodes into industry moments — not just content",
+      "PR layer turns episodes into industry moments not just content",
       "Thought leadership positioned to shape how your category is discussed, not just covered",
     ]} /><InsightChip color={C.plum} bg={C.plumBg}>You're not joining the conversation. You're running it.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>UGC & creator network</SectionTitle><BulletList items={[
+    <div className="mb-6"><SectionTitle>UGC & creator network human voices at scale</SectionTitle><BulletList items={[
       "Hosts, guests and your internal team activated as content contributors",
       "Creator partnerships that carry your content to audiences outside your own reach",
-      "Short-form UGC — reactions, insights, commentary around every episode",
+      "Short-form UGC reactions, insights, commentary around every episode",
       "Guest networks mobilised to amplify across their own global audiences",
     ]} /><InsightChip color={C.plum} bg={C.plumBg}>Credibility spreads through trusted voices, not just brand channels.</InsightChip></div>
     <div className="mb-6"><SectionTitle>Sales & commercial integration</SectionTitle><BulletList items={[
@@ -234,13 +234,13 @@ const Tier3Included = () => (
       "Sales team equipped with a content arsenal for every stage of the funnel",
       "Prospects arrive at sales conversations already informed, already warm",
     ]} /><InsightChip color={C.plum} bg={C.plumBg}>By the time your sales team reaches out, the work is already done.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Fractional Podcast CMO</SectionTitle><BulletList items={[
-      "Quarterly senior strategy sessions — treating the podcast as a business asset, not a content project",
+    <div className="mb-6"><SectionTitle>Fractional Podcast CMO category strategy at board level</SectionTitle><BulletList items={[
+      "Quarterly senior strategy sessions treating the podcast as a business asset, not a content project",
       "Full attribution from reach and engagement through to pipeline and revenue influence",
       "Continuous alignment with commercial priorities as your market evolves",
-    ]} /><InsightChip color={C.plum} bg={C.plumBg}>The strategic thinking of a CMO — without the executive hire.</InsightChip></div>
-    <RoiBox><strong className="text-text-primary">Making the case to your CEO:</strong> Category ownership is a moat. Once your brand owns the conversation in your space — the show people reference, the voice people trust, the content that shapes how your market thinks — that position is extraordinarily difficult for a competitor to undo. At £160k/year all-in, you're not buying marketing. You're buying a defensible market position.</RoiBox>
-    <UnlockQuote>"In 18 months, anyone who matters in your market will associate your brand with the conversation — not just a participant in it."</UnlockQuote>
+    ]} /><InsightChip color={C.plum} bg={C.plumBg}>The strategic thinking of a CMO without the executive hire.</InsightChip></div>
+    <RoiBox><strong className="text-text-primary">Making the case to your CEO:</strong> Category ownership is a moat. Once your brand owns the conversation in your space the show people reference, the voice people trust, the content that shapes how your market thinks that position is extraordinarily difficult for a competitor to undo. At £160k/year all-in, you're not buying marketing. You're buying a defensible market position.</RoiBox>
+    <UnlockQuote>"In 18 months, anyone who matters in your market will associate your brand with the conversation not just a participant in it."</UnlockQuote>
   </>
 );
 
@@ -256,23 +256,23 @@ const SpendScenario = ({ label, amount, children }: { label: string; amount: str
 
 const Tier3AdSpend = () => (
   <>
-    <p className="text-sm text-text-secondary leading-relaxed mb-5">The minimum £3k/month is a starting point, not a recommended level. Here's what different budgets actually deliver — and how we report against them.</p>
-    <SpendScenario label="Entry — foundation presence" amount="£3,000/month">
-      <strong className="text-text-primary">What this buys:</strong> 2–4 active campaigns promoting your strongest clips. Realistic LinkedIn reach of <strong className="text-text-primary">150,000–300,000 impressions/month</strong> tightly targeted. Enough to be consistently present. Not enough to dominate. Best for testing what content performs before scaling spend.
+    <p className="text-sm text-text-secondary leading-relaxed mb-5">The minimum £3k/month is a starting point, not a recommended level. Here's what different budgets actually deliver and how we report against them.</p>
+    <SpendScenario label="Entry foundation presence" amount="£3,000/month">
+      <strong className="text-text-primary">What this buys:</strong> 2–4 active campaigns promoting your strongest clips and maintaining consistent visibility with a defined target account list. Realistic LinkedIn reach of <strong className="text-text-primary">150,000–300,000 impressions/month</strong> tightly targeted by job title, seniority and company size. Enough to be consistently present. Not enough to dominate. Best for: Testing what content performs before scaling spend.
     </SpendScenario>
-    <SpendScenario label="Growth — consistent market presence" amount="£5,000–8,000/month">
-      <strong className="text-text-primary">What this buys:</strong> Multi-format campaigns across LinkedIn and YouTube simultaneously. Reach of <strong className="text-text-primary">400,000–700,000 impressions/month</strong>. Enough budget to run retargeting — hitting warm audiences who've already engaged. Most clients move here within 3–6 months.
+    <SpendScenario label="Growth consistent market presence" amount="£5,000–8,000/month">
+      <strong className="text-text-primary">What this buys:</strong> Multi-format campaigns across LinkedIn and YouTube simultaneously. Reach of <strong className="text-text-primary">400,000–700,000 impressions/month</strong> within your target market. Enough budget to run retargeting hitting warm audiences who've already engaged with your content. Most clients at this tier move here within 3–6 months once they see what converts.
     </SpendScenario>
-    <SpendScenario label="Scale — market saturation within your ICP" amount="£10,000+/month">
-      <strong className="text-text-primary">What this buys:</strong> Aggressive multi-channel distribution. <strong className="text-text-primary">1M+ impressions/month</strong> within a tightly defined audience. Your brand becomes genuinely unavoidable. Best for enterprise clients with large deal sizes.
+    <SpendScenario label="Scale market saturation within your ICP" amount="£10,000+/month">
+      <strong className="text-text-primary">What this buys:</strong> Aggressive multi-channel distribution LinkedIn, YouTube, Spotify and display. <strong className="text-text-primary">1M+ impressions/month</strong> within a tightly defined audience. At this level, your brand becomes genuinely unavoidable for anyone in your target market. Best for: Enterprise clients with large deal sizes where even a single influenced opportunity justifies the spend.
     </SpendScenario>
     <div className="mt-6 mb-4"><SectionTitle>How we report on ad spend</SectionTitle></div>
     <div className="divide-y divide-border">
       {[
-        { label: "Reach within target accounts", desc: "Are you actually hitting the companies you want to work with?" },
-        { label: "Engagement by content type", desc: "Which clips generate saves, shares and comments — not just passive plays." },
+        { label: "Reach within target accounts", desc: "Are you actually hitting the companies you want to work with or just accumulating views from people who'll never buy?" },
+        { label: "Engagement by content type", desc: "Which clips generate saves, shares and comments not just passive plays." },
         { label: "Warm signal tracking", desc: "Profile visits, connection requests, DM responses that correlate with campaign exposure." },
-        { label: "Pipeline influence", desc: "Did conversations or deals involve someone exposed to your content?" },
+        { label: "Pipeline influence", desc: "Did conversations or deals involve someone exposed to your content? Directional, but tracked and reported honestly." },
         { label: "Cost per meaningful engagement", desc: "Not cost-per-click. Cost per action that signals real commercial intent." },
       ].map((r) => (
         <div key={r.label} className="flex flex-col sm:flex-row gap-1 sm:gap-4 py-2.5">
@@ -281,7 +281,7 @@ const Tier3AdSpend = () => (
         </div>
       ))}
     </div>
-    <RoiBox><strong className="text-text-primary">The question worth asking your sales team:</strong> What does a genuinely warm inbound conversation with a target-account decision-maker cost you today? Work backwards from that number. The right media budget usually reveals itself.</RoiBox>
+    <RoiBox><strong className="text-text-primary">The question worth asking your sales team:</strong> What does a genuinely warm inbound conversation with a target-account decision-maker cost you today through events, cold outreach, or paid leads? Work backwards from that number. The right media budget usually reveals itself.</RoiBox>
   </>
 );
 

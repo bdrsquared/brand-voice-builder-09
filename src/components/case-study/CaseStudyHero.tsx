@@ -31,9 +31,16 @@ const CaseStudyHero = ({ data }: { data: CaseStudyData }) => {
             {data.showName}
           </h1>
 
-          <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mb-12 leading-relaxed font-body">
+          <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mb-4 leading-relaxed font-body">
             {data.tagline}
           </p>
+
+          {data.subtitle && (
+            <p className="text-sm sm:text-base text-primary/80 max-w-xl mb-12 leading-relaxed font-body italic">
+              {data.subtitle}
+            </p>
+          )}
+          {!data.subtitle && <div className="mb-12" />}
         </motion.div>
 
         {/* Stats card */}

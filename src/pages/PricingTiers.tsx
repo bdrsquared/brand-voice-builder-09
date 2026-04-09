@@ -485,7 +485,6 @@ const PricingTiers = () => {
   useMetaTags();
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Block search engine indexing
     let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
     if (!meta) {
       meta = document.createElement("meta");
@@ -497,6 +496,19 @@ const PricingTiers = () => {
   }, []);
 
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [currency, setCurrency] = useState<Currency>("GBP");
+
+  const tiers = useMemo(() => baseTiers.map(t => ({
+    ...t,
+    price: `${convertPrice(t.basePrice, currency)}${t.priceSuffix}`,
+    priceNote: t.basePriceNote(currency),
+  })), [currency]);
+
+  const addonPrice = useMemo(() => {
+    const lo = convertPrice(2000, currency);
+    const hi = convertPrice(10000, currency);
+    return { full: `${lo}–${hi}+`, short: `${lo.replace(/,/g, '').length > 5 ? lo : lo}–${hi.replace(/,/g, '').length > 5 ? hi : hi}+` };
+  }, [currency]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0B] text-foreground">
@@ -525,6 +537,11 @@ const PricingTiers = () => {
 
       {/* ── TIER CARDS ── */}
       <main className="max-w-6xl mx-auto px-4 md:px-10 -mt-10 relative z-10">
+        {/* Currency toggle */}
+        <div className="flex justify-end mb-4">
+          <CurrencyToggle value={currency} onChange={setCurrency} />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
           {tiers.map((tier, i) => (
             <motion.div
@@ -574,7 +591,7 @@ const PricingTiers = () => {
             <div className="text-xs text-text-tertiary">Third-party voices. New audiences. Credibility that compounds.</div>
           </div>
           <div className="text-right shrink-0">
-            <div className="text-sm font-medium text-text-primary">£2k–£10k+</div>
+            <div className="text-sm font-medium text-text-primary">{addonPrice.full}</div>
             <div className="text-[10px] text-text-tertiary">per month</div>
           </div>
           <ArrowUpRight className="w-4 h-4 text-text-tertiary shrink-0" />
@@ -598,7 +615,7 @@ const PricingTiers = () => {
       <TierModal open={activeModal === "t3"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t3")!}>
         <Tier3Tabs />
       </TierModal>
-      <AddOnModal open={activeModal === "addon"} onClose={() => setActiveModal(null)} />
+      <AddOnModal open={activeModal === "addon"} onClose={() => setActiveModal(null)} currency={currency} />
 
       <Footer />
     </div>

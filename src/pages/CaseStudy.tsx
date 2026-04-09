@@ -225,7 +225,7 @@ const caseStudies: Record<string, CaseStudyData> = {
       caseSoldoSkyline,
     ],
     summary: {
-      challenge: "Soldo wanted to be positioned as a thought-leader with CFOs and turn content into a qualified pipeline.",
+      challenge: "Soldo wanted to be positioned as a thought leader with CFOs and turn content into a platform for ongoing thought leadership and brand authority.",
       solution: "Working closely with Soldo's team, we developed The CFO Playbook from concept to delivery - finding CFO thought leaders and shaping finance conversations that resonated. We produced monthly remote video episodes with tier-one CFO guests, while handling host and guest sourcing, production, editing, motion graphics, and supporting social assets, all through a full 'podcast on autopilot' model.",
       result: "In the first six months, The CFO Playbook delivered strong audio download growth, significant social clip reach, and meaningful attributed pipeline, delivering a strong ROI with high average listener retention.",
     },

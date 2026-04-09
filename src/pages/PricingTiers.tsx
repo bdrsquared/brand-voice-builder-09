@@ -965,11 +965,6 @@ const PricingTiers = () => {
     priceNote: t.basePriceNote(currency),
   })), [currency]);
 
-  const addonPrice = useMemo(() => {
-    const lo = convertPrice(2000, currency);
-    const hi = convertPrice(10000, currency);
-    return { full: `${lo}–${hi}+`, short: `${lo.replace(/,/g, '').length > 5 ? lo : lo}–${hi.replace(/,/g, '').length > 5 ? hi : hi}+` };
-  }, [currency]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0B] text-foreground">

@@ -57,14 +57,14 @@ type SvcRow = { name: string; desc: string; status: "included"; label: string } 
 type SvcSection = { section: string; rows: SvcRow[] };
 
 const tierDotClass: Record<string, string> = {
-  t1: "bg-[#e8f4f1] text-[#0a6b5c]",
-  t2: "bg-[#eaeffa] text-[#1649a0]",
-  t3: "bg-[#f0eaf8] text-[#4e2d7a]",
+  t1: "bg-primary/15 text-primary",
+  t2: "bg-primary/15 text-primary",
+  t3: "bg-primary/15 text-primary",
 };
 const tierLabelClass: Record<string, string> = {
-  t1: "text-[#0a6b5c] font-medium",
-  t2: "text-[#1649a0] font-medium",
-  t3: "text-[#4e2d7a] font-medium",
+  t1: "text-primary font-medium",
+  t2: "text-primary font-medium",
+  t3: "text-primary font-medium",
 };
 
 const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string }) => (

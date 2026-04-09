@@ -142,7 +142,7 @@ const caseStudies: Record<string, CaseStudyData> = {
     ],
     summary: {
       challenge: "IG needed to cut through market noise and make complex financial topics accessible, engaging, and relevant to a broad audience.",
-      solution: "Earworm developed a video-first podcast strategy focused on timely macro themes, supported by full-service production, guest coaching, and a consistent social distribution engine.",
+      solution: "Working closely with IG's incredible internal team, Earworm developed a video-first podcast strategy focused on timely macro themes, supported by full-service production, guest coaching, and a consistent social distribution engine.",
       result: "The show delivered strong download growth, consistent YouTube performance, and high engagement rates, successfully positioning IG as a leading voice in modern investing.",
     },
   },

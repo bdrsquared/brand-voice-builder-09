@@ -1105,6 +1105,7 @@ const PricingTiers = () => {
                 currency={currency}
                 prodType={prodType}
                 prices={prices}
+                mediaStep={mediaStep}
               />
             </motion.div>
           )}

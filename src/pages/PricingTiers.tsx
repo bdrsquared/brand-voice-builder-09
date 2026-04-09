@@ -854,6 +854,103 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
   );
 };
 
+/* ── Pricing Breakdown Table ── */
+const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: string; monthly: string; yearly: string; episodes: string; paidMedia: string }>>> = {
+  GBP: {
+    location: {
+      t1: { launch: "£19,500", monthly: "—", yearly: "£19,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "£15,000", monthly: "£5,000", yearly: "£75,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "£25,000", monthly: "£8,500", yearly: "£127,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
+    },
+    virtual: {
+      t1: { launch: "£14,000", monthly: "—", yearly: "£14,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "£10,000", monthly: "£3,500", yearly: "£52,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "£17,000", monthly: "£6,000", yearly: "£89,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
+    },
+  },
+  USD: {
+    location: {
+      t1: { launch: "$26,500", monthly: "—", yearly: "$26,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "$20,000", monthly: "$6,750", yearly: "$101,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "$34,000", monthly: "$11,500", yearly: "$172,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
+    },
+    virtual: {
+      t1: { launch: "$19,000", monthly: "—", yearly: "$19,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "$13,500", monthly: "$4,750", yearly: "$70,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "$23,000", monthly: "$8,000", yearly: "$120,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
+    },
+  },
+  EUR: {
+    location: {
+      t1: { launch: "€22,500", monthly: "—", yearly: "€22,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "€17,000", monthly: "€5,750", yearly: "€86,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "€29,000", monthly: "€9,750", yearly: "€146,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
+    },
+    virtual: {
+      t1: { launch: "€16,000", monthly: "—", yearly: "€16,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "€11,500", monthly: "€4,000", yearly: "€60,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "€19,500", monthly: "€6,875", yearly: "€102,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
+    },
+  },
+};
+
+const TIER_LABELS: Record<string, string> = { t1: "Tier 01 · Launch", t2: "Tier 02 · Launch & Scale", t3: "Tier 03 · Global Leader" };
+
+const PricingBreakdownTable = ({ tier, currency, prodType }: { tier: "t1" | "t2" | "t3"; currency: Currency; prodType: ProdType; prices: TierPrices }) => {
+  const data = BREAKDOWN_DATA[currency][prodType][tier];
+  const isT3 = tier === "t3";
+
+  const rows = [
+    { label: "Launch strategy fee", value: data.launch, desc: tier === "t1" ? "One-time investment — no ongoing commitment" : "Paid upfront before production begins", highlight: false },
+    { label: "Monthly retainer", value: data.monthly, desc: tier === "t1" ? "No monthly fee — one-time project" : "Billed monthly for 12 months", highlight: false },
+    { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Total project cost" : "Launch fee + 12 months of retainer", highlight: true },
+    { label: "Episode output", value: data.episodes, desc: tier === "t1" ? "A complete first series" : "Consistent monthly production", highlight: false },
+    ...(isT3 ? [{ label: "Paid media (additional)", value: data.paidMedia, desc: "Ad spend managed by Earworm — billed separately", highlight: false }] : []),
+  ];
+
+  return (
+    <div className="mt-8 rounded-2xl border border-border overflow-hidden" style={{ background: "#111113" }}>
+      <div className="p-6 sm:p-8 border-b border-border">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{
+            background: tier === "t3" ? C.plumBg : tier === "t2" ? C.blueBg : C.greenBg,
+            color: tier === "t3" ? C.plum : tier === "t2" ? C.blueDk : C.greenDk,
+          }}>{TIER_LABELS[tier]}</span>
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">
+            {prodType === "location" ? "On Location" : "Virtual"}
+          </span>
+        </div>
+        <h3 className="font-heading text-xl text-text-primary mb-1">Investment Breakdown</h3>
+        <p className="text-sm text-text-secondary">A detailed summary of your selected tier's pricing structure.</p>
+      </div>
+      <div className="divide-y divide-border">
+        {rows.map((row) => (
+          <div key={row.label} className={`flex items-center justify-between px-6 sm:px-8 py-4 ${row.highlight ? "bg-[#1CFA76]/5" : ""}`}>
+            <div>
+              <div className={`text-sm font-medium ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>{row.label}</div>
+              <div className="text-xs text-text-tertiary mt-0.5">{row.desc}</div>
+            </div>
+            <div className={`font-heading text-lg sm:text-xl text-right ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>
+              {row.value}
+            </div>
+          </div>
+        ))}
+      </div>
+      {isT3 && (
+        <div className="px-6 sm:px-8 py-5 border-t border-border bg-[#1CFA76]/5">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#1CFA76]" />
+            <span className="text-xs font-medium text-[#1CFA76]">Paid Media Impact</span>
+          </div>
+          <p className="text-xs text-text-secondary leading-relaxed">
+            At £3k–£50k/month ad spend, estimated impressions range from <strong className="text-text-primary">150k–300k</strong> to <strong className="text-text-primary">5M+</strong> per month within your ICP. Use the slider above to explore the impact at different investment levels.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
+
 /* ════════════════════════════════════════════════════════════ */
 
 const PricingTiers = () => {

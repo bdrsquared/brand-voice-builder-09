@@ -854,6 +854,103 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
   );
 };
 
+/* ── Pricing Breakdown Table ── */
+const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: string; monthly: string; yearly: string; episodes: string; paidMedia: string }>>> = {
+  GBP: {
+    location: {
+      t1: { launch: "£19,500", monthly: "—", yearly: "£19,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "£15,000", monthly: "£5,000", yearly: "£75,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "£25,000", monthly: "£8,500", yearly: "£127,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
+    },
+    virtual: {
+      t1: { launch: "£14,000", monthly: "—", yearly: "£14,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "£10,000", monthly: "£3,500", yearly: "£52,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "£17,000", monthly: "£6,000", yearly: "£89,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
+    },
+  },
+  USD: {
+    location: {
+      t1: { launch: "$26,500", monthly: "—", yearly: "$26,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "$20,000", monthly: "$6,750", yearly: "$101,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "$34,000", monthly: "$11,500", yearly: "$172,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
+    },
+    virtual: {
+      t1: { launch: "$19,000", monthly: "—", yearly: "$19,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "$13,500", monthly: "$4,750", yearly: "$70,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "$23,000", monthly: "$8,000", yearly: "$120,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
+    },
+  },
+  EUR: {
+    location: {
+      t1: { launch: "€22,500", monthly: "—", yearly: "€22,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "€17,000", monthly: "€5,750", yearly: "€86,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "€29,000", monthly: "€9,750", yearly: "€146,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
+    },
+    virtual: {
+      t1: { launch: "€16,000", monthly: "—", yearly: "€16,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "€11,500", monthly: "€4,000", yearly: "€60,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "€19,500", monthly: "€6,875", yearly: "€102,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
+    },
+  },
+};
+
+const TIER_LABELS: Record<string, string> = { t1: "Tier 01 · Launch", t2: "Tier 02 · Launch & Scale", t3: "Tier 03 · Global Leader" };
+
+const PricingBreakdownTable = ({ tier, currency, prodType }: { tier: "t1" | "t2" | "t3"; currency: Currency; prodType: ProdType; prices: TierPrices }) => {
+  const data = BREAKDOWN_DATA[currency][prodType][tier];
+  const isT3 = tier === "t3";
+
+  const rows = [
+    { label: "Launch strategy fee", value: data.launch, desc: tier === "t1" ? "One-time investment — no ongoing commitment" : "Paid upfront before production begins", highlight: false },
+    { label: "Monthly retainer", value: data.monthly, desc: tier === "t1" ? "No monthly fee — one-time project" : "Billed monthly for 12 months", highlight: false },
+    { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Total project cost" : "Launch fee + 12 months of retainer", highlight: true },
+    { label: "Episode output", value: data.episodes, desc: tier === "t1" ? "A complete first series" : "Consistent monthly production", highlight: false },
+    ...(isT3 ? [{ label: "Paid media (additional)", value: data.paidMedia, desc: "Ad spend managed by Earworm — billed separately", highlight: false }] : []),
+  ];
+
+  return (
+    <div className="mt-8 rounded-2xl border border-border overflow-hidden" style={{ background: "#111113" }}>
+      <div className="p-6 sm:p-8 border-b border-border">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{
+            background: tier === "t3" ? C.plumBg : tier === "t2" ? C.blueBg : C.greenBg,
+            color: tier === "t3" ? C.plum : tier === "t2" ? C.blueDk : C.greenDk,
+          }}>{TIER_LABELS[tier]}</span>
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">
+            {prodType === "location" ? "On Location" : "Virtual"}
+          </span>
+        </div>
+        <h3 className="font-heading text-xl text-text-primary mb-1">Investment Breakdown</h3>
+        <p className="text-sm text-text-secondary">A detailed summary of your selected tier's pricing structure.</p>
+      </div>
+      <div className="divide-y divide-border">
+        {rows.map((row) => (
+          <div key={row.label} className={`flex items-center justify-between px-6 sm:px-8 py-4 ${row.highlight ? "bg-[#1CFA76]/5" : ""}`}>
+            <div>
+              <div className={`text-sm font-medium ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>{row.label}</div>
+              <div className="text-xs text-text-tertiary mt-0.5">{row.desc}</div>
+            </div>
+            <div className={`font-heading text-lg sm:text-xl text-right ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>
+              {row.value}
+            </div>
+          </div>
+        ))}
+      </div>
+      {isT3 && (
+        <div className="px-6 sm:px-8 py-5 border-t border-border bg-[#1CFA76]/5">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#1CFA76]" />
+            <span className="text-xs font-medium text-[#1CFA76]">Paid Media Impact</span>
+          </div>
+          <p className="text-xs text-text-secondary leading-relaxed">
+            At £3k–£50k/month ad spend, estimated impressions range from <strong className="text-text-primary">150k–300k</strong> to <strong className="text-text-primary">5M+</strong> per month within your ICP. Use the slider above to explore the impact at different investment levels.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
+
 /* ════════════════════════════════════════════════════════════ */
 
 const PricingTiers = () => {
@@ -873,6 +970,7 @@ const PricingTiers = () => {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [currency, setCurrency] = useState<Currency>("GBP");
   const [prodType, setProdType] = useState<ProdType>("location");
+  const [selectedTier, setSelectedTier] = useState<"t1" | "t2" | "t3" | null>(null);
 
   const prices = ALL_PRICES[currency][prodType];
 
@@ -920,15 +1018,16 @@ const PricingTiers = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
-          {tiers.map((tier, i) => (
+          {tiers.map((tier, i) => {
+            const isSelected = selectedTier === tier.id;
+            return (
             <motion.div
               key={tier.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              onClick={() => setActiveModal(tier.id)}
-              className={`cursor-pointer p-6 sm:p-8 flex flex-col transition-colors duration-200 ${tier.featured ? "bg-background hover:bg-[#0d0d0d]" : "bg-card hover:bg-card/80"}`}
+              className={`p-6 sm:p-8 flex flex-col transition-all duration-200 ${tier.featured ? "bg-background" : "bg-card"} ${isSelected ? "ring-2 ring-[#1CFA76]" : ""}`}
             >
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-5 flex items-center gap-2">
                 {tier.num}
@@ -947,11 +1046,27 @@ const PricingTiers = () => {
               <div className="text-xs leading-relaxed p-3 rounded-lg border-l-2 mb-5" style={{ borderColor: C.sage, background: "rgba(123,175,142,0.08)", color: C.sage }}>
                 {tier.dopamine}
               </div>
-              <button className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-border text-text-primary hover:bg-secondary transition-colors flex items-center justify-center gap-1.5">
-                See what's included <ArrowUpRight className="w-3 h-3" />
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={(e) => { e.stopPropagation(); setSelectedTier(isSelected ? null : tier.id); }}
+                  className={`w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                    isSelected
+                      ? "bg-[#1CFA76] text-black"
+                      : "border border-[#1CFA76]/40 text-[#1CFA76] hover:bg-[#1CFA76]/10"
+                  }`}
+                >
+                  {isSelected ? "✓ Selected" : "Select this tier"}
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setActiveModal(tier.id); }}
+                  className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-border text-text-primary hover:bg-secondary transition-colors flex items-center justify-center gap-1.5"
+                >
+                  See what's included <ArrowUpRight className="w-3 h-3" />
+                </button>
+              </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
 
         {/* ── COMPARE STRIP ── */}
@@ -972,6 +1087,26 @@ const PricingTiers = () => {
 
         {/* ── PAID MEDIA SLIDER ── */}
         <PaidMediaSlider currency={currency} />
+
+        {/* ── PRICING BREAKDOWN TABLE ── */}
+        <AnimatePresence>
+          {selectedTier && (
+            <motion.div
+              initial={{ opacity: 0, y: 30, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: 20, height: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="overflow-hidden"
+            >
+              <PricingBreakdownTable
+                tier={selectedTier}
+                currency={currency}
+                prodType={prodType}
+                prices={prices}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* ── FOOTER NOTE ── */}
         <div className="text-center py-12 md:py-16">

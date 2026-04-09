@@ -48,7 +48,7 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
 };
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight, Sparkles } from "lucide-react";
+import { X, ArrowUpRight, Sparkles, Info } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
@@ -574,8 +574,16 @@ const CompareTable = ({ currency, prodType }: { currency: Currency; prodType: Pr
             {sec.rows.map((row) => (
               <tr key={row.name} className="group hover:bg-secondary/20 transition-colors">
                 <td className="px-4 py-3 border-b border-border align-top">
-                  <div className="text-[12px] font-medium text-text-primary mb-0.5">{row.name}</div>
-                  <div className="text-[10px] text-text-tertiary leading-snug">{row.desc}</div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[12px] font-medium text-text-primary">{row.name}</span>
+                    <div className="relative group/tip">
+                      <Info className="w-3 h-3 text-text-tertiary/50 hover:text-text-secondary cursor-help transition-colors shrink-0" />
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-56 p-2.5 rounded-lg bg-popover border border-border shadow-lg text-[10px] text-text-secondary leading-snug opacity-0 invisible group-hover/tip:opacity-100 group-hover/tip:visible transition-all duration-150 z-20 pointer-events-none">
+                        {row.desc}
+                        <div className="absolute left-1/2 -translate-x-1/2 top-full w-2 h-2 bg-popover border-r border-b border-border rotate-45 -mt-1" />
+                      </div>
+                    </div>
+                  </div>
                 </td>
                 <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t3} /></td>
                 <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t2} /></td>

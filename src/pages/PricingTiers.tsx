@@ -716,43 +716,6 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
   </AnimatePresence>
 );
 
-/* ── Add-on modal ── */
-const AddOnModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClose: () => void; currency?: Currency }) => (
-  <AnimatePresence>
-    {open && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto"
-        style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)" }}
-        onClick={(e) => e.target === e.currentTarget && onClose()}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.97 }}
-          transition={{ duration: 0.3 }}
-          className="relative w-full max-w-[620px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
-        >
-          <ModalHeader accentColor="#C9A96E">
-            <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
-              <X className="w-4 h-4" />
-            </button>
-            <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Optional add-on</div>
-            <h3 className="font-heading text-2xl text-text-primary mb-2">Creator & Influencer Amplification</h3>
-            <p className="text-sm text-text-secondary leading-relaxed mb-4">The difference between a brand that builds an audience and one that builds a movement is third-party credibility.</p>
-            <div className="flex items-baseline gap-2.5">
-              <span className="font-heading text-3xl text-text-primary">{convertPrice(2000, currency)}–{convertPrice(10000, currency)}+</span>
-              <span className="text-xs text-text-tertiary">per month · separate managed budget</span>
-            </div>
-          </ModalHeader>
-          <div className="p-6 sm:p-8"><AddOnContent /></div>
-        </motion.div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-);
 
 /* ── Paid Media Slider ── */
 const MEDIA_STEPS = [

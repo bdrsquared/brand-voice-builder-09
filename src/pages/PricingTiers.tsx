@@ -212,22 +212,21 @@ const Tier2Content = () => (
 );
 
 const Tier3Tabs = () => {
-  const [tab, setTab] = useState<"included" | "adspend" | "guarantees">("included");
+  const [tab, setTab] = useState<"included" | "guarantees">("included");
   return (
     <>
       <div className="flex border-b border-border mb-6">
-        {(["included", "adspend", "guarantees"] as const).map((t) => (
+        {(["included", "guarantees"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`flex-1 text-xs font-medium tracking-wide py-3 border-b-2 transition-colors ${tab === t ? "text-[#8B83C7] border-[#8B83C7]" : "text-text-tertiary border-transparent hover:text-text-secondary"}`}
           >
-            {t === "included" ? "What's included" : t === "adspend" ? "Ad spend" : "Guarantees"}
+            {t === "included" ? "What's included" : "Guarantees"}
           </button>
         ))}
       </div>
       {tab === "included" && <Tier3Included />}
-      {tab === "adspend" && <Tier3AdSpend />}
       {tab === "guarantees" && <Tier3Guarantees />}
     </>
   );
@@ -266,47 +265,6 @@ const Tier3Included = () => (
     ]} /><InsightChip color={C.plum} bg={C.plumBg}>The strategic thinking of a CMO without the executive hire.</InsightChip></div>
     <RoiBox><strong className="text-text-primary">Making the case to your CEO:</strong> Category ownership is a moat. Once your brand owns the conversation in your space the show people reference, the voice people trust, the content that shapes how your market thinks that position is extraordinarily difficult for a competitor to undo. At £160k/year all-in, you're not buying marketing. You're buying a defensible market position.</RoiBox>
     <UnlockQuote>"In 18 months, anyone who matters in your market will associate your brand with the conversation not just a participant in it."</UnlockQuote>
-  </>
-);
-
-const SpendScenario = ({ label, amount, children }: { label: string; amount: string; children: React.ReactNode }) => (
-  <div className="border border-border rounded-xl overflow-hidden mb-3">
-    <div className="flex justify-between items-center px-4 py-3 bg-secondary/40">
-      <span className="text-sm font-medium text-text-primary">{label}</span>
-      <span className="font-heading text-base" style={{ color: C.plum }}>{amount}</span>
-    </div>
-    <div className="px-4 py-3 text-sm text-text-secondary leading-relaxed border-t border-border">{children}</div>
-  </div>
-);
-
-const Tier3AdSpend = () => (
-  <>
-    <p className="text-sm text-text-secondary leading-relaxed mb-5">The minimum £3k/month is a starting point, not a recommended level. Here's what different budgets actually deliver and how we report against them.</p>
-    <SpendScenario label="Entry foundation presence" amount="£3,000/month">
-      <strong className="text-text-primary">What this buys:</strong> 2–4 active campaigns promoting your strongest clips and maintaining consistent visibility with a defined target account list. Realistic LinkedIn reach of <strong className="text-text-primary">150,000–300,000 impressions/month</strong> tightly targeted by job title, seniority and company size. Enough to be consistently present. Not enough to dominate. Best for: Testing what content performs before scaling spend.
-    </SpendScenario>
-    <SpendScenario label="Growth consistent market presence" amount="£5,000–8,000/month">
-      <strong className="text-text-primary">What this buys:</strong> Multi-format campaigns across LinkedIn and YouTube simultaneously. Reach of <strong className="text-text-primary">400,000–700,000 impressions/month</strong> within your target market. Enough budget to run retargeting hitting warm audiences who've already engaged with your content. Most clients at this tier move here within 3–6 months once they see what converts.
-    </SpendScenario>
-    <SpendScenario label="Scale market saturation within your ICP" amount="£10,000+/month">
-      <strong className="text-text-primary">What this buys:</strong> Aggressive multi-channel distribution LinkedIn, YouTube, Spotify and display. <strong className="text-text-primary">1M+ impressions/month</strong> within a tightly defined audience. At this level, your brand becomes genuinely unavoidable for anyone in your target market. Best for: Enterprise clients with large deal sizes where even a single influenced opportunity justifies the spend.
-    </SpendScenario>
-    <div className="mt-6 mb-4"><SectionTitle>How we report on ad spend</SectionTitle></div>
-    <div className="divide-y divide-border">
-      {[
-        { label: "Reach within target accounts", desc: "Are you actually hitting the companies you want to work with or just accumulating views from people who'll never buy?" },
-        { label: "Engagement by content type", desc: "Which clips generate saves, shares and comments not just passive plays." },
-        { label: "Warm signal tracking", desc: "Profile visits, connection requests, DM responses that correlate with campaign exposure." },
-        { label: "Pipeline influence", desc: "Did conversations or deals involve someone exposed to your content? Directional, but tracked and reported honestly." },
-        { label: "Cost per meaningful engagement", desc: "Not cost-per-click. Cost per action that signals real commercial intent." },
-      ].map((r) => (
-        <div key={r.label} className="flex flex-col sm:flex-row gap-1 sm:gap-4 py-2.5">
-          <span className="text-xs font-medium text-text-primary sm:min-w-[180px] shrink-0">{r.label}</span>
-          <span className="text-xs text-text-secondary leading-relaxed">{r.desc}</span>
-        </div>
-      ))}
-    </div>
-    <RoiBox><strong className="text-text-primary">The question worth asking your sales team:</strong> What does a genuinely warm inbound conversation with a target-account decision-maker cost you today through events, cold outreach, or paid leads? Work backwards from that number. The right media budget usually reveals itself.</RoiBox>
   </>
 );
 
@@ -479,6 +437,91 @@ const AddOnModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClos
   </AnimatePresence>
 );
 
+/* ── Paid Media Slider ── */
+const MEDIA_STEPS = [
+  { spend: 3000,  impressions: "150k–300k",  label: "Foundation presence" },
+  { spend: 5000,  impressions: "400k–500k",  label: "Early growth" },
+  { spend: 8000,  impressions: "600k–700k",  label: "Consistent presence" },
+  { spend: 10000, impressions: "800k–1M",    label: "Market saturation" },
+  { spend: 15000, impressions: "1.2M–1.5M",  label: "Category dominance" },
+  { spend: 25000, impressions: "2M–3M",      label: "Full-scale engine" },
+  { spend: 50000, impressions: "5M+",        label: "Market ownership" },
+];
+
+const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
+  const [step, setStep] = useState(0);
+  const current = MEDIA_STEPS[step];
+  const pct = (step / (MEDIA_STEPS.length - 1)) * 100;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mt-10 rounded-2xl border border-border bg-card overflow-hidden"
+    >
+      <div className="p-6 sm:p-8">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.plumBg, color: C.plum }}>Category Engine add-on</span>
+        </div>
+        <h3 className="font-heading text-xl text-text-primary mb-1">Paid Media Investment</h3>
+        <p className="text-sm text-text-secondary mb-8">Drag to explore how ad spend scales impressions within your target ICP.</p>
+
+        {/* Metric cards */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="rounded-xl border border-border p-5 bg-secondary/30">
+            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Monthly spend</div>
+            <div className="font-heading text-2xl sm:text-3xl text-text-primary">{convertPrice(current.spend, currency)}</div>
+            <div className="text-xs text-text-tertiary mt-1">/month</div>
+          </div>
+          <div className="rounded-xl border border-border p-5 bg-secondary/30">
+            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Estimated impressions</div>
+            <div className="font-heading text-2xl sm:text-3xl" style={{ color: C.purple }}>{current.impressions}</div>
+            <div className="text-xs text-text-tertiary mt-1">/month within your ICP</div>
+          </div>
+        </div>
+
+        {/* Label */}
+        <div className="flex justify-between items-center mb-3">
+          <span className="text-xs font-medium text-text-primary">{current.label}</span>
+          <span className="text-[10px] text-text-tertiary">{convertPrice(3000, currency)} – {convertPrice(50000, currency)}/mo</span>
+        </div>
+
+        {/* Slider */}
+        <div className="relative h-2 rounded-full bg-secondary/60 mb-3">
+          <div
+            className="absolute inset-y-0 left-0 rounded-full transition-all duration-200"
+            style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${C.purple}, ${C.rose})` }}
+          />
+          <input
+            type="range"
+            min={0}
+            max={MEDIA_STEPS.length - 1}
+            value={step}
+            onChange={(e) => setStep(Number(e.target.value))}
+            className="absolute inset-0 w-full opacity-0 cursor-pointer"
+          />
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-white bg-[#8B83C7] shadow-lg shadow-[#8B83C7]/30 transition-all duration-200 pointer-events-none"
+            style={{ left: `calc(${pct}% - 10px)` }}
+          />
+        </div>
+
+        {/* Step markers */}
+        <div className="flex justify-between px-0.5">
+          {MEDIA_STEPS.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => setStep(i)}
+              className={`w-1.5 h-1.5 rounded-full transition-colors ${i <= step ? "bg-[#8B83C7]" : "bg-border"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 /* ════════════════════════════════════════════════════════════ */
 
 const PricingTiers = () => {
@@ -596,6 +639,9 @@ const PricingTiers = () => {
           </div>
           <ArrowUpRight className="w-4 h-4 text-text-tertiary shrink-0" />
         </motion.div>
+
+        {/* ── PAID MEDIA SLIDER ── */}
+        <PaidMediaSlider currency={currency} />
 
         {/* ── FOOTER NOTE ── */}
         <div className="text-center py-12 md:py-16">

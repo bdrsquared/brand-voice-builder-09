@@ -729,14 +729,14 @@ const PricingTiers = () => {
           <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed mb-8">
             Three ways to work together — from establishing authority to driving pipeline. Choose the level that matches where you want to go.
           </p>
-          <div className="flex justify-center">
-            <CurrencyToggle value={currency} onChange={setCurrency} />
-          </div>
         </div>
       </header>
 
       {/* ── TIER CARDS ── */}
       <main className="max-w-6xl mx-auto px-4 md:px-10 -mt-20 md:-mt-24 relative z-10">
+        <div className="flex justify-center mb-6">
+          <CurrencyToggle value={currency} onChange={setCurrency} />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
           {tiers.map((tier, i) => (

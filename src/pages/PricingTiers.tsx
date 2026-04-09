@@ -494,7 +494,7 @@ const AddOnContent = () => (
       "Brands ready to scale beyond their existing audience",
       "Companies entering a new market or repositioning in an existing one",
     ]} /></div>
-    <RoiBox><strong className="text-text-primary">Minimum commitment:</strong> 3 months to properly test creator fit and optimise performance. Starting at £2k/month for selective partnerships, up to £10k+ for multi-creator campaigns at scale.</RoiBox>
+    <div className="bg-secondary/40 rounded-xl p-5 my-5"><p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Minimum commitment:</strong> 3 months to properly test creator fit and optimise performance. Starting at £2k/month for selective partnerships, up to £10k+ for multi-creator campaigns at scale.</p></div>
   </>
 );
 

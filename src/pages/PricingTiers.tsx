@@ -1098,13 +1098,23 @@ const PricingTiers = () => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className={`p-6 sm:p-8 flex flex-col transition-all duration-200 ${tier.featured ? "bg-background" : "bg-card"} ${isSelected ? "ring-2 ring-[#1CFA76]" : ""}`}
             >
-              <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-5 flex items-center gap-2">
-                {tier.num}
-                {tier.popular && (
-                  <span className="inline-flex items-center gap-1 text-[9px] px-2 py-0.5 rounded-full bg-[#7BAF8E] text-black font-medium">
-                    <Sparkles className="w-2.5 h-2.5" /> Most popular
-                  </span>
-                )}
+              <div className="flex items-center justify-between mb-5">
+                <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary flex items-center gap-2">
+                  {tier.num}
+                  {tier.popular && (
+                    <span className="inline-flex items-center gap-1 text-[9px] px-2 py-0.5 rounded-full bg-[#7BAF8E] text-black font-medium">
+                      <Sparkles className="w-2.5 h-2.5" /> Most popular
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setSelectedTier(isSelected ? null : tier.id); }}
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                    isSelected ? "border-[#1CFA76] bg-[#1CFA76]" : "border-text-tertiary/40 hover:border-[#1CFA76]/60"
+                  }`}
+                >
+                  {isSelected && <div className="w-2 h-2 rounded-full bg-black" />}
+                </button>
               </div>
               <h2 className="font-heading text-xl sm:text-2xl text-text-primary mb-3 whitespace-pre-line leading-tight">{tier.name}</h2>
               <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-1">{tier.hook}</p>

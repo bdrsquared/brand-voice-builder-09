@@ -199,7 +199,7 @@ const caseStudies: Record<string, CaseStudyData> = {
     stats: [
       { label: "Audio downloads", value: "Growing" },
       { label: "Social clip reach", value: "Consistent" },
-      { label: "Pipeline ROI", value: "Measurable" },
+      { label: "Thought leadership", value: "Measurable" },
     ],
     impacts: [
       { title: "Positioned Soldo at the centre of CFO conversations", description: "Established Soldo as a credible voice for finance leaders by building a show around the priorities, challenges and perspectives of senior CFOs." },

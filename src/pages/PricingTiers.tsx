@@ -1037,22 +1037,18 @@ const PricingTiers = () => {
           ))}
         </div>
 
-        {/* ── ADD-ON STRIP ── */}
+        {/* ── COMPARE STRIP ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          onClick={() => setActiveModal("addon")}
+          onClick={() => setActiveModal("compare")}
           className="cursor-pointer border border-border border-t-0 rounded-b-2xl bg-card hover:bg-card/80 transition-colors p-5 flex items-center gap-5"
         >
-          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.amberBg, color: C.amberDk }}>Add-on</span>
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">All tiers</span>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-medium text-text-primary">Creator & Influencer Amplification</div>
-            <div className="text-xs text-text-tertiary">Third-party voices. New audiences. Credibility that compounds.</div>
-          </div>
-          <div className="text-right shrink-0">
-            <div className="text-sm font-medium text-text-primary">{addonPrice.full}</div>
-            <div className="text-[10px] text-text-tertiary">per month</div>
+            <div className="text-sm font-medium text-text-primary">Compare all three tiers</div>
+            <div className="text-xs text-text-tertiary">Every service, side by side. See exactly what changes as you scale.</div>
           </div>
           <ArrowUpRight className="w-4 h-4 text-text-tertiary shrink-0" />
         </motion.div>

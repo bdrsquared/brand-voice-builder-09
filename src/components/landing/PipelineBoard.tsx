@@ -50,14 +50,14 @@ const PipelineBoard = () => {
 
   return (
     <div
-      className="relative w-full rounded-2xl border border-black/[0.08] overflow-hidden shadow-lg shadow-black/5 h-[280px]"
-      style={{ background: "linear-gradient(135deg, #f8f9fa 0%, #eef0f4 50%, #f0f1f5 100%)" }}
+      className="relative w-full rounded-2xl border border-white/[0.08] overflow-hidden shadow-lg shadow-black/20 h-[280px]"
+      style={{ background: "linear-gradient(135deg, #111113 0%, #0d0d0f 50%, #101012 100%)" }}
     >
       <div className="flex h-full">
         {stages.map((stage, si) => (
-           <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-black/[0.06]">
-             <div className="px-3 py-2.5 border-b border-black/[0.06]">
-               <p className="text-[10px] font-medium text-light-text-tertiary uppercase tracking-wider font-body">
+           <div key={stage} className="flex-1 flex flex-col border-r last:border-r-0 border-white/[0.06]">
+             <div className="px-3 py-2.5 border-b border-white/[0.06]">
+               <p className="text-[10px] font-medium text-text-tertiary uppercase tracking-wider font-body">
                 {stage}
               </p>
             </div>
@@ -88,7 +88,7 @@ const PipelineBoard = () => {
         ))}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#eef0f4] to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#0d0d0f] to-transparent pointer-events-none" />
     </div>
   );
 };
@@ -110,7 +110,7 @@ const DealCard = ({
     className={`flex items-center gap-2 p-2 rounded-lg border ${
       highlight
         ? "border-primary/30 bg-primary/10 shadow-[0_0_12px_-4px_hsl(145,96%,55%,0.2)]"
-        : "border-black/[0.06] bg-white/70"
+        : "border-white/[0.06] bg-white/[0.05]"
     }`}
   >
     {image ? (
@@ -121,8 +121,8 @@ const DealCard = ({
       </div>
     )}
     <div className="min-w-0">
-      <p className="text-[10px] text-light-text-primary font-medium leading-tight truncate font-body">{name}</p>
-       <p className="text-[9px] text-light-text-tertiary font-body">{value}</p>
+      <p className="text-[10px] text-text-primary font-medium leading-tight truncate font-body">{name}</p>
+       <p className="text-[9px] text-text-tertiary font-body">{value}</p>
     </div>
   </div>
 );

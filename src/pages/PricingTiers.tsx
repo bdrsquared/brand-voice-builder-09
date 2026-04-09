@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, lazy, Suspense, memo } from "react";
 
 /* ── currency conversion ── */
 type Currency = "GBP" | "USD" | "EUR";
@@ -461,7 +461,7 @@ const STEP_COLORS = [
 const maxImp = MEDIA_STEPS[MEDIA_STEPS.length - 1].impNum;
 
 /* Animated particles that float up from active bars */
-const BarParticles = ({ active, color }: { active: boolean; color: string }) => {
+const BarParticles = memo(({ active, color }: { active: boolean; color: string }) => {
   if (!active) return null;
   return (
     <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-8 h-8 pointer-events-none">
@@ -485,7 +485,7 @@ const BarParticles = ({ active, color }: { active: boolean; color: string }) => 
       ))}
     </div>
   );
-};
+});
 
 const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
   const [step, setStep] = useState(0);
@@ -712,7 +712,7 @@ const PricingTiers = () => {
       <Navbar />
 
       {/* ── HERO ── */}
-      <header className="relative bg-card overflow-hidden pt-24 md:pt-32 pb-20 md:pb-28 px-6 rounded-b-[40px] md:rounded-b-[60px]">
+      <header className="relative bg-card overflow-hidden pt-24 md:pt-32 pb-36 md:pb-44 px-6 rounded-b-[40px] md:rounded-b-[60px]">
         <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
         <div className="blob-blue absolute -bottom-32 -left-32 w-[400px] h-[400px]" />
@@ -726,18 +726,17 @@ const PricingTiers = () => {
             <span className="bg-gradient-to-r from-[#6A9FA3] via-[#8B83C7] to-[#C484C9] bg-clip-text text-transparent">Your market.</span><br />
             Owned by you.
           </h1>
-          <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed mb-8">
             Three ways to work together — from establishing authority to driving pipeline. Choose the level that matches where you want to go.
           </p>
+          <div className="flex justify-center">
+            <CurrencyToggle value={currency} onChange={setCurrency} />
+          </div>
         </div>
       </header>
 
       {/* ── TIER CARDS ── */}
-      <main className="max-w-6xl mx-auto px-4 md:px-10 -mt-10 relative z-10">
-        {/* Currency toggle */}
-        <div className="flex justify-end mb-4">
-          <CurrencyToggle value={currency} onChange={setCurrency} />
-        </div>
+      <main className="max-w-6xl mx-auto px-4 md:px-10 -mt-20 md:-mt-24 relative z-10">
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
           {tiers.map((tier, i) => (

@@ -35,7 +35,7 @@ const caseStudies = [
     title: "The Art of Investing",
     logo: "IG",
     description: "How IG cut through market noise with a weekly podcast that generated 103K+ downloads and 82% consumption.",
-    stats: "103K+ downloads · 82% retention",
+    stats: "Strong growth · High retention",
     image: caseUkUsTax,
     slug: "the-art-of-investing",
   },

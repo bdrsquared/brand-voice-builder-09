@@ -113,9 +113,9 @@ const caseStudies: Record<string, CaseStudyData> = {
     heroImage: caseIgHero,
     heroObjectPosition: "center 30%",
     stats: [
-      { label: "Total podcast downloads", value: "103,943" },
-      { label: "Organic weekly listeners", value: "2,000+" },
-      { label: "Average consumption rate", value: "82%" },
+      { label: "Audience growth", value: "Consistent" },
+      { label: "Listener engagement", value: "Strong" },
+      { label: "Content consumption", value: "High" },
     ],
     impacts: [
       { title: "Made investing feel clearer and more accessible", description: "Turned complex market movements into straightforward weekly conversations, helping audiences make sense of investing without the usual noise or jargon." },
@@ -143,7 +143,7 @@ const caseStudies: Record<string, CaseStudyData> = {
     summary: {
       challenge: "IG needed to cut through market noise and make complex financial topics accessible, engaging, and relevant to a broad audience.",
       solution: "Earworm developed a video-first podcast strategy focused on timely macro themes, supported by full-service production, guest coaching, and a consistent social distribution engine.",
-      result: "The show generated over 100K downloads, strong YouTube performance, and high engagement rates, successfully positioning IG as a leading voice in modern investing.",
+      result: "The show delivered strong download growth, consistent YouTube performance, and high engagement rates, successfully positioning IG as a leading voice in modern investing.",
     },
   },
   "no-stress": {

@@ -55,7 +55,7 @@ const caseStudies = [
     title: "The Art of Investing",
     description: "How IG used podcasting to make complex financial topics accessible and engaging for a broad audience.",
     image: caseIgFirefly,
-    stats: { impressions: "103K", pipeline: "2K+" },
+    stats: { impressions: "Growing", pipeline: "Strong" },
     locationType: "On Location" as const,
     slug: "the-art-of-investing",
   },

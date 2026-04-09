@@ -731,8 +731,7 @@ const convertSpend = (gbp: number, currency: Currency): string => {
   return `${sym}${val.toLocaleString()}`;
 };
 
-const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
-  const [step, setStep] = useState(0);
+const PaidMediaSlider = ({ currency, step, setStep }: { currency: Currency; step: number; setStep: (s: number) => void }) => {
   const current = MEDIA_STEPS[step];
   const pct = (step / (MEDIA_STEPS.length - 1)) * 100;
   const activeColor = STEP_COLORS[step];

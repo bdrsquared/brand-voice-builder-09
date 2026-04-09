@@ -970,6 +970,7 @@ const PricingTiers = () => {
   const [currency, setCurrency] = useState<Currency>("GBP");
   const [prodType, setProdType] = useState<ProdType>("location");
   const [selectedTier, setSelectedTier] = useState<"t1" | "t2" | "t3" | null>(null);
+  const [mediaStep, setMediaStep] = useState(0);
 
   const prices = ALL_PRICES[currency][prodType];
 

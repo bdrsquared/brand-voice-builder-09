@@ -919,29 +919,31 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
   const sym = CURRENCY_SYMBOLS[currency];
   const paidSpendConverted = Math.round(mediaData.spend * rates[currency]);
   const mediaSpend = convertSpend(mediaData.spend, currency);
+  const productionMultiplier = PRODUCTION_REACH_MULTIPLIER[prodType];
 
-  // Monthly total = retainer + paid media (t3 only)
-  const monthlyTotal = isT3 ? data.monthlyNum + paidSpendConverted : data.monthlyNum;
+  const monthlyTotal = data.monthlyNum + paidSpendConverted;
   const monthlyTotalStr = monthlyTotal > 0 ? `${sym}${monthlyTotal.toLocaleString()}` : "—";
 
-  // Organic reach
-  const organic = ORGANIC_REACH[tier];
+  const organicBase = ORGANIC_REACH[tier];
+  const organicLow = Math.round(organicBase.low * productionMultiplier);
+  const organicHigh = Math.round(organicBase.high * productionMultiplier);
+  const organicReachStr = formatReach(organicLow, organicHigh);
 
-  // Paid impressions from slider (parse low/high from mediaData)
-  const paidImpLow = isT3 ? mediaData.impNum * 0.7 : 0;
-  const paidImpHigh = isT3 ? mediaData.impNum * 1.3 : 0;
+  const paidFactor = organicBase.paidEfficiency;
+  const paidLow = Math.round(mediaData.impNum * 0.7 * paidFactor);
+  const paidHigh = Math.round(mediaData.impNum * 1.3 * paidFactor);
+  const paidReachStr = paidFactor > 0 ? formatReach(paidLow, paidHigh) : "—";
 
-  // Total reach
-  const totalLow = organic.low + Math.round(paidImpLow);
-  const totalHigh = organic.high + Math.round(paidImpHigh);
+  const totalLow = organicLow + paidLow;
+  const totalHigh = organicHigh + paidHigh;
   const totalReachStr = formatReach(totalLow, totalHigh);
 
   const rows = [
     { label: "Launch strategy fee", value: data.launch, desc: tier === "t1" ? "One-time investment — no ongoing commitment" : "Paid upfront before production begins", highlight: false },
     { label: "Monthly retainer", value: data.monthly, desc: tier === "t1" ? "No monthly fee — one-time project" : "Billed monthly for 12 months", highlight: false },
-    ...(isT3 ? [{ label: "Paid media budget", value: `${mediaSpend}/mo`, desc: `Billed separately · use the slider above to adjust`, highlight: false }] : []),
-    ...(tier !== "t1" ? [{ label: "Monthly total", value: `${monthlyTotalStr}/mo`, desc: isT3 ? "Retainer + paid media spend combined" : "Total monthly commitment", highlight: true }] : []),
-    { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Total project cost" : "Launch fee + 12 months of retainer" + (isT3 ? " (excl. paid media)" : ""), highlight: tier === "t1" },
+    { label: "Paid media spend", value: `${mediaSpend}/mo`, desc: `Dynamic with slider · scaled for ${TIER_LABELS[tier].split("· ")[1]}`, highlight: false },
+    { label: "Monthly total", value: `${monthlyTotalStr}/mo`, desc: data.monthlyNum > 0 ? "Retainer + paid media spend combined" : "Paid media spend only for monthly promotion", highlight: true },
+    { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Core package total before optional paid media" : "Launch fee + 12 months of retainer (before paid media)", highlight: false },
     { label: "Episode output", value: data.episodes, desc: tier === "t1" ? "A complete first series" : "Consistent monthly production", highlight: false },
   ];
 
@@ -956,13 +958,16 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
           <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">
             {prodType === "location" ? "On Location" : "Virtual"}
           </span>
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">
+            {currency}
+          </span>
         </div>
         <h3 className="font-heading text-xl text-text-primary mb-1">Investment Breakdown</h3>
-        <p className="text-sm text-text-secondary">A detailed summary of your selected tier's pricing structure.</p>
+        <p className="text-sm text-text-secondary">Updates live from your tier, currency, production setup and paid media slider.</p>
       </div>
       <div className="divide-y divide-border">
         {rows.map((row) => (
-          <div key={row.label} className={`flex items-center justify-between px-6 sm:px-8 py-4 ${row.highlight ? "bg-[#1CFA76]/5" : ""}`}>
+          <div key={`${row.label}-${row.value}`} className={`flex items-center justify-between px-6 sm:px-8 py-4 ${row.highlight ? "bg-[#1CFA76]/5" : ""}`}>
             <div>
               <div className={`text-sm font-medium ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>{row.label}</div>
               <div className="text-xs text-text-tertiary mt-0.5">{row.desc}</div>
@@ -974,7 +979,6 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
         ))}
       </div>
 
-      {/* ── Total Show Impact ── */}
       <div className="border-t border-border">
         <div className="px-6 sm:px-8 py-5 bg-[#8B83C7]/5">
           <div className="flex items-center gap-2 mb-3">
@@ -984,16 +988,14 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Organic reach</div>
-              <motion.div key={organic.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-heading text-lg text-text-primary">{organic.label}</motion.div>
+              <motion.div key={organicReachStr} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-heading text-lg text-text-primary">{organicReachStr}</motion.div>
               <div className="text-[10px] text-text-tertiary mt-0.5">impressions/mo from content, social & SEO</div>
             </div>
-            {isT3 && (
-              <div>
-                <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Paid reach</div>
-                <motion.div key={mediaData.impressions} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-heading text-lg" style={{ color: STEP_COLORS[mediaStep].bar }}>{mediaData.impressions}</motion.div>
-                <div className="text-[10px] text-text-tertiary mt-0.5">impressions/mo from paid media</div>
-              </div>
-            )}
+            <div>
+              <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Paid reach</div>
+              <motion.div key={paidReachStr} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-heading text-lg" style={{ color: STEP_COLORS[mediaStep].bar }}>{paidReachStr}</motion.div>
+              <div className="text-[10px] text-text-tertiary mt-0.5">impressions/mo driven by slider spend and tier efficiency</div>
+            </div>
             <div>
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Total impact</div>
               <motion.div key={totalReachStr} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="font-heading text-xl text-[#1CFA76]">{totalReachStr}</motion.div>

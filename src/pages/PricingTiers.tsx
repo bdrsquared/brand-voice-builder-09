@@ -991,6 +991,26 @@ const PricingTiers = () => {
         {/* ── PAID MEDIA SLIDER ── */}
         <PaidMediaSlider currency={currency} />
 
+        {/* ── PRICING BREAKDOWN TABLE ── */}
+        <AnimatePresence>
+          {selectedTier && (
+            <motion.div
+              initial={{ opacity: 0, y: 30, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: 20, height: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="overflow-hidden"
+            >
+              <PricingBreakdownTable
+                tier={selectedTier}
+                currency={currency}
+                prodType={prodType}
+                prices={prices}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* ── FOOTER NOTE ── */}
         <div className="text-center py-12 md:py-16">
           <p className="text-sm text-text-secondary">

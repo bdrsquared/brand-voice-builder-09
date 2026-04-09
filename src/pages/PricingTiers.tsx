@@ -1127,16 +1127,6 @@ const PricingTiers = () => {
               </div>
               <div className="flex flex-col gap-2">
                 <button
-                  onClick={(e) => { e.stopPropagation(); setSelectedTier(isSelected ? null : tier.id); }}
-                  className={`w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
-                    isSelected
-                      ? "bg-[#1CFA76] text-black"
-                      : "border border-[#1CFA76]/40 text-[#1CFA76] hover:bg-[#1CFA76]/10"
-                  }`}
-                >
-                  {isSelected ? "✓ Selected" : "Select this tier"}
-                </button>
-                <button
                   onClick={(e) => { e.stopPropagation(); setActiveModal(tier.id); }}
                   className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-border text-text-primary hover:bg-secondary transition-colors flex items-center justify-center gap-1.5"
                 >

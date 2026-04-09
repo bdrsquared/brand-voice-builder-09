@@ -212,22 +212,21 @@ const Tier2Content = () => (
 );
 
 const Tier3Tabs = () => {
-  const [tab, setTab] = useState<"included" | "adspend" | "guarantees">("included");
+  const [tab, setTab] = useState<"included" | "guarantees">("included");
   return (
     <>
       <div className="flex border-b border-border mb-6">
-        {(["included", "adspend", "guarantees"] as const).map((t) => (
+        {(["included", "guarantees"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`flex-1 text-xs font-medium tracking-wide py-3 border-b-2 transition-colors ${tab === t ? "text-[#8B83C7] border-[#8B83C7]" : "text-text-tertiary border-transparent hover:text-text-secondary"}`}
           >
-            {t === "included" ? "What's included" : t === "adspend" ? "Ad spend" : "Guarantees"}
+            {t === "included" ? "What's included" : "Guarantees"}
           </button>
         ))}
       </div>
       {tab === "included" && <Tier3Included />}
-      {tab === "adspend" && <Tier3AdSpend />}
       {tab === "guarantees" && <Tier3Guarantees />}
     </>
   );
@@ -266,47 +265,6 @@ const Tier3Included = () => (
     ]} /><InsightChip color={C.plum} bg={C.plumBg}>The strategic thinking of a CMO without the executive hire.</InsightChip></div>
     <RoiBox><strong className="text-text-primary">Making the case to your CEO:</strong> Category ownership is a moat. Once your brand owns the conversation in your space the show people reference, the voice people trust, the content that shapes how your market thinks that position is extraordinarily difficult for a competitor to undo. At £160k/year all-in, you're not buying marketing. You're buying a defensible market position.</RoiBox>
     <UnlockQuote>"In 18 months, anyone who matters in your market will associate your brand with the conversation not just a participant in it."</UnlockQuote>
-  </>
-);
-
-const SpendScenario = ({ label, amount, children }: { label: string; amount: string; children: React.ReactNode }) => (
-  <div className="border border-border rounded-xl overflow-hidden mb-3">
-    <div className="flex justify-between items-center px-4 py-3 bg-secondary/40">
-      <span className="text-sm font-medium text-text-primary">{label}</span>
-      <span className="font-heading text-base" style={{ color: C.plum }}>{amount}</span>
-    </div>
-    <div className="px-4 py-3 text-sm text-text-secondary leading-relaxed border-t border-border">{children}</div>
-  </div>
-);
-
-const Tier3AdSpend = () => (
-  <>
-    <p className="text-sm text-text-secondary leading-relaxed mb-5">The minimum £3k/month is a starting point, not a recommended level. Here's what different budgets actually deliver and how we report against them.</p>
-    <SpendScenario label="Entry foundation presence" amount="£3,000/month">
-      <strong className="text-text-primary">What this buys:</strong> 2–4 active campaigns promoting your strongest clips and maintaining consistent visibility with a defined target account list. Realistic LinkedIn reach of <strong className="text-text-primary">150,000–300,000 impressions/month</strong> tightly targeted by job title, seniority and company size. Enough to be consistently present. Not enough to dominate. Best for: Testing what content performs before scaling spend.
-    </SpendScenario>
-    <SpendScenario label="Growth consistent market presence" amount="£5,000–8,000/month">
-      <strong className="text-text-primary">What this buys:</strong> Multi-format campaigns across LinkedIn and YouTube simultaneously. Reach of <strong className="text-text-primary">400,000–700,000 impressions/month</strong> within your target market. Enough budget to run retargeting hitting warm audiences who've already engaged with your content. Most clients at this tier move here within 3–6 months once they see what converts.
-    </SpendScenario>
-    <SpendScenario label="Scale market saturation within your ICP" amount="£10,000+/month">
-      <strong className="text-text-primary">What this buys:</strong> Aggressive multi-channel distribution LinkedIn, YouTube, Spotify and display. <strong className="text-text-primary">1M+ impressions/month</strong> within a tightly defined audience. At this level, your brand becomes genuinely unavoidable for anyone in your target market. Best for: Enterprise clients with large deal sizes where even a single influenced opportunity justifies the spend.
-    </SpendScenario>
-    <div className="mt-6 mb-4"><SectionTitle>How we report on ad spend</SectionTitle></div>
-    <div className="divide-y divide-border">
-      {[
-        { label: "Reach within target accounts", desc: "Are you actually hitting the companies you want to work with or just accumulating views from people who'll never buy?" },
-        { label: "Engagement by content type", desc: "Which clips generate saves, shares and comments not just passive plays." },
-        { label: "Warm signal tracking", desc: "Profile visits, connection requests, DM responses that correlate with campaign exposure." },
-        { label: "Pipeline influence", desc: "Did conversations or deals involve someone exposed to your content? Directional, but tracked and reported honestly." },
-        { label: "Cost per meaningful engagement", desc: "Not cost-per-click. Cost per action that signals real commercial intent." },
-      ].map((r) => (
-        <div key={r.label} className="flex flex-col sm:flex-row gap-1 sm:gap-4 py-2.5">
-          <span className="text-xs font-medium text-text-primary sm:min-w-[180px] shrink-0">{r.label}</span>
-          <span className="text-xs text-text-secondary leading-relaxed">{r.desc}</span>
-        </div>
-      ))}
-    </div>
-    <RoiBox><strong className="text-text-primary">The question worth asking your sales team:</strong> What does a genuinely warm inbound conversation with a target-account decision-maker cost you today through events, cold outreach, or paid leads? Work backwards from that number. The right media budget usually reveals itself.</RoiBox>
   </>
 );
 

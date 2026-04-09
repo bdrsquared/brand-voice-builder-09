@@ -461,7 +461,7 @@ const STEP_COLORS = [
 const maxImp = MEDIA_STEPS[MEDIA_STEPS.length - 1].impNum;
 
 /* Animated particles that float up from active bars */
-const BarParticles = ({ active, color }: { active: boolean; color: string }) => {
+const BarParticles = memo(({ active, color }: { active: boolean; color: string }) => {
   if (!active) return null;
   return (
     <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-8 h-8 pointer-events-none">
@@ -485,7 +485,7 @@ const BarParticles = ({ active, color }: { active: boolean; color: string }) => 
       ))}
     </div>
   );
-};
+});
 
 const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
   const [step, setStep] = useState(0);

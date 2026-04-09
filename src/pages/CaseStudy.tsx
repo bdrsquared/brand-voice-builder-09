@@ -40,6 +40,7 @@ export interface CaseStudyData {
   showName: string;
   clientName: string;
   tagline: string;
+  subtitle?: string;
   heroImage: string;
   heroObjectPosition?: string;
   stats: { label: string; value: string }[];
@@ -110,6 +111,7 @@ const caseStudies: Record<string, CaseStudyData> = {
     showName: "The Art of Investing",
     clientName: "IG",
     tagline: "How IG used podcasting to cut through market noise and make complex financial topics accessible, engaging, and relevant to a broad audience.",
+    subtitle: "Led by dynamic, knowledgeable hosts who bring real market insight and energy to every episode.",
     heroImage: caseIgHero,
     heroObjectPosition: "center 30%",
     stats: [

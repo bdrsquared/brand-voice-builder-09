@@ -1086,7 +1086,7 @@ const PricingTiers = () => {
         </motion.div>
 
         {/* ── PAID MEDIA SLIDER ── */}
-        <PaidMediaSlider currency={currency} />
+        <PaidMediaSlider currency={currency} step={mediaStep} setStep={setMediaStep} />
 
         {/* ── PRICING BREAKDOWN TABLE ── */}
         <AnimatePresence>

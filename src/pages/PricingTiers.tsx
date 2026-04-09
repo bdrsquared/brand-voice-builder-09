@@ -439,59 +439,219 @@ const AddOnModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClos
 
 /* ── Paid Media Slider ── */
 const MEDIA_STEPS = [
-  { spend: 3000,  impressions: "150k–300k",  label: "Foundation presence" },
-  { spend: 5000,  impressions: "400k–500k",  label: "Early growth" },
-  { spend: 8000,  impressions: "600k–700k",  label: "Consistent presence" },
-  { spend: 10000, impressions: "800k–1M",    label: "Market saturation" },
-  { spend: 15000, impressions: "1.2M–1.5M",  label: "Category dominance" },
-  { spend: 25000, impressions: "2M–3M",      label: "Full-scale engine" },
-  { spend: 50000, impressions: "5M+",        label: "Market ownership" },
+  { spend: 3000,  impressions: "150k–300k",  impNum: 225,   label: "Foundation presence" },
+  { spend: 5000,  impressions: "400k–500k",  impNum: 450,   label: "Early growth" },
+  { spend: 8000,  impressions: "600k–700k",  impNum: 650,   label: "Consistent presence" },
+  { spend: 10000, impressions: "800k–1M",    impNum: 900,   label: "Market saturation" },
+  { spend: 15000, impressions: "1.2M–1.5M",  impNum: 1350,  label: "Category dominance" },
+  { spend: 25000, impressions: "2M–3M",      impNum: 2500,  label: "Full-scale engine" },
+  { spend: 50000, impressions: "5M+",        impNum: 5000,  label: "Market ownership" },
 ];
+
+const STEP_COLORS = [
+  { bar: "#6359EA", glow: "rgba(99,89,234,0.3)", accent: "#6359EA" },
+  { bar: "#7B6BF0", glow: "rgba(123,107,240,0.35)", accent: "#7B6BF0" },
+  { bar: "#8B83C7", glow: "rgba(139,131,199,0.35)", accent: "#8B83C7" },
+  { bar: "#40ABB2", glow: "rgba(64,171,178,0.4)", accent: "#40ABB2" },
+  { bar: "#1CFA76", glow: "rgba(28,250,118,0.35)", accent: "#1CFA76" },
+  { bar: "#FFB347", glow: "rgba(255,179,71,0.4)", accent: "#FFB347" },
+  { bar: "#FF6B6B", glow: "rgba(255,107,107,0.45)", accent: "#FF6B6B" },
+];
+
+const maxImp = MEDIA_STEPS[MEDIA_STEPS.length - 1].impNum;
+
+/* Animated particles that float up from active bars */
+const BarParticles = ({ active, color }: { active: boolean; color: string }) => {
+  if (!active) return null;
+  return (
+    <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-8 h-8 pointer-events-none">
+      {[0, 1, 2].map((i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full"
+          style={{ background: color, left: `${30 + i * 20}%` }}
+          animate={{
+            y: [-4, -20 - i * 6],
+            opacity: [0.8, 0],
+            scale: [1, 0.3],
+          }}
+          transition={{
+            duration: 1.2 + i * 0.3,
+            repeat: Infinity,
+            delay: i * 0.4,
+            ease: "easeOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
   const [step, setStep] = useState(0);
   const current = MEDIA_STEPS[step];
   const pct = (step / (MEDIA_STEPS.length - 1)) * 100;
+  const activeColor = STEP_COLORS[step];
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mt-10 rounded-2xl border border-border bg-card overflow-hidden"
+      className="mt-10 rounded-2xl border border-border overflow-hidden relative"
+      style={{ background: "#111113" }}
     >
-      <div className="p-6 sm:p-8">
+      {/* Animated background glow that shifts with the slider */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{
+          background: `radial-gradient(ellipse 60% 50% at ${30 + pct * 0.4}% 70%, ${activeColor.glow}, transparent 70%)`,
+        }}
+        transition={{ duration: 0.6 }}
+      />
+
+      <div className="relative p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.plumBg, color: C.plum }}>Category Engine add-on</span>
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.plumBg, color: C.plum }}>Category Engine</span>
         </div>
         <h3 className="font-heading text-xl text-text-primary mb-1">Paid Media Investment</h3>
-        <p className="text-sm text-text-secondary mb-8">Drag to explore how ad spend scales impressions within your target ICP.</p>
+        <p className="text-sm text-text-secondary mb-6">Drag to explore how ad spend scales impressions within your target ICP.</p>
 
-        {/* Metric cards */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          <div className="rounded-xl border border-border p-5 bg-secondary/30">
-            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Monthly spend</div>
-            <div className="font-heading text-2xl sm:text-3xl text-text-primary">{convertPrice(current.spend, currency)}</div>
-            <div className="text-xs text-text-tertiary mt-1">/month</div>
-          </div>
-          <div className="rounded-xl border border-border p-5 bg-secondary/30">
-            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Estimated impressions</div>
-            <div className="font-heading text-2xl sm:text-3xl" style={{ color: C.purple }}>{current.impressions}</div>
-            <div className="text-xs text-text-tertiary mt-1">/month within your ICP</div>
-          </div>
+        {/* ── Animated bar chart ── */}
+        <div className="flex items-end gap-2 h-44 sm:h-56 mb-6 px-1">
+          {MEDIA_STEPS.map((s, i) => {
+            const isActive = i <= step;
+            const isCurrent = i === step;
+            const barHeight = (s.impNum / maxImp) * 100;
+            const barColor = STEP_COLORS[i];
+
+            return (
+              <button
+                key={i}
+                onClick={() => setStep(i)}
+                className="relative flex-1 flex flex-col items-center justify-end h-full group"
+              >
+                {/* Particles on current bar */}
+                <BarParticles active={isCurrent} color={barColor.bar} />
+
+                {/* Impression label above bar */}
+                <AnimatePresence>
+                  {isCurrent && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      className="absolute -top-7 text-[9px] font-medium whitespace-nowrap"
+                      style={{ color: barColor.bar }}
+                    >
+                      {s.impressions}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Bar */}
+                <motion.div
+                  className="w-full rounded-t-md relative overflow-hidden"
+                  animate={{
+                    height: `${barHeight}%`,
+                    opacity: isActive ? 1 : 0.2,
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  style={{
+                    background: isActive
+                      ? `linear-gradient(180deg, ${barColor.bar}, ${barColor.bar}88)`
+                      : "rgba(255,255,255,0.06)",
+                    boxShadow: isCurrent ? `0 0 20px ${barColor.glow}, 0 0 40px ${barColor.glow}` : "none",
+                  }}
+                >
+                  {/* Shimmer on current bar */}
+                  {isCurrent && (
+                    <motion.div
+                      className="absolute inset-0"
+                      animate={{ opacity: [0.1, 0.3, 0.1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      style={{ background: `linear-gradient(180deg, rgba(255,255,255,0.3), transparent)` }}
+                    />
+                  )}
+                </motion.div>
+
+                {/* Spend label under bar */}
+                <div className={`mt-2 text-[8px] sm:text-[9px] font-medium transition-colors ${isCurrent ? "text-text-primary" : "text-text-tertiary/50"}`}>
+                  {convertPrice(s.spend, currency).replace(",000", "k").replace(",500", ".5k")}
+                </div>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Label */}
+        {/* ── Metric cards ── */}
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <motion.div
+            className="rounded-xl border p-5 relative overflow-hidden"
+            animate={{
+              borderColor: `${activeColor.bar}33`,
+              boxShadow: `inset 0 0 30px ${activeColor.glow.replace(")", ",0.08)")}`,
+            }}
+            transition={{ duration: 0.4 }}
+            style={{ background: "rgba(255,255,255,0.03)" }}
+          >
+            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Monthly spend</div>
+            <motion.div
+              key={current.spend}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="font-heading text-2xl sm:text-3xl text-text-primary"
+            >
+              {convertPrice(current.spend, currency)}
+            </motion.div>
+            <div className="text-xs text-text-tertiary mt-1">/month</div>
+          </motion.div>
+          <motion.div
+            className="rounded-xl border p-5 relative overflow-hidden"
+            animate={{
+              borderColor: `${activeColor.bar}33`,
+              boxShadow: `inset 0 0 30px ${activeColor.glow.replace(")", ",0.08)")}`,
+            }}
+            transition={{ duration: 0.4 }}
+            style={{ background: "rgba(255,255,255,0.03)" }}
+          >
+            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Estimated impressions</div>
+            <motion.div
+              key={current.impressions}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="font-heading text-2xl sm:text-3xl"
+              style={{ color: activeColor.bar }}
+            >
+              {current.impressions}
+            </motion.div>
+            <div className="text-xs text-text-tertiary mt-1">/month within your ICP</div>
+          </motion.div>
+        </div>
+
+        {/* ── Label + Slider ── */}
         <div className="flex justify-between items-center mb-3">
-          <span className="text-xs font-medium text-text-primary">{current.label}</span>
+          <motion.span
+            key={current.label}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="text-xs font-medium"
+            style={{ color: activeColor.bar }}
+          >
+            {current.label}
+          </motion.span>
           <span className="text-[10px] text-text-tertiary">{convertPrice(3000, currency)} – {convertPrice(50000, currency)}/mo</span>
         </div>
 
-        {/* Slider */}
-        <div className="relative h-2 rounded-full bg-secondary/60 mb-3">
-          <div
-            className="absolute inset-y-0 left-0 rounded-full transition-all duration-200"
-            style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${C.purple}, ${C.rose})` }}
+        <div className="relative h-2.5 rounded-full mb-2" style={{ background: "rgba(255,255,255,0.06)" }}>
+          <motion.div
+            className="absolute inset-y-0 left-0 rounded-full"
+            animate={{
+              width: `${pct}%`,
+              background: `linear-gradient(90deg, #6359EA, ${activeColor.bar})`,
+              boxShadow: `0 0 12px ${activeColor.glow}`,
+            }}
+            transition={{ duration: 0.3 }}
           />
           <input
             type="range"
@@ -501,21 +661,15 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
             onChange={(e) => setStep(Number(e.target.value))}
             className="absolute inset-0 w-full opacity-0 cursor-pointer"
           />
-          <div
-            className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-white bg-[#8B83C7] shadow-lg shadow-[#8B83C7]/30 transition-all duration-200 pointer-events-none"
-            style={{ left: `calc(${pct}% - 10px)` }}
+          <motion.div
+            className="absolute top-1/2 -translate-y-1/2 w-6 h-6 rounded-full border-2 border-white pointer-events-none"
+            animate={{
+              left: `calc(${pct}% - 12px)`,
+              background: activeColor.bar,
+              boxShadow: `0 0 16px ${activeColor.glow}, 0 0 32px ${activeColor.glow}`,
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
           />
-        </div>
-
-        {/* Step markers */}
-        <div className="flex justify-between px-0.5">
-          {MEDIA_STEPS.map((s, i) => (
-            <button
-              key={i}
-              onClick={() => setStep(i)}
-              className={`w-1.5 h-1.5 rounded-full transition-colors ${i <= step ? "bg-[#8B83C7]" : "bg-border"}`}
-            />
-          ))}
         </div>
       </div>
     </motion.div>

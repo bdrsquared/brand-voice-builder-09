@@ -893,11 +893,15 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
   },
 };
 
-/* Organic reach estimates per tier (monthly impressions in thousands) */
-const ORGANIC_REACH: Record<string, { low: number; high: number; label: string }> = {
-  t1: { low: 25, high: 60, label: "25k–60k" },
-  t2: { low: 120, high: 250, label: "120k–250k" },
-  t3: { low: 200, high: 400, label: "200k–400k" },
+const ORGANIC_REACH: Record<string, { low: number; high: number; paidEfficiency: number }> = {
+  t1: { low: 25, high: 60, paidEfficiency: 0.6 },
+  t2: { low: 120, high: 250, paidEfficiency: 0.82 },
+  t3: { low: 200, high: 400, paidEfficiency: 1 },
+};
+
+const PRODUCTION_REACH_MULTIPLIER: Record<ProdType, number> = {
+  location: 1,
+  virtual: 0.88,
 };
 
 const formatReach = (low: number, high: number): string => {

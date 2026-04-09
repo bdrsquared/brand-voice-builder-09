@@ -1,4 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+
+/* ── currency conversion ── */
+type Currency = "GBP" | "USD" | "EUR";
+const CURRENCY_SYMBOLS: Record<Currency, string> = { GBP: "£", USD: "$", EUR: "€" };
+const RATES: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };
+
+const convertPrice = (gbpAmount: number, currency: Currency): string => {
+  const converted = Math.round(gbpAmount * RATES[currency]);
+  return `${CURRENCY_SYMBOLS[currency]}${converted.toLocaleString()}`;
+};
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, Sparkles } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";

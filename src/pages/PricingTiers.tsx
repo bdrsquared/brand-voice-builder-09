@@ -731,8 +731,7 @@ const convertSpend = (gbp: number, currency: Currency): string => {
   return `${sym}${val.toLocaleString()}`;
 };
 
-const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
-  const [step, setStep] = useState(0);
+const PaidMediaSlider = ({ currency, step, setStep }: { currency: Currency; step: number; setStep: (s: number) => void }) => {
   const current = MEDIA_STEPS[step];
   const pct = (step / (MEDIA_STEPS.length - 1)) * 100;
   const activeColor = STEP_COLORS[step];
@@ -896,16 +895,18 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
 
 const TIER_LABELS: Record<string, string> = { t1: "Tier 01 · Launch", t2: "Tier 02 · Launch & Scale", t3: "Tier 03 · Global Leader" };
 
-const PricingBreakdownTable = ({ tier, currency, prodType }: { tier: "t1" | "t2" | "t3"; currency: Currency; prodType: ProdType; prices: TierPrices }) => {
+const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: "t1" | "t2" | "t3"; currency: Currency; prodType: ProdType; prices: TierPrices; mediaStep: number }) => {
   const data = BREAKDOWN_DATA[currency][prodType][tier];
   const isT3 = tier === "t3";
+  const mediaData = MEDIA_STEPS[mediaStep];
+  const mediaSpend = convertSpend(mediaData.spend, currency);
 
   const rows = [
     { label: "Launch strategy fee", value: data.launch, desc: tier === "t1" ? "One-time investment — no ongoing commitment" : "Paid upfront before production begins", highlight: false },
     { label: "Monthly retainer", value: data.monthly, desc: tier === "t1" ? "No monthly fee — one-time project" : "Billed monthly for 12 months", highlight: false },
     { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Total project cost" : "Launch fee + 12 months of retainer", highlight: true },
     { label: "Episode output", value: data.episodes, desc: tier === "t1" ? "A complete first series" : "Consistent monthly production", highlight: false },
-    ...(isT3 ? [{ label: "Paid media (additional)", value: data.paidMedia, desc: "Ad spend managed by Earworm — billed separately", highlight: false }] : []),
+    ...(isT3 ? [{ label: "Paid media budget", value: `${mediaSpend}/mo`, desc: `Est. ${mediaData.impressions} impressions/mo · ${mediaData.label}`, highlight: false }] : []),
   ];
 
   return (
@@ -943,7 +944,7 @@ const PricingBreakdownTable = ({ tier, currency, prodType }: { tier: "t1" | "t2"
             <span className="text-xs font-medium text-[#1CFA76]">Paid Media Impact</span>
           </div>
           <p className="text-xs text-text-secondary leading-relaxed">
-            At £3k–£50k/month ad spend, estimated impressions range from <strong className="text-text-primary">150k–300k</strong> to <strong className="text-text-primary">5M+</strong> per month within your ICP. Use the slider above to explore the impact at different investment levels.
+            At <strong className="text-text-primary">{mediaSpend}/mo</strong>, estimated impressions are <strong className="text-text-primary">{mediaData.impressions}</strong> per month within your ICP — <strong className="text-text-primary">{mediaData.label}</strong>. Adjust the slider above to explore different levels.
           </p>
         </div>
       )}
@@ -971,6 +972,7 @@ const PricingTiers = () => {
   const [currency, setCurrency] = useState<Currency>("GBP");
   const [prodType, setProdType] = useState<ProdType>("location");
   const [selectedTier, setSelectedTier] = useState<"t1" | "t2" | "t3" | null>(null);
+  const [mediaStep, setMediaStep] = useState(0);
 
   const prices = ALL_PRICES[currency][prodType];
 
@@ -1086,7 +1088,7 @@ const PricingTiers = () => {
         </motion.div>
 
         {/* ── PAID MEDIA SLIDER ── */}
-        <PaidMediaSlider currency={currency} />
+        <PaidMediaSlider currency={currency} step={mediaStep} setStep={setMediaStep} />
 
         {/* ── PRICING BREAKDOWN TABLE ── */}
         <AnimatePresence>
@@ -1103,6 +1105,7 @@ const PricingTiers = () => {
                 currency={currency}
                 prodType={prodType}
                 prices={prices}
+                mediaStep={mediaStep}
               />
             </motion.div>
           )}

@@ -531,8 +531,6 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
                 onClick={() => setStep(i)}
                 className="relative flex-1 flex flex-col items-center justify-end h-full group"
               >
-                {/* Particles on current bar */}
-                <BarParticles active={isCurrent} color={barColor.bar} />
 
                 {/* Impression label above bar */}
                 <AnimatePresence>

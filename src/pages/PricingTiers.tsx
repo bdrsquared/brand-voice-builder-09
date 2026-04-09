@@ -1001,9 +1001,6 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
     </div>
   );
 };
-    </div>
-  );
-};
 
 /* ════════════════════════════════════════════════════════════ */
 

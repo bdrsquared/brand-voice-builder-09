@@ -361,13 +361,12 @@ const T3_SECTIONS: SvcSection[] = [
 ];
 
 const Tier3Tabs = () => {
-  const [tab, setTab] = useState<"services" | "ads" | "guarantees">("services");
+  const [tab, setTab] = useState<"services" | "guarantees">("services");
   return (
     <>
       <div className="flex border-b border-border mb-6">
         {([
           { key: "services" as const, label: "Services included" },
-          { key: "ads" as const, label: "Ad spend" },
           { key: "guarantees" as const, label: "Guarantees" },
         ]).map((t) => (
           <button
@@ -380,7 +379,6 @@ const Tier3Tabs = () => {
         ))}
       </div>
       {tab === "services" && <Tier3Services />}
-      {tab === "ads" && <Tier3AdSpend />}
       {tab === "guarantees" && <Tier3Guarantees />}
     </>
   );

@@ -854,41 +854,41 @@ const PaidMediaSlider = ({ currency, step, setStep }: { currency: Currency; step
 };
 
 /* ── Pricing Breakdown Table ── */
-const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: string; monthly: string; monthlyNum: number; yearly: string; episodes: string; paidMedia: string }>>> = {
+const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: string; launchNum: number; monthly: string; monthlyNum: number; yearly: string; episodes: string; paidMedia: string; launchMonths: number }>>> = {
   GBP: {
     location: {
-      t1: { launch: "£19,500", monthly: "—", monthlyNum: 0, yearly: "£19,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "£15,000", monthly: "£5,000", monthlyNum: 5000, yearly: "£75,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "£25,000", monthly: "£8,500", monthlyNum: 8500, yearly: "£127,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
+      t1: { launch: "£19,500", launchNum: 19500, monthly: "—", monthlyNum: 0, yearly: "£19,500", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "£15,000", launchNum: 15000, monthly: "£5,000", monthlyNum: 5000, yearly: "£75,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "£25,000", launchNum: 25000, monthly: "£8,500", monthlyNum: 8500, yearly: "£127,000", episodes: "2 per month", paidMedia: "Min £3,000/mo", launchMonths: 0 },
     },
     virtual: {
-      t1: { launch: "£14,000", monthly: "—", monthlyNum: 0, yearly: "£14,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "£10,000", monthly: "£3,500", monthlyNum: 3500, yearly: "£52,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "£17,000", monthly: "£6,000", monthlyNum: 6000, yearly: "£89,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
+      t1: { launch: "£14,000", launchNum: 14000, monthly: "—", monthlyNum: 0, yearly: "£14,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "£10,000", launchNum: 10000, monthly: "£3,500", monthlyNum: 3500, yearly: "£52,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "£17,000", launchNum: 17000, monthly: "£6,000", monthlyNum: 6000, yearly: "£89,000", episodes: "2 per month", paidMedia: "Min £3,000/mo", launchMonths: 0 },
     },
   },
   USD: {
     location: {
-      t1: { launch: "$26,500", monthly: "—", monthlyNum: 0, yearly: "$26,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "$20,000", monthly: "$6,750", monthlyNum: 6750, yearly: "$101,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "$34,000", monthly: "$11,500", monthlyNum: 11500, yearly: "$172,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
+      t1: { launch: "$26,500", launchNum: 26500, monthly: "—", monthlyNum: 0, yearly: "$26,500", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "$20,000", launchNum: 20000, monthly: "$6,750", monthlyNum: 6750, yearly: "$101,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "$34,000", launchNum: 34000, monthly: "$11,500", monthlyNum: 11500, yearly: "$172,000", episodes: "2 per month", paidMedia: "Min $4,000/mo", launchMonths: 0 },
     },
     virtual: {
-      t1: { launch: "$19,000", monthly: "—", monthlyNum: 0, yearly: "$19,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "$13,500", monthly: "$4,750", monthlyNum: 4750, yearly: "$70,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "$23,000", monthly: "$8,000", monthlyNum: 8000, yearly: "$120,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
+      t1: { launch: "$19,000", launchNum: 19000, monthly: "—", monthlyNum: 0, yearly: "$19,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "$13,500", launchNum: 13500, monthly: "$4,750", monthlyNum: 4750, yearly: "$70,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "$23,000", launchNum: 23000, monthly: "$8,000", monthlyNum: 8000, yearly: "$120,000", episodes: "2 per month", paidMedia: "Min $4,000/mo", launchMonths: 0 },
     },
   },
   EUR: {
     location: {
-      t1: { launch: "€22,500", monthly: "—", monthlyNum: 0, yearly: "€22,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "€17,000", monthly: "€5,750", monthlyNum: 5750, yearly: "€86,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "€29,000", monthly: "€9,750", monthlyNum: 9750, yearly: "€146,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
+      t1: { launch: "€22,500", launchNum: 22500, monthly: "—", monthlyNum: 0, yearly: "€22,500", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "€17,000", launchNum: 17000, monthly: "€5,750", monthlyNum: 5750, yearly: "€86,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "€29,000", launchNum: 29000, monthly: "€9,750", monthlyNum: 9750, yearly: "€146,000", episodes: "2 per month", paidMedia: "Min €3,500/mo", launchMonths: 0 },
     },
     virtual: {
-      t1: { launch: "€16,000", monthly: "—", monthlyNum: 0, yearly: "€16,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "€11,500", monthly: "€4,000", monthlyNum: 4000, yearly: "€60,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "€19,500", monthly: "€6,875", monthlyNum: 6875, yearly: "€102,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
+      t1: { launch: "€16,000", launchNum: 16000, monthly: "—", monthlyNum: 0, yearly: "€16,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "€11,500", launchNum: 11500, monthly: "€4,000", monthlyNum: 4000, yearly: "€60,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "€19,500", launchNum: 19500, monthly: "€6,875", monthlyNum: 6875, yearly: "€102,000", episodes: "2 per month", paidMedia: "Min €3,500/mo", launchMonths: 0 },
     },
   },
 };

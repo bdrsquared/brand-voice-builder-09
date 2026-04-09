@@ -88,8 +88,8 @@ const UnlockQuote = ({ children }: { children: string }) => (
   <div className="bg-card border border-border rounded-xl p-5 my-5 font-heading text-base italic text-text-primary leading-relaxed">{children}</div>
 );
 
-/* ── tier data ── */
-const tiers = [
+/* ── tier data (base prices in GBP) ── */
+const baseTiers = [
   {
     id: "t3",
     num: "Tier 03 · Category Engine",
@@ -97,8 +97,9 @@ const tiers = [
     hook: "We build the infrastructure for your brand to own the conversation in your category across every channel, in every market, at a scale your competitors can't match without starting from scratch.",
     modalPitch: "In 18 months, anyone who matters in your market will associate your brand with the conversation not just a participant in it. This is the infrastructure that makes that happen: paid, organic, creator, UGC and PR firing simultaneously, across every channel your buyers are on, globally.",
     modalTitle: "Category Engine",
-    price: "£125,000/yr",
-    priceNote: "+ min £3k/month ad spend",
+    basePrice: 125000,
+    priceSuffix: "/yr",
+    basePriceNote: (c: Currency) => `+ min ${convertPrice(3000, c)}/month ad spend`,
     dopamine: "Your competitors will feel this before they understand what's happening.",
     modalDopamine: "Your competitors will feel this before they understand what's happening.",
     featured: false,
@@ -110,8 +111,9 @@ const tiers = [
     hook: "A fully managed content engine that puts you in front of the right people consistently, professionally, without your team lifting a finger.",
     modalPitch: "Your podcast becomes part of how your company shows up in the market consistently, professionally, and without your team carrying the operational weight.",
     modalTitle: "Launch & Scale",
-    price: "£75,000/yr",
-    priceNote: "£15k onboarding · £5,750/month · 2 episodes/month",
+    basePrice: 75000,
+    priceSuffix: "/yr",
+    basePriceNote: (c: Currency) => `${convertPrice(15000, c)} onboarding · ${convertPrice(5750, c)}/month · 2 episodes/month`,
     dopamine: "The equivalent of a senior content hire without the salary, overhead, or learning curve.",
     modalDopamine: "What does a single warm conversation with a dream client cost you through paid channels? This builds a system that generates them every month.",
     featured: true,
@@ -124,12 +126,32 @@ const tiers = [
     hook: "A polished, credible podcast built from the ground up with the strategy, production and content to establish real authority in your space.",
     modalPitch: "You go from \"we keep saying we should start a podcast\" to a polished, credible show your team is proud to share with the strategy to ensure it's built on something real.",
     modalTitle: "Launch",
-    price: "£19,500",
-    priceNote: "One-time fee · 6 episodes · strategy included",
+    basePrice: 19500,
+    priceSuffix: "",
+    basePriceNote: (_c: Currency) => "One-time fee · 6 episodes · strategy included",
     dopamine: "If you're not proud of what we build, we'll be the first to say so.",
     featured: false,
   },
 ];
+
+/* ── Currency toggle component ── */
+const CurrencyToggle = ({ value, onChange }: { value: Currency; onChange: (c: Currency) => void }) => (
+  <div className="inline-flex items-center rounded-full border border-border bg-card p-1 gap-0.5">
+    {(["GBP", "USD", "EUR"] as Currency[]).map((c) => (
+      <button
+        key={c}
+        onClick={() => onChange(c)}
+        className={`text-xs font-medium tracking-wide px-4 py-1.5 rounded-full transition-all duration-200 ${
+          value === c
+            ? "bg-white/10 text-text-primary shadow-sm"
+            : "text-text-tertiary hover:text-text-secondary"
+        }`}
+      >
+        {CURRENCY_SYMBOLS[c]} {c}
+      </button>
+    ))}
+  </div>
+);
 
 /* ── Modal content components ── */
 const Tier1Content = () => (

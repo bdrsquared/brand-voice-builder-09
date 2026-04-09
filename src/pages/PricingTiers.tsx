@@ -532,20 +532,6 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
                 className="relative flex-1 flex flex-col items-center justify-end h-full group"
               >
 
-                {/* Impression label above bar */}
-                <AnimatePresence>
-                  {isCurrent && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      className="absolute -top-7 text-[9px] font-medium whitespace-nowrap"
-                      style={{ color: barColor.bar }}
-                    >
-                      {s.impressions}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
 
                 {/* Bar */}
                 <motion.div

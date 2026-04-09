@@ -398,7 +398,7 @@ const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.Re
 /* ── Modal wrapper ── */
 const tierAccent: Record<string, string> = { t1: "#6A9FA3", t2: "#7BAF8E", t3: "#8B83C7" };
 
-const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: () => void; tier: typeof tiers[0] | null; children: React.ReactNode }) => (
+const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: () => void; tier: { id: string; num: string; name: string; modalTitle?: string; modalPitch?: string; hook: string; price: string; priceNote: string; modalDopamine?: string } | null; children: React.ReactNode }) => (
   <AnimatePresence>
     {open && tier && (
       <motion.div

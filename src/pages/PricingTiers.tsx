@@ -48,7 +48,7 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
 };
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight, Sparkles } from "lucide-react";
+import { X, ArrowUpRight, Sparkles, Info } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";

@@ -52,6 +52,51 @@ const BulletList = ({ items }: { items: string[] }) => (
   </ul>
 );
 
+/* ── Service table row types ── */
+type SvcRow = { name: string; desc: string; status: "included"; label: string } | { name: string; desc: string; status: "not-included" };
+type SvcSection = { section: string; rows: SvcRow[] };
+
+const tierDotClass: Record<string, string> = {
+  t1: "bg-[#e8f4f1] text-[#0a6b5c]",
+  t2: "bg-[#eaeffa] text-[#1649a0]",
+  t3: "bg-[#f0eaf8] text-[#4e2d7a]",
+};
+const tierLabelClass: Record<string, string> = {
+  t1: "text-[#0a6b5c] font-medium",
+  t2: "text-[#1649a0] font-medium",
+  t3: "text-[#4e2d7a] font-medium",
+};
+
+const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string }) => (
+  <div className="overflow-x-auto -mx-6 sm:-mx-8">
+    <table className="w-full border-collapse min-w-[500px]">
+      {sections.map((sec) => (
+        <tbody key={sec.section}>
+          <tr><td colSpan={2} className="bg-secondary/40 px-5 py-2 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-y border-border">{sec.section}</td></tr>
+          {sec.rows.map((row) => (
+            <tr key={row.name} className="group hover:bg-secondary/20 transition-colors">
+              <td className="px-5 py-3 border-b border-border align-top min-w-[200px]">
+                <div className="text-[13px] font-medium text-text-primary mb-0.5">{row.name}</div>
+                <div className="text-xs text-text-tertiary leading-snug">{row.desc}</div>
+              </td>
+              <td className="px-5 py-3 border-b border-border align-top min-w-[160px]">
+                {row.status === "included" ? (
+                  <div className="flex items-start gap-2">
+                    <span className={`w-[18px] h-[18px] rounded-full flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5 ${tierDotClass[tier]}`}>✓</span>
+                    <span className={`text-[13px] leading-snug ${tierLabelClass[tier]}`}>{row.label}</span>
+                  </div>
+                ) : (
+                  <span className="text-xs text-text-tertiary/50 pt-1 block">Not included in this tier</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      ))}
+    </table>
+  </div>
+);
+
 const GuaranteeBlock = ({ title, items }: { title: string; items: string[] }) => (
   <div className="rounded-xl overflow-hidden border border-[#7BAF8E]/20 my-5">
     <div className="px-4 py-2.5 text-[10px] font-medium tracking-[0.08em] uppercase" style={{ background: C.greenBg, color: C.greenDk }}>{title}</div>

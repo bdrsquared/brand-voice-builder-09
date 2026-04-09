@@ -555,6 +555,9 @@ const PricingTiers = () => {
           <ArrowUpRight className="w-4 h-4 text-text-tertiary shrink-0" />
         </motion.div>
 
+        {/* ── PAID MEDIA SLIDER ── */}
+        <PaidMediaSlider currency={currency} />
+
         {/* ── FOOTER NOTE ── */}
         <div className="text-center py-12 md:py-16">
           <p className="text-sm text-text-secondary">

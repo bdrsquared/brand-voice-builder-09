@@ -1,14 +1,52 @@
-import { useEffect, useState, useMemo, lazy, Suspense, memo } from "react";
+import { useEffect, useState, useMemo, memo } from "react";
 
-/* ── currency conversion ── */
+/* ── currency & production types ── */
 type Currency = "GBP" | "USD" | "EUR";
+type ProdType = "location" | "virtual";
 const CURRENCY_SYMBOLS: Record<Currency, string> = { GBP: "£", USD: "$", EUR: "€" };
-const RATES: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };
 
-const convertPrice = (gbpAmount: number, currency: Currency): string => {
-  const converted = Math.round(gbpAmount * RATES[currency]);
-  return `${CURRENCY_SYMBOLS[currency]}${converted.toLocaleString()}`;
+type PriceSet = { price: string; note: string; dp: string; dn: string };
+type TierPrices = { t1: PriceSet; t2: PriceSet; t3: PriceSet };
+
+const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
+  GBP: {
+    location: {
+      t1: { price: "£19,500", note: "One-time fee · 6 episodes · blueprint included", dp: "£19,500", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "£75,000/yr", note: "£15,000 launch strategy + £5,000/month · 2 episodes/month", dp: "£75,000/yr", dn: "£15,000 launch strategy + £5,000/month" },
+      t3: { price: "£127,000/yr", note: "£25,000 launch strategy + £8,500/month · + ad spend (min £3k/month)", dp: "£127,000/yr", dn: "£25,000 launch strategy + £8,500/month" },
+    },
+    virtual: {
+      t1: { price: "£14,000", note: "One-time fee · 6 episodes · blueprint included", dp: "£14,000", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "£52,000/yr", note: "£10,000 launch strategy + £3,500/month · 2 episodes/month", dp: "£52,000/yr", dn: "£10,000 launch strategy + £3,500/month" },
+      t3: { price: "£89,000/yr", note: "£17,000 launch strategy + £6,000/month · + ad spend (min £3k/month)", dp: "£89,000/yr", dn: "£17,000 launch strategy + £6,000/month" },
+    },
+  },
+  EUR: {
+    location: {
+      t1: { price: "€22,500", note: "One-time fee · 6 episodes · blueprint included", dp: "€22,500", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "€86,000/yr", note: "€17,000 launch strategy + €5,750/month · 2 episodes/month", dp: "€86,000/yr", dn: "€17,000 launch strategy + €5,750/month" },
+      t3: { price: "€146,000/yr", note: "€29,000 launch strategy + €9,750/month · + ad spend (min €3,500/month)", dp: "€146,000/yr", dn: "€29,000 launch strategy + €9,750/month" },
+    },
+    virtual: {
+      t1: { price: "€16,000", note: "One-time fee · 6 episodes · blueprint included", dp: "€16,000", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "€60,000/yr", note: "€11,500 launch strategy + €4,000/month · 2 episodes/month", dp: "€60,000/yr", dn: "€11,500 launch strategy + €4,000/month" },
+      t3: { price: "€102,000/yr", note: "€19,500 launch strategy + €6,875/month · + ad spend (min €3,500/month)", dp: "€102,000/yr", dn: "€19,500 launch strategy + €6,875/month" },
+    },
+  },
+  USD: {
+    location: {
+      t1: { price: "$26,500", note: "One-time fee · 6 episodes · blueprint included", dp: "$26,500", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "$101,000/yr", note: "$20,000 launch strategy + $6,750/month · 2 episodes/month", dp: "$101,000/yr", dn: "$20,000 launch strategy + $6,750/month" },
+      t3: { price: "$172,000/yr", note: "$34,000 launch strategy + $11,500/month · + ad spend (min $4,000/month)", dp: "$172,000/yr", dn: "$34,000 launch strategy + $11,500/month" },
+    },
+    virtual: {
+      t1: { price: "$19,000", note: "One-time fee · 6 episodes · blueprint included", dp: "$19,000", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "$70,000/yr", note: "$13,500 launch strategy + $4,750/month · 2 episodes/month", dp: "$70,000/yr", dn: "$13,500 launch strategy + $4,750/month" },
+      t3: { price: "$120,000/yr", note: "$23,000 launch strategy + $8,000/month · + ad spend (min $4,000/month)", dp: "$120,000/yr", dn: "$23,000 launch strategy + $8,000/month" },
+    },
+  },
 };
+
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, Sparkles } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
@@ -16,7 +54,7 @@ import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
 import useMetaTags from "@/hooks/useMetaTags";
 
-/* ── palette tokens (mirrors Content Playbook) ── */
+/* ── palette tokens ── */
 const C = {
   sage: "#7BAF8E",
   purple: "#8B83C7",
@@ -33,26 +71,7 @@ const C = {
   amberBg: "#fdf0e0",
 };
 
-/* ── tiny reusable pieces ── */
-const InsightChip = ({ color, bg, children }: { color: string; bg: string; children: React.ReactNode }) => (
-  <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full font-medium" style={{ background: bg, color }}>{children}</span>
-);
-
-const SectionTitle = ({ children }: { children: string }) => (
-  <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-3 pb-2 border-b border-border">{children}</div>
-);
-
-const BulletList = ({ items }: { items: string[] }) => (
-  <ul className="space-y-1.5">
-    {items.map((item) => (
-      <li key={item} className="text-sm text-text-secondary flex gap-2.5 leading-relaxed">
-        <span className="text-text-tertiary text-xs mt-0.5 shrink-0">→</span>{item}
-      </li>
-    ))}
-  </ul>
-);
-
-/* ── Service table row types ── */
+/* ── Service table types ── */
 type SvcRow = { name: string; desc: string; status: "included"; label: string } | { name: string; desc: string; status: "not-included" };
 type SvcSection = { section: string; rows: SvcRow[] };
 
@@ -97,53 +116,44 @@ const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string
   </div>
 );
 
-/* ── tier data (base prices in GBP) ── */
-const baseTiers = [
+/* ── tier card data ── */
+const tierCards = [
   {
-    id: "t3",
+    id: "t3" as const,
     num: "Tier 03 · Global Leader",
-    name: "Become the only\nname your market\nthinks of.",
-    hook: "We build the infrastructure for your brand to own the conversation in your category across every channel, in every market, at a scale your competitors can't match without starting from scratch.",
-    modalPitch: "In 18 months, anyone who matters in your market will associate your brand with the conversation not just a participant in it. This is the infrastructure that makes that happen: paid, organic, creator, UGC and PR firing simultaneously, across every channel your buyers are on, globally.",
-    modalTitle: "Global Leader",
-    basePrice: 125000,
-    priceSuffix: "/yr",
-    basePriceNote: (c: Currency) => `+ min ${convertPrice(3000, c)}/month ad spend`,
-    dopamine: "Your competitors will feel this before they understand what's happening.",
-    modalDopamine: "Your competitors will feel this before they understand what's happening.",
+    name: "Own the conversation\nyour market is\nalready having.",
+    hook: "We build the platform for your brand to lead the defining conversation in your category — across every channel, in every market, at a scale that turns early commitment into a position your competitors can't recover from.",
+    modalPitch: "Everything included in Tier 3 — every service, at what level, and what it delivers commercially.",
+    modalTitle: "Full service breakdown",
+    dopamine: "The brands that own their category conversation today will be impossible to displace tomorrow.",
+    modalDopamine: "The brands that own their category conversation today will be impossible to displace tomorrow.",
     featured: false,
   },
   {
-    id: "t2",
+    id: "t2" as const,
     num: "Tier 02 · Launch & Scale",
     name: "Your brand,\nin front of your\nbuyer. Every month.",
-    hook: "A fully managed content engine that puts you in front of the right people consistently, professionally, without your team lifting a finger.",
-    modalPitch: "Your podcast becomes part of how your company shows up in the market consistently, professionally, and without your team carrying the operational weight.",
-    modalTitle: "Launch & Scale",
-    basePrice: 75000,
-    priceSuffix: "/yr",
-    basePriceNote: (c: Currency) => `${convertPrice(15000, c)} onboarding · ${convertPrice(5750, c)}/month · 2 episodes/month`,
-    dopamine: "The equivalent of a senior content hire without the salary, overhead, or learning curve.",
-    modalDopamine: "What does a single warm conversation with a dream client cost you through paid channels? This builds a system that generates them every month.",
+    hook: "A fully managed content engine that puts you in front of the right people — consistently, professionally, without your team lifting a finger.",
+    modalPitch: "Everything included in Tier 2 — what each service covers and what it delivers for your business.",
+    modalTitle: "Full service breakdown",
+    dopamine: "The equivalent of a senior content hire — without the salary, overhead, or learning curve.",
+    modalDopamine: "The equivalent of a senior content hire — without the salary, overhead, or learning curve.",
     featured: true,
     popular: true,
   },
   {
-    id: "t1",
-    num: "Tier 01",
+    id: "t1" as const,
+    num: "Tier 01 · Launch",
     name: "A show your\nmarket notices.",
-    hook: "A polished, credible podcast built from the ground up with the strategy, production and content to establish real authority in your space.",
-    modalPitch: "You go from \"we keep saying we should start a podcast\" to a polished, credible show your team is proud to share with the strategy to ensure it's built on something real.",
-    modalTitle: "Launch",
-    basePrice: 19500,
-    priceSuffix: "",
-    basePriceNote: (_c: Currency) => "One-time fee · 6 episodes · strategy included",
-    dopamine: "If you're not proud of what we build, we'll be the first to say so.",
+    hook: "A polished, credible podcast built from the ground up — with the strategy, production and content to establish real authority in your space.",
+    modalPitch: "Everything included in Tier 1 — what each service covers and what it delivers for your business.",
+    modalTitle: "Full service breakdown",
+    dopamine: "The most powerful way to experience what a branded podcast can do for your business.",
     featured: false,
   },
 ];
 
-/* ── Currency toggle component ── */
+/* ── Currency toggle ── */
 const CurrencyToggle = ({ value, onChange }: { value: Currency; onChange: (c: Currency) => void }) => (
   <div className="inline-flex items-center rounded-full border border-border bg-card p-1 gap-0.5">
     {(["GBP", "USD", "EUR"] as Currency[]).map((c) => (
@@ -151,9 +161,7 @@ const CurrencyToggle = ({ value, onChange }: { value: Currency; onChange: (c: Cu
         key={c}
         onClick={() => onChange(c)}
         className={`text-xs font-medium tracking-wide px-4 py-1.5 rounded-full transition-all duration-200 ${
-          value === c
-            ? "bg-white/10 text-text-primary shadow-sm"
-            : "text-text-tertiary hover:text-text-secondary"
+          value === c ? "bg-white/10 text-text-primary shadow-sm" : "text-text-tertiary hover:text-text-secondary"
         }`}
       >
         {CURRENCY_SYMBOLS[c]} {c}
@@ -162,61 +170,85 @@ const CurrencyToggle = ({ value, onChange }: { value: Currency; onChange: (c: Cu
   </div>
 );
 
+/* ── Production type toggle ── */
+const ProductionToggle = ({ value, onChange }: { value: ProdType; onChange: (p: ProdType) => void }) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-2xl overflow-hidden bg-card">
+    <button
+      onClick={() => onChange("location")}
+      className={`text-left p-5 transition-colors border-b sm:border-b-0 sm:border-r border-border ${value === "location" ? "bg-background" : ""}`}
+    >
+      <span className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary block mb-1">Production type</span>
+      <span className={`font-heading text-lg block mb-1 ${value === "location" ? "text-text-primary" : "text-text-secondary"}`}>On Location</span>
+      <span className="text-xs text-text-tertiary leading-relaxed block">Studios, hotels & homes. Our producers on the ground — full creative direction, all equipment included. Available across UK, EMEA and US.</span>
+    </button>
+    <button
+      onClick={() => onChange("virtual")}
+      className={`text-left p-5 transition-colors ${value === "virtual" ? "bg-background" : ""}`}
+    >
+      <span className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary block mb-1">Production type</span>
+      <span className={`font-heading text-lg block mb-1 ${value === "virtual" ? "text-text-primary" : "text-text-secondary"}`}>Virtual</span>
+      <span className="text-xs text-text-tertiary leading-relaxed block">Recorded online. We advise on camera, microphone and lighting setup to get the best possible talking-heads content from wherever your guest is.</span>
+      <span className="inline-block mt-2 text-[10px] font-medium px-2.5 py-0.5 rounded-full" style={{ background: "rgba(123,175,142,0.15)", color: C.sage }}>Save ~30%</span>
+    </button>
+  </div>
+);
+
 /* ── Modal content: Tier 1 ── */
 const T1_SECTIONS: SvcSection[] = [
   { section: "Strategy", rows: [
-    { name: "Audience & ICP definition", desc: "Define exactly who you're talking to, what they care about, and why your show is relevant to them.", status: "included", label: "Included" },
-    { name: "Podcast concept & positioning", desc: "Shape the format, name, tone and market position of the show so it stands out from day one.", status: "included", label: "Included" },
-    { name: "Content pillars & roadmap", desc: "Identify the core themes and topics that will drive consistent engagement across every episode.", status: "included", label: "Included" },
-    { name: "Distribution strategy", desc: "A clear plan for how and where the show reaches your audience from launch.", status: "included", label: "Included" },
-    { name: "Host sourcing & training", desc: "Identify and prepare the right on-screen talent — internal leadership or external host.", status: "not-included" },
-    { name: "Marketing stack integration", desc: "Connect the podcast into your CRM, email and marketing automation so content feeds the funnel.", status: "not-included" },
+    { name: "Audience & ICP definition", desc: "Who are you making this for? We define your ideal listener, their role, their world — so every episode is built for the person most likely to become a client.", status: "included", label: "Core ICP definition" },
+    { name: "Podcast concept & positioning", desc: "What is the show about and why should anyone care? We shape the name, format, tone and angle so it has a clear reason to exist in a crowded market.", status: "included", label: "Full concept, name, format and market positioning" },
+    { name: "Content pillars & episode roadmap", desc: "What will you talk about and in what order? We map out the themes, topics and episode arc so the show builds authority deliberately.", status: "included", label: "Core content pillars and launch episode themes" },
+    { name: "Distribution strategy", desc: "A show no-one hears is just expensive audio. We plan exactly where and how your episodes reach the right people at launch.", status: "included", label: "Distribution plan for launch across podcast platforms and social" },
+    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", status: "not-included" },
+    { name: "Marketing stack integration", desc: "We connect the podcast into your CRM, email platform and marketing automation — so listeners become leads automatically.", status: "not-included" },
   ]},
   { section: "Production", rows: [
-    { name: "Episode volume", desc: "Fully produced episodes, end-to-end from brief to published.", status: "included", label: "6 episodes total" },
-    { name: "Video & audio recording", desc: "High-quality recording with full technical direction and setup support — studio or remote.", status: "included", label: "Studio & remote" },
-    { name: "Professional editing", desc: "Full post-production for video and audio — paced, polished, broadcast standard.", status: "included", label: "Video + audio" },
-    { name: "Publishing & distribution", desc: "Published across all major podcast platforms from day one.", status: "included", label: "All platforms" },
+    { name: "Episode output", desc: "Consistency is what builds an audience — we make sure it never slips.", status: "included", label: "6 episodes — a complete first series" },
+    { name: "Recording — video & audio", desc: "A guest who sounds like they're in the room with you, not on a call. We set up every recording for success.", status: "included", label: "Studio or remote — full technical direction included" },
+    { name: "Editing & post-production", desc: "Good editing is invisible. Great editing makes 45 minutes feel like 15. This is where the craft lives.", status: "included", label: "Full video and audio post-production" },
+    { name: "Publishing & platform management", desc: "We handle publishing across Spotify, Apple Podcasts, YouTube and every major platform with optimised metadata so the show is findable from day one.", status: "included", label: "All platforms, fully managed" },
+    { name: "PodPlanner", desc: "Access to our proprietary production software, designed to streamline production and ideas across your team. Everyone stays aligned, nothing gets lost.", status: "included", label: "Included" },
   ]},
   { section: "Content Creation", rows: [
-    { name: "Short-form social clips", desc: "Platform-optimised video clips cut from each episode to drive reach and engagement.", status: "included", label: "4–6 clips per episode" },
-    { name: "Captions, hooks & social copy", desc: "Written content for every clip — crafted to stop the scroll and stay on-brand.", status: "included", label: "Captions per episode" },
-    { name: "Branded thumbnails & visuals", desc: "On-brand visual assets for every episode — thumbnails, cover art and social graphics.", status: "included", label: "Thumbnails & cover art" },
-    { name: "SEO-optimised show notes", desc: "Long-form written show notes built to rank in search and extend the life of every episode.", status: "included", label: "Full SEO show notes" },
-    { name: "Multi-format content repurposing", desc: "Each episode turned into multiple formats — articles, LinkedIn posts, email copy, quote cards.", status: "not-included" },
+    { name: "Short-form video clips", desc: "The moments that make someone stop scrolling and share. Cut and formatted for LinkedIn, Instagram and YouTube Shorts.", status: "included", label: "4–6 clips per episode" },
+    { name: "Captions, hooks & social copy", desc: "Every clip needs a reason to be watched. We write the hooks and captions that earn the click.", status: "included", label: "Captions for every clip" },
+    { name: "Thumbnails & visual assets", desc: "The thumbnail is the first thing a new listener sees. We design episode artwork that looks like a show worth taking seriously.", status: "included", label: "Episode thumbnails and cover art" },
+    { name: "Show notes & SEO", desc: "Every episode gets a long-form written companion built to rank in Google. Good show notes compound in value over time.", status: "included", label: "Long-form show notes with SEO optimisation" },
+    { name: "Content repurposing", desc: "One episode becomes many assets — LinkedIn posts, articles, email copy and quote cards.", status: "not-included" },
   ]},
   { section: "Distribution", rows: [
-    { name: "Social media posting & management", desc: "We write and publish content across LinkedIn, YouTube and social on your behalf.", status: "not-included" },
-    { name: "Newsletter & email distribution", desc: "Episode content distributed through your email list and newsletter.", status: "not-included" },
-    { name: "Paid media amplification", desc: "Targeted paid campaigns across LinkedIn, YouTube and Spotify.", status: "not-included" },
+    { name: "Social media management", desc: "We write, schedule and publish across LinkedIn, YouTube and social on your behalf.", status: "not-included" },
+    { name: "Email & newsletter distribution", desc: "Episode content distributed through your email list and newsletter.", status: "not-included" },
+    { name: "Paid media", desc: "Targeted paid campaigns across LinkedIn, YouTube and Spotify.", status: "not-included" },
   ]},
   { section: "Guest Strategy & PR", rows: [
-    { name: "Guest identification & targeting", desc: "Research and identify the right guests — aligned to your ICP and relevant to your content pillars.", status: "included", label: "Launch guest targeting" },
-    { name: "Personalised outreach & booking", desc: "Tailored outreach to every guest — managed end-to-end from first contact to recording.", status: "included", label: "Outreach & booking" },
-    { name: "PR & industry amplification", desc: "Turn key episodes into PR moments — press coverage and third-party amplification.", status: "not-included" },
+    { name: "Guest identification & targeting", desc: "The guest list is your editorial strategy. We research and identify guests who are credible to your audience and aligned to your content goals.", status: "included", label: "Guest targeting for your launch series" },
+    { name: "Guest outreach & booking", desc: "We handle every touch from first contact to confirmed recording slot. No generic Calendly links. No copy-paste templates.", status: "included", label: "End-to-end outreach and booking management" },
+    { name: "PR & press amplification", desc: "Turn key episodes into PR moments — press coverage and third-party amplification.", status: "not-included" },
   ]},
   { section: "UGC & Creator Network", rows: [
-    { name: "UGC strategy & activation", desc: "Turn hosts, guests and your team into active content contributors around every episode.", status: "not-included" },
-    { name: "Creator & influencer partnerships", desc: "Partner with relevant creators to carry your content to new audiences through trusted voices.", status: "not-included" },
+    { name: "UGC strategy & activation", desc: "Turn your hosts, guests and team into active content contributors around every episode.", status: "not-included" },
+    { name: "Creator & influencer partnerships", desc: "Partner with creators to carry your content to new audiences through trusted voices.", status: "not-included" },
   ]},
   { section: "Sales Integration", rows: [
-    { name: "Sales content alignment", desc: "Episodes and clips built around the exact challenges your buyers face.", status: "not-included" },
-    { name: "Outbound content toolkit", desc: "A library of clips and written assets your sales team can use in outreach sequences.", status: "not-included" },
+    { name: "Sales-aligned content planning", desc: "Episode topics planned around the questions and objections your buyers raise in sales conversations.", status: "not-included" },
+    { name: "Sales team content toolkit", desc: "A curated library of clips and written assets your sales team can drop into outreach sequences.", status: "not-included" },
     { name: "Lead capture & landing pages", desc: "Landing pages and CTAs built around the podcast to capture leads and feed your funnel.", status: "not-included" },
   ]},
   { section: "Performance & Reporting", rows: [
-    { name: "Performance reporting", desc: "Regular reporting on audience, engagement, content performance and channel breakdown.", status: "included", label: "End-of-pilot report" },
+    { name: "Performance reporting", desc: "We report on what actually matters — not just downloads and impressions, but engagement and audience quality.", status: "included", label: "End-of-series report on audience, content and early engagement" },
     { name: "Pipeline & revenue attribution", desc: "Track the journey from content impression to pipeline influence.", status: "not-included" },
-    { name: "Continuous optimisation", desc: "Ongoing refinement of content, format and distribution based on performance data.", status: "not-included" },
+    { name: "Ongoing optimisation", desc: "Monthly review and optimisation across content, format and distribution.", status: "not-included" },
   ]},
   { section: "Strategic Direction", rows: [
     { name: "Fractional Podcast CMO", desc: "Senior strategic oversight treating the podcast as a board-level commercial asset.", status: "not-included" },
-    { name: "Senior strategic account management", desc: "A named senior contact who understands your business and the commercial context behind every decision.", status: "not-included" },
+    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals.", status: "not-included" },
   ]},
   { section: "Guarantees", rows: [
-    { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed brief and quality standards. If it's not right, we fix it.", status: "included", label: "Fully guaranteed" },
-    { name: "90-day review with exit rights", desc: "Formal performance review with contractual exit rights if agreed indicators aren't met.", status: "not-included" },
-    { name: "Client reference access", desc: "Introduction to a current client at the same tier before you commit.", status: "not-included" },
+    { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed standards. If it's not right, we fix it. No arguments.", status: "included", label: "All deliverables guaranteed" },
+    { name: "90-day review with exit rights", desc: "Formal review with contractual exit rights if agreed indicators aren't met.", status: "not-included" },
+    { name: "Client reference calls", desc: "Introduction to a current client at the same tier before you commit.", status: "not-included" },
   ]},
 ];
 
@@ -235,58 +267,59 @@ const Tier1Content = () => (
 /* ── Modal content: Tier 2 ── */
 const T2_SECTIONS: SvcSection[] = [
   { section: "Strategy", rows: [
-    { name: "Audience & ICP definition", desc: "Define exactly who you're talking to, what they care about, and why your show is relevant to them.", status: "included", label: "Full ICP & buyer mapping" },
-    { name: "Podcast concept & positioning", desc: "Shape the format, name, tone and market position of the show so it stands out from day one.", status: "included", label: "Full concept & positioning" },
-    { name: "Content pillars & roadmap", desc: "Identify the core themes and topics that will drive consistent engagement across every episode.", status: "included", label: "Full content roadmap" },
-    { name: "Multi-channel distribution strategy", desc: "A clear plan for how the show reaches your audience across LinkedIn, YouTube, email and beyond.", status: "included", label: "Multi-channel strategy" },
-    { name: "Host sourcing & training", desc: "Identify and prepare the right on-screen talent — internal leadership or external host.", status: "included", label: "Full sourcing & training" },
-    { name: "Marketing stack integration", desc: "Connect the podcast into your CRM, email and marketing automation so content feeds the funnel.", status: "included", label: "Full stack integration" },
+    { name: "Audience & ICP definition", desc: "Who are you making this for? We define your ideal listener, their role, their world — so every episode is built for the person most likely to become a client.", status: "included", label: "Full ICP & buyer mapping" },
+    { name: "Podcast concept & positioning", desc: "What is the show about and why should anyone care? We shape the name, format, tone and angle.", status: "included", label: "Full concept, name, format and market positioning" },
+    { name: "Content pillars & episode roadmap", desc: "We map out the themes, topics and episode arc so the show builds authority deliberately.", status: "included", label: "Full episode roadmap with topic, format and messaging direction" },
+    { name: "Distribution strategy", desc: "We plan exactly where and how your episodes reach the right people across all channels.", status: "included", label: "Multi-channel strategy across LinkedIn, YouTube, email and podcast platforms" },
+    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", status: "included", label: "Full sourcing, testing and ongoing coaching" },
+    { name: "Marketing stack integration", desc: "We connect the podcast into your CRM, email platform and marketing automation.", status: "included", label: "Full integration into your CRM, email and automation stack" },
   ]},
   { section: "Production", rows: [
-    { name: "Episode volume", desc: "Fully produced episodes, end-to-end from brief to published.", status: "included", label: "2 per month, ongoing" },
-    { name: "Video & audio recording", desc: "High-quality recording with full technical direction — studio or remote.", status: "included", label: "Studio & remote" },
-    { name: "Professional editing", desc: "Full post-production for video and audio — paced, polished, broadcast standard.", status: "included", label: "Video + audio" },
-    { name: "Publishing & distribution", desc: "Published and optimised across all major podcast platforms — fully managed.", status: "included", label: "All platforms, fully managed" },
+    { name: "Episode output", desc: "Consistency is what builds an audience — we make sure it never slips.", status: "included", label: "2 per month, every month" },
+    { name: "Recording — video & audio", desc: "A guest who sounds like they're in the room with you, not on a call. We set up every recording for success.", status: "included", label: "Studio or remote — full technical direction included" },
+    { name: "Editing & post-production", desc: "Good editing is invisible. Great editing makes 45 minutes feel like 15. This is where the craft lives.", status: "included", label: "Full video and audio post-production" },
+    { name: "Publishing & platform management", desc: "Published across Spotify, Apple Podcasts, YouTube and every major platform with optimised metadata.", status: "included", label: "All platforms, fully managed" },
+    { name: "PodPlanner", desc: "Access to our proprietary production software, designed to streamline production and ideas across your team. Everyone stays aligned, nothing gets lost.", status: "included", label: "Included" },
   ]},
   { section: "Content Creation", rows: [
-    { name: "Short-form social clips", desc: "Platform-optimised video clips cut from each episode to drive reach and engagement.", status: "included", label: "4–6 clips per episode" },
-    { name: "Captions, hooks & social copy", desc: "Written content for every clip and post — crafted to stop the scroll and stay on-brand.", status: "included", label: "Full copywriting suite" },
-    { name: "Branded thumbnails & visuals", desc: "On-brand visual assets for every episode — thumbnails, cover art and social graphics.", status: "included", label: "Full visual suite" },
-    { name: "SEO-optimised show notes", desc: "Long-form written show notes built to rank in search and extend the life of every episode.", status: "included", label: "Full SEO show notes" },
-    { name: "Multi-format content repurposing", desc: "Each episode turned into multiple formats — articles, LinkedIn posts, email copy, quote cards.", status: "included", label: "Multi-format repurposing" },
+    { name: "Short-form video clips", desc: "The moments that make someone stop scrolling and share. Cut and formatted for LinkedIn, Instagram and YouTube Shorts.", status: "included", label: "4–6 clips per episode" },
+    { name: "Captions, hooks & social copy", desc: "Every clip needs a reason to be watched. We write the hooks, captions and post copy that earn the click.", status: "included", label: "Hooks, captions and full post copy for every clip" },
+    { name: "Thumbnails & visual assets", desc: "We design episode artwork, cover graphics and social visuals that look like a show worth taking seriously.", status: "included", label: "Episode thumbnails, cover art and social graphics" },
+    { name: "Show notes & SEO", desc: "Long-form written show notes built to rank in Google. Good show notes compound in value over time.", status: "included", label: "Long-form show notes with SEO optimisation" },
+    { name: "Content repurposing", desc: "One episode becomes many assets — LinkedIn posts, articles, email copy and quote cards.", status: "included", label: "LinkedIn posts, articles, email copy and quote cards" },
   ]},
   { section: "Distribution", rows: [
-    { name: "Social media posting & management", desc: "We write and publish content across LinkedIn, YouTube and social on your behalf — every week.", status: "included", label: "Full managed posting" },
-    { name: "Newsletter & email distribution", desc: "Episode content distributed through your email list and newsletter.", status: "included", label: "Newsletter integration" },
-    { name: "Paid media amplification", desc: "Targeted paid campaigns across LinkedIn, YouTube and Spotify.", status: "not-included" },
+    { name: "Social media management", desc: "We write, schedule and publish across LinkedIn, YouTube and social on your behalf — every week.", status: "included", label: "Fully managed — we post on your behalf across all channels" },
+    { name: "Email & newsletter distribution", desc: "We integrate each episode into your newsletter so subscribers hear about it first.", status: "included", label: "Episode distribution integrated into your newsletter" },
+    { name: "Paid media", desc: "Targeted paid campaigns across LinkedIn, YouTube and Spotify.", status: "not-included" },
   ]},
   { section: "Guest Strategy & PR", rows: [
-    { name: "Guest identification & targeting", desc: "Research and identify the right guests — aligned to your ICP and credible to your audience.", status: "included", label: "Ongoing guest pipeline" },
-    { name: "Personalised outreach & booking", desc: "Tailored outreach to every guest — no generic booking emails. End-to-end management.", status: "included", label: "Full outreach management" },
-    { name: "PR & industry amplification", desc: "Turn key episodes into PR moments — press coverage and third-party amplification.", status: "included", label: "PR amplification" },
+    { name: "Guest identification & targeting", desc: "We research and identify guests who are credible to your audience — not just whoever will say yes.", status: "included", label: "Ongoing pipeline of ICP-aligned guests, managed continuously" },
+    { name: "Guest outreach & booking", desc: "We handle every touch from first contact to confirmed recording. No generic Calendly links. No copy-paste templates.", status: "included", label: "End-to-end outreach and booking management" },
+    { name: "PR & press amplification", desc: "We identify conversations worth pitching to press and trade media — turning podcast moments into wider coverage.", status: "included", label: "Active PR outreach to press and trade media" },
   ]},
   { section: "UGC & Creator Network", rows: [
-    { name: "UGC strategy & activation", desc: "Turn hosts, guests and your team into active content contributors around every episode.", status: "not-included" },
-    { name: "Creator & influencer partnerships", desc: "Partner with creators to carry your content to new audiences through trusted voices.", status: "not-included" },
+    { name: "UGC strategy & activation", desc: "People trust people more than brands. We activate your hosts, guests and team to post their own reactions around each episode.", status: "not-included" },
+    { name: "Creator & influencer partnerships", desc: "We identify and brief creators to share your content with their audiences through voices they already trust.", status: "not-included" },
   ]},
   { section: "Sales Integration", rows: [
-    { name: "Sales content alignment", desc: "Episodes and clips built around the exact challenges and objections your buyers face.", status: "included", label: "Sales content alignment" },
-    { name: "Outbound content toolkit", desc: "A library of assets your sales team can use in outreach sequences to warm prospects.", status: "included", label: "Outbound toolkit" },
-    { name: "Lead capture & landing pages", desc: "Landing pages and CTAs built around the podcast to capture leads and feed your funnel.", status: "not-included" },
+    { name: "Sales-aligned content planning", desc: "Episode topics planned around the questions, objections and challenges your buyers raise in sales conversations.", status: "included", label: "Episode themes mapped to your sales cycle and buyer objections" },
+    { name: "Sales team content toolkit", desc: "A curated library of clips and written assets your sales team can drop into outreach sequences.", status: "included", label: "Clips and copy organised by sales stage and buyer persona" },
+    { name: "Lead capture & landing pages", desc: "Landing pages and CTAs built around the podcast to capture leads.", status: "not-included" },
   ]},
   { section: "Performance & Reporting", rows: [
-    { name: "Performance reporting", desc: "Regular reporting on audience, engagement, content performance and channel breakdown.", status: "included", label: "Monthly reporting" },
+    { name: "Performance reporting", desc: "We report on what actually matters — engagement, audience quality and the signals that indicate commercial momentum.", status: "included", label: "Monthly report — commercial metrics, engagement quality, pipeline signals" },
     { name: "Pipeline & revenue attribution", desc: "Track the journey from content impression to pipeline influence.", status: "not-included" },
-    { name: "Continuous optimisation", desc: "Ongoing refinement of content, format and distribution based on performance data.", status: "included", label: "Ongoing optimisation" },
+    { name: "Ongoing optimisation", desc: "We review performance data every month and adjust. The show gets sharper the longer we work together.", status: "included", label: "Monthly review and optimisation across content, format and distribution" },
   ]},
   { section: "Strategic Direction", rows: [
     { name: "Fractional Podcast CMO", desc: "Senior strategic oversight treating the podcast as a board-level commercial asset.", status: "not-included" },
-    { name: "Senior strategic account management", desc: "A named senior contact who understands your business and the commercial context behind every decision.", status: "included", label: "Dedicated senior contact" },
+    { name: "Senior account management", desc: "One person who is accountable for the work and accessible when it matters.", status: "included", label: "Named senior contact — consistent, accountable, accessible" },
   ]},
   { section: "Guarantees", rows: [
-    { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed brief and quality standards. If it's not right, we fix it.", status: "included", label: "Fully guaranteed" },
-    { name: "90-day review with exit rights", desc: "Formal performance review with contractual exit rights if agreed indicators aren't met.", status: "included", label: "Included" },
-    { name: "Client reference access", desc: "Introduction to a current client at the same tier before you commit.", status: "included", label: "On request" },
+    { name: "Output & quality guarantee", desc: "Every deliverable guaranteed against the agreed brief and quality standard. If it's not right, we fix it.", status: "included", label: "All deliverables guaranteed" },
+    { name: "90-day review with exit rights", desc: "At 90 days we review agreed leading indicators. If we're not hitting the bar, you have the right to exit with 30 days notice.", status: "included", label: "Formal 90-day review with contractual exit rights" },
+    { name: "Client reference calls", desc: "Before you sign, we'll introduce you to a current client at the same tier. A real conversation, no script.", status: "included", label: "Available on request before you commit" },
   ]},
 ];
 
@@ -297,7 +330,7 @@ const Tier2Content = () => (
       "Your brand stops being invisible between sales cycles. Prospects recognise you before your team ever reaches out."
     </div>
     <div className="bg-secondary/40 rounded-xl p-5 mt-4">
-      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Making the case internally:</strong> A senior content strategist + producer + social manager costs £90–120k in salary alone. This delivers equivalent output — fully coordinated, immediately operational — for £75k, with no recruitment, no onboarding, no management overhead.</p>
+      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Making the case internally:</strong> A senior content strategist + producer + social manager costs £90–120k in salary alone. This delivers equivalent output — fully coordinated, immediately operational — for £75k, with no recruitment, no ramp-up time, no management overhead.</p>
     </div>
   </>
 );
@@ -305,58 +338,54 @@ const Tier2Content = () => (
 /* ── Modal content: Tier 3 ── */
 const T3_SECTIONS: SvcSection[] = [
   { section: "Strategy", rows: [
-    { name: "Audience & ICP definition", desc: "Define exactly who you're talking to, what they care about, and why your show is relevant to them.", status: "included", label: "Deep buyer & account mapping" },
-    { name: "Podcast concept & positioning", desc: "Shape the format, name, tone and market position of the show so it stands out from day one.", status: "included", label: "Category-level positioning" },
-    { name: "Content pillars & roadmap", desc: "Identify the core themes and topics that will drive consistent engagement across every episode.", status: "included", label: "Category agenda roadmap" },
-    { name: "Multi-channel distribution strategy", desc: "A clear plan for how the show reaches your audience across every channel, globally.", status: "included", label: "Global multi-channel strategy" },
-    { name: "Host sourcing & training", desc: "Identify and prepare the right on-screen talent — internal leadership or external host.", status: "included", label: "Full sourcing & training" },
-    { name: "Marketing stack integration", desc: "Connect the podcast into your CRM, email and marketing automation so content feeds the funnel.", status: "included", label: "Full stack integration" },
+    { name: "Audience & ICP definition", desc: "We define your ideal listener, their role, their world — including target account mapping of the specific companies and job titles you want in your audience.", status: "included", label: "Includes target account mapping" },
+    { name: "Podcast concept & positioning", desc: "Positioned to own a category, not just occupy a niche.", status: "included", label: "Full concept, name, format and category-level positioning" },
+    { name: "Content pillars & episode roadmap", desc: "Roadmap built to set the agenda in your category — topics chosen for influence, not just interest.", status: "included", label: "Category agenda roadmap" },
+    { name: "Distribution strategy", desc: "Global distribution strategy across all channels — includes paid media planning.", status: "included", label: "Global multi-channel strategy including paid media planning" },
+    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", status: "included", label: "Full sourcing, testing and ongoing coaching" },
+    { name: "Marketing stack integration", desc: "We connect the podcast into your CRM, email platform and marketing automation.", status: "included", label: "Full integration into your CRM, email and automation stack" },
   ]},
   { section: "Production", rows: [
-    { name: "Episode volume", desc: "Fully produced episodes, end-to-end from brief to published.", status: "included", label: "2 per month, ongoing" },
-    { name: "Video & audio recording", desc: "High-quality recording with full technical direction — studio or remote.", status: "included", label: "Studio & remote" },
-    { name: "Professional editing", desc: "Full post-production for video and audio — paced, polished, broadcast standard.", status: "included", label: "Video + audio" },
-    { name: "Publishing & distribution", desc: "Published and optimised across all major podcast platforms — fully managed.", status: "included", label: "All platforms, fully managed" },
+    { name: "Episode output", desc: "Consistency is what builds an audience — we make sure it never slips.", status: "included", label: "2 per month, every month" },
+    { name: "Recording — video & audio", desc: "A guest who sounds like they're in the room with you, not on a call. We set up every recording for success.", status: "included", label: "Studio or remote — full technical direction included" },
+    { name: "Editing & post-production", desc: "Good editing is invisible. Great editing makes 45 minutes feel like 15. This is where the craft lives.", status: "included", label: "Full video and audio post-production" },
+    { name: "Publishing & platform management", desc: "Published across Spotify, Apple Podcasts, YouTube and every major platform with optimised metadata.", status: "included", label: "All platforms, fully managed" },
+    { name: "PodPlanner", desc: "Access to our proprietary production software, designed to streamline production and ideas across your team. Everyone stays aligned, nothing gets lost.", status: "included", label: "Included" },
   ]},
   { section: "Content Creation", rows: [
-    { name: "Short-form social clips", desc: "Platform-optimised video clips cut from each episode to drive reach and engagement.", status: "included", label: "6–10 clips per episode" },
-    { name: "Captions, hooks & social copy", desc: "Written content for every clip and post — crafted to stop the scroll and stay on-brand.", status: "included", label: "Full copywriting suite" },
-    { name: "Branded thumbnails & visuals", desc: "On-brand visual assets for every episode — thumbnails, cover art and social graphics.", status: "included", label: "Full visual suite" },
-    { name: "SEO-optimised show notes", desc: "Long-form written show notes built to rank in search and extend the life of every episode.", status: "included", label: "Full SEO show notes" },
-    { name: "Multi-format content repurposing", desc: "Each episode turned into multiple formats — articles, LinkedIn posts, email copy, quote cards.", status: "included", label: "Full repurposing engine" },
+    { name: "Short-form video clips", desc: "The moments that make someone stop scrolling and share. Cut and formatted for LinkedIn, Instagram and YouTube Shorts.", status: "included", label: "6–10 clips per episode" },
+    { name: "Captions, hooks & social copy", desc: "Every clip needs a reason to be watched. We write the hooks, captions and post copy that earn the click.", status: "included", label: "Hooks, captions and full post copy for every clip" },
+    { name: "Thumbnails & visual assets", desc: "We design episode artwork, cover graphics and social visuals that look like a show worth taking seriously.", status: "included", label: "Episode thumbnails, cover art and social graphics" },
+    { name: "Show notes & SEO", desc: "Long-form written show notes built to rank in Google. Good show notes compound in value over time.", status: "included", label: "Long-form show notes with SEO optimisation" },
+    { name: "Content repurposing", desc: "One episode becomes many assets — LinkedIn posts, articles, email copy and quote cards.", status: "included", label: "LinkedIn posts, articles, email copy and quote cards" },
   ]},
   { section: "Distribution", rows: [
-    { name: "Social media posting & management", desc: "We write and publish content across LinkedIn, YouTube and social on your behalf — every week.", status: "included", label: "Full managed posting" },
-    { name: "Newsletter & email distribution", desc: "Episode content distributed through your email list and newsletter.", status: "included", label: "Full newsletter integration" },
-    { name: "Paid media amplification", desc: "Targeted paid campaigns across LinkedIn, YouTube, Spotify and display — globally scaled.", status: "included", label: "Multi-channel, global scale" },
+    { name: "Social media management", desc: "We write, schedule and publish across LinkedIn, YouTube and social on your behalf — every week.", status: "included", label: "Fully managed — we post on your behalf across all channels" },
+    { name: "Email & newsletter distribution", desc: "We integrate each episode into your newsletter so subscribers hear about it first.", status: "included", label: "Episode distribution integrated into your newsletter" },
+    { name: "Paid media", desc: "Organic reach has a ceiling. We run targeted campaigns across LinkedIn, YouTube and Spotify — putting your best content in front of the right people at scale, globally.", status: "included", label: "Paid campaigns across LinkedIn, YouTube and Spotify — globally targeted" },
   ]},
   { section: "Guest Strategy & PR", rows: [
-    { name: "Guest identification & targeting", desc: "Research and identify the right guests — aligned to your ICP and your category ownership strategy.", status: "included", label: "Strategic account targeting" },
-    { name: "Personalised outreach & booking", desc: "Tailored outreach to every guest — no generic booking emails. End-to-end management.", status: "included", label: "Full outreach management" },
-    { name: "PR & industry amplification", desc: "Turn key episodes into PR moments — press coverage, industry citations and third-party amplification.", status: "included", label: "Full PR engine" },
+    { name: "Guest identification & targeting", desc: "The guest list is your editorial strategy. At this tier, guests are chosen from your target account list — the people you want to work with.", status: "included", label: "Guests chosen from your target account list" },
+    { name: "Guest outreach & booking", desc: "We handle every touch from first contact to confirmed recording. No generic Calendly links. No copy-paste templates.", status: "included", label: "End-to-end outreach and booking management" },
+    { name: "PR & press amplification", desc: "We identify conversations worth pitching to press and trade media — turning podcast moments into wider coverage.", status: "included", label: "Full PR engine — active outreach to press and trade media" },
   ]},
   { section: "UGC & Creator Network", rows: [
-    { name: "UGC strategy & activation", desc: "Turn hosts, guests and your team into active content contributors — reactions, insights, commentary around every episode.", status: "included", label: "Full UGC activation" },
-    { name: "Creator & influencer partnerships", desc: "Partner with relevant creators and industry voices to carry your content to new audiences through trusted channels.", status: "included", label: "Available as add-on" },
+    { name: "UGC strategy & activation", desc: "People trust people more than brands. We activate your hosts, guests and team to post their own reactions, takeaways and commentary around each episode.", status: "included", label: "Structured UGC programme around every episode" },
+    { name: "Creator & influencer partnerships", desc: "We identify and brief relevant creators and industry voices to share your content with their own audiences through voices they already trust.", status: "included", label: "Available as a separate add-on" },
   ]},
   { section: "Sales Integration", rows: [
-    { name: "Sales content alignment", desc: "Episodes and clips built around the exact challenges and objections your buyers face.", status: "included", label: "Full sales alignment" },
-    { name: "Outbound content toolkit", desc: "A library of assets your sales team can use in outreach sequences to warm prospects at every funnel stage.", status: "included", label: "Full outbound toolkit" },
-    { name: "Lead capture & landing pages", desc: "Landing pages and CTAs built around the podcast to capture leads and feed your funnel.", status: "included", label: "Full lead capture system" },
+    { name: "Sales-aligned content planning", desc: "Episode topics planned around the questions, objections and challenges your buyers raise in sales conversations — so your content does sales work before your team ever reaches out.", status: "included", label: "Episode themes mapped to your sales cycle and buyer objections" },
+    { name: "Sales team content toolkit", desc: "A curated library of clips and written assets your sales team can drop into outreach sequences at every stage of the funnel.", status: "included", label: "Clips and copy organised by sales stage and buyer persona" },
+    { name: "Lead capture & landing pages", desc: "We build dedicated landing pages with clear calls to action that convert listeners into leads and feed them into your pipeline automatically.", status: "included", label: "Dedicated podcast landing page with lead capture and CRM integration" },
   ]},
   { section: "Performance & Reporting", rows: [
-    { name: "Performance reporting", desc: "Regular reporting on audience, engagement, content performance and channel breakdown.", status: "included", label: "Monthly commercial reporting" },
-    { name: "Pipeline & revenue attribution", desc: "Track the journey from content impression to pipeline influence — connecting podcast activity to commercial outcomes.", status: "included", label: "Full attribution model" },
-    { name: "Continuous optimisation", desc: "Ongoing refinement of content, format and distribution based on performance data.", status: "included", label: "Ongoing optimisation" },
+    { name: "Performance reporting", desc: "We report on what actually matters — engagement, audience quality and the signals that indicate commercial momentum.", status: "included", label: "Monthly report — commercial metrics, engagement quality, pipeline signals" },
+    { name: "Pipeline & revenue attribution", desc: "We track the journey from content impression to sales conversation to closed deal — so you can show your board exactly what the podcast is contributing to revenue.", status: "included", label: "Attribution tracking from content exposure through to pipeline and closed revenue" },
+    { name: "Ongoing optimisation", desc: "We review performance data every month and adjust. The show gets sharper the longer we work together.", status: "included", label: "Monthly review and optimisation across content, format and distribution" },
   ]},
   { section: "Strategic Direction", rows: [
-    { name: "Fractional Podcast CMO", desc: "Senior strategic oversight — quarterly planning, treating the podcast as a board-level commercial asset.", status: "included", label: "Quarterly strategy sessions" },
-    { name: "Senior strategic account management", desc: "A named senior contact who understands your business and the commercial context behind every decision.", status: "included", label: "Dedicated senior contact" },
-  ]},
-  { section: "Guarantees", rows: [
-    { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed brief and quality standards. If it's not right, we fix it.", status: "included", label: "Fully guaranteed" },
-    { name: "90-day review with exit rights", desc: "Formal performance review with contractual exit rights if agreed leading indicators aren't met.", status: "included", label: "Included" },
-    { name: "Client reference access", desc: "Introduction to a current Tier 3 client before you commit — hear it from someone already in the programme.", status: "included", label: "On request" },
+    { name: "Fractional Podcast CMO", desc: "Quarterly senior strategy sessions where we treat the podcast as a board-level commercial asset — reviewing market positioning, competitive landscape and commercial direction. The strategic thinking of a CMO without the hire.", status: "included", label: "Quarterly sessions with senior strategic lead" },
+    { name: "Senior account management", desc: "One person who is accountable for the work and accessible when it matters.", status: "included", label: "Named senior contact — consistent, accountable, accessible" },
   ]},
 ];
 
@@ -386,6 +415,7 @@ const Tier3Tabs = () => {
 
 const Tier3Services = () => (
   <>
+    <div className="text-sm text-text-secondary p-3 border border-border rounded-lg mb-5">Includes everything in Launch & Scale — plus the full category ownership layer.</div>
     <ServiceTable sections={T3_SECTIONS} tier="t3" />
     <div className="mt-6 bg-card border border-border rounded-xl p-5 font-heading text-base italic text-text-primary leading-relaxed">
       "In 18 months, anyone who matters in your market will associate your brand with the conversation — not just a participant in it."
@@ -393,44 +423,6 @@ const Tier3Services = () => (
     <div className="bg-secondary/40 rounded-xl p-5 mt-4">
       <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Making the case to your CEO:</strong> Category ownership is a moat. At £160k/year all-in, you're not buying marketing. You're buying a defensible market position that's extraordinarily difficult for a competitor to undo.</p>
     </div>
-  </>
-);
-
-const Tier3AdSpend = () => (
-  <>
-    <p className="text-sm text-text-secondary leading-relaxed mb-5">The minimum £3k/month is a starting point, not a recommended level. Here's what different budgets actually deliver.</p>
-    {[
-      { label: "Entry — foundation presence", amount: "£3,000/month", body: <>
-        <strong className="text-text-primary">What this buys:</strong> 2–4 active campaigns across LinkedIn. Realistic reach of <strong className="text-text-primary">150,000–300,000 impressions/month</strong> — tightly targeted by job title, seniority and company size. Best for testing what content performs before scaling.
-      </> },
-      { label: "Growth — consistent market presence", amount: "£5,000–8,000/month", body: <>
-        <strong className="text-text-primary">What this buys:</strong> Multi-format campaigns across LinkedIn and YouTube simultaneously. Reach of <strong className="text-text-primary">400,000–700,000 impressions/month</strong>. Retargeting activated — hitting warm audiences who have already engaged. Most clients move here within 3–6 months.
-      </> },
-      { label: "Scale — category saturation", amount: "£10,000+/month", body: <>
-        <strong className="text-text-primary">What this buys:</strong> Aggressive multi-channel distribution across LinkedIn, YouTube, Spotify and display. <strong className="text-text-primary">1M+ impressions/month</strong> within a tightly defined audience. Your brand becomes genuinely unavoidable for anyone in your target market.
-      </> },
-    ].map((sc) => (
-      <div key={sc.label} className="border border-border rounded-xl overflow-hidden mb-4">
-        <div className="flex justify-between items-center bg-secondary/40 px-4 py-2.5">
-          <span className="text-[13px] font-medium text-text-primary">{sc.label}</span>
-          <span className="font-heading text-base" style={{ color: C.plum }}>{sc.amount}</span>
-        </div>
-        <div className="px-4 py-3 text-[13px] text-text-secondary leading-relaxed border-t border-border">{sc.body}</div>
-      </div>
-    ))}
-    <p className="text-[13px] font-medium text-text-primary mt-5 mb-3">How we report on ad spend</p>
-    {[
-      { label: "Reach within target accounts", desc: "Are you hitting the companies you want to work with — or accumulating views from people who will never buy?" },
-      { label: "Engagement by content type", desc: "Which clips generate saves, shares and comments — not just passive plays." },
-      { label: "Warm signal tracking", desc: "Profile visits, connection requests and DM responses that correlate with campaign exposure." },
-      { label: "Pipeline influence", desc: "Did conversations or deals involve someone exposed to your content? Tracked and reported honestly." },
-      { label: "Cost per meaningful engagement", desc: "Not cost-per-click. Cost per action that signals real commercial intent." },
-    ].map((r) => (
-      <div key={r.label} className="flex gap-3 py-2.5 border-b border-border last:border-b-0">
-        <span className="text-xs font-medium text-text-primary min-w-[150px] shrink-0">{r.label}</span>
-        <span className="text-xs text-text-secondary leading-relaxed">{r.desc}</span>
-      </div>
-    ))}
   </>
 );
 
@@ -442,7 +434,7 @@ const Tier3Guarantees = () => (
       <ul className="divide-y divide-[#7BAF8E]/10">
         {[
           "All production deliverables — episodes, clips, show notes — delivered on schedule to agreed quality standards",
-          "All guests meet seniority and ICP criteria defined at onboarding — you have approval rights",
+          "All guests meet seniority and ICP criteria defined at the start — you have approval rights",
           "Monthly reporting on a fixed date — commercial metrics, not vanity numbers",
           "Senior point of contact accessible within 24 hours, always",
           "Quarterly strategy sessions in the diary before the quarter begins",
@@ -485,23 +477,24 @@ type CompareSection = { section: string; rows: CompareRow[] };
 
 const compareSections: CompareSection[] = [
   { section: "Strategy", rows: [
-    { name: "Audience & ICP definition", desc: "Define who you're talking to, what they care about, and why your show is relevant.", t3: "Deep buyer & account mapping", t2: "Full ICP & buyer mapping", t1: "ICP definition" },
-    { name: "Podcast concept & positioning", desc: "What is the show actually about, and why should anyone care? We shape the name, format, tone and angle — so it has a clear reason to exist in a crowded market.", t3: "Positioned to own a category, not just occupy a niche", t2: "Full concept, name, format and market positioning", t1: "Full concept, name, format and market positioning" },
-    { name: "Content pillars & episode roadmap", desc: "What will you talk about, and in what order? We map out the themes, topics and episode arc so the show builds authority deliberately — not randomly.", t3: "Roadmap built to set the agenda in your category — topics chosen for influence, not just interest", t2: "Full episode roadmap with topic, format and messaging direction", t1: "Core content pillars and launch episode themes" },
-    { name: "Distribution strategy", desc: "A show no-one hears is just expensive audio. We plan exactly where and how your episodes reach the right people — which platforms, which channels, which formats.", t3: "Global distribution strategy across all channels — includes paid media planning", t2: "Multi-channel strategy across LinkedIn, YouTube, email and podcast platforms", t1: "Distribution plan for launch across podcast platforms and social" },
-    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person — internal or external — and coach them to sound natural, confident and authoritative on mic.", t3: "Full sourcing, testing and ongoing coaching", t2: "Full sourcing, testing and ongoing coaching", t1: null },
-    { name: "Marketing stack integration", desc: "We connect the podcast into your CRM, email platform and marketing automation — so listeners become leads, and leads get nurtured automatically.", t3: "Full integration into your CRM, email and automation stack", t2: "Full integration into your CRM, email and automation stack", t1: null },
+    { name: "Audience & ICP definition", desc: "Who are you making this for? We define your ideal listener so every episode is built for the person most likely to become a client.", t3: "Includes target account mapping", t2: "Full ICP & buyer mapping", t1: "Core ICP definition" },
+    { name: "Podcast concept & positioning", desc: "What is the show about and why should anyone care? We shape the name, format, tone and angle so it has a clear reason to exist in a crowded market.", t3: "Category-level positioning", t2: "Full concept, name, format and positioning", t1: "Full concept, name, format and positioning" },
+    { name: "Content pillars & episode roadmap", desc: "What will you talk about and in what order? We map out the themes, topics and episode arc so the show builds authority deliberately.", t3: "Category agenda roadmap", t2: "Full episode roadmap with topic and messaging direction", t1: "Core content pillars and launch episode themes" },
+    { name: "Distribution strategy", desc: "A show no-one hears is just expensive audio. We plan exactly where and how your episodes reach the right people.", t3: "Global multi-channel strategy including paid media planning", t2: "Multi-channel strategy across LinkedIn, YouTube and email", t1: "Distribution plan for launch" },
+    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", t3: "Full sourcing, testing and ongoing coaching", t2: "Full sourcing, testing and ongoing coaching", t1: null },
+    { name: "Marketing stack integration", desc: "We connect the podcast into your CRM, email platform and marketing automation so listeners become leads automatically.", t3: "Full integration into your CRM, email and automation stack", t2: "Full integration into your CRM, email and automation stack", t1: null },
   ]},
   { section: "Production", rows: [
-    { name: "Episode output", desc: "How many episodes we produce for you, fully managed from guest brief to final publish. Consistency is what builds an audience — we make sure it never slips.", t3: "2 per month, every month", t2: "2 per month, every month", t1: "6 episodes — a complete first series" },
-    { name: "Recording — video & audio", desc: "Great production starts before the edit. We set up every recording for success — the right environment, the right sound, the right frame.", t3: "Studio or remote — full technical direction included", t2: "Studio or remote — full technical direction included", t1: "Studio or remote — full technical direction included" },
-    { name: "Editing & post-production", desc: "Good editing is invisible. Great editing makes 45 minutes feel like 15. We cut for pace and clarity — removing the dead air, sharpening the insights.", t3: "Full video and audio post-production", t2: "Full video and audio post-production", t1: "Full video and audio post-production" },
-    { name: "Publishing & platform management", desc: "We handle publishing across Spotify, Apple Podcasts, YouTube and every major platform — with optimised titles, descriptions and metadata.", t3: "All platforms, fully managed", t2: "All platforms, fully managed", t1: "All platforms, fully managed" },
+    { name: "Episode output", desc: "Consistency is what builds an audience. We make sure it never slips — fully managed from guest brief to final publish.", t3: "2 per month, every month", t2: "2 per month, every month", t1: "6 episodes — a complete first series" },
+    { name: "Recording — video & audio", desc: "Great production starts before the edit. A guest who sounds like they're in the room with you, not on a call.", t3: "Studio or remote — full technical direction included", t2: "Studio or remote — full technical direction included", t1: "Studio or remote — full technical direction included" },
+    { name: "Editing & post-production", desc: "Good editing is invisible. Great editing makes 45 minutes feel like 15. We cut for pace and clarity — this is where the craft lives.", t3: "Full video and audio post-production", t2: "Full video and audio post-production", t1: "Full video and audio post-production" },
+    { name: "Publishing & platform management", desc: "We handle publishing across Spotify, Apple Podcasts, YouTube and every major platform with optimised metadata so the show is findable from day one.", t3: "All platforms, fully managed", t2: "All platforms, fully managed", t1: "All platforms, fully managed" },
+    { name: "PodPlanner", desc: "Our proprietary production software — designed to streamline production and align ideas across your whole team. Every episode, every asset, every brief in one place.", t3: "Included", t2: "Included", t1: "Included" },
   ]},
   { section: "Content Creation", rows: [
-    { name: "Short-form video clips", desc: "The moments that make someone stop scrolling and share. We cut the best 60–90 seconds from every episode and format them for LinkedIn, Instagram and YouTube Shorts.", t3: "6–10 clips per episode", t2: "4–6 clips per episode", t1: "4–6 clips per episode" },
-    { name: "Captions, hooks & social copy", desc: "Every clip needs a reason to be watched. We write the hooks, captions and post copy that earn the click — not filler text dropped under a video.", t3: "Hooks, captions and full post copy for every clip", t2: "Hooks, captions and full post copy for every clip", t1: "Captions for every clip" },
-    { name: "Thumbnails & visual assets", desc: "The thumbnail is the first thing a new listener sees. We design episode artwork, cover graphics and social visuals that look like a show worth taking seriously.", t3: "Episode thumbnails, cover art and social graphics", t2: "Episode thumbnails, cover art and social graphics", t1: "Episode thumbnails and cover art" },
+    { name: "Short-form video clips", desc: "The moments that make someone stop scrolling and share. Cut for LinkedIn, Instagram and YouTube Shorts.", t3: "6–10 clips per episode", t2: "4–6 clips per episode", t1: "4–6 clips per episode" },
+    { name: "Captions, hooks & social copy", desc: "Every clip needs a reason to be watched. We write the hooks, captions and post copy that earn the click — not filler text.", t3: "Hooks, captions and full post copy for every clip", t2: "Hooks, captions and full post copy for every clip", t1: "Captions for every clip" },
+    { name: "Thumbnails & visual assets", desc: "The thumbnail is the first thing a new listener sees. We design episode artwork that looks like a show worth taking seriously.", t3: "Episode thumbnails, cover art and social graphics", t2: "Episode thumbnails, cover art and social graphics", t1: "Episode thumbnails and cover art" },
     { name: "Show notes & SEO", desc: "Every episode gets a written companion — a long-form summary built to rank in Google and give the episode a life beyond the listen.", t3: "Long-form show notes with SEO optimisation", t2: "Long-form show notes with SEO optimisation", t1: "Long-form show notes with SEO optimisation" },
     { name: "Content repurposing", desc: "One episode becomes many assets. We turn each recording into LinkedIn posts, articles, email copy and quote cards.", t3: "LinkedIn posts, articles, email copy and quote cards", t2: "LinkedIn posts, articles, email copy and quote cards", t1: null },
   ]},
@@ -511,13 +504,13 @@ const compareSections: CompareSection[] = [
     { name: "Paid media", desc: "Organic reach has a ceiling. Paid distribution removes it. We run targeted campaigns across LinkedIn, YouTube and Spotify.", t3: "Paid campaigns across LinkedIn, YouTube and Spotify — globally targeted", t2: null, t1: null },
   ]},
   { section: "Guest Strategy & PR", rows: [
-    { name: "Guest identification & targeting", desc: "The guest list is your editorial strategy. We research and identify guests who are credible to your audience and aligned to your content goals.", t3: "Guests chosen from your target account list — the people you want to work with", t2: "Ongoing pipeline of ICP-aligned guests, managed continuously", t1: "Guest targeting for your launch series" },
+    { name: "Guest identification & targeting", desc: "The guest list is your editorial strategy. We research and identify guests who are credible to your audience and aligned to your content goals.", t3: "Guests chosen from your target account list", t2: "Ongoing pipeline of ICP-aligned guests, managed continuously", t1: "Guest targeting for your launch series" },
     { name: "Guest outreach & booking", desc: "We handle every touch from first contact to confirmed recording slot — with personalised outreach that reflects the quality of your show.", t3: "End-to-end outreach and booking management", t2: "End-to-end outreach and booking management", t1: "End-to-end outreach and booking management" },
-    { name: "PR & press amplification", desc: "The best episodes deserve more than a social post. We identify the conversations worth pitching to press, trade media and industry publications.", t3: "Active PR outreach to press and trade media", t2: "Active PR outreach to press and trade media", t1: null },
+    { name: "PR & press amplification", desc: "The best episodes deserve more than a social post. We identify the conversations worth pitching to press, trade media and industry publications.", t3: "Full PR engine — active outreach to press and trade media", t2: "Active PR outreach to press and trade media", t1: null },
   ]},
   { section: "UGC & Creator Network", rows: [
-    { name: "User-generated content (UGC)", desc: "People trust people more than brands. We activate your hosts, guests and internal team to post their own reactions, takeaways and commentary around each episode.", t3: "Structured UGC programme around every episode", t2: null, t1: null },
-    { name: "Creator & influencer partnerships", desc: "We identify and brief relevant creators and industry voices to share your content with their own audiences — introducing your brand to people who have never heard of you.", t3: "Available as a separate add-on — see details below", t2: null, t1: null },
+    { name: "UGC strategy & activation", desc: "People trust people more than brands. We activate your hosts, guests and internal team to post their own reactions, takeaways and commentary around each episode.", t3: "Structured UGC programme around every episode", t2: null, t1: null },
+    { name: "Creator & influencer partnerships", desc: "We identify and brief relevant creators and industry voices to share your content with their own audiences — introducing your brand to people who have never heard of you.", t3: "Available as a separate add-on", t2: null, t1: null },
   ]},
   { section: "Sales Integration", rows: [
     { name: "Sales-aligned content planning", desc: "We plan episode topics around the questions, objections and challenges your buyers raise in sales conversations.", t3: "Episode themes mapped to your sales cycle and buyer objections", t2: "Episode themes mapped to your sales cycle and buyer objections", t1: null },
@@ -536,7 +529,7 @@ const compareSections: CompareSection[] = [
   { section: "Guarantees", rows: [
     { name: "Output & quality guarantee", desc: "Every deliverable — episodes, clips, copy, visuals — is guaranteed against the agreed brief and quality standard. If something isn't right, we fix it.", t3: "All deliverables guaranteed", t2: "All deliverables guaranteed", t1: "All deliverables guaranteed" },
     { name: "90-day review with exit rights", desc: "At 90 days we sit down together and review the agreed leading indicators. If we're not hitting the bar we set, you have the right to exit with 30 days notice.", t3: "Formal 90-day review with contractual exit rights", t2: "Formal 90-day review with contractual exit rights", t1: null },
-    { name: "Client reference calls", desc: "Before you sign, we'll introduce you to a current client at the same tier. A real conversation, no script.", t3: "Available on request before you commit", t2: "Available on request before you commit", t1: null },
+    { name: "Client reference calls", desc: "Before you sign, we'll introduce you to a current client at the same tier. A real conversation, no script — so you can hear directly what it's like to work with us.", t3: "Available on request before you commit", t2: "Available on request before you commit", t1: null },
   ]},
 ];
 
@@ -550,51 +543,54 @@ const CompareCell = ({ value }: { value: string | null }) =>
     <span className="text-[10px] text-text-tertiary/50">Not included</span>
   );
 
-const CompareTable = ({ currency }: { currency: Currency }) => (
-  <div className="overflow-x-auto -mx-6 sm:-mx-8 px-6 sm:px-8">
-    <table className="w-full border-collapse min-w-[700px]">
-      <thead>
-        <tr>
-          <th className="text-left px-4 py-3 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-b border-border w-[30%]">Service</th>
-          <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
-            <div className="text-[11px] font-medium text-text-primary">Global Leader</div>
-            <div className="text-[10px] text-text-tertiary">{convertPrice(125000, currency)}/yr + ad spend</div>
-            <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#f0eaf8", color: "#4e2d7a" }}>Tier 03</span>
-          </th>
-          <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
-            <div className="text-[11px] font-medium text-text-primary">Launch & Scale</div>
-            <div className="text-[10px] text-text-tertiary">{convertPrice(75000, currency)}/yr</div>
-            <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#eaeffa", color: "#1649a0" }}>Tier 02</span>
-          </th>
-          <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
-            <div className="text-[11px] font-medium text-text-primary">Launch</div>
-            <div className="text-[10px] text-text-tertiary">{convertPrice(19500, currency)} one-time</div>
-            <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#e8f4f1", color: "#0a6b5c" }}>Tier 01</span>
-          </th>
-        </tr>
-      </thead>
-      {compareSections.map((sec) => (
-        <tbody key={sec.section}>
-          <tr><td colSpan={4} className="bg-secondary/40 px-4 py-2 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-y border-border">{sec.section}</td></tr>
-          {sec.rows.map((row) => (
-            <tr key={row.name} className="group hover:bg-secondary/20 transition-colors">
-              <td className="px-4 py-3 border-b border-border align-top">
-                <div className="text-[12px] font-medium text-text-primary mb-0.5">{row.name}</div>
-                <div className="text-[10px] text-text-tertiary leading-snug">{row.desc}</div>
-              </td>
-              <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t3} /></td>
-              <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t2} /></td>
-              <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t1} /></td>
-            </tr>
-          ))}
-        </tbody>
-      ))}
-    </table>
-  </div>
-);
+const CompareTable = ({ currency, prodType }: { currency: Currency; prodType: ProdType }) => {
+  const prices = ALL_PRICES[currency][prodType];
+  return (
+    <div className="overflow-x-auto -mx-6 sm:-mx-8 px-6 sm:px-8">
+      <table className="w-full border-collapse min-w-[700px]">
+        <thead>
+          <tr>
+            <th className="text-left px-4 py-3 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-b border-border w-[30%]">Service</th>
+            <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
+              <div className="text-[11px] font-medium text-text-primary">Global Leader</div>
+              <div className="text-[10px] text-text-tertiary">{prices.t3.price} + ad spend</div>
+              <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#f0eaf8", color: "#4e2d7a" }}>Tier 03</span>
+            </th>
+            <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
+              <div className="text-[11px] font-medium text-text-primary">Launch & Scale</div>
+              <div className="text-[10px] text-text-tertiary">{prices.t2.price}</div>
+              <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#eaeffa", color: "#1649a0" }}>Tier 02</span>
+            </th>
+            <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
+              <div className="text-[11px] font-medium text-text-primary">Launch</div>
+              <div className="text-[10px] text-text-tertiary">{prices.t1.price} one-time</div>
+              <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#e8f4f1", color: "#0a6b5c" }}>Tier 01</span>
+            </th>
+          </tr>
+        </thead>
+        {compareSections.map((sec) => (
+          <tbody key={sec.section}>
+            <tr><td colSpan={4} className="bg-secondary/40 px-4 py-2 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-y border-border">{sec.section}</td></tr>
+            {sec.rows.map((row) => (
+              <tr key={row.name} className="group hover:bg-secondary/20 transition-colors">
+                <td className="px-4 py-3 border-b border-border align-top">
+                  <div className="text-[12px] font-medium text-text-primary mb-0.5">{row.name}</div>
+                  <div className="text-[10px] text-text-tertiary leading-snug">{row.desc}</div>
+                </td>
+                <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t3} /></td>
+                <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t2} /></td>
+                <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t1} /></td>
+              </tr>
+            ))}
+          </tbody>
+        ))}
+      </table>
+    </div>
+  );
+};
 
 /* ── Compare modal ── */
-const CompareModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClose: () => void; currency?: Currency }) => (
+const CompareModal = ({ open, onClose, currency = "GBP" as Currency, prodType = "location" as ProdType }: { open: boolean; onClose: () => void; currency?: Currency; prodType?: ProdType }) => (
   <AnimatePresence>
     {open && (
       <motion.div
@@ -616,11 +612,11 @@ const CompareModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onCl
             <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
               <X className="w-4 h-4" />
             </button>
-            <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">All tiers</div>
-            <h3 className="font-heading text-2xl text-text-primary mb-2">Side by side comparison</h3>
+            <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Full comparison</div>
+            <h3 className="font-heading text-2xl text-text-primary mb-2">Side by side</h3>
             <p className="text-sm text-text-secondary leading-relaxed">Every service across all three tiers. What's included, at what level, and what changes as you scale.</p>
           </ModalHeader>
-          <div className="p-6 sm:p-8"><CompareTable currency={currency} /></div>
+          <div className="p-6 sm:p-8"><CompareTable currency={currency} prodType={prodType} /></div>
         </motion.div>
       </motion.div>
     )}
@@ -630,10 +626,7 @@ const CompareModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onCl
 /* ── Animated modal header ── */
 const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.ReactNode; accentColor?: string }) => (
   <div className="relative overflow-hidden border-b border-border">
-    {/* Gradient top edge */}
     <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, #8B83C7, #C484C9, transparent)` }} />
-
-    {/* Floating blur blobs */}
     <motion.div
       animate={{ x: [0, 30, -20, 0], y: [0, -15, 10, 0], scale: [1, 1.2, 0.9, 1] }}
       transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -652,8 +645,6 @@ const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.Re
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 rounded-full pointer-events-none"
       style={{ background: "#C484C9", opacity: 0.05, filter: "blur(50px)" }}
     />
-
-    {/* Shimmer sweep */}
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       <motion.div
         animate={{ x: ["-100%", "200%"] }}
@@ -662,10 +653,7 @@ const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.Re
         style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent)" }}
       />
     </div>
-
-    {/* Subtle grid texture */}
     <div className="absolute inset-0 pointer-events-none opacity-30" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.02) 39px,rgba(255,255,255,0.02) 40px)" }} />
-
     <div className="relative p-6 sm:p-8 pb-5">{children}</div>
   </div>
 );
@@ -673,7 +661,9 @@ const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.Re
 /* ── Modal wrapper ── */
 const tierAccent: Record<string, string> = { t1: "#6A9FA3", t2: "#7BAF8E", t3: "#8B83C7" };
 
-const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: () => void; tier: { id: string; num: string; name: string; modalTitle?: string; modalPitch?: string; hook: string; price: string; priceNote: string; modalDopamine?: string } | null; children: React.ReactNode }) => (
+type TierModalData = { id: string; num: string; modalTitle?: string; modalPitch?: string; price: string; priceNote: string; modalDopamine?: string };
+
+const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: () => void; tier: TierModalData | null; children: React.ReactNode }) => (
   <AnimatePresence>
     {open && tier && (
       <motion.div
@@ -696,19 +686,13 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
               <X className="w-4 h-4" />
             </button>
             <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">{tier.num}</div>
-            <h3 className="font-heading text-2xl text-text-primary mb-2">{tier.modalTitle || tier.name.split("\n")[0]}</h3>
-            <p className="text-sm text-text-secondary leading-relaxed mb-4">{tier.modalPitch || tier.hook}</p>
+            <h3 className="font-heading text-2xl text-text-primary mb-2">{tier.modalTitle || "Full service breakdown"}</h3>
+            <p className="text-sm text-text-secondary leading-relaxed mb-4">{tier.modalPitch}</p>
             <div className="flex items-baseline gap-2.5">
               <span className="font-heading text-3xl text-text-primary">{tier.price}</span>
               <span className="text-xs text-text-tertiary">{tier.priceNote}</span>
             </div>
-            {tier.modalDopamine && (
-              <div className="mt-4 p-3 rounded-lg bg-white/[0.06] font-heading text-sm italic text-text-secondary leading-relaxed">
-                "{tier.modalDopamine}"
-              </div>
-            )}
           </ModalHeader>
-          {/* body */}
           <div className="p-6 sm:p-8">{children}</div>
         </motion.div>
       </motion.div>
@@ -740,32 +724,12 @@ const STEP_COLORS = [
 
 const maxImp = MEDIA_STEPS[MEDIA_STEPS.length - 1].impNum;
 
-/* Animated particles that float up from active bars */
-const BarParticles = memo(({ active, color }: { active: boolean; color: string }) => {
-  if (!active) return null;
-  return (
-    <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-8 h-8 pointer-events-none">
-      {[0, 1, 2].map((i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full"
-          style={{ background: color, left: `${30 + i * 20}%` }}
-          animate={{
-            y: [-4, -20 - i * 6],
-            opacity: [0.8, 0],
-            scale: [1, 0.3],
-          }}
-          transition={{
-            duration: 1.2 + i * 0.3,
-            repeat: Infinity,
-            delay: i * 0.4,
-            ease: "easeOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-});
+const convertSpend = (gbp: number, currency: Currency): string => {
+  const rates: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };
+  const sym = CURRENCY_SYMBOLS[currency];
+  const val = Math.round(gbp * rates[currency]);
+  return `${sym}${val.toLocaleString()}`;
+};
 
 const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
   const [step, setStep] = useState(0);
@@ -781,15 +745,11 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
       className="mt-10 rounded-2xl border border-border overflow-hidden relative"
       style={{ background: "#111113" }}
     >
-      {/* Animated background glow that shifts with the slider */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
-        animate={{
-          background: `radial-gradient(ellipse 60% 50% at ${30 + pct * 0.4}% 70%, ${activeColor.glow}, transparent 70%)`,
-        }}
+        animate={{ background: `radial-gradient(ellipse 60% 50% at ${30 + pct * 0.4}% 70%, ${activeColor.glow}, transparent 70%)` }}
         transition={{ duration: 0.6 }}
       />
-
       <div className="relative p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.plumBg, color: C.plum }}>Global Leader</span>
@@ -797,124 +757,82 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
         <h3 className="font-heading text-xl text-text-primary mb-1">Paid Media Investment</h3>
         <p className="text-sm text-text-secondary mb-6">Drag to explore how ad spend scales impressions within your target ICP.</p>
 
-        {/* ── Animated bar chart ── */}
         <div className="flex items-end gap-2 h-44 sm:h-56 mb-6 px-1">
           {MEDIA_STEPS.map((s, i) => {
             const isActive = i <= step;
             const isCurrent = i === step;
             const barHeight = (s.impNum / maxImp) * 100;
             const barColor = STEP_COLORS[i];
-
             return (
               <button
                 key={i}
                 onClick={() => setStep(i)}
                 className="relative flex-1 flex flex-col items-center justify-end h-full group"
               >
-
-
-                {/* Bar */}
                 <motion.div
                   className="w-full rounded-t-md relative overflow-hidden"
-                  animate={{
-                    height: `${barHeight}%`,
-                    opacity: isActive ? 1 : 0.2,
-                  }}
+                  animate={{ height: `${barHeight}%`, opacity: isActive ? 1 : 0.2 }}
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   style={{
-                    background: isActive
-                      ? `linear-gradient(180deg, ${barColor.bar}, ${barColor.bar}88)`
-                      : "rgba(255,255,255,0.06)",
+                    background: isActive ? `linear-gradient(180deg, ${barColor.bar}, ${barColor.bar}88)` : "rgba(255,255,255,0.06)",
                     boxShadow: isCurrent ? `0 0 20px ${barColor.glow}, 0 0 40px ${barColor.glow}` : "none",
                   }}
                 >
-                  {/* Shimmer on current bar */}
                   {isCurrent && (
                     <motion.div
                       className="absolute inset-0"
                       animate={{ opacity: [0.1, 0.3, 0.1] }}
                       transition={{ duration: 2, repeat: Infinity }}
-                      style={{ background: `linear-gradient(180deg, rgba(255,255,255,0.3), transparent)` }}
+                      style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.3), transparent)" }}
                     />
                   )}
                 </motion.div>
-
-                {/* Spend label under bar */}
                 <div className={`mt-2 text-[8px] sm:text-[9px] font-medium transition-colors ${isCurrent ? "text-text-primary" : "text-text-tertiary/50"}`}>
-                  {convertPrice(s.spend, currency).replace(",000", "k").replace(",500", ".5k")}
+                  {convertSpend(s.spend, currency).replace(",000", "k").replace(",500", ".5k")}
                 </div>
               </button>
             );
           })}
         </div>
 
-        {/* ── Metric cards ── */}
         <div className="grid grid-cols-2 gap-4 mb-6">
           <motion.div
             className="rounded-xl border p-5 relative overflow-hidden"
-            animate={{
-              borderColor: `${activeColor.bar}33`,
-              boxShadow: `inset 0 0 30px ${activeColor.glow.replace(")", ",0.08)")}`,
-            }}
+            animate={{ borderColor: `${activeColor.bar}33`, boxShadow: `inset 0 0 30px ${activeColor.glow.replace(")", ",0.08)")}` }}
             transition={{ duration: 0.4 }}
             style={{ background: "rgba(255,255,255,0.03)" }}
           >
             <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Monthly spend</div>
-            <motion.div
-              key={current.spend}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="font-heading text-2xl sm:text-3xl text-text-primary"
-            >
-              {convertPrice(current.spend, currency)}
+            <motion.div key={current.spend} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-2xl sm:text-3xl text-text-primary">
+              {convertSpend(current.spend, currency)}
             </motion.div>
             <div className="text-xs text-text-tertiary mt-1">/month</div>
           </motion.div>
           <motion.div
             className="rounded-xl border p-5 relative overflow-hidden"
-            animate={{
-              borderColor: `${activeColor.bar}33`,
-              boxShadow: `inset 0 0 30px ${activeColor.glow.replace(")", ",0.08)")}`,
-            }}
+            animate={{ borderColor: `${activeColor.bar}33`, boxShadow: `inset 0 0 30px ${activeColor.glow.replace(")", ",0.08)")}` }}
             transition={{ duration: 0.4 }}
             style={{ background: "rgba(255,255,255,0.03)" }}
           >
             <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Estimated impressions</div>
-            <motion.div
-              key={current.impressions}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="font-heading text-2xl sm:text-3xl"
-              style={{ color: activeColor.bar }}
-            >
+            <motion.div key={current.impressions} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-2xl sm:text-3xl" style={{ color: activeColor.bar }}>
               {current.impressions}
             </motion.div>
             <div className="text-xs text-text-tertiary mt-1">/month within your ICP</div>
           </motion.div>
         </div>
 
-        {/* ── Label + Slider ── */}
         <div className="flex justify-between items-center mb-3">
-          <motion.span
-            key={current.label}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-xs font-medium"
-            style={{ color: activeColor.bar }}
-          >
+          <motion.span key={current.label} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="text-xs font-medium" style={{ color: activeColor.bar }}>
             {current.label}
           </motion.span>
-          <span className="text-[10px] text-text-tertiary">{convertPrice(3000, currency)} – {convertPrice(50000, currency)}/mo</span>
+          <span className="text-[10px] text-text-tertiary">{convertSpend(3000, currency)} – {convertSpend(50000, currency)}/mo</span>
         </div>
 
         <div className="relative h-2.5 rounded-full mb-2" style={{ background: "rgba(255,255,255,0.06)" }}>
           <motion.div
             className="absolute inset-y-0 left-0 rounded-full"
-            animate={{
-              width: `${pct}%`,
-              background: `linear-gradient(90deg, #6359EA, ${activeColor.bar})`,
-              boxShadow: `0 0 12px ${activeColor.glow}`,
-            }}
+            animate={{ width: `${pct}%`, background: `linear-gradient(90deg, #6359EA, ${activeColor.bar})`, boxShadow: `0 0 12px ${activeColor.glow}` }}
             transition={{ duration: 0.3 }}
           />
           <input
@@ -927,11 +845,7 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
           />
           <motion.div
             className="absolute top-1/2 -translate-y-1/2 w-6 h-6 rounded-full border-2 border-white pointer-events-none"
-            animate={{
-              left: `calc(${pct}% - 12px)`,
-              background: activeColor.bar,
-              boxShadow: `0 0 16px ${activeColor.glow}, 0 0 32px ${activeColor.glow}`,
-            }}
+            animate={{ left: `calc(${pct}% - 12px)`, background: activeColor.bar, boxShadow: `0 0 16px ${activeColor.glow}, 0 0 32px ${activeColor.glow}` }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
           />
         </div>
@@ -958,13 +872,17 @@ const PricingTiers = () => {
 
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [currency, setCurrency] = useState<Currency>("GBP");
+  const [prodType, setProdType] = useState<ProdType>("location");
 
-  const tiers = useMemo(() => baseTiers.map(t => ({
+  const prices = ALL_PRICES[currency][prodType];
+
+  const tiers = useMemo(() => tierCards.map(t => ({
     ...t,
-    price: `${convertPrice(t.basePrice, currency)}${t.priceSuffix}`,
-    priceNote: t.basePriceNote(currency),
-  })), [currency]);
-
+    price: prices[t.id].price,
+    priceNote: prices[t.id].note,
+    dpPrice: prices[t.id].dp,
+    dpNote: prices[t.id].dn,
+  })), [prices]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0B] text-foreground">
@@ -975,7 +893,6 @@ const PricingTiers = () => {
         <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
         <div className="blob-green absolute -top-40 -right-40 w-[500px] h-[500px]" />
         <div className="blob-blue absolute -bottom-32 -left-32 w-[400px] h-[400px]" />
-
         <div className="relative max-w-3xl mx-auto text-center">
           <div className="mb-6 mt-6 flex justify-center">
             <SectionPill>Podcast partnership tiers</SectionPill>
@@ -993,8 +910,13 @@ const PricingTiers = () => {
 
       {/* ── TIER CARDS ── */}
       <main className="max-w-6xl mx-auto px-4 md:px-10 -mt-20 md:-mt-24 relative z-10">
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-4">
           <CurrencyToggle value={currency} onChange={setCurrency} />
+        </div>
+
+        {/* Production type toggle */}
+        <div className="mb-6">
+          <ProductionToggle value={prodType} onChange={setProdType} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
@@ -1060,16 +982,16 @@ const PricingTiers = () => {
       </main>
 
       {/* ── MODALS ── */}
-      <TierModal open={activeModal === "t1"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t1")!}>
+      <TierModal open={activeModal === "t1"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t1") || null}>
         <Tier1Content />
       </TierModal>
-      <TierModal open={activeModal === "t2"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t2")!}>
+      <TierModal open={activeModal === "t2"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t2") || null}>
         <Tier2Content />
       </TierModal>
-      <TierModal open={activeModal === "t3"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t3")!}>
+      <TierModal open={activeModal === "t3"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t3") || null}>
         <Tier3Tabs />
       </TierModal>
-      <CompareModal open={activeModal === "compare"} onClose={() => setActiveModal(null)} currency={currency} />
+      <CompareModal open={activeModal === "compare"} onClose={() => setActiveModal(null)} currency={currency} prodType={prodType} />
 
       <Footer />
     </div>

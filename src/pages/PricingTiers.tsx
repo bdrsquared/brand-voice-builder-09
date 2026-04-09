@@ -921,15 +921,16 @@ const PricingTiers = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
-          {tiers.map((tier, i) => (
+          {tiers.map((tier, i) => {
+            const isSelected = selectedTier === tier.id;
+            return (
             <motion.div
               key={tier.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              onClick={() => setActiveModal(tier.id)}
-              className={`cursor-pointer p-6 sm:p-8 flex flex-col transition-colors duration-200 ${tier.featured ? "bg-background hover:bg-[#0d0d0d]" : "bg-card hover:bg-card/80"}`}
+              className={`p-6 sm:p-8 flex flex-col transition-all duration-200 ${tier.featured ? "bg-background" : "bg-card"} ${isSelected ? "ring-2 ring-[#1CFA76]" : ""}`}
             >
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-5 flex items-center gap-2">
                 {tier.num}
@@ -948,11 +949,27 @@ const PricingTiers = () => {
               <div className="text-xs leading-relaxed p-3 rounded-lg border-l-2 mb-5" style={{ borderColor: C.sage, background: "rgba(123,175,142,0.08)", color: C.sage }}>
                 {tier.dopamine}
               </div>
-              <button className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-border text-text-primary hover:bg-secondary transition-colors flex items-center justify-center gap-1.5">
-                See what's included <ArrowUpRight className="w-3 h-3" />
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={(e) => { e.stopPropagation(); setSelectedTier(isSelected ? null : tier.id); }}
+                  className={`w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                    isSelected
+                      ? "bg-[#1CFA76] text-black"
+                      : "border border-[#1CFA76]/40 text-[#1CFA76] hover:bg-[#1CFA76]/10"
+                  }`}
+                >
+                  {isSelected ? "✓ Selected" : "Select this tier"}
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setActiveModal(tier.id); }}
+                  className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-border text-text-primary hover:bg-secondary transition-colors flex items-center justify-center gap-1.5"
+                >
+                  See what's included <ArrowUpRight className="w-3 h-3" />
+                </button>
+              </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
 
         {/* ── COMPARE STRIP ── */}

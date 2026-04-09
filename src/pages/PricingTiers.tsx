@@ -854,43 +854,55 @@ const PaidMediaSlider = ({ currency, step, setStep }: { currency: Currency; step
 };
 
 /* ── Pricing Breakdown Table ── */
-const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: string; monthly: string; yearly: string; episodes: string; paidMedia: string }>>> = {
+const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: string; monthly: string; monthlyNum: number; yearly: string; episodes: string; paidMedia: string }>>> = {
   GBP: {
     location: {
-      t1: { launch: "£19,500", monthly: "—", yearly: "£19,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "£15,000", monthly: "£5,000", yearly: "£75,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "£25,000", monthly: "£8,500", yearly: "£127,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
+      t1: { launch: "£19,500", monthly: "—", monthlyNum: 0, yearly: "£19,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "£15,000", monthly: "£5,000", monthlyNum: 5000, yearly: "£75,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "£25,000", monthly: "£8,500", monthlyNum: 8500, yearly: "£127,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
     },
     virtual: {
-      t1: { launch: "£14,000", monthly: "—", yearly: "£14,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "£10,000", monthly: "£3,500", yearly: "£52,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "£17,000", monthly: "£6,000", yearly: "£89,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
+      t1: { launch: "£14,000", monthly: "—", monthlyNum: 0, yearly: "£14,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "£10,000", monthly: "£3,500", monthlyNum: 3500, yearly: "£52,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "£17,000", monthly: "£6,000", monthlyNum: 6000, yearly: "£89,000", episodes: "2 per month", paidMedia: "Min £3,000/mo" },
     },
   },
   USD: {
     location: {
-      t1: { launch: "$26,500", monthly: "—", yearly: "$26,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "$20,000", monthly: "$6,750", yearly: "$101,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "$34,000", monthly: "$11,500", yearly: "$172,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
+      t1: { launch: "$26,500", monthly: "—", monthlyNum: 0, yearly: "$26,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "$20,000", monthly: "$6,750", monthlyNum: 6750, yearly: "$101,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "$34,000", monthly: "$11,500", monthlyNum: 11500, yearly: "$172,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
     },
     virtual: {
-      t1: { launch: "$19,000", monthly: "—", yearly: "$19,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "$13,500", monthly: "$4,750", yearly: "$70,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "$23,000", monthly: "$8,000", yearly: "$120,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
+      t1: { launch: "$19,000", monthly: "—", monthlyNum: 0, yearly: "$19,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "$13,500", monthly: "$4,750", monthlyNum: 4750, yearly: "$70,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "$23,000", monthly: "$8,000", monthlyNum: 8000, yearly: "$120,000", episodes: "2 per month", paidMedia: "Min $4,000/mo" },
     },
   },
   EUR: {
     location: {
-      t1: { launch: "€22,500", monthly: "—", yearly: "€22,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "€17,000", monthly: "€5,750", yearly: "€86,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "€29,000", monthly: "€9,750", yearly: "€146,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
+      t1: { launch: "€22,500", monthly: "—", monthlyNum: 0, yearly: "€22,500", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "€17,000", monthly: "€5,750", monthlyNum: 5750, yearly: "€86,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "€29,000", monthly: "€9,750", monthlyNum: 9750, yearly: "€146,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
     },
     virtual: {
-      t1: { launch: "€16,000", monthly: "—", yearly: "€16,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
-      t2: { launch: "€11,500", monthly: "€4,000", yearly: "€60,000", episodes: "2 per month", paidMedia: "Not included" },
-      t3: { launch: "€19,500", monthly: "€6,875", yearly: "€102,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
+      t1: { launch: "€16,000", monthly: "—", monthlyNum: 0, yearly: "€16,000", episodes: "6 episodes (one-time)", paidMedia: "Not included" },
+      t2: { launch: "€11,500", monthly: "€4,000", monthlyNum: 4000, yearly: "€60,000", episodes: "2 per month", paidMedia: "Not included" },
+      t3: { launch: "€19,500", monthly: "€6,875", monthlyNum: 6875, yearly: "€102,000", episodes: "2 per month", paidMedia: "Min €3,500/mo" },
     },
   },
+};
+
+/* Organic reach estimates per tier (monthly impressions in thousands) */
+const ORGANIC_REACH: Record<string, { low: number; high: number; label: string }> = {
+  t1: { low: 25, high: 60, label: "25k–60k" },
+  t2: { low: 120, high: 250, label: "120k–250k" },
+  t3: { low: 200, high: 400, label: "200k–400k" },
+};
+
+const formatReach = (low: number, high: number): string => {
+  const fmt = (n: number) => n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, "")}M` : `${n}k`;
+  return `${fmt(low)}–${fmt(high)}`;
 };
 
 const TIER_LABELS: Record<string, string> = { t1: "Tier 01 · Launch", t2: "Tier 02 · Launch & Scale", t3: "Tier 03 · Global Leader" };
@@ -899,14 +911,34 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
   const data = BREAKDOWN_DATA[currency][prodType][tier];
   const isT3 = tier === "t3";
   const mediaData = MEDIA_STEPS[mediaStep];
+  const rates: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };
+  const sym = CURRENCY_SYMBOLS[currency];
+  const paidSpendConverted = Math.round(mediaData.spend * rates[currency]);
   const mediaSpend = convertSpend(mediaData.spend, currency);
+
+  // Monthly total = retainer + paid media (t3 only)
+  const monthlyTotal = isT3 ? data.monthlyNum + paidSpendConverted : data.monthlyNum;
+  const monthlyTotalStr = monthlyTotal > 0 ? `${sym}${monthlyTotal.toLocaleString()}` : "—";
+
+  // Organic reach
+  const organic = ORGANIC_REACH[tier];
+
+  // Paid impressions from slider (parse low/high from mediaData)
+  const paidImpLow = isT3 ? mediaData.impNum * 0.7 : 0;
+  const paidImpHigh = isT3 ? mediaData.impNum * 1.3 : 0;
+
+  // Total reach
+  const totalLow = organic.low + Math.round(paidImpLow);
+  const totalHigh = organic.high + Math.round(paidImpHigh);
+  const totalReachStr = formatReach(totalLow, totalHigh);
 
   const rows = [
     { label: "Launch strategy fee", value: data.launch, desc: tier === "t1" ? "One-time investment — no ongoing commitment" : "Paid upfront before production begins", highlight: false },
     { label: "Monthly retainer", value: data.monthly, desc: tier === "t1" ? "No monthly fee — one-time project" : "Billed monthly for 12 months", highlight: false },
-    { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Total project cost" : "Launch fee + 12 months of retainer", highlight: true },
+    ...(isT3 ? [{ label: "Paid media budget", value: `${mediaSpend}/mo`, desc: `Billed separately · use the slider above to adjust`, highlight: false }] : []),
+    ...(tier !== "t1" ? [{ label: "Monthly total", value: `${monthlyTotalStr}/mo`, desc: isT3 ? "Retainer + paid media spend combined" : "Total monthly commitment", highlight: true }] : []),
+    { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Total project cost" : "Launch fee + 12 months of retainer" + (isT3 ? " (excl. paid media)" : ""), highlight: tier === "t1" },
     { label: "Episode output", value: data.episodes, desc: tier === "t1" ? "A complete first series" : "Consistent monthly production", highlight: false },
-    ...(isT3 ? [{ label: "Paid media budget", value: `${mediaSpend}/mo`, desc: `Est. ${mediaData.impressions} impressions/mo · ${mediaData.label}`, highlight: false }] : []),
   ];
 
   return (
@@ -931,23 +963,41 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
               <div className={`text-sm font-medium ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>{row.label}</div>
               <div className="text-xs text-text-tertiary mt-0.5">{row.desc}</div>
             </div>
-            <div className={`font-heading text-lg sm:text-xl text-right ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>
+            <motion.div key={row.value} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className={`font-heading text-lg sm:text-xl text-right ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>
               {row.value}
-            </div>
+            </motion.div>
           </div>
         ))}
       </div>
-      {isT3 && (
-        <div className="px-6 sm:px-8 py-5 border-t border-border bg-[#1CFA76]/5">
-          <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#1CFA76]" />
-            <span className="text-xs font-medium text-[#1CFA76]">Paid Media Impact</span>
+
+      {/* ── Total Show Impact ── */}
+      <div className="border-t border-border">
+        <div className="px-6 sm:px-8 py-5 bg-[#8B83C7]/5">
+          <div className="flex items-center gap-2 mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-[#8B83C7]" />
+            <span className="text-xs font-medium text-[#8B83C7] tracking-wide uppercase">Estimated Total Reach</span>
           </div>
-          <p className="text-xs text-text-secondary leading-relaxed">
-            At <strong className="text-text-primary">{mediaSpend}/mo</strong>, estimated impressions are <strong className="text-text-primary">{mediaData.impressions}</strong> per month within your ICP — <strong className="text-text-primary">{mediaData.label}</strong>. Adjust the slider above to explore different levels.
-          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Organic reach</div>
+              <motion.div key={organic.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-heading text-lg text-text-primary">{organic.label}</motion.div>
+              <div className="text-[10px] text-text-tertiary mt-0.5">impressions/mo from content, social & SEO</div>
+            </div>
+            {isT3 && (
+              <div>
+                <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Paid reach</div>
+                <motion.div key={mediaData.impressions} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-heading text-lg" style={{ color: STEP_COLORS[mediaStep].bar }}>{mediaData.impressions}</motion.div>
+                <div className="text-[10px] text-text-tertiary mt-0.5">impressions/mo from paid media</div>
+              </div>
+            )}
+            <div>
+              <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Total impact</div>
+              <motion.div key={totalReachStr} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="font-heading text-xl text-[#1CFA76]">{totalReachStr}</motion.div>
+              <div className="text-[10px] text-text-tertiary mt-0.5">estimated impressions/mo within your ICP</div>
+            </div>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

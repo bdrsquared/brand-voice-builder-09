@@ -101,11 +101,11 @@ const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string
 const baseTiers = [
   {
     id: "t3",
-    num: "Tier 03 · Category Engine",
+    num: "Tier 03 · Global Leader",
     name: "Become the only\nname your market\nthinks of.",
     hook: "We build the infrastructure for your brand to own the conversation in your category across every channel, in every market, at a scale your competitors can't match without starting from scratch.",
     modalPitch: "In 18 months, anyone who matters in your market will associate your brand with the conversation not just a participant in it. This is the infrastructure that makes that happen: paid, organic, creator, UGC and PR firing simultaneously, across every channel your buyers are on, globally.",
-    modalTitle: "Category Engine",
+    modalTitle: "Global Leader",
     basePrice: 125000,
     priceSuffix: "/yr",
     basePriceNote: (c: Currency) => `+ min ${convertPrice(3000, c)}/month ad spend`,
@@ -557,7 +557,7 @@ const CompareTable = ({ currency }: { currency: Currency }) => (
         <tr>
           <th className="text-left px-4 py-3 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-b border-border w-[30%]">Service</th>
           <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
-            <div className="text-[11px] font-medium text-text-primary">Category Engine</div>
+            <div className="text-[11px] font-medium text-text-primary">Global Leader</div>
             <div className="text-[10px] text-text-tertiary">{convertPrice(125000, currency)}/yr + ad spend</div>
             <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#f0eaf8", color: "#4e2d7a" }}>Tier 03</span>
           </th>
@@ -792,7 +792,7 @@ const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
 
       <div className="relative p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.plumBg, color: C.plum }}>Category Engine</span>
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.plumBg, color: C.plum }}>Global Leader</span>
         </div>
         <h3 className="font-heading text-xl text-text-primary mb-1">Paid Media Investment</h3>
         <p className="text-sm text-text-secondary mb-6">Drag to explore how ad spend scales impressions within your target ICP.</p>

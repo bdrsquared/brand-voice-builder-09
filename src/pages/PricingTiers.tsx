@@ -895,16 +895,18 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
 
 const TIER_LABELS: Record<string, string> = { t1: "Tier 01 · Launch", t2: "Tier 02 · Launch & Scale", t3: "Tier 03 · Global Leader" };
 
-const PricingBreakdownTable = ({ tier, currency, prodType }: { tier: "t1" | "t2" | "t3"; currency: Currency; prodType: ProdType; prices: TierPrices }) => {
+const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: "t1" | "t2" | "t3"; currency: Currency; prodType: ProdType; prices: TierPrices; mediaStep: number }) => {
   const data = BREAKDOWN_DATA[currency][prodType][tier];
   const isT3 = tier === "t3";
+  const mediaData = MEDIA_STEPS[mediaStep];
+  const mediaSpend = convertSpend(mediaData.spend, currency);
 
   const rows = [
     { label: "Launch strategy fee", value: data.launch, desc: tier === "t1" ? "One-time investment — no ongoing commitment" : "Paid upfront before production begins", highlight: false },
     { label: "Monthly retainer", value: data.monthly, desc: tier === "t1" ? "No monthly fee — one-time project" : "Billed monthly for 12 months", highlight: false },
     { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Total project cost" : "Launch fee + 12 months of retainer", highlight: true },
     { label: "Episode output", value: data.episodes, desc: tier === "t1" ? "A complete first series" : "Consistent monthly production", highlight: false },
-    ...(isT3 ? [{ label: "Paid media (additional)", value: data.paidMedia, desc: "Ad spend managed by Earworm — billed separately", highlight: false }] : []),
+    ...(isT3 ? [{ label: "Paid media budget", value: `${mediaSpend}/mo`, desc: `Est. ${mediaData.impressions} impressions/mo · ${mediaData.label}`, highlight: false }] : []),
   ];
 
   return (

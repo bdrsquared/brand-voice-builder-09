@@ -1074,7 +1074,7 @@ const PricingTiers = () => {
       <TierModal open={activeModal === "t3"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t3")!}>
         <Tier3Tabs />
       </TierModal>
-      <AddOnModal open={activeModal === "addon"} onClose={() => setActiveModal(null)} currency={currency} />
+      <CompareModal open={activeModal === "compare"} onClose={() => setActiveModal(null)} currency={currency} />
 
       <Footer />
     </div>

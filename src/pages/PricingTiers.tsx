@@ -437,6 +437,91 @@ const AddOnModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClos
   </AnimatePresence>
 );
 
+/* ── Paid Media Slider ── */
+const MEDIA_STEPS = [
+  { spend: 3000,  impressions: "150k–300k",  label: "Foundation presence" },
+  { spend: 5000,  impressions: "400k–500k",  label: "Early growth" },
+  { spend: 8000,  impressions: "600k–700k",  label: "Consistent presence" },
+  { spend: 10000, impressions: "800k–1M",    label: "Market saturation" },
+  { spend: 15000, impressions: "1.2M–1.5M",  label: "Category dominance" },
+  { spend: 25000, impressions: "2M–3M",      label: "Full-scale engine" },
+  { spend: 50000, impressions: "5M+",        label: "Market ownership" },
+];
+
+const PaidMediaSlider = ({ currency }: { currency: Currency }) => {
+  const [step, setStep] = useState(0);
+  const current = MEDIA_STEPS[step];
+  const pct = (step / (MEDIA_STEPS.length - 1)) * 100;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mt-10 rounded-2xl border border-border bg-card overflow-hidden"
+    >
+      <div className="p-6 sm:p-8">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.plumBg, color: C.plum }}>Category Engine add-on</span>
+        </div>
+        <h3 className="font-heading text-xl text-text-primary mb-1">Paid Media Investment</h3>
+        <p className="text-sm text-text-secondary mb-8">Drag to explore how ad spend scales impressions within your target ICP.</p>
+
+        {/* Metric cards */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="rounded-xl border border-border p-5 bg-secondary/30">
+            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Monthly spend</div>
+            <div className="font-heading text-2xl sm:text-3xl text-text-primary">{convertPrice(current.spend, currency)}</div>
+            <div className="text-xs text-text-tertiary mt-1">/month</div>
+          </div>
+          <div className="rounded-xl border border-border p-5 bg-secondary/30">
+            <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Estimated impressions</div>
+            <div className="font-heading text-2xl sm:text-3xl" style={{ color: C.purple }}>{current.impressions}</div>
+            <div className="text-xs text-text-tertiary mt-1">/month within your ICP</div>
+          </div>
+        </div>
+
+        {/* Label */}
+        <div className="flex justify-between items-center mb-3">
+          <span className="text-xs font-medium text-text-primary">{current.label}</span>
+          <span className="text-[10px] text-text-tertiary">{convertPrice(3000, currency)} – {convertPrice(50000, currency)}/mo</span>
+        </div>
+
+        {/* Slider */}
+        <div className="relative h-2 rounded-full bg-secondary/60 mb-3">
+          <div
+            className="absolute inset-y-0 left-0 rounded-full transition-all duration-200"
+            style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${C.purple}, ${C.rose})` }}
+          />
+          <input
+            type="range"
+            min={0}
+            max={MEDIA_STEPS.length - 1}
+            value={step}
+            onChange={(e) => setStep(Number(e.target.value))}
+            className="absolute inset-0 w-full opacity-0 cursor-pointer"
+          />
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-white bg-[#8B83C7] shadow-lg shadow-[#8B83C7]/30 transition-all duration-200 pointer-events-none"
+            style={{ left: `calc(${pct}% - 10px)` }}
+          />
+        </div>
+
+        {/* Step markers */}
+        <div className="flex justify-between px-0.5">
+          {MEDIA_STEPS.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => setStep(i)}
+              className={`w-1.5 h-1.5 rounded-full transition-colors ${i <= step ? "bg-[#8B83C7]" : "bg-border"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 /* ════════════════════════════════════════════════════════════ */
 
 const PricingTiers = () => {

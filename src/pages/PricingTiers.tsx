@@ -1,4 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+
+/* ── currency conversion ── */
+type Currency = "GBP" | "USD" | "EUR";
+const CURRENCY_SYMBOLS: Record<Currency, string> = { GBP: "£", USD: "$", EUR: "€" };
+const RATES: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };
+
+const convertPrice = (gbpAmount: number, currency: Currency): string => {
+  const converted = Math.round(gbpAmount * RATES[currency]);
+  return `${CURRENCY_SYMBOLS[currency]}${converted.toLocaleString()}`;
+};
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, Sparkles } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
@@ -78,8 +88,8 @@ const UnlockQuote = ({ children }: { children: string }) => (
   <div className="bg-card border border-border rounded-xl p-5 my-5 font-heading text-base italic text-text-primary leading-relaxed">{children}</div>
 );
 
-/* ── tier data ── */
-const tiers = [
+/* ── tier data (base prices in GBP) ── */
+const baseTiers = [
   {
     id: "t3",
     num: "Tier 03 · Category Engine",
@@ -87,8 +97,9 @@ const tiers = [
     hook: "We build the infrastructure for your brand to own the conversation in your category across every channel, in every market, at a scale your competitors can't match without starting from scratch.",
     modalPitch: "In 18 months, anyone who matters in your market will associate your brand with the conversation not just a participant in it. This is the infrastructure that makes that happen: paid, organic, creator, UGC and PR firing simultaneously, across every channel your buyers are on, globally.",
     modalTitle: "Category Engine",
-    price: "£125,000/yr",
-    priceNote: "+ min £3k/month ad spend",
+    basePrice: 125000,
+    priceSuffix: "/yr",
+    basePriceNote: (c: Currency) => `+ min ${convertPrice(3000, c)}/month ad spend`,
     dopamine: "Your competitors will feel this before they understand what's happening.",
     modalDopamine: "Your competitors will feel this before they understand what's happening.",
     featured: false,
@@ -100,8 +111,9 @@ const tiers = [
     hook: "A fully managed content engine that puts you in front of the right people consistently, professionally, without your team lifting a finger.",
     modalPitch: "Your podcast becomes part of how your company shows up in the market consistently, professionally, and without your team carrying the operational weight.",
     modalTitle: "Launch & Scale",
-    price: "£75,000/yr",
-    priceNote: "£15k onboarding · £5,750/month · 2 episodes/month",
+    basePrice: 75000,
+    priceSuffix: "/yr",
+    basePriceNote: (c: Currency) => `${convertPrice(15000, c)} onboarding · ${convertPrice(5750, c)}/month · 2 episodes/month`,
     dopamine: "The equivalent of a senior content hire without the salary, overhead, or learning curve.",
     modalDopamine: "What does a single warm conversation with a dream client cost you through paid channels? This builds a system that generates them every month.",
     featured: true,
@@ -114,12 +126,32 @@ const tiers = [
     hook: "A polished, credible podcast built from the ground up with the strategy, production and content to establish real authority in your space.",
     modalPitch: "You go from \"we keep saying we should start a podcast\" to a polished, credible show your team is proud to share with the strategy to ensure it's built on something real.",
     modalTitle: "Launch",
-    price: "£19,500",
-    priceNote: "One-time fee · 6 episodes · strategy included",
+    basePrice: 19500,
+    priceSuffix: "",
+    basePriceNote: (_c: Currency) => "One-time fee · 6 episodes · strategy included",
     dopamine: "If you're not proud of what we build, we'll be the first to say so.",
     featured: false,
   },
 ];
+
+/* ── Currency toggle component ── */
+const CurrencyToggle = ({ value, onChange }: { value: Currency; onChange: (c: Currency) => void }) => (
+  <div className="inline-flex items-center rounded-full border border-border bg-card p-1 gap-0.5">
+    {(["GBP", "USD", "EUR"] as Currency[]).map((c) => (
+      <button
+        key={c}
+        onClick={() => onChange(c)}
+        className={`text-xs font-medium tracking-wide px-4 py-1.5 rounded-full transition-all duration-200 ${
+          value === c
+            ? "bg-white/10 text-text-primary shadow-sm"
+            : "text-text-tertiary hover:text-text-secondary"
+        }`}
+      >
+        {CURRENCY_SYMBOLS[c]} {c}
+      </button>
+    ))}
+  </div>
+);
 
 /* ── Modal content components ── */
 const Tier1Content = () => (
@@ -366,7 +398,7 @@ const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.Re
 /* ── Modal wrapper ── */
 const tierAccent: Record<string, string> = { t1: "#6A9FA3", t2: "#7BAF8E", t3: "#8B83C7" };
 
-const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: () => void; tier: typeof tiers[0] | null; children: React.ReactNode }) => (
+const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: () => void; tier: { id: string; num: string; name: string; modalTitle?: string; modalPitch?: string; hook: string; price: string; priceNote: string; modalDopamine?: string } | null; children: React.ReactNode }) => (
   <AnimatePresence>
     {open && tier && (
       <motion.div
@@ -410,7 +442,7 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
 );
 
 /* ── Add-on modal ── */
-const AddOnModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => (
+const AddOnModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClose: () => void; currency?: Currency }) => (
   <AnimatePresence>
     {open && (
       <motion.div
@@ -436,7 +468,7 @@ const AddOnModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =
             <h3 className="font-heading text-2xl text-text-primary mb-2">Creator & Influencer Amplification</h3>
             <p className="text-sm text-text-secondary leading-relaxed mb-4">The difference between a brand that builds an audience and one that builds a movement is third-party credibility.</p>
             <div className="flex items-baseline gap-2.5">
-              <span className="font-heading text-3xl text-text-primary">£2,000–£10,000+</span>
+              <span className="font-heading text-3xl text-text-primary">{convertPrice(2000, currency)}–{convertPrice(10000, currency)}+</span>
               <span className="text-xs text-text-tertiary">per month · separate managed budget</span>
             </div>
           </ModalHeader>
@@ -453,7 +485,6 @@ const PricingTiers = () => {
   useMetaTags();
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Block search engine indexing
     let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
     if (!meta) {
       meta = document.createElement("meta");
@@ -465,6 +496,19 @@ const PricingTiers = () => {
   }, []);
 
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [currency, setCurrency] = useState<Currency>("GBP");
+
+  const tiers = useMemo(() => baseTiers.map(t => ({
+    ...t,
+    price: `${convertPrice(t.basePrice, currency)}${t.priceSuffix}`,
+    priceNote: t.basePriceNote(currency),
+  })), [currency]);
+
+  const addonPrice = useMemo(() => {
+    const lo = convertPrice(2000, currency);
+    const hi = convertPrice(10000, currency);
+    return { full: `${lo}–${hi}+`, short: `${lo.replace(/,/g, '').length > 5 ? lo : lo}–${hi.replace(/,/g, '').length > 5 ? hi : hi}+` };
+  }, [currency]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0B] text-foreground">
@@ -493,6 +537,11 @@ const PricingTiers = () => {
 
       {/* ── TIER CARDS ── */}
       <main className="max-w-6xl mx-auto px-4 md:px-10 -mt-10 relative z-10">
+        {/* Currency toggle */}
+        <div className="flex justify-end mb-4">
+          <CurrencyToggle value={currency} onChange={setCurrency} />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
           {tiers.map((tier, i) => (
             <motion.div
@@ -542,7 +591,7 @@ const PricingTiers = () => {
             <div className="text-xs text-text-tertiary">Third-party voices. New audiences. Credibility that compounds.</div>
           </div>
           <div className="text-right shrink-0">
-            <div className="text-sm font-medium text-text-primary">£2k–£10k+</div>
+            <div className="text-sm font-medium text-text-primary">{addonPrice.full}</div>
             <div className="text-[10px] text-text-tertiary">per month</div>
           </div>
           <ArrowUpRight className="w-4 h-4 text-text-tertiary shrink-0" />
@@ -566,7 +615,7 @@ const PricingTiers = () => {
       <TierModal open={activeModal === "t3"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t3")!}>
         <Tier3Tabs />
       </TierModal>
-      <AddOnModal open={activeModal === "addon"} onClose={() => setActiveModal(null)} />
+      <AddOnModal open={activeModal === "addon"} onClose={() => setActiveModal(null)} currency={currency} />
 
       <Footer />
     </div>

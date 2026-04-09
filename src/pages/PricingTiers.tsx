@@ -479,21 +479,152 @@ const Tier3Guarantees = () => (
   </>
 );
 
-const AddOnContent = () => (
-  <>
-    <div className="mb-6"><SectionTitle>What's included</SectionTitle><BulletList items={[
-      "Identify and partner with creators authentically aligned to your audience",
-      "Produce reaction-style and commentary-led content around your episodes",
-      "Distribute key moments through third-party voices and platforms",
-      "Extend reach to new audiences who've never heard of you — but will trust the intro",
-    ]} /><InsightChip color={C.amberDk} bg={C.amberBg}>New audiences reached through voices they already trust. Credibility transfers.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Best paired with</SectionTitle><BulletList items={[
-      "Tier 3 — where paid amplification is already in motion",
-      "Brands ready to scale beyond their existing audience",
-      "Companies entering a new market or repositioning in an existing one",
-    ]} /></div>
-    <div className="bg-secondary/40 rounded-xl p-5 my-5"><p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Minimum commitment:</strong> 3 months to properly test creator fit and optimise performance. Starting at £2k/month for selective partnerships, up to £10k+ for multi-creator campaigns at scale.</p></div>
-  </>
+/* ── Compare table data ── */
+type CompareRow = { name: string; desc: string; t3: string | null; t2: string | null; t1: string | null };
+type CompareSection = { section: string; rows: CompareRow[] };
+
+const compareSections: CompareSection[] = [
+  { section: "Strategy", rows: [
+    { name: "Audience & ICP definition", desc: "Define who you're talking to, what they care about, and why your show is relevant.", t3: "Deep buyer & account mapping", t2: "Full ICP & buyer mapping", t1: "ICP definition" },
+    { name: "Podcast concept & positioning", desc: "Shape the format, name, tone and market position of the show.", t3: "Category-level positioning", t2: "Full concept & positioning", t1: "Concept & positioning" },
+    { name: "Content pillars & roadmap", desc: "Identify core themes and topics that will drive consistent engagement.", t3: "Category agenda roadmap", t2: "Full content roadmap", t1: "Core content pillars" },
+    { name: "Multi-channel distribution strategy", desc: "How and where the show reaches your audience across all channels.", t3: "Global multi-channel strategy", t2: "Multi-channel strategy", t1: "Distribution plan" },
+    { name: "Host sourcing & training", desc: "Identify and prepare the right on-screen talent.", t3: "Full sourcing & training", t2: "Full sourcing & training", t1: null },
+    { name: "Marketing stack integration", desc: "Connect podcast into CRM, email and marketing automation.", t3: "Full stack integration", t2: "Full stack integration", t1: null },
+  ]},
+  { section: "Production", rows: [
+    { name: "Episode volume", desc: "Fully produced episodes per period.", t3: "2 per month, ongoing", t2: "2 per month, ongoing", t1: "6 episodes total" },
+    { name: "Video & audio recording", desc: "High-quality recording — studio or remote.", t3: "Studio & remote", t2: "Studio & remote", t1: "Studio & remote" },
+    { name: "Professional editing", desc: "Full post-production — video and audio, broadcast standard.", t3: "Video + audio", t2: "Video + audio", t1: "Video + audio" },
+    { name: "Publishing & distribution", desc: "Published across all major podcast platforms.", t3: "All platforms, fully managed", t2: "All platforms, fully managed", t1: "All platforms" },
+  ]},
+  { section: "Content Creation", rows: [
+    { name: "Short-form social clips", desc: "Platform-optimised clips from each episode.", t3: "6–10 clips per episode", t2: "4–6 clips per episode", t1: "4–6 clips per episode" },
+    { name: "Captions, hooks & social copy", desc: "Written content for every clip and post.", t3: "Full copywriting suite", t2: "Full copywriting suite", t1: "Captions per episode" },
+    { name: "Branded thumbnails & visuals", desc: "On-brand visual assets for every episode.", t3: "Full visual suite", t2: "Full visual suite", t1: "Thumbnails & cover art" },
+    { name: "SEO-optimised show notes", desc: "Long-form show notes built to rank in search.", t3: "Full SEO show notes", t2: "Full SEO show notes", t1: "SEO show notes" },
+    { name: "Multi-format content repurposing", desc: "Each episode turned into articles, posts, email copy and more.", t3: "Full repurposing engine", t2: "Multi-format repurposing", t1: null },
+  ]},
+  { section: "Distribution", rows: [
+    { name: "Social media posting & management", desc: "We write and publish content across all social channels on your behalf.", t3: "Full managed posting", t2: "Full managed posting", t1: null },
+    { name: "Newsletter & email distribution", desc: "Episode content through your email list and newsletter.", t3: "Full newsletter integration", t2: "Newsletter integration", t1: null },
+    { name: "Paid media amplification", desc: "Targeted paid campaigns across LinkedIn, YouTube, Spotify and display.", t3: "Multi-channel, global scale", t2: null, t1: null },
+  ]},
+  { section: "Guest Strategy & PR", rows: [
+    { name: "Guest identification & targeting", desc: "Research and identify the right guests aligned to your ICP.", t3: "Strategic account targeting", t2: "Ongoing guest pipeline", t1: "Launch guest targeting" },
+    { name: "Personalised outreach & booking", desc: "Tailored outreach — no generic booking emails. End-to-end management.", t3: "Full outreach management", t2: "Full outreach management", t1: "Outreach & booking" },
+    { name: "PR & industry amplification", desc: "Turn key episodes into PR moments — press coverage and third-party amplification.", t3: "Full PR engine", t2: "PR amplification", t1: null },
+  ]},
+  { section: "UGC & Creator Network", rows: [
+    { name: "UGC strategy & activation", desc: "Turn hosts, guests and your team into active content contributors.", t3: "Full UGC activation", t2: null, t1: null },
+    { name: "Creator & influencer partnerships", desc: "Partner with creators to carry your content to new audiences through trusted voices.", t3: "Available as add-on", t2: null, t1: null },
+  ]},
+  { section: "Sales Integration", rows: [
+    { name: "Sales content alignment", desc: "Episodes and clips built around the exact challenges your buyers face.", t3: "Full sales alignment", t2: "Sales content alignment", t1: null },
+    { name: "Outbound content toolkit", desc: "Assets your sales team can use in outreach sequences to warm prospects.", t3: "Full outbound toolkit", t2: "Outbound toolkit", t1: null },
+    { name: "Lead capture & landing pages", desc: "Landing pages and CTAs built around the podcast to capture leads.", t3: "Full lead capture system", t2: null, t1: null },
+  ]},
+  { section: "Performance & Reporting", rows: [
+    { name: "Performance reporting", desc: "Regular reporting on audience, engagement and content performance.", t3: "Monthly commercial reporting", t2: "Monthly reporting", t1: "End-of-pilot report" },
+    { name: "Pipeline & revenue attribution", desc: "Connect podcast activity to commercial outcomes and pipeline influence.", t3: "Full attribution model", t2: null, t1: null },
+    { name: "Continuous optimisation", desc: "Ongoing refinement of content, format and distribution based on data.", t3: "Ongoing", t2: "Ongoing", t1: null },
+  ]},
+  { section: "Strategic Direction", rows: [
+    { name: "Fractional Podcast CMO", desc: "Senior strategic oversight at board level — quarterly planning sessions.", t3: "Quarterly strategy sessions", t2: null, t1: null },
+    { name: "Senior strategic account management", desc: "A named senior contact who understands your business and commercial context.", t3: "Dedicated senior contact", t2: "Dedicated senior contact", t1: null },
+  ]},
+  { section: "Guarantees", rows: [
+    { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed standards. If it's not right, we fix it.", t3: "Fully guaranteed", t2: "Fully guaranteed", t1: "Fully guaranteed" },
+    { name: "90-day review with exit rights", desc: "Formal review with contractual exit rights if agreed indicators aren't met.", t3: "Included", t2: "Included", t1: null },
+    { name: "Client reference access", desc: "Introduction to a current client at the same tier before you commit.", t3: "On request", t2: "On request", t1: null },
+  ]},
+];
+
+const CompareCell = ({ value }: { value: string | null }) =>
+  value ? (
+    <div className="flex items-start gap-1.5">
+      <span className="w-[16px] h-[16px] rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5 bg-primary/15 text-primary">✓</span>
+      <span className="text-[11px] leading-snug text-primary font-medium">{value}</span>
+    </div>
+  ) : (
+    <span className="text-[10px] text-text-tertiary/50">Not included</span>
+  );
+
+const CompareTable = ({ currency }: { currency: Currency }) => (
+  <div className="overflow-x-auto -mx-6 sm:-mx-8 px-6 sm:px-8">
+    <table className="w-full border-collapse min-w-[700px]">
+      <thead>
+        <tr>
+          <th className="text-left px-4 py-3 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-b border-border w-[30%]">Service</th>
+          <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
+            <div className="text-[11px] font-medium text-text-primary">Category Engine</div>
+            <div className="text-[10px] text-text-tertiary">{convertPrice(125000, currency)}/yr + ad spend</div>
+            <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#f0eaf8", color: "#4e2d7a" }}>Tier 03</span>
+          </th>
+          <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
+            <div className="text-[11px] font-medium text-text-primary">Launch & Scale</div>
+            <div className="text-[10px] text-text-tertiary">{convertPrice(75000, currency)}/yr</div>
+            <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#eaeffa", color: "#1649a0" }}>Tier 02</span>
+          </th>
+          <th className="px-3 py-3 text-center border-b border-border w-[23.3%]">
+            <div className="text-[11px] font-medium text-text-primary">Launch</div>
+            <div className="text-[10px] text-text-tertiary">{convertPrice(19500, currency)} one-time</div>
+            <span className="inline-block mt-1 text-[9px] font-medium tracking-[0.06em] uppercase px-2 py-0.5 rounded-full" style={{ background: "#e8f4f1", color: "#0a6b5c" }}>Tier 01</span>
+          </th>
+        </tr>
+      </thead>
+      {compareSections.map((sec) => (
+        <tbody key={sec.section}>
+          <tr><td colSpan={4} className="bg-secondary/40 px-4 py-2 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-y border-border">{sec.section}</td></tr>
+          {sec.rows.map((row) => (
+            <tr key={row.name} className="group hover:bg-secondary/20 transition-colors">
+              <td className="px-4 py-3 border-b border-border align-top">
+                <div className="text-[12px] font-medium text-text-primary mb-0.5">{row.name}</div>
+                <div className="text-[10px] text-text-tertiary leading-snug">{row.desc}</div>
+              </td>
+              <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t3} /></td>
+              <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t2} /></td>
+              <td className="px-3 py-3 border-b border-border align-top"><CompareCell value={row.t1} /></td>
+            </tr>
+          ))}
+        </tbody>
+      ))}
+    </table>
+  </div>
+);
+
+/* ── Compare modal ── */
+const CompareModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClose: () => void; currency?: Currency }) => (
+  <AnimatePresence>
+    {open && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto"
+        style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)" }}
+        onClick={(e) => e.target === e.currentTarget && onClose()}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.97 }}
+          transition={{ duration: 0.3 }}
+          className="relative w-full max-w-[900px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
+        >
+          <ModalHeader accentColor="#6A9FA3">
+            <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
+              <X className="w-4 h-4" />
+            </button>
+            <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">All tiers</div>
+            <h3 className="font-heading text-2xl text-text-primary mb-2">Side by side comparison</h3>
+            <p className="text-sm text-text-secondary leading-relaxed">Every service across all three tiers. What's included, at what level, and what changes as you scale.</p>
+          </ModalHeader>
+          <div className="p-6 sm:p-8"><CompareTable currency={currency} /></div>
+        </motion.div>
+      </motion.div>
+    )}
+  </AnimatePresence>
 );
 
 /* ── Animated modal header ── */
@@ -585,43 +716,6 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
   </AnimatePresence>
 );
 
-/* ── Add-on modal ── */
-const AddOnModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClose: () => void; currency?: Currency }) => (
-  <AnimatePresence>
-    {open && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto"
-        style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)" }}
-        onClick={(e) => e.target === e.currentTarget && onClose()}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.97 }}
-          transition={{ duration: 0.3 }}
-          className="relative w-full max-w-[620px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
-        >
-          <ModalHeader accentColor="#C9A96E">
-            <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
-              <X className="w-4 h-4" />
-            </button>
-            <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">Optional add-on</div>
-            <h3 className="font-heading text-2xl text-text-primary mb-2">Creator & Influencer Amplification</h3>
-            <p className="text-sm text-text-secondary leading-relaxed mb-4">The difference between a brand that builds an audience and one that builds a movement is third-party credibility.</p>
-            <div className="flex items-baseline gap-2.5">
-              <span className="font-heading text-3xl text-text-primary">{convertPrice(2000, currency)}–{convertPrice(10000, currency)}+</span>
-              <span className="text-xs text-text-tertiary">per month · separate managed budget</span>
-            </div>
-          </ModalHeader>
-          <div className="p-6 sm:p-8"><AddOnContent /></div>
-        </motion.div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-);
 
 /* ── Paid Media Slider ── */
 const MEDIA_STEPS = [
@@ -871,11 +965,6 @@ const PricingTiers = () => {
     priceNote: t.basePriceNote(currency),
   })), [currency]);
 
-  const addonPrice = useMemo(() => {
-    const lo = convertPrice(2000, currency);
-    const hi = convertPrice(10000, currency);
-    return { full: `${lo}–${hi}+`, short: `${lo.replace(/,/g, '').length > 5 ? lo : lo}–${hi.replace(/,/g, '').length > 5 ? hi : hi}+` };
-  }, [currency]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0B] text-foreground">
@@ -943,22 +1032,18 @@ const PricingTiers = () => {
           ))}
         </div>
 
-        {/* ── ADD-ON STRIP ── */}
+        {/* ── COMPARE STRIP ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          onClick={() => setActiveModal("addon")}
+          onClick={() => setActiveModal("compare")}
           className="cursor-pointer border border-border border-t-0 rounded-b-2xl bg-card hover:bg-card/80 transition-colors p-5 flex items-center gap-5"
         >
-          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0" style={{ background: C.amberBg, color: C.amberDk }}>Add-on</span>
+          <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">All tiers</span>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-medium text-text-primary">Creator & Influencer Amplification</div>
-            <div className="text-xs text-text-tertiary">Third-party voices. New audiences. Credibility that compounds.</div>
-          </div>
-          <div className="text-right shrink-0">
-            <div className="text-sm font-medium text-text-primary">{addonPrice.full}</div>
-            <div className="text-[10px] text-text-tertiary">per month</div>
+            <div className="text-sm font-medium text-text-primary">Compare all three tiers</div>
+            <div className="text-xs text-text-tertiary">Every service, side by side. See exactly what changes as you scale.</div>
           </div>
           <ArrowUpRight className="w-4 h-4 text-text-tertiary shrink-0" />
         </motion.div>
@@ -984,7 +1069,7 @@ const PricingTiers = () => {
       <TierModal open={activeModal === "t3"} onClose={() => setActiveModal(null)} tier={tiers.find(t => t.id === "t3")!}>
         <Tier3Tabs />
       </TierModal>
-      <AddOnModal open={activeModal === "addon"} onClose={() => setActiveModal(null)} currency={currency} />
+      <CompareModal open={activeModal === "compare"} onClose={() => setActiveModal(null)} currency={currency} />
 
       <Footer />
     </div>

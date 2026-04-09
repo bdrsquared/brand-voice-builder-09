@@ -944,7 +944,7 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
             <span className="text-xs font-medium text-[#1CFA76]">Paid Media Impact</span>
           </div>
           <p className="text-xs text-text-secondary leading-relaxed">
-            At £3k–£50k/month ad spend, estimated impressions range from <strong className="text-text-primary">150k–300k</strong> to <strong className="text-text-primary">5M+</strong> per month within your ICP. Use the slider above to explore the impact at different investment levels.
+            At <strong className="text-text-primary">{mediaSpend}/mo</strong>, estimated impressions are <strong className="text-text-primary">{mediaData.impressions}</strong> per month within your ICP — <strong className="text-text-primary">{mediaData.label}</strong>. Adjust the slider above to explore different levels.
           </p>
         </div>
       )}

@@ -921,7 +921,10 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
   const mediaSpend = convertSpend(mediaData.spend, currency);
   const productionMultiplier = PRODUCTION_REACH_MULTIPLIER[prodType];
 
-  const monthlyTotal = data.monthlyNum + paidSpendConverted;
+  const isT1 = tier === "t1";
+  const launchPerMonth = isT1 ? Math.round(data.launchNum / 3) : 0;
+  const retainerOrLaunch = isT1 ? launchPerMonth : data.monthlyNum;
+  const monthlyTotal = retainerOrLaunch + paidSpendConverted;
   const monthlyTotalStr = monthlyTotal > 0 ? `${sym}${monthlyTotal.toLocaleString()}` : "—";
 
   const organicBase = ORGANIC_REACH[tier];
@@ -939,12 +942,12 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
   const totalReachStr = formatReach(totalLow, totalHigh);
 
   const rows = [
-    { label: "Launch strategy fee", value: data.launch, desc: tier === "t1" ? "One-time investment — no ongoing commitment" : "Paid upfront before production begins", highlight: false },
-    { label: "Monthly retainer", value: data.monthly, desc: tier === "t1" ? "No monthly fee — one-time project" : "Billed monthly for 12 months", highlight: false },
+    { label: "Launch strategy fee", value: data.launch, desc: isT1 ? `${data.launch} total — paid over 3 months (${sym}${launchPerMonth.toLocaleString()}/mo)` : "Paid upfront before production begins", highlight: false },
+    { label: isT1 ? "Monthly cost (during launch)" : "Monthly retainer", value: isT1 ? `${sym}${launchPerMonth.toLocaleString()}/mo` : data.monthly, desc: isT1 ? "Launch fee spread over 3 months" : "Billed monthly for 12 months", highlight: false },
     { label: "Paid media spend", value: `${mediaSpend}/mo`, desc: `Dynamic with slider · scaled for ${TIER_LABELS[tier].split("· ")[1]}`, highlight: false },
-    { label: "Monthly total", value: `${monthlyTotalStr}/mo`, desc: data.monthlyNum > 0 ? "Retainer + paid media spend combined" : "Paid media spend only for monthly promotion", highlight: true },
-    { label: "Annual total", value: data.yearly, desc: tier === "t1" ? "Core package total before optional paid media" : "Launch fee + 12 months of retainer (before paid media)", highlight: false },
-    { label: "Episode output", value: data.episodes, desc: tier === "t1" ? "A complete first series" : "Consistent monthly production", highlight: false },
+    { label: "Monthly total", value: `${monthlyTotalStr}/mo`, desc: isT1 ? "Launch cost (over 3 months) + paid media spend" : "Retainer + paid media spend combined", highlight: true },
+    { label: isT1 ? "Total project cost" : "Annual total", value: data.yearly, desc: isT1 ? "Core package total (3-month launch)" : "Launch fee + 12 months of retainer (before paid media)", highlight: false },
+    { label: "Episode output", value: data.episodes, desc: isT1 ? "A complete first series" : "Consistent monthly production", highlight: false },
   ];
 
   return (

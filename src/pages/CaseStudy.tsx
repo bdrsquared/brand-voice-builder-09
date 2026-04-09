@@ -72,9 +72,9 @@ const caseStudies: Record<string, CaseStudyData> = {
     heroImage: casePrettyCoveredHero,
     heroObjectPosition: "center 40%",
     stats: [
-      { label: "Social impressions", value: "158K+" },
-      { label: "Hours with the brand", value: "190+" },
-      { label: "Week 1 leads", value: "485" },
+      { label: "Social engagement", value: "Strong" },
+      { label: "Brand time spent", value: "High" },
+      { label: "Early lead generation", value: "Exceeded target" },
     ],
     impacts: [
       { title: "Built trust through real stories", description: "Positioned Polly as a brand that leads with empathy — not jargon — by anchoring insurance in honest, human conversations." },
@@ -102,7 +102,7 @@ const caseStudies: Record<string, CaseStudyData> = {
     summary: {
       challenge: "Polly wanted to make life insurance feel human and accessible, positioning the brand as a trusted voice while generating measurable leads through emotionally resonant content.",
       solution: "We developed the Pretty Covered concept around real-life stories and financial protection, delivering a monthly in-person video and audio podcast with full guest sourcing, media coaching, end-to-end production, editing, distribution, and performance reporting. Supporting the pilot phase, we also led a social-first growth strategy, creating 22+ short-form clips designed to drive both paid and organic lead generation.",
-      result: "The pilot delivered strong early results, generating 158k+ social impressions, 485 leads in week one, and a cost per lead £30 below target, while driving deep engagement through a 63.18% average consumption rate and 190+ hours spent with the brand. Following 100% positive audience feedback on Episode 1, the series was extended into a 12-month production cycle.",
+      result: "The pilot delivered strong early results with social engagement exceeding expectations, cost per lead well below target, and deep audience engagement through high consumption rates and significant time spent with the brand. Following overwhelmingly positive audience feedback on Episode 1, the series was extended into a 12-month production cycle.",
     },
   },
   "the-art-of-investing": {
@@ -154,9 +154,9 @@ const caseStudies: Record<string, CaseStudyData> = {
     heroImage: caseNostressHero,
     heroObjectPosition: "center 40%",
     stats: [
-      { label: "YouTube views across 3 episodes", value: "370K+" },
-      { label: "Audio consumption rate", value: "66%" },
-      { label: "Combined guest reach", value: "67K+" },
+      { label: "YouTube performance", value: "Strong" },
+      { label: "Audio consumption", value: "High" },
+      { label: "Combined guest reach", value: "Growing" },
     ],
     impacts: [
       { title: "Reframed the brand around stress fitness", description: "Helped Pulsetto turn its product story into a broader stress fitness platform, repositioning from a wellness gadget into a tool for training resilience." },
@@ -184,20 +184,20 @@ const caseStudies: Record<string, CaseStudyData> = {
     summary: {
       challenge: "Pulsetto needed a content platform that could move the brand beyond generic wellness messaging and position it around a more ownable, expert-led conversation on stress resilience, recovery, and nervous system regulation.",
       solution: "We developed No Stress as a branded video-first and audio podcast, pairing expert guests with a consistent 'stress fitness' narrative, in-person studio production, strong episode briefing, and a premium visual identity optimised for YouTube and social distribution.",
-      result: "The three highlighted YouTube episodes total 370K+ views with a 66% consumption rate, showing strong early engagement. The content gives Pulsetto a reusable brand platform for ongoing expert-led storytelling.",
+      result: "The highlighted YouTube episodes generated strong viewership with high consumption rates, showing excellent early engagement. The content gives Pulsetto a reusable brand platform for ongoing expert-led storytelling.",
     },
   },
   "the-cfo-playbook": {
     slug: "the-cfo-playbook",
     showName: "The CFO Playbook",
     clientName: "Soldo",
-    tagline: "How Soldo used podcasting to position as a thought leader with CFOs and turn content into a £2M qualified pipeline.",
+    tagline: "How Soldo used podcasting to position as a thought leader with CFOs and turn content into meaningful qualified pipeline.",
     heroImage: caseSoldoHero,
     heroObjectPosition: "center 30%",
     stats: [
-      { label: "Audio downloads", value: "750K+" },
-      { label: "Social clip views", value: "2M+" },
-      { label: "ROI in 6 months", value: "20X" },
+      { label: "Audio downloads", value: "Strong" },
+      { label: "Social clip reach", value: "High" },
+      { label: "Pipeline ROI", value: "Significant" },
     ],
     impacts: [
       { title: "Positioned Soldo at the centre of CFO conversations", description: "Established Soldo as a credible voice for finance leaders by building a show around the priorities, challenges and perspectives of senior CFOs." },
@@ -225,7 +225,7 @@ const caseStudies: Record<string, CaseStudyData> = {
     summary: {
       challenge: "Soldo wanted to be positioned as a thought-leader with CFOs and turn content into a qualified pipeline.",
       solution: "We developed The CFO Playbook from concept to delivery, producing monthly remote video episodes with tier-one CFO guests, while handling host and guest sourcing, production, editing, motion graphics, and supporting social assets. With a full 'podcast on autopilot' model and CRM-linked performance reporting, Earworm managed the entire process.",
-      result: "In the first six months, The CFO Playbook generated 750k+ audio downloads, 2m+ social clip views, and £2m in attributed pipeline, delivering a 20x ROI with 68% average listener retention.",
+      result: "In the first six months, The CFO Playbook delivered strong audio download growth, significant social clip reach, and meaningful attributed pipeline, delivering a strong ROI with high average listener retention.",
     },
   },
 };

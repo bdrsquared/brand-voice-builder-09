@@ -52,40 +52,49 @@ const BulletList = ({ items }: { items: string[] }) => (
   </ul>
 );
 
-const GuaranteeBlock = ({ title, items }: { title: string; items: string[] }) => (
-  <div className="rounded-xl overflow-hidden border border-[#7BAF8E]/20 my-5">
-    <div className="px-4 py-2.5 text-[10px] font-medium tracking-[0.08em] uppercase" style={{ background: C.greenBg, color: C.greenDk }}>{title}</div>
-    <ul className="divide-y divide-[#7BAF8E]/10">
-      {items.map((item) => (
-        <li key={item} className="px-4 py-2.5 text-sm text-text-secondary flex gap-2.5 leading-relaxed">
-          <span className="text-[#7BAF8E] text-xs font-bold shrink-0 mt-0.5">✓</span>{item}
-        </li>
+/* ── Service table row types ── */
+type SvcRow = { name: string; desc: string; status: "included"; label: string } | { name: string; desc: string; status: "not-included" };
+type SvcSection = { section: string; rows: SvcRow[] };
+
+const tierDotClass: Record<string, string> = {
+  t1: "bg-[#e8f4f1] text-[#0a6b5c]",
+  t2: "bg-[#eaeffa] text-[#1649a0]",
+  t3: "bg-[#f0eaf8] text-[#4e2d7a]",
+};
+const tierLabelClass: Record<string, string> = {
+  t1: "text-[#0a6b5c] font-medium",
+  t2: "text-[#1649a0] font-medium",
+  t3: "text-[#4e2d7a] font-medium",
+};
+
+const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string }) => (
+  <div className="overflow-x-auto -mx-6 sm:-mx-8">
+    <table className="w-full border-collapse min-w-[500px]">
+      {sections.map((sec) => (
+        <tbody key={sec.section}>
+          <tr><td colSpan={2} className="bg-secondary/40 px-5 py-2 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary border-y border-border">{sec.section}</td></tr>
+          {sec.rows.map((row) => (
+            <tr key={row.name} className="group hover:bg-secondary/20 transition-colors">
+              <td className="px-5 py-3 border-b border-border align-top min-w-[200px]">
+                <div className="text-[13px] font-medium text-text-primary mb-0.5">{row.name}</div>
+                <div className="text-xs text-text-tertiary leading-snug">{row.desc}</div>
+              </td>
+              <td className="px-5 py-3 border-b border-border align-top min-w-[160px]">
+                {row.status === "included" ? (
+                  <div className="flex items-start gap-2">
+                    <span className={`w-[18px] h-[18px] rounded-full flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5 ${tierDotClass[tier]}`}>✓</span>
+                    <span className={`text-[13px] leading-snug ${tierLabelClass[tier]}`}>{row.label}</span>
+                  </div>
+                ) : (
+                  <span className="text-xs text-text-tertiary/50 pt-1 block">Not included in this tier</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
       ))}
-    </ul>
+    </table>
   </div>
-);
-
-const NoGuaranteeBlock = ({ title, items }: { title: string; items: string[] }) => (
-  <div className="rounded-xl overflow-hidden border border-border my-5">
-    <div className="px-4 py-2.5 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary bg-secondary/60">{title}</div>
-    <ul className="divide-y divide-border">
-      {items.map((item) => (
-        <li key={item} className="px-4 py-2.5 text-sm text-text-secondary flex gap-2.5 leading-relaxed">
-          <span className="text-text-tertiary text-xs shrink-0 mt-0.5">✕</span>{item}
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-const RoiBox = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-secondary/40 rounded-xl p-5 my-5">
-    <p className="text-sm text-text-secondary leading-relaxed m-0">{children}</p>
-  </div>
-);
-
-const UnlockQuote = ({ children }: { children: string }) => (
-  <div className="bg-card border border-border rounded-xl p-5 my-5 font-heading text-base italic text-text-primary leading-relaxed">{children}</div>
 );
 
 /* ── tier data (base prices in GBP) ── */
@@ -153,143 +162,322 @@ const CurrencyToggle = ({ value, onChange }: { value: Currency; onChange: (c: Cu
   </div>
 );
 
-/* ── Modal content components ── */
+/* ── Modal content: Tier 1 ── */
+const T1_SECTIONS: SvcSection[] = [
+  { section: "Strategy", rows: [
+    { name: "Audience & ICP definition", desc: "Define exactly who you're talking to, what they care about, and why your show is relevant to them.", status: "included", label: "Included" },
+    { name: "Podcast concept & positioning", desc: "Shape the format, name, tone and market position of the show so it stands out from day one.", status: "included", label: "Included" },
+    { name: "Content pillars & roadmap", desc: "Identify the core themes and topics that will drive consistent engagement across every episode.", status: "included", label: "Included" },
+    { name: "Distribution strategy", desc: "A clear plan for how and where the show reaches your audience from launch.", status: "included", label: "Included" },
+    { name: "Host sourcing & training", desc: "Identify and prepare the right on-screen talent — internal leadership or external host.", status: "not-included" },
+    { name: "Marketing stack integration", desc: "Connect the podcast into your CRM, email and marketing automation so content feeds the funnel.", status: "not-included" },
+  ]},
+  { section: "Production", rows: [
+    { name: "Episode volume", desc: "Fully produced episodes, end-to-end from brief to published.", status: "included", label: "6 episodes total" },
+    { name: "Video & audio recording", desc: "High-quality recording with full technical direction and setup support — studio or remote.", status: "included", label: "Studio & remote" },
+    { name: "Professional editing", desc: "Full post-production for video and audio — paced, polished, broadcast standard.", status: "included", label: "Video + audio" },
+    { name: "Publishing & distribution", desc: "Published across all major podcast platforms from day one.", status: "included", label: "All platforms" },
+  ]},
+  { section: "Content Creation", rows: [
+    { name: "Short-form social clips", desc: "Platform-optimised video clips cut from each episode to drive reach and engagement.", status: "included", label: "4–6 clips per episode" },
+    { name: "Captions, hooks & social copy", desc: "Written content for every clip — crafted to stop the scroll and stay on-brand.", status: "included", label: "Captions per episode" },
+    { name: "Branded thumbnails & visuals", desc: "On-brand visual assets for every episode — thumbnails, cover art and social graphics.", status: "included", label: "Thumbnails & cover art" },
+    { name: "SEO-optimised show notes", desc: "Long-form written show notes built to rank in search and extend the life of every episode.", status: "included", label: "Full SEO show notes" },
+    { name: "Multi-format content repurposing", desc: "Each episode turned into multiple formats — articles, LinkedIn posts, email copy, quote cards.", status: "not-included" },
+  ]},
+  { section: "Distribution", rows: [
+    { name: "Social media posting & management", desc: "We write and publish content across LinkedIn, YouTube and social on your behalf.", status: "not-included" },
+    { name: "Newsletter & email distribution", desc: "Episode content distributed through your email list and newsletter.", status: "not-included" },
+    { name: "Paid media amplification", desc: "Targeted paid campaigns across LinkedIn, YouTube and Spotify.", status: "not-included" },
+  ]},
+  { section: "Guest Strategy & PR", rows: [
+    { name: "Guest identification & targeting", desc: "Research and identify the right guests — aligned to your ICP and relevant to your content pillars.", status: "included", label: "Launch guest targeting" },
+    { name: "Personalised outreach & booking", desc: "Tailored outreach to every guest — managed end-to-end from first contact to recording.", status: "included", label: "Outreach & booking" },
+    { name: "PR & industry amplification", desc: "Turn key episodes into PR moments — press coverage and third-party amplification.", status: "not-included" },
+  ]},
+  { section: "UGC & Creator Network", rows: [
+    { name: "UGC strategy & activation", desc: "Turn hosts, guests and your team into active content contributors around every episode.", status: "not-included" },
+    { name: "Creator & influencer partnerships", desc: "Partner with relevant creators to carry your content to new audiences through trusted voices.", status: "not-included" },
+  ]},
+  { section: "Sales Integration", rows: [
+    { name: "Sales content alignment", desc: "Episodes and clips built around the exact challenges your buyers face.", status: "not-included" },
+    { name: "Outbound content toolkit", desc: "A library of clips and written assets your sales team can use in outreach sequences.", status: "not-included" },
+    { name: "Lead capture & landing pages", desc: "Landing pages and CTAs built around the podcast to capture leads and feed your funnel.", status: "not-included" },
+  ]},
+  { section: "Performance & Reporting", rows: [
+    { name: "Performance reporting", desc: "Regular reporting on audience, engagement, content performance and channel breakdown.", status: "included", label: "End-of-pilot report" },
+    { name: "Pipeline & revenue attribution", desc: "Track the journey from content impression to pipeline influence.", status: "not-included" },
+    { name: "Continuous optimisation", desc: "Ongoing refinement of content, format and distribution based on performance data.", status: "not-included" },
+  ]},
+  { section: "Strategic Direction", rows: [
+    { name: "Fractional Podcast CMO", desc: "Senior strategic oversight treating the podcast as a board-level commercial asset.", status: "not-included" },
+    { name: "Senior strategic account management", desc: "A named senior contact who understands your business and the commercial context behind every decision.", status: "not-included" },
+  ]},
+  { section: "Guarantees", rows: [
+    { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed brief and quality standards. If it's not right, we fix it.", status: "included", label: "Fully guaranteed" },
+    { name: "90-day review with exit rights", desc: "Formal performance review with contractual exit rights if agreed indicators aren't met.", status: "not-included" },
+    { name: "Client reference access", desc: "Introduction to a current client at the same tier before you commit.", status: "not-included" },
+  ]},
+];
+
 const Tier1Content = () => (
   <>
-    <div className="mb-6"><SectionTitle>Strategy</SectionTitle><BulletList items={[
-      "Define your target audience (ICP) who you're talking to and why they'll care",
-      "Shape the podcast concept, format and market positioning",
-      "Identify content pillars and themes that drive real engagement",
-      "Build a distribution plan so the show actually gets heard",
-    ]} /></div>
-    <div className="mb-6"><SectionTitle>Production 6 fully produced episodes</SectionTitle><BulletList items={[
-      "High-quality video and audio recording",
-      "Professional editing paced, clear, engaging",
-      "Published across all major podcast platforms from day one",
-    ]} /></div>
-    <div className="mb-6"><SectionTitle>Content</SectionTitle><BulletList items={[
-      "4–6 short-form video clips per episode, optimised for social",
-      "Captions and hooks designed to stop the scroll",
-      "Branded thumbnails and visuals",
-      "SEO-optimised show notes",
-    ]} /><InsightChip color={C.teal} bg="rgba(106,159,163,0.12)">Content designed to be shared, not just watched</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Guest & performance</SectionTitle><BulletList items={[
-      "Identify relevant, on-brand guests targeted, not random",
-      "Personalised outreach and booking",
-      "Clear early reporting on what's landing with your audience",
-    ]} /></div>
-    
-    <RoiBox><strong className="text-text-primary">Making the case internally:</strong> Six episodes at £19,500 costs less than one month of a mid-level content hire and produces a permanent asset your brand owns. Unlike headcount, it ships on a fixed timeline and comes with a proven system you can scale into.</RoiBox>
-    <UnlockQuote>"A credible show in market. Your brand sounds like it means it. Your leadership wants to be on it. Your audience starts to notice."</UnlockQuote>
+    <ServiceTable sections={T1_SECTIONS} tier="t1" />
+    <div className="mt-6 bg-card border border-border rounded-xl p-5 font-heading text-base italic text-text-primary leading-relaxed">
+      "A credible show in market. Your brand sounds like it means it. Your audience starts to notice."
+    </div>
+    <div className="bg-secondary/40 rounded-xl p-5 mt-4">
+      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Making the case internally:</strong> Six episodes at £19,500 costs less than one month of a mid-level content hire — and produces a permanent asset your brand owns. It ships on a fixed timeline with a proven system you can scale into.</p>
+    </div>
   </>
 );
+
+/* ── Modal content: Tier 2 ── */
+const T2_SECTIONS: SvcSection[] = [
+  { section: "Strategy", rows: [
+    { name: "Audience & ICP definition", desc: "Define exactly who you're talking to, what they care about, and why your show is relevant to them.", status: "included", label: "Full ICP & buyer mapping" },
+    { name: "Podcast concept & positioning", desc: "Shape the format, name, tone and market position of the show so it stands out from day one.", status: "included", label: "Full concept & positioning" },
+    { name: "Content pillars & roadmap", desc: "Identify the core themes and topics that will drive consistent engagement across every episode.", status: "included", label: "Full content roadmap" },
+    { name: "Multi-channel distribution strategy", desc: "A clear plan for how the show reaches your audience across LinkedIn, YouTube, email and beyond.", status: "included", label: "Multi-channel strategy" },
+    { name: "Host sourcing & training", desc: "Identify and prepare the right on-screen talent — internal leadership or external host.", status: "included", label: "Full sourcing & training" },
+    { name: "Marketing stack integration", desc: "Connect the podcast into your CRM, email and marketing automation so content feeds the funnel.", status: "included", label: "Full stack integration" },
+  ]},
+  { section: "Production", rows: [
+    { name: "Episode volume", desc: "Fully produced episodes, end-to-end from brief to published.", status: "included", label: "2 per month, ongoing" },
+    { name: "Video & audio recording", desc: "High-quality recording with full technical direction — studio or remote.", status: "included", label: "Studio & remote" },
+    { name: "Professional editing", desc: "Full post-production for video and audio — paced, polished, broadcast standard.", status: "included", label: "Video + audio" },
+    { name: "Publishing & distribution", desc: "Published and optimised across all major podcast platforms — fully managed.", status: "included", label: "All platforms, fully managed" },
+  ]},
+  { section: "Content Creation", rows: [
+    { name: "Short-form social clips", desc: "Platform-optimised video clips cut from each episode to drive reach and engagement.", status: "included", label: "4–6 clips per episode" },
+    { name: "Captions, hooks & social copy", desc: "Written content for every clip and post — crafted to stop the scroll and stay on-brand.", status: "included", label: "Full copywriting suite" },
+    { name: "Branded thumbnails & visuals", desc: "On-brand visual assets for every episode — thumbnails, cover art and social graphics.", status: "included", label: "Full visual suite" },
+    { name: "SEO-optimised show notes", desc: "Long-form written show notes built to rank in search and extend the life of every episode.", status: "included", label: "Full SEO show notes" },
+    { name: "Multi-format content repurposing", desc: "Each episode turned into multiple formats — articles, LinkedIn posts, email copy, quote cards.", status: "included", label: "Multi-format repurposing" },
+  ]},
+  { section: "Distribution", rows: [
+    { name: "Social media posting & management", desc: "We write and publish content across LinkedIn, YouTube and social on your behalf — every week.", status: "included", label: "Full managed posting" },
+    { name: "Newsletter & email distribution", desc: "Episode content distributed through your email list and newsletter.", status: "included", label: "Newsletter integration" },
+    { name: "Paid media amplification", desc: "Targeted paid campaigns across LinkedIn, YouTube and Spotify.", status: "not-included" },
+  ]},
+  { section: "Guest Strategy & PR", rows: [
+    { name: "Guest identification & targeting", desc: "Research and identify the right guests — aligned to your ICP and credible to your audience.", status: "included", label: "Ongoing guest pipeline" },
+    { name: "Personalised outreach & booking", desc: "Tailored outreach to every guest — no generic booking emails. End-to-end management.", status: "included", label: "Full outreach management" },
+    { name: "PR & industry amplification", desc: "Turn key episodes into PR moments — press coverage and third-party amplification.", status: "included", label: "PR amplification" },
+  ]},
+  { section: "UGC & Creator Network", rows: [
+    { name: "UGC strategy & activation", desc: "Turn hosts, guests and your team into active content contributors around every episode.", status: "not-included" },
+    { name: "Creator & influencer partnerships", desc: "Partner with creators to carry your content to new audiences through trusted voices.", status: "not-included" },
+  ]},
+  { section: "Sales Integration", rows: [
+    { name: "Sales content alignment", desc: "Episodes and clips built around the exact challenges and objections your buyers face.", status: "included", label: "Sales content alignment" },
+    { name: "Outbound content toolkit", desc: "A library of assets your sales team can use in outreach sequences to warm prospects.", status: "included", label: "Outbound toolkit" },
+    { name: "Lead capture & landing pages", desc: "Landing pages and CTAs built around the podcast to capture leads and feed your funnel.", status: "not-included" },
+  ]},
+  { section: "Performance & Reporting", rows: [
+    { name: "Performance reporting", desc: "Regular reporting on audience, engagement, content performance and channel breakdown.", status: "included", label: "Monthly reporting" },
+    { name: "Pipeline & revenue attribution", desc: "Track the journey from content impression to pipeline influence.", status: "not-included" },
+    { name: "Continuous optimisation", desc: "Ongoing refinement of content, format and distribution based on performance data.", status: "included", label: "Ongoing optimisation" },
+  ]},
+  { section: "Strategic Direction", rows: [
+    { name: "Fractional Podcast CMO", desc: "Senior strategic oversight treating the podcast as a board-level commercial asset.", status: "not-included" },
+    { name: "Senior strategic account management", desc: "A named senior contact who understands your business and the commercial context behind every decision.", status: "included", label: "Dedicated senior contact" },
+  ]},
+  { section: "Guarantees", rows: [
+    { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed brief and quality standards. If it's not right, we fix it.", status: "included", label: "Fully guaranteed" },
+    { name: "90-day review with exit rights", desc: "Formal performance review with contractual exit rights if agreed indicators aren't met.", status: "included", label: "Included" },
+    { name: "Client reference access", desc: "Introduction to a current client at the same tier before you commit.", status: "included", label: "On request" },
+  ]},
+];
 
 const Tier2Content = () => (
   <>
-    <div className="mb-6"><SectionTitle>Strategy & system design first 8 weeks</SectionTitle><BulletList items={[
-      "Deep ICP and buyer mapping who, where, and what moves them",
-      "Content strategy and roadmap built around your audience's actual priorities",
-      "Multi-channel distribution LinkedIn, YouTube, email",
-      "Full integration into your existing marketing activity",
-      "Host sourcing, testing and training",
-      "Studio setup and creative direction",
-    ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>You don't just get a podcast. You get a system for how it drives attention.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Production 2 episodes per month, end-to-end</SectionTitle><BulletList items={[
-      "Guest booking, scheduling and all logistics handled",
-      "Recording studio or remote, your choice",
-      "Full video + audio editing to broadcast standard",
-      "Publishing and distribution managed for you",
-    ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>Fully managed. Zero added workload for your team.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Distribution & guest engine</SectionTitle><BulletList items={[
-      "Published across all podcast platforms and social channels we write and post",
-      "Episodes repurposed into clips, copy and multiple formats",
-      "High-value guests your audience respects personalised outreach, consistent pipeline",
-    ]} /><InsightChip color={C.blueDk} bg={C.blueBg}>Your content shows up where your buyers already are every month, without fail.</InsightChip></div>
-    
-    <RoiBox><strong className="text-text-primary">Making the case internally:</strong> A senior content strategist + producer + social manager costs £90–120k in salary alone. This delivers equivalent output fully coordinated, immediately operational for £75k, with no recruitment, no onboarding, no management overhead.</RoiBox>
-    <UnlockQuote>"Your brand stops being invisible between sales cycles. Prospects recognise you before your team ever reaches out."</UnlockQuote>
+    <ServiceTable sections={T2_SECTIONS} tier="t2" />
+    <div className="mt-6 bg-card border border-border rounded-xl p-5 font-heading text-base italic text-text-primary leading-relaxed">
+      "Your brand stops being invisible between sales cycles. Prospects recognise you before your team ever reaches out."
+    </div>
+    <div className="bg-secondary/40 rounded-xl p-5 mt-4">
+      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Making the case internally:</strong> A senior content strategist + producer + social manager costs £90–120k in salary alone. This delivers equivalent output — fully coordinated, immediately operational — for £75k, with no recruitment, no onboarding, no management overhead.</p>
+    </div>
   </>
 );
 
+/* ── Modal content: Tier 3 ── */
+const T3_SECTIONS: SvcSection[] = [
+  { section: "Strategy", rows: [
+    { name: "Audience & ICP definition", desc: "Define exactly who you're talking to, what they care about, and why your show is relevant to them.", status: "included", label: "Deep buyer & account mapping" },
+    { name: "Podcast concept & positioning", desc: "Shape the format, name, tone and market position of the show so it stands out from day one.", status: "included", label: "Category-level positioning" },
+    { name: "Content pillars & roadmap", desc: "Identify the core themes and topics that will drive consistent engagement across every episode.", status: "included", label: "Category agenda roadmap" },
+    { name: "Multi-channel distribution strategy", desc: "A clear plan for how the show reaches your audience across every channel, globally.", status: "included", label: "Global multi-channel strategy" },
+    { name: "Host sourcing & training", desc: "Identify and prepare the right on-screen talent — internal leadership or external host.", status: "included", label: "Full sourcing & training" },
+    { name: "Marketing stack integration", desc: "Connect the podcast into your CRM, email and marketing automation so content feeds the funnel.", status: "included", label: "Full stack integration" },
+  ]},
+  { section: "Production", rows: [
+    { name: "Episode volume", desc: "Fully produced episodes, end-to-end from brief to published.", status: "included", label: "2 per month, ongoing" },
+    { name: "Video & audio recording", desc: "High-quality recording with full technical direction — studio or remote.", status: "included", label: "Studio & remote" },
+    { name: "Professional editing", desc: "Full post-production for video and audio — paced, polished, broadcast standard.", status: "included", label: "Video + audio" },
+    { name: "Publishing & distribution", desc: "Published and optimised across all major podcast platforms — fully managed.", status: "included", label: "All platforms, fully managed" },
+  ]},
+  { section: "Content Creation", rows: [
+    { name: "Short-form social clips", desc: "Platform-optimised video clips cut from each episode to drive reach and engagement.", status: "included", label: "6–10 clips per episode" },
+    { name: "Captions, hooks & social copy", desc: "Written content for every clip and post — crafted to stop the scroll and stay on-brand.", status: "included", label: "Full copywriting suite" },
+    { name: "Branded thumbnails & visuals", desc: "On-brand visual assets for every episode — thumbnails, cover art and social graphics.", status: "included", label: "Full visual suite" },
+    { name: "SEO-optimised show notes", desc: "Long-form written show notes built to rank in search and extend the life of every episode.", status: "included", label: "Full SEO show notes" },
+    { name: "Multi-format content repurposing", desc: "Each episode turned into multiple formats — articles, LinkedIn posts, email copy, quote cards.", status: "included", label: "Full repurposing engine" },
+  ]},
+  { section: "Distribution", rows: [
+    { name: "Social media posting & management", desc: "We write and publish content across LinkedIn, YouTube and social on your behalf — every week.", status: "included", label: "Full managed posting" },
+    { name: "Newsletter & email distribution", desc: "Episode content distributed through your email list and newsletter.", status: "included", label: "Full newsletter integration" },
+    { name: "Paid media amplification", desc: "Targeted paid campaigns across LinkedIn, YouTube, Spotify and display — globally scaled.", status: "included", label: "Multi-channel, global scale" },
+  ]},
+  { section: "Guest Strategy & PR", rows: [
+    { name: "Guest identification & targeting", desc: "Research and identify the right guests — aligned to your ICP and your category ownership strategy.", status: "included", label: "Strategic account targeting" },
+    { name: "Personalised outreach & booking", desc: "Tailored outreach to every guest — no generic booking emails. End-to-end management.", status: "included", label: "Full outreach management" },
+    { name: "PR & industry amplification", desc: "Turn key episodes into PR moments — press coverage, industry citations and third-party amplification.", status: "included", label: "Full PR engine" },
+  ]},
+  { section: "UGC & Creator Network", rows: [
+    { name: "UGC strategy & activation", desc: "Turn hosts, guests and your team into active content contributors — reactions, insights, commentary around every episode.", status: "included", label: "Full UGC activation" },
+    { name: "Creator & influencer partnerships", desc: "Partner with relevant creators and industry voices to carry your content to new audiences through trusted channels.", status: "included", label: "Available as add-on" },
+  ]},
+  { section: "Sales Integration", rows: [
+    { name: "Sales content alignment", desc: "Episodes and clips built around the exact challenges and objections your buyers face.", status: "included", label: "Full sales alignment" },
+    { name: "Outbound content toolkit", desc: "A library of assets your sales team can use in outreach sequences to warm prospects at every funnel stage.", status: "included", label: "Full outbound toolkit" },
+    { name: "Lead capture & landing pages", desc: "Landing pages and CTAs built around the podcast to capture leads and feed your funnel.", status: "included", label: "Full lead capture system" },
+  ]},
+  { section: "Performance & Reporting", rows: [
+    { name: "Performance reporting", desc: "Regular reporting on audience, engagement, content performance and channel breakdown.", status: "included", label: "Monthly commercial reporting" },
+    { name: "Pipeline & revenue attribution", desc: "Track the journey from content impression to pipeline influence — connecting podcast activity to commercial outcomes.", status: "included", label: "Full attribution model" },
+    { name: "Continuous optimisation", desc: "Ongoing refinement of content, format and distribution based on performance data.", status: "included", label: "Ongoing optimisation" },
+  ]},
+  { section: "Strategic Direction", rows: [
+    { name: "Fractional Podcast CMO", desc: "Senior strategic oversight — quarterly planning, treating the podcast as a board-level commercial asset.", status: "included", label: "Quarterly strategy sessions" },
+    { name: "Senior strategic account management", desc: "A named senior contact who understands your business and the commercial context behind every decision.", status: "included", label: "Dedicated senior contact" },
+  ]},
+  { section: "Guarantees", rows: [
+    { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed brief and quality standards. If it's not right, we fix it.", status: "included", label: "Fully guaranteed" },
+    { name: "90-day review with exit rights", desc: "Formal performance review with contractual exit rights if agreed leading indicators aren't met.", status: "included", label: "Included" },
+    { name: "Client reference access", desc: "Introduction to a current Tier 3 client before you commit — hear it from someone already in the programme.", status: "included", label: "On request" },
+  ]},
+];
+
 const Tier3Tabs = () => {
-  const [tab, setTab] = useState<"included" | "guarantees">("included");
+  const [tab, setTab] = useState<"services" | "ads" | "guarantees">("services");
   return (
     <>
       <div className="flex border-b border-border mb-6">
-        {(["included", "guarantees"] as const).map((t) => (
+        {([
+          { key: "services" as const, label: "Services included" },
+          { key: "ads" as const, label: "Ad spend" },
+          { key: "guarantees" as const, label: "Guarantees" },
+        ]).map((t) => (
           <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={`flex-1 text-xs font-medium tracking-wide py-3 border-b-2 transition-colors ${tab === t ? "text-[#8B83C7] border-[#8B83C7]" : "text-text-tertiary border-transparent hover:text-text-secondary"}`}
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`flex-1 text-xs font-medium tracking-wide py-3 border-b-2 transition-colors ${tab === t.key ? "text-[#8B83C7] border-[#8B83C7]" : "text-text-tertiary border-transparent hover:text-text-secondary"}`}
           >
-            {t === "included" ? "What's included" : "Guarantees"}
+            {t.label}
           </button>
         ))}
       </div>
-      {tab === "included" && <Tier3Included />}
+      {tab === "services" && <Tier3Services />}
+      {tab === "ads" && <Tier3AdSpend />}
       {tab === "guarantees" && <Tier3Guarantees />}
     </>
   );
 };
 
-const Tier3Included = () => (
+const Tier3Services = () => (
   <>
-    <div className="text-sm text-text-secondary p-3 border border-border rounded-lg mb-6">Includes everything in Launch & Scale plus the full category ownership layer.</div>
-    <div className="mb-6"><SectionTitle>Global paid amplification own every channel your buyers use</SectionTitle><BulletList items={[
-      "Multi-channel paid campaigns across LinkedIn, YouTube, Spotify, display and beyond",
-      "Content distributed into every market your buyers operate in not just your home territory",
-      "Continuous creative testing at scale what works gets amplified, what doesn't gets cut",
-      "Retargeting infrastructure that keeps your brand in front of warm audiences across platforms",
-    ]} /><InsightChip color={C.plum} bg={C.plumBg}>Your buyers can't go a week without encountering your brand somewhere.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Category conversation strategy you set the agenda</SectionTitle><BulletList items={[
-      "Episode themes and guests chosen to own the defining conversations in your space",
-      "Your show becomes the reference point competitors are measured against",
-      "PR layer turns episodes into industry moments not just content",
-      "Thought leadership positioned to shape how your category is discussed, not just covered",
-    ]} /><InsightChip color={C.plum} bg={C.plumBg}>You're not joining the conversation. You're running it.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>UGC & creator network human voices at scale</SectionTitle><BulletList items={[
-      "Hosts, guests and your internal team activated as content contributors",
-      "Creator partnerships that carry your content to audiences outside your own reach",
-      "Short-form UGC reactions, insights, commentary around every episode",
-      "Guest networks mobilised to amplify across their own global audiences",
-    ]} /><InsightChip color={C.plum} bg={C.plumBg}>Credibility spreads through trusted voices, not just brand channels.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Sales & commercial integration</SectionTitle><BulletList items={[
-      "Content built around the exact objections and challenges your buyers face",
-      "Sales team equipped with a content arsenal for every stage of the funnel",
-      "Prospects arrive at sales conversations already informed, already warm",
-    ]} /><InsightChip color={C.plum} bg={C.plumBg}>By the time your sales team reaches out, the work is already done.</InsightChip></div>
-    <div className="mb-6"><SectionTitle>Fractional Podcast CMO category strategy at board level</SectionTitle><BulletList items={[
-      "Quarterly senior strategy sessions treating the podcast as a business asset, not a content project",
-      "Full attribution from reach and engagement through to pipeline and revenue influence",
-      "Continuous alignment with commercial priorities as your market evolves",
-    ]} /><InsightChip color={C.plum} bg={C.plumBg}>The strategic thinking of a CMO without the executive hire.</InsightChip></div>
-    <RoiBox><strong className="text-text-primary">Making the case to your CEO:</strong> Category ownership is a moat. Once your brand owns the conversation in your space the show people reference, the voice people trust, the content that shapes how your market thinks that position is extraordinarily difficult for a competitor to undo. At £160k/year all-in, you're not buying marketing. You're buying a defensible market position.</RoiBox>
-    <UnlockQuote>"In 18 months, anyone who matters in your market will associate your brand with the conversation not just a participant in it."</UnlockQuote>
+    <ServiceTable sections={T3_SECTIONS} tier="t3" />
+    <div className="mt-6 bg-card border border-border rounded-xl p-5 font-heading text-base italic text-text-primary leading-relaxed">
+      "In 18 months, anyone who matters in your market will associate your brand with the conversation — not just a participant in it."
+    </div>
+    <div className="bg-secondary/40 rounded-xl p-5 mt-4">
+      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Making the case to your CEO:</strong> Category ownership is a moat. At £160k/year all-in, you're not buying marketing. You're buying a defensible market position that's extraordinarily difficult for a competitor to undo.</p>
+    </div>
+  </>
+);
+
+const Tier3AdSpend = () => (
+  <>
+    <p className="text-sm text-text-secondary leading-relaxed mb-5">The minimum £3k/month is a starting point, not a recommended level. Here's what different budgets actually deliver.</p>
+    {[
+      { label: "Entry — foundation presence", amount: "£3,000/month", body: <>
+        <strong className="text-text-primary">What this buys:</strong> 2–4 active campaigns across LinkedIn. Realistic reach of <strong className="text-text-primary">150,000–300,000 impressions/month</strong> — tightly targeted by job title, seniority and company size. Best for testing what content performs before scaling.
+      </> },
+      { label: "Growth — consistent market presence", amount: "£5,000–8,000/month", body: <>
+        <strong className="text-text-primary">What this buys:</strong> Multi-format campaigns across LinkedIn and YouTube simultaneously. Reach of <strong className="text-text-primary">400,000–700,000 impressions/month</strong>. Retargeting activated — hitting warm audiences who have already engaged. Most clients move here within 3–6 months.
+      </> },
+      { label: "Scale — category saturation", amount: "£10,000+/month", body: <>
+        <strong className="text-text-primary">What this buys:</strong> Aggressive multi-channel distribution across LinkedIn, YouTube, Spotify and display. <strong className="text-text-primary">1M+ impressions/month</strong> within a tightly defined audience. Your brand becomes genuinely unavoidable for anyone in your target market.
+      </> },
+    ].map((sc) => (
+      <div key={sc.label} className="border border-border rounded-xl overflow-hidden mb-4">
+        <div className="flex justify-between items-center bg-secondary/40 px-4 py-2.5">
+          <span className="text-[13px] font-medium text-text-primary">{sc.label}</span>
+          <span className="font-heading text-base" style={{ color: C.plum }}>{sc.amount}</span>
+        </div>
+        <div className="px-4 py-3 text-[13px] text-text-secondary leading-relaxed border-t border-border">{sc.body}</div>
+      </div>
+    ))}
+    <p className="text-[13px] font-medium text-text-primary mt-5 mb-3">How we report on ad spend</p>
+    {[
+      { label: "Reach within target accounts", desc: "Are you hitting the companies you want to work with — or accumulating views from people who will never buy?" },
+      { label: "Engagement by content type", desc: "Which clips generate saves, shares and comments — not just passive plays." },
+      { label: "Warm signal tracking", desc: "Profile visits, connection requests and DM responses that correlate with campaign exposure." },
+      { label: "Pipeline influence", desc: "Did conversations or deals involve someone exposed to your content? Tracked and reported honestly." },
+      { label: "Cost per meaningful engagement", desc: "Not cost-per-click. Cost per action that signals real commercial intent." },
+    ].map((r) => (
+      <div key={r.label} className="flex gap-3 py-2.5 border-b border-border last:border-b-0">
+        <span className="text-xs font-medium text-text-primary min-w-[150px] shrink-0">{r.label}</span>
+        <span className="text-xs text-text-secondary leading-relaxed">{r.desc}</span>
+      </div>
+    ))}
   </>
 );
 
 const Tier3Guarantees = () => (
   <>
-    <p className="text-sm text-text-secondary leading-relaxed mb-5">Any agency promising specific pipeline numbers or impression guarantees is telling you what you want to hear. Here's what we'll commit to in writing and what we won't, and why.</p>
-    <GuaranteeBlock title="What we commit to in writing" items={[
-      "All production deliverables episodes, clips, show notes delivered on schedule to agreed quality standards",
-      "All guests meet seniority and ICP criteria defined at onboarding. You have approval rights on the guest list.",
-      "Monthly reporting delivered on a fixed date commercial metrics, not vanity numbers",
-      "Senior point of contact accessible within 24 hours, always",
-      "Quarterly strategy sessions in the diary before the quarter begins",
-      "Transparent reporting including what isn't working, not just what is",
-    ]} />
-    <NoGuaranteeBlock title="What we won't guarantee and why you should be suspicious of anyone who does" items={[
-      "Specific impression volumes LinkedIn CPMs shift with targeting precision and algorithm changes. Anyone guaranteeing a number hasn't run these campaigns recently.",
-      "Pipeline numbers your offer, your sales team, your market timing, and a dozen variables outside content all play a role. A guarantee here is either meaningless or has a very low bar baked in.",
-    ]} />
-    <div className="bg-secondary/40 rounded-xl p-5 my-5">
-      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">90-day performance review with exit rights.</strong> At the 90-day mark we review agreed leading indicators together engagement benchmarks, guest quality, content output, early audience signals. If we're not hitting the bar we set, you have the right to exit the contract with 30 days notice. We're confident enough in the work to back that in writing.</p>
+    <p className="text-sm text-text-secondary leading-relaxed mb-5">Any agency promising specific pipeline numbers is telling you what you want to hear. Here's what we commit to in writing — and what we won't, and why.</p>
+    <div className="rounded-xl overflow-hidden border border-[#7BAF8E]/20 mb-5">
+      <div className="px-4 py-2.5 text-[10px] font-medium tracking-[0.08em] uppercase" style={{ background: C.greenBg, color: C.greenDk }}>What we commit to in writing</div>
+      <ul className="divide-y divide-[#7BAF8E]/10">
+        {[
+          "All production deliverables — episodes, clips, show notes — delivered on schedule to agreed quality standards",
+          "All guests meet seniority and ICP criteria defined at onboarding — you have approval rights",
+          "Monthly reporting on a fixed date — commercial metrics, not vanity numbers",
+          "Senior point of contact accessible within 24 hours, always",
+          "Quarterly strategy sessions in the diary before the quarter begins",
+          "Transparent reporting — including what is not working, not just what is",
+        ].map((item) => (
+          <li key={item} className="px-4 py-2.5 text-sm text-text-secondary flex gap-2.5 leading-relaxed">
+            <span className="text-[#7BAF8E] text-xs font-bold shrink-0 mt-0.5">✓</span>{item}
+          </li>
+        ))}
+      </ul>
     </div>
-    <div className="bg-secondary/40 rounded-xl p-5 my-5">
-      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Before you sign, ask us for references.</strong> A conversation with a current Tier 3 client will tell you more than any contractual clause. We'll arrange it.</p>
+    <div className="rounded-xl overflow-hidden border border-border mb-5">
+      <div className="px-4 py-2.5 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary bg-secondary/60">What we won't guarantee — and why you should be suspicious of anyone who does</div>
+      <ul className="divide-y divide-border">
+        {[
+          "Specific impression volumes — LinkedIn CPMs shift with targeting and algorithm changes. Anyone guaranteeing a number hasn't run these campaigns recently.",
+          "Pipeline numbers — your offer, your sales team, your market timing, and a dozen variables outside content all play a role.",
+        ].map((item) => (
+          <li key={item} className="px-4 py-2.5 text-sm text-text-secondary flex gap-2.5 leading-relaxed">
+            <span className="text-text-tertiary text-xs shrink-0 mt-0.5">✕</span>{item}
+          </li>
+        ))}
+      </ul>
     </div>
-    <UnlockQuote>"We're not the right partner for every business. If we don't think this will work for you, we'll say so before you commit."</UnlockQuote>
+    <div className="bg-secondary/40 rounded-xl p-5 mb-4">
+      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">90-day performance review with exit rights.</strong> At 90 days we review agreed leading indicators together. If we're not hitting the bar we set, you have the right to exit with 30 days notice. We're confident enough to back that in writing.</p>
+    </div>
+    <div className="bg-secondary/40 rounded-xl p-5 mb-4">
+      <p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Before you sign, ask us for references.</strong> A conversation with a current Tier 3 client tells you more than any contract clause. We'll arrange it.</p>
+    </div>
+    <div className="bg-card border border-border rounded-xl p-5 font-heading text-base italic text-text-primary leading-relaxed">
+      "We're not the right partner for every business. If we don't think this will work for you, we'll say so before you commit."
+    </div>
   </>
 );
 
@@ -306,7 +494,7 @@ const AddOnContent = () => (
       "Brands ready to scale beyond their existing audience",
       "Companies entering a new market or repositioning in an existing one",
     ]} /></div>
-    <RoiBox><strong className="text-text-primary">Minimum commitment:</strong> 3 months to properly test creator fit and optimise performance. Starting at £2k/month for selective partnerships, up to £10k+ for multi-creator campaigns at scale.</RoiBox>
+    <div className="bg-secondary/40 rounded-xl p-5 my-5"><p className="text-sm text-text-secondary leading-relaxed m-0"><strong className="text-text-primary">Minimum commitment:</strong> 3 months to properly test creator fit and optimise performance. Starting at £2k/month for selective partnerships, up to £10k+ for multi-creator campaigns at scale.</p></div>
   </>
 );
 

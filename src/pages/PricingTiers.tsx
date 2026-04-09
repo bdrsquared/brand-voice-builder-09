@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, lazy, Suspense, memo } from "react";
 
 /* ── currency conversion ── */
 type Currency = "GBP" | "USD" | "EUR";

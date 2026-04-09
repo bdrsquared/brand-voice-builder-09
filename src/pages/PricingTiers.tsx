@@ -942,7 +942,7 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
   const totalReachStr = formatReach(totalLow, totalHigh);
 
   const rows = [
-    { label: "Launch strategy fee", value: data.launch, desc: isT1 ? `${data.launch} total — paid over 3 months (${sym}${launchPerMonth.toLocaleString()}/mo)` : "Paid upfront before production begins", highlight: false },
+    { label: "Launch strategy fee", value: data.launch, desc: isT1 ? `${data.launch} total — paid over 3 months (${sym}${launchPerMonth.toLocaleString()}/mo)` : "Kick off — to ensure we're set up for success for your category", highlight: false },
     { label: isT1 ? "Monthly cost (during launch)" : "Monthly retainer", value: isT1 ? `${sym}${launchPerMonth.toLocaleString()}/mo` : data.monthly, desc: isT1 ? "Launch fee spread over 3 months" : "Billed monthly for 12 months", highlight: false },
     { label: "Paid media spend", value: `${mediaSpend}/mo`, desc: `Dynamic with slider · scaled for ${TIER_LABELS[tier].split("· ")[1]}`, highlight: false },
     { label: "Monthly total", value: `${monthlyTotalStr}/mo`, desc: isT1 ? "Launch cost (over 3 months) + paid media spend" : "Retainer + paid media spend combined", highlight: true },

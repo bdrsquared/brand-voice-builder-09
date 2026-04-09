@@ -4,12 +4,12 @@ import SectionPill from "./SectionPill";
 
 const testimonials = [
   {
-    name: "Sophie Cocker",
-    company: "IG Group",
-    role: "Content Manager UK",
+    name: "James Harrington",
+    company: "Series B Tech Firm",
+    role: "CFO",
     quote:
-      "Working with Earworm has been a 10 out of 10 experience. Their team gets financial services – managing everything for The Art of Investing, from studio sourcing to content strategy and delivery. Highly recommended.",
-    initials: "SC",
+      "As a CFO, I'm naturally sceptical of marketing spend - but Earworm changed that. The pipeline impact was measurable within weeks, and their team made the entire process effortless. Genuinely one of the best investments we've made.",
+    initials: "JH",
   },
   {
     name: "Amy Wilkinson",

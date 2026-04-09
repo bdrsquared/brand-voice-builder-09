@@ -97,42 +97,6 @@ const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string
   </div>
 );
 
-const GuaranteeBlock = ({ title, items }: { title: string; items: string[] }) => (
-  <div className="rounded-xl overflow-hidden border border-[#7BAF8E]/20 my-5">
-    <div className="px-4 py-2.5 text-[10px] font-medium tracking-[0.08em] uppercase" style={{ background: C.greenBg, color: C.greenDk }}>{title}</div>
-    <ul className="divide-y divide-[#7BAF8E]/10">
-      {items.map((item) => (
-        <li key={item} className="px-4 py-2.5 text-sm text-text-secondary flex gap-2.5 leading-relaxed">
-          <span className="text-[#7BAF8E] text-xs font-bold shrink-0 mt-0.5">✓</span>{item}
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-const NoGuaranteeBlock = ({ title, items }: { title: string; items: string[] }) => (
-  <div className="rounded-xl overflow-hidden border border-border my-5">
-    <div className="px-4 py-2.5 text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary bg-secondary/60">{title}</div>
-    <ul className="divide-y divide-border">
-      {items.map((item) => (
-        <li key={item} className="px-4 py-2.5 text-sm text-text-secondary flex gap-2.5 leading-relaxed">
-          <span className="text-text-tertiary text-xs shrink-0 mt-0.5">✕</span>{item}
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-const RoiBox = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-secondary/40 rounded-xl p-5 my-5">
-    <p className="text-sm text-text-secondary leading-relaxed m-0">{children}</p>
-  </div>
-);
-
-const UnlockQuote = ({ children }: { children: string }) => (
-  <div className="bg-card border border-border rounded-xl p-5 my-5 font-heading text-base italic text-text-primary leading-relaxed">{children}</div>
-);
-
 /* ── tier data (base prices in GBP) ── */
 const baseTiers = [
   {

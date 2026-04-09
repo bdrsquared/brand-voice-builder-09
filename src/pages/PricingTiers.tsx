@@ -442,7 +442,7 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
 );
 
 /* ── Add-on modal ── */
-const AddOnModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => (
+const AddOnModal = ({ open, onClose, currency = "GBP" }: { open: boolean; onClose: () => void; currency?: Currency }) => (
   <AnimatePresence>
     {open && (
       <motion.div
@@ -468,7 +468,7 @@ const AddOnModal = ({ open, onClose }: { open: boolean; onClose: () => void }) =
             <h3 className="font-heading text-2xl text-text-primary mb-2">Creator & Influencer Amplification</h3>
             <p className="text-sm text-text-secondary leading-relaxed mb-4">The difference between a brand that builds an audience and one that builds a movement is third-party credibility.</p>
             <div className="flex items-baseline gap-2.5">
-              <span className="font-heading text-3xl text-text-primary">£2,000–£10,000+</span>
+              <span className="font-heading text-3xl text-text-primary">{convertPrice(2000, currency)}–{convertPrice(10000, currency)}+</span>
               <span className="text-xs text-text-tertiary">per month · separate managed budget</span>
             </div>
           </ModalHeader>

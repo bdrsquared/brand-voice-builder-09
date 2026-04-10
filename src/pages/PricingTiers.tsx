@@ -224,7 +224,7 @@ const T1_SECTIONS: SvcSection[] = [
     { name: "Podcast concept & positioning", desc: "What is the show about and why should anyone care? We shape the name, format, tone and angle so it has a clear reason to exist in a crowded market.", status: "included", label: "Full concept, name, format and market positioning" },
     { name: "Content pillars & episode roadmap", desc: "What will you talk about and in what order? We map out the themes, topics and episode arc so the show builds authority deliberately.", status: "included", label: "Core content pillars and launch episode themes" },
     { name: "Distribution strategy", desc: "A show no-one hears is just expensive audio. We plan exactly where and how your episodes reach the right people at launch.", status: "included", label: "Distribution plan for launch across podcast platforms and social" },
-    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", status: "not-included" },
+    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", status: "included", label: "Full sourcing, testing and coaching for your launch series" },
     { name: "Marketing stack integration", desc: "We connect the podcast into your CRM, email platform and marketing automation — so listeners become leads automatically.", status: "not-included" },
   ]},
   { section: "Production", rows: [

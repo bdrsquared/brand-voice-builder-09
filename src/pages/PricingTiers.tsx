@@ -1007,7 +1007,7 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
             color: tier === "t3" ? C.plum : tier === "t2" ? C.blueDk : C.greenDk,
           }}>{TIER_LABELS[tier]}</span>
           <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">
-            {prodType === "location" ? "On Location" : "Virtual"}
+            {prodType === "location" ? "On Location" : prodType === "studio" ? "Studio" : "Virtual"}
           </span>
           <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">
             {currency}

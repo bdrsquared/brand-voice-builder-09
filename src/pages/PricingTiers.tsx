@@ -135,7 +135,7 @@ const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string
 const tierCards = [
   {
     id: "t3" as const,
-    num: "Tier 03 · Global Leader",
+    num: "Global Leader",
     name: "Own the conversation\nyour market is\nalready having.",
     hook: "We build the platform for your brand to lead the defining conversation in your category — across every channel, in every market, at a scale that turns early commitment into a position your competitors can't recover from.",
     modalPitch: "Everything included in Tier 3 — every service, at what level, and what it delivers commercially.",
@@ -146,7 +146,7 @@ const tierCards = [
   },
   {
     id: "t2" as const,
-    num: "Tier 02 · Launch & Scale",
+    num: "Launch & Scale",
     name: "Your brand,\nin front of your\nbuyer. Every month.",
     hook: "A fully managed content engine that puts you in front of the right people — consistently, professionally, without your team lifting a finger.",
     modalPitch: "Everything included in Tier 2 — what each service covers and what it delivers for your business.",
@@ -158,7 +158,7 @@ const tierCards = [
   },
   {
     id: "t1" as const,
-    num: "Tier 01 · Launch",
+    num: "Launch",
     name: "A show your\nmarket notices.",
     hook: "A polished, credible podcast built from the ground up — with the strategy, production and content to establish real authority in your space.",
     modalPitch: "Everything included in Tier 1 — what each service covers and what it delivers for your business.",
@@ -1139,8 +1139,10 @@ const PricingTiers = () => {
               className={`p-6 sm:p-8 flex flex-col transition-all duration-200 ${tier.featured ? "bg-background" : "bg-card"} ${isSelected ? "ring-2 ring-[#1CFA76]" : ""}`}
             >
               <div className="flex items-center justify-between mb-5">
-                <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary flex items-center gap-2">
-                  {tier.num}
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-text-secondary">
+                    {tier.num}
+                  </span>
                   {tier.popular && (
                     <span className="inline-flex items-center gap-1 text-[9px] px-2 py-0.5 rounded-full bg-[#7BAF8E] text-black font-medium">
                       <Sparkles className="w-2.5 h-2.5" /> Most popular

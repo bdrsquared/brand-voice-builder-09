@@ -224,7 +224,7 @@ const T1_SECTIONS: SvcSection[] = [
     { name: "Podcast concept & positioning", desc: "What is the show about and why should anyone care? We shape the name, format, tone and angle so it has a clear reason to exist in a crowded market.", status: "included", label: "Full concept, name, format and market positioning" },
     { name: "Content pillars & episode roadmap", desc: "What will you talk about and in what order? We map out the themes, topics and episode arc so the show builds authority deliberately.", status: "included", label: "Core content pillars and launch episode themes" },
     { name: "Distribution strategy", desc: "A show no-one hears is just expensive audio. We plan exactly where and how your episodes reach the right people at launch.", status: "included", label: "Distribution plan for launch across podcast platforms and social" },
-    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", status: "not-included" },
+    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", status: "included", label: "Full sourcing, testing and coaching for your launch series" },
     { name: "Marketing stack integration", desc: "We connect the podcast into your CRM, email platform and marketing automation — so listeners become leads automatically.", status: "not-included" },
   ]},
   { section: "Production", rows: [
@@ -267,7 +267,7 @@ const T1_SECTIONS: SvcSection[] = [
   ]},
   { section: "Strategic Direction", rows: [
     { name: "Fractional Podcast CMO", desc: "Senior strategic oversight treating the podcast as a board-level commercial asset.", status: "not-included" },
-    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals.", status: "not-included" },
+    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals.", status: "included", label: "Named senior contact for your launch" },
   ]},
   { section: "Guarantees", rows: [
     { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed standards. If it's not right, we fix it. No arguments.", status: "included", label: "All deliverables guaranteed" },
@@ -505,7 +505,7 @@ const compareSections: CompareSection[] = [
     { name: "Podcast concept & positioning", desc: "What is the show about and why should anyone care? We shape the name, format, tone and angle so it has a clear reason to exist in a crowded market.", t3: "Category-level positioning", t2: "Full concept, name, format and positioning", t1: "Full concept, name, format and positioning" },
     { name: "Content pillars & episode roadmap", desc: "What will you talk about and in what order? We map out the themes, topics and episode arc so the show builds authority deliberately.", t3: "Category agenda roadmap", t2: "Full episode roadmap with topic and messaging direction", t1: "Core content pillars and launch episode themes" },
     { name: "Distribution strategy", desc: "A show no-one hears is just expensive audio. We plan exactly where and how your episodes reach the right people.", t3: "Global multi-channel strategy including paid media planning", t2: "Multi-channel strategy across LinkedIn, YouTube and email", t1: "Distribution plan for launch" },
-    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", t3: "Full sourcing, testing and ongoing coaching", t2: "Full sourcing, testing and ongoing coaching", t1: null },
+    { name: "Host sourcing & coaching", desc: "The host makes or breaks a podcast. We find the right person and coach them to sound natural, confident and authoritative on mic.", t3: "Full sourcing, testing and ongoing coaching", t2: "Full sourcing, testing and ongoing coaching", t1: "Full sourcing, testing and coaching for your launch series" },
     { name: "Marketing stack integration", desc: "We connect the podcast into your CRM, email platform and marketing automation so listeners become leads automatically.", t3: "Full integration into your CRM, email and automation stack", t2: "Full integration into your CRM, email and automation stack", t1: null },
   ]},
   { section: "Production", rows: [
@@ -548,7 +548,7 @@ const compareSections: CompareSection[] = [
   ]},
   { section: "Strategic Direction", rows: [
     { name: "Fractional Podcast CMO", desc: "Quarterly senior strategy sessions where we treat the podcast as a board-level commercial asset.", t3: "Quarterly sessions with senior strategic lead", t2: null, t1: null },
-    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals — not a rotating account team.", t3: "Named senior contact — consistent, accountable, accessible", t2: "Named senior contact — consistent, accountable, accessible", t1: null },
+    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals — not a rotating account team.", t3: "Named senior contact — consistent, accountable, accessible", t2: "Named senior contact — consistent, accountable, accessible", t1: "Named senior contact for your launch" },
   ]},
   { section: "Guarantees", rows: [
     { name: "Output & quality guarantee", desc: "Every deliverable — episodes, clips, copy, visuals — is guaranteed against the agreed brief and quality standard. If something isn't right, we fix it.", t3: "All deliverables guaranteed", t2: "All deliverables guaranteed", t1: "All deliverables guaranteed" },

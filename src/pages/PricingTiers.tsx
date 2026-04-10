@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo, memo } from "react";
 
 /* ── currency & production types ── */
 type Currency = "GBP" | "USD" | "EUR";
-type ProdType = "location" | "virtual";
+type ProdType = "location" | "studio" | "virtual";
 const CURRENCY_SYMBOLS: Record<Currency, string> = { GBP: "£", USD: "$", EUR: "€" };
 
 type PriceSet = { price: string; note: string; dp: string; dn: string };

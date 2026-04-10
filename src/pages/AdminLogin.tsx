@@ -140,14 +140,12 @@ const AdminLogin = () => {
             </form>
           </div>
 
-          {/* Right: Decorative panel (desktop only) */}
+          {/* Right: Vanta Halo animation (desktop only) */}
           <div className="hidden lg:flex w-[45%] p-3">
-            <div className="w-full h-full rounded-2xl overflow-hidden bg-[#212828] relative">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="blob-green-strong w-48 h-48 absolute top-1/4 left-1/3" />
-                <div className="blob-blue-strong w-40 h-40 absolute bottom-1/4 right-1/4" />
-              </div>
-            </div>
+            <div
+              ref={vantaRef}
+              className="w-full h-full rounded-2xl overflow-hidden"
+            />
           </div>
         </div>
       </div>

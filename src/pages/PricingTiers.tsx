@@ -187,7 +187,7 @@ const CurrencyToggle = ({ value, onChange }: { value: Currency; onChange: (c: Cu
 
 /* ── Production type toggle ── */
 const ProductionToggle = ({ value, onChange }: { value: ProdType; onChange: (p: ProdType) => void }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-2xl overflow-hidden bg-card">
+  <div className="grid grid-cols-1 sm:grid-cols-3 border border-border rounded-2xl overflow-hidden bg-card">
     <button
       onClick={() => onChange("location")}
       className={`text-left p-5 transition-colors border-b sm:border-b-0 sm:border-r border-border ${value === "location" ? "bg-background" : ""}`}
@@ -195,6 +195,15 @@ const ProductionToggle = ({ value, onChange }: { value: ProdType; onChange: (p: 
       <span className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary block mb-1">Production type</span>
       <span className={`font-heading text-lg block mb-1 ${value === "location" ? "text-text-primary" : "text-text-secondary"}`}>On Location</span>
       <span className="text-xs text-text-tertiary leading-relaxed block">Studios, hotels & homes. Our producers on the ground — full creative direction, all equipment included. Available across UK, EMEA and US.</span>
+    </button>
+    <button
+      onClick={() => onChange("studio")}
+      className={`text-left p-5 transition-colors border-b sm:border-b-0 sm:border-r border-border ${value === "studio" ? "bg-background" : ""}`}
+    >
+      <span className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary block mb-1">Production type</span>
+      <span className={`font-heading text-lg block mb-1 ${value === "studio" ? "text-text-primary" : "text-text-secondary"}`}>Studio</span>
+      <span className="text-xs text-text-tertiary leading-relaxed block">We work with our huge network of studio partners to record, edit and deliver the show — professional quality, wherever your guests are.</span>
+      <span className="inline-block mt-2 text-[10px] font-medium px-2.5 py-0.5 rounded-full" style={{ background: "rgba(106,159,163,0.15)", color: C.teal }}>Save ~19%</span>
     </button>
     <button
       onClick={() => onChange("virtual")}

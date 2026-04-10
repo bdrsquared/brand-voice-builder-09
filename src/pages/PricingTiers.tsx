@@ -63,7 +63,7 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
 };
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight, Sparkles, Info } from "lucide-react";
+import { X, ArrowUpRight, Sparkles, Info, Rocket, Zap, Crown } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
@@ -1151,10 +1151,19 @@ const PricingTiers = () => {
               <div className="absolute inset-0 pointer-events-none" style={{ background: ac.gradient }} />
 
               <div className="relative flex items-center justify-between mb-5">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-text-secondary">
-                    {tier.num}
-                  </span>
+                <div className="flex items-center gap-3">
+                  {/* Glassmorphic icon */}
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10 shadow-lg"
+                    style={{ background: `${ac.btn}`, boxShadow: `0 4px 16px ${ac.border}33, inset 0 1px 0 rgba(255,255,255,0.1)` }}>
+                    {tier.id === "t3" && <Crown className="w-5 h-5" style={{ color: ac.border }} />}
+                    {tier.id === "t2" && <Zap className="w-5 h-5" style={{ color: ac.border }} />}
+                    {tier.id === "t1" && <Rocket className="w-5 h-5" style={{ color: ac.border }} />}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-text-secondary">
+                      {tier.num}
+                    </span>
+                  </div>
                   {tier.popular && (
                     <span className="inline-flex items-center gap-1 text-[9px] px-2.5 py-0.5 rounded-full font-medium text-white bg-gradient-to-r from-[#6A9FA3] via-[#8B83C7] to-[#C484C9]">
                       <Sparkles className="w-2.5 h-2.5" /> Most popular

@@ -15,6 +15,11 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
       t2: { price: "£75,000/yr", note: "£15,000 launch strategy + £5,000/month · 2 episodes/month", dp: "£75,000/yr", dn: "£15,000 launch strategy + £5,000/month" },
       t3: { price: "£127,000/yr", note: "£25,000 launch strategy + £8,500/month · + ad spend (min £3k/month)", dp: "£127,000/yr", dn: "£25,000 launch strategy + £8,500/month" },
     },
+    studio: {
+      t1: { price: "£15,800", note: "One-time fee · 6 episodes · blueprint included", dp: "£15,800", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "£60,000/yr", note: "£12,000 launch strategy + £4,000/month · 2 episodes/month", dp: "£60,000/yr", dn: "£12,000 launch strategy + £4,000/month" },
+      t3: { price: "£103,000/yr", note: "£20,000 launch strategy + £6,900/month · + ad spend (min £3k/month)", dp: "£103,000/yr", dn: "£20,000 launch strategy + £6,900/month" },
+    },
     virtual: {
       t1: { price: "£14,000", note: "One-time fee · 6 episodes · blueprint included", dp: "£14,000", dn: "One-time · 6 episodes · blueprint included" },
       t2: { price: "£52,000/yr", note: "£10,000 launch strategy + £3,500/month · 2 episodes/month", dp: "£52,000/yr", dn: "£10,000 launch strategy + £3,500/month" },
@@ -27,6 +32,11 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
       t2: { price: "€86,000/yr", note: "€17,000 launch strategy + €5,750/month · 2 episodes/month", dp: "€86,000/yr", dn: "€17,000 launch strategy + €5,750/month" },
       t3: { price: "€146,000/yr", note: "€29,000 launch strategy + €9,750/month · + ad spend (min €3,500/month)", dp: "€146,000/yr", dn: "€29,000 launch strategy + €9,750/month" },
     },
+    studio: {
+      t1: { price: "€18,000", note: "One-time fee · 6 episodes · blueprint included", dp: "€18,000", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "€70,000/yr", note: "€14,000 launch strategy + €4,650/month · 2 episodes/month", dp: "€70,000/yr", dn: "€14,000 launch strategy + €4,650/month" },
+      t3: { price: "€118,000/yr", note: "€23,500 launch strategy + €7,900/month · + ad spend (min €3,500/month)", dp: "€118,000/yr", dn: "€23,500 launch strategy + €7,900/month" },
+    },
     virtual: {
       t1: { price: "€16,000", note: "One-time fee · 6 episodes · blueprint included", dp: "€16,000", dn: "One-time · 6 episodes · blueprint included" },
       t2: { price: "€60,000/yr", note: "€11,500 launch strategy + €4,000/month · 2 episodes/month", dp: "€60,000/yr", dn: "€11,500 launch strategy + €4,000/month" },
@@ -38,6 +48,11 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
       t1: { price: "$26,500", note: "One-time fee · 6 episodes · blueprint included", dp: "$26,500", dn: "One-time · 6 episodes · blueprint included" },
       t2: { price: "$101,000/yr", note: "$20,000 launch strategy + $6,750/month · 2 episodes/month", dp: "$101,000/yr", dn: "$20,000 launch strategy + $6,750/month" },
       t3: { price: "$172,000/yr", note: "$34,000 launch strategy + $11,500/month · + ad spend (min $4,000/month)", dp: "$172,000/yr", dn: "$34,000 launch strategy + $11,500/month" },
+    },
+    studio: {
+      t1: { price: "$21,500", note: "One-time fee · 6 episodes · blueprint included", dp: "$21,500", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "$82,000/yr", note: "$16,000 launch strategy + $5,500/month · 2 episodes/month", dp: "$82,000/yr", dn: "$16,000 launch strategy + $5,500/month" },
+      t3: { price: "$139,000/yr", note: "$27,500 launch strategy + $9,300/month · + ad spend (min $4,000/month)", dp: "$139,000/yr", dn: "$27,500 launch strategy + $9,300/month" },
     },
     virtual: {
       t1: { price: "$19,000", note: "One-time fee · 6 episodes · blueprint included", dp: "$19,000", dn: "One-time · 6 episodes · blueprint included" },

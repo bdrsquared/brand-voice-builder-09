@@ -1179,10 +1179,10 @@ const PricingTiers = () => {
                   {isSelected && <div className="w-2 h-2 rounded-full bg-black" />}
                 </button>
               </div>
-              <div className="relative">
+              <div className="relative flex flex-col flex-1">
                 <h2 className="font-heading text-xl sm:text-2xl text-text-primary mb-3 whitespace-pre-line leading-tight">{tier.name}</h2>
                 <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-1">{tier.hook}</p>
-                <hr className="border-border mb-5" />
+                <hr className="border-border mb-5 mt-auto" />
                 <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Investment</div>
                 <div className="font-heading text-2xl sm:text-3xl text-text-primary mb-1">{tier.price}</div>
                 <div className="text-xs text-text-tertiary mb-5">{tier.priceNote}</div>

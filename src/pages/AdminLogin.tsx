@@ -5,6 +5,12 @@ import { Mail, Lock, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import earwormLogo from "@/assets/earworm-logo-dark.svg";
 
+declare global {
+  interface Window {
+    VANTA: any;
+  }
+}
+
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +18,39 @@ const AdminLogin = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
+
+  useEffect(() => {
+    const initVanta = () => {
+      if (window.VANTA && vantaRef.current && !vantaEffect.current) {
+        vantaEffect.current = window.VANTA.HALO({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+        });
+      }
+    };
+
+    initVanta();
+    const timer = setInterval(() => {
+      if (window.VANTA) {
+        initVanta();
+        clearInterval(timer);
+      }
+    }, 100);
+
+    return () => {
+      clearInterval(timer);
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+        vantaEffect.current = null;
+      }
+    };
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

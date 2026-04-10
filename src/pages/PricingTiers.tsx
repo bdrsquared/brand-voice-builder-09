@@ -267,7 +267,7 @@ const T1_SECTIONS: SvcSection[] = [
   ]},
   { section: "Strategic Direction", rows: [
     { name: "Fractional Podcast CMO", desc: "Senior strategic oversight treating the podcast as a board-level commercial asset.", status: "not-included" },
-    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals.", status: "not-included" },
+    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals.", status: "included", label: "Named senior contact for your launch" },
   ]},
   { section: "Guarantees", rows: [
     { name: "Output & quality guarantee", desc: "All deliverables guaranteed against agreed standards. If it's not right, we fix it. No arguments.", status: "included", label: "All deliverables guaranteed" },

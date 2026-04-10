@@ -884,6 +884,11 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
       t2: { launch: "£15,000", launchNum: 15000, monthly: "£5,000", monthlyNum: 5000, yearly: "£75,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
       t3: { launch: "£25,000", launchNum: 25000, monthly: "£8,500", monthlyNum: 8500, yearly: "£127,000", episodes: "2 per month", paidMedia: "Min £3,000/mo", launchMonths: 0 },
     },
+    studio: {
+      t1: { launch: "£15,800", launchNum: 15800, monthly: "—", monthlyNum: 0, yearly: "£15,800", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "£12,000", launchNum: 12000, monthly: "£4,000", monthlyNum: 4000, yearly: "£60,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "£20,000", launchNum: 20000, monthly: "£6,900", monthlyNum: 6900, yearly: "£102,800", episodes: "2 per month", paidMedia: "Min £3,000/mo", launchMonths: 0 },
+    },
     virtual: {
       t1: { launch: "£14,000", launchNum: 14000, monthly: "—", monthlyNum: 0, yearly: "£14,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
       t2: { launch: "£10,000", launchNum: 10000, monthly: "£3,500", monthlyNum: 3500, yearly: "£52,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
@@ -896,6 +901,11 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
       t2: { launch: "$20,000", launchNum: 20000, monthly: "$6,750", monthlyNum: 6750, yearly: "$101,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
       t3: { launch: "$34,000", launchNum: 34000, monthly: "$11,500", monthlyNum: 11500, yearly: "$172,000", episodes: "2 per month", paidMedia: "Min $4,000/mo", launchMonths: 0 },
     },
+    studio: {
+      t1: { launch: "$21,500", launchNum: 21500, monthly: "—", monthlyNum: 0, yearly: "$21,500", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "$16,000", launchNum: 16000, monthly: "$5,500", monthlyNum: 5500, yearly: "$82,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "$27,500", launchNum: 27500, monthly: "$9,300", monthlyNum: 9300, yearly: "$139,000", episodes: "2 per month", paidMedia: "Min $4,000/mo", launchMonths: 0 },
+    },
     virtual: {
       t1: { launch: "$19,000", launchNum: 19000, monthly: "—", monthlyNum: 0, yearly: "$19,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
       t2: { launch: "$13,500", launchNum: 13500, monthly: "$4,750", monthlyNum: 4750, yearly: "$70,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
@@ -907,6 +917,11 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
       t1: { launch: "€22,500", launchNum: 22500, monthly: "—", monthlyNum: 0, yearly: "€22,500", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
       t2: { launch: "€17,000", launchNum: 17000, monthly: "€5,750", monthlyNum: 5750, yearly: "€86,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
       t3: { launch: "€29,000", launchNum: 29000, monthly: "€9,750", monthlyNum: 9750, yearly: "€146,000", episodes: "2 per month", paidMedia: "Min €3,500/mo", launchMonths: 0 },
+    },
+    studio: {
+      t1: { launch: "€18,000", launchNum: 18000, monthly: "—", monthlyNum: 0, yearly: "€18,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "€14,000", launchNum: 14000, monthly: "€4,650", monthlyNum: 4650, yearly: "€70,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "€23,500", launchNum: 23500, monthly: "€7,900", monthlyNum: 7900, yearly: "€118,000", episodes: "2 per month", paidMedia: "Min €3,500/mo", launchMonths: 0 },
     },
     virtual: {
       t1: { launch: "€16,000", launchNum: 16000, monthly: "—", monthlyNum: 0, yearly: "€16,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
@@ -924,6 +939,7 @@ const ORGANIC_REACH: Record<string, { low: number; high: number; paidEfficiency:
 
 const PRODUCTION_REACH_MULTIPLIER: Record<ProdType, number> = {
   location: 1,
+  studio: 0.95,
   virtual: 0.88,
 };
 

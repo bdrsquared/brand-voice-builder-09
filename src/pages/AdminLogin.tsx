@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Mail, Lock, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import earwormLogo from "@/assets/earworm-logo-dark.svg";
+
+declare global {
+  interface Window {
+    VANTA: any;
+  }
+}
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +18,39 @@ const AdminLogin = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
+
+  useEffect(() => {
+    const initVanta = () => {
+      if (window.VANTA && vantaRef.current && !vantaEffect.current) {
+        vantaEffect.current = window.VANTA.HALO({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+        });
+      }
+    };
+
+    initVanta();
+    const timer = setInterval(() => {
+      if (window.VANTA) {
+        initVanta();
+        clearInterval(timer);
+      }
+    }, 100);
+
+    return () => {
+      clearInterval(timer);
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+        vantaEffect.current = null;
+      }
+    };
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,14 +140,12 @@ const AdminLogin = () => {
             </form>
           </div>
 
-          {/* Right: Decorative panel (desktop only) */}
+          {/* Right: Vanta Halo animation (desktop only) */}
           <div className="hidden lg:flex w-[45%] p-3">
-            <div className="w-full h-full rounded-2xl overflow-hidden bg-[#212828] relative">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="blob-green-strong w-48 h-48 absolute top-1/4 left-1/3" />
-                <div className="blob-blue-strong w-40 h-40 absolute bottom-1/4 right-1/4" />
-              </div>
-            </div>
+            <div
+              ref={vantaRef}
+              className="w-full h-full rounded-2xl overflow-hidden"
+            />
           </div>
         </div>
       </div>

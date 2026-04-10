@@ -1186,14 +1186,14 @@ const PricingTiers = () => {
                 <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Investment</div>
                 <div className="font-heading text-2xl sm:text-3xl text-text-primary mb-1">{tier.price}</div>
                 <div className="text-xs text-text-tertiary mb-5">{tier.priceNote}</div>
-                <div className="text-xs leading-relaxed p-3 rounded-lg border-l-2 mb-5" style={{ borderColor: ac.border, background: ac.btn, color: ac.border }}>
+                <div className="text-xs leading-relaxed p-3 rounded-lg border border-white/[0.08] mb-5 text-text-secondary backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.03)" }}>
                   {tier.dopamine}
                 </div>
                 <div className="flex flex-col gap-2">
                   <button
                     onClick={(e) => { e.stopPropagation(); setActiveModal(tier.id); }}
-                    className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border text-text-primary hover:brightness-125 transition-all flex items-center justify-center gap-1.5"
-                    style={{ borderColor: `${ac.border}44`, background: ac.btn }}
+                    className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-white/[0.08] text-text-primary hover:bg-white/[0.06] transition-all flex items-center justify-center gap-1.5 backdrop-blur-sm"
+                    style={{ background: "rgba(255,255,255,0.04)", boxShadow: `0 0 20px ${ac.border}11` }}
                   >
                     See what's included <ArrowUpRight className="w-3 h-3" />
                   </button>

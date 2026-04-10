@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo, memo } from "react";
 
 /* ── currency & production types ── */
 type Currency = "GBP" | "USD" | "EUR";
-type ProdType = "location" | "virtual";
+type ProdType = "location" | "studio" | "virtual";
 const CURRENCY_SYMBOLS: Record<Currency, string> = { GBP: "£", USD: "$", EUR: "€" };
 
 type PriceSet = { price: string; note: string; dp: string; dn: string };
@@ -14,6 +14,11 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
       t1: { price: "£19,500", note: "One-time fee · 6 episodes · blueprint included", dp: "£19,500", dn: "One-time · 6 episodes · blueprint included" },
       t2: { price: "£75,000/yr", note: "£15,000 launch strategy + £5,000/month · 2 episodes/month", dp: "£75,000/yr", dn: "£15,000 launch strategy + £5,000/month" },
       t3: { price: "£127,000/yr", note: "£25,000 launch strategy + £8,500/month · + ad spend (min £3k/month)", dp: "£127,000/yr", dn: "£25,000 launch strategy + £8,500/month" },
+    },
+    studio: {
+      t1: { price: "£15,800", note: "One-time fee · 6 episodes · blueprint included", dp: "£15,800", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "£60,000/yr", note: "£12,000 launch strategy + £4,000/month · 2 episodes/month", dp: "£60,000/yr", dn: "£12,000 launch strategy + £4,000/month" },
+      t3: { price: "£103,000/yr", note: "£20,000 launch strategy + £6,900/month · + ad spend (min £3k/month)", dp: "£103,000/yr", dn: "£20,000 launch strategy + £6,900/month" },
     },
     virtual: {
       t1: { price: "£14,000", note: "One-time fee · 6 episodes · blueprint included", dp: "£14,000", dn: "One-time · 6 episodes · blueprint included" },
@@ -27,6 +32,11 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
       t2: { price: "€86,000/yr", note: "€17,000 launch strategy + €5,750/month · 2 episodes/month", dp: "€86,000/yr", dn: "€17,000 launch strategy + €5,750/month" },
       t3: { price: "€146,000/yr", note: "€29,000 launch strategy + €9,750/month · + ad spend (min €3,500/month)", dp: "€146,000/yr", dn: "€29,000 launch strategy + €9,750/month" },
     },
+    studio: {
+      t1: { price: "€18,000", note: "One-time fee · 6 episodes · blueprint included", dp: "€18,000", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "€70,000/yr", note: "€14,000 launch strategy + €4,650/month · 2 episodes/month", dp: "€70,000/yr", dn: "€14,000 launch strategy + €4,650/month" },
+      t3: { price: "€118,000/yr", note: "€23,500 launch strategy + €7,900/month · + ad spend (min €3,500/month)", dp: "€118,000/yr", dn: "€23,500 launch strategy + €7,900/month" },
+    },
     virtual: {
       t1: { price: "€16,000", note: "One-time fee · 6 episodes · blueprint included", dp: "€16,000", dn: "One-time · 6 episodes · blueprint included" },
       t2: { price: "€60,000/yr", note: "€11,500 launch strategy + €4,000/month · 2 episodes/month", dp: "€60,000/yr", dn: "€11,500 launch strategy + €4,000/month" },
@@ -38,6 +48,11 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
       t1: { price: "$26,500", note: "One-time fee · 6 episodes · blueprint included", dp: "$26,500", dn: "One-time · 6 episodes · blueprint included" },
       t2: { price: "$101,000/yr", note: "$20,000 launch strategy + $6,750/month · 2 episodes/month", dp: "$101,000/yr", dn: "$20,000 launch strategy + $6,750/month" },
       t3: { price: "$172,000/yr", note: "$34,000 launch strategy + $11,500/month · + ad spend (min $4,000/month)", dp: "$172,000/yr", dn: "$34,000 launch strategy + $11,500/month" },
+    },
+    studio: {
+      t1: { price: "$21,500", note: "One-time fee · 6 episodes · blueprint included", dp: "$21,500", dn: "One-time · 6 episodes · blueprint included" },
+      t2: { price: "$82,000/yr", note: "$16,000 launch strategy + $5,500/month · 2 episodes/month", dp: "$82,000/yr", dn: "$16,000 launch strategy + $5,500/month" },
+      t3: { price: "$139,000/yr", note: "$27,500 launch strategy + $9,300/month · + ad spend (min $4,000/month)", dp: "$139,000/yr", dn: "$27,500 launch strategy + $9,300/month" },
     },
     virtual: {
       t1: { price: "$19,000", note: "One-time fee · 6 episodes · blueprint included", dp: "$19,000", dn: "One-time · 6 episodes · blueprint included" },
@@ -172,7 +187,7 @@ const CurrencyToggle = ({ value, onChange }: { value: Currency; onChange: (c: Cu
 
 /* ── Production type toggle ── */
 const ProductionToggle = ({ value, onChange }: { value: ProdType; onChange: (p: ProdType) => void }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-2xl overflow-hidden bg-card">
+  <div className="grid grid-cols-1 sm:grid-cols-3 border border-border rounded-2xl overflow-hidden bg-card">
     <button
       onClick={() => onChange("location")}
       className={`text-left p-5 transition-colors border-b sm:border-b-0 sm:border-r border-border ${value === "location" ? "bg-background" : ""}`}
@@ -180,6 +195,15 @@ const ProductionToggle = ({ value, onChange }: { value: ProdType; onChange: (p: 
       <span className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary block mb-1">Production type</span>
       <span className={`font-heading text-lg block mb-1 ${value === "location" ? "text-text-primary" : "text-text-secondary"}`}>On Location</span>
       <span className="text-xs text-text-tertiary leading-relaxed block">Studios, hotels & homes. Our producers on the ground — full creative direction, all equipment included. Available across UK, EMEA and US.</span>
+    </button>
+    <button
+      onClick={() => onChange("studio")}
+      className={`text-left p-5 transition-colors border-b sm:border-b-0 sm:border-r border-border ${value === "studio" ? "bg-background" : ""}`}
+    >
+      <span className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary block mb-1">Production type</span>
+      <span className={`font-heading text-lg block mb-1 ${value === "studio" ? "text-text-primary" : "text-text-secondary"}`}>Studio</span>
+      <span className="text-xs text-text-tertiary leading-relaxed block">We work with our huge network of studio partners to record, edit and deliver the show — professional quality, wherever your guests are.</span>
+      <span className="inline-block mt-2 text-[10px] font-medium px-2.5 py-0.5 rounded-full" style={{ background: "rgba(106,159,163,0.15)", color: C.teal }}>Save ~19%</span>
     </button>
     <button
       onClick={() => onChange("virtual")}
@@ -869,6 +893,11 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
       t2: { launch: "£15,000", launchNum: 15000, monthly: "£5,000", monthlyNum: 5000, yearly: "£75,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
       t3: { launch: "£25,000", launchNum: 25000, monthly: "£8,500", monthlyNum: 8500, yearly: "£127,000", episodes: "2 per month", paidMedia: "Min £3,000/mo", launchMonths: 0 },
     },
+    studio: {
+      t1: { launch: "£15,800", launchNum: 15800, monthly: "—", monthlyNum: 0, yearly: "£15,800", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "£12,000", launchNum: 12000, monthly: "£4,000", monthlyNum: 4000, yearly: "£60,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "£20,000", launchNum: 20000, monthly: "£6,900", monthlyNum: 6900, yearly: "£102,800", episodes: "2 per month", paidMedia: "Min £3,000/mo", launchMonths: 0 },
+    },
     virtual: {
       t1: { launch: "£14,000", launchNum: 14000, monthly: "—", monthlyNum: 0, yearly: "£14,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
       t2: { launch: "£10,000", launchNum: 10000, monthly: "£3,500", monthlyNum: 3500, yearly: "£52,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
@@ -881,6 +910,11 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
       t2: { launch: "$20,000", launchNum: 20000, monthly: "$6,750", monthlyNum: 6750, yearly: "$101,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
       t3: { launch: "$34,000", launchNum: 34000, monthly: "$11,500", monthlyNum: 11500, yearly: "$172,000", episodes: "2 per month", paidMedia: "Min $4,000/mo", launchMonths: 0 },
     },
+    studio: {
+      t1: { launch: "$21,500", launchNum: 21500, monthly: "—", monthlyNum: 0, yearly: "$21,500", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "$16,000", launchNum: 16000, monthly: "$5,500", monthlyNum: 5500, yearly: "$82,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "$27,500", launchNum: 27500, monthly: "$9,300", monthlyNum: 9300, yearly: "$139,000", episodes: "2 per month", paidMedia: "Min $4,000/mo", launchMonths: 0 },
+    },
     virtual: {
       t1: { launch: "$19,000", launchNum: 19000, monthly: "—", monthlyNum: 0, yearly: "$19,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
       t2: { launch: "$13,500", launchNum: 13500, monthly: "$4,750", monthlyNum: 4750, yearly: "$70,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
@@ -892,6 +926,11 @@ const BREAKDOWN_DATA: Record<string, Record<ProdType, Record<string, { launch: s
       t1: { launch: "€22,500", launchNum: 22500, monthly: "—", monthlyNum: 0, yearly: "€22,500", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
       t2: { launch: "€17,000", launchNum: 17000, monthly: "€5,750", monthlyNum: 5750, yearly: "€86,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
       t3: { launch: "€29,000", launchNum: 29000, monthly: "€9,750", monthlyNum: 9750, yearly: "€146,000", episodes: "2 per month", paidMedia: "Min €3,500/mo", launchMonths: 0 },
+    },
+    studio: {
+      t1: { launch: "€18,000", launchNum: 18000, monthly: "—", monthlyNum: 0, yearly: "€18,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
+      t2: { launch: "€14,000", launchNum: 14000, monthly: "€4,650", monthlyNum: 4650, yearly: "€70,000", episodes: "2 per month", paidMedia: "Not included", launchMonths: 0 },
+      t3: { launch: "€23,500", launchNum: 23500, monthly: "€7,900", monthlyNum: 7900, yearly: "€118,000", episodes: "2 per month", paidMedia: "Min €3,500/mo", launchMonths: 0 },
     },
     virtual: {
       t1: { launch: "€16,000", launchNum: 16000, monthly: "—", monthlyNum: 0, yearly: "€16,000", episodes: "6 episodes (one-time)", paidMedia: "Not included", launchMonths: 3 },
@@ -909,6 +948,7 @@ const ORGANIC_REACH: Record<string, { low: number; high: number; paidEfficiency:
 
 const PRODUCTION_REACH_MULTIPLIER: Record<ProdType, number> = {
   location: 1,
+  studio: 0.95,
   virtual: 0.88,
 };
 
@@ -967,7 +1007,7 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
             color: tier === "t3" ? C.plum : tier === "t2" ? C.blueDk : C.greenDk,
           }}>{TIER_LABELS[tier]}</span>
           <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">
-            {prodType === "location" ? "On Location" : "Virtual"}
+            {prodType === "location" ? "On Location" : prodType === "studio" ? "Studio" : "Virtual"}
           </span>
           <span className="text-[9px] font-medium tracking-[0.07em] uppercase px-2.5 py-1 rounded-full shrink-0 bg-secondary text-text-secondary">
             {currency}

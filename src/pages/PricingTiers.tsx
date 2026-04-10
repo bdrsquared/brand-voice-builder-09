@@ -1143,6 +1143,11 @@ const PricingTiers = () => {
                   <span className="text-[10px] font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-text-secondary">
                     {tier.num}
                   </span>
+                  {tier.popular && (
+                    <span className="inline-flex items-center gap-1 text-[9px] px-2.5 py-0.5 rounded-full font-medium text-white bg-gradient-to-r from-[#6A9FA3] via-[#8B83C7] to-[#C484C9]">
+                      <Sparkles className="w-2.5 h-2.5" /> Most popular
+                    </span>
+                  )}
                 </div>
                 <button
                   onClick={(e) => { e.stopPropagation(); setSelectedTier(isSelected ? null : tier.id); }}

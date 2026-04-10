@@ -91,14 +91,14 @@ type SvcRow = { name: string; desc: string; status: "included"; label: string } 
 type SvcSection = { section: string; rows: SvcRow[] };
 
 const tierDotClass: Record<string, string> = {
-  t1: "bg-primary/15 text-primary",
-  t2: "bg-primary/15 text-primary",
-  t3: "bg-primary/15 text-primary",
+  t1: "bg-white/10 text-text-secondary",
+  t2: "bg-white/10 text-text-secondary",
+  t3: "bg-white/10 text-text-secondary",
 };
 const tierLabelClass: Record<string, string> = {
-  t1: "text-primary font-medium",
-  t2: "text-primary font-medium",
-  t3: "text-primary font-medium",
+  t1: "text-text-secondary font-medium",
+  t2: "text-text-secondary font-medium",
+  t3: "text-text-secondary font-medium",
 };
 
 const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string }) => (
@@ -560,8 +560,8 @@ const compareSections: CompareSection[] = [
 const CompareCell = ({ value }: { value: string | null }) =>
   value ? (
     <div className="flex items-start gap-1.5">
-      <span className="w-[16px] h-[16px] rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5 bg-primary/15 text-primary">✓</span>
-      <span className="text-[11px] leading-snug text-primary font-medium">{value}</span>
+      <span className="w-[16px] h-[16px] rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5 bg-white/10 text-text-secondary">✓</span>
+      <span className="text-[11px] leading-snug text-text-secondary font-medium">{value}</span>
     </div>
   ) : (
     <span className="text-[10px] text-text-tertiary/50">Not included</span>
@@ -638,7 +638,7 @@ const CompareModal = ({ open, onClose, currency = "GBP" as Currency, prodType = 
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.97 }}
           transition={{ duration: 0.3 }}
-          className="relative w-full max-w-[900px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
+          className="relative w-full max-w-[1200px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
         >
           <ModalHeader accentColor="#6A9FA3">
             <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">

@@ -548,7 +548,7 @@ const compareSections: CompareSection[] = [
   ]},
   { section: "Strategic Direction", rows: [
     { name: "Fractional Podcast CMO", desc: "Quarterly senior strategy sessions where we treat the podcast as a board-level commercial asset.", t3: "Quarterly sessions with senior strategic lead", t2: null, t1: null },
-    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals — not a rotating account team.", t3: "Named senior contact — consistent, accountable, accessible", t2: "Named senior contact — consistent, accountable, accessible", t1: null },
+    { name: "Senior account management", desc: "A named senior contact who knows your business, your market and your goals — not a rotating account team.", t3: "Named senior contact — consistent, accountable, accessible", t2: "Named senior contact — consistent, accountable, accessible", t1: "Named senior contact for your launch" },
   ]},
   { section: "Guarantees", rows: [
     { name: "Output & quality guarantee", desc: "Every deliverable — episodes, clips, copy, visuals — is guaranteed against the agreed brief and quality standard. If something isn't right, we fix it.", t3: "All deliverables guaranteed", t2: "All deliverables guaranteed", t1: "All deliverables guaranteed" },

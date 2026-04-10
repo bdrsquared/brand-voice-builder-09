@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Mail, Lock, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import earwormLogo from "@/assets/earworm-logo-dark.svg";
+import earwormLogo from "@/assets/earworm-logo-white.png";
 
 declare global {
   interface Window {
@@ -89,7 +89,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#141414] relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-[#2a3333] relative overflow-hidden">
       <div className="relative w-full max-w-4xl mx-6 z-10">
         <div className="bg-card rounded-3xl shadow-2xl overflow-hidden flex min-h-[520px]">
           {/* Left: Form */}

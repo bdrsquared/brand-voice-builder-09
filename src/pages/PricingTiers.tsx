@@ -194,7 +194,7 @@ const ProductionToggle = ({ value, onChange }: { value: ProdType; onChange: (p: 
     >
       <span className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary block mb-1">Production type</span>
       <span className={`font-heading text-lg block mb-1 ${value === "location" ? "text-text-primary" : "text-text-secondary"}`}>On Location</span>
-      <span className="text-xs text-text-tertiary leading-relaxed block">Studios, hotels & homes. Our producers on the ground — full creative direction, all equipment included. Available across UK, EMEA and US.</span>
+      <span className="text-xs text-text-tertiary leading-relaxed block">Restaurants, hotels, homes & at your offices. Our producers on the ground — full creative direction, all equipment included. Available across UK, EMEA and US.</span>
     </button>
     <button
       onClick={() => onChange("studio")}

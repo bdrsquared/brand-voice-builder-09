@@ -63,7 +63,7 @@ const ALL_PRICES: Record<string, Record<ProdType, TierPrices>> = {
 };
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight, Sparkles, Info } from "lucide-react";
+import { X, ArrowUpRight, Sparkles, Info, Rocket, Zap, Crown } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
@@ -91,14 +91,14 @@ type SvcRow = { name: string; desc: string; status: "included"; label: string } 
 type SvcSection = { section: string; rows: SvcRow[] };
 
 const tierDotClass: Record<string, string> = {
-  t1: "bg-primary/15 text-primary",
-  t2: "bg-primary/15 text-primary",
-  t3: "bg-primary/15 text-primary",
+  t1: "bg-white/10 text-text-secondary",
+  t2: "bg-white/10 text-text-secondary",
+  t3: "bg-white/10 text-text-secondary",
 };
 const tierLabelClass: Record<string, string> = {
-  t1: "text-primary font-medium",
-  t2: "text-primary font-medium",
-  t3: "text-primary font-medium",
+  t1: "text-text-secondary font-medium",
+  t2: "text-text-secondary font-medium",
+  t3: "text-text-secondary font-medium",
 };
 
 const ServiceTable = ({ sections, tier }: { sections: SvcSection[]; tier: string }) => (
@@ -560,8 +560,8 @@ const compareSections: CompareSection[] = [
 const CompareCell = ({ value }: { value: string | null }) =>
   value ? (
     <div className="flex items-start gap-1.5">
-      <span className="w-[16px] h-[16px] rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5 bg-primary/15 text-primary">✓</span>
-      <span className="text-[11px] leading-snug text-primary font-medium">{value}</span>
+      <span className="w-[16px] h-[16px] rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 mt-0.5 bg-white/10 text-text-secondary">✓</span>
+      <span className="text-[11px] leading-snug text-text-secondary font-medium">{value}</span>
     </div>
   ) : (
     <span className="text-[10px] text-text-tertiary/50">Not included</span>
@@ -638,7 +638,7 @@ const CompareModal = ({ open, onClose, currency = "GBP" as Currency, prodType = 
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.97 }}
           transition={{ duration: 0.3 }}
-          className="relative w-full max-w-[900px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
+          className="relative w-full max-w-[1200px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
         >
           <ModalHeader accentColor="#6A9FA3">
             <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
@@ -1151,10 +1151,19 @@ const PricingTiers = () => {
               <div className="absolute inset-0 pointer-events-none" style={{ background: ac.gradient }} />
 
               <div className="relative flex items-center justify-between mb-5">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-text-secondary">
-                    {tier.num}
-                  </span>
+                <div className="flex items-center gap-3">
+                  {/* Glassmorphic icon */}
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10 shadow-lg"
+                    style={{ background: `${ac.btn}`, boxShadow: `0 4px 16px ${ac.border}33, inset 0 1px 0 rgba(255,255,255,0.1)` }}>
+                    {tier.id === "t3" && <Crown className="w-5 h-5" style={{ color: ac.border }} />}
+                    {tier.id === "t2" && <Zap className="w-5 h-5" style={{ color: ac.border }} />}
+                    {tier.id === "t1" && <Rocket className="w-5 h-5" style={{ color: ac.border }} />}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-text-secondary">
+                      {tier.num}
+                    </span>
+                  </div>
                   {tier.popular && (
                     <span className="inline-flex items-center gap-1 text-[9px] px-2.5 py-0.5 rounded-full font-medium text-white bg-gradient-to-r from-[#6A9FA3] via-[#8B83C7] to-[#C484C9]">
                       <Sparkles className="w-2.5 h-2.5" /> Most popular

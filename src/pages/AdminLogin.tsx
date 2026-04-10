@@ -94,7 +94,7 @@ const AdminLogin = () => {
         <div className="bg-card rounded-3xl shadow-2xl overflow-hidden flex min-h-[520px]">
           {/* Left: Form */}
           <div className="flex-1 flex flex-col justify-center px-10 py-12 lg:px-14">
-            <img src={earwormLogo} alt="Earworm" className="h-[17px] w-auto max-w-[140px] mb-8" />
+            <img src={earwormLogo} alt="Earworm" className="h-[17px] w-auto object-contain object-left max-w-[140px] mb-8" />
             <h1 className="text-2xl font-heading text-foreground mb-1">
               Welcome back 👋
             </h1>

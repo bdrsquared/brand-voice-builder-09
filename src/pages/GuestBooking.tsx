@@ -195,6 +195,18 @@ const GuestBooking = () => {
                 Start a conversation →
               </button>
             </motion.div>
+
+            {/* Mobile hero image */}
+            <motion.div variants={fadeUp} custom={3.5} className="block sm:hidden relative rounded-2xl overflow-hidden aspect-[16/9] -mx-2 mb-4">
+              <img
+                src={speakerImg}
+                alt="Professional speaking on a podcast"
+                className="w-full h-full object-cover"
+                width={800}
+                height={1000}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent" />
+            </motion.div>
           </motion.div>
 
           {/* Show cards row */}

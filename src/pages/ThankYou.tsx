@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -7,8 +8,20 @@ import DotsBackground from "@/components/landing/DotsBackground";
 import Footer from "@/components/landing/Footer";
 import useMetaTags from "@/hooks/useMetaTags";
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 const ThankYou = () => {
   useMetaTags();
+
+  useEffect(() => {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "ads_conversion_SUBMIT_LEAD_FORM_1");
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden relative">

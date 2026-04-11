@@ -54,7 +54,7 @@ const InPractice = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
             {/* Subtle brand gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#6359EA]/20 via-transparent to-[#1CFA76]/10 mix-blend-overlay" />
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-primary/10 mix-blend-overlay" />
 
             <div className="relative z-10 p-8 sm:p-10">
               <div className="absolute top-[-70px] right-8 flex gap-3">
@@ -88,7 +88,7 @@ const InPractice = () => {
             transition={{ duration: 0.5, delay: 0.08 }}
           >
             {/* Subtle gradient accent */}
-            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#FFB347]/15 to-transparent rounded-bl-full pointer-events-none" />
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-brand-orange/15 to-transparent rounded-bl-full pointer-events-none" />
             <div className="w-12 h-12 rounded-2xl bg-black/[0.05] backdrop-blur-sm border border-black/[0.06] flex items-center justify-center">
               <Scissors className="w-5 h-5 text-light-text-secondary" />
             </div>
@@ -115,7 +115,7 @@ const InPractice = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.16 }}
           >
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-[#6359EA]/10 to-transparent rounded-tr-full pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-accent/10 to-transparent rounded-tr-full pointer-events-none" />
             <div className="w-12 h-12 rounded-2xl bg-black/[0.05] backdrop-blur-sm border border-black/[0.06] flex items-center justify-center">
               <Share2 className="w-5 h-5 text-light-text-secondary" />
             </div>
@@ -139,7 +139,7 @@ const InPractice = () => {
           >
             <img src={booksImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-white/10" />
-            <div className="absolute inset-0 bg-gradient-to-br from-[#40ABB2]/15 via-transparent to-[#1CFA76]/10 mix-blend-overlay" />
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-teal/15 via-transparent to-primary/10 mix-blend-overlay" />
             <div className="relative z-10 p-8 sm:p-9">
               <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 flex items-center justify-center mb-5">
                 <Library className="w-5 h-5 text-white/80" />
@@ -165,7 +165,7 @@ const InPractice = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.32 }}
           >
-            <div className="absolute top-0 left-0 w-36 h-36 bg-gradient-to-br from-[#1CFA76]/10 to-transparent rounded-br-full pointer-events-none" />
+            <div className="absolute top-0 left-0 w-36 h-36 bg-gradient-to-br from-primary/10 to-transparent rounded-br-full pointer-events-none" />
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl bg-black/[0.05] backdrop-blur-sm border border-black/[0.06] flex items-center justify-center">
                 <BarChart3 className="w-5 h-5 text-light-text-secondary" />

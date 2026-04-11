@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, ArrowRight, Check, ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,6 +8,7 @@ import BudgetSelect from "@/components/BudgetSelect";
 import benProfile from "@/assets/ben-profile.png";
 
 const ChatWidget = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -87,7 +89,7 @@ const ChatWidget = () => {
         body: { name: name.trim(), email: email.trim() },
       }).catch((err) => console.error("Thank you email failed:", err));
 
-      setSubmitted(true);
+      navigate("/thank-you");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

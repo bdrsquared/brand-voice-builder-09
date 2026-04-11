@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,6 +10,7 @@ interface PlayPackModalProps {
 }
 
 const PlayPackModal = ({ open, onClose }: PlayPackModalProps) => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
@@ -42,7 +44,8 @@ const PlayPackModal = ({ open, onClose }: PlayPackModalProps) => {
       if (typeof window.gtag === "function") {
         window.gtag('event', 'conversion', { 'send_to': 'AW-11137316015/86-ECMzzhZUcEK_p174p' });
       }
-      setSubmitted(true);
+      onClose();
+      navigate("/thank-you");
     } catch (err: any) {
       console.error(err);
       setError("Something went wrong. Please try again.");

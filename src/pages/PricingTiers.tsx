@@ -71,11 +71,11 @@ import useMetaTags from "@/hooks/useMetaTags";
 
 /* ── palette tokens ── */
 const C = {
-  sage: "#7BAF8E",
-  purple: "#8B83C7",
-  teal: "#6A9FA3",
-  amber: "#C9A96E",
-  rose: "#C484C9",
+  sage: "hsl(140,24%,62%)",
+  purple: "hsl(246,27%,65%)",
+  teal: "hsl(184,22%,53%)",
+  amber: "hsl(36,38%,61%)",
+  rose: "hsl(300,33%,65%)",
   plum: "#4e2d7a",
   plumBg: "#f0eaf8",
   greenDk: "#1a5c2a",
@@ -425,7 +425,7 @@ const Tier3Tabs = () => {
           <button
             key={t.key}
             onClick={() => setTab(t.key)}
-            className={`flex-1 text-xs font-medium tracking-wide py-3 border-b-2 transition-colors ${tab === t.key ? "text-[#8B83C7] border-[#8B83C7]" : "text-text-tertiary border-transparent hover:text-text-secondary"}`}
+            className={`flex-1 text-xs font-medium tracking-wide py-3 border-b-2 transition-colors ${tab === t.key ? "text-veneer-purple border-veneer-purple" : "text-text-tertiary border-transparent hover:text-text-secondary"}`}
           >
             {t.label}
           </button>
@@ -453,9 +453,9 @@ const Tier3Services = () => (
 const Tier3Guarantees = () => (
   <>
     <p className="text-sm text-text-secondary leading-relaxed mb-5">Any agency promising specific pipeline numbers is telling you what you want to hear. Here's what we commit to in writing — and what we won't, and why.</p>
-    <div className="rounded-xl overflow-hidden border border-[#7BAF8E]/20 mb-5">
+    <div className="rounded-xl overflow-hidden border border-veneer-sage/20 mb-5">
       <div className="px-4 py-2.5 text-[10px] font-medium tracking-[0.08em] uppercase" style={{ background: C.greenBg, color: C.greenDk }}>What we commit to in writing</div>
-      <ul className="divide-y divide-[#7BAF8E]/10">
+      <ul className="divide-y divide-veneer-sage/10">
         {[
           "All production deliverables — episodes, clips, show notes — delivered on schedule to agreed quality standards",
           "All guests meet seniority and ICP criteria defined at the start — you have approval rights",
@@ -465,7 +465,7 @@ const Tier3Guarantees = () => (
           "Transparent reporting — including what is not working, not just what is",
         ].map((item) => (
           <li key={item} className="px-4 py-2.5 text-sm text-text-secondary flex gap-2.5 leading-relaxed">
-            <span className="text-[#7BAF8E] text-xs font-bold shrink-0 mt-0.5">✓</span>{item}
+            <span className="text-veneer-sage text-xs font-bold shrink-0 mt-0.5">✓</span>{item}
           </li>
         ))}
       </ul>
@@ -640,7 +640,7 @@ const CompareModal = ({ open, onClose, currency = "GBP" as Currency, prodType = 
           transition={{ duration: 0.3 }}
           className="relative w-full max-w-[1200px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
         >
-          <ModalHeader accentColor="#6A9FA3">
+          <ModalHeader accentColor="hsl(184,22%,53%)">
             <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
               <X className="w-4 h-4" />
             </button>
@@ -656,7 +656,7 @@ const CompareModal = ({ open, onClose, currency = "GBP" as Currency, prodType = 
 );
 
 /* ── Animated modal header ── */
-const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.ReactNode; accentColor?: string }) => (
+const ModalHeader = ({ children, accentColor = "hsl(184,22%,53%)" }: { children: React.ReactNode; accentColor?: string }) => (
   <div className="relative overflow-hidden border-b border-border">
     <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, #8B83C7, #C484C9, transparent)` }} />
     <motion.div
@@ -669,13 +669,13 @@ const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.Re
       animate={{ x: [0, -20, 15, 0], y: [0, 10, -10, 0], scale: [1, 0.85, 1.15, 1] }}
       transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       className="absolute -bottom-12 -left-12 w-36 h-36 rounded-full pointer-events-none"
-      style={{ background: "#8B83C7", opacity: 0.07, filter: "blur(50px)" }}
+      style={{ background: "hsl(246,27%,65%)", opacity: 0.07, filter: "blur(50px)" }}
     />
     <motion.div
       animate={{ x: [0, 15, -10, 0], y: [0, -8, 12, 0] }}
       transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 rounded-full pointer-events-none"
-      style={{ background: "#C484C9", opacity: 0.05, filter: "blur(50px)" }}
+      style={{ background: "hsl(300,33%,65%)", opacity: 0.05, filter: "blur(50px)" }}
     />
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       <motion.div
@@ -691,7 +691,7 @@ const ModalHeader = ({ children, accentColor = "#6A9FA3" }: { children: React.Re
 );
 
 /* ── Modal wrapper ── */
-const tierAccent: Record<string, string> = { t1: "#6A9FA3", t2: "#7BAF8E", t3: "#8B83C7" };
+const tierAccent: Record<string, string> = { t1: "hsl(184,22%,53%)", t2: "hsl(140,24%,62%)", t3: "hsl(246,27%,65%)" };
 
 type TierModalData = { id: string; num: string; modalTitle?: string; modalPitch?: string; price: string; priceNote: string; modalDopamine?: string };
 
@@ -713,7 +713,7 @@ const TierModal = ({ open, onClose, tier, children }: { open: boolean; onClose: 
           transition={{ duration: 0.3 }}
           className="relative w-full max-w-[620px] my-auto rounded-2xl border border-border overflow-hidden bg-card"
         >
-          <ModalHeader accentColor={tierAccent[tier.id] || "#6A9FA3"}>
+          <ModalHeader accentColor={tierAccent[tier.id] || "hsl(184,22%,53%)"}>
             <button onClick={onClose} className="absolute top-4 right-4 z-10 text-text-tertiary hover:text-text-primary transition-colors p-1 rounded-lg hover:bg-secondary">
               <X className="w-4 h-4" />
             </button>
@@ -745,12 +745,12 @@ const MEDIA_STEPS = [
 ];
 
 const STEP_COLORS = [
-  { bar: "#6359EA", glow: "rgba(99,89,234,0.3)", accent: "#6359EA" },
+  { bar: "hsl(243,79%,63%)", glow: "rgba(99,89,234,0.3)", accent: "hsl(243,79%,63%)" },
   { bar: "#7B6BF0", glow: "rgba(123,107,240,0.35)", accent: "#7B6BF0" },
-  { bar: "#8B83C7", glow: "rgba(139,131,199,0.35)", accent: "#8B83C7" },
-  { bar: "#40ABB2", glow: "rgba(64,171,178,0.4)", accent: "#40ABB2" },
-  { bar: "#1CFA76", glow: "rgba(28,250,118,0.35)", accent: "#1CFA76" },
-  { bar: "#FFB347", glow: "rgba(255,179,71,0.4)", accent: "#FFB347" },
+  { bar: "hsl(246,27%,65%)", glow: "rgba(139,131,199,0.35)", accent: "hsl(246,27%,65%)" },
+  { bar: "hsl(184,47%,47%)", glow: "rgba(64,171,178,0.4)", accent: "hsl(184,47%,47%)" },
+  { bar: "hsl(145,96%,55%)", glow: "rgba(28,250,118,0.35)", accent: "hsl(145,96%,55%)" },
+  { bar: "hsl(30,100%,65%)", glow: "rgba(255,179,71,0.4)", accent: "hsl(30,100%,65%)" },
   { bar: "#FF6B6B", glow: "rgba(255,107,107,0.45)", accent: "#FF6B6B" },
 ];
 
@@ -1018,12 +1018,12 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
       </div>
       <div className="divide-y divide-border">
         {rows.map((row) => (
-          <div key={`${row.label}-${row.value}`} className={`flex items-center justify-between px-6 sm:px-8 py-4 ${row.highlight ? "bg-[#1CFA76]/5" : ""}`}>
+          <div key={`${row.label}-${row.value}`} className={`flex items-center justify-between px-6 sm:px-8 py-4 ${row.highlight ? "bg-primary/5" : ""}`}>
             <div>
-              <div className={`text-sm font-medium ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>{row.label}</div>
+              <div className={`text-sm font-medium ${row.highlight ? "text-primary" : "text-text-primary"}`}>{row.label}</div>
               <div className="text-xs text-text-tertiary mt-0.5">{row.desc}</div>
             </div>
-            <motion.div key={row.value} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className={`font-heading text-lg sm:text-xl text-right ${row.highlight ? "text-[#1CFA76]" : "text-text-primary"}`}>
+            <motion.div key={row.value} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className={`font-heading text-lg sm:text-xl text-right ${row.highlight ? "text-primary" : "text-text-primary"}`}>
               {row.value}
             </motion.div>
           </div>
@@ -1031,10 +1031,10 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
       </div>
 
       <div className="border-t border-border">
-        <div className="px-6 sm:px-8 py-5 bg-[#8B83C7]/5">
+        <div className="px-6 sm:px-8 py-5 bg-veneer-purple/5">
           <div className="flex items-center gap-2 mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-[#8B83C7]" />
-            <span className="text-xs font-medium text-[#8B83C7] tracking-wide uppercase">Estimated Total Reach</span>
+            <Sparkles className="w-3.5 h-3.5 text-veneer-purple" />
+            <span className="text-xs font-medium text-veneer-purple tracking-wide uppercase">Estimated Total Reach</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
@@ -1049,7 +1049,7 @@ const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: 
             </div>
             <div>
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Total impact</div>
-              <motion.div key={totalReachStr} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="font-heading text-xl text-[#1CFA76]">{totalReachStr}</motion.div>
+              <motion.div key={totalReachStr} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="font-heading text-xl text-primary">{totalReachStr}</motion.div>
               <div className="text-[10px] text-text-tertiary mt-0.5">estimated impressions/mo within your ICP</div>
             </div>
           </div>
@@ -1092,7 +1092,7 @@ const PricingTiers = () => {
   })), [prices]);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] text-foreground">
+    <div className="min-h-screen bg-[hsl(0,0%,4%)] text-foreground">
       <Navbar />
 
       {/* ── HERO ── */}
@@ -1106,7 +1106,7 @@ const PricingTiers = () => {
           </div>
           <h1 className="text-3xl md:text-6xl lg:text-7xl mb-6">
             Your show.<br />
-            <span className="bg-gradient-to-r from-[#6A9FA3] via-[#8B83C7] to-[#C484C9] bg-clip-text text-transparent">Your market.</span><br />
+            <span className="bg-gradient-to-r from-veneer-teal via-veneer-purple to-veneer-rose bg-clip-text text-transparent">Your market.</span><br />
             Owned by you.
           </h1>
           <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed mb-8">
@@ -1130,9 +1130,9 @@ const PricingTiers = () => {
           {tiers.map((tier, i) => {
             const isSelected = selectedTier === tier.id;
             const tierAccents: Record<string, { gradient: string; border: string; glow: string; btn: string; btnHover: string }> = {
-              t3: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,89,234,0.15), transparent 70%)", border: "#6359EA", glow: "0 -1px 30px rgba(99,89,234,0.2)", btn: "rgba(99,89,234,0.15)", btnHover: "rgba(99,89,234,0.25)" },
-              t2: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(28,250,118,0.12), transparent 70%)", border: "#1CFA76", glow: "0 -1px 30px rgba(28,250,118,0.18)", btn: "rgba(28,250,118,0.15)", btnHover: "rgba(28,250,118,0.25)" },
-              t1: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,179,71,0.15), transparent 70%)", border: "#FFB347", glow: "0 -1px 30px rgba(255,179,71,0.2)", btn: "rgba(255,179,71,0.15)", btnHover: "rgba(255,179,71,0.25)" },
+              t3: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,89,234,0.15), transparent 70%)", border: "hsl(243,79%,63%)", glow: "0 -1px 30px rgba(99,89,234,0.2)", btn: "rgba(99,89,234,0.15)", btnHover: "rgba(99,89,234,0.25)" },
+              t2: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(28,250,118,0.12), transparent 70%)", border: "hsl(145,96%,55%)", glow: "0 -1px 30px rgba(28,250,118,0.18)", btn: "rgba(28,250,118,0.15)", btnHover: "rgba(28,250,118,0.25)" },
+              t1: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,179,71,0.15), transparent 70%)", border: "hsl(30,100%,65%)", glow: "0 -1px 30px rgba(255,179,71,0.2)", btn: "rgba(255,179,71,0.15)", btnHover: "rgba(255,179,71,0.25)" },
             };
             const ac = tierAccents[tier.id];
             return (
@@ -1142,7 +1142,7 @@ const PricingTiers = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`relative p-6 sm:p-8 flex flex-col transition-all duration-200 ${tier.featured ? "bg-background" : "bg-card"} ${isSelected ? "ring-2 ring-[#1CFA76]" : ""}`}
+              className={`relative p-6 sm:p-8 flex flex-col transition-all duration-200 ${tier.featured ? "bg-background" : "bg-card"} ${isSelected ? "ring-2 ring-primary" : ""}`}
               style={{ boxShadow: ac.glow }}
             >
               {/* Top accent bar */}
@@ -1168,7 +1168,7 @@ const PricingTiers = () => {
                 <button
                   onClick={(e) => { e.stopPropagation(); setSelectedTier(isSelected ? null : tier.id); }}
                   className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                    isSelected ? "border-[#1CFA76] bg-[#1CFA76]" : "border-text-tertiary/40 hover:border-[#1CFA76]/60"
+                    isSelected ? "border-primary bg-primary" : "border-text-tertiary/40 hover:border-primary/60"
                   }`}
                 >
                   {isSelected && <div className="w-2 h-2 rounded-full bg-black" />}

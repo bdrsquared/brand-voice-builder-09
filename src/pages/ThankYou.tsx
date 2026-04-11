@@ -28,7 +28,7 @@ const ThankYou = () => {
       <TestimonialTicker />
       <Navbar />
 
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-28 pb-24 px-6">
+      <section className="relative min-h-[80vh] flex items-center justify-center pt-28 pb-24 px-6">
         <DotsBackground />
 
         <motion.div

@@ -2,13 +2,15 @@ import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
 import logo from "@/assets/earworm-logo.webp";
 
-const Footer = () => {
+const Footer = ({ hideDivider = false }: { hideDivider?: boolean }) => {
   return (
     <footer>
       {/* Rounded section divider */}
-      <div className="relative z-10" style={{ backgroundColor: 'hsl(0,0%,8%)' }}>
-        <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
-      </div>
+      {!hideDivider && (
+        <div className="relative z-10" style={{ backgroundColor: 'hsl(0,0%,8%)' }}>
+          <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+        </div>
+      )}
 
       <div className="relative bg-[hsl(0,0%,8%)] text-white pt-16 pb-8 px-6 overflow-hidden">
         {/* Subtle branded gradient overlay */}

@@ -102,14 +102,15 @@ const forWho = [
 
 interface FormData {
   name: string;
+  email: string;
   role: string;
   audience: string;
+  opportunities: string;
 }
 
 /* ───── glassmorphic card ───── */
 const GlassCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <div className={`relative overflow-hidden rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] transition-all duration-300 hover:border-white/[0.16] hover:shadow-[0_4px_30px_rgba(0,0,0,0.3)] group ${className}`}>
-    {/* sweep shimmer */}
     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none" />
     {children}
   </div>
@@ -123,6 +124,7 @@ const GuestBooking = () => {
     description: "Get placed on the podcasts your future clients are already listening to. Earworm's guest booking service finds the right shows and gets you booked.",
   });
 
+  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm<FormData>();
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -132,16 +134,25 @@ const GuestBooking = () => {
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("inquiries").insert({
-        name: data.name,
-        email: "",
-        message: `Role: ${data.role}\n\nTarget audience: ${data.audience}`,
-        type: "guest_booking",
-        source_page: "/guest-booking",
+      const message = `Role: ${data.role}\n\nTarget audience: ${data.audience}\n\nOpportunities per month: ${data.opportunities}`;
+
+      const { data: fnData, error: fnError } = await supabase.functions.invoke("send-demo-request", {
+        body: {
+          name: data.name.trim(),
+          email: data.email.trim(),
+          message,
+          type: "guest_booking",
+          source_page: "/guest-booking",
+        },
       });
-      if (error) throw error;
-      toast.success("Thanks! We'll be in touch within one working day.");
-      reset();
+      if (fnError) throw fnError;
+      if (fnData && !fnData.success) throw new Error(fnData.error || "Something went wrong");
+
+      supabase.functions.invoke("send-thank-you", {
+        body: { name: data.name.trim(), email: data.email.trim() },
+      }).catch((err) => console.error("Thank you email failed:", err));
+
+      navigate("/thank-you");
     } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {

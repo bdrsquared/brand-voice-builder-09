@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Mic, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";

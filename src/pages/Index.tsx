@@ -41,6 +41,7 @@ const Index = () => {
           <div className="rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: "hsl(220, 12%, 7%)" }} />
         </div>
 
+        <ValueProps />
 
         {/* Rounded divider: dark to light */}
         <div id="light-section-start" className="relative z-10" style={{ backgroundColor: '#E4E5E9' }}>

@@ -658,7 +658,7 @@ const CompareModal = ({ open, onClose, currency = "GBP" as Currency, prodType = 
 /* ── Animated modal header ── */
 const ModalHeader = ({ children, accentColor = "hsl(184,22%,53%)" }: { children: React.ReactNode; accentColor?: string }) => (
   <div className="relative overflow-hidden border-b border-border">
-    <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, #8B83C7, #C484C9, transparent)` }} />
+    <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, hsl(246,27%,65%), hsl(300,33%,65%), transparent)` }} />
     <motion.div
       animate={{ x: [0, 30, -20, 0], y: [0, -15, 10, 0], scale: [1, 1.2, 0.9, 1] }}
       transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -863,7 +863,7 @@ const PaidMediaSlider = ({ currency, step, setStep }: { currency: Currency; step
         <div className="relative h-2.5 rounded-full mb-2" style={{ background: "rgba(255,255,255,0.06)" }}>
           <motion.div
             className="absolute inset-y-0 left-0 rounded-full"
-            animate={{ width: `${pct}%`, background: `linear-gradient(90deg, #6359EA, ${activeColor.bar})`, boxShadow: `0 0 12px ${activeColor.glow}` }}
+            animate={{ width: `${pct}%`, background: `linear-gradient(90deg, hsl(243,79%,63%), ${activeColor.bar})`, boxShadow: `0 0 12px ${activeColor.glow}` }}
             transition={{ duration: 0.3 }}
           />
           <input

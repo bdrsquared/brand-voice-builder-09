@@ -142,7 +142,7 @@ const CaseStudies = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
-            Case studies
+            Client results
           </h2>
           <Link
             to="/case-studies"

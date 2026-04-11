@@ -25,9 +25,9 @@ const Index = () => {
       <Hero />
       
       <Suspense fallback={null}>
-        {/* Top shape divider: black rounds into case study bg */}
-        <div className="relative z-10" style={{ backgroundColor: "hsl(220, 12%, 7%)" }}>
-          <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+        {/* Top shape divider: case study bg rounds up into black */}
+        <div className="relative z-10 bg-background">
+          <div className="rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: "hsl(220, 12%, 7%)" }} />
         </div>
 
         <div className="relative" style={{ backgroundColor: "hsl(220, 12%, 7%)" }}>

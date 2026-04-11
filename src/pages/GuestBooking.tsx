@@ -387,13 +387,23 @@ const GuestBooking = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(0,0%,4%)]/70 via-transparent to-[hsl(0,0%,4%)]/70" />
         </motion.div>
+      </main>
 
-        {/* ─── TESTIMONIALS ─── */}
+      {/* ─── TESTIMONIALS (boxed section with shape dividers) ─── */}
+      {/* Top shape divider: page bg rounds into testimonial bg */}
+      <div className="relative z-10" style={{ backgroundColor: "hsl(220, 8%, 8%)" }}>
+        <div className="h-[40px] sm:h-[60px] rounded-b-[40px] sm:rounded-b-[60px]" style={{ backgroundColor: "hsl(0, 0%, 4%)" }} />
+      </div>
+
+      <div className="relative" style={{ backgroundColor: "hsl(220, 8%, 8%)" }}>
+        {/* Subtle warm gradient overlay */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.05]" style={{ background: "radial-gradient(ellipse at 20% 50%, hsl(var(--veneer-sage)) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, hsl(var(--veneer-amber)) 0%, transparent 50%)" }} />
+
         <motion.section
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="py-20 sm:py-28"
+          className="relative z-10 max-w-5xl mx-auto px-4 md:px-10 py-20 sm:py-28"
         >
           <motion.div variants={fadeUp} custom={0} className="mb-5">
             <SectionPill>What clients say</SectionPill>
@@ -425,6 +435,14 @@ const GuestBooking = () => {
             ))}
           </div>
         </motion.section>
+      </div>
+
+      {/* Bottom shape divider: testimonial bg rounds into page bg */}
+      <div className="relative z-10" style={{ backgroundColor: "hsl(0, 0%, 4%)" }}>
+        <div className="h-[40px] sm:h-[60px] rounded-b-[40px] sm:rounded-b-[60px]" style={{ backgroundColor: "hsl(220, 8%, 8%)" }} />
+      </div>
+
+      <main className="max-w-5xl mx-auto px-4 md:px-10">
 
         {/* ─── CTA + FORM ─── */}
         <motion.section

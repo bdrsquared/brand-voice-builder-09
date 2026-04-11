@@ -19,8 +19,11 @@ const BudgetSelect = ({ value, onChange, compact = false, light = false }: Budge
   return (
     <div>
       <label className={`block ${labelSize} font-semibold ${light ? "text-gray-500" : "text-white/50"} mb-${compact ? "1" : "1.5"} uppercase tracking-wider`}>
-        Budget <span className={light ? "text-gray-400" : "text-white/30"}>(optional)</span>
+        Investment level <span className={light ? "text-gray-400" : "text-white/30"}>(optional)</span>
       </label>
+      <p className={`${compact ? "text-[9px]" : "text-[11px]"} ${light ? "text-gray-400" : "text-white/30"} mb-${compact ? "1.5" : "2"} -mt-0.5 font-body`}>
+        Helps us tailor the right approach
+      </p>
       <div className="relative">
         <button
           type="button"
@@ -32,7 +35,7 @@ const BudgetSelect = ({ value, onChange, compact = false, light = false }: Budge
           }`}
         >
           <span className={value ? (light ? "text-gray-900" : "text-foreground") : (light ? "text-gray-400" : "text-white/25")}>
-            {value || "Select a budget range"}
+            {value || "Select a range"}
           </span>
           <ChevronDown className={`w-4 h-4 ${light ? "text-gray-400" : "text-white/40"} transition-transform ${open ? "rotate-180" : ""}`} />
         </button>

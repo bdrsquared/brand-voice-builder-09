@@ -60,6 +60,19 @@
     --accent: 243 79% 63%;
     --accent-foreground: 0 0% 100%;
 
+    /* Brand palette */
+    --brand-teal: 184 47% 47%;
+    --brand-orange: 30 100% 65%;
+    --brand-pink: 293 96% 62%;
+    --brand-surface: 0 0% 8%;
+
+    /* Professional veneer palette */
+    --veneer-sage: 140 24% 62%;
+    --veneer-purple: 246 27% 65%;
+    --veneer-teal: 184 22% 53%;
+    --veneer-amber: 36 38% 61%;
+    --veneer-rose: 300 33% 65%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 

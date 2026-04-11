@@ -441,7 +441,7 @@ const ICPLandingPage = () => {
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: i * 0.08 }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#6359EA]/20 via-transparent to-[#1CFA76]/10 mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-primary/10 mix-blend-overlay" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                     <div
                       className="absolute inset-0 pointer-events-none"
@@ -475,10 +475,10 @@ const ICPLandingPage = () => {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
                 >
-                  {i === 1 && <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#FFB347]/15 to-transparent rounded-bl-full pointer-events-none" />}
-                  {i === 2 && <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-[#6359EA]/10 to-transparent rounded-tr-full pointer-events-none" />}
-                  {i === 3 && <div className="absolute top-0 left-0 w-36 h-36 bg-gradient-to-br from-[#1CFA76]/10 to-transparent rounded-br-full pointer-events-none" />}
-                  {i === 4 && <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-[#40ABB2]/10 to-transparent rounded-tl-full pointer-events-none" />}
+                  {i === 1 && <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-brand-orange/15 to-transparent rounded-bl-full pointer-events-none" />}
+                  {i === 2 && <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-accent/10 to-transparent rounded-tr-full pointer-events-none" />}
+                  {i === 3 && <div className="absolute top-0 left-0 w-36 h-36 bg-gradient-to-br from-primary/10 to-transparent rounded-br-full pointer-events-none" />}
+                  {i === 4 && <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-brand-teal/10 to-transparent rounded-tl-full pointer-events-none" />}
 
                   <div className="flex flex-wrap gap-2.5">
                     {card.pills.map((pill, j) => (

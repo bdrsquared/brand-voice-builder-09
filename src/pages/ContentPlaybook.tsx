@@ -467,9 +467,9 @@ const ContentPlaybook = () => {
         {/* ── CLOSING ── */}
         <section className="py-16 text-center border-t border-border">
           <h2 className="text-2xl md:text-4xl italic mb-4">Content that drives sales looks like trust media.</h2>
-          <div className="w-10 h-px bg-[#7BAF8E] mx-auto my-6" />
+          <div className="w-10 h-px bg-veneer-sage mx-auto my-6" />
           <p className="text-text-secondary text-sm max-w-2xl mx-auto leading-relaxed">Strong point of view. Strong host. Strong long-form core. Aggressive short-form distribution. Low-friction private sharing. Measurement built for imperfect visibility. The teams that accept that reality earlier will beat the teams still trying to force every buying journey into last-click analytics.</p>
-          <div className="w-10 h-px bg-[#7BAF8E] mx-auto my-6" />
+          <div className="w-10 h-px bg-veneer-sage mx-auto my-6" />
           <p className="text-text-secondary text-sm">Content Marketing Playbook 2026/2027 — Sources: Edelman, Gartner, HubSpot, CMI, Wistia, Spotify, YouTube, SparkToro, Edison Research, LinkedIn</p>
         </section>
       </main>

@@ -112,7 +112,7 @@ const ChatWidget = () => {
     : "w-full rounded-xl border border-white/[0.1] bg-white/[0.05] px-3 py-2.5 text-sm text-foreground placeholder:text-white/25 focus:outline-none focus:border-white/[0.2] focus:bg-white/[0.07] transition-all font-body";
 
   const labelClass = light
-    ? "block text-[10px] font-semibold text-gray-500 mb-1 uppercase tracking-wider"
+    ? "block text-[10px] font-semibold text-gray-600 mb-1 uppercase tracking-wider"
     : "block text-[10px] font-semibold text-white/50 mb-1 uppercase tracking-wider";
 
   return (
@@ -127,7 +127,7 @@ const ChatWidget = () => {
             className={`absolute bottom-16 right-0 w-[340px] rounded-2xl backdrop-blur-2xl shadow-2xl overflow-visible transition-colors duration-300 ${
               light
                 ? "border border-black/[0.12] bg-white/70"
-                : "border border-white/[0.12] bg-white/[0.06]"
+                : "border border-white/[0.12] bg-[hsl(0,0%,8%)]/90"
             }`}
           >
             <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{

@@ -8,6 +8,7 @@ import BudgetSelect from "@/components/BudgetSelect";
 import benProfile from "@/assets/ben-profile.png";
 
 const ChatWidget = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -88,7 +89,7 @@ const ChatWidget = () => {
         body: { name: name.trim(), email: email.trim() },
       }).catch((err) => console.error("Thank you email failed:", err));
 
-      setSubmitted(true);
+      navigate("/thank-you");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

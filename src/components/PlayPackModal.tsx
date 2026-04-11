@@ -10,6 +10,7 @@ interface PlayPackModalProps {
 }
 
 const PlayPackModal = ({ open, onClose }: PlayPackModalProps) => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
@@ -43,7 +44,8 @@ const PlayPackModal = ({ open, onClose }: PlayPackModalProps) => {
       if (typeof window.gtag === "function") {
         window.gtag('event', 'conversion', { 'send_to': 'AW-11137316015/86-ECMzzhZUcEK_p174p' });
       }
-      setSubmitted(true);
+      onClose();
+      navigate("/thank-you");
     } catch (err: any) {
       console.error(err);
       setError("Something went wrong. Please try again.");

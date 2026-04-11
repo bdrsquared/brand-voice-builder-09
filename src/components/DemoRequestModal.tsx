@@ -12,6 +12,7 @@ interface DemoRequestModalProps {
 }
 
 const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -71,7 +72,8 @@ const DemoRequestModal = ({ open, onClose }: DemoRequestModalProps) => {
       if (typeof window.gtag === "function") {
         window.gtag('event', 'conversion', { 'send_to': 'AW-11137316015/86-ECMzzhZUcEK_p174p' });
       }
-      setSubmitted(true);
+      onClose();
+      navigate("/thank-you");
     } catch (err: any) {
       console.error(err);
       setError("Something went wrong. Please try again.");

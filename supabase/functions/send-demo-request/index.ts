@@ -65,7 +65,8 @@ serve(async (req) => {
 
     const isPlayPack = type === 'playpack';
     const isPlaybook = type === 'playbook';
-    const headerText = isPlaybook ? "📄 New Content Playbook Download" : isPlayPack ? "📦 Play Pack Request" : isContact ? "💬 New Website Message" : "🎙️ New PodPlanner Demo Request";
+    const isGuestBooking = type === 'guest_booking';
+    const headerText = isPlaybook ? "📄 New Content Playbook Download" : isPlayPack ? "📦 Play Pack Request" : isGuestBooking ? "🎤 New Podcast Booking Request" : isContact ? "💬 New Website Message" : "🎙️ New PodPlanner Demo Request";
 
     const slackMessage = {
       blocks: [

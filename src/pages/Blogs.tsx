@@ -123,7 +123,7 @@ const Blogs = () => {
               className="group block relative rounded-2xl overflow-hidden border border-white/[0.08] hover:border-white/[0.16] transition-all duration-500 mb-10"
             >
               {/* Gradient border glow on hover */}
-              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-[#6359EA]/20 via-[#1CFA76]/10 to-[#FFB347]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm pointer-events-none" />
+              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-accent/20 via-primary/10 to-brand-orange/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm pointer-events-none" />
 
               <div className="relative grid md:grid-cols-2 bg-background">
                 <div className="aspect-[16/10] md:aspect-auto md:h-full overflow-hidden">

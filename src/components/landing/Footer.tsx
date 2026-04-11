@@ -7,12 +7,12 @@ const Footer = ({ hideDivider = false }: { hideDivider?: boolean }) => {
     <footer>
       {/* Rounded section divider */}
       {!hideDivider && (
-        <div className="relative z-10" style={{ backgroundColor: 'hsl(0,0%,8%)' }}>
+        <div className="relative z-10 bg-brand-surface">
           <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
         </div>
       )}
 
-      <div className="relative bg-[hsl(0,0%,8%)] text-white pt-16 pb-8 px-6 overflow-hidden">
+      <div className="relative bg-brand-surface text-white pt-16 pb-8 px-6 overflow-hidden">
         {/* Subtle branded gradient overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.07]" style={{ background: 'radial-gradient(ellipse at 20% 80%, hsl(145,80%,55%) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, hsl(250,80%,65%) 0%, transparent 50%)' }} />
 

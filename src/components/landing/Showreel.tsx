@@ -62,9 +62,9 @@ const Showreel = () => {
         <div className="relative text-left sm:text-center mb-14 sm:mb-16">
           {/* Brand gradient blobs behind the title */}
           <div className="absolute inset-0 pointer-events-none -z-10" aria-hidden>
-            <div className="absolute top-1/2 left-1/2 -translate-x-[70%] -translate-y-[60%] w-[280px] h-[280px] sm:w-[450px] sm:h-[400px] rounded-full bg-[#6359EA] opacity-[0.22] sm:opacity-[0.18] blur-[80px] sm:blur-[100px]" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-[30%] -translate-y-[40%] w-[260px] h-[260px] sm:w-[400px] sm:h-[350px] rounded-full bg-[#1CFA76] opacity-[0.18] sm:opacity-[0.15] blur-[80px] sm:blur-[100px]" />
-            <div className="absolute top-1/2 left-1/2 translate-x-[10%] -translate-y-[50%] w-[240px] h-[240px] sm:w-[350px] sm:h-[300px] rounded-full bg-[#FFB347] opacity-[0.18] sm:opacity-[0.15] blur-[80px] sm:blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-[70%] -translate-y-[60%] w-[280px] h-[280px] sm:w-[450px] sm:h-[400px] rounded-full bg-accent opacity-[0.22] sm:opacity-[0.18] blur-[80px] sm:blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-[30%] -translate-y-[40%] w-[260px] h-[260px] sm:w-[400px] sm:h-[350px] rounded-full bg-primary opacity-[0.18] sm:opacity-[0.15] blur-[80px] sm:blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 translate-x-[10%] -translate-y-[50%] w-[240px] h-[240px] sm:w-[350px] sm:h-[300px] rounded-full bg-brand-orange opacity-[0.18] sm:opacity-[0.15] blur-[80px] sm:blur-[100px]" />
           </div>
 
           <motion.span

@@ -127,7 +127,7 @@ const ChatWidget = () => {
             className={`absolute bottom-16 right-0 w-[340px] rounded-2xl backdrop-blur-2xl shadow-2xl overflow-visible transition-colors duration-300 ${
               light
                 ? "border border-black/[0.12] bg-white/70"
-                : "border border-white/[0.12] bg-[hsl(0,0%,8%)]/90"
+                : "border border-white/[0.12] bg-brand-surface/90"
             }`}
           >
             <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{

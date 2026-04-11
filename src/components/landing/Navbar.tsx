@@ -591,13 +591,13 @@ const Navbar = () => {
                           {/* Grid background */}
                           <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 19px,rgba(255,255,255,0.04) 19px,rgba(255,255,255,0.04) 20px), repeating-linear-gradient(90deg,transparent,transparent 19px,rgba(255,255,255,0.04) 19px,rgba(255,255,255,0.04) 20px)" }} />
                           {/* Gradient blob */}
-                          <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-[#40ABB2]/30 via-[#6359EA]/20 to-[#E040FB]/20 blur-2xl" />
+                          <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-brand-teal/30 via-accent/20 to-brand-pink/20 blur-2xl" />
                           <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-primary/10 blur-xl" />
                           {/* Text content */}
                           <div className="relative z-10 flex flex-col justify-end h-full p-4">
                             <span className="text-[9px] font-body uppercase tracking-[0.15em] text-white/40 mb-1">Earworm Report</span>
                             <span className="text-sm font-heading font-bold text-white leading-tight">Content<br />Playbook</span>
-                            <span className="text-lg font-heading font-bold bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent leading-tight">2026 / 2027</span>
+                            <span className="text-lg font-heading font-bold bg-gradient-to-r from-brand-teal via-accent to-brand-pink bg-clip-text text-transparent leading-tight">2026 / 2027</span>
                           </div>
                         </div>
                         <h5 className="text-sm font-heading font-bold text-white mb-2">The Content Playbook for 2026 / 2027</h5>
@@ -1007,12 +1007,12 @@ const Navbar = () => {
                     >
                       <div className="relative w-full aspect-[2/1] overflow-hidden">
                         <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 19px,rgba(255,255,255,0.04) 19px,rgba(255,255,255,0.04) 20px), repeating-linear-gradient(90deg,transparent,transparent 19px,rgba(255,255,255,0.04) 19px,rgba(255,255,255,0.04) 20px)" }} />
-                        <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-[#40ABB2]/20 blur-3xl" />
-                        <div className="absolute bottom-1/4 right-1/4 w-28 h-28 rounded-full bg-[#6359EA]/20 blur-3xl" />
-                        <div className="absolute bottom-0 right-1/3 w-24 h-24 rounded-full bg-[#E040FB]/15 blur-3xl" />
+                        <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-brand-teal/20 blur-3xl" />
+                        <div className="absolute bottom-1/4 right-1/4 w-28 h-28 rounded-full bg-accent/20 blur-3xl" />
+                        <div className="absolute bottom-0 right-1/3 w-24 h-24 rounded-full bg-brand-pink/15 blur-3xl" />
                         <div className="relative z-10 flex flex-col justify-end h-full p-4">
                           <span className="text-sm font-heading font-bold text-foreground leading-tight">Content Playbook</span>
-                          <span className="text-lg font-heading font-bold bg-gradient-to-r from-[#40ABB2] via-[#6359EA] to-[#E040FB] bg-clip-text text-transparent">2026 / 2027</span>
+                          <span className="text-lg font-heading font-bold bg-gradient-to-r from-brand-teal via-accent to-brand-pink bg-clip-text text-transparent">2026 / 2027</span>
                         </div>
                       </div>
                       <div className="p-4 pt-2">
@@ -1125,7 +1125,7 @@ const Navbar = () => {
             <div className="px-4 py-2.5">
               <button
                 onClick={() => setContactModalOpen(true)}
-                className={`flex items-center justify-center gap-2 w-full text-sm font-semibold py-2.5 rounded-full transition-all relative overflow-hidden backdrop-blur-xl border cursor-pointer ${isBottomLight ? 'text-black bg-black/10 border-black/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] before:bg-gradient-to-r before:from-[#1CFA76] before:via-[#6359EA] before:to-[#FFB347]' : 'text-white bg-white/10 border-white/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] hover:shadow-[0_0_18px_rgba(28,250,118,0.25),0_0_8px_rgba(99,89,234,0.25)] before:bg-gradient-to-r before:from-[#1CFA76] before:via-[#6359EA] before:to-[#FFB347]'} before:absolute before:inset-0 before:rounded-full before:p-[1px] before:pointer-events-none before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude]`}
+                className={`flex items-center justify-center gap-2 w-full text-sm font-semibold py-2.5 rounded-full transition-all relative overflow-hidden backdrop-blur-xl border cursor-pointer ${isBottomLight ? 'text-black bg-black/10 border-black/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] before:bg-gradient-to-r before:from-primary before:via-accent before:to-brand-orange' : 'text-white bg-white/10 border-white/20 shadow-[0_0_12px_rgba(28,250,118,0.15),0_0_4px_rgba(99,89,234,0.15)] hover:shadow-[0_0_18px_rgba(28,250,118,0.25),0_0_8px_rgba(99,89,234,0.25)] before:bg-gradient-to-r before:from-primary before:via-accent before:to-brand-orange'} before:absolute before:inset-0 before:rounded-full before:p-[1px] before:pointer-events-none before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude]`}
               >
                 <MessageCircle className="w-4 h-4 relative z-10" />
                 <span className="relative z-10">Start a conversation</span>

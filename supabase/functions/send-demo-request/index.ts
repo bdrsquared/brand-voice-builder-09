@@ -87,7 +87,7 @@ serve(async (req) => {
             { type: "mrkdwn", text: `*Phone:*\n${phone.trim()}` },
           ]
         }] : []),
-        ...(isContact && message ? [{
+        ...((isContact || isGuestBooking) && message ? [{
           type: "section",
           text: { type: "mrkdwn", text: `*Message:*\n${message.trim()}` }
         }] : []),

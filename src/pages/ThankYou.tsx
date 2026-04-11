@@ -73,7 +73,6 @@ const ThankYou = () => {
             </div>
           </motion.div>
         </div>
-      </div>
 
       <Footer hideDivider />
     </div>

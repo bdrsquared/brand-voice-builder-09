@@ -25,7 +25,22 @@ const Index = () => {
       <Hero />
       
       <Suspense fallback={null}>
-        <CaseStudies />
+        {/* Top shape divider: black rounds into case study bg */}
+        <div className="relative z-10" style={{ backgroundColor: "hsl(220, 12%, 7%)" }}>
+          <div className="bg-background rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" />
+        </div>
+
+        <div className="relative" style={{ backgroundColor: "hsl(220, 12%, 7%)" }}>
+          {/* Subtle accent glow */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: "radial-gradient(ellipse at 30% 40%, hsl(145,96%,55%) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, hsl(243,79%,63%) 0%, transparent 50%)" }} />
+          <CaseStudies />
+        </div>
+
+        {/* Bottom shape divider: case study bg rounds into black */}
+        <div className="relative z-10 bg-background">
+          <div className="rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: "hsl(220, 12%, 7%)" }} />
+        </div>
+
         <ValueProps />
 
         {/* Rounded divider: dark to light */}

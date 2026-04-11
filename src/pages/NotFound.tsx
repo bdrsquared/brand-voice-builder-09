@@ -42,7 +42,7 @@ const NotFound = () => {
           <Link to="/">
             <Button
               size="lg"
-              className="rounded-full px-8 py-6 text-base font-medium gap-2 bg-[#1CFA76] hover:bg-[#1CFA76]/90 text-black"
+              className="rounded-full px-8 py-6 text-base font-medium gap-2 bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Home className="w-5 h-5" />
               Back to safety

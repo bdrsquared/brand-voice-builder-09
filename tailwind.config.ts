@@ -47,6 +47,21 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        // Brand palette
+        brand: {
+          teal: "hsl(var(--brand-teal))",
+          orange: "hsl(var(--brand-orange))",
+          pink: "hsl(var(--brand-pink))",
+          surface: "hsl(var(--brand-surface))",
+        },
+        // Professional veneer palette
+        veneer: {
+          sage: "hsl(var(--veneer-sage))",
+          purple: "hsl(var(--veneer-purple))",
+          teal: "hsl(var(--veneer-teal))",
+          amber: "hsl(var(--veneer-amber))",
+          rose: "hsl(var(--veneer-rose))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",

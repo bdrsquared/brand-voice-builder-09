@@ -24,7 +24,7 @@ const ThankYou = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[hsl(0,0%,8%)] overflow-x-hidden relative">
+    <div className="min-h-screen bg-brand-surface overflow-x-hidden relative">
       <TestimonialTicker />
       <Navbar />
 

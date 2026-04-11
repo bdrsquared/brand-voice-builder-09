@@ -187,49 +187,49 @@
 
   /* Blurred shapes for depth */
   .blob-green {
-    background: #1CFA76;
+    background: hsl(var(--primary));
     opacity: 0.08;
     filter: blur(120px);
     border-radius: 50%;
   }
 
   .blob-green-strong {
-    background: #1CFA76;
+    background: hsl(var(--primary));
     opacity: 0.12;
     filter: blur(100px);
     border-radius: 50%;
   }
 
   .blob-blue {
-    background: #6359EA;
+    background: hsl(var(--accent));
     opacity: 0.08;
     filter: blur(120px);
     border-radius: 50%;
   }
 
   .blob-blue-strong {
-    background: #6359EA;
+    background: hsl(var(--accent));
     opacity: 0.12;
     filter: blur(100px);
     border-radius: 50%;
   }
 
   .blob-oblong-green {
-    background: #1CFA76;
+    background: hsl(var(--primary));
     opacity: 0.07;
     filter: blur(100px);
     border-radius: 40% 60% 50% 50%;
   }
 
   .blob-oblong-blue {
-    background: #6359EA;
+    background: hsl(var(--accent));
     opacity: 0.07;
     filter: blur(100px);
     border-radius: 60% 40% 50% 50%;
   }
 
   .blob-oblong-amber {
-    background: #F5A623;
+    background: hsl(var(--brand-orange));
     opacity: 0.07;
     filter: blur(100px);
     border-radius: 50% 40% 60% 50%;
@@ -262,7 +262,7 @@
 
   .glow-on-hover::before {
     content: '';
-    background: linear-gradient(45deg, #574ECC, #9139A4, #1CFA76, #9139A4, #574ECC);
+    background: linear-gradient(45deg, hsl(250,60%,55%), hsl(300,40%,43%), hsl(var(--primary)), hsl(300,40%,43%), hsl(250,60%,55%));
     position: absolute;
     top: -3px;
     left: -3px;
@@ -285,7 +285,7 @@
     .glow-on-hover::before {
       opacity: 1;
       animation: none;
-      background: conic-gradient(#574ECC, #9139A4, #1CFA76, #574ECC);
+      background: conic-gradient(hsl(250,60%,55%), hsl(300,40%,43%), hsl(var(--primary)), hsl(250,60%,55%));
       background-size: 100%;
     }
   }
@@ -306,7 +306,7 @@
     bottom: 0;
     border-radius: 9999px;
     padding: 1px;
-    background: linear-gradient(45deg, #574ECC, #9139A4, #1CFA76, #9139A4, #574ECC);
+    background: linear-gradient(45deg, hsl(250,60%,55%), hsl(300,40%,43%), hsl(var(--primary)), hsl(300,40%,43%), hsl(250,60%,55%));
     background-size: 400%;
     animation: glowing 20s linear infinite;
     -webkit-mask: 

@@ -466,7 +466,7 @@ const GuestBooking = () => {
         >
           <motion.div variants={fadeUp} custom={0}>
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl leading-[1.1] tracking-tight mb-5">
-              Curious whether it's right <span className="bg-gradient-to-r from-veneer-amber to-veneer-rose bg-clip-text text-transparent italic">for you?</span>
+              Curious whether it's right <span className="bg-gradient-to-r from-veneer-amber to-veneer-rose bg-clip-text text-transparent italic pr-1">for you?</span>
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-text-secondary font-body mb-8 max-w-md">
               Tell us what you do and who you're trying to reach. We'll tell you honestly whether we can help - and if we can't, we'll tell you that too.

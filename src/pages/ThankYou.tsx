@@ -24,14 +24,16 @@ const ThankYou = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden relative">
+    <div className="min-h-screen bg-[hsl(0,0%,8%)] overflow-x-hidden relative">
       <TestimonialTicker />
       <Navbar />
 
-      {/* Hero + shape divider as one unit so dots animate through the curve */}
-      <div className="relative z-10" style={{ backgroundColor: 'hsl(0,0%,8%)' }}>
-        <div className="relative bg-background rounded-b-[40px] sm:rounded-b-[60px] overflow-hidden min-h-[80vh] flex items-center justify-center pt-28 pb-24 px-6">
-          <DotsBackground />
+      {/* Hero + shape divider as one unit — dots animate through the curve */}
+      <div
+        className="relative min-h-[80vh] flex items-center justify-center pt-28 pb-24 px-6 bg-background"
+        style={{ clipPath: 'inset(0 0 0 0 round 0 0 40px 40px)' }}
+      >
+        <DotsBackground />
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -71,7 +73,6 @@ const ThankYou = () => {
             </div>
           </motion.div>
         </div>
-      </div>
 
       <Footer hideDivider />
     </div>

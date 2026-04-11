@@ -6,13 +6,16 @@ import { toast } from "sonner";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import useMetaTags from "@/hooks/useMetaTags";
+import type { Easing } from "framer-motion";
+
+const easeOut: Easing = [0, 0, 0.2, 1];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" },
+    transition: { duration: 0.5, delay: i * 0.1, ease: easeOut },
   }),
 };
 

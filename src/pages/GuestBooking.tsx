@@ -184,8 +184,8 @@ const GuestBooking = () => {
             </motion.div>
 
             <motion.h1 variants={fadeUp} custom={1} className="text-3xl md:text-6xl lg:text-7xl mb-6 max-w-3xl">
-              Your ideas deserve a{" "}
-              <span className="bg-gradient-to-r from-veneer-sage via-veneer-amber to-veneer-rose bg-clip-text text-transparent italic">bigger room.</span>
+              You know you need to reach{" "}
+              <span className="bg-gradient-to-r from-veneer-sage via-veneer-amber to-veneer-rose bg-clip-text text-transparent italic">more people.</span>
             </motion.h1>
 
             <motion.p variants={fadeUp} custom={2} className="text-text-secondary text-base sm:text-lg max-w-xl leading-relaxed mb-10 font-body">

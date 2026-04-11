@@ -506,6 +506,14 @@ const GuestBooking = () => {
                   className="w-full text-sm px-4 py-3 border border-white/[0.1] rounded-xl bg-white/[0.04] text-text-primary placeholder:text-text-tertiary outline-none focus:border-veneer-sage/40 focus:ring-1 focus:ring-veneer-sage/20 transition-all mb-4 font-body"
                 />
 
+                <label className="block text-xs font-medium text-text-secondary mb-2 tracking-wide font-body">Email</label>
+                <input
+                  {...register("email", { required: true })}
+                  type="email"
+                  placeholder="alex@company.com"
+                  className="w-full text-sm px-4 py-3 border border-white/[0.1] rounded-xl bg-white/[0.04] text-text-primary placeholder:text-text-tertiary outline-none focus:border-veneer-sage/40 focus:ring-1 focus:ring-veneer-sage/20 transition-all mb-4 font-body"
+                />
+
                 <label className="block text-xs font-medium text-text-secondary mb-2 tracking-wide font-body">What you do</label>
                 <input
                   {...register("role", { required: true })}
@@ -520,6 +528,19 @@ const GuestBooking = () => {
                   rows={3}
                   className="w-full text-sm px-4 py-3 border border-white/[0.1] rounded-xl bg-white/[0.04] text-text-primary placeholder:text-text-tertiary outline-none focus:border-veneer-sage/40 focus:ring-1 focus:ring-veneer-sage/20 transition-all mb-4 resize-none font-body"
                 />
+
+                <label className="block text-xs font-medium text-text-secondary mb-2 tracking-wide font-body">How many opportunities do you have time for each month?</label>
+                <select
+                  {...register("opportunities", { required: true })}
+                  defaultValue=""
+                  className="w-full text-sm px-4 py-3 border border-white/[0.1] rounded-xl bg-white/[0.04] text-text-primary outline-none focus:border-veneer-sage/40 focus:ring-1 focus:ring-veneer-sage/20 transition-all mb-6 font-body appearance-none"
+                >
+                  <option value="" disabled className="bg-card text-text-tertiary">Select...</option>
+                  <option value="1-2" className="bg-card">1–2</option>
+                  <option value="3-5" className="bg-card">3–5</option>
+                  <option value="5-10" className="bg-card">5–10</option>
+                  <option value="10+" className="bg-card">10+</option>
+                </select>
 
                 <button
                   type="submit"

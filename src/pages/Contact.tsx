@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, ChevronDown, Search, Mail, MapPin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,6 +19,7 @@ const fadeUp = {
 
 const Contact = () => {
   useMetaTags();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -80,7 +82,7 @@ const Contact = () => {
         body: { name: name.trim(), email: email.trim() },
       }).catch((err) => console.error("Thank you email failed:", err));
 
-      setSubmitted(true);
+      navigate("/thank-you");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

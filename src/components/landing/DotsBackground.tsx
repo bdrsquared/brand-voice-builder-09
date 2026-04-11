@@ -52,6 +52,8 @@ const DotsBackground = () => {
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
           animation-direction: alternate;
+          contain: strict;
+          content-visibility: auto;
         }
         .dots-layer::before {
           content: '.';

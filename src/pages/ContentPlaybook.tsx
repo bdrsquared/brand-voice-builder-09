@@ -14,14 +14,14 @@ const SectionNum = ({ children }: { children: string }) => (
 );
 
 const Pullquote = ({ children }: { children: React.ReactNode }) => (
-  <blockquote className="border-l-[3px] border-[#7BAF8E] pl-6 py-5 my-10 bg-secondary/40 rounded-r-lg font-heading text-lg md:text-xl italic text-text-primary leading-relaxed">
+  <blockquote className="border-l-[3px] border-veneer-sage pl-6 py-5 my-10 bg-secondary/40 rounded-r-lg font-heading text-lg md:text-xl italic text-text-primary leading-relaxed">
     {children}
   </blockquote>
 );
 
 const Callout = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <div className="bg-secondary/60 border border-border rounded-lg p-6 my-8">
-    <div className="font-body text-xs tracking-[0.15em] uppercase text-[#6A9FA3] mb-3 pb-2 border-b border-border">{label}</div>
+    <div className="font-body text-xs tracking-[0.15em] uppercase text-veneer-teal mb-3 pb-2 border-b border-border">{label}</div>
     <div className="text-text-secondary text-sm md:text-base leading-relaxed">{children}</div>
   </div>
 );
@@ -34,7 +34,7 @@ const BarChart = ({ title, rows }: { title: string; rows: { label: string; pct: 
         <div key={r.label} className="grid grid-cols-[minmax(80px,160px)_1fr_50px] md:grid-cols-[minmax(120px,200px)_1fr_60px] items-center gap-2 md:gap-4">
           <div className="text-sm text-text-secondary text-right leading-tight">{r.label}</div>
           <div className="bg-border h-7 rounded-sm overflow-hidden">
-            <div className="h-full rounded-sm" style={{ width: `${r.pct}%`, background: r.color ?? "#7BAF8E" }} />
+            <div className="h-full rounded-sm" style={{ width: `${r.pct}%`, background: r.color ?? "hsl(140,24%,62%)" }} />
           </div>
           <div className="font-body text-sm text-text-secondary">{r.val}</div>
         </div>
@@ -47,7 +47,7 @@ const StatGrid = ({ stats }: { stats: { num: string; desc: string; source: strin
   <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
     {stats.map((s) => (
       <div key={s.num + s.desc} className="bg-card p-6 text-center">
-        <span className="font-heading text-4xl text-[#7BAF8E] block leading-none mb-2">{s.num}</span>
+        <span className="font-heading text-4xl text-veneer-sage block leading-none mb-2">{s.num}</span>
         <span className="text-text-secondary text-sm leading-snug block">{s.desc}</span>
         <span className="font-body text-xs tracking-[0.05em] uppercase text-text-tertiary mt-2 block">{s.source}</span>
       </div>
@@ -69,7 +69,7 @@ const DataTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) =
         {rows.map((row, i) => (
           <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-secondary/30"}>
             {row.map((cell, j) => (
-              <td key={j} className={`p-3 border-t border-border leading-relaxed ${j === 0 ? "font-semibold text-[#6A9FA3] text-sm whitespace-nowrap" : "text-text-secondary text-sm"}`}>{cell}</td>
+              <td key={j} className={`p-3 border-t border-border leading-relaxed ${j === 0 ? "font-semibold text-veneer-teal text-sm whitespace-nowrap" : "text-text-secondary text-sm"}`}>{cell}</td>
             ))}
           </tr>
         ))}
@@ -86,7 +86,7 @@ const ContentPlaybook = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B] text-foreground">
+    <div className="min-h-screen bg-[hsl(0,0%,4%)] text-foreground">
       <Navbar />
 
       {/* ── HERO ── */}
@@ -100,7 +100,7 @@ const ContentPlaybook = () => {
             <SectionPill>Senior Marketer Edition</SectionPill>
           </div>
           <h1 className="text-3xl md:text-6xl lg:text-7xl mb-6">
-            The Content Playbook<br />for <span className="bg-gradient-to-r from-[#6A9FA3] via-[#8B83C7] to-[#C484C9] bg-clip-text text-transparent">2026 / 2027</span>
+            The Content Playbook<br />for <span className="bg-gradient-to-r from-veneer-teal via-veneer-purple to-veneer-rose bg-clip-text text-transparent">2026 / 2027</span>
           </h1>
           <p className="text-text-secondary text-lg max-w-xl leading-relaxed mb-10">
             Content is changing fast. This report breaks down the trends, data, and strategies reshaping B2B content — so you can lead the conversation, not chase it.
@@ -127,7 +127,7 @@ const ContentPlaybook = () => {
               >
                 {/* sweep shimmer */}
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none" />
-               <span className="font-heading text-2xl md:text-3xl text-[#7BAF8E] block leading-none mb-3">{s.num}</span>
+               <span className="font-heading text-2xl md:text-3xl text-veneer-sage block leading-none mb-3">{s.num}</span>
                 <span className="text-text-secondary text-xs md:text-sm leading-snug">{s.label} <em className="opacity-50 not-italic">({s.src})</em></span>
               </div>
             ))}
@@ -152,9 +152,9 @@ const ContentPlaybook = () => {
               { label: "Understanding the audience", pct: 82, val: "82%" },
               { label: "Producing high-quality content", pct: 77, val: "77%" },
               { label: "Possessing industry expertise", pct: 70, val: "70%" },
-              { label: "Aligning to business objectives", pct: 62, val: "62%", color: "#8B83C7" },
-              { label: "Measuring performance effectively", pct: 53, val: "53%", color: "#8B83C7" },
-              { label: "Having a documented strategy", pct: 47, val: "47%", color: "#8B83C7" },
+              { label: "Aligning to business objectives", pct: 62, val: "62%", color: "hsl(246,27%,65%)" },
+              { label: "Measuring performance effectively", pct: 53, val: "53%", color: "hsl(246,27%,65%)" },
+              { label: "Having a documented strategy", pct: 47, val: "47%", color: "hsl(246,27%,65%)" },
             ]}
           />
 
@@ -167,7 +167,7 @@ const ContentPlaybook = () => {
               { n: "04", t: "Use hosts as trust infrastructure", d: "In 2026/2027, the host is the trust interface between brand and buyer - not just talent." },
             ].map((r) => (
               <div key={r.n} className="bg-background p-5 flex gap-4 items-start">
-                <span className="font-body text-2xl text-[#7BAF8E] font-medium leading-none shrink-0">{r.n}</span>
+                <span className="font-body text-2xl text-veneer-sage font-medium leading-none shrink-0">{r.n}</span>
                 <div>
                   <div className="font-semibold text-sm text-text-primary mb-1">{r.t}</div>
                   <p className="text-sm text-text-secondary leading-relaxed m-0">{r.d}</p>
@@ -175,7 +175,7 @@ const ContentPlaybook = () => {
               </div>
             ))}
             <div className="bg-background p-5 flex gap-4 items-start md:col-span-2">
-              <span className="font-body text-2xl text-[#7BAF8E] font-medium leading-none shrink-0">05</span>
+              <span className="font-body text-2xl text-veneer-sage font-medium leading-none shrink-0">05</span>
               <div>
                 <div className="font-semibold text-sm text-text-primary mb-1">Measure influence, not just last-click source purity</div>
                 <p className="text-sm text-text-secondary leading-relaxed m-0">Perfect attribution is fantasy. Decision-grade attribution is enough. Build for probabilistic measurement from the start.</p>
@@ -193,9 +193,9 @@ const ContentPlaybook = () => {
           <BarChart
             title="Highest-ROI content formats — 2026 (HubSpot)"
             rows={[
-              { label: "Short-form video", pct: 97, val: "48.6%", color: "#6A9FA3" },
-              { label: "Long-form video", pct: 57, val: "28.6%", color: "#6A9FA3" },
-              { label: "Live-streaming video", pct: 50, val: "25.1%", color: "#6A9FA3" },
+              { label: "Short-form video", pct: 97, val: "48.6%", color: "hsl(184,22%,53%)" },
+              { label: "Long-form video", pct: 57, val: "28.6%", color: "hsl(184,22%,53%)" },
+              { label: "Live-streaming video", pct: 50, val: "25.1%", color: "hsl(184,22%,53%)" },
               { label: "Blog / written content", pct: 38, val: "~19%", color: "#6A7A8C" },
               { label: "Infographics / visual", pct: 28, val: "~14%", color: "#6A7A8C" },
             ]}
@@ -208,7 +208,7 @@ const ContentPlaybook = () => {
             {[
               { emoji: "🎬", label: "Flagship Episode - 35-75 min", w: "100%", bg: "hsl(var(--card))", textColor: "text-text-primary", desc: "The anchor asset - full depth, full conviction, full story" },
               { emoji: "✂️", label: "Mid-form Segments - 5-15 min", w: "85%", bg: "#6A7A8C", textColor: "text-white", desc: "Conversion & nurture layer - 5-30 min videos average a 10% conversion rate (Wistia)" },
-              { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "#7BAF8E", textColor: "text-white", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
+              { emoji: "📱", label: "Short-form Clips - 15-90 sec", w: "65%", bg: "hsl(140,24%,62%)", textColor: "text-white", desc: "Discovery & dark-social forwarding - Under-1-min videos average 50% engagement (Wistia)" },
               { emoji: "📄", label: "Written Companion Assets", w: "50%", bg: "#5C7A6A", textColor: "text-white", desc: "Search, AI retrieval & internal shareability" },
             ].map((l) => (
               <div key={l.label} className="rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-4">
@@ -266,10 +266,10 @@ const ContentPlaybook = () => {
           <BarChart
             title="Hidden buyer priorities at final vendor selection (Edelman/LinkedIn 2025)"
             rows={[
-              { label: "Understanding our challenges & needs", pct: 85, val: "85%", color: "#6A9FA3" },
-              { label: "Strategic fit", pct: 76, val: "76%", color: "#6A9FA3" },
-              { label: "Understanding industry trends", pct: 74, val: "74%", color: "#6A9FA3" },
-              { label: "Relevant expertise", pct: 68, val: "68%", color: "#6A9FA3" },
+              { label: "Understanding our challenges & needs", pct: 85, val: "85%", color: "hsl(184,22%,53%)" },
+              { label: "Strategic fit", pct: 76, val: "76%", color: "hsl(184,22%,53%)" },
+              { label: "Understanding industry trends", pct: 74, val: "74%", color: "hsl(184,22%,53%)" },
+              { label: "Relevant expertise", pct: 68, val: "68%", color: "hsl(184,22%,53%)" },
               { label: "Being the \"safest choice\"", pct: 41, val: "41%", color: "#6A7A8C" },
             ]}
           />
@@ -285,7 +285,7 @@ const ContentPlaybook = () => {
               { name: "Buyer Guides", desc: "\"How leaders should evaluate X in 2026.\" Feels like TOFU, secretly a sales acceleration asset. Write it for internal forwarding." },
             ].map((f, i) => (
               <div key={f.name} className={`p-4 grid grid-cols-1 md:grid-cols-[180px_1fr] gap-1 md:gap-6 items-start ${i % 2 ? "bg-secondary/30" : "bg-background"}`}>
-                <div className="font-semibold text-sm text-[#6A9FA3]">{f.name}</div>
+                <div className="font-semibold text-sm text-veneer-teal">{f.name}</div>
                 <p className="text-sm text-text-secondary leading-relaxed m-0">{f.desc}</p>
               </div>
             ))}
@@ -295,7 +295,7 @@ const ContentPlaybook = () => {
           <div className="bg-card border border-border rounded-lg p-8 my-10 text-center">
             <div className="font-body text-xs tracking-[0.15em] uppercase text-text-tertiary mb-4">The TOFU Content Formula</div>
             <div className="font-heading text-xl md:text-2xl italic text-text-primary leading-relaxed">
-              <span className="text-[#7BAF8E]">Teach</span> + <span className="text-[#7BAF8E]">Diagnose</span> + <span className="text-[#7BAF8E]">Reframe</span> + <span className="text-[#7BAF8E]">Equip</span> + <span className="text-[#7BAF8E]">Invite</span>
+              <span className="text-veneer-sage">Teach</span> + <span className="text-veneer-sage">Diagnose</span> + <span className="text-veneer-sage">Reframe</span> + <span className="text-veneer-sage">Equip</span> + <span className="text-veneer-sage">Invite</span>
             </div>
             <p className="text-text-tertiary text-xs mt-3 mb-0">If the content doesn't give the buyer something they can reuse internally, it's probably not revenue-grade TOFU yet.</p>
           </div>
@@ -318,8 +318,8 @@ const ContentPlaybook = () => {
               { label: "Slack", pct: 100, val: "100%" },
               { label: "Discord", pct: 100, val: "100%" },
               { label: "WhatsApp", pct: 100, val: "100%" },
-              { label: "FB Messenger", pct: 75, val: "75%", color: "#8B83C7" },
-              { label: "Instagram DMs", pct: 60, val: "~60%", color: "#8B83C7" },
+              { label: "FB Messenger", pct: 75, val: "75%", color: "hsl(246,27%,65%)" },
+              { label: "Instagram DMs", pct: 60, val: "~60%", color: "hsl(246,27%,65%)" },
             ]}
           />
 
@@ -347,10 +347,10 @@ const ContentPlaybook = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
             {[
-              { label: "Layer 1 — Attention Quality", color: "text-[#7BAF8E]", items: ["Watch time & average % viewed", "Consumption hours", "Completion rate", "Returning viewers", "Live watch behaviour"] },
-              { label: "Layer 2 — Relationship Depth", color: "text-[#8B83C7]", items: ["Follower / subscriber growth", "Repeat viewers", "Newsletter opt-ins", "Comments, saves, audience participation", "Episode-to-episode retention"] },
+              { label: "Layer 1 — Attention Quality", color: "text-veneer-sage", items: ["Watch time & average % viewed", "Consumption hours", "Completion rate", "Returning viewers", "Live watch behaviour"] },
+              { label: "Layer 2 — Relationship Depth", color: "text-veneer-purple", items: ["Follower / subscriber growth", "Repeat viewers", "Newsletter opt-ins", "Comments, saves, audience participation", "Episode-to-episode retention"] },
               { label: "Layer 3 — Dark-Funnel Movement", color: "text-text-secondary", items: ["Direct deep-link ratio", "Branded search lift", "Self-reported mentions", "Episode-assist rate in CRM", "Copy-link click volume"] },
-              { label: "Layer 4 — Revenue Impact", color: "text-[#C9A96E]", items: ["Opportunity creation (influenced)", "Exposed-account win rate lift", "Sales-cycle compression", "ACV delta: exposed vs. unexposed", "Influenced pipeline per content pillar"] },
+              { label: "Layer 4 — Revenue Impact", color: "text-veneer-amber", items: ["Opportunity creation (influenced)", "Exposed-account win rate lift", "Sales-cycle compression", "ACV delta: exposed vs. unexposed", "Influenced pipeline per content pillar"] },
             ].map((q) => (
               <div key={q.label} className="bg-background p-5">
                 <div className={`font-body text-xs tracking-[0.12em] uppercase ${q.color} mb-3 pb-2 border-b border-border`}>{q.label}</div>
@@ -404,7 +404,7 @@ const ContentPlaybook = () => {
           <h3 className="text-lg md:text-2xl mt-10 mb-5 text-text-primary">AI: right use cases vs. wrong use cases</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded-lg overflow-hidden my-8">
             <div className="bg-background p-5">
-              <div className="font-body text-xs tracking-[0.12em] uppercase text-[#7BAF8E] mb-3 pb-2 border-b border-border">✓ Right use cases</div>
+              <div className="font-body text-xs tracking-[0.12em] uppercase text-veneer-sage mb-3 pb-2 border-b border-border">✓ Right use cases</div>
               <ul className="space-y-1">
                 {["Transcript cleanup and chaptering", "Title and headline variants", "Clip selection suggestions", "Metadata, captions, translation", "Repurposing drafts from episode summaries", "Research clustering"].map((item) => (
                   <li key={item} className="text-sm text-text-secondary">✓ {item}</li>
@@ -428,9 +428,9 @@ const ContentPlaybook = () => {
           <h3 className="text-lg md:text-2xl mt-10 mb-8 text-text-primary">The 90-day rollout</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { period: "Days 1-30", title: "Foundation & Strategy", icon: "🧭", color: "#7BAF8E", items: ["Define ICP, buying jobs, hidden buyers, show thesis, host roles", "Build the measurement framework", "Lock UTM taxonomy and self-reported attribution questions before publishing anything"] },
-              { period: "Days 31-60", title: "Production & Systems", icon: "⚙️", color: "#8B83C7", items: ["Record four to six episodes before launch", "Build template systems: full episodes, segment cuts, shorts, articles, thumbnails, captions, sales one-pagers", "Train sales on how to use clips in outreach and follow-up"] },
-              { period: "Days 61-90", title: "Launch & Iterate", icon: "🚀", color: "#6A9FA3", items: ["Launch in batches, not as one-off hero content", "Watch for direct traffic to deep pages, branded search movement, self-reported mentions, repeat viewers", "Double down on themes that get forwarded privately - not just publicly applauded"] },
+              { period: "Days 1-30", title: "Foundation & Strategy", icon: "🧭", color: "hsl(140,24%,62%)", items: ["Define ICP, buying jobs, hidden buyers, show thesis, host roles", "Build the measurement framework", "Lock UTM taxonomy and self-reported attribution questions before publishing anything"] },
+              { period: "Days 31-60", title: "Production & Systems", icon: "⚙️", color: "hsl(246,27%,65%)", items: ["Record four to six episodes before launch", "Build template systems: full episodes, segment cuts, shorts, articles, thumbnails, captions, sales one-pagers", "Train sales on how to use clips in outreach and follow-up"] },
+              { period: "Days 61-90", title: "Launch & Iterate", icon: "🚀", color: "hsl(184,22%,53%)", items: ["Launch in batches, not as one-off hero content", "Watch for direct traffic to deep pages, branded search movement, self-reported mentions, repeat viewers", "Double down on themes that get forwarded privately - not just publicly applauded"] },
             ].map((tl, i) => (
               <motion.div
                 key={tl.period}

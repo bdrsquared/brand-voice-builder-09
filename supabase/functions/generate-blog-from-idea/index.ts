@@ -65,6 +65,7 @@ serve(async (req) => {
         },
         body: JSON.stringify({
           model: "google/gemini-3-flash-preview",
+          response_format: { type: "json_object" },
           messages: [
             {
               role: "system",
@@ -195,17 +196,47 @@ Make it insightful, practical, and relevant to B2B marketers and business leader
     const aiData = await aiResponse.json();
     const rawContent = aiData.choices?.[0]?.message?.content || "";
 
-    // Parse the JSON blog
+    // Parse the JSON blog (with fallback for malformed JSON containing unescaped chars)
     let blog: { title: string; excerpt: string; content: string; category: string };
+    const tryParse = (s: string) => {
+      try { return JSON.parse(s); } catch { return null; }
+    };
+    const extractField = (s: string, field: string): string | null => {
+      // Find "field": "..." across multiple lines, allowing escaped quotes
+      const re = new RegExp(`"${field}"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"`, "s");
+      const m = s.match(re);
+      return m ? m[1].replace(/\\"/g, '"').replace(/\\n/g, "\n").replace(/\\\\/g, "\\") : null;
+    };
     try {
-      const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        blog = JSON.parse(jsonMatch[0]);
+      // Strip code fences if present
+      const cleaned = rawContent
+        .replace(/^```(?:json)?\s*/i, "")
+        .replace(/\s*```\s*$/i, "")
+        .trim();
+      const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+      const candidate = jsonMatch ? jsonMatch[0] : cleaned;
+      const parsed = tryParse(candidate) || tryParse(cleaned);
+      if (parsed && parsed.title && parsed.content) {
+        blog = parsed;
       } else {
-        throw new Error("No JSON found in AI response");
+        // Fallback: regex-extract each field individually
+        const title = extractField(candidate, "title");
+        const excerpt = extractField(candidate, "excerpt");
+        const content = extractField(candidate, "content");
+        const category = extractField(candidate, "category");
+        if (!title || !content) {
+          throw new Error("Could not extract required fields from AI response");
+        }
+        console.warn("Used regex fallback to parse blog JSON");
+        blog = {
+          title,
+          excerpt: excerpt || "",
+          content,
+          category: category || "Strategy",
+        };
       }
     } catch (e) {
-      console.error("Failed to parse blog JSON:", e);
+      console.error("Failed to parse blog JSON:", e, "Raw content preview:", rawContent.slice(0, 500));
       await supabase
         .from("blog_ideas")
         .update({ status: "error" })

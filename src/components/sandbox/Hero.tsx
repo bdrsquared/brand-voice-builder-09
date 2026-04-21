@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LogoWall from "./LogoWall";
-import DotsBackground from "./DotsBackground";
+import ShaderBackground from "./ShaderBackground";
 
 interface HeroProps {
   variant?: "classic" | "dots";
@@ -10,14 +10,21 @@ interface HeroProps {
 const Hero = ({ variant = "classic" }: HeroProps) => {
 
   return (
-    <section className="relative pt-28 pb-8 sm:pt-36 sm:pb-28 px-6">
-      {/* Grid background */}
-      <div className="absolute inset-0 pointer-events-none z-[1]" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px), repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
-      {/* Background */}
-      <DotsBackground />
-      <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
+    <section className="relative px-6 overflow-hidden">
+      {/* Animated mesh-shader background fills the hero */}
+      <div className="absolute inset-0 z-0">
+        <ShaderBackground>
+          <></>
+        </ShaderBackground>
+      </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      {/* Subtle grid overlay on top of the shader */}
+      <div className="absolute inset-0 pointer-events-none z-[1]" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px), repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
+
+      {/* Bottom fade so the hero blends into the section below */}
+      <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
+
+      <div className="relative z-10 max-w-5xl mx-auto pt-28 pb-8 sm:pt-36 sm:pb-28">
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}

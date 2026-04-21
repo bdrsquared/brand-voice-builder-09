@@ -55,7 +55,7 @@ export function ShaderBackground({ children }: ShaderBackgroundProps) {
 
       {/* Background mesh gradient — base layer */}
       <MeshGradient
-        colors={["#080a0c", "#15d668", "#4a42c0", "#080a0c", "#c47a2a"]}
+        colors={["#080a0c", "#15d668", "#4a42c0", "#080a0c", "#1a1d22"]}
         speed={isActive ? 0.5 : 0.25}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       />

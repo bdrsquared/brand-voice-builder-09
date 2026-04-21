@@ -18,6 +18,14 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </ShaderBackground>
       </div>
 
+      {/* Centred dark scrim — keeps body copy readable over the bright mesh */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[2]"
+        style={{
+          background:
+            "radial-gradient(ellipse 65% 50% at 50% 55%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 45%, transparent 80%)",
+        }}
+      />
 
       {/* Bottom fade so the hero blends into the section below */}
       <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
@@ -49,7 +57,8 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.h1>
 
         <motion.p
-          className="text-center text-base sm:text-lg text-text-secondary max-w-2xl mx-auto mb-8 leading-relaxed font-body"
+          className="text-center text-base sm:text-lg text-white/85 max-w-2xl mx-auto mb-8 leading-relaxed font-body"
+          style={{ textShadow: "0 1px 12px rgba(0,0,0,0.6), 0 0 2px rgba(0,0,0,0.4)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -78,7 +87,8 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           </a>
           <a
             href="/#how-it-works"
-            className="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary font-medium px-6 py-4 transition-colors text-sm"
+            className="inline-flex items-center gap-2 text-white/75 hover:text-white font-medium px-6 py-4 transition-colors text-sm"
+            style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
           >
             See how we work
             <ArrowRight className="w-4 h-4" />
@@ -86,16 +96,17 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.div>
 
         <motion.p
-          className="text-center text-xs text-text-tertiary font-body"
+          className="text-center text-xs text-white/70 font-body"
+          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           Trusted by teams at{" "}
-          <span className="font-semibold text-text-primary">Experian</span>,{" "}
-          <span className="font-semibold text-text-primary">Cisco</span>,{" "}
-          <span className="font-semibold text-text-primary">IG Group</span>,{" "}
-          <span className="font-semibold text-text-primary">Infobip</span> and
+          <span className="font-semibold text-white">Experian</span>,{" "}
+          <span className="font-semibold text-white">Cisco</span>,{" "}
+          <span className="font-semibold text-white">IG Group</span>,{" "}
+          <span className="font-semibold text-white">Infobip</span> and
           more
         </motion.p>
 

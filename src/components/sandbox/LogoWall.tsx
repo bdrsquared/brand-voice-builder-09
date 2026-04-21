@@ -25,9 +25,7 @@ const allLogos = [...logos, ...logos];
 const LogoWall = () => {
   return (
     <div className="relative max-w-3xl mx-auto mt-10 overflow-hidden">
-      {/* Fade edges */}
-      <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      {/* Fade edges using mask for true transparency */}
 
       <div className="flex items-center gap-16 animate-scroll-left w-max will-change-transform">
         {allLogos.map((logo, i) => (

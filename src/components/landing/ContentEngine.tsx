@@ -59,10 +59,10 @@ const ContentEngine = () => {
   return (
     <div
       className="relative w-full rounded-2xl border border-white/[0.08] overflow-hidden shadow-lg shadow-black/20 flex flex-col justify-center gap-2.5 py-4 h-[280px]"
-      style={{ background: "linear-gradient(135deg, #111113 0%, #0d0d0f 50%, #101012 100%)" }}
+      style={{ background: "linear-gradient(135deg, rgba(17,17,19,0.7) 0%, rgba(13,13,15,0.8) 50%, rgba(16,16,18,0.7) 100%)", backdropFilter: "blur(20px)" }}
     >
-      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#111113] to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#101012] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#111113]/80 to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#101012]/80 to-transparent z-20 pointer-events-none" />
 
       {rows.map((items, ri) => {
         const tripled = [...items, ...items, ...items];

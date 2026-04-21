@@ -18,8 +18,6 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </ShaderBackground>
       </div>
 
-      {/* Subtle grid overlay on top of the shader */}
-      <div className="absolute inset-0 pointer-events-none z-[1]" style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px), repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px)" }} />
 
       {/* Bottom fade so the hero blends into the section below */}
       <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
 import logo from "@/assets/earworm-logo.webp";
+import CinematicFooter from "./CinematicFooter";
 
 const Footer = ({ hideDivider = false }: { hideDivider?: boolean }) => {
   return (
@@ -12,7 +13,13 @@ const Footer = ({ hideDivider = false }: { hideDivider?: boolean }) => {
         </div>
       )}
 
-      <div className="relative bg-brand-surface text-white pt-16 pb-8 px-6 overflow-hidden">
+      {/* Desktop — cinematic footer */}
+      <div className="hidden md:block">
+        <CinematicFooter />
+      </div>
+
+      {/* Mobile — simplified footer */}
+      <div className="md:hidden relative bg-brand-surface text-white pt-16 pb-8 px-6 overflow-hidden">
         {/* Subtle branded gradient overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.07]" style={{ background: 'radial-gradient(ellipse at 20% 80%, hsl(145,80%,55%) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, hsl(250,80%,65%) 0%, transparent 50%)' }} />
 

@@ -115,14 +115,6 @@ export default {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-100%)" },
         },
-        "cinematic-marquee": {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-33.3333%)" },
-        },
-        "cinematic-breathe": {
-          "0%, 100%": { transform: "translate(-50%, -50%) scale(1)", opacity: "0.6" },
-          "50%": { transform: "translate(-50%, -50%) scale(1.1)", opacity: "1" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -130,8 +122,6 @@ export default {
         "scroll-left": "scroll-left 20s linear infinite",
         "scroll-left-slow": "scroll-left 35s linear infinite",
         marquee: "marquee 10s linear infinite",
-        "cinematic-marquee": "cinematic-marquee 40s linear infinite",
-        "cinematic-breathe": "cinematic-breathe 8s ease-in-out infinite",
       },
     },
   },

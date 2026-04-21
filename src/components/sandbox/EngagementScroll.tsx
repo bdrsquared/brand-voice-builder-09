@@ -1,0 +1,88 @@
+import { useEffect, useRef } from "react";
+import { Heart, MessageCircle, Share2, UserPlus } from "lucide-react";
+import ryanFosterAvatar from "@/assets/ryan-foster-avatar.webp";
+import oliviaParkAvatar from "@/assets/olivia-park-avatar.webp";
+import lucasGrantAvatar from "@/assets/lucas-grant-avatar.webp";
+import jonDoeAvatar from "@/assets/jon-doe-avatar.webp";
+import miaJohnsonAvatar from "@/assets/mia-johnson-avatar.webp";
+import alexChenAvatar from "@/assets/alex-chen-avatar.webp";
+import emmaCarterAvatar from "@/assets/emma-carter-avatar.webp";
+
+const notifications = [
+  { name: "Jon Doe", action: "liked your video", avatar: "JD", bg: "bg-primary/20 text-primary", image: jonDoeAvatar },
+  { name: "Sarah Miles", action: "commented on your post", avatar: "SM", bg: "bg-accent/20 text-accent", image: null },
+  { name: "Alex Chen", action: "shared your clip", avatar: "AC", bg: "bg-primary/20 text-primary", image: alexChenAvatar },
+  { name: "Emma Carter", action: "followed your page", avatar: "EC", bg: "bg-accent/20 text-accent", image: emmaCarterAvatar },
+  { name: "Ryan Foster", action: "liked your video", avatar: "RF", bg: "bg-primary/20 text-primary", image: ryanFosterAvatar },
+  { name: "Mia Johnson", action: "commented on your post", avatar: "MJ", bg: "bg-accent/20 text-accent", image: miaJohnsonAvatar },
+  { name: "Lucas Grant", action: "shared your clip", avatar: "LG", bg: "bg-primary/20 text-primary", image: lucasGrantAvatar },
+  { name: "Olivia Park", action: "followed your page", avatar: "OP", bg: "bg-accent/20 text-accent", image: oliviaParkAvatar },
+];
+
+const EngagementScroll = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let animationId: number;
+    let offset = 0;
+    const speed = 0.345;
+
+    const animate = () => {
+      offset += speed;
+      const halfHeight = el.scrollHeight / 2;
+      if (offset >= halfHeight) offset = 0;
+      el.style.transform = `translateY(-${offset}px)`;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
+  }, []);
+
+  const doubled = [...notifications, ...notifications];
+
+  return (
+    <div className="relative w-full rounded-2xl border border-white/[0.08] overflow-hidden shadow-lg shadow-black/20 h-[280px]" style={{ background: "linear-gradient(135deg, #111113 0%, #0d0d0f 50%, #101012 100%)" }}>
+      {/* Top/bottom fade masks */}
+      <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#111113] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#0d0d0f] to-transparent z-10 pointer-events-none" />
+
+      <div className="p-4 h-full overflow-hidden">
+        <div ref={scrollRef} className="flex flex-col gap-2.5">
+          {doubled.map((item, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08]"
+            >
+              {item.image ? (
+                <img src={item.image} alt={item.name} className="w-8 h-8 rounded-full object-cover shrink-0" />
+              ) : (
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium shrink-0 ${item.bg}`}>
+                  {item.avatar}
+                </div>
+              )}
+              <p className="text-xs text-text-secondary font-body leading-tight flex-1">
+                <span className="font-medium text-text-primary">{item.name}</span>{" "}
+                {item.action}
+              </p>
+              <div className="shrink-0 text-text-tertiary">
+                {item.action.includes("liked") && <Heart size={14} />}
+                {item.action.includes("commented") && <MessageCircle size={14} />}
+                {item.action.includes("shared") && <Share2 size={14} />}
+                {item.action.includes("followed") && <UserPlus size={14} />}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EngagementScroll;

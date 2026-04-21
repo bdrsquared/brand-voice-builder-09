@@ -87,7 +87,8 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           </a>
           <a
             href="/#how-it-works"
-            className="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary font-medium px-6 py-4 transition-colors text-sm"
+            className="inline-flex items-center gap-2 text-white/75 hover:text-white font-medium px-6 py-4 transition-colors text-sm"
+            style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
           >
             See how we work
             <ArrowRight className="w-4 h-4" />
@@ -95,16 +96,17 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.div>
 
         <motion.p
-          className="text-center text-xs text-text-tertiary font-body"
+          className="text-center text-xs text-white/70 font-body"
+          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           Trusted by teams at{" "}
-          <span className="font-semibold text-text-primary">Experian</span>,{" "}
-          <span className="font-semibold text-text-primary">Cisco</span>,{" "}
-          <span className="font-semibold text-text-primary">IG Group</span>,{" "}
-          <span className="font-semibold text-text-primary">Infobip</span> and
+          <span className="font-semibold text-white">Experian</span>,{" "}
+          <span className="font-semibold text-white">Cisco</span>,{" "}
+          <span className="font-semibold text-white">IG Group</span>,{" "}
+          <span className="font-semibold text-white">Infobip</span> and
           more
         </motion.p>
 

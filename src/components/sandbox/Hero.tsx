@@ -31,7 +31,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
       {/* Bottom fade so the hero blends into the section below */}
       <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-[5]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto pt-24 pb-6 sm:pt-28 sm:pb-16">
+      <div className="relative z-10 max-w-6xl mx-auto pt-36 pb-6 sm:pt-44 sm:pb-16">
         <motion.div
           className="text-center sm:text-left"
           initial={{ opacity: 0, y: 20 }}

@@ -40,7 +40,7 @@ const HeroMarquee = () => {
 
   return (
     <motion.div
-      className="relative w-full overflow-hidden mt-12 sm:mt-16"
+      className="relative w-full overflow-hidden mt-4 sm:mt-6"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.5 }}
@@ -51,11 +51,11 @@ const HeroMarquee = () => {
           "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
       }}
     >
-      <div className="flex gap-4 sm:gap-6 w-max animate-[marquee_40s_linear_infinite]">
+      <div className="flex gap-3 sm:gap-4 w-max animate-[marquee_40s_linear_infinite]">
         {duplicated.map((src, i) => (
           <div
             key={i}
-            className="relative shrink-0 w-[200px] h-[267px] sm:w-[240px] sm:h-[320px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_8px_24px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.06)] bg-white/[0.03] backdrop-blur-md"
+            className="relative shrink-0 w-[140px] h-[187px] sm:w-[170px] sm:h-[227px] rounded-xl overflow-hidden border border-white/[0.08] shadow-[0_8px_24px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.06)] bg-white/[0.03] backdrop-blur-md"
           >
             <img
               src={src}

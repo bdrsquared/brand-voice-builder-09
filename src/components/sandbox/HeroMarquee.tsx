@@ -8,6 +8,13 @@ import imgConservatory from "@/assets/podcast-conservatory-wide.jpg";
 import imgBlueShirt from "@/assets/podcast-blue-shirt-floral.jpg";
 import imgRedDress from "@/assets/podcast-red-dress-lounge.jpg";
 import imgGreenDress from "@/assets/podcast-green-dress-lounge.jpg";
+import imgBoucleDuo from "@/assets/podcast-bouclé-chairs-duo.jpg";
+import imgSchnauzer from "@/assets/podcast-schnauzer-guest.jpg";
+import imgBoschMural from "@/assets/podcast-bosch-mural-yellow.jpg";
+import imgDiscoLounge from "@/assets/podcast-disco-yellow-lounge.jpg";
+import imgControlRoom from "@/assets/podcast-control-room-multicam.jpg";
+import imgGreenLit from "@/assets/podcast-green-lit-guest.jpg";
+import imgGreenStudio from "@/assets/podcast-green-studio-wide.jpg";
 
 const images = [
   imgBlueCardigan,
@@ -19,6 +26,13 @@ const images = [
   imgBlueShirt,
   imgRedDress,
   imgGreenDress,
+  imgBoucleDuo,
+  imgSchnauzer,
+  imgBoschMural,
+  imgDiscoLounge,
+  imgControlRoom,
+  imgGreenLit,
+  imgGreenStudio,
 ];
 
 const HeroMarquee = () => {

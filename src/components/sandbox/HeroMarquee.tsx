@@ -8,7 +8,7 @@ import imgConservatory from "@/assets/podcast-conservatory-wide.jpg";
 import imgBlueShirt from "@/assets/podcast-blue-shirt-floral.jpg";
 import imgRedDress from "@/assets/podcast-red-dress-lounge.jpg";
 import imgGreenDress from "@/assets/podcast-green-dress-lounge.jpg";
-import imgBoucleDuo from "@/assets/podcast-bouclé-chairs-duo.jpg";
+import imgBoucleDuo from "@/assets/podcast-boucle-chairs-duo.jpg";
 import imgSchnauzer from "@/assets/podcast-schnauzer-guest.jpg";
 import imgBoschMural from "@/assets/podcast-bosch-mural-yellow.jpg";
 import imgDiscoLounge from "@/assets/podcast-disco-yellow-lounge.jpg";
@@ -35,8 +35,18 @@ const images = [
   imgGreenStudio,
 ];
 
+const shuffle = <T,>(arr: T[]): T[] => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
 const HeroMarquee = () => {
-  const duplicated = [...images, ...images];
+  const shuffled = shuffle(images);
+  const duplicated = [...shuffled, ...shuffled];
 
   return (
     <motion.div

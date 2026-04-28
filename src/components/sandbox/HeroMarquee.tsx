@@ -1,22 +1,24 @@
 import { motion } from "framer-motion";
-import caseIgHero from "@/assets/case-ig-hero.webp";
-import caseNoStressHero from "@/assets/case-nostress-hero.webp";
-import caseIgBtsStudio from "@/assets/case-ig-bts-studio.webp";
-import caseNostressBtsWide from "@/assets/case-nostress-bts-wide.webp";
-import caseCfoPlaybook from "@/assets/case-cfo-playbook-thumb.webp";
-import caseIgFirefly from "@/assets/case-ig-firefly-thumb.webp";
-import caseIgBtsControl from "@/assets/case-ig-bts-control.webp";
-import caseNoStressThumb from "@/assets/case-no-stress-thumb.webp";
+import imgBlueCardigan from "@/assets/podcast-studio-blue-cardigan.jpg";
+import imgPurpleDenim from "@/assets/podcast-purple-denim.jpg";
+import imgPinkCouch from "@/assets/podcast-pink-couch.jpg";
+import imgStudioWide from "@/assets/podcast-studio-wide-purple.jpg";
+import imgHostSuit from "@/assets/podcast-host-suit-purple.jpg";
+import imgConservatory from "@/assets/podcast-conservatory-wide.jpg";
+import imgBlueShirt from "@/assets/podcast-blue-shirt-floral.jpg";
+import imgRedDress from "@/assets/podcast-red-dress-lounge.jpg";
+import imgGreenDress from "@/assets/podcast-green-dress-lounge.jpg";
 
 const images = [
-  caseIgHero,
-  caseNoStressHero,
-  caseIgBtsStudio,
-  caseNostressBtsWide,
-  caseCfoPlaybook,
-  caseIgFirefly,
-  caseIgBtsControl,
-  caseNoStressThumb,
+  imgBlueCardigan,
+  imgPurpleDenim,
+  imgPinkCouch,
+  imgStudioWide,
+  imgHostSuit,
+  imgConservatory,
+  imgBlueShirt,
+  imgRedDress,
+  imgGreenDress,
 ];
 
 const HeroMarquee = () => {
@@ -39,7 +41,7 @@ const HeroMarquee = () => {
         {duplicated.map((src, i) => (
           <div
             key={i}
-            className="relative shrink-0 w-[260px] h-[160px] sm:w-[320px] sm:h-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_8px_24px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.06)] bg-white/[0.03] backdrop-blur-md"
+            className="relative shrink-0 w-[200px] h-[267px] sm:w-[240px] sm:h-[320px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_8px_24px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.06)] bg-white/[0.03] backdrop-blur-md"
           >
             <img
               src={src}

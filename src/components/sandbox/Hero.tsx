@@ -92,7 +92,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         <HeroMarquee />
 
         <motion.p
-          className="text-center sm:text-left text-[11px] text-white/60 font-body mt-6"
+          className="text-center text-[11px] text-white/60 font-body mt-6"
           style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

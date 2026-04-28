@@ -56,14 +56,14 @@ export function ShaderBackground({ children }: ShaderBackgroundProps) {
       {/* Background mesh gradient — base layer (tight green↔indigo palette) */}
       <MeshGradient
         colors={["#0a1410", "#15d668", "#1e3a8a", "#3b3a8c", "#0b0f1a"]}
-        speed={isActive ? 0.5 : 0.25}
+        speed={isActive ? 0.35 : 0.175}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       />
 
       {/* Secondary mesh — overlay for richness */}
       <MeshGradient
         colors={["#0b0f1a", "#1CFA76", "#4a42c0", "#1e3a8a"]}
-        speed={isActive ? 0.35 : 0.15}
+        speed={isActive ? 0.245 : 0.105}
         style={{
           position: "absolute",
           inset: 0,

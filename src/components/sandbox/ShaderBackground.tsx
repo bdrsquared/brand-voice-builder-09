@@ -53,16 +53,16 @@ export function ShaderBackground({ children }: ShaderBackgroundProps) {
         </defs>
       </svg>
 
-      {/* Background mesh gradient — base layer */}
+      {/* Background mesh gradient — base layer (tight green↔indigo palette) */}
       <MeshGradient
-        colors={["#080a0c", "#15d668", "#4a42c0", "#080a0c", "#1a1d22"]}
+        colors={["#0a1410", "#15d668", "#1e3a8a", "#3b3a8c", "#0b0f1a"]}
         speed={isActive ? 0.5 : 0.25}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       />
 
       {/* Secondary mesh — overlay for richness */}
       <MeshGradient
-        colors={["#000000", "#15d668", "#4a42c0", "#000000"]}
+        colors={["#0b0f1a", "#1CFA76", "#4a42c0", "#1e3a8a"]}
         speed={isActive ? 0.35 : 0.15}
         style={{
           position: "absolute",
@@ -70,7 +70,7 @@ export function ShaderBackground({ children }: ShaderBackgroundProps) {
           width: "100%",
           height: "100%",
           mixBlendMode: "screen",
-          opacity: 0.4,
+          opacity: 0.45,
           filter: "url(#glass-effect)",
         }}
       />

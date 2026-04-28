@@ -49,7 +49,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Strategic video podcast for <span className="italic">forward thinking</span> businesses
+          Strategic video podcasts for <span className="italic">forward thinking</span> businesses
         </motion.h1>
 
         <motion.p

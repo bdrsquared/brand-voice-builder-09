@@ -38,7 +38,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-flex items-center gap-2 bg-gradient-to-r from-black/40 via-black/70 to-black/40 text-foreground font-medium text-sm px-7 py-3 rounded-full mb-6 border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),inset_0_-1px_1px_rgba(0,0,0,0.3),0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-xl tracking-widest uppercase text-xs transition-all duration-300 hover:border-white/[0.12] cursor-default">
+          <span className="inline-flex items-center gap-2 bg-white/[0.12] text-white font-medium text-sm px-7 py-3 rounded-full mb-6 border border-white/[0.18] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_4px_16px_rgba(0,0,0,0.25)] backdrop-blur-xl tracking-widest uppercase text-xs transition-all duration-300 hover:bg-white/[0.16] hover:border-white/[0.24] cursor-default">
             Content Partner
           </span>
         </motion.div>

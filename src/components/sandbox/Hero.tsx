@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LogoWall from "./LogoWall";
 import ShaderBackground from "./ShaderBackground";
+import HeroMarquee from "./HeroMarquee";
 
 interface HeroProps {
   variant?: "classic" | "dots";
@@ -109,6 +110,8 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           <span className="font-semibold text-white">Infobip</span> and
           more
         </motion.p>
+
+        <HeroMarquee />
 
         <LogoWall />
       </div>

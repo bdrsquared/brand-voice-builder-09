@@ -49,9 +49,8 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Turn video podcasting into a{" "}
-          <span className="inline-flex items-center px-3 py-1 rounded-lg bg-white/[0.08] backdrop-blur-md border border-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_2px_8px_rgba(0,0,0,0.3)] italic">content engine</span> that
-          drives <span className="text-white">growth</span>
+          <span className="inline-flex items-center px-3 py-1 rounded-lg bg-white/[0.08] backdrop-blur-md border border-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_2px_8px_rgba(0,0,0,0.3)] italic">Strategic</span> video
+          podcasts that drive <span className="text-white">growth</span>
         </motion.h1>
 
         <motion.p

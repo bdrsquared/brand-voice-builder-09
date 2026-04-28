@@ -44,18 +44,18 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.div>
 
         <motion.h1
-          className="text-center sm:text-left text-[2rem] sm:text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] mb-4 text-text-primary max-w-4xl"
+          className="text-center sm:text-left text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] mb-5 text-text-primary max-w-5xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           Turn video podcasting into a{" "}
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg bg-white/[0.08] backdrop-blur-md border border-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_2px_8px_rgba(0,0,0,0.3)] italic">content engine</span> that
+          <span className="inline-flex items-center px-3 py-1 rounded-lg bg-white/[0.08] backdrop-blur-md border border-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_2px_8px_rgba(0,0,0,0.3)] italic">content engine</span> that
           drives <span className="text-white">growth</span>
         </motion.h1>
 
         <motion.p
-          className="text-center sm:text-left text-sm sm:text-base text-white/85 max-w-xl mx-auto sm:mx-0 mb-6 leading-relaxed font-body"
+          className="text-center sm:text-left text-base sm:text-lg text-white/85 max-w-2xl mx-auto sm:mx-0 mb-7 leading-relaxed font-body"
           style={{ textShadow: "0 1px 12px rgba(0,0,0,0.6), 0 0 2px rgba(0,0,0,0.4)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -65,14 +65,14 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-start justify-center gap-3 mb-5"
+          className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-start justify-center gap-3 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <a
             href="#contact"
-            className={`group relative inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-full text-sm transition-all duration-300 ${
+            className={`group relative inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-full text-[15px] transition-all duration-300 ${
               variant === "classic"
                 ? "glow-on-hover text-primary-foreground"
                 : "text-white bg-white/[0.08] backdrop-blur-xl border border-white/[0.12] shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:bg-white/[0.14] hover:border-white/[0.2] hover:shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_20px_rgba(255,255,255,0.04)]"
@@ -83,7 +83,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           </a>
           <a
             href="/#how-it-works"
-            className="inline-flex items-center gap-2 text-white/75 hover:text-white font-medium px-4 py-3 transition-colors text-sm"
+            className="inline-flex items-center gap-2 text-white/75 hover:text-white font-medium px-5 py-3.5 transition-colors text-[15px]"
             style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
           >
             See how we work

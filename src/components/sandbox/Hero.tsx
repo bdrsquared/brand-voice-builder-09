@@ -33,7 +33,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
 
       <div className="relative z-10 max-w-5xl mx-auto pt-28 pb-8 sm:pt-36 sm:pb-28">
         <motion.div
-          className="text-center"
+          className="text-center sm:text-left"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -44,7 +44,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.div>
 
         <motion.h1
-          className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 text-text-primary"
+          className="text-center sm:text-left text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 text-text-primary"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -58,7 +58,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.h1>
 
         <motion.p
-          className="text-center text-base sm:text-lg text-white/85 max-w-2xl mx-auto mb-8 leading-relaxed font-body"
+          className="text-center sm:text-left text-base sm:text-lg text-white/85 max-w-2xl mx-auto sm:mx-0 mb-8 leading-relaxed font-body"
           style={{ textShadow: "0 1px 12px rgba(0,0,0,0.6), 0 0 2px rgba(0,0,0,0.4)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+          className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-start justify-center gap-4 mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -97,7 +97,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
         </motion.div>
 
         <motion.p
-          className="text-center text-xs text-white/70 font-body"
+          className="text-center sm:text-left text-xs text-white/70 font-body"
           style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

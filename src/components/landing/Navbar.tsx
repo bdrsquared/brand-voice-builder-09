@@ -102,7 +102,7 @@ const Navbar = () => {
       .select("title, excerpt, created_at, slug, cover_image")
       .eq("published", true)
       .order("created_at", { ascending: false })
-      .limit(5)
+      .limit(3)
       .then(({ data }) => { if (data) setRecentBlogs(data); });
   }, []);
 
@@ -593,7 +593,7 @@ const Navbar = () => {
                                 </span>
                               </div>
                               {blog.excerpt && (
-                                <p className="text-xs text-white/40 line-clamp-1 font-body">{blog.excerpt}</p>
+                                <p className="text-xs text-white/40 line-clamp-2 font-body leading-snug">{blog.excerpt}</p>
                               )}
                             </div>
                           </a>

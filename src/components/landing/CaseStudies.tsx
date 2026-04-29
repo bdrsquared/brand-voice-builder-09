@@ -141,12 +141,12 @@ const CaseStudies = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-light-text-primary">
             Client results
           </h2>
           <Link
             to="/case-studies"
-            className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-text-secondary bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2.5 hover:bg-white/10 hover:text-text-primary transition-colors"
+            className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-light-text-secondary bg-black/5 backdrop-blur-sm border border-black/10 rounded-full px-5 py-2.5 hover:bg-black/10 hover:text-light-text-primary transition-colors"
           >
             View All Work
             <ArrowUpRight className="w-4 h-4" />
@@ -154,7 +154,7 @@ const CaseStudies = () => {
         </motion.div>
 
         <motion.p
-          className="text-text-secondary font-body mb-12 text-base"
+          className="text-light-text-secondary font-body mb-12 text-base"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

@@ -933,8 +933,8 @@ const Navbar = () => {
                         onClick={() => setMobileSubMenu("podplanner")}
                       >
                         <span className="flex items-center gap-2">
-                          <img src={podplannerIcon} alt="" className="w-4 h-4" />
-                          PodPlanner
+                          <LogIn className="w-4 h-4" />
+                          Login
                         </span>
                         <ChevronRight className="w-4 h-4 text-muted-foreground" />
                       </button>

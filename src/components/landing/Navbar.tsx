@@ -202,8 +202,8 @@ const Navbar = () => {
                 onMouseEnter={() => setMegaOpen("podplanner")}
               >
                 <button className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-300 ${navLight ? "text-gray-800 hover:text-gray-950" : "text-white/90 hover:text-white"}`}>
-                  <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
-                  PodPlanner
+                  <LogIn className="w-3.5 h-3.5" />
+                  Login
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${megaOpen === "podplanner" ? "rotate-180" : ""}`} />
                 </button>
               </div>

@@ -164,7 +164,7 @@ const Navbar = () => {
           className="max-w-6xl mx-auto relative"
           onMouseLeave={() => setMegaOpen(null)}
         >
-          <div className={`${navLight ? "bg-white/70 border-black/10 shadow-black/5" : "bg-white/5 border-white/10 shadow-black/20"} backdrop-blur-xl border rounded-full px-3 sm:px-6 flex items-center justify-between h-14 shadow-lg transition-colors duration-300`}>
+          <div className={`${navLight ? "bg-white/70 border-black/10 shadow-black/5" : "bg-white/5 border-white/10 shadow-black/20"} backdrop-blur-xl border rounded-full pl-3 pr-1.5 sm:pl-6 sm:pr-1.5 flex items-center justify-between h-14 shadow-lg transition-colors duration-300`}>
             <img src={navLight ? logoDark : logo} alt="Earworm" className="h-5 transition-opacity duration-300 cursor-pointer" onClick={() => navigate("/")} />
             <div className="hidden sm:flex items-center gap-8">
               <div
@@ -209,7 +209,7 @@ const Navbar = () => {
               </div>
               <button
                 onClick={() => setContactModalOpen(true)}
-                className={`group relative inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all backdrop-blur-xl overflow-hidden cursor-pointer ${
+                className={`group relative inline-flex items-center gap-2 text-sm font-semibold pl-5 pr-5 h-11 rounded-full transition-all backdrop-blur-xl overflow-hidden cursor-pointer ${
                   navLight
                     ? "text-gray-900 bg-black/[0.08] border border-black/[0.15] hover:bg-black/[0.12]"
                     : "text-white bg-white/[0.08] border border-white/[0.15] hover:bg-white/[0.12]"

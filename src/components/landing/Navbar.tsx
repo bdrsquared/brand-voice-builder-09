@@ -384,127 +384,129 @@ const Navbar = () => {
                   {/* Two-column layout: PodPlanner + Insight Studio */}
                   <div className="grid grid-cols-2 gap-6">
                     {/* PodPlanner card */}
-                    <div className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:bg-white/[0.05] transition-colors">
-                      <div className="flex items-center gap-2 mb-2">
-                        <img src={podplannerIcon} alt="" className="w-5 h-5" />
-                        <h4 className="text-base font-heading font-semibold text-foreground">PodPlanner</h4>
-                      </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed font-body mb-4">
-                        Plan, track, and manage your video podcast workflow in one dashboard.
-                      </p>
-
-                      {/* Production Status UI mock */}
-                      <div className="aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col pointer-events-none select-none mb-4">
-                        <div className="flex items-center justify-between mb-2.5">
-                          <div className="flex items-center gap-1.5">
-                            <ArrowRight className="w-3 h-3 text-white/40 rotate-180" />
-                            <span className="text-[10px] font-heading font-semibold text-white/90">Production Status</span>
-                          </div>
-                          <div className="w-4 h-4 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center">
-                            <span className="text-[8px] text-primary font-bold">+</span>
-                          </div>
-                        </div>
-                        <div className="flex-1 flex flex-col gap-1.5">
-                          {[
-                            { task: "Finalize Research & Outline", done: false, highlight: true },
-                            { task: "Record Interview with Jane Doe", done: false },
-                            { task: "Mix & Master Final Episode", done: false },
-                            { task: "Write Show Notes & Transcript", done: true },
-                            { task: "Create Promotional Audiogram", done: false },
-                          ].map((item, i) => (
-                            <motion.div
-                              key={i}
-                              className={`flex items-center gap-2 rounded-lg px-2 py-1.5 ${item.highlight ? "bg-white/[0.12] border border-white/15" : "bg-white/[0.07]"}`}
-                              initial={{ opacity: 0, y: 4 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
-                            >
-                              <div className={`w-3 h-3 rounded-full border-[1.5px] shrink-0 flex items-center justify-center ${item.done ? "border-primary bg-primary/20" : "border-white/25"}`}>
-                                {item.done && <div className="w-1.5 h-1.5 rounded-full bg-primary" />}
-                              </div>
-                              <span className="text-[8px] text-white/70 font-body truncate">{item.task}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                        <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-white/[0.06]">
-                          <div className="flex items-center gap-1.5">
-                            <svg className="w-3 h-3" viewBox="0 0 16 16">
-                              <circle cx="8" cy="8" r="6" fill="none" stroke="hsl(var(--primary) / 0.3)" strokeWidth="2" />
-                              <circle cx="8" cy="8" r="6" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeDasharray="37.7" strokeDashoffset="30" strokeLinecap="round" transform="rotate(-90 8 8)" />
-                            </svg>
-                            <span className="text-[7px] font-semibold text-white/40 uppercase tracking-wider">Completed 1/5</span>
-                          </div>
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-transparent to-primary/[0.06] pointer-events-none rounded-xl" />
+                    <div className="group/card relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-card shadow-2xl shadow-black/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-black/30">
+                      <div className="p-5 space-y-1.5 z-10 relative">
+                        <h2 className="text-[10px] tracking-wider text-white/50 uppercase flex items-center gap-1.5">
+                          <img src={podplannerIcon} alt="" className="w-3.5 h-3.5" />
+                          PodPlanner
+                        </h2>
+                        <p className="text-base font-heading font-medium text-foreground leading-snug">
+                          Plan, track and ship your podcast in one place.
+                        </p>
                       </div>
 
-                      <a
-                        href="https://app.earworm.co/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-auto inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-foreground bg-white/[0.08] border border-white/15 hover:bg-white/[0.12] transition-colors rounded-full py-2.5"
-                      >
-                        <LogIn className="w-3.5 h-3.5" />
-                        Log in to PodPlanner
-                      </a>
+                      {/* Layered workspace preview */}
+                      <div className="relative w-full h-[180px] overflow-hidden">
+                        {/* back layer */}
+                        <div className="absolute top-10 left-10 w-full h-full bg-white/[0.04] rounded-3xl border border-white/10 opacity-80" />
+                        {/* foreground frame */}
+                        <div className="absolute top-5 left-16 w-full h-full bg-background rounded-tl-3xl shadow-xl flex flex-col overflow-hidden ring-4 ring-white/[0.06]">
+                          <div className="px-3 py-2 rounded-tl-3xl border-b border-white/10 flex items-center relative">
+                            <div className="flex gap-1">
+                              <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
+                            </div>
+                            <span className="absolute left-1/2 -translate-x-1/2 text-[8px] tracking-wider text-white/40 uppercase">
+                              Production
+                            </span>
+                          </div>
+                          <div className="flex-1 flex flex-col gap-1 p-2 overflow-hidden">
+                            {[
+                              { task: "Finalise Research & Outline", done: false, highlight: true },
+                              { task: "Record interview with Jane", done: false },
+                              { task: "Mix & master final episode", done: false },
+                              { task: "Write show notes", done: true },
+                            ].map((item, i) => (
+                              <motion.div
+                                key={i}
+                                className={`flex items-center gap-2 rounded-md px-2 py-1.5 ${item.highlight ? "bg-white/[0.08] border border-white/10" : "bg-white/[0.03]"}`}
+                                initial={{ opacity: 0, y: 4 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 + i * 0.06, duration: 0.3 }}
+                              >
+                                <div className={`w-2.5 h-2.5 rounded-full border-[1.5px] shrink-0 flex items-center justify-center ${item.done ? "border-primary bg-primary/20" : "border-white/25"}`}>
+                                  {item.done && <div className="w-1 h-1 rounded-full bg-primary" />}
+                                </div>
+                                <span className="text-[9px] text-white/70 font-body truncate">{item.task}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-4 pt-3 border-t border-white/5">
+                        <a
+                          href="https://app.earworm.co/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex w-full items-center justify-center gap-1.5 text-sm font-semibold text-foreground bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] transition-colors rounded-full py-2.5"
+                        >
+                          <LogIn className="w-3.5 h-3.5" />
+                          Log in to PodPlanner
+                        </a>
+                      </div>
                     </div>
 
                     {/* Insight Studio card  -  placeholder */}
-                    <div className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:bg-white/[0.05] transition-colors">
-                      <div className="flex items-center gap-2 mb-2">
-                        <BarChart3 className="w-5 h-5 text-accent" />
-                        <h4 className="text-base font-heading font-semibold text-foreground">Insight Studio</h4>
-                        <span className="ml-auto text-[9px] font-semibold uppercase tracking-wider text-white/40 bg-white/[0.06] border border-white/10 rounded-full px-2 py-0.5">Soon</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed font-body mb-4">
-                        Audience analytics and performance reporting across every episode and clip.
-                      </p>
-
-                      {/* Insight Studio UI mock placeholder */}
-                      <div className="aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col pointer-events-none select-none mb-4">
-                        <div className="flex items-center justify-between mb-2.5">
-                          <div className="flex items-center gap-1.5">
-                            <Activity className="w-3 h-3 text-white/40" />
-                            <span className="text-[10px] font-heading font-semibold text-white/90">Performance</span>
-                          </div>
-                          <span className="text-[8px] text-white/40 font-body">Last 30d</span>
-                        </div>
-
-                        {/* Big stat */}
-                        <div className="mb-3">
-                          <div className="text-[22px] font-heading font-bold text-foreground leading-none">128.4K</div>
-                          <div className="flex items-center gap-1 mt-1">
-                            <span className="text-[8px] font-semibold text-primary">+18.2%</span>
-                            <span className="text-[8px] text-white/40 font-body">total impressions</span>
-                          </div>
-                        </div>
-
-                        {/* Bar chart mock */}
-                        <div className="flex-1 flex items-end gap-1">
-                          {[40, 65, 50, 78, 60, 88, 72, 95, 70, 82, 100, 85].map((h, i) => (
-                            <motion.div
-                              key={i}
-                              className="flex-1 rounded-sm bg-gradient-to-t from-accent/40 to-accent/80"
-                              initial={{ height: 0 }}
-                              animate={{ height: `${h}%` }}
-                              transition={{ delay: 0.2 + i * 0.04, duration: 0.4 }}
-                            />
-                          ))}
-                        </div>
-
-                        <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-white/[0.06]">
-                          <span className="text-[7px] font-semibold text-white/40 uppercase tracking-wider">Episodes · Clips · Shorts</span>
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.06] via-transparent to-accent/[0.06] pointer-events-none rounded-xl" />
+                    <div className="group/card relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-card shadow-2xl shadow-black/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-black/30">
+                      <div className="p-5 space-y-1.5 z-10 relative">
+                        <h2 className="text-[10px] tracking-wider text-white/50 uppercase flex items-center gap-1.5">
+                          <BarChart3 className="w-3.5 h-3.5" />
+                          Insight Studio
+                          <span className="ml-auto text-[8px] font-semibold uppercase tracking-wider text-white/50 bg-white/[0.06] border border-white/10 rounded-full px-1.5 py-0.5">Soon</span>
+                        </h2>
+                        <p className="text-base font-heading font-medium text-foreground leading-snug">
+                          Audience analytics across every episode and clip.
+                        </p>
                       </div>
 
-                      <button
-                        disabled
-                        className="mt-auto inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-white/50 bg-white/[0.04] border border-white/10 rounded-full py-2.5 cursor-not-allowed"
-                      >
-                        <LogIn className="w-3.5 h-3.5" />
-                        Coming soon
-                      </button>
+                      {/* Layered analytics preview */}
+                      <div className="relative w-full h-[180px] overflow-hidden">
+                        <div className="absolute top-10 left-10 w-full h-full bg-white/[0.04] rounded-3xl border border-white/10 opacity-80" />
+                        <div className="absolute top-5 left-16 w-full h-full bg-background rounded-tl-3xl shadow-xl flex flex-col overflow-hidden ring-4 ring-white/[0.06]">
+                          <div className="px-3 py-2 rounded-tl-3xl border-b border-white/10 flex items-center relative">
+                            <div className="flex gap-1">
+                              <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
+                            </div>
+                            <span className="absolute left-1/2 -translate-x-1/2 text-[8px] tracking-wider text-white/40 uppercase">
+                              Performance
+                            </span>
+                          </div>
+                          <div className="flex-1 flex flex-col gap-2 p-3 overflow-hidden">
+                            <div>
+                              <div className="text-lg font-heading font-bold text-foreground leading-none">128.4K</div>
+                              <div className="flex items-center gap-1 mt-1">
+                                <span className="text-[8px] font-semibold text-primary">+18.2%</span>
+                                <span className="text-[8px] text-white/40 font-body">total impressions</span>
+                              </div>
+                            </div>
+                            <div className="flex-1 flex items-end gap-1">
+                              {[40, 65, 50, 78, 60, 88, 72, 95, 70, 82, 100, 85].map((h, i) => (
+                                <motion.div
+                                  key={i}
+                                  className="flex-1 rounded-sm bg-gradient-to-t from-accent/40 to-accent/80"
+                                  initial={{ height: 0 }}
+                                  animate={{ height: `${h}%` }}
+                                  transition={{ delay: 0.1 + i * 0.04, duration: 0.4 }}
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-4 pt-3 border-t border-white/5">
+                        <button
+                          disabled
+                          className="inline-flex w-full items-center justify-center gap-1.5 text-sm font-semibold text-white/50 bg-white/[0.03] border border-white/10 rounded-full py-2.5 cursor-not-allowed"
+                        >
+                          <LogIn className="w-3.5 h-3.5" />
+                          Coming soon
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

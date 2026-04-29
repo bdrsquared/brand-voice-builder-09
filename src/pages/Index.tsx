@@ -25,20 +25,20 @@ const Index = () => {
       <Hero />
       
       <Suspense fallback={null}>
-        {/* Top shape divider: case study light bg rounds up into black */}
+        {/* Top shape divider: case study bg rounds up into black */}
         <div className="relative z-10 bg-background">
-          <div className="rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: "#E4E5E9" }} />
+          <div className="rounded-t-[40px] sm:rounded-t-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: "hsl(220, 12%, 7%)" }} />
         </div>
 
-        <div className="relative" style={{ backgroundColor: "#E4E5E9" }}>
+        <div className="relative" style={{ backgroundColor: "hsl(220, 12%, 7%)" }}>
           {/* Subtle accent glow */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.18]" style={{ background: "radial-gradient(ellipse at 30% 40%, hsl(145,96%,55%) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, hsl(243,79%,63%) 0%, transparent 50%)" }} />
+          <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: "radial-gradient(ellipse at 30% 40%, hsl(145,96%,55%) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, hsl(243,79%,63%) 0%, transparent 50%)" }} />
           <CaseStudies />
         </div>
 
-        {/* Bottom shape divider: case study light bg rounds into black */}
+        {/* Bottom shape divider: case study bg rounds into black */}
         <div className="relative z-10 bg-background">
-          <div className="rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: "#E4E5E9" }} />
+          <div className="rounded-b-[40px] sm:rounded-b-[60px] h-[40px] sm:h-[60px]" style={{ backgroundColor: "hsl(220, 12%, 7%)" }} />
         </div>
 
         <ValueProps />

@@ -59,7 +59,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          A complete video content system designed for growth
+          High-quality video podcasts that build authority, reach the right audience, and turn one conversation into consistent long and short form content.
         </motion.p>
 
         <motion.div

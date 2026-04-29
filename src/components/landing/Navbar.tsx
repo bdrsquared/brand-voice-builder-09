@@ -380,23 +380,21 @@ const Navbar = () => {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 transition-colors duration-300`}>
-                  {/* Two-column layout */}
-                  <div className="flex gap-6">
-                    {/* Left column  -  description + animated UI */}
-                    <div className="flex-1 flex flex-col">
+                <div className={`${navLight ? 'bg-black/75' : 'bg-black/60'} backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl shadow-black/30 transition-colors duration-300 w-[720px]`}>
+                  {/* Two-column layout: PodPlanner + Insight Studio */}
+                  <div className="grid grid-cols-2 gap-6">
+                    {/* PodPlanner card */}
+                    <div className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:bg-white/[0.05] transition-colors">
                       <div className="flex items-center gap-2 mb-2">
                         <img src={podplannerIcon} alt="" className="w-5 h-5" />
-                        <h4 className="text-lg font-heading font-semibold text-foreground">PodPlanner</h4>
+                        <h4 className="text-base font-heading font-semibold text-foreground">PodPlanner</h4>
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed font-body mb-4 max-w-sm">
-                        We've built a tool for planning and running a video podcast strategy.<br /><br />
-                        One dashboard to organise, track, and collaborate.
+                      <p className="text-xs text-muted-foreground leading-relaxed font-body mb-4">
+                        Plan, track, and manage your video podcast workflow in one dashboard.
                       </p>
 
-                      {/* Production Status UI  -  square, pinned to bottom (decorative only) */}
-                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col pointer-events-none select-none">
-                        {/* Header */}
+                      {/* Production Status UI mock */}
+                      <div className="aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col pointer-events-none select-none mb-4">
                         <div className="flex items-center justify-between mb-2.5">
                           <div className="flex items-center gap-1.5">
                             <ArrowRight className="w-3 h-3 text-white/40 rotate-180" />
@@ -406,8 +404,6 @@ const Navbar = () => {
                             <span className="text-[8px] text-primary font-bold">+</span>
                           </div>
                         </div>
-
-                        {/* Task list */}
                         <div className="flex-1 flex flex-col gap-1.5">
                           {[
                             { task: "Finalize Research & Outline", done: false, highlight: true },
@@ -416,7 +412,7 @@ const Navbar = () => {
                             { task: "Write Show Notes & Transcript", done: true },
                             { task: "Create Promotional Audiogram", done: false },
                           ].map((item, i) => (
-                              <motion.div
+                            <motion.div
                               key={i}
                               className={`flex items-center gap-2 rounded-lg px-2 py-1.5 ${item.highlight ? "bg-white/[0.12] border border-white/15" : "bg-white/[0.07]"}`}
                               initial={{ opacity: 0, y: 4 }}
@@ -427,15 +423,9 @@ const Navbar = () => {
                                 {item.done && <div className="w-1.5 h-1.5 rounded-full bg-primary" />}
                               </div>
                               <span className="text-[8px] text-white/70 font-body truncate">{item.task}</span>
-                              <div className="ml-auto flex items-center gap-0.5 shrink-0">
-                                <div className="w-1 h-1 rounded-full bg-white/15" />
-                                <div className="w-1 h-1 rounded-full bg-white/15" />
-                              </div>
                             </motion.div>
                           ))}
                         </div>
-
-                        {/* Footer */}
                         <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-white/[0.06]">
                           <div className="flex items-center gap-1.5">
                             <svg className="w-3 h-3" viewBox="0 0 16 16">
@@ -445,123 +435,75 @@ const Navbar = () => {
                             <span className="text-[7px] font-semibold text-white/40 uppercase tracking-wider">Completed 1/5</span>
                           </div>
                         </div>
-
                         <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-transparent to-primary/[0.06] pointer-events-none rounded-xl" />
                       </div>
-                    </div>
 
-                    {/* Divider */}
-                    <div className="w-px bg-white/10 self-stretch" />
-
-                    {/* Middle column  -  content schedule */}
-                    <div className="flex-1 flex flex-col">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h4 className="text-lg font-heading font-semibold text-foreground">See your content schedule</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed font-body mb-4 max-w-sm">
-                        View upcoming episodes and read the plan behind each one.
-                      </p>
-
-                      {/* Mini schedule table  -  square, pinned to bottom (decorative only) */}
-                      <div className="mt-auto aspect-square rounded-xl bg-white/[0.08] border border-white/15 overflow-hidden flex flex-col pointer-events-none select-none">
-                        {/* Table header */}
-                        <div className="grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 py-2 border-b border-white/[0.08] text-[8px] font-semibold text-white/30 uppercase tracking-wider">
-                          <span></span>
-                          <span>Date</span>
-                          <span>Title</span>
-                          <span>Status</span>
-                          <span></span>
-                        </div>
-                        {/* Table rows */}
-                        <div className="flex-1 flex flex-col">
-                          {[
-                            { date: "May 11, 2027", title: "Ep 1: Bright – TBC", status: "Released", statusColor: "bg-white/10 text-white/60" },
-                            { date: "May 25, 2027", title: "Ep 2: Bright – TBC", status: "In Progress", statusColor: "bg-accent/20 text-accent" },
-                            { date: "Jun 8, 2027", title: "Ep 3: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
-                            { date: "Jun 22, 2027", title: "Ep 4: Bright – TBC", status: "Planned", statusColor: "bg-primary/20 text-primary" },
-                            { date: "Jul 6, 2027", title: "Ep 5: Bright – TBC", status: "Create Plan", statusColor: "bg-white/5 text-white/40 border border-white/10" },
-                            { date: "Jul 20, 2027", title: "Ep 6: Bright – TBC", status: "Create Plan", statusColor: "bg-white/5 text-white/40 border border-white/10" },
-                          ].map((row, i, arr) => (
-                            <motion.div
-                              key={i}
-                              className={`flex-1 grid grid-cols-[24px_1fr_1fr_60px_16px] gap-1.5 items-center px-3 ${i < arr.length - 1 ? "border-b border-white/[0.08]" : ""}`}
-                              initial={{ opacity: 0, y: 4 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
-                            >
-                              <img src={brightLogo} alt="Bright" className="w-4 h-4 rounded object-cover" />
-                              <span className="text-[8px] text-white/50 font-body">{row.date}</span>
-                              <span className="text-[8px] text-white/80 font-body truncate">{row.title}</span>
-                              <span className={`text-[7px] font-semibold px-1.5 py-0.5 rounded-full ${row.statusColor} text-center`}>{row.status}</span>
-                              <ArrowRight className="w-2.5 h-2.5 text-white/20" />
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="w-px bg-white/10 self-stretch" />
-
-                    {/* Right column  -  features */}
-                    <div className="flex flex-col justify-center w-72 py-2 pl-2 gap-0">
-                      {[
-                        { icon: Layers, title: "Plan with clarity", desc: "Map out episodes, guests, and content in one place." },
-                        { icon: Activity, title: "Track progress", desc: "See exactly where each episode is in production." },
-                        { icon: Eye, title: "Measure performance", desc: "Understand what's working across your content." },
-                      ].map((feature, i, arr) => {
-                        const gradients = [
-                          "radial-gradient(ellipse at 10% 80%, hsla(145,80%,55%,0.06) 0%, transparent 55%), radial-gradient(ellipse at 90% 20%, hsla(243,70%,60%,0.04) 0%, transparent 50%)",
-                          "radial-gradient(ellipse at 80% 90%, hsla(243,70%,60%,0.06) 0%, transparent 55%), radial-gradient(ellipse at 20% 10%, hsla(35,90%,55%,0.04) 0%, transparent 50%)",
-                          "radial-gradient(ellipse at 15% 20%, hsla(35,90%,55%,0.05) 0%, transparent 50%), radial-gradient(ellipse at 85% 80%, hsla(145,80%,55%,0.05) 0%, transparent 55%)",
-                        ];
-                        return (
-                          <div
-                            key={feature.title}
-                            className={`group/svc relative flex-1 flex flex-col justify-center rounded-xl px-3 py-3 my-1.5 -mx-3 overflow-hidden transition-all duration-500 hover:bg-white/[0.04] ${i < arr.length - 1 ? "border-b border-white/10" : ""}`}
-                            style={{ backgroundImage: gradients[i] }}
-                          >
-                            <div className="absolute inset-0 opacity-0 group-hover/svc:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-xl">
-                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover/svc:translate-x-full transition-transform duration-1000 ease-in-out" />
-                            </div>
-                            <div className="absolute inset-0 rounded-xl border border-white/0 group-hover/svc:border-white/[0.08] transition-colors duration-500 pointer-events-none" />
-                            <div className="relative z-10">
-                              <div className="flex items-center gap-2.5 mb-1.5">
-                                <feature.icon className="w-5 h-5 text-white/50 shrink-0 group-hover/svc:text-primary/70 transition-colors duration-300" />
-                                <span className="text-base font-semibold text-foreground">{feature.title}</span>
-                              </div>
-                              <p className="text-sm text-muted-foreground leading-relaxed pl-[30px]">{feature.desc}</p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Bottom divider */}
-                  <div className="h-px bg-white/10 mt-5 mb-4" />
-
-                  {/* Bottom CTAs */}
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground font-body">
-                      Manage your podcast workflow from planning to publishing.
-                    </p>
-                    <div className="flex items-center gap-4 ml-6">
                       <a
                         href="https://app.earworm.co/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-colors whitespace-nowrap"
+                        className="mt-auto inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-foreground bg-white/[0.08] border border-white/15 hover:bg-white/[0.12] transition-colors rounded-full py-2.5"
                       >
                         <LogIn className="w-3.5 h-3.5" />
-                        Log in
+                        Log in to PodPlanner
                       </a>
+                    </div>
+
+                    {/* Insight Studio card  -  placeholder */}
+                    <div className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:bg-white/[0.05] transition-colors">
+                      <div className="flex items-center gap-2 mb-2">
+                        <BarChart3 className="w-5 h-5 text-accent" />
+                        <h4 className="text-base font-heading font-semibold text-foreground">Insight Studio</h4>
+                        <span className="ml-auto text-[9px] font-semibold uppercase tracking-wider text-white/40 bg-white/[0.06] border border-white/10 rounded-full px-2 py-0.5">Soon</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground leading-relaxed font-body mb-4">
+                        Audience analytics and performance reporting across every episode and clip.
+                      </p>
+
+                      {/* Insight Studio UI mock placeholder */}
+                      <div className="aspect-square rounded-xl bg-white/[0.08] border border-white/15 p-3 overflow-hidden relative flex flex-col pointer-events-none select-none mb-4">
+                        <div className="flex items-center justify-between mb-2.5">
+                          <div className="flex items-center gap-1.5">
+                            <Activity className="w-3 h-3 text-white/40" />
+                            <span className="text-[10px] font-heading font-semibold text-white/90">Performance</span>
+                          </div>
+                          <span className="text-[8px] text-white/40 font-body">Last 30d</span>
+                        </div>
+
+                        {/* Big stat */}
+                        <div className="mb-3">
+                          <div className="text-[22px] font-heading font-bold text-foreground leading-none">128.4K</div>
+                          <div className="flex items-center gap-1 mt-1">
+                            <span className="text-[8px] font-semibold text-primary">+18.2%</span>
+                            <span className="text-[8px] text-white/40 font-body">total impressions</span>
+                          </div>
+                        </div>
+
+                        {/* Bar chart mock */}
+                        <div className="flex-1 flex items-end gap-1">
+                          {[40, 65, 50, 78, 60, 88, 72, 95, 70, 82, 100, 85].map((h, i) => (
+                            <motion.div
+                              key={i}
+                              className="flex-1 rounded-sm bg-gradient-to-t from-accent/40 to-accent/80"
+                              initial={{ height: 0 }}
+                              animate={{ height: `${h}%` }}
+                              transition={{ delay: 0.2 + i * 0.04, duration: 0.4 }}
+                            />
+                          ))}
+                        </div>
+
+                        <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-white/[0.06]">
+                          <span className="text-[7px] font-semibold text-white/40 uppercase tracking-wider">Episodes · Clips · Shorts</span>
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.06] via-transparent to-accent/[0.06] pointer-events-none rounded-xl" />
+                      </div>
+
                       <button
-                        onClick={() => setDemoModalOpen(true)}
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:brightness-125 transition-all whitespace-nowrap"
+                        disabled
+                        className="mt-auto inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-white/50 bg-white/[0.04] border border-white/10 rounded-full py-2.5 cursor-not-allowed"
                       >
-                        Request a demo
-                        <ArrowRight className="w-3 h-3" />
+                        <LogIn className="w-3.5 h-3.5" />
+                        Coming soon
                       </button>
                     </div>
                   </div>

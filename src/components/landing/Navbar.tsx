@@ -374,7 +374,7 @@ const Navbar = () => {
           <AnimatePresence>
             {megaOpen === "podplanner" && (
               <motion.div
-                className="absolute top-full left-0 right-0 pt-2"
+                className="absolute top-full right-0 pt-2"
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}

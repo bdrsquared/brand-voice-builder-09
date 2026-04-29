@@ -450,12 +450,14 @@ const Navbar = () => {
 
                     {/* Insight Studio card  -  placeholder */}
                     <div className="group/card relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-card shadow-2xl shadow-black/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-black/30">
-                      <div className="p-5 space-y-1.5 z-10 relative">
-                        <h2 className="text-[10px] tracking-wider text-white/50 uppercase flex items-center gap-1.5">
-                          <BarChart3 className="w-3.5 h-3.5" />
-                          Insight Studio
-                          <span className="ml-auto text-[8px] font-semibold uppercase tracking-wider text-white/50 bg-white/[0.06] border border-white/10 rounded-full px-1.5 py-0.5">Soon</span>
-                        </h2>
+                      <div className="p-5 space-y-2 z-10 relative">
+                        <div className="flex items-center gap-2.5">
+                          <img src={logo} alt="Earworm" className="h-3.5 w-auto object-contain" />
+                          <span className="block w-px h-3.5 bg-white/15" />
+                          <span className="font-mono text-[10px] font-semibold tracking-[0.18em] uppercase text-white/80">
+                            Insight Studio
+                          </span>
+                        </div>
                         <p className="text-base font-heading font-medium text-foreground leading-snug">
                           Audience analytics across every episode and clip.
                         </p>
@@ -499,13 +501,15 @@ const Navbar = () => {
                       </div>
 
                       <div className="p-4 pt-3 border-t border-white/5">
-                        <button
-                          disabled
-                          className="inline-flex w-full items-center justify-center gap-1.5 text-sm font-semibold text-white/50 bg-white/[0.03] border border-white/10 rounded-full py-2.5 cursor-not-allowed"
+                        <a
+                          href="https://reports.earworm.co/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex w-full items-center justify-center gap-1.5 text-sm font-semibold text-foreground bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] transition-colors rounded-full py-2.5"
                         >
                           <LogIn className="w-3.5 h-3.5" />
-                          Coming soon
-                        </button>
+                          Log in to Insight Studio
+                        </a>
                       </div>
                     </div>
                   </div>

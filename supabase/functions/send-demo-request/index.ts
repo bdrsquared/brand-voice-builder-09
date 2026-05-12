@@ -63,6 +63,82 @@ serve(async (req) => {
       // Don't block the Slack notification if DB fails
     }
 
+    // Sync to Pipedrive (non-blocking — don't fail the whole request if it errors)
+    try {
+      const PIPEDRIVE_API_TOKEN = Deno.env.get('PIPEDRIVE_API_TOKEN');
+      const PIPEDRIVE_DOMAIN = 'earwormagency';
+      if (PIPEDRIVE_API_TOKEN) {
+        const pdBase = `https://${PIPEDRIVE_DOMAIN}.pipedrive.com/api/v2`;
+        const auth = `api_token=${PIPEDRIVE_API_TOKEN}`;
+
+        // 1. Find existing person by email
+        const searchRes = await fetch(
+          `https://${PIPEDRIVE_DOMAIN}.pipedrive.com/api/v2/persons/search?term=${encodeURIComponent(email.trim())}&fields=email&exact_match=true&${auth}`
+        );
+        const searchData = await searchRes.json();
+        let personId: number | null = searchData?.data?.items?.[0]?.item?.id ?? null;
+
+        // 2. Create person if not found
+        if (!personId) {
+          const personRes = await fetch(`${pdBase}/persons?${auth}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name.trim(),
+              emails: [{ value: email.trim(), primary: true, label: 'work' }],
+              ...(phone && phone.trim() ? { phones: [{ value: phone.trim(), primary: true, label: 'work' }] } : {}),
+            }),
+          });
+          const personData = await personRes.json();
+          personId = personData?.data?.id ?? null;
+        }
+
+        if (personId) {
+          // 3. Create Lead in Leads Inbox
+          const typeLabel = type === 'playbook' ? 'Content Playbook download'
+            : type === 'playpack' ? 'Play Pack request'
+            : type === 'guest_booking' ? 'Podcast booking request'
+            : type === 'contact' ? 'Website message'
+            : 'PodPlanner demo request';
+
+          const leadRes = await fetch(`https://${PIPEDRIVE_DOMAIN}.pipedrive.com/api/v1/leads?${auth}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              title: `${typeLabel} - ${name.trim()}`,
+              person_id: personId,
+            }),
+          });
+          const leadData = await leadRes.json();
+          const leadId = leadData?.data?.id ?? null;
+
+          // 4. Attach note with all submission context
+          const noteLines = [
+            `Source: ${typeLabel}`,
+            source_page ? `Page: ${source_page}` : null,
+            budget ? `Budget: ${budget}` : null,
+            phone ? `Phone: ${phone.trim()}` : null,
+            message ? `\nMessage:\n${message.trim()}` : null,
+          ].filter(Boolean).join('\n');
+
+          if (noteLines) {
+            await fetch(`https://${PIPEDRIVE_DOMAIN}.pipedrive.com/api/v1/notes?${auth}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                content: noteLines.replace(/\n/g, '<br>'),
+                person_id: personId,
+                ...(leadId ? { lead_id: leadId } : {}),
+              }),
+            });
+          }
+        }
+      }
+    } catch (pdError) {
+      console.error('Failed to sync to Pipedrive:', pdError);
+      // Non-blocking — Slack + DB still proceed
+    }
+
     const isPlayPack = type === 'playpack';
     const isPlaybook = type === 'playbook';
     const isGuestBooking = type === 'guest_booking';

@@ -6,6 +6,15 @@ export const budgetOptions = [
   { label: "Unsure", description: "" },
 ];
 
+export const budgetOptionsUSD = [
+  { label: "$13k–$25k", description: "Smaller projects or early-stage exploration" },
+  { label: "$25k–$50k", description: "Running a podcast as a serious channel" },
+  { label: "$50k–$95k", description: "Multi-episode, multi-channel programs" },
+  { label: "$95k+", description: "Enterprise or multi-show partnerships" },
+  { label: "Unsure", description: "" },
+];
+
+
 export const countryCodes = [
   { code: "+1", country: "US", flag: "🇺🇸", name: "United States" },
   { code: "+1", country: "CA", flag: "🇨🇦", name: "Canada" },

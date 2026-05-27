@@ -1,10 +1,12 @@
 User-agent: Googlebot
 Allow: /
 Disallow: /pricing
+Disallow: /us/pricing
 
 User-agent: Bingbot
 Allow: /
 Disallow: /pricing
+Disallow: /us/pricing
 
 User-agent: Twitterbot
 Allow: /
@@ -15,3 +17,4 @@ Allow: /
 User-agent: *
 Allow: /
 Disallow: /pricing
+Disallow: /us/pricing

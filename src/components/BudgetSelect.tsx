@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { budgetOptions } from "@/lib/country-codes";
+import { budgetOptions, budgetOptionsUSD } from "@/lib/country-codes";
+import { useLocale } from "@/contexts/LocaleContext";
 
 interface BudgetSelectProps {
   value: string;

@@ -56,7 +56,7 @@ const BudgetSelect = ({ value, onChange, compact = false, light = false }: Budge
                   : "border border-white/[0.12] bg-[hsl(var(--card))]/95"
               }`}
             >
-              {budgetOptions.map((opt) => (
+              {options.map((opt) => (
                 <button
                   key={opt.label}
                   type="button"

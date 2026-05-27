@@ -984,7 +984,28 @@ const formatReach = (low: number, high: number): string => {
 const TIER_LABELS: Record<string, string> = { t1: "Tier 01 · Launch", t2: "Tier 02 · Launch & Scale", t3: "Tier 03 · Global Leader" };
 
 const PricingBreakdownTable = ({ tier, currency, prodType, mediaStep }: { tier: "t1" | "t2" | "t3"; currency: Currency; prodType: ProdType; prices: TierPrices; mediaStep: number }) => {
-  const data = BREAKDOWN_DATA[currency][prodType][tier];
+  const { isUS } = useLocale();
+  // On /us, derive USD breakdown values from the GBP source via the FX helper.
+  const data = (() => {
+    if (isUS) {
+      const gbp = BREAKDOWN_DATA.GBP[prodType][tier];
+      const rate = 1.27;
+      const round1k = (n: number) => n >= 1000 ? Math.round(n * rate / 1000) * 1000 : Math.round(n * rate / 50) * 50;
+      const launchNum = round1k(gbp.launchNum);
+      const monthlyNum = round1k(gbp.monthlyNum);
+      const yearlyNum = launchNum + monthlyNum * 12;
+      return {
+        ...gbp,
+        launch: gbp.launchNum ? `$${launchNum.toLocaleString()}` : "—",
+        launchNum,
+        monthly: gbp.monthlyNum ? `$${monthlyNum.toLocaleString()}` : "—",
+        monthlyNum,
+        yearly: `$${(gbp.monthlyNum ? yearlyNum : launchNum).toLocaleString()}`,
+        paidMedia: swapCurrencyInString(gbp.paidMedia, "USD"),
+      };
+    }
+    return BREAKDOWN_DATA[currency][prodType][tier];
+  })();
   const isT3 = tier === "t3";
   const mediaData = MEDIA_STEPS[mediaStep];
   const rates: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };

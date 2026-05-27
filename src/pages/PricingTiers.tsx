@@ -68,6 +68,30 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
 import useMetaTags from "@/hooks/useMetaTags";
+import { useLocale } from "@/contexts/LocaleContext";
+import { swapCurrencyInString } from "@/lib/fx";
+
+/** Build a USD price set on the fly from the canonical GBP set (rounded to neat $1k by fx.ts). */
+const deriveUsdPriceSet = (gbp: TierPrices): TierPrices => ({
+  t1: {
+    price: swapCurrencyInString(gbp.t1.price, "USD"),
+    note: swapCurrencyInString(gbp.t1.note, "USD"),
+    dp: swapCurrencyInString(gbp.t1.dp, "USD"),
+    dn: swapCurrencyInString(gbp.t1.dn, "USD"),
+  },
+  t2: {
+    price: swapCurrencyInString(gbp.t2.price, "USD"),
+    note: swapCurrencyInString(gbp.t2.note, "USD"),
+    dp: swapCurrencyInString(gbp.t2.dp, "USD"),
+    dn: swapCurrencyInString(gbp.t2.dn, "USD"),
+  },
+  t3: {
+    price: swapCurrencyInString(gbp.t3.price, "USD"),
+    note: swapCurrencyInString(gbp.t3.note, "USD"),
+    dp: swapCurrencyInString(gbp.t3.dp, "USD"),
+    dn: swapCurrencyInString(gbp.t3.dn, "USD"),
+  },
+});
 
 /* ── palette tokens ── */
 const C = {
@@ -1075,13 +1099,20 @@ const PricingTiers = () => {
     return () => { meta.remove(); };
   }, []);
 
+  const { isUS } = useLocale();
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [currency, setCurrency] = useState<Currency>("GBP");
+  // On /us we lock currency to USD; on UK the toggle remains.
+  const [currency, setCurrency] = useState<Currency>(isUS ? "USD" : "GBP");
   const [prodType, setProdType] = useState<ProdType>("location");
   const [selectedTier, setSelectedTier] = useState<"t1" | "t2" | "t3" | null>(null);
   const [mediaStep, setMediaStep] = useState(0);
 
-  const prices = ALL_PRICES[currency][prodType];
+  // On /us, derive USD from GBP (rounded to neat $1k) instead of using the
+  // manually-tuned USD figures, per the locale build spec.
+  const prices = useMemo(() => {
+    if (isUS) return deriveUsdPriceSet(ALL_PRICES.GBP[prodType]);
+    return ALL_PRICES[currency][prodType];
+  }, [isUS, currency, prodType]);
 
   const tiers = useMemo(() => tierCards.map(t => ({
     ...t,
@@ -1117,9 +1148,11 @@ const PricingTiers = () => {
 
       {/* ── TIER CARDS ── */}
       <main className="max-w-6xl mx-auto px-4 md:px-10 -mt-20 md:-mt-24 relative z-10">
-        <div className="flex justify-center mb-4">
-          <CurrencyToggle value={currency} onChange={setCurrency} />
-        </div>
+        {!isUS && (
+          <div className="flex justify-center mb-4">
+            <CurrencyToggle value={currency} onChange={setCurrency} />
+          </div>
+        )}
 
         {/* Production type toggle */}
         <div className="mb-6">

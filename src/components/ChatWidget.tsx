@@ -104,7 +104,7 @@ const ChatWidget = () => {
     setOpen(false);
     setTimeout(() => {
       setName(""); setEmail(""); setPhoneNumber(""); setBudget(""); setMessage("");
-      setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
+      setSelectedCode(countryCodes[defaultPhoneIndex]);
       setSubmitted(false); setError(""); setCodeSearch(""); setCodeDropdownOpen(false);
     }, 300);
   };

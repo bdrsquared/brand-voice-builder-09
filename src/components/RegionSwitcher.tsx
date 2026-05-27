@@ -28,11 +28,14 @@ const RegionSwitcher = ({ light = false }: Props) => {
   };
 
   return (
-    <div className="relative" onMouseLeave={() => setOpen(false)}>
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        onMouseEnter={() => setOpen(true)}
         className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-colors duration-300 ${
           light ? "text-gray-800 hover:text-gray-950" : "text-white/80 hover:text-white"
         }`}
@@ -45,28 +48,42 @@ const RegionSwitcher = ({ light = false }: Props) => {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full mt-2 min-w-[180px] rounded-xl border border-white/10 bg-card/95 backdrop-blur-xl shadow-2xl overflow-hidden z-50"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 top-full pt-3 z-50"
           >
-            {(Object.keys(LABELS) as Locale[]).map((key) => {
-              const item = LABELS[key];
-              const active = key === locale;
-              return (
-                <button
-                  key={key}
-                  onClick={() => switchTo(key)}
-                  className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 text-left text-sm transition-colors ${
-                    active ? "bg-white/10 text-foreground" : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
-                  }`}
-                >
-                  <span className="text-base leading-none">{item.flag}</span>
-                  <span className="font-medium">{item.name}</span>
-                </button>
-              );
-            })}
+            <div
+              className={`min-w-[180px] rounded-2xl border backdrop-blur-xl shadow-lg overflow-hidden ${
+                light
+                  ? "bg-white/70 border-black/10 shadow-black/5"
+                  : "bg-white/5 border-white/10 shadow-black/20"
+              }`}
+            >
+              {(Object.keys(LABELS) as Locale[]).map((key) => {
+                const item = LABELS[key];
+                const active = key === locale;
+                return (
+                  <button
+                    key={key}
+                    onClick={() => switchTo(key)}
+                    className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 text-left text-sm transition-colors ${
+                      light
+                        ? active
+                          ? "bg-black/[0.08] text-gray-950"
+                          : "text-gray-700 hover:bg-black/[0.05] hover:text-gray-950"
+                        : active
+                          ? "bg-white/10 text-foreground"
+                          : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                    }`}
+                  >
+                    <span className="text-base leading-none">{item.flag}</span>
+                    <span className="font-medium">{item.name}</span>
+                  </button>
+                );
+              })}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -96,3 +96,4 @@ export const countryCodes = [
 ];
 
 export const UK_DEFAULT_INDEX = 2; // countryCodes[2] is UK +44
+export const US_DEFAULT_INDEX = 0; // countryCodes[0] is US +1

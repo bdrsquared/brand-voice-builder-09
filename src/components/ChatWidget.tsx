@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, ArrowRight, Check, ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { countryCodes, UK_DEFAULT_INDEX } from "@/lib/country-codes";
+import { countryCodes, UK_DEFAULT_INDEX, US_DEFAULT_INDEX } from "@/lib/country-codes";
+import { useLocale } from "@/contexts/LocaleContext";
 import BudgetSelect from "@/components/BudgetSelect";
 import benProfile from "@/assets/ben-profile.png";
 

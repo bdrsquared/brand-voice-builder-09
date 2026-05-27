@@ -13,6 +13,8 @@ interface BudgetSelectProps {
 
 const BudgetSelect = ({ value, onChange, compact = false, light = false }: BudgetSelectProps) => {
   const [open, setOpen] = useState(false);
+  const { locale } = useLocale();
+  const options = locale === "en-US" ? budgetOptionsUSD : budgetOptions;
 
   const labelSize = compact ? "text-[10px]" : "text-xs";
   const py = compact ? "py-2.5" : "py-3";

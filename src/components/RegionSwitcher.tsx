@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLocale, type Locale } from "@/contexts/LocaleContext";
 
 const LABELS: Record<Locale, { flag: string; code: string; name: string }> = {
-  "en-GB": { flag: "🇬🇧", code: "UK", name: "United Kingdom · £" },
-  "en-US": { flag: "🇺🇸", code: "US", name: "United States · $" },
+  "en-GB": { flag: "🇬🇧", code: "UK", name: "United Kingdom" },
+  "en-US": { flag: "🇺🇸", code: "US", name: "United States" },
 };
 
 interface Props {

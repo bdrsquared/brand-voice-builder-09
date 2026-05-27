@@ -10,6 +10,8 @@ import CookieConsent from "./components/CookieConsent";
 import ChatWidget from "./components/ChatWidget";
 import PageViewTracker from "./components/PageViewTracker";
 import RedirectHandler from "./components/RedirectHandler";
+import { LocaleProvider } from "./contexts/LocaleContext";
+import LocaleSEO from "./components/LocaleSEO";
 
 const ConditionalWidgets = () => {
   const location = useLocation();
@@ -46,32 +48,50 @@ const GuestBooking = lazy(() => import("./pages/GuestBooking.tsx"));
 
 const queryClient = new QueryClient();
 
+/**
+ * Renders the public-page route tree. Mounted twice in <AnimatedRoutes/>:
+ * once at "/" (UK) and once at "/us" (US). Admin / form-action routes are
+ * mounted separately and stay UK-only.
+ */
+const PublicRoutes = () => (
+  <>
+    <Route index element={<PageTransition><Index /></PageTransition>} />
+    <Route path="about-earworm" element={<PageTransition><OurStory /></PageTransition>} />
+    <Route path="case-study/:slug" element={<PageTransition><CaseStudy /></PageTransition>} />
+    <Route path="cookies" element={<PageTransition><CookiesPolicy /></PageTransition>} />
+    <Route path="book-a-call" element={<PageTransition><BookACall /></PageTransition>} />
+    <Route path="blogs" element={<PageTransition><Blogs /></PageTransition>} />
+    <Route path="blog/:slug" element={<PageTransition><BlogPostPage /></PageTransition>} />
+    <Route path="case-studies" element={<PageTransition><CaseStudiesPage /></PageTransition>} />
+    <Route path="privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+    <Route path="content-marketing/:slug" element={<PageTransition><ICPLandingPage /></PageTransition>} />
+    <Route path="content-playbook" element={<PageTransition><ContentPlaybook /></PageTransition>} />
+    <Route path="careers" element={<PageTransition><Careers /></PageTransition>} />
+    <Route path="contact" element={<PageTransition><Contact /></PageTransition>} />
+    <Route path="pricing" element={<PageTransition><PricingTiers /></PageTransition>} />
+    <Route path="awards" element={<PageTransition><Awards /></PageTransition>} />
+    <Route path="guest-booking" element={<PageTransition><GuestBooking /></PageTransition>} />
+  </>
+);
+
 const AnimatedRoutes = () => {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
       <Suspense fallback={<div className="min-h-screen bg-background" />}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageTransition><Index /></PageTransition>} />
-          <Route path="/about-earworm" element={<PageTransition><OurStory /></PageTransition>} />
-          <Route path="/case-study/:slug" element={<PageTransition><CaseStudy /></PageTransition>} />
-          <Route path="/cookies" element={<PageTransition><CookiesPolicy /></PageTransition>} />
-          <Route path="/book-a-call" element={<PageTransition><BookACall /></PageTransition>} />
-          <Route path="/blogs" element={<PageTransition><Blogs /></PageTransition>} />
-          <Route path="/blog/:slug" element={<PageTransition><BlogPostPage /></PageTransition>} />
+          {/* UK (default) */}
+          <Route path="/">{PublicRoutes()}</Route>
+
+          {/* US mirror — same component tree, /us prefix */}
+          <Route path="/us">{PublicRoutes()}</Route>
+
+          {/* UK-only routes (admin, form action, sandbox) */}
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/sandbox" element={<PageTransition><Sandbox /></PageTransition>} />
-          <Route path="/case-studies" element={<PageTransition><CaseStudiesPage /></PageTransition>} />
-          <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
-          <Route path="/content-marketing/:slug" element={<PageTransition><ICPLandingPage /></PageTransition>} />
-          <Route path="/content-playbook" element={<PageTransition><ContentPlaybook /></PageTransition>} />
-          <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
-          <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-          <Route path="/pricing" element={<PageTransition><PricingTiers /></PageTransition>} />
           <Route path="/thank-you" element={<PageTransition><ThankYou /></PageTransition>} />
-          <Route path="/awards" element={<PageTransition><Awards /></PageTransition>} />
-          <Route path="/guest-booking" element={<PageTransition><GuestBooking /></PageTransition>} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>
@@ -86,10 +106,13 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AnimatedRoutes />
-        <RedirectHandler />
-        <PageViewTracker />
-        <ConditionalWidgets />
+        <LocaleProvider>
+          <LocaleSEO />
+          <AnimatedRoutes />
+          <RedirectHandler />
+          <PageViewTracker />
+          <ConditionalWidgets />
+        </LocaleProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

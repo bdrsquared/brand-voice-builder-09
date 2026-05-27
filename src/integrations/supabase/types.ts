@@ -52,42 +52,51 @@ export type Database = {
           author: string
           category: string | null
           content: string
+          content_us: string | null
           cover_image: string | null
           created_at: string
           excerpt: string | null
+          excerpt_us: string | null
           id: string
           image_style: string | null
           published: boolean
           slug: string
           title: string
+          title_us: string | null
           updated_at: string
         }
         Insert: {
           author?: string
           category?: string | null
           content?: string
+          content_us?: string | null
           cover_image?: string | null
           created_at?: string
           excerpt?: string | null
+          excerpt_us?: string | null
           id?: string
           image_style?: string | null
           published?: boolean
           slug: string
           title: string
+          title_us?: string | null
           updated_at?: string
         }
         Update: {
           author?: string
           category?: string | null
           content?: string
+          content_us?: string | null
           cover_image?: string | null
           created_at?: string
           excerpt?: string | null
+          excerpt_us?: string | null
           id?: string
           image_style?: string | null
           published?: boolean
           slug?: string
           title?: string
+          title_us?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -219,6 +228,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          locale: string | null
           meta_description: string | null
           meta_title: string | null
           og_description: string | null
@@ -231,6 +241,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          locale?: string | null
           meta_description?: string | null
           meta_title?: string | null
           og_description?: string | null
@@ -243,6 +254,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          locale?: string | null
           meta_description?: string | null
           meta_title?: string | null
           og_description?: string | null
@@ -250,6 +262,42 @@ export type Database = {
           og_title?: string | null
           page_name?: string
           page_path?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      page_translations: {
+        Row: {
+          approved: boolean
+          created_at: string
+          id: string
+          locale: string
+          page_path: string
+          source_text: string
+          string_key: string
+          translated_text: string
+          updated_at: string
+        }
+        Insert: {
+          approved?: boolean
+          created_at?: string
+          id?: string
+          locale?: string
+          page_path: string
+          source_text: string
+          string_key: string
+          translated_text: string
+          updated_at?: string
+        }
+        Update: {
+          approved?: boolean
+          created_at?: string
+          id?: string
+          locale?: string
+          page_path?: string
+          source_text?: string
+          string_key?: string
+          translated_text?: string
           updated_at?: string
         }
         Relationships: []

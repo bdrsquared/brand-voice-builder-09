@@ -101,7 +101,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
       setPhoneNumber("");
       setBudget("");
       setMessage("");
-      setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
+      setSelectedCode(countryCodes[defaultPhoneIndex]);
       setSubmitted(false);
       setError("");
       setCodeSearch("");

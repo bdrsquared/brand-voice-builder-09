@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { budgetOptions } from "@/lib/country-codes";
+import { budgetOptions, budgetOptionsUSD } from "@/lib/country-codes";
+import { useLocale } from "@/contexts/LocaleContext";
 
 interface BudgetSelectProps {
   value: string;
@@ -12,6 +13,8 @@ interface BudgetSelectProps {
 
 const BudgetSelect = ({ value, onChange, compact = false, light = false }: BudgetSelectProps) => {
   const [open, setOpen] = useState(false);
+  const { locale } = useLocale();
+  const options = locale === "en-US" ? budgetOptionsUSD : budgetOptions;
 
   const labelSize = compact ? "text-[10px]" : "text-xs";
   const py = compact ? "py-2.5" : "py-3";
@@ -53,7 +56,7 @@ const BudgetSelect = ({ value, onChange, compact = false, light = false }: Budge
                   : "border border-white/[0.12] bg-[hsl(var(--card))]/95"
               }`}
             >
-              {budgetOptions.map((opt) => (
+              {options.map((opt) => (
                 <button
                   key={opt.label}
                   type="button"

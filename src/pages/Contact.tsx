@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, ChevronDown, Search, Mail, MapPin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { countryCodes, UK_DEFAULT_INDEX } from "@/lib/country-codes";
+import { countryCodes, UK_DEFAULT_INDEX, US_DEFAULT_INDEX } from "@/lib/country-codes";
+import { useLocale } from "@/contexts/LocaleContext";
 import BudgetSelect from "@/components/BudgetSelect";
 import Navbar from "@/components/landing/Navbar";
 import TestimonialTicker from "@/components/landing/TestimonialTicker";
@@ -20,13 +21,15 @@ const fadeUp = {
 const Contact = () => {
   useMetaTags();
   const navigate = useNavigate();
+  const { locale } = useLocale();
+  const defaultPhoneIndex = locale === "en-US" ? US_DEFAULT_INDEX : UK_DEFAULT_INDEX;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [budget, setBudget] = useState("");
   const [message, setMessage] = useState("");
-  const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]);
+  const [selectedCode, setSelectedCode] = useState(countryCodes[defaultPhoneIndex]);
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);
   const [codeSearch, setCodeSearch] = useState("");
   const [loading, setLoading] = useState(false);

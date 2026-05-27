@@ -3,19 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, ArrowRight, Check, ChevronDown, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { countryCodes, UK_DEFAULT_INDEX } from "@/lib/country-codes";
+import { countryCodes, UK_DEFAULT_INDEX, US_DEFAULT_INDEX } from "@/lib/country-codes";
+import { useLocale } from "@/contexts/LocaleContext";
 import BudgetSelect from "@/components/BudgetSelect";
 import benProfile from "@/assets/ben-profile.png";
 
 const ChatWidget = () => {
   const navigate = useNavigate();
+  const { locale } = useLocale();
+  const defaultPhoneIndex = locale === "en-US" ? US_DEFAULT_INDEX : UK_DEFAULT_INDEX;
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [budget, setBudget] = useState("");
   const [message, setMessage] = useState("");
-  const [selectedCode, setSelectedCode] = useState(countryCodes[UK_DEFAULT_INDEX]);
+  const [selectedCode, setSelectedCode] = useState(countryCodes[defaultPhoneIndex]);
   const [codeDropdownOpen, setCodeDropdownOpen] = useState(false);
   const [codeSearch, setCodeSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -101,7 +104,7 @@ const ChatWidget = () => {
     setOpen(false);
     setTimeout(() => {
       setName(""); setEmail(""); setPhoneNumber(""); setBudget(""); setMessage("");
-      setSelectedCode(countryCodes[UK_DEFAULT_INDEX]);
+      setSelectedCode(countryCodes[defaultPhoneIndex]);
       setSubmitted(false); setError(""); setCodeSearch(""); setCodeDropdownOpen(false);
     }, 300);
   };

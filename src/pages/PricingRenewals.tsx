@@ -25,17 +25,18 @@ type EpsPerMonth = 1 | 2 | 4;
 const CURRENCY_SYMBOLS: Record<Currency, string> = { GBP: "£", USD: "$", EUR: "€" };
 const FX_RATES: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };
 
-/* Base monthly retainers in GBP at the standard 2 episodes/month cadence
-   (no launch fee — that's already paid). */
+/* Base monthly retainers in GBP at the 1 episode/month cadence baseline
+   for a 6-month renewal term (no launch fee — that's already paid).
+   Higher cadences apply EPS_MULTIPLIER on top. */
 const BASE_MONTHLY_GBP: Record<ProdType, { t1: number; t2: number; t3: number }> = {
-  location: { t1: 3250, t2: 5000, t3: 8500 },
-  studio:   { t1: 2630, t2: 4000, t3: 6900 },
-  virtual:  { t1: 2330, t2: 3500, t3: 6000 },
+  location: { t1: 2300, t2: 3500, t3: 5950 },
+  studio:   { t1: 1850, t2: 2650, t3: 4500 },
+  virtual:  { t1: 1600, t2: 2250, t3: 3850 },
 };
 
-/* Cadence multiplier — applied to the base 2-ep monthly retainer.
-   1 ep/mo is lighter production load; 4 ep/mo earns mild economies of scale. */
-const EPS_MULTIPLIER: Record<EpsPerMonth, number> = { 1: 0.7, 2: 1.0, 4: 1.9 };
+/* Cadence multiplier — 1 ep/mo is the baseline. 2 and 4 ep/mo carry
+   modest per-episode discounts that reflect production efficiencies. */
+const EPS_MULTIPLIER: Record<EpsPerMonth, number> = { 1: 1.0, 2: 1.85, 4: 3.4 };
 
 /* Renewal discount on monthly retainer by term length. */
 const TERM_DISCOUNT: Record<Term, number> = { 6: 0, 12: 0.05, 18: 0.10 };

@@ -35,7 +35,7 @@ const BASE_MONTHLY_GBP: Record<ProdType, { t1: number; t2: number; t3: number }>
 
 /* Cadence multiplier — applied to the base 2-ep monthly retainer.
    1 ep/mo is lighter production load; 4 ep/mo earns mild economies of scale. */
-const EPS_MULTIPLIER: Record<EpsPerMonth, number> = { 1: 0.6, 2: 1.0, 4: 1.75 };
+const EPS_MULTIPLIER: Record<EpsPerMonth, number> = { 1: 0.7, 2: 1.0, 4: 1.9 };
 
 /* Renewal discount on monthly retainer by term length. */
 const TERM_DISCOUNT: Record<Term, number> = { 6: 0, 12: 0.05, 18: 0.10 };

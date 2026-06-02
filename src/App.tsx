@@ -70,6 +70,7 @@ const PublicRoutes = () => (
     <Route path="careers" element={<PageTransition><Careers /></PageTransition>} />
     <Route path="contact" element={<PageTransition><Contact /></PageTransition>} />
     <Route path="pricing" element={<PageTransition><PricingTiers /></PageTransition>} />
+    <Route path="pricing/renewals" element={<PageTransition><PricingRenewals /></PageTransition>} />
     <Route path="awards" element={<PageTransition><Awards /></PageTransition>} />
     <Route path="guest-booking" element={<PageTransition><GuestBooking /></PageTransition>} />
   </>

@@ -410,13 +410,14 @@ const PricingRenewals = () => {
             <SectionPill>Contract renewal</SectionPill>
           </div>
           <h1 className="text-3xl md:text-6xl lg:text-7xl mb-6">
-            Renewing your<br />
-            <span className="bg-gradient-to-r from-veneer-teal via-veneer-purple to-veneer-rose bg-clip-text text-transparent">contract.</span><br />
-            No reset. No ramp.
+            Contract<br />
+            <span className="bg-gradient-to-r from-veneer-teal via-veneer-purple to-veneer-rose bg-clip-text text-transparent">renewal</span><br />
+            pricing.
           </h1>
           <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed mb-8">
-            The strategy is set. The systems are running. The team knows your business.
-            Renewal pricing reflects that — and rewards longer commitment.
+            Internal reference for renewing existing contracts. Pricing assumes onboarding,
+            strategy and integrations are already in place. Adjust term, production type and
+            cadence to view the applicable monthly retainer.
           </p>
         </div>
       </header>

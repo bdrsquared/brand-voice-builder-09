@@ -71,18 +71,18 @@ const tierCards = [
   {
     id: "t2" as const,
     num: "On Air",
-    name: "Same engine. Less setup. More output.",
-    hook: "The strategy is set, the rhythm is established, the team knows your business. Renew and let the flywheel keep turning — sharper every quarter.",
-    dopamine: "Year two is when the content library starts working harder than the content you're shipping.",
+    name: "On Air renewal",
+    hook: "Continuation of the existing On Air package. Onboarding, strategy and integrations already in place; renewal covers ongoing production, content and distribution for the term selected.",
+    dopamine: "Pricing assumes existing setup carries forward. No re-onboarding fees apply.",
     icon: Zap,
     featured: true,
   },
   {
     id: "t3" as const,
     num: "Global Leader",
-    name: "Keep owning the conversation you built.",
-    hook: "You've built the platform. Renew to protect the position — and compound the authority your team's already established in market.",
-    dopamine: "Category ownership compounds. Every month you keep going makes you harder to displace.",
+    name: "Global Leader renewal",
+    hook: "Continuation of the Global Leader package. Includes full production, content, distribution, guest pipeline, PR, UGC, sales integration and attribution reporting at the same cadence as the existing term.",
+    dopamine: "Ad spend is billed separately. Quarterly strategic reviews continue as standard.",
     icon: Crown,
   },
 ];
@@ -264,13 +264,13 @@ const TermToggle = ({ value, onChange }: { value: Term; onChange: (t: Term) => v
             {t} months
           </span>
           <span className="text-xs text-text-tertiary leading-relaxed block">
-            {t === 6 && "Short cycle. Keep momentum without a longer commitment."}
-            {t === 12 && "The standard renewal — covers a full annual planning cycle."}
-            {t === 18 && "Lock in rates and roadmap through a full strategic period."}
+            {t === 6 && "Short renewal cycle. No term discount."}
+            {t === 12 && "Standard annual renewal. 5% discount on monthly retainer."}
+            {t === 18 && "Extended renewal. 10% discount on monthly retainer."}
           </span>
           {discount > 0 && (
             <span className="inline-block mt-2 text-[10px] font-medium px-2.5 py-0.5 rounded-full" style={{ background: "rgba(28,250,118,0.15)", color: "hsl(145,60%,55%)" }}>
-              Save {Math.round(discount * 100)}% on monthly
+              −{Math.round(discount * 100)}% monthly
             </span>
           )}
         </button>
@@ -284,9 +284,9 @@ const CadenceToggle = ({ value, onChange }: { value: EpsPerMonth; onChange: (e: 
     {([1, 2, 4] as EpsPerMonth[]).map((n, i) => {
       const active = value === n;
       const sub: Record<EpsPerMonth, string> = {
-        1: "Lighter cadence",
+        1: "Baseline cadence",
         2: "Standard cadence",
-        4: "High output",
+        4: "Increased cadence",
       };
       return (
         <button
@@ -410,13 +410,14 @@ const PricingRenewals = () => {
             <SectionPill>Contract renewal</SectionPill>
           </div>
           <h1 className="text-3xl md:text-6xl lg:text-7xl mb-6">
-            Renewing your<br />
-            <span className="bg-gradient-to-r from-veneer-teal via-veneer-purple to-veneer-rose bg-clip-text text-transparent">contract.</span><br />
-            No reset. No ramp.
+            Contract<br />
+            <span className="bg-gradient-to-r from-veneer-teal via-veneer-purple to-veneer-rose bg-clip-text text-transparent">renewal</span><br />
+            pricing.
           </h1>
           <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed mb-8">
-            The strategy is set. The systems are running. The team knows your business.
-            Renewal pricing reflects that — and rewards longer commitment.
+            Internal reference for renewing existing contracts. Pricing assumes onboarding,
+            strategy and integrations are already in place. Adjust term, production type and
+            cadence to view the applicable monthly retainer.
           </p>
         </div>
       </header>
@@ -500,7 +501,7 @@ const PricingRenewals = () => {
                   </div>
                   {price.saving && (
                     <div className="text-xs mb-4" style={{ color: "hsl(145,60%,55%)" }}>
-                      Saving {price.saving} vs. month-to-month
+                      Term discount applied: {price.saving} across {term} months
                     </div>
                   )}
                   <button
@@ -508,7 +509,7 @@ const PricingRenewals = () => {
                     className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-white/[0.08] text-text-primary hover:bg-white/[0.06] transition-all flex items-center justify-center gap-1.5 backdrop-blur-sm mt-auto"
                     style={{ background: "rgba(255,255,255,0.04)", boxShadow: `0 0 20px ${ac.border}11` }}
                   >
-                    See what's included on renewal <ArrowUpRight className="w-3 h-3" />
+                    View scope of services <ArrowUpRight className="w-3 h-3" />
                   </button>
                 </div>
               </motion.div>
@@ -521,20 +522,20 @@ const PricingRenewals = () => {
         <div className="mt-6 rounded-2xl border border-border bg-card overflow-hidden">
           <div className="px-6 py-4 border-b border-border">
             <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Renewal terms</div>
-            <h3 className="font-heading text-lg text-text-primary">How renewal pricing works</h3>
+            <h3 className="font-heading text-lg text-text-primary">Pricing rules</h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
             <div className="p-5">
-              <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">No setup fees</div>
-              <p className="text-sm text-text-secondary leading-relaxed">Strategy, positioning, host coaching, marketing stack integration — all already done at original onboarding. Nothing to pay for twice.</p>
+              <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Setup fees</div>
+              <p className="text-sm text-text-secondary leading-relaxed">Not applied on renewal. Onboarding, strategy, positioning, host coaching and marketing stack integration carry forward from the original contract.</p>
             </div>
             <div className="p-5">
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Term discounts</div>
-              <p className="text-sm text-text-secondary leading-relaxed">6 months at the standard rate. 12 months saves 5% on the monthly. 18 months saves 10%. Discount applies for the full renewal term.</p>
+              <p className="text-sm text-text-secondary leading-relaxed">6 months: 0%. 12 months: 5% off monthly retainer. 18 months: 10% off monthly retainer. Discount applies for the full renewal term.</p>
             </div>
             <div className="p-5">
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Team continuity</div>
-              <p className="text-sm text-text-secondary leading-relaxed">Same producers, same senior lead, same systems. The team that knows your business stays on the account for the renewal period.</p>
+              <p className="text-sm text-text-secondary leading-relaxed">Same producers, senior lead and systems remain on the account for the renewal term unless otherwise agreed.</p>
             </div>
           </div>
         </div>
@@ -542,7 +543,7 @@ const PricingRenewals = () => {
         {/* Footer note */}
         <div className="text-center py-12 md:py-16">
           <p className="text-sm text-text-secondary">
-            <strong className="text-text-primary">Questions on the renewal?</strong> Speak to your account lead directly, or reach the senior team for any commercial adjustments.
+            <strong className="text-text-primary">Internal reference.</strong> For commercial adjustments or non-standard terms, contact the account lead directly.
           </p>
         </div>
       </main>
@@ -570,16 +571,16 @@ const PricingRenewals = () => {
                 <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">
                   {tierCards.find(t => t.id === activeModal)?.num} · {TERM_LABEL[term]}
                 </div>
-                <h3 className="font-heading text-2xl text-text-primary mb-2">What's included on renewal</h3>
+                <h3 className="font-heading text-2xl text-text-primary mb-2">Scope of services</h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                  Everything below carries forward from your existing setup. The onboarding work is already done — this is the ongoing engine.
+                  Services included on renewal at this tier. Items marked as established at onboarding carry forward without re-scoping.
                 </p>
                 <div className="flex items-baseline gap-2.5">
                   <span className="font-heading text-3xl text-text-primary">
                     {activeModal === "t1" ? priceFor(activeModal).total : priceFor(activeModal).monthly}
                   </span>
                   <span className="text-xs text-text-tertiary">
-                    {activeModal === "t1" ? `for ${term === 6 ? "this series" : "renewed series"}` : `per month · ${term}-month term`}
+                    {activeModal === "t1" ? `series total · ${term}-month term` : `monthly retainer · ${term}-month term`}
                   </span>
                 </div>
               </ModalHeader>
@@ -588,9 +589,9 @@ const PricingRenewals = () => {
                 <div className="mt-6 bg-secondary/40 rounded-xl p-5">
                   <p className="text-sm text-text-secondary leading-relaxed m-0">
                     <strong className="text-text-primary">Renewal note:</strong>{" "}
-                    {activeModal === "t1" && "A fresh series on the format we've already validated together — no concept work, no host search, no learning curve."}
-                    {activeModal === "t2" && `Year two is when the content engine compounds. Your back catalogue keeps working, your guest network keeps opening doors, and your team keeps getting sharper at what already works for your buyer.`}
-                    {activeModal === "t3" && "Category positions are built over years, not quarters. Renewal protects what you've established and lets the attribution data from year one sharpen everything you do in year two."}
+                    {activeModal === "t1" && "Fresh series on an already-validated format. No concept, format or host setup work re-scoped."}
+                    {activeModal === "t2" && "All On Air services continue at the agreed cadence. Annual strategic refresh included within the renewal term."}
+                    {activeModal === "t3" && "All Global Leader services continue at the agreed cadence. Quarterly strategic reviews and attribution reporting included. Ad spend billed separately."}
                   </p>
                 </div>
               </div>

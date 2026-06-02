@@ -42,6 +42,7 @@ const ContentPlaybook = lazy(() => import("./pages/ContentPlaybook.tsx"));
 const Careers = lazy(() => import("./pages/Careers.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
 const PricingTiers = lazy(() => import("./pages/PricingTiers.tsx"));
+const PricingRenewals = lazy(() => import("./pages/PricingRenewals.tsx"));
 const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
 const Awards = lazy(() => import("./pages/Awards.tsx"));
 const GuestBooking = lazy(() => import("./pages/GuestBooking.tsx"));

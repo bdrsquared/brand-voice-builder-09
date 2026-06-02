@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight, Zap, Crown, Rocket } from "lucide-react";
+import { X, ArrowUpRight, Zap, Crown } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";

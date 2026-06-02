@@ -47,14 +47,14 @@ const TERM_LABEL: Record<Term, string> = {
   18: "18-month renewal",
 };
 
-/* Round to the nearest 10 so no displayed price ends in odd digits. */
-const round10 = (n: number) => Math.round(n / 10) * 10;
+/* Round to the nearest 50 so displayed prices stay tidy. */
+const round50 = (n: number) => Math.round(n / 50) * 50;
 
-/* Convert GBP → active currency, always rounded to nearest 10 in the target currency. */
+/* Convert GBP → active currency, always rounded to nearest 50 in the target currency. */
 const convert = (gbp: number, currency: Currency): number => {
-  if (currency === "USD") return round10(gbpToUsd(gbp));
-  if (currency === "EUR") return round10(gbp * FX_RATES.EUR);
-  return round10(gbp);
+  if (currency === "USD") return round50(gbpToUsd(gbp));
+  if (currency === "EUR") return round50(gbp * FX_RATES.EUR);
+  return round50(gbp);
 };
 
 const fmt = (gbp: number, currency: Currency): string =>

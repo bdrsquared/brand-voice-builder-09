@@ -501,7 +501,7 @@ const PricingRenewals = () => {
                   </div>
                   {price.saving && (
                     <div className="text-xs mb-4" style={{ color: "hsl(145,60%,55%)" }}>
-                      Saving {price.saving} vs. month-to-month
+                      Term discount applied: {price.saving} across {term} months
                     </div>
                   )}
                   <button
@@ -509,7 +509,7 @@ const PricingRenewals = () => {
                     className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-white/[0.08] text-text-primary hover:bg-white/[0.06] transition-all flex items-center justify-center gap-1.5 backdrop-blur-sm mt-auto"
                     style={{ background: "rgba(255,255,255,0.04)", boxShadow: `0 0 20px ${ac.border}11` }}
                   >
-                    See what's included on renewal <ArrowUpRight className="w-3 h-3" />
+                    View scope of services <ArrowUpRight className="w-3 h-3" />
                   </button>
                 </div>
               </motion.div>

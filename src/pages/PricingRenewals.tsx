@@ -77,7 +77,7 @@ const tierCards = [
   },
   {
     id: "t2" as const,
-    num: "Launch & Scale",
+    num: "On Air",
     name: "Same engine. Less setup. More output.",
     hook: "The strategy is set, the rhythm is established, the team knows your business. Renew and let the flywheel keep turning — sharper every quarter.",
     dopamine: "Year two is when the content library starts working harder than the content you're shipping.",

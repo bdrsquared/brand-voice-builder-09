@@ -499,7 +499,7 @@ const PricingRenewals = () => {
                     <>
                       <div className="font-heading text-2xl sm:text-3xl text-text-primary mb-1">{price.total}</div>
                       <div className="text-xs text-text-tertiary mb-5">
-                        Fresh series of 6 episodes · billed over {term === 6 ? "3" : term === 12 ? "6" : "6"} months · no setup fees
+                        Fresh series of 6 episodes · delivered over {t1Months} months at {eps} ep{eps > 1 ? "s" : ""}/mo · no setup fees
                       </div>
                     </>
                   ) : (
@@ -508,7 +508,7 @@ const PricingRenewals = () => {
                         {price.monthly}<span className="text-base text-text-tertiary font-normal">/mo</span>
                       </div>
                       <div className="text-xs text-text-tertiary mb-2">
-                        {price.total} total over {term} months
+                        {eps} episode{eps > 1 ? "s" : ""}/mo · {price.total} total over {term} months
                         {tier.id === "t3" && " · + ad spend"}
                       </div>
                       {price.saving && (

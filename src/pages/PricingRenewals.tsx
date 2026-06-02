@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight, Zap, Crown, Rocket } from "lucide-react";
+import { X, ArrowUpRight, Zap, Crown } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
@@ -70,7 +70,7 @@ const tierCards = [
   {
     id: "t3" as const,
     num: "Global Leader",
-    name: "Keep owning the\nconversation\nyou built.",
+    name: "Keep owning the conversation you built.",
     hook: "You've built the platform. Renew to protect the position — and compound the authority your team's already established in market.",
     dopamine: "Category ownership compounds. Every month you keep going makes you harder to displace.",
     icon: Crown,
@@ -78,19 +78,11 @@ const tierCards = [
   {
     id: "t2" as const,
     num: "Launch & Scale",
-    name: "Same engine.\nLess setup.\nMore output.",
+    name: "Same engine. Less setup. More output.",
     hook: "The strategy is set, the rhythm is established, the team knows your business. Renew and let the flywheel keep turning — sharper every quarter.",
     dopamine: "Year two is when the content library starts working harder than the content you're shipping.",
     icon: Zap,
     featured: true,
-  },
-  {
-    id: "t1" as const,
-    num: "Continue",
-    name: "Another series.\nReady to ship.",
-    hook: "Run a fresh series of 6 episodes on the format we've already proven works for your brand — no re-onboarding, no setup time.",
-    dopamine: "The fastest path back to market with a series that's already proven for your audience.",
-    icon: Rocket,
   },
 ];
 
@@ -451,81 +443,68 @@ const PricingRenewals = () => {
           <CadenceToggle value={eps} onChange={setEps} />
         </div>
 
-        {/* Tier cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
+        {/* Tier cards — stacked as rows */}
+        <div className="grid grid-cols-1 gap-px bg-border border border-border rounded-2xl overflow-hidden items-stretch">
           {tierCards.map((tier, i) => {
             const Icon = tier.icon;
             const price = priceFor(tier.id);
             const tierAccents: Record<string, { gradient: string; border: string; glow: string; btn: string }> = {
-              t3: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,89,234,0.15), transparent 70%)", border: "hsl(243,79%,63%)", glow: "0 -1px 30px rgba(99,89,234,0.2)", btn: "rgba(99,89,234,0.15)" },
-              t2: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(28,250,118,0.12), transparent 70%)", border: "hsl(145,96%,55%)", glow: "0 -1px 30px rgba(28,250,118,0.18)", btn: "rgba(28,250,118,0.15)" },
-              t1: { gradient: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,179,71,0.15), transparent 70%)", border: "hsl(30,100%,65%)", glow: "0 -1px 30px rgba(255,179,71,0.2)", btn: "rgba(255,179,71,0.15)" },
+              t3: { gradient: "radial-gradient(ellipse 60% 100% at 0% 50%, rgba(99,89,234,0.15), transparent 70%)", border: "hsl(243,79%,63%)", glow: "0 -1px 30px rgba(99,89,234,0.2)", btn: "rgba(99,89,234,0.15)" },
+              t2: { gradient: "radial-gradient(ellipse 60% 100% at 0% 50%, rgba(28,250,118,0.12), transparent 70%)", border: "hsl(145,96%,55%)", glow: "0 -1px 30px rgba(28,250,118,0.18)", btn: "rgba(28,250,118,0.15)" },
             };
             const ac = tierAccents[tier.id];
             const featured = (tier as any).featured;
             return (
               <motion.div
                 key={tier.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`relative p-6 sm:p-8 flex flex-col transition-all duration-200 ${featured ? "bg-background" : "bg-card"}`}
+                className={`relative p-6 sm:p-8 grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 md:gap-10 transition-all duration-200 ${featured ? "bg-background" : "bg-card"}`}
                 style={{ boxShadow: ac.glow }}
               >
-                <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: `linear-gradient(90deg, transparent, ${ac.border}, transparent)` }} />
+                <div className="absolute top-0 left-0 bottom-0 w-[3px]" style={{ background: `linear-gradient(180deg, transparent, ${ac.border}, transparent)` }} />
                 <div className="absolute inset-0 pointer-events-none" style={{ background: ac.gradient }} />
 
-                <div className="relative flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10 shadow-lg"
-                    style={{ background: ac.btn, boxShadow: `0 4px 16px ${ac.border}33, inset 0 1px 0 rgba(255,255,255,0.1)` }}>
-                    <Icon className="w-5 h-5" style={{ color: ac.border }} />
+                {/* Left: identity + narrative */}
+                <div className="relative flex flex-col">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10 shadow-lg"
+                      style={{ background: ac.btn, boxShadow: `0 4px 16px ${ac.border}33, inset 0 1px 0 rgba(255,255,255,0.1)` }}>
+                      <Icon className="w-5 h-5" style={{ color: ac.border }} />
+                    </div>
+                    <span className="text-[10px] font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-text-secondary">
+                      {tier.num}
+                    </span>
                   </div>
-                  <span className="text-[10px] font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full border border-white/10 bg-black/40 backdrop-blur-md text-text-secondary">
-                    {tier.num}
-                  </span>
-                </div>
-
-                <div className="relative flex flex-col flex-1">
-                  <h2 className="font-heading text-xl sm:text-2xl text-text-primary mb-3 whitespace-pre-line leading-tight">{tier.name}</h2>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-1">{tier.hook}</p>
-                  <hr className="border-border mb-5 mt-auto" />
-
-                  <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">
-                    {tier.id === "t1" ? "Series investment" : "Monthly retainer"}
-                  </div>
-
-                  {tier.id === "t1" ? (
-                    <>
-                      <div className="font-heading text-2xl sm:text-3xl text-text-primary mb-1">{price.total}</div>
-                      <div className="text-xs text-text-tertiary mb-5">
-                        Fresh series of 6 episodes · delivered over {t1Months} months at {eps} ep{eps > 1 ? "s" : ""}/mo · no setup fees
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="font-heading text-2xl sm:text-3xl text-text-primary mb-1">
-                        {price.monthly}<span className="text-base text-text-tertiary font-normal">/mo</span>
-                      </div>
-                      <div className="text-xs text-text-tertiary mb-2">
-                        {eps} episode{eps > 1 ? "s" : ""}/mo · {price.total} total over {term} months
-                        {tier.id === "t3" && " · + ad spend"}
-                      </div>
-                      {price.saving && (
-                        <div className="text-xs mb-3" style={{ color: "hsl(145,60%,55%)" }}>
-                          Saving {price.saving} vs. month-to-month
-                        </div>
-                      )}
-                    </>
-                  )}
-
-                  <div className="text-xs leading-relaxed p-3 rounded-lg border border-white/[0.08] mb-5 text-text-secondary backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.03)" }}>
+                  <h2 className="font-heading text-xl sm:text-2xl text-text-primary mb-3 leading-tight">{tier.name}</h2>
+                  <p className="text-sm text-text-secondary leading-relaxed mb-4">{tier.hook}</p>
+                  <div className="text-xs leading-relaxed p-3 rounded-lg border border-white/[0.08] text-text-secondary backdrop-blur-sm mt-auto" style={{ background: "rgba(255,255,255,0.03)" }}>
                     {tier.dopamine}
                   </div>
+                </div>
 
+                {/* Right: price + CTA */}
+                <div className="relative flex flex-col md:border-l md:border-white/[0.06] md:pl-10">
+                  <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">
+                    Monthly retainer
+                  </div>
+                  <div className="font-heading text-3xl sm:text-4xl text-text-primary mb-1">
+                    {price.monthly}<span className="text-base text-text-tertiary font-normal">/mo</span>
+                  </div>
+                  <div className="text-xs text-text-tertiary mb-2">
+                    {eps} episode{eps > 1 ? "s" : ""}/mo · {price.total} total over {term} months
+                    {tier.id === "t3" && " · + ad spend"}
+                  </div>
+                  {price.saving && (
+                    <div className="text-xs mb-4" style={{ color: "hsl(145,60%,55%)" }}>
+                      Saving {price.saving} vs. month-to-month
+                    </div>
+                  )}
                   <button
                     onClick={() => setActiveModal(tier.id)}
-                    className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-white/[0.08] text-text-primary hover:bg-white/[0.06] transition-all flex items-center justify-center gap-1.5 backdrop-blur-sm"
+                    className="w-full text-xs font-medium tracking-wide py-2.5 px-4 rounded-lg border border-white/[0.08] text-text-primary hover:bg-white/[0.06] transition-all flex items-center justify-center gap-1.5 backdrop-blur-sm mt-auto"
                     style={{ background: "rgba(255,255,255,0.04)", boxShadow: `0 0 20px ${ac.border}11` }}
                   >
                     See what's included on renewal <ArrowUpRight className="w-3 h-3" />
@@ -535,6 +514,7 @@ const PricingRenewals = () => {
             );
           })}
         </div>
+
 
         {/* Renewal terms summary card */}
         <div className="mt-6 rounded-2xl border border-border bg-card overflow-hidden">

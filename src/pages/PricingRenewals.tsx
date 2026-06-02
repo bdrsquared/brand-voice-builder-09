@@ -49,10 +49,6 @@ const convert = (gbp: number, currency: Currency): number => {
   return gbp;
 };
 
-const format = (gbp: number, currency: Currency): string =>
-  formatPrice(convert(gbp, currency), currency as "GBP" | "USD") .replace(/^€/, CURRENCY_SYMBOLS.EUR) ||
-  `${CURRENCY_SYMBOLS[currency]}${convert(gbp, currency).toLocaleString("en-US")}`;
-
 const fmt = (gbp: number, currency: Currency): string =>
   `${CURRENCY_SYMBOLS[currency]}${convert(gbp, currency).toLocaleString("en-US")}`;
 

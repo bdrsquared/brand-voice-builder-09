@@ -68,14 +68,6 @@ const C = {
 /* ── Tier card config ── */
 const tierCards = [
   {
-    id: "t3" as const,
-    num: "Global Leader",
-    name: "Keep owning the conversation you built.",
-    hook: "You've built the platform. Renew to protect the position — and compound the authority your team's already established in market.",
-    dopamine: "Category ownership compounds. Every month you keep going makes you harder to displace.",
-    icon: Crown,
-  },
-  {
     id: "t2" as const,
     num: "On Air",
     name: "Same engine. Less setup. More output.",
@@ -83,6 +75,14 @@ const tierCards = [
     dopamine: "Year two is when the content library starts working harder than the content you're shipping.",
     icon: Zap,
     featured: true,
+  },
+  {
+    id: "t3" as const,
+    num: "Global Leader",
+    name: "Keep owning the conversation you built.",
+    hook: "You've built the platform. Renew to protect the position — and compound the authority your team's already established in market.",
+    dopamine: "Category ownership compounds. Every month you keep going makes you harder to displace.",
+    icon: Crown,
   },
 ];
 

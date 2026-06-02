@@ -286,6 +286,29 @@ const TermToggle = ({ value, onChange }: { value: Term; onChange: (t: Term) => v
   </div>
 );
 
+const CadenceToggle = ({ value, onChange }: { value: EpsPerMonth; onChange: (e: EpsPerMonth) => void }) => (
+  <div className="grid grid-cols-3 border border-border rounded-2xl overflow-hidden bg-card">
+    {([1, 2, 4] as EpsPerMonth[]).map((n, i) => {
+      const active = value === n;
+      const sub: Record<EpsPerMonth, string> = {
+        1: "Lighter cadence",
+        2: "Standard cadence",
+        4: "High output",
+      };
+      return (
+        <button
+          key={n}
+          onClick={() => onChange(n)}
+          className={`text-center py-3 px-2 transition-colors ${i < 2 ? "border-r border-border" : ""} ${active ? "bg-background text-text-primary" : "text-text-tertiary hover:text-text-secondary"}`}
+        >
+          <div className="text-xs font-medium">{n} episode{n > 1 ? "s" : ""}/mo</div>
+          <div className="text-[10px] text-text-tertiary mt-0.5">{sub[n]}</div>
+        </button>
+      );
+    })}
+  </div>
+);
+
 const ProductionToggle = ({ value, onChange }: { value: ProdType; onChange: (p: ProdType) => void }) => (
   <div className="grid grid-cols-3 border border-border rounded-2xl overflow-hidden bg-card">
     {(["location", "studio", "virtual"] as ProdType[]).map((p, i) => {

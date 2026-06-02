@@ -20,16 +20,22 @@ import { gbpToUsd } from "@/lib/fx";
 type Currency = "GBP" | "USD" | "EUR";
 type ProdType = "location" | "studio" | "virtual";
 type Term = 6 | 12 | 18;
+type EpsPerMonth = 1 | 2 | 4;
 
 const CURRENCY_SYMBOLS: Record<Currency, string> = { GBP: "£", USD: "$", EUR: "€" };
 const FX_RATES: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };
 
-/* Base monthly retainers in GBP (no launch fee — that's already paid). */
+/* Base monthly retainers in GBP at the standard 2 episodes/month cadence
+   (no launch fee — that's already paid). */
 const BASE_MONTHLY_GBP: Record<ProdType, { t1: number; t2: number; t3: number }> = {
   location: { t1: 3250, t2: 5000, t3: 8500 },
   studio:   { t1: 2630, t2: 4000, t3: 6900 },
   virtual:  { t1: 2330, t2: 3500, t3: 6000 },
 };
+
+/* Cadence multiplier — applied to the base 2-ep monthly retainer.
+   1 ep/mo is lighter production load; 4 ep/mo earns mild economies of scale. */
+const EPS_MULTIPLIER: Record<EpsPerMonth, number> = { 1: 0.6, 2: 1.0, 4: 1.75 };
 
 /* Renewal discount on monthly retainer by term length. */
 const TERM_DISCOUNT: Record<Term, number> = { 6: 0, 12: 0.05, 18: 0.10 };

@@ -359,19 +359,26 @@ const PricingRenewals = () => {
   const [currency, setCurrency] = useState<Currency>(isUS ? "USD" : "GBP");
   const [prodType, setProdType] = useState<ProdType>("location");
   const [term, setTerm] = useState<Term>(12);
+  const [eps, setEps] = useState<EpsPerMonth>(2);
   const [activeModal, setActiveModal] = useState<"t1" | "t2" | "t3" | null>(null);
 
   const priceFor = (tier: "t1" | "t2" | "t3") => {
     const baseMonthly = BASE_MONTHLY_GBP[prodType][tier];
-    const monthlyGbp = Math.round(baseMonthly * (1 - TERM_DISCOUNT[term]));
+    // T1 is a finite series of 6 episodes — cadence only changes pace, not cost.
+    const cadenceMult = tier === "t1" ? 1 : EPS_MULTIPLIER[eps];
+    const adjustedBase = baseMonthly * cadenceMult;
+    const monthlyGbp = Math.round(adjustedBase * (1 - TERM_DISCOUNT[term]));
     const totalGbp = monthlyGbp * term;
     return {
       monthly: fmt(monthlyGbp, currency),
       total: fmt(totalGbp, currency),
-      baseMonthly: fmt(baseMonthly, currency),
-      saving: TERM_DISCOUNT[term] > 0 ? fmt((baseMonthly - monthlyGbp) * term, currency) : null,
+      baseMonthly: fmt(Math.round(adjustedBase), currency),
+      saving: TERM_DISCOUNT[term] > 0 ? fmt((Math.round(adjustedBase) - monthlyGbp) * term, currency) : null,
     };
   };
+
+  // T1 series duration in months depending on cadence (always 6 episodes total).
+  const t1Months = eps === 1 ? 6 : eps === 2 ? 3 : 2;
 
   return (
     <div className="min-h-screen bg-[hsl(0,0%,4%)] text-foreground">

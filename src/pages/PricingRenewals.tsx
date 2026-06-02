@@ -441,9 +441,14 @@ const PricingRenewals = () => {
           <TermToggle value={term} onChange={setTerm} />
         </div>
 
-        {/* Production toggle (secondary) */}
-        <div className="mb-6">
+        {/* Production toggle */}
+        <div className="mb-3">
           <ProductionToggle value={prodType} onChange={setProdType} />
+        </div>
+
+        {/* Episodes-per-month cadence toggle */}
+        <div className="mb-6">
+          <CadenceToggle value={eps} onChange={setEps} />
         </div>
 
         {/* Tier cards */}

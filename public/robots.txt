@@ -1,12 +1,16 @@
 User-agent: Googlebot
 Allow: /
 Disallow: /pricing
+Disallow: /pricing/renewals
 Disallow: /us/pricing
+Disallow: /us/pricing/renewals
 
 User-agent: Bingbot
 Allow: /
 Disallow: /pricing
+Disallow: /pricing/renewals
 Disallow: /us/pricing
+Disallow: /us/pricing/renewals
 
 User-agent: Twitterbot
 Allow: /
@@ -17,4 +21,6 @@ Allow: /
 User-agent: *
 Allow: /
 Disallow: /pricing
+Disallow: /pricing/renewals
 Disallow: /us/pricing
+Disallow: /us/pricing/renewals

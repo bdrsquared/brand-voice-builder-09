@@ -35,8 +35,9 @@ const BASE_MONTHLY_GBP: Record<ProdType, { t1: number; t2: number; t3: number }>
 };
 
 /* Cadence multiplier — 1 ep/mo is the baseline. 2 and 4 ep/mo carry
-   modest per-episode discounts that reflect production efficiencies. */
-const EPS_MULTIPLIER: Record<EpsPerMonth, number> = { 1: 1.0, 2: 1.85, 4: 3.4 };
+   modest per-episode discounts that reflect production efficiencies.
+   Calibrated against studio: 1ep £2,650 · 4ep ~£7,550. */
+const EPS_MULTIPLIER: Record<EpsPerMonth, number> = { 1: 1.0, 2: 1.7, 4: 2.85 };
 
 /* Renewal discount on monthly retainer by term length. */
 const TERM_DISCOUNT: Record<Term, number> = { 6: 0, 12: 0.05, 18: 0.10 };

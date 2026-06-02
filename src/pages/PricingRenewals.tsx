@@ -70,7 +70,7 @@ const tierCards = [
   {
     id: "t3" as const,
     num: "Global Leader",
-    name: "Keep owning the\nconversation\nyou built.",
+    name: "Keep owning the conversation you built.",
     hook: "You've built the platform. Renew to protect the position — and compound the authority your team's already established in market.",
     dopamine: "Category ownership compounds. Every month you keep going makes you harder to displace.",
     icon: Crown,
@@ -78,19 +78,11 @@ const tierCards = [
   {
     id: "t2" as const,
     num: "Launch & Scale",
-    name: "Same engine.\nLess setup.\nMore output.",
+    name: "Same engine. Less setup. More output.",
     hook: "The strategy is set, the rhythm is established, the team knows your business. Renew and let the flywheel keep turning — sharper every quarter.",
     dopamine: "Year two is when the content library starts working harder than the content you're shipping.",
     icon: Zap,
     featured: true,
-  },
-  {
-    id: "t1" as const,
-    num: "Continue",
-    name: "Another series.\nReady to ship.",
-    hook: "Run a fresh series of 6 episodes on the format we've already proven works for your brand — no re-onboarding, no setup time.",
-    dopamine: "The fastest path back to market with a series that's already proven for your audience.",
-    icon: Rocket,
   },
 ];
 

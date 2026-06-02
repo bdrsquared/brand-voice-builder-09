@@ -522,20 +522,20 @@ const PricingRenewals = () => {
         <div className="mt-6 rounded-2xl border border-border bg-card overflow-hidden">
           <div className="px-6 py-4 border-b border-border">
             <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Renewal terms</div>
-            <h3 className="font-heading text-lg text-text-primary">How renewal pricing works</h3>
+            <h3 className="font-heading text-lg text-text-primary">Pricing rules</h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
             <div className="p-5">
-              <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">No setup fees</div>
-              <p className="text-sm text-text-secondary leading-relaxed">Strategy, positioning, host coaching, marketing stack integration — all already done at original onboarding. Nothing to pay for twice.</p>
+              <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Setup fees</div>
+              <p className="text-sm text-text-secondary leading-relaxed">Not applied on renewal. Onboarding, strategy, positioning, host coaching and marketing stack integration carry forward from the original contract.</p>
             </div>
             <div className="p-5">
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Term discounts</div>
-              <p className="text-sm text-text-secondary leading-relaxed">6 months at the standard rate. 12 months saves 5% on the monthly. 18 months saves 10%. Discount applies for the full renewal term.</p>
+              <p className="text-sm text-text-secondary leading-relaxed">6 months: 0%. 12 months: 5% off monthly retainer. 18 months: 10% off monthly retainer. Discount applies for the full renewal term.</p>
             </div>
             <div className="p-5">
               <div className="text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-1">Team continuity</div>
-              <p className="text-sm text-text-secondary leading-relaxed">Same producers, same senior lead, same systems. The team that knows your business stays on the account for the renewal period.</p>
+              <p className="text-sm text-text-secondary leading-relaxed">Same producers, senior lead and systems remain on the account for the renewal term unless otherwise agreed.</p>
             </div>
           </div>
         </div>
@@ -543,7 +543,7 @@ const PricingRenewals = () => {
         {/* Footer note */}
         <div className="text-center py-12 md:py-16">
           <p className="text-sm text-text-secondary">
-            <strong className="text-text-primary">Questions on the renewal?</strong> Speak to your account lead directly, or reach the senior team for any commercial adjustments.
+            <strong className="text-text-primary">Internal reference.</strong> For commercial adjustments or non-standard terms, contact the account lead directly.
           </p>
         </div>
       </main>

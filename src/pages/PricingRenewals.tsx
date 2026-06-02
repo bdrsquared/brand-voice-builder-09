@@ -20,16 +20,22 @@ import { gbpToUsd } from "@/lib/fx";
 type Currency = "GBP" | "USD" | "EUR";
 type ProdType = "location" | "studio" | "virtual";
 type Term = 6 | 12 | 18;
+type EpsPerMonth = 1 | 2 | 4;
 
 const CURRENCY_SYMBOLS: Record<Currency, string> = { GBP: "£", USD: "$", EUR: "€" };
 const FX_RATES: Record<Currency, number> = { GBP: 1, USD: 1.27, EUR: 1.17 };
 
-/* Base monthly retainers in GBP (no launch fee — that's already paid). */
+/* Base monthly retainers in GBP at the standard 2 episodes/month cadence
+   (no launch fee — that's already paid). */
 const BASE_MONTHLY_GBP: Record<ProdType, { t1: number; t2: number; t3: number }> = {
   location: { t1: 3250, t2: 5000, t3: 8500 },
   studio:   { t1: 2630, t2: 4000, t3: 6900 },
   virtual:  { t1: 2330, t2: 3500, t3: 6000 },
 };
+
+/* Cadence multiplier — applied to the base 2-ep monthly retainer.
+   1 ep/mo is lighter production load; 4 ep/mo earns mild economies of scale. */
+const EPS_MULTIPLIER: Record<EpsPerMonth, number> = { 1: 0.6, 2: 1.0, 4: 1.75 };
 
 /* Renewal discount on monthly retainer by term length. */
 const TERM_DISCOUNT: Record<Term, number> = { 6: 0, 12: 0.05, 18: 0.10 };
@@ -280,6 +286,29 @@ const TermToggle = ({ value, onChange }: { value: Term; onChange: (t: Term) => v
   </div>
 );
 
+const CadenceToggle = ({ value, onChange }: { value: EpsPerMonth; onChange: (e: EpsPerMonth) => void }) => (
+  <div className="grid grid-cols-3 border border-border rounded-2xl overflow-hidden bg-card">
+    {([1, 2, 4] as EpsPerMonth[]).map((n, i) => {
+      const active = value === n;
+      const sub: Record<EpsPerMonth, string> = {
+        1: "Lighter cadence",
+        2: "Standard cadence",
+        4: "High output",
+      };
+      return (
+        <button
+          key={n}
+          onClick={() => onChange(n)}
+          className={`text-center py-3 px-2 transition-colors ${i < 2 ? "border-r border-border" : ""} ${active ? "bg-background text-text-primary" : "text-text-tertiary hover:text-text-secondary"}`}
+        >
+          <div className="text-xs font-medium">{n} episode{n > 1 ? "s" : ""}/mo</div>
+          <div className="text-[10px] text-text-tertiary mt-0.5">{sub[n]}</div>
+        </button>
+      );
+    })}
+  </div>
+);
+
 const ProductionToggle = ({ value, onChange }: { value: ProdType; onChange: (p: ProdType) => void }) => (
   <div className="grid grid-cols-3 border border-border rounded-2xl overflow-hidden bg-card">
     {(["location", "studio", "virtual"] as ProdType[]).map((p, i) => {
@@ -353,19 +382,26 @@ const PricingRenewals = () => {
   const [currency, setCurrency] = useState<Currency>(isUS ? "USD" : "GBP");
   const [prodType, setProdType] = useState<ProdType>("location");
   const [term, setTerm] = useState<Term>(12);
+  const [eps, setEps] = useState<EpsPerMonth>(2);
   const [activeModal, setActiveModal] = useState<"t1" | "t2" | "t3" | null>(null);
 
   const priceFor = (tier: "t1" | "t2" | "t3") => {
     const baseMonthly = BASE_MONTHLY_GBP[prodType][tier];
-    const monthlyGbp = Math.round(baseMonthly * (1 - TERM_DISCOUNT[term]));
+    // T1 is a finite series of 6 episodes — cadence only changes pace, not cost.
+    const cadenceMult = tier === "t1" ? 1 : EPS_MULTIPLIER[eps];
+    const adjustedBase = baseMonthly * cadenceMult;
+    const monthlyGbp = Math.round(adjustedBase * (1 - TERM_DISCOUNT[term]));
     const totalGbp = monthlyGbp * term;
     return {
       monthly: fmt(monthlyGbp, currency),
       total: fmt(totalGbp, currency),
-      baseMonthly: fmt(baseMonthly, currency),
-      saving: TERM_DISCOUNT[term] > 0 ? fmt((baseMonthly - monthlyGbp) * term, currency) : null,
+      baseMonthly: fmt(Math.round(adjustedBase), currency),
+      saving: TERM_DISCOUNT[term] > 0 ? fmt((Math.round(adjustedBase) - monthlyGbp) * term, currency) : null,
     };
   };
+
+  // T1 series duration in months depending on cadence (always 6 episodes total).
+  const t1Months = eps === 1 ? 6 : eps === 2 ? 3 : 2;
 
   return (
     <div className="min-h-screen bg-[hsl(0,0%,4%)] text-foreground">
@@ -405,9 +441,14 @@ const PricingRenewals = () => {
           <TermToggle value={term} onChange={setTerm} />
         </div>
 
-        {/* Production toggle (secondary) */}
-        <div className="mb-6">
+        {/* Production toggle */}
+        <div className="mb-3">
           <ProductionToggle value={prodType} onChange={setProdType} />
+        </div>
+
+        {/* Episodes-per-month cadence toggle */}
+        <div className="mb-6">
+          <CadenceToggle value={eps} onChange={setEps} />
         </div>
 
         {/* Tier cards */}
@@ -458,7 +499,7 @@ const PricingRenewals = () => {
                     <>
                       <div className="font-heading text-2xl sm:text-3xl text-text-primary mb-1">{price.total}</div>
                       <div className="text-xs text-text-tertiary mb-5">
-                        Fresh series of 6 episodes · billed over {term === 6 ? "3" : term === 12 ? "6" : "6"} months · no setup fees
+                        Fresh series of 6 episodes · delivered over {t1Months} months at {eps} ep{eps > 1 ? "s" : ""}/mo · no setup fees
                       </div>
                     </>
                   ) : (
@@ -467,7 +508,7 @@ const PricingRenewals = () => {
                         {price.monthly}<span className="text-base text-text-tertiary font-normal">/mo</span>
                       </div>
                       <div className="text-xs text-text-tertiary mb-2">
-                        {price.total} total over {term} months
+                        {eps} episode{eps > 1 ? "s" : ""}/mo · {price.total} total over {term} months
                         {tier.id === "t3" && " · + ad spend"}
                       </div>
                       {price.saving && (

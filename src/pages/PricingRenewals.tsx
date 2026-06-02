@@ -46,14 +46,14 @@ const TERM_LABEL: Record<Term, string> = {
   18: "18-month renewal",
 };
 
-/* Convert GBP → active currency with neat rounding for USD via fx.ts. */
+/* Round to the nearest 10 so no displayed price ends in odd digits. */
+const round10 = (n: number) => Math.round(n / 10) * 10;
+
+/* Convert GBP → active currency, always rounded to nearest 10 in the target currency. */
 const convert = (gbp: number, currency: Currency): number => {
-  if (currency === "USD") return gbpToUsd(gbp);
-  if (currency === "EUR") {
-    const eur = gbp * FX_RATES.EUR;
-    return eur >= 1000 ? Math.round(eur / 100) * 100 : Math.round(eur / 50) * 50;
-  }
-  return gbp;
+  if (currency === "USD") return round10(gbpToUsd(gbp));
+  if (currency === "EUR") return round10(gbp * FX_RATES.EUR);
+  return round10(gbp);
 };
 
 const fmt = (gbp: number, currency: Currency): string =>

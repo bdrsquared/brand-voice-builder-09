@@ -264,13 +264,13 @@ const TermToggle = ({ value, onChange }: { value: Term; onChange: (t: Term) => v
             {t} months
           </span>
           <span className="text-xs text-text-tertiary leading-relaxed block">
-            {t === 6 && "Short cycle. Keep momentum without a longer commitment."}
-            {t === 12 && "The standard renewal — covers a full annual planning cycle."}
-            {t === 18 && "Lock in rates and roadmap through a full strategic period."}
+            {t === 6 && "Short renewal cycle. No term discount."}
+            {t === 12 && "Standard annual renewal. 5% discount on monthly retainer."}
+            {t === 18 && "Extended renewal. 10% discount on monthly retainer."}
           </span>
           {discount > 0 && (
             <span className="inline-block mt-2 text-[10px] font-medium px-2.5 py-0.5 rounded-full" style={{ background: "rgba(28,250,118,0.15)", color: "hsl(145,60%,55%)" }}>
-              Save {Math.round(discount * 100)}% on monthly
+              −{Math.round(discount * 100)}% monthly
             </span>
           )}
         </button>

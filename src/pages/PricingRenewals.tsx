@@ -571,16 +571,16 @@ const PricingRenewals = () => {
                 <div className="font-body text-[10px] font-medium tracking-[0.08em] uppercase text-text-tertiary mb-2">
                   {tierCards.find(t => t.id === activeModal)?.num} · {TERM_LABEL[term]}
                 </div>
-                <h3 className="font-heading text-2xl text-text-primary mb-2">What's included on renewal</h3>
+                <h3 className="font-heading text-2xl text-text-primary mb-2">Scope of services</h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                  Everything below carries forward from your existing setup. The onboarding work is already done — this is the ongoing engine.
+                  Services included on renewal at this tier. Items marked as established at onboarding carry forward without re-scoping.
                 </p>
                 <div className="flex items-baseline gap-2.5">
                   <span className="font-heading text-3xl text-text-primary">
                     {activeModal === "t1" ? priceFor(activeModal).total : priceFor(activeModal).monthly}
                   </span>
                   <span className="text-xs text-text-tertiary">
-                    {activeModal === "t1" ? `for ${term === 6 ? "this series" : "renewed series"}` : `per month · ${term}-month term`}
+                    {activeModal === "t1" ? `series total · ${term}-month term` : `monthly retainer · ${term}-month term`}
                   </span>
                 </div>
               </ModalHeader>
@@ -589,9 +589,9 @@ const PricingRenewals = () => {
                 <div className="mt-6 bg-secondary/40 rounded-xl p-5">
                   <p className="text-sm text-text-secondary leading-relaxed m-0">
                     <strong className="text-text-primary">Renewal note:</strong>{" "}
-                    {activeModal === "t1" && "A fresh series on the format we've already validated together — no concept work, no host search, no learning curve."}
-                    {activeModal === "t2" && `Year two is when the content engine compounds. Your back catalogue keeps working, your guest network keeps opening doors, and your team keeps getting sharper at what already works for your buyer.`}
-                    {activeModal === "t3" && "Category positions are built over years, not quarters. Renewal protects what you've established and lets the attribution data from year one sharpen everything you do in year two."}
+                    {activeModal === "t1" && "Fresh series on an already-validated format. No concept, format or host setup work re-scoped."}
+                    {activeModal === "t2" && "All On Air services continue at the agreed cadence. Annual strategic refresh included within the renewal term."}
+                    {activeModal === "t3" && "All Global Leader services continue at the agreed cadence. Quarterly strategic reviews and attribution reporting included. Ad spend billed separately."}
                   </p>
                 </div>
               </div>

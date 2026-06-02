@@ -6,7 +6,7 @@ import Footer from "@/components/landing/Footer";
 import SectionPill from "@/components/landing/SectionPill";
 import useMetaTags from "@/hooks/useMetaTags";
 import { useLocale } from "@/contexts/LocaleContext";
-import { gbpToUsd, formatPrice } from "@/lib/fx";
+import { gbpToUsd } from "@/lib/fx";
 
 /* ──────────────────────────────────────────────────────────────
    PRICING RENEWALS PAGE — /pricing/renewals

@@ -284,9 +284,9 @@ const CadenceToggle = ({ value, onChange }: { value: EpsPerMonth; onChange: (e: 
     {([1, 2, 4] as EpsPerMonth[]).map((n, i) => {
       const active = value === n;
       const sub: Record<EpsPerMonth, string> = {
-        1: "Lighter cadence",
+        1: "Baseline cadence",
         2: "Standard cadence",
-        4: "High output",
+        4: "Increased cadence",
       };
       return (
         <button

@@ -23,7 +23,20 @@ const AdminLogin = () => {
   const vantaEffect = useRef<any>(null);
 
   useEffect(() => {
+    let cancelled = false;
+    const loadScript = (src: string) =>
+      new Promise<void>((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) return resolve();
+        const s = document.createElement("script");
+        s.src = src;
+        s.async = true;
+        s.onload = () => resolve();
+        s.onerror = () => reject();
+        document.head.appendChild(s);
+      });
+
     const initVanta = () => {
+      if (cancelled) return;
       if (window.VANTA && vantaRef.current && !vantaEffect.current) {
         vantaEffect.current = window.VANTA.HALO({
           el: vantaRef.current,
@@ -36,16 +49,13 @@ const AdminLogin = () => {
       }
     };
 
-    initVanta();
-    const timer = setInterval(() => {
-      if (window.VANTA) {
-        initVanta();
-        clearInterval(timer);
-      }
-    }, 100);
+    loadScript("https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js")
+      .then(() => loadScript("https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"))
+      .then(initVanta)
+      .catch(() => {});
 
     return () => {
-      clearInterval(timer);
+      cancelled = true;
       if (vantaEffect.current) {
         vantaEffect.current.destroy();
         vantaEffect.current = null;

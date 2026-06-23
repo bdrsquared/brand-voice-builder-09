@@ -98,14 +98,26 @@ const Navbar = () => {
   const navLight = isLightSection && !mobileOpen;
 
   useEffect(() => {
-    supabase
-      .from("blog_posts")
-      .select("title, excerpt, created_at, slug, cover_image")
-      .eq("published", true)
-      .order("created_at", { ascending: false })
-      .limit(3)
-      .then(({ data }) => { if (data) setRecentBlogs(data); });
+    // Defer non-critical mega-menu fetch until the browser is idle so it never blocks LCP/FCP.
+    const run = () => {
+      supabase
+        .from("blog_posts")
+        .select("title, excerpt, created_at, slug, cover_image")
+        .eq("published", true)
+        .order("created_at", { ascending: false })
+        .limit(3)
+        .then(({ data }) => { if (data) setRecentBlogs(data); });
+    };
+    const w = window as any;
+    const id = w.requestIdleCallback
+      ? w.requestIdleCallback(run, { timeout: 4000 })
+      : window.setTimeout(run, 2500);
+    return () => {
+      if (w.cancelIdleCallback) w.cancelIdleCallback(id);
+      else window.clearTimeout(id);
+    };
   }, []);
+
 
   useEffect(() => {
     const handler = () => {

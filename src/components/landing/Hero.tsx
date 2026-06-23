@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LogoWall from "./LogoWall";
+import { heroMarqueeFirstImage } from "./HeroMarquee";
+
 
 const ShaderBackground = lazy(() => import("./ShaderBackground"));
 const HeroMarquee = lazy(() => import("./HeroMarquee"));
@@ -26,6 +28,9 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
 
   return (
     <section className="relative px-6 overflow-hidden">
+      {/* Preload first marquee image so the browser fetches it immediately, not after JS executes */}
+      <link rel="preload" as="image" href={heroMarqueeFirstImage} fetchPriority="high" />
+
       <div className="absolute inset-0 z-0">
         {isMobile ? (
           <div

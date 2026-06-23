@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LogoWall from "./LogoWall";
-import ShaderBackground from "./ShaderBackground";
-import HeroMarquee from "./HeroMarquee";
+
+const ShaderBackground = lazy(() => import("./ShaderBackground"));
+const HeroMarquee = lazy(() => import("./HeroMarquee"));
 
 interface HeroProps {
   variant?: "classic" | "dots";

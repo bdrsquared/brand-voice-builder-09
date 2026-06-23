@@ -4,8 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 const DEFAULT_TITLE = "Video Podcast Agency for B2B & Enterprise | Earworm";
 const DEFAULT_DESC = "Earworm helps enterprise brands turn podcasting into a strategic content engine. Build authority, reach the right audience, and create high-quality video content that supports growth.";
-const DEFAULT_OG_IMAGE = "https://uk.earworm.co/og-image.png";
-const SITE_URL = "https://uk.earworm.co";
+const DEFAULT_OG_IMAGE = "https://earworm.co/og-image.png";
+const SITE_URL = "https://earworm.co";
 
 interface MetaOverrides {
   title?: string;

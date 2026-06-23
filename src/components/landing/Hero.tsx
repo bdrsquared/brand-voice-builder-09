@@ -31,9 +31,11 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
             }}
           />
         ) : (
-          <ShaderBackground>
-            <></>
-          </ShaderBackground>
+          <Suspense fallback={null}>
+            <ShaderBackground>
+              <></>
+            </ShaderBackground>
+          </Suspense>
         )}
       </div>
 

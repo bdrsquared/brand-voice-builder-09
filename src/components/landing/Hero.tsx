@@ -109,11 +109,9 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           </a>
         </motion.div>
 
-        {!isMobile && (
-          <Suspense fallback={null}>
-            <HeroMarquee />
-          </Suspense>
-        )}
+        <Suspense fallback={null}>
+          <HeroMarquee />
+        </Suspense>
 
         <motion.p
           className="text-center text-[11px] text-white/60 font-body mt-6"

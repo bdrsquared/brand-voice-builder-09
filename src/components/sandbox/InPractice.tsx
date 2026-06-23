@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import SectionPill from "./SectionPill";
 import { Video, Scissors, Share2, Library, Calendar, Mic, BarChart3, Sparkles } from "lucide-react";
-import microphoneImg from "@/assets/earworm-microphone.png";
-import booksImg from "@/assets/earworm-books.png";
+import microphoneImg from "@/assets/earworm-microphone.webp";
+import booksImg from "@/assets/earworm-books.webp";
 
 const Pill = ({ children, variant = "light" }: { children: React.ReactNode; variant?: "light" | "dark" }) => (
   <span className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wide ${

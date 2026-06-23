@@ -83,10 +83,12 @@ const Footer = ({ hideDivider = false }: { hideDivider?: boolean }) => {
                 href="https://www.linkedin.com/company/earworm-podcast-agency"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Earworm on LinkedIn"
                 className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/[0.08] border border-white/[0.1] text-white/60 hover:text-white hover:bg-white/[0.15] transition-all"
               >
-                <Linkedin className="w-4 h-4" />
+                <Linkedin className="w-4 h-4" aria-hidden="true" />
               </a>
+
             </div>
           </div>
 

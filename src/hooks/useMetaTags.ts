@@ -97,11 +97,18 @@ const useMetaTags = (overrides?: MetaOverrides) => {
       setCanonical(`${SITE_URL}${path}`);
     };
 
-    fetchMeta();
+    // Defer the page_metadata fetch to idle time so it never blocks LCP/FCP.
+    const w = window as any;
+    const idleId = w.requestIdleCallback
+      ? w.requestIdleCallback(fetchMeta, { timeout: 3000 })
+      : window.setTimeout(fetchMeta, 1500);
 
     return () => {
+      if (w.cancelIdleCallback) w.cancelIdleCallback(idleId);
+      else window.clearTimeout(idleId);
       document.title = DEFAULT_TITLE;
     };
+
   }, [location.pathname, overrides?.title, overrides?.description, overrides?.ogImage]);
 };
 

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import imgBlueCardigan from "@/assets/podcast-studio-blue-cardigan.webp";
 import imgPurpleDenim from "@/assets/podcast-purple-denim.webp";
 import imgPinkCouch from "@/assets/podcast-pink-couch.webp";
@@ -16,10 +15,11 @@ import imgControlRoom from "@/assets/podcast-control-room-multicam.webp";
 import imgGreenLit from "@/assets/podcast-green-lit-guest.webp";
 import imgGreenStudio from "@/assets/podcast-green-studio-wide.webp";
 
+// Deterministic order so the first (LCP-candidate) image is stable & can be preloaded.
 const images = [
+  imgPinkCouch,
   imgBlueCardigan,
   imgPurpleDenim,
-  imgPinkCouch,
   imgStudioWide,
   imgHostSuit,
   imgConservatory,
@@ -35,25 +35,14 @@ const images = [
   imgGreenStudio,
 ];
 
-const shuffle = <T,>(arr: T[]): T[] => {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-};
+export const heroMarqueeFirstImage = images[0];
 
 const HeroMarquee = () => {
-  const shuffled = shuffle(images);
-  const duplicated = [...shuffled, ...shuffled];
+  const duplicated = [...images, ...images];
 
   return (
-    <motion.div
+    <div
       className="relative w-full overflow-hidden mt-6 sm:mt-8"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.5 }}
       style={{
         maskImage:
           "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
@@ -70,7 +59,11 @@ const HeroMarquee = () => {
             <img
               src={src}
               alt=""
-              loading="lazy"
+              width={260}
+              height={347}
+              loading={i === 0 ? "eager" : "lazy"}
+              fetchPriority={i === 0 ? "high" : "low"}
+              decoding="async"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
@@ -84,7 +77,7 @@ const HeroMarquee = () => {
           100% { transform: translateX(-50%); }
         }
       `}</style>
-    </motion.div>
+    </div>
   );
 };
 

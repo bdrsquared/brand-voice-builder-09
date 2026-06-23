@@ -1,20 +1,20 @@
 import { motion } from "framer-motion";
-import imgBlueCardigan from "@/assets/podcast-studio-blue-cardigan.jpg";
-import imgPurpleDenim from "@/assets/podcast-purple-denim.jpg";
-import imgPinkCouch from "@/assets/podcast-pink-couch.jpg";
-import imgStudioWide from "@/assets/podcast-studio-wide-purple.jpg";
-import imgHostSuit from "@/assets/podcast-host-suit-purple.jpg";
-import imgConservatory from "@/assets/podcast-conservatory-wide.jpg";
-import imgBlueShirt from "@/assets/podcast-blue-shirt-floral.jpg";
-import imgRedDress from "@/assets/podcast-red-dress-lounge.jpg";
-import imgGreenDress from "@/assets/podcast-green-dress-lounge.jpg";
-import imgBoucleDuo from "@/assets/podcast-boucle-chairs-duo.jpg";
-import imgSchnauzer from "@/assets/podcast-schnauzer-guest.jpg";
-import imgBoschMural from "@/assets/podcast-bosch-mural-yellow.jpg";
-import imgDiscoLounge from "@/assets/podcast-disco-yellow-lounge.jpg";
-import imgControlRoom from "@/assets/podcast-control-room-multicam.jpg";
-import imgGreenLit from "@/assets/podcast-green-lit-guest.jpg";
-import imgGreenStudio from "@/assets/podcast-green-studio-wide.jpg";
+import imgBlueCardigan from "@/assets/podcast-studio-blue-cardigan.webp";
+import imgPurpleDenim from "@/assets/podcast-purple-denim.webp";
+import imgPinkCouch from "@/assets/podcast-pink-couch.webp";
+import imgStudioWide from "@/assets/podcast-studio-wide-purple.webp";
+import imgHostSuit from "@/assets/podcast-host-suit-purple.webp";
+import imgConservatory from "@/assets/podcast-conservatory-wide.webp";
+import imgBlueShirt from "@/assets/podcast-blue-shirt-floral.webp";
+import imgRedDress from "@/assets/podcast-red-dress-lounge.webp";
+import imgGreenDress from "@/assets/podcast-green-dress-lounge.webp";
+import imgBoucleDuo from "@/assets/podcast-boucle-chairs-duo.webp";
+import imgSchnauzer from "@/assets/podcast-schnauzer-guest.webp";
+import imgBoschMural from "@/assets/podcast-bosch-mural-yellow.webp";
+import imgDiscoLounge from "@/assets/podcast-disco-yellow-lounge.webp";
+import imgControlRoom from "@/assets/podcast-control-room-multicam.webp";
+import imgGreenLit from "@/assets/podcast-green-lit-guest.webp";
+import imgGreenStudio from "@/assets/podcast-green-studio-wide.webp";
 
 const images = [
   imgBlueCardigan,

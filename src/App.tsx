@@ -94,6 +94,7 @@ const AnimatedRoutes = () => {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/sandbox" element={<PageTransition><Sandbox /></PageTransition>} />
           <Route path="/thank-you" element={<PageTransition><ThankYou /></PageTransition>} />
+          <Route path="/lp" element={<Lp />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />

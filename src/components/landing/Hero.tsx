@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import LogoWall from "./LogoWall";
@@ -9,14 +10,30 @@ interface HeroProps {
 }
 
 const Hero = ({ variant = "classic" }: HeroProps) => {
+  // Sync read so first paint already knows the form factor – avoids
+  // mounting the WebGL shader / 16-image marquee on mobile at all.
+  const [isMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(max-width: 767px)").matches;
+  });
 
   return (
     <section className="relative px-6 overflow-hidden">
-      {/* Animated mesh-shader background fills the hero */}
+      {/* Background: heavyweight shader on desktop, static CSS gradient on mobile */}
       <div className="absolute inset-0 z-0">
-        <ShaderBackground>
-          <></>
-        </ShaderBackground>
+        {isMobile ? (
+          <div
+            className="w-full h-full"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 55% at 30% 30%, #15d668 0%, transparent 55%), radial-gradient(ellipse 70% 55% at 75% 70%, #4a42c0 0%, transparent 55%), linear-gradient(180deg, #0a1410 0%, #0b0f1a 100%)",
+            }}
+          />
+        ) : (
+          <ShaderBackground>
+            <></>
+          </ShaderBackground>
+        )}
       </div>
 
       {/* Centred dark scrim — keeps body copy readable over the bright mesh */}
@@ -89,7 +106,7 @@ const Hero = ({ variant = "classic" }: HeroProps) => {
           </a>
         </motion.div>
 
-        <HeroMarquee />
+        {!isMobile && <HeroMarquee />}
 
         <motion.p
           className="text-center text-[11px] text-white/60 font-body mt-6"

@@ -7,8 +7,22 @@
     <meta name="description" content="Earworm helps enterprise brands turn podcasting into a strategic content engine. Build authority, reach the right audience, and create high-quality video content that supports growth." />
     <meta name="author" content="Earworm" />
     <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="preload" href="/fonts/Nohemi-Medium.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Nohemi-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://opzkaxzcmqqqdbteuhas.supabase.co" />
+    <!-- Non-blocking Geist webfont: preconnect + media=print swap pattern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" />
+    </noscript>
+
     <!-- Google tag (gtag.js) — deferred to post-load to protect LCP -->
     <script>
       window.dataLayer = window.dataLayer || [];

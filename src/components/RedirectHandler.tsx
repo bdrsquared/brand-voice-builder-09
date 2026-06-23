@@ -13,13 +13,25 @@ const RedirectHandler = () => {
   const [redirects, setRedirects] = useState<Redirect[] | null>(null);
 
   useEffect(() => {
-    supabase
-      .from("redirects")
-      .select("from_path, to_path")
-      .then(({ data }) => {
-        if (data) setRedirects(data as Redirect[]);
-      });
+    // Defer the redirects fetch to idle time so it never blocks the first paint.
+    const run = () => {
+      supabase
+        .from("redirects")
+        .select("from_path, to_path")
+        .then(({ data }) => {
+          if (data) setRedirects(data as Redirect[]);
+        });
+    };
+    const w = window as any;
+    const id = w.requestIdleCallback
+      ? w.requestIdleCallback(run, { timeout: 3000 })
+      : window.setTimeout(run, 1500);
+    return () => {
+      if (w.cancelIdleCallback) w.cancelIdleCallback(id);
+      else window.clearTimeout(id);
+    };
   }, []);
+
 
   useEffect(() => {
     if (!redirects) return;

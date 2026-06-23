@@ -31,14 +31,20 @@ const PageViewTracker = () => {
       });
     }
 
-    supabase
-      .from("page_views")
-      .insert({
-        page_path: path,
-        referrer: document.referrer || null,
-        user_agent: navigator.userAgent || null,
-      } as any)
-      .then(() => {});
+    const run = () => {
+      supabase
+        .from("page_views")
+        .insert({
+          page_path: path,
+          referrer: document.referrer || null,
+          user_agent: navigator.userAgent || null,
+        } as any)
+        .then(() => {});
+    };
+    const w = window as any;
+    if (w.requestIdleCallback) w.requestIdleCallback(run, { timeout: 4000 });
+    else window.setTimeout(run, 2000);
+
   }, [location.pathname]);
 
   return null;

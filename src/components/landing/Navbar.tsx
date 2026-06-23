@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, ChevronLeft, MonitorPlay, Film, BarChart3, X, MessageCircle, Calendar, Layers, Activity, Eye, LogIn, BookOpen, GraduationCap } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import RegionSwitcher from "@/components/RegionSwitcher";
+
 import { getThumbnailUrl } from "@/lib/image-utils";
 import logo from "@/assets/earworm-logo.webp";
 import logoDark from "@/assets/earworm-logo-dark.svg";
@@ -210,7 +210,7 @@ const Navbar = () => {
 
             {/* Desktop right side */}
             <div className="hidden sm:flex items-center gap-4">
-              <RegionSwitcher light={navLight} />
+              
               <div
                 className="relative"
                 onMouseEnter={() => setMegaOpen("podplanner")}

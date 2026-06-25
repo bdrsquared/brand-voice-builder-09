@@ -47,6 +47,7 @@ const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
 const Awards = lazy(() => import("./pages/Awards.tsx"));
 const GuestBooking = lazy(() => import("./pages/GuestBooking.tsx"));
 const Lp = lazy(() => import("./pages/Lp.tsx"));
+const LpUk = lazy(() => import("./pages/LpUk.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -95,6 +96,7 @@ const AnimatedRoutes = () => {
           <Route path="/sandbox" element={<PageTransition><Sandbox /></PageTransition>} />
           <Route path="/thank-you" element={<PageTransition><ThankYou /></PageTransition>} />
           <Route path="/lp" element={<Lp />} />
+          <Route path="/lpuk" element={<LpUk />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />

@@ -264,13 +264,13 @@ const LpUk = () => {
           <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
             A 20-minute call to see if your business is a fit. No deck, no pressure.
           </p>
-          <a
-            href="https://cal.com/earworm/intro"
+          <Link
+            to="/book-a-call"
             className="inline-flex items-center justify-center h-12 px-8 rounded-full text-base font-semibold text-black transition-transform hover:scale-[1.02]"
             style={{ background: "linear-gradient(135deg, #1CFA76, #6359EA)" }}
           >
             Book a call
-          </a>
+          </Link>
         </div>
       </section>
 

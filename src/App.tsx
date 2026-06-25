@@ -47,6 +47,7 @@ const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
 const Awards = lazy(() => import("./pages/Awards.tsx"));
 const GuestBooking = lazy(() => import("./pages/GuestBooking.tsx"));
 const Lp = lazy(() => import("./pages/Lp.tsx"));
+const LpUk = lazy(() => import("./pages/LpUk.tsx"));
 
 const queryClient = new QueryClient();
 

@@ -1,12 +1,74 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
+// ---------- Table access policy ----------
+// Each entry: what can be written, what identifies a row for PATCH, whether reads/writes are public.
+type TableConfig = {
+  writable: string[];               // columns allowed in POST/PATCH
+  identifiers: string[];            // columns usable to locate a row for PATCH/DELETE
+  allowDelete?: boolean;
+  allowWrite?: boolean;             // POST/PATCH allowed
+  slugSource?: string;              // column auto-slugified from another (e.g. slug from title)
+};
+
+const TABLES: Record<string, TableConfig> = {
+  blog_posts: {
+    writable: [
+      "title", "slug", "content", "excerpt", "category", "author",
+      "cover_image", "image_style", "published",
+      "title_us", "content_us", "excerpt_us",
+    ],
+    identifiers: ["id", "slug"],
+    allowWrite: true,
+    slugSource: "title",
+  },
+  page_metadata: {
+    writable: [
+      "page_name", "page_path", "locale",
+      "meta_title", "meta_description",
+      "og_title", "og_description", "og_image",
+    ],
+    identifiers: ["id", "page_path"],
+    allowWrite: true,
+  },
+  page_translations: {
+    writable: [
+      "page_path", "locale", "string_key",
+      "source_text", "translated_text", "approved",
+    ],
+    identifiers: ["id"],
+    allowWrite: true,
+  },
+  icp_landing_pages: {
+    writable: [
+      "icp_name", "icp_description", "slug",
+      "page_style", "generated_copy", "research_data",
+      "status", "published",
+    ],
+    identifiers: ["id", "slug"],
+    allowWrite: true,
+    slugSource: "icp_name",
+  },
+  redirects: {
+    // read-only audit surface
+    writable: [],
+    identifiers: ["id", "from_path"],
+    allowWrite: false,
+  },
+};
+
 const slugify = (s: string) =>
   s.toLowerCase().trim()
     .replace(/[^\w\s-]/g, "")
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
     .slice(0, 120);
+
+const pickWritable = (cfg: TableConfig, body: Record<string, unknown>) => {
+  const out: Record<string, unknown> = {};
+  for (const k of cfg.writable) if (k in body) out[k] = body[k];
+  return out;
+};
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -17,8 +79,9 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
 
-  // Auth: shared API key in x-api-key header
-  const provided = req.headers.get("x-api-key") ?? req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+  // Auth: shared API key
+  const provided = req.headers.get("x-api-key") ??
+    req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
   const expected = Deno.env.get("BLOG_AGENT_API_KEY");
   if (!expected) return json(500, { error: "Server misconfigured" });
   if (!provided || provided !== expected) return json(401, { error: "Unauthorized" });
@@ -28,81 +91,125 @@ Deno.serve(async (req) => {
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
   );
 
+  const url = new URL(req.url);
   const method = req.method.toUpperCase();
 
   try {
-    // LIST: GET /blog-agent
-    if (method === "GET") {
-      const url = new URL(req.url);
-      const limit = Math.min(parseInt(url.searchParams.get("limit") ?? "50"), 200);
-      const { data, error } = await supabase
-        .from("blog_posts")
-        .select("id, title, slug, category, author, published, created_at, updated_at")
-        .order("created_at", { ascending: false })
-        .limit(limit);
-      if (error) return json(500, { error: error.message });
-      return json(200, { posts: data });
+    // ---------- Discovery: list available tables + their writable columns ----------
+    if (method === "GET" && url.searchParams.get("action") === "schema") {
+      const out: Record<string, unknown> = {};
+      for (const [name, cfg] of Object.entries(TABLES)) {
+        out[name] = {
+          writable_columns: cfg.writable,
+          identifiers: cfg.identifiers,
+          can_write: !!cfg.allowWrite,
+        };
+      }
+      return json(200, { tables: out });
     }
+
+    // ---------- Convenience: list of public routes for SEO crawling ----------
+    if (method === "GET" && url.searchParams.get("action") === "routes") {
+      const { data, error } = await supabase
+        .from("page_metadata")
+        .select("page_path, page_name, locale, meta_title, meta_description")
+        .order("page_path");
+      if (error) return json(500, { error: error.message });
+      return json(200, { routes: data });
+    }
+
+    // ---------- Back-compat: GET with no ?table= still lists recent blog posts ----------
+    const tableParam = url.searchParams.get("table") ?? (method === "GET" ? "blog_posts" : null);
+    if (!tableParam) return json(400, { error: "table query param required" });
+    const cfg = TABLES[tableParam];
+    if (!cfg) return json(400, { error: `unknown table '${tableParam}'. Try ?action=schema` });
+
+    // ---------- LIST / READ ----------
+    if (method === "GET") {
+      const limit = Math.min(parseInt(url.searchParams.get("limit") ?? "50"), 500);
+      const offset = Math.max(parseInt(url.searchParams.get("offset") ?? "0"), 0);
+      const select = url.searchParams.get("select") ?? "*";
+
+      let q = supabase.from(tableParam).select(select).range(offset, offset + limit - 1);
+
+      // Filter by any identifier passed in querystring (e.g. ?slug=foo, ?page_path=/about)
+      for (const idCol of cfg.identifiers) {
+        const v = url.searchParams.get(idCol);
+        if (v) q = q.eq(idCol, v);
+      }
+      // Order if created_at exists in the table; harmless otherwise
+      q = q.order("created_at", { ascending: false } as never);
+
+      const { data, error } = await q;
+      if (error) return json(400, { error: error.message });
+      return json(200, { table: tableParam, rows: data });
+    }
+
+    // ---------- WRITE ----------
+    if (!cfg.allowWrite) return json(403, { error: `table '${tableParam}' is read-only` });
 
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") return json(400, { error: "Invalid JSON body" });
 
-    // CREATE: POST /blog-agent
     if (method === "POST") {
-      const {
-        title, content, slug, excerpt, category, author,
-        cover_image, image_style, published,
-        title_us, content_us, excerpt_us,
-      } = body as Record<string, unknown>;
+      const row = pickWritable(cfg, body as Record<string, unknown>);
 
-      if (typeof title !== "string" || title.trim().length < 3 || title.length > 300)
-        return json(400, { error: "title required (3-300 chars)" });
-      if (typeof content !== "string" || content.trim().length < 20)
-        return json(400, { error: "content required (min 20 chars)" });
-      if (author !== undefined && (typeof author !== "string" || author.length > 100))
-        return json(400, { error: "author must be string <=100 chars" });
+      // Per-table validation
+      if (tableParam === "blog_posts") {
+        if (typeof row.title !== "string" || row.title.trim().length < 3)
+          return json(400, { error: "title required (min 3 chars)" });
+        if (typeof row.content !== "string" || row.content.trim().length < 20)
+          return json(400, { error: "content required (min 20 chars)" });
+        if (!row.author) row.author = "Earworm";
+      }
+      if (tableParam === "page_metadata") {
+        if (typeof row.page_path !== "string" || !row.page_path.startsWith("/"))
+          return json(400, { error: "page_path required, must start with /" });
+        if (typeof row.page_name !== "string" || row.page_name.length < 1)
+          return json(400, { error: "page_name required" });
+      }
+      if (tableParam === "icp_landing_pages") {
+        if (typeof row.icp_name !== "string" || row.icp_name.trim().length < 2)
+          return json(400, { error: "icp_name required" });
+      }
 
-      const finalSlug = slugify(typeof slug === "string" && slug.trim() ? slug : title);
+      // Auto-slug if applicable and missing
+      if (cfg.slugSource && !row.slug && typeof row[cfg.slugSource] === "string") {
+        row.slug = slugify(row[cfg.slugSource] as string);
+      } else if (typeof row.slug === "string") {
+        row.slug = slugify(row.slug);
+      }
 
-      const row: Record<string, unknown> = {
-        title: title.trim(),
-        slug: finalSlug,
-        content,
-        excerpt: typeof excerpt === "string" ? excerpt.slice(0, 500) : null,
-        category: typeof category === "string" ? category.slice(0, 80) : null,
-        author: typeof author === "string" ? author : "Earworm",
-        cover_image: typeof cover_image === "string" ? cover_image : null,
-        image_style: typeof image_style === "string" ? image_style : null,
-        published: typeof published === "boolean" ? published : false,
-        title_us: typeof title_us === "string" ? title_us : null,
-        content_us: typeof content_us === "string" ? content_us : null,
-        excerpt_us: typeof excerpt_us === "string" ? excerpt_us : null,
-      };
-
-      const { data, error } = await supabase.from("blog_posts").insert(row).select().single();
+      const { data, error } = await supabase.from(tableParam).insert(row).select().single();
       if (error) return json(400, { error: error.message });
-      return json(201, { post: data });
+      return json(201, { table: tableParam, row: data });
     }
 
-    // UPDATE: PATCH /blog-agent  { id | slug, ...fields }
     if (method === "PATCH") {
-      const { id, slug, ...rest } = body as Record<string, unknown>;
-      if (!id && !slug) return json(400, { error: "id or slug required" });
+      const { ...rest } = body as Record<string, unknown>;
+      // Locate row by any identifier
+      const idCol = cfg.identifiers.find((c) => c in rest && (rest as any)[c] != null);
+      if (!idCol) return json(400, { error: `must include one of: ${cfg.identifiers.join(", ")}` });
+      const idVal = (rest as any)[idCol];
 
-      const allowed = [
-        "title", "content", "excerpt", "category", "author", "cover_image",
-        "image_style", "published", "title_us", "content_us", "excerpt_us", "slug",
-      ];
-      const updates: Record<string, unknown> = {};
-      for (const k of allowed) if (k in rest) updates[k] = (rest as any)[k];
-      if (updates.slug && typeof updates.slug === "string") updates.slug = slugify(updates.slug);
-      if (Object.keys(updates).length === 0) return json(400, { error: "no updatable fields" });
+      const updates = pickWritable(cfg, rest);
+      if (typeof updates.slug === "string") updates.slug = slugify(updates.slug);
+      if (Object.keys(updates).length === 0)
+        return json(400, { error: "no updatable fields supplied" });
 
-      let q = supabase.from("blog_posts").update(updates);
-      q = id ? q.eq("id", id as string) : q.eq("slug", slug as string);
-      const { data, error } = await q.select().single();
+      const { data, error } = await supabase
+        .from(tableParam).update(updates).eq(idCol, idVal).select().single();
       if (error) return json(400, { error: error.message });
-      return json(200, { post: data });
+      return json(200, { table: tableParam, row: data });
+    }
+
+    if (method === "DELETE") {
+      if (!cfg.allowDelete) return json(403, { error: "delete not allowed on this table" });
+      const idCol = cfg.identifiers.find((c) => url.searchParams.get(c));
+      if (!idCol) return json(400, { error: `must include one of: ${cfg.identifiers.join(", ")}` });
+      const { error } = await supabase.from(tableParam).delete().eq(idCol, url.searchParams.get(idCol)!);
+      if (error) return json(400, { error: error.message });
+      return json(200, { ok: true });
     }
 
     return json(405, { error: "Method not allowed" });
